@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
 {
+    // 작성자: 조혜찬
+    // 햄버거 메뉴 버튼 클래스
     public class HamburgerMenuButton : MonoBehaviour, IUIButton
     {
         [SerializeField] private RectTransform _hamburgerMenuViewRectTransform; // 햄버거 메뉴 뷰를 아래로 내려 열고 위로 올려 닫기 위해 필요한 변수
