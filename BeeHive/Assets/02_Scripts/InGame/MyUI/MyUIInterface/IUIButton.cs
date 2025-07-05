@@ -3,7 +3,7 @@ using UnityEngine;
 namespace InGame.MyUI.MyUIInterface
 {
     // 작성자: 조혜찬
-    // UI 버튼의 공통 기능 구현을 강제하기 위한 스크립트
+    // UI 버튼의 공통 기능 구현을 강제하기 위한 인터페이스
     public interface IUIButton
     {
         // 클릭 시 실행될 함수
