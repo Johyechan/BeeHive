@@ -12,10 +12,12 @@ namespace InGame.MyUI
         [SerializeField] private float _maxAngle; // 전체 부채꼴 각도
         [SerializeField] private float _xPosPerCard; // 카드간의 x축 간격
         [SerializeField] private float _yPosPerCard; // 카드간의 y축 간격
+        [SerializeField] private float _cardBaseYPos; // 기본 카드의 Y축 위치
 
         private RectTransform _rectTransform; // 이 스크립트를 가지는 객체의 RectTransform - 보유 중인 UI 카드들 즉, 자식의 수를 알기 위해 필요한 변수
 
         private float _anglePerCard; // 카드간의 각도 간격
+        
         
         private void Awake()
         {
@@ -52,7 +54,7 @@ namespace InGame.MyUI
                 RectTransform uiCardRectTransform = _rectTransform.GetChild(i).GetComponent<RectTransform>(); // 현재 자식(카드)의 RectTransform을 가져오기
 
                 uiCardRectTransform.DORotate(new Vector3(0, 0, -angle), 0.1f); // angle만큼 회전 (-를 한 이유는 반대로 되야 내가 보기 편해서)
-                uiCardRectTransform.DOAnchorPos(new Vector3(xPos, yPos, 0), 0.1f); // xPos, yPos만큼 이동
+                uiCardRectTransform.DOAnchorPos(new Vector3(xPos, _cardBaseYPos + yPos, 0), 0.1f); // xPos, yPos만큼 이동
             }
         }
     }
