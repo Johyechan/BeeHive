@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 66368526}
   - component: {fileID: 66368525}
   - component: {fileID: 66368527}
+  - component: {fileID: 66368528}
   m_Layer: 5
   m_Name: Miner
   m_TagString: Untagged
@@ -455,7 +456,38 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 66368525}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 66368528}
+        m_TargetAssemblyTypeName: InGame.MyUI.MyUIButton.PieceButton, Assembly-CSharp
+        m_MethodName: OnUIButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &66368528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 66368523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ceaf1d9537f729468b2f2072b630d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _highLightPosList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &73458577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -674,6 +706,7 @@ Transform:
   - {fileID: 1803926870}
   - {fileID: 1750792967}
   - {fileID: 1250777122}
+  - {fileID: 120938036}
   m_Father: {fileID: 1759363215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &86307554
@@ -862,6 +895,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5086692239746744237, guid: c8a36783f9066e445889096a9854d924, type: 3}
   m_PrefabInstance: {fileID: 112552626}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &120938035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 120938036}
+  m_Layer: 0
+  m_Name: PlacePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &120938036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120938035}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 83451644}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &123828209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2105,7 +2169,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3433962, g: 0.3433962, b: 0.3433962, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
