@@ -9,6 +9,7 @@ public class AutoPlaceHelper : EditorWindow
     public GameObject prefab; // 자동으로 생성 시킬 객체
 
     public Transform parentTransform; // 자동으로 생성될 객체의 부모
+    public Transform beforeParentTransform; // 이전에 자동으로 생성한 객체의 부모 - 객체를 구분하기 위한 이름을 추가할 때 사용할 변수
 
     public Vector3 startPos; // 자동으로 생성을 시작할 위치
 
@@ -28,6 +29,7 @@ public class AutoPlaceHelper : EditorWindow
     {
         prefab = (GameObject)EditorGUILayout.ObjectField("Auto Place Object", prefab, typeof(GameObject), false); // 자동으로 생성 시킬 프리팹을 선택할 수 있는 필드 - Auto Place Object를 이름으로 가지는 필드이며 GameObject형식만을 받을 수 있으며, 씬 오브젝트는 선택 불가, prefab을 할당하면서 2번째 매개변수에 prefab을 다시 넣는 이유는 필드에서 변경된 값을 prefab이 받고 prefab에 다시 할당해줌으로써 코드내에서도 변경된 prefab의 값을 사용할 수 있게 됨
         parentTransform = (Transform)EditorGUILayout.ObjectField("Auto Place Parent", parentTransform, typeof(Transform), true); // Auto Place Parent라는 이름을 가지는 필드이며 Transform형식만을 받을 수 있으며, 씬 오브젝트 선택이 가능하다
+        beforeParentTransform = (Transform)EditorGUILayout.ObjectField("Before Auto Place Parent", beforeParentTransform, typeof(Transform), true); // Before Auto Place Parent라는 이름을 가지는 필드이며 Transform형식만을 받을 수 있으며, 씬 오브젝트 선택이 가능하다
         startPos = EditorGUILayout.Vector3Field("Start Position", startPos); // Start Position이라는 이름을 가지는 필드
         rows = EditorGUILayout.IntField("Rows", rows); // Rows라는 이름을 가지는 필드
         cols = EditorGUILayout.IntField("Columns", cols); // Columns라는 이름을 가지는 필드
@@ -54,13 +56,19 @@ public class AutoPlaceHelper : EditorWindow
             DestroyImmediate(parentTransform.GetChild(i).gameObject); // 에디터에서 즉시 오브젝트를 지울 때 사용하는 함수 - Destroy는 다음 프레임 끝에 삭제하지만 이 함수는 즉시 삭제
         }
 
-        for(int row = 0; row < rows; row++) // 가로열만큼 순회
+        for(int row = 0; row < rows; row++) // 가로열만큼 반복
         {
-            for(int col = 0; col < cols; col++) // 세로열만큼 순회
+            for(int col = 0; col < cols; col++) // 세로열만큼 반복
             {
                 Debug.Log(row);
                 Vector3 pos = startPos + new Vector3(row * xSpacing, 0, col * ySpacing); // 위치는 (처음 위치 * n번째, 0, 처음 위치 * n번째)
                 GameObject obj = (GameObject)PrefabUtility.InstantiatePrefab(prefab, parentTransform); // GameObjec 타입으로 프리팹 생성 (기본 Instantiate은 프리팹이 끊긴 상태로 생성하지만 이 함수는 프리팹 상태로 생성 그래서 프리팹 변경사항을 씬 오브젝트에 반영 가능 + 비교 가능, 또 에디터 전용 함수)
+
+                if(beforeParentTransform != null) // 이전에 자동으로 생성했었던 객체가 있다면
+                    obj.name += $"{beforeParentTransform.childCount + row + 1 + col}"; // 객체를 구분하기 위해서 이름에 이전에 자동으로 생성했었던 객체들의 수 + 가로열 + 세로열 값을 문자열로 추가(+1을 해줌으로 0으로 시작하지 않도록 설정)
+                else //아니라면
+                    obj.name += $"{row + 1 + col}";// 객체를 구분하기 위해서 이름에 가로열 + 세로열 값을 문자열로 추가(+1을 해줌으로 0으로 시작하지 않도록 설정)
+
                 obj.transform.localPosition = pos; // 새롭게 생성한 GameObject의 위치를 위에서 지정한 Vector3값으로 이동
                 obj.SetActive(true); // 새롭게 생성한 GameObject 활성화
             }
