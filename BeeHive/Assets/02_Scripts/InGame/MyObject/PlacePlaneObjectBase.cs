@@ -8,8 +8,6 @@ namespace InGame.MyObject
     // 배치 칸의 기능 클래스
     public class PlacePlaneObjectBase : MonoBehaviour
     {
-        [SerializeField] private float _intensity; // 밝기 강도
-
         private Renderer _renderer; // 머티리얼을 들고 오기 위한 변수
         private Material _material; // 하이라이트 머티리얼 변수
 
@@ -31,21 +29,20 @@ namespace InGame.MyObject
         {
             _renderer = GetComponent<Renderer>();
             _material = _renderer.material; // 공용 머티리얼이 아닌 인스턴스화를 통한 개인 머티리얼을 가져옴
+            _placedObjectType = ObjectType.None; // 아무것도 안 올려져 있는 상태로 초기화
         }
 
         // 하이라이트를 키는 함수
         public void HighLightOn()
         {
             _material.color = new Color(_material.color.r, _material.color.g, _material.color.b, 1); // 알파 값을 1로 올리면서 보이도록 변경
-            _material.SetColor("_EmissionColor", Color.white.linear * _intensity); // emission값을 조정하여 빛나도록 설정(하이라이트 키기)
         }
 
         // 하이라이트를 끄는 함수
         public void HighLightOff()
         {
             _material.color = new Color(_material.color.r, _material.color.g, _material.color.b, 0); // 알파 값을 0으로 바꿔 보이지 않도록 변경
-            _material.SetColor("_EmissionColor", Color.white.linear * 0); // emission 값에 *0을 해줌으로써 Intensity를 0으로 만들어 보이지 않도록 변경(하이라이트 끄기)
         }
     }
 }
-// 마지막 작성 일자: 2025.07.09
+// 마지막 작성 일자: 2025.07.10
