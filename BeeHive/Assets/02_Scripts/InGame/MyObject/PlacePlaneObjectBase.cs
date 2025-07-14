@@ -1,4 +1,5 @@
 using InGame.MyObject.MyObjectEnum;
+using InGame.MyObject.MyObjectInterface;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace InGame.MyObject
 {
     // 작성자: 조혜찬
     // 배치 칸의 기능 클래스
-    public class PlacePlaneObjectBase : MonoBehaviour
+    public abstract class PlacePlaneObjectBase : MonoBehaviour, IClickObject
     {
         private Renderer _renderer; // 머티리얼을 들고 오기 위한 변수
         private Material _material; // 하이라이트 머티리얼 변수
@@ -43,6 +44,8 @@ namespace InGame.MyObject
         {
             _material.color = new Color(_material.color.r, _material.color.g, _material.color.b, 0); // 알파 값을 0으로 바꿔 보이지 않도록 변경
         }
+
+        public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2025.07.10
+// 마지막 작성 일자: 2025.07.14

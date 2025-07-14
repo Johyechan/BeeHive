@@ -8,6 +8,11 @@ namespace InGame.MyObject
     public class RoadPlacePlaneObject : PlacePlaneObjectBase
     {
         public List<PiecePlacePlaneObject> nearPiecePlaceTransformList; // 가깝게 붙어있는 기물 칸을 저장하는 리스트
+
+        public override void ObjectClicked()
+        {
+            throw new System.NotImplementedException();
+        }
         // 이거 시작했을 때 리스트에 있던 값들 사라짐
     }
 }

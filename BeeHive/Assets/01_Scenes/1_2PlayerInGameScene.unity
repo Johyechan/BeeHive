@@ -8494,7 +8494,7 @@ MonoBehaviour:
   _cardsUI: {fileID: 1145864087}
   _piecesUI: {fileID: 1632149183}
   _showYPos: 0
-  _showDownYPos: -135
+  _showDownYPos: -150
 --- !u!1001 &948703457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9100,7 +9100,7 @@ MonoBehaviour:
   _cardsUI: {fileID: 1145864087}
   _piecesUI: {fileID: 1632149183}
   _showYPos: 0
-  _showDownYPos: -135
+  _showDownYPos: -150
 --- !u!1001 &1027238440
 PrefabInstance:
   m_ObjectHideFlags: 0
