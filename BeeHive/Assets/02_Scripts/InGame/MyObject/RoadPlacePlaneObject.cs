@@ -11,7 +11,7 @@ namespace InGame.MyObject
 
         public override void ObjectClicked()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("도로 배치판 클릭됨");
         }
         // 이거 시작했을 때 리스트에 있던 값들 사라짐
     }

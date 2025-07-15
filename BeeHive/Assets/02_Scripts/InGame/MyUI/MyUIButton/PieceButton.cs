@@ -11,6 +11,7 @@ namespace InGame.MyUI.MyUIButton
     public class PieceButton : MonoBehaviour, IUIButton
     {
         [SerializeField] private List<Transform> _highLightPosList; // 배치할 수 있는 위치들을 가지는 리스트
+        [SerializeField] private ObjectType _objectType; // 배치할 객체를 설정하는 변수
 
         private bool _isHighLightOn; // 배치 칸의 하이라이트가 켜져있는지 확인하는 변수
 
@@ -32,12 +33,14 @@ namespace InGame.MyUI.MyUIButton
                     continue; // 아래 코드 무시
                 }
 
-                if (!_isHighLightOn) // 배치 칸에 하이라이트가 켜져있다면
+                if (!_isHighLightOn) // 배치 칸에 하이라이트가 꺼져있다면
                 {
+                    highLightObjectBase.CanPlacePiece = _objectType; // 배치가능한 객체를 배치할 객체로 설정
                     highLightObjectBase.HighLightOn(); // 배치할 수 있는 위치를 보여주는 하이라이트 오브젝트 활성화
                 }
                 else // 아니라면
                 {
+                    highLightObjectBase.CanPlacePiece = ObjectType.None; // 배치가능한 객체를 None으로 설정
                     highLightObjectBase.HighLightOff(); // 배치할 수 있는 위치를 보여주는 하이라이트 오브젝트 활성화
                 }
             }
@@ -46,4 +49,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.07.10
+// 마지막 작성 일자: 2025.07.15

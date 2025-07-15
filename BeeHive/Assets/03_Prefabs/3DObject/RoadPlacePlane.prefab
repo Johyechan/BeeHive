@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2539139066115289158}
   - component: {fileID: 4518505234373498968}
   - component: {fileID: -267463316982301117}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RoadPlacePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,5 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3160241d0a842b5418f9dadf0a980e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _intensity: 35
-  _neerPiecePlaceTransformList: []
+  nearPiecePlaceTransformList: []

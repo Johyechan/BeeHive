@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2539139066115289158}
   - component: {fileID: 4518505234373498968}
   - component: {fileID: -1463943333394200502}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PiecePlacePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,5 +121,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca335a8698da93439bed4bbe897cf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _intensity: 35
-  _neerRoadPlaceTransformList: []
+  nearRoadPlaceTransformList: []

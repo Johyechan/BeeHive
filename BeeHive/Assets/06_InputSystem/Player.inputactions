@@ -1,0 +1,51 @@
+{
+    "name": "Player",
+    "maps": [
+        {
+            "name": "Play",
+            "id": "1ba3f712-6c1a-4729-9959-569079784f1d",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "cac5f56d-ce49-4609-939f-c0d177fb41c0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c677340f-b929-4e85-825a-957590617491",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "PC",
+            "bindingGroup": "PC",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
