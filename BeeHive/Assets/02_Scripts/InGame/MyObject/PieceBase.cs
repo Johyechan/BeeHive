@@ -14,9 +14,10 @@ namespace InGame.MyObject
         public void MoveToPlacePlane(Transform parent, Vector3 targetPos)
         {
             transform.SetParent(parent); // 부모 변경
+            float yPos = targetPos.y * 1.5f; // 이후 배치할 때 애니메이션 효과를 위해 1.5배를 하여 조금 더 높이 올려준다
             Sequence sequence = DOTween.Sequence() // 시퀀스를 통해서 차례대로 순차적으로 실행
-                .Append(transform.DOLocalMoveY(targetPos.y * 1.5f, _animationDuration)) // 높이 먼저 올리기
-                .Append(transform.DOLocalMove(new Vector3(targetPos.x, transform.position.y, targetPos.z), _animationDuration)) // 지정한 위치로 이동
+                .Append(transform.DOLocalMoveY(yPos, _animationDuration)) // 높이 먼저 올리기
+                .Append(transform.DOLocalMove(new Vector3(targetPos.x, yPos, targetPos.z), _animationDuration)) // 지정한 위치로 이동
                 .Append(transform.DOLocalMoveY(targetPos.y, _animationDuration)); // 이후 높이 맞추기
         }
 
@@ -24,4 +25,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2025.07.15
+// 마지막 작성 일자: 2025.07.16
