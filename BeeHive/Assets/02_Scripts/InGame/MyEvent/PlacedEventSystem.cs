@@ -1,16 +1,7 @@
+using System;
 using UnityEngine;
 
-public class PlacedEventSystem : MonoBehaviour
+public static class PlacedEventSystem
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static Action OnPlaced; // 배치 했을 때 불릴 이벤트
 }

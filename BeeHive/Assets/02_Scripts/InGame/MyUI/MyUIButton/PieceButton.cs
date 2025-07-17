@@ -40,7 +40,6 @@ namespace InGame.MyUI.MyUIButton
                 }
                 else // 아니라면
                 {
-                    highLightObjectBase.CanPlacePiece = ObjectType.None; // 배치가능한 객체를 None으로 설정
                     highLightObjectBase.HighLightOff(); // 배치할 수 있는 위치를 보여주는 하이라이트 오브젝트 활성화
                 }
             }

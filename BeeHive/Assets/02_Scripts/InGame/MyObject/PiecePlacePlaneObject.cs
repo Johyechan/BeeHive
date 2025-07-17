@@ -42,6 +42,7 @@ namespace InGame.MyObject
             {
                 PlacedObjectType = CanPlacePiece; // 현재 배치가 가능한 기물로 이 배치판에 배치되어있는 기물로 지정
                 pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
+                PlacedEventSystem.OnPlaced?.Invoke(); // 배치 이벤트 콜
             }
         }
     }

@@ -1,4 +1,5 @@
 using InGame.MyObject;
+using InGame.MyObject.MyObjectInterface;
 using MyUtil;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,9 +19,10 @@ public class InputClickHandler
             GameObject clickedObj = RaycastUtil.MouseRaycast(out _mouseRaycastHit, 100, LayerMask.GetMask("ClickObj")); // 레이를 쏘기
             if (clickedObj != null) // 레이에 닿은 객체가 있다면
             {
-                PlacePlaneObjectBase placePlaneObjectBase = clickedObj.GetComponent<PlacePlaneObjectBase>(); // PlacePlaneObjectBase를 가져오기
+                IClickObject placePlaneObjectBase = clickedObj.GetComponent<IClickObject>(); // PlacePlaneObjectBase를 가져오기
                 placePlaneObjectBase.ObjectClicked(); // PlacePlaneObjectBase에 있는 인터페이스 함수를 실행 - 기물을 옮기는 함수 실행
             }
         }
     }
 }
+// 마지막 작성 일자: 2025.07.17
