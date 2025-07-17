@@ -9,7 +9,7 @@ public class InputClickHandler
     private RaycastHit _mouseRaycastHit; // 마우스 레이를 쐈을 때 닿았을 때 정보를 저장할 변수
 
     private bool _isOverUI; // UI위에 마우스 커서가 있는지 확인할 변수
-    public bool IsOverUI { get { return _isOverUI; } set { _isOverUI = value; } } // _isOverUI 프로퍼티
+    public bool IsOverUIProp { get { return _isOverUI; } set { _isOverUI = value; } } // _isOverUI 프로퍼티
 
     // 마우스 좌클릭 시 실행될 함수
     public void OnMouseClick(InputAction.CallbackContext context)

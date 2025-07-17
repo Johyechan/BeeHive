@@ -41,7 +41,7 @@ namespace InGame.MyManager
 
         void Update()
         {
-            _clickHandler.IsOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(); // 현재 이벤트 시스템이 존재하면서 마우스 커서가 UI 위에 있다면 true 하나라도 충족하지 못한다면 false
+            _clickHandler.IsOverUIProp = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(); // 현재 이벤트 시스템이 존재하면서 마우스 커서가 UI 위에 있다면 true 하나라도 충족하지 못한다면 false
         }
     }
 }

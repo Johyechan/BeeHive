@@ -27,7 +27,7 @@ namespace InGame.MyUI.MyUIButton
             {
                 PlacePlaneObjectBase highLightObjectBase = trans.GetComponent<PlacePlaneObjectBase>(); // 하이라이트 스크립트 가져오기
 
-                if (highLightObjectBase.PlacedObjectType != ObjectType.None) // 배치된 상태라면
+                if (highLightObjectBase.PlacedObjectTypeProp != ObjectType.None) // 배치된 상태라면
                 {
                     highLightObjectBase.HighLightOff();
                     continue; // 아래 코드 무시
@@ -35,7 +35,7 @@ namespace InGame.MyUI.MyUIButton
 
                 if (!_isHighLightOn) // 배치 칸에 하이라이트가 꺼져있다면
                 {
-                    highLightObjectBase.CanPlacePiece = _objectType; // 배치가능한 객체를 배치할 객체로 설정
+                    highLightObjectBase.CanPlacePieceProp = _objectType; // 배치가능한 객체를 배치할 객체로 설정
                     highLightObjectBase.HighLightOn(); // 배치할 수 있는 위치를 보여주는 하이라이트 오브젝트 활성화
                 }
                 else // 아니라면
