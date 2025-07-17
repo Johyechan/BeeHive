@@ -86,6 +86,9 @@ public class AutoFindNearObject : EditorWindow
                 {
                     piecePlacePlane.nearRoadPlaceTransformList.Add(roadPlacePlane); // 기물 칸 클래스에 있는 인접한 도로를 저장하는 리스트에 현재 도로 클래스 추가
                     roadPlacePlane.nearPiecePlaceTransformList.Add(piecePlacePlane); // 도로 칸 클래스에 있는 인접한 기물을 저장하는 리스트에 현재 기물 클래스 추가
+
+                    EditorUtility.SetDirty(piecePlacePlane); // 에디터에서 유니티에게 piecePlacePlane에 변경 사항이 있다고 알려서 저장
+                    EditorUtility.SetDirty(roadPlacePlane); // 에디터에서 유니티에게 roadPlacePlane에 변경 사항이 있다고 알려서 저장
                 }
             }
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace InGame.MyObject.MyObjectEnum
 {
     // 성 주위 객체 타입
-    public enum NearCastleType
+    public enum TeamType
     {
         None, // 성 주위 객체가 아닐 경우
         Team1, // 첫 번째 팀

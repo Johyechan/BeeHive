@@ -8,7 +8,7 @@ namespace InGame.MyObject
     // 기물 배치 칸의 기능 클래스
     public class PiecePlacePlaneObject : PlacePlaneObjectBase
     {
-        public List<RoadPlacePlaneObject> nearRoadPlaceTransformList; // 가깝게 붙어있는 도로 칸을 저장하는 리스트
+        public List<RoadPlacePlaneObject> nearRoadPlaceTransformList = new(); // 가깝게 붙어있는 도로 칸을 저장하는 리스트
 
         private Transform _minerParent; // 광부 기물들의 부모
         private Transform _soldierParent; // 보병 기물들의 부모
@@ -34,15 +34,15 @@ namespace InGame.MyObject
         // 마우스로 클릭 시 실행될 함수
         public override void ObjectClicked()
         {
-            Transform pieceParent = _pieceMap[CanPlacePieceProp]; // 현재 배치 가능한 타입의 객체 부모
+            Transform pieceParent = _pieceMap[CanPlacePieceTypeProp]; // 현재 배치 가능한 타입의 객체 부모
             int pieceCount = pieceParent.childCount; // 현재 보유 중인 배치 가능한 타입의 기물 수
 
             PieceBase pieceBase = pieceParent.GetChild(pieceCount - 1).GetComponent<PieceBase>(); // 현재 배치 가능한 타입의 객체의 마지막 객체의 PieceBase를 가져오기
             if(pieceBase != null) // null 체크
             {
-                PlacedObjectTypeProp = CanPlacePieceProp; // 현재 배치가 가능한 기물로 이 배치판에 배치되어있는 기물로 지정
+                PlacedObjectTypeProp = CanPlacePieceTypeProp; // 현재 배치가 가능한 기물로 이 배치판에 배치되어있는 기물로 지정
                 pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
-                HighLightEventSystem.OnHighLight?.Invoke(false); // 하이라이트를 끄는 매개변수로 이벤트 콜
+                HighLightEventSystem.OnPieceHighLight?.Invoke(false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜
             }
         }
     }
