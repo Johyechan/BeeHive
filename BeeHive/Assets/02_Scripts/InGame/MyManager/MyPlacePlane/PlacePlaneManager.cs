@@ -1,9 +1,7 @@
-using InGame.MyObject;
 using InGame.MyObject.MyObjectEnum;
 using InGame.MySystem;
 using MyUtil;
-using System.Collections.Generic;
-using TMPro;
+using DG.Tweening;
 using UnityEngine;
 
 namespace InGame.MyManager.MyPlacePlane
@@ -49,10 +47,10 @@ namespace InGame.MyManager.MyPlacePlane
         {
             if(Input.GetKeyDown(KeyCode.F))
             {
-                Debug.Log("배치 가능한 곳 찾기");
-                _findCanPlacePlaneSystem.ResetPlacePlanes();
-                _findCanPlacePlaneSystem.FindCanPiecePlacePlane(TeamType.Team1);
-                _findCanPlacePlaneSystem.FindCanRoadPlacePlane(TeamType.Team1);
+                Sequence sequence = DOTween.Sequence()
+                    .AppendCallback(() => _findCanPlacePlaneSystem.ResetPlacePlanes())
+                    .AppendCallback(() => _findCanPlacePlaneSystem.FindCanPiecePlacePlane(TeamType.Team1))
+                    .AppendCallback(() => _findCanPlacePlaneSystem.FindCanRoadPlacePlane(TeamType.Team1));
             }
             
         }

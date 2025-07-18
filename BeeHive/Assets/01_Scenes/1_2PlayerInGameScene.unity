@@ -190,6 +190,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -264,6 +268,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -329,6 +337,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8244229074724728705, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
   m_PrefabInstance: {fileID: 27873035}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &34064402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 34064403}
+  m_Layer: 0
+  m_Name: OtherRoad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &34064403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34064402}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.053, y: 0, z: -0.0125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 239678219}
+  m_Father: {fileID: 1262243795}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &39806743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -914,6 +954,7 @@ GameObject:
   - component: {fileID: 77282905}
   - component: {fileID: 77282904}
   - component: {fileID: 77282906}
+  - component: {fileID: 77282907}
   m_Layer: 5
   m_Name: Road
   m_TagString: Untagged
@@ -1023,7 +1064,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 77282904}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 77282907}
+        m_TargetAssemblyTypeName: InGame.MyUI.MyUIButton.RoadButton, Assembly-CSharp
+        m_MethodName: OnUIButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &77282907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77282902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5582e7d6e8940794cb3a44109acde087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectType: 4
 --- !u!1 &83451643
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,6 +1701,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1708,6 +1778,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -1844,6 +1918,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -2211,6 +2289,7 @@ Transform:
   - {fileID: 1614998234}
   - {fileID: 2121979491}
   - {fileID: 1993153890}
+  - {fileID: 1729767050}
   m_Father: {fileID: 1816700330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &200617593
@@ -2374,6 +2453,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -2534,6 +2617,68 @@ Transform:
   - {fileID: 1658051556}
   m_Father: {fileID: 1262243795}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &239678218
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 34064403}
+    m_Modifications:
+    - target: {fileID: 1006445174990255016, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_Name
+      value: Bridge
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+--- !u!4 &239678219 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+  m_PrefabInstance: {fileID: 239678218}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &239825332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2752,6 +2897,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -3003,6 +3152,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -3533,6 +3686,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -3878,6 +4035,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -4281,6 +4442,7 @@ GameObject:
   - component: {fileID: 468767785}
   - component: {fileID: 468767784}
   - component: {fileID: 468767786}
+  - component: {fileID: 468767787}
   m_Layer: 5
   m_Name: Soldier
   m_TagString: Untagged
@@ -4390,7 +4552,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 468767784}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 468767787}
+        m_TargetAssemblyTypeName: InGame.MyUI.MyUIButton.PieceButton, Assembly-CSharp
+        m_MethodName: OnUIButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &468767787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468767782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ceaf1d9537f729468b2f2072b630d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectType: 2
 --- !u!1001 &468912161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4399,6 +4586,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -4495,6 +4686,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -4790,6 +4985,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -5501,6 +5700,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -6265,6 +6472,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -6411,6 +6622,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -6740,6 +6955,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -8175,6 +8394,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3160241d0a842b5418f9dadf0a980e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &820118719
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1729767050}
+    m_Modifications:
+    - target: {fileID: 1006445174990255016, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_Name
+      value: Bridge
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+--- !u!4 &820118720 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+  m_PrefabInstance: {fileID: 820118719}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &825894735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8620,8 +8901,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -8879,6 +9164,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -9014,6 +9303,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -9175,7 +9472,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -9596,6 +9893,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -10010,8 +10311,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -10404,6 +10709,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -10578,6 +10887,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -10724,6 +11037,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -10970,6 +11287,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -11068,6 +11389,9 @@ MonoBehaviour:
   - poolType: 1
     poolCount: 5
     poolObject: {fileID: 1321742906231919482, guid: 27538c82f8fc54f4694680bab44b294d, type: 3}
+  - poolType: 2
+    poolCount: 10
+    poolObject: {fileID: 1006445174990255016, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
 --- !u!4 &1094954667
 Transform:
   m_ObjectHideFlags: 0
@@ -11366,6 +11690,7 @@ GameObject:
   - component: {fileID: 1125970400}
   - component: {fileID: 1125970399}
   - component: {fileID: 1125970401}
+  - component: {fileID: 1125970402}
   m_Layer: 5
   m_Name: Tank
   m_TagString: Untagged
@@ -11475,7 +11800,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1125970399}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1125970402}
+        m_TargetAssemblyTypeName: InGame.MyUI.MyUIButton.PieceButton, Assembly-CSharp
+        m_MethodName: OnUIButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1125970402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125970397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ceaf1d9537f729468b2f2072b630d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectType: 3
 --- !u!1 &1128003493
 GameObject:
   m_ObjectHideFlags: 0
@@ -12102,6 +12452,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -12186,6 +12540,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -12435,6 +12793,7 @@ Transform:
   - {fileID: 236278747}
   - {fileID: 516685352}
   - {fileID: 1984745557}
+  - {fileID: 34064403}
   m_Father: {fileID: 1871924973}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1264822273
@@ -12644,6 +13003,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -13022,6 +13385,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -13118,6 +13485,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -13202,6 +13573,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -13610,6 +13985,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -13868,6 +14247,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -15443,6 +15826,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -15539,6 +15926,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
       value: 1
       objectReference: {fileID: 0}
@@ -15628,6 +16019,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -15701,6 +16096,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -16388,6 +16791,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -17087,6 +17494,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -17172,6 +17583,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -17248,6 +17663,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3160241d0a842b5418f9dadf0a980e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1729767049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1729767050}
+  m_Layer: 0
+  m_Name: PlayerRoad
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1729767050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729767049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.243, y: 0, z: -0.0125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 820118720}
+  m_Father: {fileID: 200311275}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1729770974 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
@@ -17591,7 +18038,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -17714,6 +18161,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -17996,6 +18447,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -18080,6 +18535,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
       value: 1
@@ -18522,6 +18981,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -18992,6 +19455,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -19503,6 +19970,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -19843,6 +20314,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -20884,6 +21359,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -20979,6 +21462,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: _roadAngle
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2

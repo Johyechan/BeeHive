@@ -35,6 +35,7 @@ namespace InGame.MyObject
             _collider = GetComponent<Collider>();
             _collider.enabled = false; // 콜라이더 비활성화
             _placedObjectType = ObjectType.None; // 아무것도 안 올려져 있는 상태로 초기화
+            _canPlaceTypePiece = ObjectType.None; // 아무것도 배치 할 수 없는 상태로 초기화
         }
 
         protected virtual void Start()
@@ -52,6 +53,7 @@ namespace InGame.MyObject
         // 하이라이트를 끄는 함수
         public void HighLightOff()
         {
+            _canPlaceTypePiece = ObjectType.None; // 배치 가능한 타입 초기화
             _collider.enabled = false; // 클릭이 되지 않도록 콜라이더 비활성화
             _material.color = new Color(_material.color.r, _material.color.g, _material.color.b, 0); // 알파 값을 0으로 바꿔 보이지 않도록 변경
         }
@@ -59,4 +61,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2025.07.15
+// 마지막 작성 일자: 2025.07.18

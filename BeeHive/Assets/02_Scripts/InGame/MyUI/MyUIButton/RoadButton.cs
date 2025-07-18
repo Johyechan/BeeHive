@@ -1,15 +1,13 @@
 using InGame.MyManager.MyPlacePlane;
-using InGame.MyObject;
 using InGame.MyObject.MyObjectEnum;
 using InGame.MyUI.MyUIInterface;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
 {
     // 작성자: 조혜찬
-    // 기물 UI 버튼 클래스
-    public class PieceButton : MonoBehaviour, IUIButton
+    // 도로 UI 버튼 클래스
+    public class RoadButton : MonoBehaviour, IUIButton
     {
         [SerializeField] private ObjectType _objectType; // 배치 가능한 객체 타입 변수
 
@@ -22,12 +20,12 @@ namespace InGame.MyUI.MyUIButton
 
         private void OnEnable()
         {
-            HighLightEventSystem.OnPieceHighLight += HightLightOnOff; // 이벤트 구독
+            HighLightEventSystem.OnRoadHighLight += HightLightOnOff; // 이벤트 구독
         }
 
         private void OnDisable()
         {
-            HighLightEventSystem.OnPieceHighLight -= HightLightOnOff; // 이벤트 구독 해제
+            HighLightEventSystem.OnRoadHighLight -= HightLightOnOff; // 이벤트 구독 해제
         }
 
         // 하이라이트가 켜질 때 하이라이트가 켜진 상태 할당, 꺼졌을 때는 꺼진 상태 할당
@@ -36,23 +34,24 @@ namespace InGame.MyUI.MyUIButton
             _isHighLightOn = isOn;
         }
 
-        // 클릭 시 실행될 함수
         public void OnUIButtonClick()
         {
-            if(!_isHighLightOn) // 하이라이트가 꺼져 있을 때
+            if(!_isHighLightOn) // 하이라이트가 꺼져있을 때
             {
-                foreach (var piece in PlacePlaneManager.Instance.HighLightHandlerProp.CanPiecePlacePlanesProp) // 배치 가능한 기물 칸들 순회
+                foreach (var road in PlacePlaneManager.Instance.HighLightHandlerProp.CanRoadPlacePlanesProp) // 배치 가능한 도로 칸들 순회
                 {
-                    piece.CanPlacePieceTypeProp = _objectType; // 배치 가능한 타입을 할당
+                    Debug.Log($"버튼 눌렀을 때 배치 가능한 객체는 {_objectType}");
+                    road.CanPlacePieceTypeProp = _objectType; // 배치 가능한 타입을 할당
+                    Debug.Log($"도로 판이 판단했을 때 배치 가능한 객체는? {road.CanPlacePieceTypeProp}");
                 }
 
-                HighLightEventSystem.OnPieceHighLight?.Invoke(true); // 배치 가능한 기물 칸 하이라이트 키기
+                HighLightEventSystem.OnRoadHighLight?.Invoke(true); // 배치 가능한 도로칸 하이라이트 키기
             }
             else // 하이라이트가 켜져있을 때
             {
-                HighLightEventSystem.OnPieceHighLight?.Invoke(false); // 배치 가능한 기물 칸 하이라이트 끄기
+                HighLightEventSystem.OnRoadHighLight?.Invoke(false); // 배치 가능한 도로칸 하이라이트 끄기
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.07.17
+// 마지막 작성 일자: 2025.07.18

@@ -8,6 +8,7 @@ namespace MyUtil.MyObjectPool
     {
         None, // 아무것도 아닌 상태
         UIcard, // UI 카드
+        Road, // 도로 기물
     }
 }
 // 마지막 작성 일자: 2025.07.08

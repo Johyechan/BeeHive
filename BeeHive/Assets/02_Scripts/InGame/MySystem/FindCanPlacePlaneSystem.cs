@@ -21,20 +21,6 @@ namespace InGame.MySystem
             }
         }
 
-        // 배치 판 확인 여부 초기화 함수
-        public void ResetPlacePlanes()
-        {
-            foreach (var piece in PlacePlaneManager.Instance.PlacePlaneMapProp.PiecePlacePlanesProp) // 전체 기물 판 순회
-            {
-                piece.IsCheckedProp = false; // 확인하지 않은 상태로 초기화
-            }
-
-            foreach (var road in PlacePlaneManager.Instance.PlacePlaneMapProp.RoadPlacePlanesProp) // 전체 도로 판 순회
-            {
-                road.IsCheckedProp = false; // 확인하지 않은 상태로 초기화
-            }
-        }
-
         // 배치 가능한 도로 칸들을 찾는 함수
         public void FindCanRoadPlacePlane(TeamType type)
         {
@@ -47,10 +33,27 @@ namespace InGame.MySystem
             }
         }
 
+        // 배치 판 확인 여부 초기화 함수
+        public void ResetPlacePlanes()
+        {
+            foreach (var piece in PlacePlaneManager.Instance.PlacePlaneMapProp.PiecePlacePlanesProp) // 전체 기물 판 순회
+            {
+                piece.IsCheckedProp = false; // 확인하지 않은 상태로 초기화
+            }
+            PlacePlaneManager.Instance.HighLightHandlerProp.CanPiecePlacePlanesProp.Clear(); // 기물 배치 가능한 판 저장 컨테이너 비우기
+
+            foreach (var road in PlacePlaneManager.Instance.PlacePlaneMapProp.RoadPlacePlanesProp) // 전체 도로 판 순회
+            {
+                road.IsCheckedProp = false; // 확인하지 않은 상태로 초기화
+            }
+            PlacePlaneManager.Instance.HighLightHandlerProp.CanRoadPlacePlanesProp.Clear(); // 도로 배치 가능한 판 저장 컨테이너 비우기
+        }
+
         // 인접한 기물들을 찾는 함수
         private void FindNearPieces(TeamType teamType, RoadPlacePlaneObject road)
         {
-            if(!PlacePlaneManager.Instance.HighLightHandlerProp.CanRoadPlacePlanesProp.Contains(road)) // 동일한 대상을 찾을 수 없다면
+            if(!PlacePlaneManager.Instance.HighLightHandlerProp.CanRoadPlacePlanesProp.Contains(road) &&
+                road.PlacedObjectTypeProp == ObjectType.None) // 동일한 대상을 찾을 수 없다면 또는 빈 곳이라면
             {
                 PlacePlaneManager.Instance.HighLightHandlerProp.CanRoadPlacePlanesProp.Add(road); // 배치가 가능한 도로 배치 칸 저장 컨테이너에 추가
             }
@@ -71,7 +74,8 @@ namespace InGame.MySystem
         // 인접한 도로들을 찾는 함수
         private void FindNearRoads(TeamType teamType, PiecePlacePlaneObject piece)
         {
-            if(!PlacePlaneManager.Instance.HighLightHandlerProp.CanPiecePlacePlanesProp.Contains(piece)) // 동일한 대상을 찾을 수 없다면
+            if(!PlacePlaneManager.Instance.HighLightHandlerProp.CanPiecePlacePlanesProp.Contains(piece) &&
+                piece.PlacedObjectTypeProp == ObjectType.None) // 동일한 대상을 찾을 수 없다면 또는 빈 곳이라면
             {
                 PlacePlaneManager.Instance.HighLightHandlerProp.CanPiecePlacePlanesProp.Add(piece); // 배치가 가능한 기물 배치 칸 저장 컨테이너에 추가
             }
