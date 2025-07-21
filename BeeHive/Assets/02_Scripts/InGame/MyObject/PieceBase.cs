@@ -1,6 +1,8 @@
 using InGame.MyObject.MyObjectInterface;
 using DG.Tweening;
 using UnityEngine;
+using InGame.MyManager;
+using InGame.MyObject.MyObjectEnum;
 
 namespace InGame.MyObject
 {
@@ -8,6 +10,8 @@ namespace InGame.MyObject
     // 기물들의 기본적인 기능을 가지는 부모 클래스
     public abstract class PieceBase : MonoBehaviour, IClickObject
     {
+        public TeamType teamType; // 객체의 팀 타입
+
         [SerializeField] private float _animationDuration; // 애니메이션 지속시간
 
         protected Transform _parent; // 기물을 모아두는 부모
@@ -21,12 +25,12 @@ namespace InGame.MyObject
                 .Append(transform.DOLocalMoveY(yPos, _animationDuration)) // 높이 먼저 올리기
                 .Append(transform.DOLocalMove(new Vector3(targetPos.x, yPos, targetPos.z), _animationDuration)) // 지정한 위치로 이동
                 .Append(transform.DOLocalRotate(new Vector3(0, angle, 0), _animationDuration)) // 회전 값만큼 y축 회전
-                .Append(transform.DOLocalMoveY(targetPos.y, _animationDuration)); // 이후 높이 맞추기
-                
+                .Append(transform.DOLocalMoveY(targetPos.y, _animationDuration)) // 이후 높이 맞추기
+                .AppendCallback(() => UIManager.Instance.CanInteractionUI = true); // UI 상호작용 가능 상태로 초기화
         }
 
         // 오브젝트가 마우스로 클릭되었을 때 실행될 함수
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2025.07.18
+// 마지막 작성 일자: 2025.07.21

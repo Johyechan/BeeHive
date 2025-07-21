@@ -941,7 +941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceaf1d9537f729468b2f2072b630d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectType: 1
+  _canPlaceType: 1
 --- !u!1 &77282902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,7 +1089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5582e7d6e8940794cb3a44109acde087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectType: 4
+  _canPlaceType: 4
 --- !u!1 &83451643
 GameObject:
   m_ObjectHideFlags: 0
@@ -4577,7 +4577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceaf1d9537f729468b2f2072b630d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectType: 2
+  _canPlaceType: 2
 --- !u!1001 &468912161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11825,7 +11825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ceaf1d9537f729468b2f2072b630d36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectType: 3
+  _canPlaceType: 3
 --- !u!1 &1128003493
 GameObject:
   m_ObjectHideFlags: 0

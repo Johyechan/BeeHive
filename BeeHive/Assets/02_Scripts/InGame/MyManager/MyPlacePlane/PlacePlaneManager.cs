@@ -3,6 +3,7 @@ using InGame.MySystem;
 using MyUtil;
 using DG.Tweening;
 using UnityEngine;
+using InGame.MyEvent;
 
 namespace InGame.MyManager.MyPlacePlane
 {
@@ -56,4 +57,4 @@ namespace InGame.MyManager.MyPlacePlane
         }
     }
 }
-// 마지막 작성 일자: 2025.07.17
+// 마지막 작성 일자: 2025.07.21

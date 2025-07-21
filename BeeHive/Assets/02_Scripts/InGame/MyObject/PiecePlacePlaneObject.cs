@@ -1,3 +1,5 @@
+using InGame.MyEvent;
+using InGame.MyManager;
 using InGame.MyObject.MyObjectEnum;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,13 +40,18 @@ namespace InGame.MyObject
             int pieceCount = pieceParent.childCount; // 현재 보유 중인 배치 가능한 타입의 기물 수
 
             PieceBase pieceBase = pieceParent.GetChild(pieceCount - 1).GetComponent<PieceBase>(); // 현재 배치 가능한 타입의 객체의 마지막 객체의 PieceBase를 가져오기
+            // 현재 턴의 팀 타입으로 pieceBase 팀 타입 결정
+            pieceBase.teamType = TeamType.Team1; // 임시
+
             if(pieceBase != null) // null 체크
             {
-                PlacedObjectTypeProp = CanPlacePieceTypeProp; // 현재 배치가 가능한 기물로 이 배치판에 배치되어있는 기물로 지정
+                UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
+                PlacedObjectTypeProp = CanPlacePieceTypeProp; // 현재 배치가 가능한 기물을 이 배치판에 배치되어있는 기물로 지정
+                TeamTypeProp = pieceBase.teamType; // 현재 기물 배치 칸의 팀 타입을 기물의 팀 타입으로 할당
                 pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
                 HighLightEventSystem.OnPieceHighLight?.Invoke(false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.07.15
+// 마지막 작성 일자: 2025.07.21
