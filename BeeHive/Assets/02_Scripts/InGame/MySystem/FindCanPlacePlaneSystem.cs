@@ -15,12 +15,13 @@ namespace InGame.MySystem
             {
                 if (piece.TeamTypeProp == type && piece.PlacedObjectTypeProp != ObjectType.None) // 기물 칸의 팀 타입이 현재 탐색 중인 팀 타입이며 빈 곳이 아니라면
                 {
-                    FindNearRoads(type, piece); // 배치가 가능한 기물 배치 칸 저장 후 인접한 도로 탐색
+                    FindNearRoads(type, piece); // 배치가 가능한 기물 배치 칸 저장 후 인접한 도로 색탐
                 }
                 else if (piece.isNearToCastle) // 성과 인접한 배치 판이라면
                 {
                     piece.IsCheckedProp = true; // 체크 한 것으로 취급
                     PlacePlaneManager.Instance.HighLightHandlerProp.CanPiecePlacePlanesProp.Add(piece); // 배치가 가능한 기물 배치 칸 저장
+                    PlacePlaneManager.Instance.HighLightHandlerProp.CanMovePlacePlanes.Add(piece); // 이동 가능한 기물 배치 칸 저장
                 }
             }
         }
@@ -69,7 +70,7 @@ namespace InGame.MySystem
 
                 if(nearPiece.PlacedObjectTypeProp == ObjectType.None) // 빈 칸이라면
                 {
-                    PlacePlaneManager.Instance.HighLightHandlerProp.CanPiecePlacePlanesProp.Add(nearPiece); // 배치가 가능한 기물 배치 칸 추가
+                    PlacePlaneManager.Instance.HighLightHandlerProp.CanMovePlacePlanes.Add(nearPiece); // 이동 가능한 기물 배치 칸 추가
                     FindNearRoads(teamType, nearPiece); // 해당 기물 칸의 인접한 도로 탐색
                 }
                 else // 빈 칸이 아니라면 - 즉 내 팀에 속한 기물이 올려져 있다면

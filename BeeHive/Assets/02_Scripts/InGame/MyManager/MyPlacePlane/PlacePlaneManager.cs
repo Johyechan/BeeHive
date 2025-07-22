@@ -53,7 +53,6 @@ namespace InGame.MyManager.MyPlacePlane
                     .AppendCallback(() => _findCanPlacePlaneSystem.FindCanPiecePlacePlane(TeamType.Team1))
                     .AppendCallback(() => _findCanPlacePlaneSystem.FindCanRoadPlacePlane(TeamType.Team1));
             }
-            
         }
     }
 }

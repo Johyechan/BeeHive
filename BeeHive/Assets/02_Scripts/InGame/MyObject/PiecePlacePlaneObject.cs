@@ -49,9 +49,9 @@ namespace InGame.MyObject
                 PlacedObjectTypeProp = CanPlacePieceTypeProp; // 현재 배치가 가능한 기물을 이 배치판에 배치되어있는 기물로 지정
                 TeamTypeProp = pieceBase.teamType; // 현재 기물 배치 칸의 팀 타입을 기물의 팀 타입으로 할당
                 pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
-                HighLightEventSystem.OnPieceHighLight?.Invoke(false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜
+                HighLightEventSystem.OnPieceHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.07.21
+// 마지막 작성 일자: 2025.07.22

@@ -16,6 +16,8 @@ namespace InGame.MyObject
 
         protected Transform _parent; // 기물을 모아두는 부모
 
+        protected bool _isSelected; // 선택 여부를 확인하는 변수
+
         // 기물들을 지정 위치로 이동 시키는 함수
         public void MoveToPlacePlane(Transform parent, Vector3 targetPos, float angle = 0)
         {

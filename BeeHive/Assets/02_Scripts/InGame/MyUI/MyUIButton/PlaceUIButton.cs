@@ -31,7 +31,16 @@ namespace InGame.MyUI.MyUIButton
             HighLightEventSystem.OnRoadHighLight -= HightLightOff; // 도로 전용 이벤트 구독 해제
         }
 
-        // 하이라이트가 꺼질 때 현재 하이라이트 활성화 여부를 끄는 함수
+        // 하이라이트가 꺼질 때 현재 하이라이트 활성화 여부를 끄는 함수 - 기물용
+        private void HightLightOff(bool isOn, bool isPlace = true)
+        {
+            if (!isOn) // 꺼져있는 상태라면
+            {
+                _isHighLightOn = isOn; // 현재 하이라이트 활성화 여부를 꺼져있는 상태로 할당
+            }
+        }
+
+        // 하이라이트가 꺼질 때 현재 하이라이트 활성화 여부를 끄는 함수 - 도로용
         private void HightLightOff(bool isOn)
         {
             if (!isOn) // 꺼져있는 상태라면
@@ -43,4 +52,4 @@ namespace InGame.MyUI.MyUIButton
         public abstract void OnUIButtonClick();
     }
 }
-// 마지막 작성 일자: 2025.07.21
+// 마지막 작성 일자: 2025.07.22
