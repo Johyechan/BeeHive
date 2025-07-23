@@ -1,5 +1,6 @@
 using InGame.MyEvent;
 using InGame.MyManager.MyPlacePlane;
+using InGame.MyObject.MyObjectEnum;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -18,13 +19,14 @@ namespace InGame.MyObject
             // 클릭 되었을 때 이동 가능한 배치 칸 하이라이트 활성화
             if(!_isSelected) // 선택된 상태가 아닐 경우
             {
-                HighLightEventSystem.OnPieceHighLight?.Invoke(false, true); // 하이라이트 끄기, 배치 가능 배치 판 대상
-                HighLightEventSystem.OnPieceHighLight?.Invoke(true, false); // 하이라이트 키기, 이동 가능 배치 판 대상
+                HighLightEventSystem.CurrentCanPlaceType = ObjectType.None; // 배치 하는 것이 아닌 이동의 여부이기에 None으로 설정
+                HighLightEventSystem.OnPieceHighLightUIAction?.Invoke(false, true); // 하이라이트 끄기, 배치 가능 배치 판 대상
+                HighLightEventSystem.OnPieceHighLightObjAction?.Invoke(true, false); // 하이라이트 키기, 이동 가능 배치 판 대상
                 _isSelected = true; // 선택 되었다고 할당
             }
             else // 선택된 상태일 경우
             {
-                HighLightEventSystem.OnPieceHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
+                HighLightEventSystem.OnPieceHighLightObjAction?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
                 _isSelected = false; // 선택 해제 되었다고 할당
             }
         }

@@ -10,9 +10,10 @@ namespace InGame.MyEvent
         private static ObjectType _currentCanPlaceType = ObjectType.None; // 기물 칸에 배치 가능한 타입 확인 변수 - 현재 배치 가능한 기물이 다르다면 자기 자신을 누른 것이 아닌 다른 것을 눌렀다는 것이기 때문에 기물 하이라이트는 끄지 않지만 배치 가능한 타입은 변경이 가능, 처음 상태는 None으로 초기화
         public static ObjectType CurrentCanPlaceType { get { return _currentCanPlaceType; } set { _currentCanPlaceType = value; } }
 
-        public static Action<bool, bool> OnPieceHighLight; // 하이라이트를 키거나 끌 때 불릴 이벤트
-        public static Action<bool> OnRoadHighLight; // 하이라이트를 키거나 끌 때 불릴 이벤트
+        public static Action<bool, bool> OnPieceHighLightUIAction; // UI에서 기물 배치 가능 칸 하이라이트를 키거나 끌 때 불릴 액션
+        public static Action<bool> OnRoadHighLightUIAction; // UI에서 도로 배치 가능 칸 하이라이트를 키거나 끌 때 불릴 액션
+        public static Action<bool, bool> OnPieceHighLightObjAction; // 객체를 통해 이동 가능 칸 하이라이트를 키거나 끌 때 불릴 액션
     }
 
-    // 마지막 작성 일자: 2025.07.22
+    // 마지막 작성 일자: 2025.07.23
 }

@@ -3,6 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using InGame.MyManager;
 using InGame.MyObject.MyObjectEnum;
+using InGame.MyEvent;
 
 namespace InGame.MyObject
 {
@@ -17,6 +18,25 @@ namespace InGame.MyObject
         protected Transform _parent; // 기물을 모아두는 부모
 
         protected bool _isSelected; // 선택 여부를 확인하는 변수
+
+        protected virtual void OnEnable()
+        {
+            HighLightEventSystem.OnPieceHighLightObjAction += HighLightOff;
+        }
+
+        protected virtual void OnDisable()
+        {
+            HighLightEventSystem.OnPieceHighLightObjAction -= HighLightOff;
+        }
+
+        // 외부에서 하이라이트를 끌 때 현재 스크립트에서 하이라이트 활성화 여부를 끔 상태로 만들어주는 함수
+        private void HighLightOff(bool isOn, bool isMove = true) // 켜졌는지 여부, 이동 상태를 위해 켜졌는지 여부
+        {
+            if(!isOn) // 끄는 상태일 때
+            {
+                _isSelected = false;
+            }
+        }
 
         // 기물들을 지정 위치로 이동 시키는 함수
         public void MoveToPlacePlane(Transform parent, Vector3 targetPos, float angle = 0)

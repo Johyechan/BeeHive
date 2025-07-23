@@ -21,14 +21,14 @@ namespace InGame.MyUI.MyUIButton
 
         private void OnEnable()
         {
-            HighLightEventSystem.OnPieceHighLight += HightLightOff; // 기물 전용 이벤트 구독
-            HighLightEventSystem.OnRoadHighLight += HightLightOff; // 도로 전용 이벤트 구독
+            HighLightEventSystem.OnPieceHighLightUIAction += HightLightOff; // 기물 전용 이벤트 구독
+            HighLightEventSystem.OnRoadHighLightUIAction += HightLightOff; // 도로 전용 이벤트 구독
         }
 
         private void OnDisable()
         {
-            HighLightEventSystem.OnPieceHighLight -= HightLightOff; // 기물 전용 이벤트 구독 해제
-            HighLightEventSystem.OnRoadHighLight -= HightLightOff; // 도로 전용 이벤트 구독 해제
+            HighLightEventSystem.OnPieceHighLightUIAction -= HightLightOff; // 기물 전용 이벤트 구독 해제
+            HighLightEventSystem.OnRoadHighLightUIAction -= HightLightOff; // 도로 전용 이벤트 구독 해제
         }
 
         // 하이라이트가 꺼질 때 현재 하이라이트 활성화 여부를 끄는 함수 - 기물용

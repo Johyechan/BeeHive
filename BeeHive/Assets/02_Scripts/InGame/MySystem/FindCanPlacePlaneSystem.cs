@@ -20,8 +20,10 @@ namespace InGame.MySystem
                 else if (piece.isNearToCastle) // 성과 인접한 배치 판이라면
                 {
                     piece.IsCheckedProp = true; // 체크 한 것으로 취급
-                    PlacePlaneManager.Instance.HighLightHandlerProp.CanPiecePlacePlanesProp.Add(piece); // 배치가 가능한 기물 배치 칸 저장
-                    PlacePlaneManager.Instance.HighLightHandlerProp.CanMovePlacePlanes.Add(piece); // 이동 가능한 기물 배치 칸 저장
+                    if(piece.PlacedObjectTypeProp == ObjectType.None) // 해당 위치에 아무것도 올라와 있지 않을 때
+                    {
+                        PlacePlaneManager.Instance.HighLightHandlerProp.CanPiecePlacePlanesProp.Add(piece); // 배치가 가능한 기물 배치 칸 저장
+                    }
                 }
             }
         }
@@ -38,7 +40,10 @@ namespace InGame.MySystem
                 else if (road.isNearToCastle) // 성과 인접한 배치 판이라면
                 {
                     road.IsCheckedProp = true; // 체크 한 것으로 취급
-                    PlacePlaneManager.Instance.HighLightHandlerProp.CanRoadPlacePlanesProp.Add(road); // 배치가 가능한 도로 배치 칸 저장
+                    if(road.PlacedObjectTypeProp == ObjectType.None) // 아무것도 올라와 있지 않은 상태 일때
+                    {
+                        PlacePlaneManager.Instance.HighLightHandlerProp.CanRoadPlacePlanesProp.Add(road); // 배치가 가능한 도로 배치 칸 저장
+                    }
                 }
             }
         }

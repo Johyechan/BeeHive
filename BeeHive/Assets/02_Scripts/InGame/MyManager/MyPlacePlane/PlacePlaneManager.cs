@@ -34,14 +34,16 @@ namespace InGame.MyManager.MyPlacePlane
 
         private void OnEnable()
         {
-            HighLightEventSystem.OnPieceHighLight += _highLightHandler.PieceHighLight; // 이벤트 구독
-            HighLightEventSystem.OnRoadHighLight += _highLightHandler.RoadHighLight; // 이벤트 구독
+            HighLightEventSystem.OnPieceHighLightUIAction += _highLightHandler.PieceHighLight; // 이벤트 구독
+            HighLightEventSystem.OnRoadHighLightUIAction += _highLightHandler.RoadHighLight; // 이벤트 구독
+            HighLightEventSystem.OnPieceHighLightObjAction += _highLightHandler.PieceHighLight; // 이벤트 구독
         }
 
         private void OnDisable()
         {
-            HighLightEventSystem.OnPieceHighLight -= _highLightHandler.PieceHighLight; // 이벤트 구독 해제
-            HighLightEventSystem.OnRoadHighLight -= _highLightHandler.RoadHighLight; // 이벤트 구독 해제
+            HighLightEventSystem.OnPieceHighLightUIAction -= _highLightHandler.PieceHighLight; // 이벤트 구독 해제
+            HighLightEventSystem.OnRoadHighLightUIAction -= _highLightHandler.RoadHighLight; // 이벤트 구독 해제
+            HighLightEventSystem.OnPieceHighLightObjAction -= _highLightHandler.PieceHighLight; // 이벤트 구독 해제
         }
 
         private void Update()
