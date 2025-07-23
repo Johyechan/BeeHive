@@ -9,10 +9,10 @@ namespace InGame.MySystem
     public class PlacePlaneMap
     {
         private HashSet<PiecePlacePlaneObject> _piecePlacePlanes = new(); // 전체 기물 배치판 해시 테이블 기반 컨테이너
-        public HashSet<PiecePlacePlaneObject> PiecePlacePlanesProp { get { return _piecePlacePlanes; } } // _allPiecePlacePlane 프로퍼티
+        public HashSet<PiecePlacePlaneObject> PiecePlacePlanes { get { return _piecePlacePlanes; } } // _allPiecePlacePlane 프로퍼티
 
         private HashSet<RoadPlacePlaneObject> _roadPlacePlanes = new(); // 전체 도로 배치판 해시 테이블 기반 컨테이너
-        public HashSet<RoadPlacePlaneObject> RoadPlacePlanesProp { get { return _roadPlacePlanes; } } // _allRoadPlacePlane 프로퍼티
+        public HashSet<RoadPlacePlaneObject> RoadPlacePlanes { get { return _roadPlacePlanes; } } // _allRoadPlacePlane 프로퍼티
 
         // 모든 배치 판을 기물 따로 도로 따로 저장하는 함수
         public void PlacePlaneSet(Transform placePlaneParent)

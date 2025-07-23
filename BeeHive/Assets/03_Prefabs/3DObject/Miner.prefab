@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamType: 0
-  _animationDuration: 1
+  _animationDuration: 0.3
+  _canPlaceType: 1
 --- !u!65 &6039080308620968799
 BoxCollider:
   m_ObjectHideFlags: 0

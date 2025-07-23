@@ -20,6 +20,8 @@ namespace InGame.MyManager.MyPlacePlane
         public HighLightHandler HighLightHandler => _highLightHandler; // get만 가지는 _highLightHandler 프로퍼티
 
         private FindCanPlacePlaneSystem _findCanPlacePlaneSystem; // 배치 가능한 배치 판들을 찾는 시스템 클래스 변수
+        // 위에 변수를 외부에서 접근하기 위한 프로퍼티
+        public FindCanPlacePlaneSystem FindCanPlacePlaneSystem => _findCanPlacePlaneSystem;
 
         // 변수 초기화
         protected override void Awake()

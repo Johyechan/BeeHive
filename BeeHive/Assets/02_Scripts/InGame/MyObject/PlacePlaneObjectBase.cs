@@ -20,15 +20,15 @@ namespace InGame.MyObject
         private Collider _collider; // 콜라이더 변수
 
         private TeamType _teamType; // 어떤 팀인지 확인하기 위한 변수
-        public TeamType TeamTypeProp { get { return _teamType; } set { _teamType = value; } } // _teamType 프로퍼티
+        public TeamType TeamType { get { return _teamType; } set { _teamType = value; } } // _teamType 프로퍼티
 
         private ObjectType _placedObjectType; // 어떤 기물이 배치되어있는지 알기 위한 변수
-        public ObjectType PlacedObjectTypeProp { get { return _placedObjectType; } set { _placedObjectType = value; } } // 외부에서 어떤 기물이 배치되어있는지 알고, 어떤 기물을 배치한 것인지 설정하기 위한 프로퍼티
+        public ObjectType PlacedObjectType { get { return _placedObjectType; } set { _placedObjectType = value; } } // 외부에서 어떤 기물이 배치되어있는지 알고, 어떤 기물을 배치한 것인지 설정하기 위한 프로퍼티
         private ObjectType _canPlaceTypePiece; // 현재 배치가 가능한 기물 객체를 확인하는 변수
-        public ObjectType CanPlacePieceTypeProp { get { return _canPlaceTypePiece; } set { _canPlaceTypePiece = value; } } // 외부에서 현재 배치가 가능한 기물 객체를 설정할 프로퍼티
+        public ObjectType CanPlacePieceType { get { return _canPlaceTypePiece; } set { _canPlaceTypePiece = value; } } // 외부에서 현재 배치가 가능한 기물 객체를 설정할 프로퍼티
 
         private bool _isChecked; // 이전에 확인이 되었는지 확인하는 변수
-        public bool IsCheckedProp { get { return _isChecked; } set { _isChecked = value; } } // 이전에 확인이 되었는지 확인하는 변수 프로퍼티
+        public bool IsChecked { get { return _isChecked; } set { _isChecked = value; } } // 이전에 확인이 되었는지 확인하는 변수 프로퍼티
 
         protected virtual void Awake()
         {
@@ -63,4 +63,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2025.07.18
+// 마지막 작성 일자: 2025.07.23

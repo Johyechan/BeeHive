@@ -36,22 +36,61 @@ namespace InGame.MyObject
         // 마우스로 클릭 시 실행될 함수
         public override void ObjectClicked()
         {
-            Transform pieceParent = _pieceMap[CanPlacePieceTypeProp]; // 현재 배치 가능한 타입의 객체 부모
+            if (GameManager.Instance.CurrentMovePiece != null) // 현재 이동 가능한 객체 있다면
+            {
+                ObjectMove(); // 기물 이동 함수 실행
+            }
+            else // 현재 이동 가능한 객체가 없다면
+            {
+                ObjectPlace(); // 기물 배치 함수 실행
+            }
+        }
+
+        // 객체를 이동하는 기능 함수
+        private void ObjectMove()
+        {
+            PlacePiece(GameManager.Instance.CurrentMovePiece, true); // 기물 이동
+        }
+
+        // 객체를 배치하는 기능 함수
+        private void ObjectPlace()
+        {
+            Transform pieceParent = _pieceMap[CanPlacePieceType]; // 현재 배치 가능한 타입의 객체 부모
             int pieceCount = pieceParent.childCount; // 현재 보유 중인 배치 가능한 타입의 기물 수
 
-            PieceBase pieceBase = pieceParent.GetChild(pieceCount - 1).GetComponent<PieceBase>(); // 현재 배치 가능한 타입의 객체의 마지막 객체의 PieceBase를 가져오기
-            // 현재 턴의 팀 타입으로 pieceBase 팀 타입 결정
-            pieceBase.teamType = TeamType.Team1; // 임시
+            
 
-            if(pieceBase != null) // null 체크
+            PlacePiece(pieceParent.GetChild(pieceCount - 1).gameObject, false); // 기물 배치
+        }
+
+        private void PlacePiece(GameObject pieceObj, bool isMove)
+        {
+            PieceBase pieceBase = pieceObj.GetComponent<PieceBase>(); // 객체의 PieceBase를 가져오기
+
+            if (pieceBase != null) // null 체크
             {
+                if(isMove) // 이동 상태이고
+                {
+                    if(pieceBase.CurrentPlacePlane != null) // 움직일 기물이 배치 되어 있는 칸이 있을 때
+                    {
+                        pieceBase.CurrentPlacePlane.PlacedObjectType = ObjectType.None; // 움직일 기물이 배치 되어있던 칸을 빈 칸으로 초기화
+                    }
+                }
+                pieceBase.CurrentPlacePlane = this; // 현재 기물이 올라가 있는 배치 칸을 자기 자신으로 할당
+
+                // 현재 턴의 팀 타입으로 pieceBase 팀 타입 결정
+                pieceBase.teamType = TeamType.Team1; // 임시
+
                 UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
-                PlacedObjectTypeProp = CanPlacePieceTypeProp; // 현재 배치가 가능한 기물을 이 배치판에 배치되어있는 기물로 지정
-                TeamTypeProp = pieceBase.teamType; // 현재 기물 배치 칸의 팀 타입을 기물의 팀 타입으로 할당
+                PlacedObjectType = CanPlacePieceType; // 현재 배치가 가능한 기물을 이 배치판에 배치되어있는 기물로 지정
+                TeamType = pieceBase.teamType; // 현재 기물 배치 칸의 팀 타입을 기물의 팀 타입으로 할당
+
                 pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
+
                 HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
+                HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.07.22
+// 마지막 작성 일자: 2025.07.23

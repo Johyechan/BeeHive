@@ -942,6 +942,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canPlaceType: 1
+  _objectParent: {fileID: 779070669}
 --- !u!1 &77282902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,6 +1091,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canPlaceType: 4
+  _objectParent: {fileID: 1729767050}
 --- !u!1 &83451643
 GameObject:
   m_ObjectHideFlags: 0
@@ -4578,6 +4580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canPlaceType: 2
+  _objectParent: {fileID: 830720629}
 --- !u!1001 &468912161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11826,6 +11829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canPlaceType: 3
+  _objectParent: {fileID: 1614998234}
 --- !u!1 &1128003493
 GameObject:
   m_ObjectHideFlags: 0

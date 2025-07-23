@@ -13,8 +13,8 @@ namespace InGame.MyObject
 
         public override void ObjectClicked()
         {
-            throw new System.NotImplementedException();
+            base.ObjectClicked();
         }
     }
 }
-// 마지막 작성 일자: 2025.07.18
+// 마지막 작성 일자: 2025.07.23

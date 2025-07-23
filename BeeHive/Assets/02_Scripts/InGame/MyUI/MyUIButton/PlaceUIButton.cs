@@ -12,6 +12,8 @@ namespace InGame.MyUI.MyUIButton
     {
         [SerializeField] protected ObjectType _canPlaceType; // 배치 가능한 객체 타입 변수
 
+        [SerializeField] protected Transform _objectParent; // 배치하려고 하는 기물의 부모
+
         protected bool _isHighLightOn; // 하이라이트가 켜졌는지 확인하는 변수
 
         private void Awake()

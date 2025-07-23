@@ -8,13 +8,13 @@ namespace InGame.MySystem
     public class HighLightHandler
     {
         private HashSet<PlacePlaneObjectBase> _canPiecePlacePlanes = new(); // 배치 가능한 기물 배치 판들을 저장해두는 해시 테이블 기반 컨테이너
-        public HashSet<PlacePlaneObjectBase> CanPiecePlacePlanesProp { get { return _canPiecePlacePlanes; } } // _canPiecePlacePlanes 프로퍼티
+        public HashSet<PlacePlaneObjectBase> CanPiecePlacePlanes { get { return _canPiecePlacePlanes; } } // _canPiecePlacePlanes 프로퍼티
 
         private HashSet<PlacePlaneObjectBase> _canRoadPlacePlanes = new(); // 배치 가능한 기물 배치 판들을 저장해두는 해시 테이블 기반 컨테이너
-        public HashSet<PlacePlaneObjectBase> CanRoadPlacePlanesProp { get { return _canRoadPlacePlanes; } } // _canPlacePlanes 프로퍼티
+        public HashSet<PlacePlaneObjectBase> CanRoadPlacePlanes { get { return _canRoadPlacePlanes; } } // _canPlacePlanes 프로퍼티
 
-        private HashSet<PlacePlaneObjectBase> _canMovePlacePlanes = new(); // 이동 가능한 기물 배치 판들을 저장해두는 해시 테이블 기반 컨테이너
-        public HashSet<PlacePlaneObjectBase> CanMovePlacePlanes { get { return _canMovePlacePlanes; } } // _canMovePlacePlanes 프로퍼티
+        private HashSet<PlacePlaneObjectBase> _canPieceMovePlanes = new(); // 이동 가능한 기물 배치 판들을 저장해두는 해시 테이블 기반 컨테이너
+        public HashSet<PlacePlaneObjectBase> CanPieceMovePlanes { get { return _canPieceMovePlanes; } } // _canMovePlacePlanes 프로퍼티
 
         public void PieceHighLight(bool on, bool isPlace)
         {
@@ -37,10 +37,10 @@ namespace InGame.MySystem
             }
             else
             {
-                if (_canMovePlacePlanes.Count <= 0) // 이동 가능한 기물 판 객체 존재하지 않다면
+                if (_canPieceMovePlanes.Count <= 0) // 이동 가능한 기물 판 객체 존재하지 않다면
                     return; // 그냥 반환
 
-                foreach (var placePlane in _canMovePlacePlanes) // 이동 가능한 기물 판 객체들 순회
+                foreach (var placePlane in _canPieceMovePlanes) // 이동 가능한 기물 판 객체들 순회
                 {
                     if (on) // 킬 것이라면
                     {
@@ -74,4 +74,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.07.22
+// 마지막 작성 일자: 2025.07.23

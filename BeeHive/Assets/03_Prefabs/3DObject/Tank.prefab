@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8470461354041131804}
   - component: {fileID: 4549152480045486938}
-  m_Layer: 0
+  - component: {fileID: 4871278116008338751}
+  m_Layer: 6
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +47,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3009b0213c0de374ca89c5c341fc5de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animationDuration: 1
+  teamType: 0
+  _animationDuration: 0.3
+  _canPlaceType: 3
+--- !u!65 &4871278116008338751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3580588991831825165}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0056987675, y: 0.0023695838, z: 0.0046698535}
+  m_Center: {x: -0.000017836224, y: 0.0009191892, z: 0.0000336176}
 --- !u!1001 &4847499704540240225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,6 +122,18 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ef38d94571a3143469a731cdf7820811, type: 3}
       propertyPath: m_Name
       value: _piece_3_bottom
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ef38d94571a3143469a731cdf7820811, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618390714125674172, guid: ef38d94571a3143469a731cdf7820811, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8148020786976898669, guid: ef38d94571a3143469a731cdf7820811, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -164,6 +200,22 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: e8c9b51b705a5b2419e7b3dbcf9195fb, type: 3}
       propertyPath: m_Name
       value: _piece_3_top
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e8c9b51b705a5b2419e7b3dbcf9195fb, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4991603876070023865, guid: e8c9b51b705a5b2419e7b3dbcf9195fb, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618390714125674172, guid: e8c9b51b705a5b2419e7b3dbcf9195fb, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8148020786976898669, guid: e8c9b51b705a5b2419e7b3dbcf9195fb, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

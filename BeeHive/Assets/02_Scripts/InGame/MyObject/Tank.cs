@@ -11,11 +11,6 @@ namespace InGame.MyObject
         {
             _parent = GameObject.Find("PlayerTanks").transform; // 전차 기물 부모 할당
         }
-
-        public override void ObjectClicked()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
-
+// 마지막 작성 일자: 2025.07.23
