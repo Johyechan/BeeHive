@@ -1,5 +1,4 @@
 using MyUtil;
-using UnityEngine;
 
 namespace InGame.MyManager
 {
@@ -16,4 +15,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.07.21
+// 마지막 작성 일자: 2025.07.23

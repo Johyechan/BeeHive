@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace InGame.MyObject.MyObjectEnum
 {
     // 작성자: 조혜찬
@@ -13,4 +11,4 @@ namespace InGame.MyObject.MyObjectEnum
         Road, // 도로
     }
 }
-// 마지막 작성 일자: 2025.07.09
+// 마지막 작성 일자: 2025.07.23

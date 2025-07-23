@@ -21,12 +21,12 @@ namespace InGame.MyObject
 
         protected virtual void OnEnable()
         {
-            HighLightEventSystem.OnPieceHighLightObjAction += HighLightOff;
+            HighLightEvents.OnPieceMovementHighLight += HighLightOff;
         }
 
         protected virtual void OnDisable()
         {
-            HighLightEventSystem.OnPieceHighLightObjAction -= HighLightOff;
+            HighLightEvents.OnPieceMovementHighLight -= HighLightOff;
         }
 
         // 외부에서 하이라이트를 끌 때 현재 스크립트에서 하이라이트 활성화 여부를 끔 상태로 만들어주는 함수

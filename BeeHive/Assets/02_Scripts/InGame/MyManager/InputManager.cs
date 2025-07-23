@@ -1,4 +1,6 @@
+using InGame.MyInput;
 using InGame.MyObject;
+using InGame.MyObject.MyObjectInterface;
 using MyUtil;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,43 +8,54 @@ using UnityEngine.InputSystem;
 
 namespace InGame.MyManager
 {
-    // ÀÛ¼ºÀÚ: Á¶ÇıÂù
-    // ÀÎÇ² °ü·Ã ¸Å´ÏÀú
+    // ì‘ì„±ì: ì¡°í˜œì°¬
+    // ì¸í’‹ì„ ê´€ë¦¬í•˜ëŠ” ì‹±ê¸€í†¤ ë§¤ë‹ˆì €
     public class InputManager : MonoSingleton<InputManager>
     {
-        [SerializeField] private InputActionAsset _playerActionAsset; // ÇÃ·¹ÀÌ¾î ÀÎÇ² ¾×¼Ç ¿¡¼Â
+        [SerializeField] private InputActionAsset _playerActionAsset; // í”Œë ˆì´ì–´ì˜ ì¸í’‹ ì—ì…‹
 
-        private InputActionMap _playActionMap; // Play ¸íÀ» °¡Áø ÇÃ·¹ÀÌ ÇÒ ¶§ ÇÊ¿äÇÑ ¾×¼ÇµéÀ» °¡Áø ¸Ê º¯¼ö
-        private InputAction _clickAction; // click ¸íÀ» °¡Áø Å¬¸¯ ¾×¼Ç º¯¼ö
+        private InputActionMap _playActionMap; // ì¸í’‹ ì—ì…‹ì˜ ì•¡ì…˜ ë§µ - ê²Œì„ì— í•„ìš”í•œ ì•¡ì…˜ë“¤ì„ ê°€ì§€ëŠ” ë§µ
+        private InputAction _clickAction; // ì•¡ì…˜ ë§µì— ìˆëŠ” ì•¡ì…˜ - í´ë¦­ ì•¡ì…˜
 
-        private InputClickHandler _clickHandler;
+        private InputClickHandler _clickHandler; // ê°ì²´ í´ë¦­ì„ ì¸ì‹í•˜ê¸° ìœ„í•œ í•¸ë“¤ëŸ¬
 
         protected override void Awake()
         {
             base.Awake();
 
-            _clickHandler = new InputClickHandler(); // ÀÎÇ² Å¬¸¯ Å¬·¡½º °¡Á®¿À±â
+            _clickHandler = new InputClickHandler();
 
-            _playActionMap = _playerActionAsset.FindActionMap("Play"); // ÀÎÇ² ¾×¼Ç ¿¡¼Â¿¡¼­ Play ¸íÀ» °¡Áø ¸Ê Å½»ö
-            _clickAction = _playActionMap.FindAction("Click"); // ÀÎÇ² ¾×¼Ç ¿¡¼Â ¸Ê¿¡¼­ Click ¸íÀ» °¡Áø ¾×¼Ç Å½»ö
+            _playActionMap = _playerActionAsset.FindActionMap("Play"); // ì¸í’‹ ì—ì…‹ì—ì„œ Play ì´ë¦„ì„ ê°€ì§„ ì•¡ì…˜ ë§µ íƒìƒ‰
+            _clickAction = _playActionMap.FindAction("Click"); // ì•¡ì…˜ ë§µì—ì„œ Clickì´ë¦„ì„ ê°€ì§„ ì•¡ì…˜ íƒìƒ‰
         }
 
         private void OnEnable()
         {
-            _playerActionAsset.Enable(); // ÇÃ·¹ÀÌ¾î ÀÎÇ² ¾×¼Ç ¿¡¼Â È°¼ºÈ­ - ¸Ê°ú ¾×¼Ç±îÁö ÀüºÎ È°¼ºÈ­
-            _clickAction.performed += _clickHandler.OnMouseClick; // Å¬¸¯ ¾×¼Ç¿¡ Å¬¸¯ ½Ã ½ÇÇàµÉ ÇÔ¼ö ±¸µ¶
+            _playerActionAsset.Enable(); // ì¸í’‹ ì—ì…‹ í™œì„±í™”
+            _clickAction.performed += MouseClick; // í´ë¦­ ì•¡ì…˜ì— í´ë¦­ ì‹œ ì‹¤í–‰ë  í•¨ìˆ˜ êµ¬ë…
         }
 
         private void OnDisable()
         {
-            _clickAction.performed -= _clickHandler.OnMouseClick; // Å¬¸¯ ¾×¼Ç¿¡ ±¸µ¶µÇ¾î ÀÖ´Â ÇÔ¼ö ±¸µ¶ ÇØÁ¦
-            _playerActionAsset.Disable(); // ÇÃ·¹ÀÌ¾î ÀÎÇ² ¾×¼Ç ¿¡¼Â ºñÈ°¼ºÈ­ - ¸Ê°ú ¾×¼Ç±îÁö ÀüºÎ ºñÈ°¼ºÈ­
+            _clickAction.performed -= MouseClick; // í´ë¦­ ì•¡ì…˜ì— êµ¬ë…ëœ í•¨ìˆ˜ í•´ì œ
+            _playerActionAsset.Disable(); // ì¸í’‹ ì—ì…‹ ë¹„í™œì„±í™”
+        }
+
+        private void MouseClick(InputAction.CallbackContext context)
+        {
+            GameObject hitObj = _clickHandler.OnMouseClick(); // ë§ˆìš°ìŠ¤ í´ë¦­ ì‹œ ë ˆì´ ìºìŠ¤íŠ¸ë¥¼ ì˜ì•„ ë‹¿ì€ ê°ì²´ë¥¼ ë°˜í™˜
+            if (hitObj != null) // ë ˆì´ìºìŠ¤íŠ¸ì— ë‹¿ì€ ê°ì²´ê°€ ìˆì„ ê²½ìš°
+            {
+                IClickObject clickObj = hitObj.GetComponent<IClickObject>(); // í´ë¦­ ê°€ëŠ¥í•œ ì˜¤ë¸Œì íŠ¸ë“¤ì´ ê°€ì§€ëŠ” ì¸í„°í˜ì´ìŠ¤ ê°€ì ¸ì˜¤ê¸°
+                clickObj.ObjectClicked(); // ë ˆì´ ìºìŠ¤íŠ¸ì— ë‹¿ì€ ê°ì²´ì—ê²Œ í´ë¦­ë˜ì—ˆë‹¤ê³  í•¨ìˆ˜ í˜¸ì¶œ
+            }
+            
         }
 
         void Update()
         {
-            _clickHandler.IsOverUIProp = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(); // ÇöÀç ÀÌº¥Æ® ½Ã½ºÅÛÀÌ Á¸ÀçÇÏ¸é¼­ ¸¶¿ì½º Ä¿¼­°¡ UI À§¿¡ ÀÖ´Ù¸é true ÇÏ³ª¶óµµ ÃæÁ·ÇÏÁö ¸øÇÑ´Ù¸é false
+            _clickHandler.IsOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(); // í˜„ì¬ EventSystemì´ ì¡´ì¬í•˜ê³  ë§ˆìš°ìŠ¤ ì»¤ì„œê°€ UIìœ„ì— ìˆë‹¤ë©´ true í• ë‹¹, ë‘˜ ì¤‘ í•˜ë‚˜ë¼ë„ falseë¼ë©´ false í• ë‹¹
         }
     }
 }
-// ¸¶Áö¸· ÀÛ¼º ÀÏÀÚ: 2025.07.16
+// ë§ˆì§€ë§‰ ì‘ì„± ì¼ì: 2025.07.23
