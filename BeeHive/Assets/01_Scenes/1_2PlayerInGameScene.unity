@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 830720629}
     m_Modifications:
+    - target: {fileID: -917148370639149671, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: sceneId
+      value: 1611234315
+      objectReference: {fileID: 0}
     - target: {fileID: 252553519089831707, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.007
@@ -514,6 +518,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 779070669}
     m_Modifications:
+    - target: {fileID: 5018658349302613103, guid: c8a36783f9066e445889096a9854d924, type: 3}
+      propertyPath: sceneId
+      value: 1669030097
+      objectReference: {fileID: 0}
     - target: {fileID: 7392490733645986711, guid: c8a36783f9066e445889096a9854d924, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1640,6 +1648,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 779070669}
     m_Modifications:
+    - target: {fileID: 5018658349302613103, guid: c8a36783f9066e445889096a9854d924, type: 3}
+      propertyPath: sceneId
+      value: 745565169
+      objectReference: {fileID: 0}
     - target: {fileID: 7392490733645986711, guid: c8a36783f9066e445889096a9854d924, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.007
@@ -2670,6 +2682,10 @@ PrefabInstance:
     - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607526933633809385, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: sceneId
+      value: 3982347129
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4782,6 +4798,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4754393114718704262, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
+      propertyPath: sceneId
+      value: 1012934733
+      objectReference: {fileID: 0}
     - target: {fileID: 8470461354041131804, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.007
@@ -5785,6 +5805,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 880769345}
     m_Modifications:
+    - target: {fileID: -917148370639149671, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: sceneId
+      value: 231784136
+      objectReference: {fileID: 0}
     - target: {fileID: 252553519089831707, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.007
@@ -6566,6 +6590,10 @@ PrefabInstance:
     - target: {fileID: 3580588991831825165, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: m_Name
       value: Tank 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754393114718704262, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
+      propertyPath: sceneId
+      value: 3738212939
       objectReference: {fileID: 0}
     - target: {fileID: 8470461354041131804, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7397,6 +7425,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 880769345}
     m_Modifications:
+    - target: {fileID: -917148370639149671, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: sceneId
+      value: 83794038
+      objectReference: {fileID: 0}
     - target: {fileID: 252553519089831707, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.014
@@ -7777,6 +7809,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 180855404}
     m_Modifications:
+    - target: {fileID: 5018658349302613103, guid: c8a36783f9066e445889096a9854d924, type: 3}
+      propertyPath: sceneId
+      value: 178761627
+      objectReference: {fileID: 0}
     - target: {fileID: 7392490733645986711, guid: c8a36783f9066e445889096a9854d924, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7883,6 +7919,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 180855404}
     m_Modifications:
+    - target: {fileID: 5018658349302613103, guid: c8a36783f9066e445889096a9854d924, type: 3}
+      propertyPath: sceneId
+      value: 2629165799
+      objectReference: {fileID: 0}
     - target: {fileID: 7392490733645986711, guid: c8a36783f9066e445889096a9854d924, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.007
@@ -8448,6 +8488,10 @@ PrefabInstance:
     - target: {fileID: 3020630815217639663, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3607526933633809385, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: sceneId
+      value: 2710352372
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9247,6 +9291,10 @@ PrefabInstance:
     - target: {fileID: 3580588991831825165, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: m_Name
       value: Tank 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754393114718704262, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
+      propertyPath: sceneId
+      value: 2100084533
       objectReference: {fileID: 0}
     - target: {fileID: 8470461354041131804, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12349,6 +12397,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 830720629}
     m_Modifications:
+    - target: {fileID: -917148370639149671, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: sceneId
+      value: 2765464420
+      objectReference: {fileID: 0}
     - target: {fileID: 252553519089831707, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.014
@@ -16355,6 +16407,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 880769345}
     m_Modifications:
+    - target: {fileID: -917148370639149671, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: sceneId
+      value: 45659845
+      objectReference: {fileID: 0}
     - target: {fileID: 252553519089831707, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -17108,6 +17164,10 @@ PrefabInstance:
     - target: {fileID: 3580588991831825165, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: m_Name
       value: Tank 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4754393114718704262, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
+      propertyPath: sceneId
+      value: 115084718
       objectReference: {fileID: 0}
     - target: {fileID: 8470461354041131804, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18883,6 +18943,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 415dad43b26339f46987a2e8bfb87fde, type: 3}
   m_PrefabInstance: {fileID: 1803926869}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1809194250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1809194252}
+  - component: {fileID: 1809194251}
+  m_Layer: 0
+  m_Name: NetworkManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1809194251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809194250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aab4c8111b7c411b9b92cf3dbc5bd4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
+  runInBackground: 1
+  headlessStartMode: 0
+  editorAutoStart: 0
+  sendRate: 60
+  unreliableBaselineRate: 1
+  unreliableRedundancy: 0
+  transport: {fileID: 0}
+  networkAddress: localhost
+  maxConnections: 100
+  disconnectInactiveConnections: 0
+  disconnectInactiveTimeout: 60
+  exceptionsDisconnect: 1
+  authenticator: {fileID: 0}
+  offlineScene: 
+  onlineScene: 
+  offlineSceneLoadDelay: 0
+  playerPrefab: {fileID: 0}
+  autoCreatePlayer: 1
+  playerSpawnMethod: 0
+  spawnPrefabs: []
+  snapshotSettings:
+    bufferTimeMultiplier: 2
+    bufferLimit: 32
+    catchupNegativeThreshold: -1
+    catchupPositiveThreshold: 1
+    catchupSpeed: 0.019999999552965164
+    slowdownSpeed: 0.03999999910593033
+    driftEmaDuration: 1
+    dynamicAdjustment: 1
+    dynamicAdjustmentTolerance: 1
+    deliveryTimeEmaDuration: 2
+  evaluationMethod: 0
+  evaluationInterval: 3
+  timeInterpolationGui: 0
+--- !u!4 &1809194252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809194250}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1816700329
 GameObject:
   m_ObjectHideFlags: 0
@@ -20062,6 +20201,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 830720629}
     m_Modifications:
+    - target: {fileID: -917148370639149671, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: sceneId
+      value: 2101429153
+      objectReference: {fileID: 0}
     - target: {fileID: 252553519089831707, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -21562,3 +21705,4 @@ SceneRoots:
   - {fileID: 662562039}
   - {fileID: 1431473991}
   - {fileID: 1759363215}
+  - {fileID: 1809194252}
