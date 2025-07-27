@@ -7896,6 +7896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae14af774f5ab04a88c716a6c799920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerCount: 0
 --- !u!4 &733623769
 Transform:
   m_ObjectHideFlags: 0
@@ -18992,7 +18993,11 @@ MonoBehaviour:
   playerPrefab: {fileID: 0}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 1006445174990255016, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+  - {fileID: 7451704670816394464, guid: c8a36783f9066e445889096a9854d924, type: 3}
+  - {fileID: 4372677616447509983, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+  - {fileID: 3580588991831825165, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
   snapshotSettings:
     bufferTimeMultiplier: 2
     bufferLimit: 32
