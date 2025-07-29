@@ -1,6 +1,5 @@
 using InGame.MyUI.MyUIInterface;
 using UnityEngine;
-using UnityEngine.UI;
 using DG.Tweening;
 
 namespace InGame.MyUI
@@ -9,7 +8,7 @@ namespace InGame.MyUI
     // 특정 패널을 닫는 버튼 클래스
     public class ClosePanelButton : MonoBehaviour, IUIButton
     {
-        [SerializeField] private Image _targetPanel; // 닫을 패널
+        [SerializeField] private CanvasGroup _targetPanel; // 닫을 패널
 
         [SerializeField] private float _animationDuration; // 애니메이션 지속 시간
 
