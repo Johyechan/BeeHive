@@ -1,5 +1,6 @@
 using InGame.MyUI.MyUIInterface;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace InGame.MyUI
 {
@@ -7,6 +8,9 @@ namespace InGame.MyUI
     // 방을 만드는 버튼
     public class MakeRoomButton : MonoBehaviour, IUIButton
     {
+        [SerializeField] private InputField _inputField; // 방 이름을 적을 InputField
+
+        // 클릭 시 실행될 함수
         public void OnUIButtonClick()
         {
             
