@@ -1,4 +1,3 @@
-using InGame.MyObject.MyObjectEnum;
 using Mirror;
 using TMPro;
 using UnityEngine;

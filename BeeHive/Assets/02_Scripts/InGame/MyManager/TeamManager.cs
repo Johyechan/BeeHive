@@ -1,8 +1,8 @@
 using UnityEngine;
 using Mirror;
-using InGame.MyObject.MyObjectEnum;
 using MyUtil;
 using TMPro;
+using InGame.MyEnum;
 
 namespace InGame.MyManager
 {

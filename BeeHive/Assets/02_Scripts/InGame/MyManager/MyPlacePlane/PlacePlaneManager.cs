@@ -1,9 +1,10 @@
-using InGame.MyObject.MyObjectEnum;
+
 using InGame.MySystem;
 using MyUtil;
 using DG.Tweening;
 using UnityEngine;
 using InGame.MyEvent;
+using InGame.MyEnum;
 
 namespace InGame.MyManager.MyPlacePlane
 {

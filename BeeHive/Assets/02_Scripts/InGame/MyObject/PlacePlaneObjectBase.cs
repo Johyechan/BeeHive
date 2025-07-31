@@ -1,6 +1,6 @@
+using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.MyPlacePlane;
-using InGame.MyObject.MyObjectEnum;
 using InGame.MyObject.MyObjectInterface;
 using System.Collections.Generic;
 using UnityEngine;

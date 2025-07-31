@@ -1,7 +1,7 @@
+using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject;
-using InGame.MyObject.MyObjectEnum;
 using UnityEngine;
 
 namespace InGame.MySystem

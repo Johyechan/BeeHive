@@ -1,8 +1,8 @@
 using DG.Tweening;
+using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
-using InGame.MyObject.MyObjectEnum;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MySystem;
 using UnityEngine;

@@ -1,4 +1,4 @@
-namespace InGame.MyObject.MyObjectEnum
+namespace InGame.MyEnum
 {
     // 작성자: 조혜찬
     // 3D 객체 enum

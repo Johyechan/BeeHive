@@ -1,4 +1,4 @@
-using InGame.MyObject.MyObjectEnum;
+using InGame.MyEnum;
 using System;
 
 namespace InGame.MyEvent

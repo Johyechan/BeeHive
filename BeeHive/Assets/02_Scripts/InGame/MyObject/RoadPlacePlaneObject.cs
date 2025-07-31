@@ -1,7 +1,7 @@
 using InGame.MyEvent;
 using InGame.MyManager;
-using InGame.MyObject.MyObjectEnum;
 using MyUtil.MyObjectPool;
+using InGame.MyEnum;
 using System.Collections.Generic;
 using UnityEngine;
 

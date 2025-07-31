@@ -1,4 +1,4 @@
-namespace InGame.MyObject.MyObjectEnum
+namespace InGame.MyEnum
 {
     // ∆¿ ≈∏¿‘
     public enum TeamType

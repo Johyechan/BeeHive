@@ -1,6 +1,6 @@
+using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
-using InGame.MyObject.MyObjectEnum;
 using System.Collections.Generic;
 using UnityEngine;
 
