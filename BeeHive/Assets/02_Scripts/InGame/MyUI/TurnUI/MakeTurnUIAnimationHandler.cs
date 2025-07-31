@@ -8,7 +8,7 @@ namespace InGame.MyUI.TurnUI
     // 생산 턴에 나올 UI 애니메이션 클래스
     public class MakeTurnUIAnimationHandler : TurnUIAnimationHandlerBase
     {
-        public MakeTurnUIAnimationHandler(Image backgroundImage, TMP_Text tmpText) : base(backgroundImage, tmpText)
+        public MakeTurnUIAnimationHandler(CanvasGroup canvasGroup, TMP_Text tmpText) : base(canvasGroup, tmpText)
         {
         }
 
@@ -18,4 +18,4 @@ namespace InGame.MyUI.TurnUI
         }
     }
 }
-// 마지막 작성 일자: 2025.07.31
+// 마지막 작성 일자: 2025.08.01

@@ -8,7 +8,7 @@ namespace InGame.MyUI.TurnUI
     // 카드 뽑기 결정 턴에 나올 UI 애니메이션 클래스
     public class DrawTurnUIAnimationHandler : TurnUIAnimationHandlerBase
     {
-        public DrawTurnUIAnimationHandler(Image backgroundImage, TMP_Text tmpText) : base(backgroundImage, tmpText)
+        public DrawTurnUIAnimationHandler(CanvasGroup canvasGroup, TMP_Text tmpText) : base(canvasGroup, tmpText)
         {
         }
 
@@ -18,4 +18,4 @@ namespace InGame.MyUI.TurnUI
         }
     }
 }
-// 마지막 작성 일자: 2025.07.31
+// 마지막 작성 일자: 2025.08.01

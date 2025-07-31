@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace InGame.MyUI.TurnUI
@@ -7,13 +8,13 @@ namespace InGame.MyUI.TurnUI
     // 턴마다 나오는 UI 애니메이션 클래스들의 부모 클래스
     public abstract class TurnUIAnimationHandlerBase
     {
-        protected Image _backgroundImage; // 애니메이션 백그라운드 이미지 변수
+        protected CanvasGroup _canvasGroup; // 애니메이션 백그라운드 이미지 변수
 
         protected TMP_Text _tmpText; // 현재 턴을 보여줄 text 변수
 
-        public TurnUIAnimationHandlerBase(Image backgroundImage, TMP_Text tmpText)
+        public TurnUIAnimationHandlerBase(CanvasGroup canvasGroup, TMP_Text tmpText)
         {
-            _backgroundImage = backgroundImage;
+            _canvasGroup = canvasGroup;
             _tmpText = tmpText;
         }
 
@@ -21,4 +22,4 @@ namespace InGame.MyUI.TurnUI
         public abstract void UIAnimationPlay();
     }
 }
-// 마지막 작성 일자: 2025.07.31
+// 마지막 작성 일자: 2025.08.01

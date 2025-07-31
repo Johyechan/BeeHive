@@ -8,7 +8,7 @@ namespace InGame.MyUI.TurnUI
     // 턴 종료에 나올 UI 애니메이션 클래스
     public class TurnEndUIAnimationHandler : TurnUIAnimationHandlerBase
     {
-        public TurnEndUIAnimationHandler(Image backgroundImage, TMP_Text tmpText) : base(backgroundImage, tmpText)
+        public TurnEndUIAnimationHandler(CanvasGroup canvasGroup, TMP_Text tmpText) : base(canvasGroup, tmpText)
         {
         }
 
@@ -18,4 +18,4 @@ namespace InGame.MyUI.TurnUI
         }
     }
 }
-// 마지막 작성 일자: 2025.07.31
+// 마지막 작성 일자: 2025.08.01
