@@ -1,3 +1,5 @@
+using DG.Tweening;
+using InGame.MyManager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,13 +10,15 @@ namespace InGame.MyUI.TurnUI
     // 팀 변경할 때 나올 UI 애니메이션 클래스
     public class ChangeTeamUIAnimationHandler : TurnUIAnimationHandlerBase
     {
-        public ChangeTeamUIAnimationHandler(CanvasGroup canvasGroup, TMP_Text tmpText) : base(canvasGroup, tmpText)
+        public ChangeTeamUIAnimationHandler(CanvasGroup canvasGroup, TMP_Text tmpText, float animationDuration) : base(canvasGroup, tmpText, animationDuration)
         {
         }
 
-        public override void UIAnimationPlay()
+        public override Sequence UIAnimationPlay()
         {
-            throw new System.NotImplementedException();
+            return DOTween.Sequence()
+                .AppendCallback(() => _tmpText.text = TurnManager.Instance.CurrentTeamType.ToString() + " 턴") // 무슨 턴인지 텍스트로 보여주기
+                .Append(base.UIAnimationPlay()); // 이후 동일하게 실행되어야 할 기능 수행
         }
     }
 }

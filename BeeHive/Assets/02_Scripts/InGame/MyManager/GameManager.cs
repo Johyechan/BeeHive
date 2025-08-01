@@ -1,10 +1,7 @@
 using InGame.MyEnum;
-using InGame.MyObject;
 using MyUtil;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
 namespace InGame.MyManager
 {
@@ -55,6 +52,10 @@ namespace InGame.MyManager
                 _teamOrder.Add(TeamType.Team2); // 팀2 추가
                 _teamOrder.Add(TeamType.Team3); // 팀3 추가
             }
+            else
+            {
+                Debug.Log($"{maxTeamCount} 수의 인원은 불가 합니다");
+            }
 
             ShuffleUtility.Shuffle(_teamOrder); // 셔플
         }
@@ -84,4 +85,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.07.23
+// 마지막 작성 일자: 2025.08.01

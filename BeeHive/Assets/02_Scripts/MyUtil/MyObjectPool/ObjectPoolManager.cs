@@ -1,3 +1,4 @@
+using Mirror;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,6 +48,7 @@ namespace MyUtil.MyObjectPool
             newObject.transform.position = Vector3.zero; // 새로 생성한 객체 위치 초기화
             newObject.transform.rotation = Quaternion.identity; // 새로 생성한 객체 회전 초기화
             newObject.SetActive(false); // 새로 생성한 객체 비활성화
+            //NetworkServer.Spawn(newObject); // 서버에도 저장
             return newObject; // 새로 생성한 객체 반환
         }
 
@@ -82,4 +84,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2025.07.08
+// 마지막 작성 일자: 2025.08.01
