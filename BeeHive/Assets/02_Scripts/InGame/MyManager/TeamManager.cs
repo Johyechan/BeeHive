@@ -1,5 +1,4 @@
 using UnityEngine;
-using Mirror;
 using MyUtil;
 using TMPro;
 using InGame.MyEnum;
@@ -14,21 +13,17 @@ namespace InGame.MyManager
         // 위에 변수 프로퍼티
         public TeamType currentTeamType { get => _currentTeamType; set => _currentTeamType = value; }
 
-        private TMP_Text _tmpText;
-
         private int _maxTeam; // 최대 팀 수
         private int _currentTeam = 1; // 현재 팀
 
         private void Start()
         {
-            _tmpText = GameObject.Find("CurrentTeamDebug").GetComponent<TMP_Text>();
             _maxTeam = GameManager.Instance.PlayerCount; // 최대 플레이어 수를 최대 팀 수로 저장
         }
 
         public void SetTeam()
         {
             _currentTeamType = (TeamType)_currentTeam; // 현재 팀 값 저장
-            _tmpText.text = _currentTeamType.ToString();
 
             _currentTeam++; // 현재 팀 증가
             if (_currentTeam > _maxTeam) // 현재 팀이 최대 팀보다 크다면

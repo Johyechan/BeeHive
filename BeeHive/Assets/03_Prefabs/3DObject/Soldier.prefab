@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 252553519089831707}
   - component: {fileID: 5747962797088880711}
   - component: {fileID: 9001652827864050983}
-  - component: {fileID: -917148370639149671}
-  - component: {fileID: 6224066373781034384}
   m_Layer: 6
   m_Name: Soldier
   m_TagString: Untagged
@@ -73,60 +71,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.005543845, y: 0.002381888, z: 0.004759605}
   m_Center: {x: 0.00009837048, y: 0.0010448858, z: -0.00006847642}
---- !u!114 &-917148370639149671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4372677616447509983}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  _assetId: 2119057304
-  serverOnly: 0
-  visibility: 0
-  hasSpawned: 0
---- !u!114 &6224066373781034384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4372677616447509983}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f63ea2e505fd484193fb31c5c55ca73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMethod: 1
-  syncDirection: 1
-  syncMode: 0
-  syncInterval: 0.05
-  target: {fileID: 252553519089831707}
-  updateMethod: 0
-  syncPosition: 1
-  syncRotation: 1
-  syncScale: 0
-  onlySyncOnChange: 1
-  compressRotation: 1
-  interpolatePosition: 1
-  interpolateRotation: 1
-  interpolateScale: 1
-  coordinateSpace: 0
-  timelineOffset: 1
-  showGizmos: 0
-  showOverlay: 0
-  overlayColor: {r: 0, g: 0, b: 0, a: 0.5}
-  onlySyncOnChangeCorrectionMultiplier: 2
-  rotationSensitivity: 0.01
-  positionPrecision: 0.01
-  rotationPrecision: 0.001
-  scalePrecision: 0.01
-  debugDraw: 0
 --- !u!1001 &5762517627902331898
 PrefabInstance:
   m_ObjectHideFlags: 0

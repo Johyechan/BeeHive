@@ -1,6 +1,5 @@
 using InGame.MyManager;
 using InGame.MyUI.MyUIInterface;
-using Mirror;
 using TMPro;
 using UnityEngine;
 
@@ -15,17 +14,6 @@ namespace InGame.MyUI
         // 클릭 시 실행될 함수
         public void OnUIButtonClick()
         {
-            MyNetworkManager myNetMgr = MyNetworkManager.singleton as MyNetworkManager;
-            NetworkManager.singleton.StartHost(); // 새로운 서버 IP 만들기 + 현재 클라이언트 입장
-
-            RegisterRoomMessage msg = new RegisterRoomMessage
-            {
-                roomName = _inputField.text,
-                ip = myNetMgr.MainServerIP
-            };
-
-            NetworkClient.Send(msg); // 클라이언트에서 서버로 RegisterRoomMessage 형식으로 메세지 보내기
-            Debug.Log("방 만들기");
         }
     }
 }

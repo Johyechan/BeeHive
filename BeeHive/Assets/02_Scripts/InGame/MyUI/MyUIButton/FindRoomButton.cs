@@ -1,6 +1,5 @@
 using InGame.MyManager;
 using InGame.MyUI.MyUIInterface;
-using Mirror;
 using TMPro;
 using UnityEngine;
 
@@ -14,14 +13,6 @@ namespace InGame.MyUI
 
         public void OnUIButtonClick()
         {
-            MyNetworkManager myNetMgr = MyNetworkManager.singleton as MyNetworkManager;
-
-            SearchRoomMessage msg = new SearchRoomMessage
-            {
-                roomName = _inputField.text // 검색할 방 이름 할당
-            };
-
-            NetworkClient.Send(msg); // 클라이언트에서 서버로 SearchRoomMessage형식으로 메세지 보내기
         }
     }
 }
