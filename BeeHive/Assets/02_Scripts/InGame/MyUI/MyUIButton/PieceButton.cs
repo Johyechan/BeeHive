@@ -12,7 +12,7 @@ namespace InGame.MyUI.MyUIButton
     public class PieceButton : PlaceUIButton
     {
         // 클릭 시 실행될 함수
-        public override void OnUIButtonClick()
+        public override void OnUIClick()
         {
             // 만약 UI 상호작용 불가능 상태라면 또는 배치하려는 객체가 없을 경우(이 경우 특수하게 효과 줄 예정)
             if (!UIManager.Instance.CanInteractionUI || _objectParent.childCount <= 0) 

@@ -6,14 +6,14 @@ namespace InGame.MyUI
 {
     // 조혜찬
     // 패널을 띄우는 버튼 클래스
-    public class ShowPanelButton : MonoBehaviour, IUIButton
+    public class ShowPanelButton : MonoBehaviour, IUIClick
     {
         [SerializeField] private CanvasGroup _targetPanel; // 보여줄 패널
 
         [SerializeField] private float _animationDuration; // 애니메이션 지속 시간
 
         // 클릭 시 실행될 함수
-        public void OnUIButtonClick()
+        public void OnUIClick()
         {
             _targetPanel.gameObject.SetActive(true); // _targetPanel 활성화
             _targetPanel.DOFade(1, _animationDuration); // _targetPanel을 _animationDuration 동안 페이드 인

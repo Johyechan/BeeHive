@@ -6,7 +6,7 @@ namespace InGame.MyUI.MyUIButton
 {
     // 작성자: 조혜찬
     // 햄버거 메뉴 버튼 클래스
-    public class HamburgerMenuButton : MonoBehaviour, IUIButton
+    public class HamburgerMenuButton : MonoBehaviour, IUIClick
     {
         [SerializeField] private RectTransform _hamburgerMenuViewRectTransform; // 햄버거 메뉴 뷰를 아래로 내려 열고 위로 올려 닫기 위해 필요한 변수
         [SerializeField] private RectTransform _hamburgerMenuIconRectTransform; // 햄버거 메뉴 아이콘의 RectTransform - 여기서는 Icon의 회전을 위해 필요한 변수
@@ -27,7 +27,7 @@ namespace InGame.MyUI.MyUIButton
         }
 
         // 클릭 시 실행될 함수
-        public void OnUIButtonClick()
+        public void OnUIClick()
         {
             // 클릭 시 애니메이션 실행 - 아이콘 회전, 아래로 바 내려가기
             if(!_isOpen) // 햄버거 메뉴가 열리지 않은 상태라면

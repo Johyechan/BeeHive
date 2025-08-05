@@ -7,12 +7,13 @@ namespace InGame.MyUI
 {
     // 작성자: 조혜찬
     // 방을 찾는 버튼 클래스
-    public class FindRoomButton : MonoBehaviour, IUIButton
+    public class FindRoomButton : MonoBehaviour, IUIClick
     {
-        [SerializeField] private TMP_InputField _inputField; // 방 이름을 적는 inputField
+        [SerializeField] private TMP_InputField _roomIDField; // 방 ID를 적는 inputField
 
-        public void OnUIButtonClick()
+        public void OnUIClick()
         {
+            NetworkManager.Instance.Socket.Emit("joinRoom", _roomIDField.text); // 서버에 방을 찾고 있다고 신호를 보냄
         }
     }
 }

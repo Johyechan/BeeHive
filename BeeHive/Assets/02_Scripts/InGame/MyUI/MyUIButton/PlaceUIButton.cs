@@ -8,7 +8,7 @@ namespace InGame.MyUI.MyUIButton
 {
     // 작성자: 조혜찬
     // 배치할 기물을 선택하는 버튼의 부모 클래스
-    public abstract class PlaceUIButton : MonoBehaviour, IUIButton
+    public abstract class PlaceUIButton : MonoBehaviour, IUIClick
     {
         [SerializeField] protected ObjectType _canPlaceType; // 배치 가능한 객체 타입 변수
 
@@ -51,7 +51,7 @@ namespace InGame.MyUI.MyUIButton
             }
         }
 
-        public abstract void OnUIButtonClick();
+        public abstract void OnUIClick();
     }
 }
 // 마지막 작성 일자: 2025.07.22

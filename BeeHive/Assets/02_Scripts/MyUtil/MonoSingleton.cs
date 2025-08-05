@@ -38,7 +38,12 @@ namespace MyUtil
             {
                 Destroy(gameObject); // 현재 이 오브젝트를 삭제
             }
+            else // 아니라면
+            {
+                _instance = this as T; // 이 객체를 T 타입으로 변형해서 인스턴스 할당
+                DontDestroyOnLoad(gameObject); // 씬이 바뀌어도 삭제되지 않게 설정
+            }
         }
     }
 }
-// 마지막 작성 일자: 2025.07.08
+// 마지막 작성 일자: 2025.08.05

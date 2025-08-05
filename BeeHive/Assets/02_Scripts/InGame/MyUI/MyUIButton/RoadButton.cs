@@ -12,7 +12,7 @@ namespace InGame.MyUI.MyUIButton
     public class RoadButton : PlaceUIButton
     {
         // 클릭 시 실행될 함수
-        public override void OnUIButtonClick()
+        public override void OnUIClick()
         {
             if(!UIManager.Instance.CanInteractionUI) // 만약 UI 상호작용 불가능 상태라면
                 return; // 반환 - UI 클릭 무시

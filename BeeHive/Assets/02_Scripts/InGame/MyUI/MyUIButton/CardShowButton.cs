@@ -13,7 +13,7 @@ namespace InGame.MyUI.MyUIButton
         [SerializeField] private float _showYPos; // 보여주기 위한 Y축 값
         [SerializeField] private float _showDownYPos; // 안 보여주기 위한 Y축 값
 
-        public override void OnUIButtonClick()
+        public override void OnUIClick()
         {
             ShowAnimationY(_cardsUI, _piecesUI, _showYPos, _showDownYPos);
         }
