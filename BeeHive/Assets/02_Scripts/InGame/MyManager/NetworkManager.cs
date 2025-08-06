@@ -14,6 +14,10 @@ namespace InGame.MyManager
         private SocketIOUnity _socket; // 유니티에서 Socket.IO 서버와 통신하기 위한 객체
         public SocketIOUnity Socket { get => _socket; } // 외부에서 _socket에 안전하게 접근 가능한 프로퍼티
 
+        private string _currentPlayerID; // 현재 클라이언트 ID
+        // 현재 클라이언트 ID 프로퍼티
+        public string CurrentPlayerID { get => _currentPlayerID; }
+
         private RoomNetworkHandler _roomNetworkHandler; // 방과 관련된 서버 신호를 받는 핸들러
 
         protected override void Awake()
@@ -33,6 +37,13 @@ namespace InGame.MyManager
 
             _socket.OnConnected += (sender, e) =>
             {
+                // 현재 클라이언트 ID를 서버에서 받아온다
+                _socket.On("myID", data =>
+                {
+                    string id = data.GetValue<string>();
+                    MainThreadDispatcher.Enqueue(() => _currentPlayerID = id); // 현재 클라이언트 ID 할당
+                });
+
                 // 오류 발생 시 오류 표기
                 _socket.On("error", response =>
                 {

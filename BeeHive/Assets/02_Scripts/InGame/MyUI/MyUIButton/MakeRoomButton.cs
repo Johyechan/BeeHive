@@ -1,7 +1,10 @@
 using InGame.MyManager;
 using InGame.MyUI.MyUIInterface;
+using MyUtil;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace InGame.MyUI
@@ -13,15 +16,20 @@ namespace InGame.MyUI
     {
         public string roomName;
         public int maxPlayer;
+        public string socketName;
     }
 
     // 방을 만드는 버튼
     public class MakeRoomButton : MonoBehaviour, IUIClick
     {
+        [SerializeField] private GameObject _loadingUI; // 로딩창 UI
+
         [SerializeField] private TMP_InputField _roomNameField; // 방 이름을 적을 InputField
 
         [SerializeField] private Toggle _twoPlayer; // 2인 플레이어 방인지 토글을 통해 확인
         [SerializeField] private Toggle _threePlayer; // 3인 플레이어 방인지 토글을 통해 확인
+
+        [SerializeField] private TMP_Text _currentClientName; // 현재 클라이언트 닉네임
 
         // 클릭 시 실행될 함수
         public void OnUIClick()
@@ -37,11 +45,13 @@ namespace InGame.MyUI
                 Debug.Log("인원 수를 선택해야 합니다");
                 return;
             }
+            roomValue.socketName = _currentClientName.text; // 현재 클라이언트 닉네임
 
             string json = JsonUtility.ToJson(roomValue); // JSON 형태로 감싸기
 
             NetworkManager.Instance.Socket.Emit("createRoom", json); // 방 생성을 서버에 요청
+            _loadingUI.SetActive(true); // 로딩창 활성화
         }
     }
 }
-// 마지막 작성 일자: 2025.08.05
+// 마지막 작성 일자: 2025.08.06
