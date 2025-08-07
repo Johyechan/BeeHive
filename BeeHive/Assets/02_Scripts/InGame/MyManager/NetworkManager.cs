@@ -1,8 +1,10 @@
 using InGame.MyNetwork;
 using MyUtil;
+using MyUtil.MyObjectPool;
 using SocketIOClient;
 using System;
 using System.Net.Sockets;
+using TMPro;
 using UnityEngine;
 
 namespace InGame.MyManager
@@ -47,7 +49,17 @@ namespace InGame.MyManager
                 // 오류 발생 시 오류 표기
                 _socket.On("error", response =>
                 {
-                    Debug.Log(response.GetValue<string>());
+                    MainThreadDispatcher.Enqueue(() =>
+                    {
+                        GameObject canvas = GameObject.Find("Canvas"); // 캔버스 찾기
+                        GameObject uiPanel = ObjectPoolManager.Instance.GetObject(ObjectPoolType.UIPanel, canvas.transform); // 경고, 알림 UI 프리팹 가져오기
+                        CanvasGroup canvasGroup = uiPanel.GetComponent<CanvasGroup>();
+                        RectTransform rect = uiPanel.GetComponent<RectTransform>(); 
+                        canvasGroup.alpha = 1.0f; // 불투명도를 최대로 하여 보이도록 하기
+                        rect.anchoredPosition = Vector2.zero; // 위치 초기화
+                        TMP_Text tmpText = uiPanel.transform.GetChild(0).GetComponent<TMP_Text>(); // 텍스트 가져오기
+                        tmpText.text = response.GetValue<string>(); // 경고, 알림 작성
+                    });
                     return;
                 });
 
@@ -56,4 +68,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.08.05
+// 마지막 작성 일자: 2025.08.07

@@ -1,4 +1,6 @@
+using InGame.MyManager;
 using MyUtil;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InGame.MySystem.Room
@@ -10,6 +12,8 @@ namespace InGame.MySystem.Room
         private PlayerInfo _player1; // 플레이어 1 정보 - 방장
         private PlayerInfo _player2; // 플레이어 2 정보
         private PlayerInfo _player3; // 플레이어 3 정보
+
+        private PlayerInfo[] _players = new PlayerInfo[3]; // 플레이어 정보 배열
 
         private RoomInfo _roomInfo; // 방 정보
         // 방 정보 프로퍼티
@@ -29,6 +33,9 @@ namespace InGame.MySystem.Room
             _isTwoPlayer = false;
             _player3UI = player3UI;
             _vsUI2 = vsUI2;
+            _players[0] = _player1;
+            _players[1] = _player2;
+            _players[2] = _player3;
         }
 
         public void Init()
@@ -50,12 +57,31 @@ namespace InGame.MySystem.Room
                 }
             });
 
-            // 배열 안에 있는 플레이어의 정보를 서버에서 가지고 클라이언트에 전해줘야 함
-            // 플레이어마다 -> 방장인지 여부, 플레이어 ID랑 이름, 준비여부 만 알면 됨
-            // 방장은 무조건 준비 완료 상태로 바꾸고, 추방 UI 버튼 활성화 시키고 준비 버튼이 아닌 게임 시작 버튼으로 버튼 활성화, 방장 토글 체크
-            // 아닌 애들은 아님
-            // 그리고 방장인지 확인하는 건 NetworkManager에서 CurrentPlayerID로 배열 돌면서 확인하기
+            MainThreadDispatcher.Enqueue(() =>
+            {
+                for(int i = 0; i < _roomInfo.players.Length; i++)
+                {
+                    Debug.Log("dd");
+                    _players[i].playerNameText.text = _roomInfo.players[i].nickName; // 각 클라이언트 이름 띄우기
+                    if (_roomInfo.players[i].isRoomManager) // n번째 인덱스 플레이어가 방장이라면
+                    {
+                        _players[i].isRoomManagerToggle.isOn = true;// n번째 플레이어 방장 토글 체크
+                        _players[i].readyText.text = "준비 완료"; // 방장은 바로 준비 완료 상태
+                        _players[i].readyImage.color = Color.green; // 준비 완료 상태 색으로 변경
+                        _players[i].readyButton.gameObject.SetActive(false); // 준비 완료 버튼 비활성화
+                        _players[i].gameStartButton.gameObject.SetActive(true); // 게임 시작 버튼 활성화
+
+                        for(int j = 0; j < _roomInfo.players.Length; j++) // 다시 플레이어들을 전부 순회하며
+                        {
+                            if(!_roomInfo.players[j].isRoomManager) // 방장이 아닌 플레이어라면 - 방장 입장에서 추방 버튼이 보여야 함
+                            {
+                                _players[j].exileButton.gameObject.SetActive(true); // 추방 버튼 활성화
+                            }
+                        }
+                    }
+                }
+            });
         }
     }
 }
-// 마지막 작성 일자: 2025.08.06
+// 마지막 작성 일자: 2025.08.07

@@ -14,7 +14,8 @@ namespace InGame.MyUI
         public void OnUIClick()
         {
             NetworkManager.Instance.Socket.Emit("joinRoom", _roomIDField.text); // 서버에 방을 찾고 있다고 신호를 보냄
+            _roomIDField.text = "";
         }
     }
 }
-// 마지막 작성 일자: 2025.07.29
+// 마지막 작성 일자: 2025.08.07

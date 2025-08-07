@@ -36,6 +36,7 @@ namespace InGame.MyUI
         {
             CreateRoomValue roomValue = new CreateRoomValue(); // 방을 만들 때 필요한 값을 가지는 구조체
             roomValue.roomName = _roomNameField.text; // 방 이름 할당
+            _roomNameField.text = "";
             if (_twoPlayer.isOn) // 2인 플레이어 방이라면
                 roomValue.maxPlayer = 2; // 최대 입장 가능 인원 수 2
             else if(_threePlayer.isOn) // 3인 플레이어 방이라면

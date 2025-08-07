@@ -33,7 +33,14 @@ namespace MyUtil
                 {
                     action = _executionQueue.Dequeue();
                 }
-                action?.Invoke(); // 작업 실행
+                try
+                {
+                    action?.Invoke(); // 작업 실행
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
             }
         }
     }

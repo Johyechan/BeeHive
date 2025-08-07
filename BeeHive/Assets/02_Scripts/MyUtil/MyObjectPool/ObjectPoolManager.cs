@@ -14,6 +14,8 @@ namespace MyUtil.MyObjectPool
 
         protected override void Awake()
         {
+            base.Awake();
+
             Init(); // Ç® »ý¼º
         }
 

@@ -4,9 +4,11 @@ using UnityEngine;
 using InGame.MyManager;
 using System.Runtime.CompilerServices;
 using MyUtil;
+using UnityEngine.UI;
 
 namespace InGame.MySystem.Room
 {
+    [Serializable] // 직렬화하여 JsonUtility에서 파싱 가능하도록 변경
     public struct PlayerData
     {
         public string id; // 플레이어 ID
@@ -19,15 +21,20 @@ namespace InGame.MySystem.Room
     public struct PlayerInfo
     {
         public TMP_Text playerNameText; // 플레이어 이름
-        [HideInInspector] public bool isRoomManager; // 방장 여부 - 인스펙터 창에서 변경 불가
-        public GameObject readyUI; // 준비 여부를 보여주는 UI 객체
+        public Toggle isRoomManagerToggle; // 방장 여부 토글
+        public TMP_Text readyText; // 준비 여부 텍스트
+        public Image readyImage; // 준비 여부 이미지
+        public Button exileButton; // 추방 버튼
+        public Button gameStartButton; // 게임 시작 버튼
+        public Button readyButton; // 게임 준비 버튼
     }
 
     // 방 정보 구조체
+    [Serializable] // 직렬화
     public struct RoomInfo
     {
-        public string roomID; // 방 ID 
-        public string roomName; // 방 이름
+        public string ID; // 방 ID 
+        public string Name; // 방 이름
         public int maxPlayer; // 최대 입장 가능한 플레이어 수
         public string host; // 방장
         public PlayerData[] players; // 플레이어들 - 플레이어 정보 UI에 배치 값을 주기 위해 필요한 변수
@@ -65,13 +72,12 @@ namespace InGame.MySystem.Room
             {
                 string json = data.GetValue().ToString(); // string 형태로 값 받기
                 RoomInfo roomInfo = JsonUtility.FromJson<RoomInfo>(json); // RoomInfo 형태로 json 값을 변경
-                Debug.Log(roomInfo.roomID + roomInfo.roomName + roomInfo.maxPlayer + roomInfo.host + roomInfo.players.Length);
-                MainThreadDispatcher.Enqueue(() => _roomID.text = $"방 ID: {roomInfo.roomID}"); // 메인 스레드에서 방 ID UI 변경
-                MainThreadDispatcher.Enqueue(() => _roomName.text = $"방 이름: {roomInfo.roomName}"); // 메인 스레드에서 방 이름 UI 변경
+                MainThreadDispatcher.Enqueue(() => _roomID.text = $"방 ID: {roomInfo.ID}"); // 메인 스레드에서 방 ID UI 변경
+                MainThreadDispatcher.Enqueue(() => _roomName.text = $"방 이름: {roomInfo.Name}"); // 메인 스레드에서 방 이름 UI 변경
                 MainThreadDispatcher.Enqueue(() => _playerUISettingHandler.RoomInfo = roomInfo); // 방 정보 공유
                 MainThreadDispatcher.Enqueue(() => _playerUISettingHandler.Init()); // 플레이어 정보 UI에 관련해서 변경을 하는 함수 실행
             });
         }
     }
 }
-// 마지막 작성 일자: 2025.08.06
+// 마지막 작성 일자: 2025.08.07
