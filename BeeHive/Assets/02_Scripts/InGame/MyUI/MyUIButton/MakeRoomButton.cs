@@ -1,24 +1,12 @@
 using InGame.MyManager;
 using InGame.MyUI.MyUIInterface;
-using MyUtil;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace InGame.MyUI
 {
     // 작성자: 조혜찬
-    // 직렬화 가능한 방 생성에 필요한 값을 가지는 구조체
-    [System.Serializable]
-    public struct CreateRoomValue
-    {
-        public string roomName;
-        public int maxPlayer;
-        public string socketName;
-    }
-
     // 방을 만드는 버튼
     public class MakeRoomButton : MonoBehaviour, IUIClick
     {
@@ -28,8 +16,6 @@ namespace InGame.MyUI
 
         [SerializeField] private Toggle _twoPlayer; // 2인 플레이어 방인지 토글을 통해 확인
         [SerializeField] private Toggle _threePlayer; // 3인 플레이어 방인지 토글을 통해 확인
-
-        [SerializeField] private TMP_Text _currentClientName; // 현재 클라이언트 닉네임
 
         // 클릭 시 실행될 함수
         public void OnUIClick()
@@ -46,7 +32,7 @@ namespace InGame.MyUI
                 Debug.Log("인원 수를 선택해야 합니다");
                 return;
             }
-            roomValue.socketName = _currentClientName.text; // 현재 클라이언트 닉네임
+            roomValue.socketName = NetworkManager.Instance.CurrentClientName; // 현재 클라이언트 닉네임
 
             string json = JsonUtility.ToJson(roomValue); // JSON 형태로 감싸기
 

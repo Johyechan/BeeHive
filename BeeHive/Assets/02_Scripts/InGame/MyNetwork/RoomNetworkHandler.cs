@@ -1,5 +1,6 @@
 using InGame.MyManager;
 using MyUtil;
+using SocketIOClient;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,18 +15,20 @@ namespace InGame.MyNetwork
         {
             var socket = NetworkManager.Instance.Socket;
 
-            // 서버로부터 방이 만들어졌다는 신호 이벤트가 온다면 기능 구독
-            socket.On("roomCreated", data =>
+            socket.On("roomCreated", data => ChangeToRoomScene(data)); // 서버로부터 방이 만들어졌다는 신호가 오면 방 씬으로 이동
+            socket.On("joinedRoom", data => ChangeToRoomScene(data)); // 서버로부터 방을 찾아서 참가했다는 신호가 오면 방 씬으로 이동
+        }
+
+        // 방 씬으로 이동하는 함수
+        private void ChangeToRoomScene(SocketIOResponse data)
+        {
+            string ID = data.GetValue<string>(); // 방 ID를 string 값으로 가져오기
+            MainThreadDispatcher.Enqueue(() =>
             {
-                string ID = data.GetValue<string>(); // 데이터를 string 값으로 가져오기
-                Debug.Log(ID);
-                MainThreadDispatcher.Enqueue(() =>
-                {
-                    SceneMgr.Instance.CurrentRoomID = ID;
-                    SceneManager.LoadScene(1); // 방 씬으로 변경 추가
-                });
+                SceneMgr.Instance.CurrentRoomID = ID; // 현재 참가한 방의 ID 저장
+                SceneManager.LoadScene(1); // 방 씬으로 변경 추가
             });
         }
     }
 }
-// 마지막 작성 일자: 2025.08.05
+// 마지막 작성 일자: 2025.08.08

@@ -16,6 +16,10 @@ namespace InGame.MyManager
         private SocketIOUnity _socket; // 유니티에서 Socket.IO 서버와 통신하기 위한 객체
         public SocketIOUnity Socket { get => _socket; } // 외부에서 _socket에 안전하게 접근 가능한 프로퍼티
 
+        private string _currentClientName; // 현재 클라이언트 닉네임
+        // 현재 클라이언트 닉네임
+        public string CurrentClientName { get => _currentClientName; set => _currentClientName = value; }
+
         private string _currentPlayerID; // 현재 클라이언트 ID
         // 현재 클라이언트 ID 프로퍼티
         public string CurrentPlayerID { get => _currentPlayerID; }

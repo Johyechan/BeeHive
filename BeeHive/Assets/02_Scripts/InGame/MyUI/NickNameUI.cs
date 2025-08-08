@@ -15,6 +15,7 @@ namespace InGame.MyUI
         public void InputEnd()
         {
             _nickNameTmpText.text = _nickNameField.text; // 플레이어가 정한 닉네임으로 변경
+            NetworkManager.Instance.CurrentClientName = _nickNameTmpText.text; // 플레이어가 정한 닉네임 저장
             _nickNameField.text = "";
         }
     }
