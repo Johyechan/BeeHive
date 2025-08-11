@@ -4905,7 +4905,6 @@ MonoBehaviour:
   _roomNameField: {fileID: 964101165}
   _twoPlayer: {fileID: 1915753868}
   _threePlayer: {fileID: 2017758663}
-  _currentClientName: {fileID: 463120351}
 --- !u!1 &1542822631
 GameObject:
   m_ObjectHideFlags: 0

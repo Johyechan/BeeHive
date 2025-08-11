@@ -11,10 +11,11 @@ namespace InGame.MySystem
     public struct PlayerUI
     {
         public TMP_Text playerNameText; // 플레이어 이름
-        public Toggle isRoomManagerToggle; // 방장 여부 토글
         public TMP_Text readyText; // 준비 여부 텍스트
+        public Image roomManagerImage; // 방장 여부 토글
         public Image readyImage; // 준비 여부 이미지
         public Button exileButton; // 추방 버튼
+        public Button roomManagerButton; // 추방 버튼
     }
 }
 // 마지막 작성 일자: 08.08

@@ -1,6 +1,5 @@
 using InGame.MyManager;
 using MyUtil;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,33 +55,62 @@ namespace InGame.MySystem.Room
 
             MainThreadDispatcher.Enqueue(() =>
             {
-                // 여기서 이제 준비 여부 및 게임 시작 여부 결정도 해야 함
-                for(int i = 0; i < _roomInfo.players.Length; i++)
+                for (int i = 0; i < _roomInfo.players.Length; i++)
                 {
                     _players[i].playerNameText.text = _roomInfo.players[i].nickName; // 각 클라이언트 이름 띄우기
-                    if (_roomInfo.players[i].isRoomManager) // n번째 인덱스 플레이어가 방장이라면
+
+                    if (_roomInfo.players[i].isReady) // n번째 인덱스 플레이어가 준비 완료 상태라면
                     {
-                        _players[i].isRoomManagerToggle.isOn = true;// n번째 플레이어 방장 토글 체크
-                        _players[i].readyText.text = "준비 완료"; // 방장은 바로 준비 완료 상태
-                        _players[i].readyImage.color = Color.green; // 준비 완료 상태 색으로 변경
+                        ReadyUI(i, "준비 완료", Color.green);
+                    }
+                    else
+                    {
+                        ReadyUI(i, "준비 중", Color.white);
+                    }
 
-                        if (_roomInfo.players[i].id == NetworkManager.Instance.CurrentPlayerID) // 현재 클라이언트와 현재 플레이어의 클라 ID가 같다면
-                        {
-                            _readyButton.gameObject.SetActive(false); // 준비 완료 버튼 비활성화
-                            _gameStartButton.gameObject.SetActive(true); // 게임 시작 버튼 활성화
+                    if (_roomInfo.players[i].id == NetworkManager.Instance.CurrentPlayerID) // 현재 클라이언트 ID와 플레이어 id가 같다면
+                    {
+                        RoomManagerUI(i, _roomInfo.players[i].isRoomManager); // 방장 관련 UI 변경 함수 실행
 
-                            for (int j = 0; j < _roomInfo.players.Length; j++) // 다시 플레이어들을 전부 순회하며
-                            {
-                                if (!_roomInfo.players[j].isRoomManager) // 방장이 아닌 플레이어라면 - 방장 입장에서 추방 버튼이 보여야 함
-                                {
-                                    _players[j].exileButton.gameObject.SetActive(true); // 추방 버튼 활성화
-                                }
-                            }
-                        }
+                        if (_roomInfo.players[i].isRoomManager) // 현재 클라이언트가 방장인 경우
+                            _players[i].exileButton.gameObject.SetActive(false); // 방장의 추방 버튼은 비활성화
                     }
                 }
             });
         }
+
+        // 준비 관련 UI 변경 함수
+        private void ReadyUI(int index, string text, Color color)
+        {
+            _players[index].readyText.text = text;
+            _players[index].readyImage.color = color;
+        }
+
+        // 방장 관련 UI 변경 함수
+        private void RoomManagerUI(int index, bool isRoomManager)
+        {
+            _players[index].roomManagerButton.interactable = !isRoomManager; // 방장일 경우 클릭 금지, 방장이 아닐 경우 클릭 가능
+
+            _readyButton.gameObject.SetActive(!isRoomManager); // 방장일 경우 준비 버튼 비활성화, 방장이 아닐 경우 활성화
+            _gameStartButton.gameObject.SetActive(isRoomManager); // 방장일 경우 게임 시작 버튼 활성화, 방장이 아닐 경우 비활성화
+
+            for (int j = 0; j < _roomInfo.players.Length; j++)
+            {
+                if (_roomInfo.players[j].isRoomManager) // 방장인 플레이어
+                {
+                    _players[j].roomManagerImage.color = Color.red;// 방장일 경우 빨간색
+                    _players[j].roomManagerButton.gameObject.SetActive(isRoomManager); // 방장일 경우 방장 변경 버튼 활성화, 방장이 아닐 경우 비활성화
+                }
+                else // 방장이 아닌 플레이어
+                {
+                    _players[j].roomManagerImage.color = Color.white; // 방장이 아닐 경우 흰색
+                    _players[j].roomManagerButton.gameObject.SetActive(isRoomManager); // 방장일 경우 방장 변경 버튼 활성화, 방장이 아닐 경우 비활성화
+                    Debug.Log(j);
+                }
+
+                _players[j].exileButton.gameObject.SetActive(isRoomManager); // 방장일 경우 추방 버튼 활성화, 방장이 아닐 경우 추방 버튼 비활성화
+            }
+        }
     }
 }
-// 마지막 작성 일자: 2025.08.07
+// 마지막 작성 일자: 2025.08.11

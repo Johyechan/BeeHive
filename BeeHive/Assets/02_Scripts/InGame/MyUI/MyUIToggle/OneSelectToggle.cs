@@ -24,18 +24,20 @@ namespace InGame.MyUI.MyUIToggle
         // 클릭되었을 때 실행될 함수
         public void OnUIClick()
         {
-            if(_isMouseOn)
+            if(_isMouseOn) // 마우스 포인터가 현재 UI 객체 위에 올라가 있다면
             {
                 _currentToggle.isOn = true; // 현재 토글(내 토글) 키기
                 _otherToggle.isOn = false; // 다른 토글 끄기
             }
         }
 
+        // 마우스 포인터가 올려져 있을 경우
         public void OnPointerEnter(PointerEventData eventData)
         {
             _isMouseOn = true;
         }
 
+        // 마우스 포인터가 올려져 있지 않을 경우
         public void OnPointerExit(PointerEventData eventData)
         {
             _isMouseOn = false;
