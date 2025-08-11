@@ -2278,18 +2278,21 @@ MonoBehaviour:
   _players:
   - playerNameText: {fileID: 483791850}
     readyText: {fileID: 438467808}
+    readyButtonText: {fileID: 2106881294}
     roomManagerImage: {fileID: 1345551728}
     readyImage: {fileID: 1247541805}
     exileButton: {fileID: 1377350965}
     roomManagerButton: {fileID: 164195782}
   - playerNameText: {fileID: 1606071460}
     readyText: {fileID: 124518209}
+    readyButtonText: {fileID: 2106881294}
     roomManagerImage: {fileID: 1141091572}
     readyImage: {fileID: 1941202351}
     exileButton: {fileID: 1140451993}
     roomManagerButton: {fileID: 411611510}
   - playerNameText: {fileID: 2074365833}
     readyText: {fileID: 588170832}
+    readyButtonText: {fileID: 2106881294}
     roomManagerImage: {fileID: 1560733082}
     readyImage: {fileID: 1790589144}
     exileButton: {fileID: 1720555658}
@@ -2614,7 +2617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d4c906f2cc71d4a9c1c258ecdd66c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _readyButtonText: {fileID: 2106881294}
 --- !u!1 &1024452160
 GameObject:
   m_ObjectHideFlags: 0

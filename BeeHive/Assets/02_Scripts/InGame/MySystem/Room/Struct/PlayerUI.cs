@@ -12,6 +12,7 @@ namespace InGame.MySystem
     {
         public TMP_Text playerNameText; // 플레이어 이름
         public TMP_Text readyText; // 준비 여부 텍스트
+        public TMP_Text readyButtonText; // 준비 버튼 텍스트
         public Image roomManagerImage; // 방장 여부 토글
         public Image readyImage; // 준비 여부 이미지
         public Button exileButton; // 추방 버튼

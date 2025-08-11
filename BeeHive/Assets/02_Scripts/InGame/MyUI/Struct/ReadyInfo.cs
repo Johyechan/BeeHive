@@ -8,7 +8,6 @@ namespace InGame.MyUI
     {
         public string roomID; // 현재 방 ID
         public string targetID; // 준비 여부 변경 클라이언트 ID
-        public bool isReady; // 준비 여부
     }
 }
-// 마지막 작성 일자: 2025.08.08
+// 마지막 작성 일자: 2025.08.12

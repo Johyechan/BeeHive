@@ -85,6 +85,18 @@ namespace InGame.MySystem.Room
                         ReadyUI(i, "준비 중", Color.white);
                     }
 
+                    if (_roomInfo.players[i].id == currentPlayerID)
+                    {
+                        if (_roomInfo.players[i].isReady) // 준비 상태인 경우
+                        {
+                            _players[i].readyButtonText.text = "취소";
+                        }
+                        else // 준비 중인 경우
+                        {
+                            _players[i].readyButtonText.text = "준비";
+                        }
+                    }
+
                     if (_roomInfo.players[i].isRoomManager) // 방장 슬롯
                     {
                         _players[i].roomManagerImage.color = Color.red; // 방장 표시
@@ -112,4 +124,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2025.08.11
+// 마지막 작성 일자: 2025.08.12
