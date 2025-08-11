@@ -55,6 +55,23 @@ namespace InGame.MySystem.Room
 
             MainThreadDispatcher.Enqueue(() =>
             {
+                bool isCurrentRoomManager = false; // 현재 클라이언트가 방장 클라이언트인지 확인하는 변수
+
+                string currentPlayerID = NetworkManager.Instance.CurrentPlayerID; // 현재 클라이언트 ID
+                string roomManagerID = null; // 방장 클라이언트 ID 저장 변수
+
+                for(int i = 0; i < _roomInfo.players.Length; i++)
+                {
+                    if (_roomInfo.players[i].isRoomManager)
+                    {
+                        roomManagerID = _roomInfo.players[i].id; // 방장 클라이언트 ID 저장
+                        break; // 반복문 탈출
+                    }
+                }
+
+                isCurrentRoomManager = currentPlayerID == roomManagerID; // 현재 클라이언트가 방장 클라이언트인지 확인
+
+
                 for (int i = 0; i < _roomInfo.players.Length; i++)
                 {
                     _players[i].playerNameText.text = _roomInfo.players[i].nickName; // 각 클라이언트 이름 띄우기
@@ -68,14 +85,22 @@ namespace InGame.MySystem.Room
                         ReadyUI(i, "준비 중", Color.white);
                     }
 
-                    if (_roomInfo.players[i].id == NetworkManager.Instance.CurrentPlayerID) // 현재 클라이언트 ID와 플레이어 id가 같다면
+                    if (_roomInfo.players[i].isRoomManager) // 방장 슬롯
                     {
-                        RoomManagerUI(i, _roomInfo.players[i].isRoomManager); // 방장 관련 UI 변경 함수 실행
-
-                        if (_roomInfo.players[i].isRoomManager) // 현재 클라이언트가 방장인 경우
-                            _players[i].exileButton.gameObject.SetActive(false); // 방장의 추방 버튼은 비활성화
+                        _players[i].roomManagerImage.color = Color.red; // 방장 표시
+                        _players[i].roomManagerButton.gameObject.SetActive(true); // 방장 버튼 활성화
+                        _players[i].exileButton.gameObject.SetActive(false); // 방장 슬롯 추방 버튼 비활성화
+                    }
+                    else // 일반 슬롯
+                    {
+                        _players[i].roomManagerImage.color = Color.white; // 일반 표시
+                        _players[i].roomManagerButton.gameObject.SetActive(isCurrentRoomManager); // 방장 클라이언트라면 활성화
+                        _players[i].exileButton.gameObject.SetActive(isCurrentRoomManager); // 방장 클라이언트라면 활성화
                     }
                 }
+
+                _readyButton.gameObject.SetActive(!isCurrentRoomManager); // 방장 클라이언트라면 비활성화
+                _gameStartButton.gameObject.SetActive(isCurrentRoomManager); // 방장 클라이언트라면 활성화
             });
         }
 
@@ -84,32 +109,6 @@ namespace InGame.MySystem.Room
         {
             _players[index].readyText.text = text;
             _players[index].readyImage.color = color;
-        }
-
-        // 방장 관련 UI 변경 함수
-        private void RoomManagerUI(int index, bool isRoomManager)
-        {
-            _players[index].roomManagerButton.interactable = !isRoomManager; // 방장일 경우 클릭 금지, 방장이 아닐 경우 클릭 가능
-
-            _readyButton.gameObject.SetActive(!isRoomManager); // 방장일 경우 준비 버튼 비활성화, 방장이 아닐 경우 활성화
-            _gameStartButton.gameObject.SetActive(isRoomManager); // 방장일 경우 게임 시작 버튼 활성화, 방장이 아닐 경우 비활성화
-
-            for (int j = 0; j < _roomInfo.players.Length; j++)
-            {
-                if (_roomInfo.players[j].isRoomManager) // 방장인 플레이어
-                {
-                    _players[j].roomManagerImage.color = Color.red;// 방장일 경우 빨간색
-                    _players[j].roomManagerButton.gameObject.SetActive(isRoomManager); // 방장일 경우 방장 변경 버튼 활성화, 방장이 아닐 경우 비활성화
-                }
-                else // 방장이 아닌 플레이어
-                {
-                    _players[j].roomManagerImage.color = Color.white; // 방장이 아닐 경우 흰색
-                    _players[j].roomManagerButton.gameObject.SetActive(isRoomManager); // 방장일 경우 방장 변경 버튼 활성화, 방장이 아닐 경우 비활성화
-                    Debug.Log(j);
-                }
-
-                _players[j].exileButton.gameObject.SetActive(isRoomManager); // 방장일 경우 추방 버튼 활성화, 방장이 아닐 경우 추방 버튼 비활성화
-            }
         }
     }
 }
