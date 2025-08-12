@@ -6,6 +6,7 @@ using System;
 using System.Net.Sockets;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace InGame.MyManager
 {
@@ -48,6 +49,11 @@ namespace InGame.MyManager
                 {
                     string id = data.GetValue<string>();
                     MainThreadDispatcher.Enqueue(() => _currentPlayerID = id); // 현재 클라이언트 ID 할당
+                });
+
+                _socket.On("goLobby", _ =>
+                {
+                    MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(0)); // 로비 씬으로 이동
                 });
 
                 // 오류 발생 시 오류 표기
