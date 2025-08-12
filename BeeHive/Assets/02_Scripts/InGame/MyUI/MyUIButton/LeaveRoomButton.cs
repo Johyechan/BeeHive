@@ -1,0 +1,32 @@
+using InGame.MyManager;
+using InGame.MyUI.MyUIInterface;
+using UnityEngine;
+
+namespace InGame.MyUI.MyUIButton
+{
+    // 작성자: 조혜찬
+    // 방 나가기 버튼 클래스
+    public class LeaveRoomButton : MonoBehaviour, IUIClick
+    {
+        public void OnUIClick()
+        {
+            var socket = NetworkManager.Instance.Socket; // 서버와 통신하기 위한 객체 가져오기
+
+            if(socket != null) // 서버와 통신하기 위한 객체가 null이 아니라면
+            {
+                if(SceneMgr.Instance.CurrentRoomID != "") // 방 ID가 있을 때
+                {
+                    LeaveRoomInfo leaveRoomInfo = new LeaveRoomInfo() // 방을 떠날 때 필요한 값을 가지는 구조체 생성
+                    {
+                        roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID 할당
+                        targetID = NetworkManager.Instance.CurrentPlayerID // 현재 클라이언트 ID 할당
+                    };
+
+                    string json = JsonUtility.ToJson(leaveRoomInfo); // JSON 형태로 변환
+                    socket.Emit("leaveRoom", json);
+                }
+            }
+        }
+    }
+}
+// 마지막 작성 일자: 2025.08.12

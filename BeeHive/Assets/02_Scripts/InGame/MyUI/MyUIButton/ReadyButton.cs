@@ -29,8 +29,6 @@ namespace InGame.MyUI.MyUIButton
                     };
 
                     string json = JsonUtility.ToJson(readyInfo); // json형태로 변환
-
-                    Debug.Log("준비 여부 변경 신호 보냄");
                     socket.Emit("ready", json); // 준비 이벤트 실행
                 }
             }

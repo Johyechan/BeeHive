@@ -43,6 +43,16 @@ namespace InGame.MySystem.Room
                 }
             }
 
+            socket.On("canStartGame", _ => 
+            { 
+                MainThreadDispatcher.Enqueue(() => _gameStartButton.interactable = true); // 게임 시작 버튼 활성화
+            });
+            
+            socket.On("cantStartGame", _ =>
+            {
+                MainThreadDispatcher.Enqueue(() => _gameStartButton.interactable = false);// 게임 시작 버튼 비활성화
+            });
+
             socket.On("roomInfo", (data) =>
             {
                 string json = data.GetValue().ToString(); // string 형태로 값 받기
