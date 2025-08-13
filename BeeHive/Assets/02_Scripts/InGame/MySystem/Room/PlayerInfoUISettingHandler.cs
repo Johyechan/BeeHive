@@ -74,6 +74,17 @@ namespace InGame.MySystem.Room
 
                 for (int i = 0; i < _roomInfo.players.Length; i++)
                 {
+                    
+                    if (_roomInfo.players[i].id == null) // 만약 현재 플레이어가 빈 칸이라면
+                    {
+                        _players[i].playerNameText.text = "비어 있음";
+                        _players[i].readyText.text = "준비 중"; // 준비 중 상태
+                        _players[i].readyImage.color = Color.white; // 준비 중 상태
+                        _players[i].roomManagerImage.color = Color.white; // 방장 여부 방장 아님으로 초기화
+                        _players[i].roomManagerButton.gameObject.SetActive(false); // 방장 버튼 비활성화
+                        _players[i].exileButton.gameObject.SetActive(false); // 추방 버튼 비활성화
+                        continue; // 이번 반복 회차 넘기기
+                    }
                     _players[i].playerNameText.text = _roomInfo.players[i].nickName; // 각 클라이언트 이름 띄우기
 
                     if (_roomInfo.players[i].isReady) // n번째 인덱스 플레이어가 준비 완료 상태라면
