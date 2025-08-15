@@ -10,6 +10,7 @@ namespace InGame.MySystem
     {
         public string id; // 플레이어 ID
         public string nickName; // 플레이어 이름
+        public int index; // 슬롯 인덱스
         public bool isRoomManager; // 방장 여부
         public bool isReady; // 준비 완료 여부
     }
