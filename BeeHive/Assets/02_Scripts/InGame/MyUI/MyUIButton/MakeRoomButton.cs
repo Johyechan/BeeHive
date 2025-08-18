@@ -37,8 +37,7 @@ namespace InGame.MyUI
             string json = JsonUtility.ToJson(roomValue); // JSON 형태로 감싸기
 
             NetworkManager.Instance.Socket.Emit("createRoom", json); // 방 생성을 서버에 요청
-            _loadingUI.SetActive(true); // 로딩창 활성화
         }
     }
 }
-// 마지막 작성 일자: 2025.08.06
+// 마지막 작성 일자: 2025.08.18

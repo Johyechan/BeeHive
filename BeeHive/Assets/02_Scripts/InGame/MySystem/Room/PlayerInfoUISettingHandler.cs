@@ -1,5 +1,7 @@
 using InGame.MyManager;
 using MyUtil;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,6 +62,8 @@ namespace InGame.MySystem.Room
                 string currentPlayerID = NetworkManager.Instance.CurrentPlayerID; // 현재 클라이언트 ID
                 string roomManagerID = null; // 방장 클라이언트 ID 저장 변수
 
+                List<int> existIndexList = new List<int>(); // 플레이어의 UI 슬롯으로 사용되는 인덱스를 저장하는 리스트
+
                 for(int i = 0; i < _roomInfo.players.Length; i++)
                 {
                     if (_roomInfo.players[i].isRoomManager)
@@ -71,29 +75,20 @@ namespace InGame.MySystem.Room
 
                 isCurrentRoomManager = currentPlayerID == roomManagerID; // 현재 클라이언트가 방장 클라이언트인지 확인
 
-
                 for (int i = 0; i < _roomInfo.players.Length; i++)
                 {
                     int index = _roomInfo.players[i].index;
-                    if (_roomInfo.players[i].id == null) // 만약 현재 플레이어가 빈 칸이라면
-                    {
-                        _players[index].playerNameText.text = "비어 있음";
-                        _players[index].readyText.text = "준비 중"; // 준비 중 상태
-                        _players[index].readyImage.color = Color.white; // 준비 중 상태
-                        _players[index].roomManagerImage.color = Color.white; // 방장 여부 방장 아님으로 초기화
-                        _players[index].roomManagerButton.gameObject.SetActive(false); // 방장 버튼 비활성화
-                        _players[index].exileButton.gameObject.SetActive(false); // 추방 버튼 비활성화
-                        continue; // 이번 반복 회차 넘기기
-                    }
+
+                    existIndexList.Add(index); // 현재 플레이어의 인덱스 저장
                     _players[index].playerNameText.text = _roomInfo.players[i].nickName; // 각 클라이언트 이름 띄우기
 
                     if (_roomInfo.players[i].isReady) // n번째 인덱스 플레이어가 준비 완료 상태라면
                     {
-                        ReadyUI(i, "준비 완료", Color.green);
+                        ReadyUI(index, "준비 완료", Color.green);
                     }
                     else
                     {
-                        ReadyUI(i, "준비 중", Color.white);
+                        ReadyUI(index, "준비 중", Color.white);
                     }
 
                     if (_roomInfo.players[i].id == currentPlayerID)
@@ -122,6 +117,22 @@ namespace InGame.MySystem.Room
                     }
                 }
 
+                if (_roomInfo.players.Length < _roomInfo.maxPlayer)// 현재 플레이어 수가 최대 플레이어 수보다 작다면
+                {
+                    for (int i = 0; i < _roomInfo.maxPlayer; i++) // 최대 플레이어 수만큼 반복
+                    {
+                        if (!existIndexList.Contains(i)) // 만약 사용하는 인덱스 리스트에 존재하지 않는다면
+                        {
+                            _players[i].playerNameText.text = "비어 있음";
+                            _players[i].readyText.text = "준비 중"; // 준비 중 상태
+                            _players[i].readyImage.color = Color.white; // 준비 중 상태
+                            _players[i].roomManagerImage.color = Color.white; // 방장 여부 방장 아님으로 초기화
+                            _players[i].roomManagerButton.gameObject.SetActive(false); // 방장 버튼 비활성화
+                            _players[i].exileButton.gameObject.SetActive(false); // 추방 버튼 비활성화
+                        }
+                    }
+                }
+
                 _readyButton.gameObject.SetActive(!isCurrentRoomManager); // 방장 클라이언트라면 비활성화
                 _gameStartButton.gameObject.SetActive(isCurrentRoomManager); // 방장 클라이언트라면 활성화
             });
@@ -135,4 +146,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2025.08.12
+// 마지막 작성 일자: 2025.08.18

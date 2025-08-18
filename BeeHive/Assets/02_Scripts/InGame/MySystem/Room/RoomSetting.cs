@@ -1,8 +1,10 @@
-using TMPro;
-using System;
-using UnityEngine;
 using InGame.MyManager;
 using MyUtil;
+using System;
+using System.Net.Sockets;
+using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace InGame.MySystem.Room
@@ -53,6 +55,11 @@ namespace InGame.MySystem.Room
                 MainThreadDispatcher.Enqueue(() => _gameStartButton.interactable = false);// 게임 시작 버튼 비활성화
             });
 
+            socket.On("goLobby", _ =>
+            {
+                MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(0)); // 로비 씬으로 이동
+            });
+
             socket.On("roomInfo", (data) =>
             {
                 string json = data.GetValue().ToString(); // string 형태로 값 받기
@@ -80,4 +87,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2025.08.07
+// 마지막 작성 일자: 2025.08.18
