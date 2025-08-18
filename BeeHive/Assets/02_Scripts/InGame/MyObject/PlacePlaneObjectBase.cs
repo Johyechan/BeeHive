@@ -13,6 +13,8 @@ namespace InGame.MyObject
     {
         public bool isNearToCastle; // 성과 근접한 배치 판인지 확인
 
+        public TeamType currentPlayerTeamType; // 현재 플레이어의 팀 타입
+
         private Renderer _renderer; // 머티리얼을 들고 오기 위한 변수
 
         private Material _material; // 하이라이트 머티리얼 변수

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using MyUtil;
 using System.Net.Sockets;
 using UnityEngine;
@@ -23,9 +24,17 @@ namespace InGame.MyManager
 
                 socket.On("goLobby", _ => MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(0)));// 로비 씬으로 이동
 
-                socket.On("goGame", _ => MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(2))); // 게임 씬으로 이동
+                socket.On("goGame", _ =>
+                {
+                    MainThreadDispatcher.Enqueue(() =>
+                    {
+                        Sequence sequence = DOTween.Sequence()
+                            .AppendCallback(() => SceneManager.LoadScene(2)) // 게임 씬으로 이동
+                            .AppendCallback(() => socket.Emit("setTeam")); // 팀을 정해달라는 이벤트를 서버에게 전달
+                    }); 
+                }); 
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.08.06
+// 마지막 작성 일자: 2025.08.19

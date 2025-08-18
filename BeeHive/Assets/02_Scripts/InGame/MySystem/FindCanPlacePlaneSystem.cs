@@ -15,7 +15,7 @@ namespace InGame.MySystem
         {
             foreach (var piece in PlacePlaneManager.Instance.PlacePlaneMap.PiecePlacePlanes) // 전체 기물 판 순회
             {
-                if (piece.isNearToCastle) // 성과 인접한 배치 판이라면
+                if (piece.isNearToCastle && piece.currentPlayerTeamType == TeamManager.Instance.CurrentTeamType) // 성과 인접한 배치 판이면서 같은 팀일 경우
                 {
                     piece.IsChecked = true; // 체크 한 것으로 취급
                     if(piece.PlacedObjectType == ObjectType.None) // 해당 위치에 아무것도 올라와 있지 않을 때
@@ -139,4 +139,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.07.21
+// 마지막 작성 일자: 2025.08.19
