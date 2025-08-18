@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 12720704}
   - component: {fileID: 12720703}
   - component: {fileID: 12720702}
+  - component: {fileID: 12720705}
   m_Layer: 5
   m_Name: GameStartButton
   m_TagString: Untagged
@@ -201,7 +202,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 12720703}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 12720705}
+        m_TargetAssemblyTypeName: InGame.MyUI.MyUIButton.GameStartButton, Assembly-CSharp
+        m_MethodName: OnUIClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &12720703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +253,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12720700}
   m_CullTransparentMesh: 1
+--- !u!114 &12720705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12720700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f1f8cd2222769458ec86955395a9e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &51535026
 GameObject:
   m_ObjectHideFlags: 0
@@ -2765,6 +2790,7 @@ GameObject:
   - component: {fileID: 1140451995}
   - component: {fileID: 1140451994}
   - component: {fileID: 1140451993}
+  - component: {fileID: 1140451996}
   m_Layer: 5
   m_Name: Player2ExileButton
   m_TagString: Untagged
@@ -2834,7 +2860,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1140451994}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1140451996}
+        m_TargetAssemblyTypeName: InGame.MyUI.MyUIButton.ExileButton, Assembly-CSharp
+        m_MethodName: OnUIClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1140451994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2873,6 +2911,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140451991}
   m_CullTransparentMesh: 1
+--- !u!114 &1140451996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140451991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0064fcfd3bb4b9f1479cc53e9143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1141091570
 GameObject:
   m_ObjectHideFlags: 0
@@ -3983,6 +4033,7 @@ GameObject:
   - component: {fileID: 1377350967}
   - component: {fileID: 1377350966}
   - component: {fileID: 1377350965}
+  - component: {fileID: 1377350968}
   m_Layer: 5
   m_Name: Player1ExileButton
   m_TagString: Untagged
@@ -4052,7 +4103,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1377350966}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1377350968}
+        m_TargetAssemblyTypeName: InGame.MyUI.MyUIButton.ExileButton, Assembly-CSharp
+        m_MethodName: OnUIClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1377350966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4091,6 +4154,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1377350963}
   m_CullTransparentMesh: 1
+--- !u!114 &1377350968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377350963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0064fcfd3bb4b9f1479cc53e9143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1394299140
 GameObject:
   m_ObjectHideFlags: 0
@@ -4607,6 +4682,7 @@ GameObject:
   - component: {fileID: 1720555660}
   - component: {fileID: 1720555659}
   - component: {fileID: 1720555658}
+  - component: {fileID: 1720555661}
   m_Layer: 5
   m_Name: Player3ExileButton
   m_TagString: Untagged
@@ -4676,7 +4752,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1720555659}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1720555661}
+        m_TargetAssemblyTypeName: InGame.MyUI.MyUIButton.ExileButton, Assembly-CSharp
+        m_MethodName: OnUIClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1720555659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4715,6 +4803,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720555656}
   m_CullTransparentMesh: 1
+--- !u!114 &1720555661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720555656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f4d0064fcfd3bb4b9f1479cc53e9143, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1790589142
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,11 +55,6 @@ namespace InGame.MySystem.Room
                 MainThreadDispatcher.Enqueue(() => _gameStartButton.interactable = false);// 게임 시작 버튼 비활성화
             });
 
-            socket.On("goLobby", _ =>
-            {
-                MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(0)); // 로비 씬으로 이동
-            });
-
             socket.On("roomInfo", (data) =>
             {
                 string json = data.GetValue().ToString(); // string 형태로 값 받기

@@ -21,7 +21,7 @@ namespace InGame.MySystem.Lobby
 
             if(socket != null) // 서버와 통신하기 위한 객체가 null 아닐 때
             {
-                socket.Emit("comeLobby");
+                //socket.Emit("comeLobby");
             }
         }
     }

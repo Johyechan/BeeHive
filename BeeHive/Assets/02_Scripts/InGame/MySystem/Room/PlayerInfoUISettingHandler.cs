@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using InGame.MyUI.MyUIButton;
 using MyUtil;
 using System;
 using System.Collections.Generic;
@@ -81,6 +82,8 @@ namespace InGame.MySystem.Room
 
                     existIndexList.Add(index); // 현재 플레이어의 인덱스 저장
                     _players[index].playerNameText.text = _roomInfo.players[i].nickName; // 각 클라이언트 이름 띄우기
+                    ExileButton exileButton = _players[index].exileButton.GetComponent<ExileButton>(); // 추방 버튼 변수 초기화
+                    exileButton.TargetID = _roomInfo.players[i].id; // 타겟 ID 초기화
 
                     if (_roomInfo.players[i].isReady) // n번째 인덱스 플레이어가 준비 완료 상태라면
                     {
