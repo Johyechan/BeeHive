@@ -2,7 +2,7 @@ using UnityEngine;
 using MyUtil;
 using TMPro;
 using InGame.MyEnum;
-using Unity.Android.Gradle;
+using System;
 
 namespace InGame.MyManager
 {
@@ -14,21 +14,52 @@ namespace InGame.MyManager
         // 위에 변수 프로퍼티
         public TeamType CurrentTeamType { get => _currentTeamType; set => _currentTeamType = value; }
 
+        private string _minerParentName; // 광부 객체의 부모 객체 이름
+        // 위 변수 프로퍼티
+        public string MinerParentName { get => _minerParentName; }
+        private string _soldierParentName; // 보병 객체의 부모 객체 이름
+        // 위 변수 프로퍼티
+        public string SoldierParentName { get => _soldierParentName; }
+        private string _tankParentName; // 전차 객체의 부모 객체 이름
+        // 위 변수 프로퍼티
+        public string TankParentName { get => _tankParentName; }
+        private string _roadParentName; // 도로 객체의 부모 객체 이름
+        // 위 변수 프로퍼티
+        public string RoadParentName { get => _roadParentName; }
+
         protected override void Awake()
         {
             base.Awake();
 
             var socket = NetworkManager.Instance.Socket; // 서버와 통신하기 위한 객체 받아오기
-            if(socket != null) // 서버와 통신하기 위한 객체가 존재할 경우
+
+            if(socket != null) // 서버와 통신하기 위한 객체가 null이 아닐 때
             {
-                socket.On("teamType", data =>
+                socket.On("teamType", value =>
                 {
-                    int teamType = data.GetValue<int>(); // int 형으로 전달 받은 값 저장
+                    int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
                     _currentTeamType = (TeamType)teamType; // 팀 저장
-                    MainThreadDispatcher.Enqueue(() =>
+                    switch (_currentTeamType) // 현재 타입에 따라
                     {
-                        CameraManager.Instance.SetCamera(_currentTeamType); // 팀 카메라 세팅
-                    });
+                        case TeamType.Team1: // 팀1일 경우
+                            _minerParentName = "Player1Miners";
+                            _soldierParentName = "Player1Soldiers";
+                            _tankParentName = "Player1Tanks";
+                            _roadParentName = "Player1Road";
+                            break;
+                        case TeamType.Team2:// 팀2일 경우
+                            _minerParentName = "Player2Miners";
+                            _soldierParentName = "Player2Soldiers";
+                            _tankParentName = "Player2Tanks";
+                            _roadParentName = "Player2Road";
+                            break;
+                        case TeamType.Team3:// 팀3일 경우
+                            _minerParentName = "Player3Miners";
+                            _soldierParentName = "Player3Soldiers";
+                            _tankParentName = "Player3Tanks";
+                            _roadParentName = "Player3Road";
+                            break;
+                    }
                 });
             }
         }

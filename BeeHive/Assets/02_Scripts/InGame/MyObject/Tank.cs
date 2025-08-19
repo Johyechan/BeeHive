@@ -1,3 +1,4 @@
+using InGame.MyManager;
 using InGame.MyObject;
 using UnityEngine;
 
@@ -9,8 +10,14 @@ namespace InGame.MyObject
     {
         private void Awake()
         {
-            _parent = GameObject.Find("PlayerTanks").transform; // 전차 기물 부모 할당
+            ParentSet();
+        }
+
+        // 부모 초기화 함수
+        private void ParentSet()
+        {
+            _parent = GameObject.Find(TeamManager.Instance.TankParentName).transform; // 보병 객체의 부모 할당
         }
     }
 }
-// 마지막 작성 일자: 2025.07.23
+// 마지막 작성 일자: 2025.08.19

@@ -21,7 +21,13 @@ namespace InGame.MyObject
         {
             base.Awake();
 
-            _roadParent = GameObject.Find("PlayerRoad").transform; // 도로 기물의 부모 탐색 후 할당
+            ParentSet();
+        }
+
+        // 부모 초기화 함수
+        private void ParentSet()
+        {
+            _roadParent = GameObject.Find(TeamManager.Instance.RoadParentName).transform; // 도로 기물의 부모 탐색 후 할당
         }
 
         // 클릭 시 실행될 함수
@@ -47,4 +53,4 @@ namespace InGame.MyObject
         // 이거 시작했을 때 리스트에 있던 값들 사라짐
     }
 }
-// 마지막 작성 일자: 2025.07.21
+// 마지막 작성 일자: 2025.08.19

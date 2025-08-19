@@ -11,6 +11,13 @@ namespace InGame.MyManager
     {
         [SerializeField] private CinemachineBrain _cameraBrain;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            SetCamera(TeamManager.Instance.CurrentTeamType);
+        }
+
         public void SetCamera(TeamType teamType)
         {
             switch(teamType)

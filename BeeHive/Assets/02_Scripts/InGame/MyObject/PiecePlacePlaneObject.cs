@@ -22,11 +22,15 @@ namespace InGame.MyObject
         {
             base.Awake();
 
-            _minerParent = GameObject.Find("PlayerMiners").transform; // 광부 기물들의 부모 탐색 후 할당
-            _soldierParent = GameObject.Find("PlayerSoldiers").transform; // 보병 기물들의 부모 탐색 후 할당
-            _tankParent = GameObject.Find("PlayerTanks").transform; // 전차 기물들의 부모 탐색 후 할당
+            ParentSet();
+        }
 
-            // 타입에 맞게 맵 초기화
+        // 부모 초기화 함수
+        private void ParentSet()
+        {
+            _minerParent = GameObject.Find(TeamManager.Instance.MinerParentName).transform; // 광부 기물들의 부모 탐색 후 할당
+            _soldierParent = GameObject.Find(TeamManager.Instance.SoldierParentName).transform; // 보병 기물들의 부모 탐색 후 할당
+            _tankParent = GameObject.Find(TeamManager.Instance.TankParentName).transform; // 전차 기물들의 부모 탐색 후 할당
             _pieceMap.Clear(); // 맵 비우기
             _pieceMap.Add(ObjectType.Miner, _minerParent); // 광부 추가
             _pieceMap.Add(ObjectType.Soldier, _soldierParent); // 보병 추가
@@ -57,8 +61,6 @@ namespace InGame.MyObject
         {
             Transform pieceParent = _pieceMap[CanPlacePieceType]; // 현재 배치 가능한 타입의 객체 부모
             int pieceCount = pieceParent.childCount; // 현재 보유 중인 배치 가능한 타입의 기물 수
-
-            
 
             PlacePiece(pieceParent.GetChild(pieceCount - 1).gameObject, false); // 기물 배치
         }
@@ -93,4 +95,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.07.23
+// 마지막 작성 일자: 2025.08.19
