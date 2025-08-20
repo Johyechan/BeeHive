@@ -1044,6 +1044,12 @@ MonoBehaviour:
   - poolType: 3
     poolCount: 1
     poolObject: {fileID: 1750350457765991339, guid: 7d8a4afc03587f54299032cc03dc4de6, type: 3}
+  - poolType: 4
+    poolCount: 5
+    poolObject: {fileID: 3178345233608239537, guid: 77243012df3489e44918caf1d98f0cfe, type: 3}
+  - poolType: 5
+    poolCount: 10
+    poolObject: {fileID: 5662776212622894042, guid: 6e9f4da0ecb304147a1b15b441ffb3d9, type: 3}
 --- !u!4 &252034718
 Transform:
   m_ObjectHideFlags: 0

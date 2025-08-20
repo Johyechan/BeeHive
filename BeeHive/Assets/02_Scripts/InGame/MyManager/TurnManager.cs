@@ -31,6 +31,8 @@ namespace InGame.MyManager
             base.Awake();
 
             _turnUIAnimation = GetComponent<TurnUIAnimation>();
+
+            _currentTeamType = TeamType.Team1; // 처음 시작은 Team1부터
         }
 
         private void Start()

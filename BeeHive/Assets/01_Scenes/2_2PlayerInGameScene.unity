@@ -577,6 +577,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
       objectReference: {fileID: 0}
@@ -666,6 +674,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -1215,6 +1231,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -2110,6 +2134,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -2183,6 +2215,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
@@ -2269,6 +2309,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -2385,6 +2433,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -2458,6 +2510,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -2834,6 +2894,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -2983,7 +3051,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -3051,6 +3119,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8244229074724728705, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
   m_PrefabInstance: {fileID: 258445726}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &258812764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 258812765}
+  m_Layer: 0
+  m_Name: GameSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &258812765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258812764}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 131.21461, y: 68.81739, z: -38.178978}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 845072587}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &260190405
 GameObject:
   m_ObjectHideFlags: 0
@@ -3158,6 +3258,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -3525,6 +3633,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
@@ -3906,6 +4022,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
       objectReference: {fileID: 0}
@@ -4213,6 +4337,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
       objectReference: {fileID: 0}
@@ -4456,6 +4588,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
@@ -5004,6 +5144,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
@@ -5647,6 +5795,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -5799,7 +5955,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -7054,6 +7210,10 @@ PrefabInstance:
       value: -60
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -7263,6 +7423,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -8038,6 +8206,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -8122,6 +8298,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -8560,6 +8744,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -8723,6 +8915,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &845072586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 845072587}
+  - component: {fileID: 845072588}
+  m_Layer: 0
+  m_Name: Wallet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &845072587
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845072586}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 258812765}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &845072588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845072586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffa3280b61f00064594a32ca114e7b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goldCoinTmpText: {fileID: 1652461259}
+  _goldBarTmpText: {fileID: 886003375}
 --- !u!1001 &845263050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8731,6 +8969,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -9201,6 +9447,10 @@ PrefabInstance:
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -9342,7 +9592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -9418,6 +9668,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
@@ -9688,6 +9946,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
@@ -10311,6 +10573,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
       objectReference: {fileID: 0}
@@ -10910,6 +11180,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -11001,6 +11279,10 @@ PrefabInstance:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: _roadAngle
       value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -11151,7 +11433,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -11227,6 +11509,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
@@ -11312,6 +11602,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
@@ -11481,6 +11779,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
       objectReference: {fileID: 0}
@@ -11578,6 +11884,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -11666,6 +11980,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -12875,6 +13197,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -13016,6 +13346,10 @@ PrefabInstance:
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: isNearToCastle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -13152,6 +13486,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -13229,6 +13571,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -13757,7 +14107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1364030388}
   m_Layer: 0
-  m_Name: GoldBar
+  m_Name: Player2GoldBars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13895,6 +14245,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
@@ -14086,6 +14444,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -14170,6 +14536,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -14570,6 +14944,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -14660,7 +15042,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -14784,6 +15166,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _placePlaneParent: {fileID: 120938036}
+  _team1NearRoads:
+  - {fileID: 1584448134}
+  - {fileID: 1565117118}
+  - {fileID: 2137896400}
+  - {fileID: 1599724899}
+  - {fileID: 2107810612}
+  - {fileID: 1318927606}
+  - {fileID: 1780337883}
+  - {fileID: 1576401656}
+  - {fileID: 1785694566}
+  - {fileID: 2126504938}
+  _team2NearRoads:
+  - {fileID: 1752591368}
+  - {fileID: 1481721073}
+  - {fileID: 1011102871}
+  - {fileID: 1672974187}
+  - {fileID: 942515706}
+  - {fileID: 1660807964}
+  - {fileID: 1959074324}
+  - {fileID: 1066390654}
+  - {fileID: 1947787920}
+  - {fileID: 911689745}
+  _team3NearRoads: []
 --- !u!1 &1461527423
 GameObject:
   m_ObjectHideFlags: 0
@@ -14794,7 +15199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1461527424}
   m_Layer: 0
-  m_Name: GoldCoin
+  m_Name: Player2GoldCoins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14828,6 +15233,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -15112,6 +15525,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -15196,6 +15617,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
@@ -15293,6 +15722,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -15381,6 +15818,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -15761,6 +16206,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -15944,7 +16397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -16160,7 +16613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -16322,7 +16775,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -16471,6 +16924,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
@@ -16749,6 +17210,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -17075,6 +17544,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -17308,6 +17785,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
       objectReference: {fileID: 0}
@@ -17421,7 +17906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1705991052}
   m_Layer: 0
-  m_Name: GoldCoin
+  m_Name: Player1GoldCoins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17455,6 +17940,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -17849,6 +18342,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -18128,6 +18629,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ea8863ca9f8b6f944acd3241742b7736, type: 3}
       propertyPath: m_Name
       value: Land_4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7568568940729787565, guid: ea8863ca9f8b6f944acd3241742b7736, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7618390714125674172, guid: ea8863ca9f8b6f944acd3241742b7736, type: 3}
       propertyPath: m_Name
@@ -18436,6 +18941,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
       objectReference: {fileID: 0}
@@ -18668,7 +19181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -18851,6 +19364,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -19866,6 +20387,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -19954,6 +20483,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
@@ -20057,7 +20594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991570586}
   m_Layer: 0
-  m_Name: GoldBar
+  m_Name: Player1GoldBars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20971,6 +21508,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: isNearToCastle
       value: 1
       objectReference: {fileID: 0}
@@ -21233,6 +21778,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -21321,6 +21874,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 120938036}
     m_Modifications:
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team1GoldCoin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: team2GoldCoin
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: nearRoadPlaceTransformList.Array.size
       value: 3
@@ -21495,7 +22056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -21690,3 +22251,4 @@ SceneRoots:
   - {fileID: 1713890272}
   - {fileID: 1566061382}
   - {fileID: 1759363215}
+  - {fileID: 258812765}

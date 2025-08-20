@@ -80,8 +80,7 @@ namespace InGame.MyObject
                 }
                 pieceBase.CurrentPlacePlane = this; // 현재 기물이 올라가 있는 배치 칸을 자기 자신으로 할당
 
-                // 현재 턴의 팀 타입으로 pieceBase 팀 타입 결정
-                pieceBase.teamType = TeamType.Team1; // 임시
+                pieceBase.teamType = TeamManager.Instance.CurrentTeamType;
 
                 UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
                 PlacedObjectType = CanPlacePieceType; // 현재 배치가 가능한 기물을 이 배치판에 배치되어있는 기물로 지정

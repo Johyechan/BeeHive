@@ -13,6 +13,10 @@ namespace InGame.MyObject
     {
         public bool isNearToCastle; // 성과 근접한 배치 판인지 확인
 
+        public int team1GoldCoin; // 이 칸에서 Team1 광부가 획득할 수 있는 금화 수
+        public int team2GoldCoin; // 이 칸에서 Team2 광부가 획득할 수 있는 금화 수
+        public int team3GoldCoin; // 이 칸에서 Team3 광부가 획득할 수 있는 금화 수
+
         public TeamType currentPlayerTeamType; // 현재 플레이어의 팀 타입
 
         private Renderer _renderer; // 머티리얼을 들고 오기 위한 변수
@@ -65,4 +69,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2025.07.23
+// 마지막 작성 일자: 2025.08.20

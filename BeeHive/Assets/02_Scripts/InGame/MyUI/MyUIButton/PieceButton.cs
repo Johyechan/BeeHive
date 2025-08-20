@@ -15,8 +15,12 @@ namespace InGame.MyUI.MyUIButton
         public override void OnUIClick()
         {
             // 만약 UI 상호작용 불가능 상태라면 또는 배치하려는 객체가 없을 경우(이 경우 특수하게 효과 줄 예정)
-            if (!UIManager.Instance.CanInteractionUI || _objectParent.childCount <= 0) 
+            if (!UIManager.Instance.CanInteractionUI || _objectParent.childCount <= 0)
+            {
+                Debug.Log($"배치하려는 객체의 남은 수: {_objectParent.childCount}");
+                Debug.Log($"배치 불가: {UIManager.Instance.CanInteractionUI}");
                 return; // 반환 - UI 클릭 무시
+            }
 
             if (!_isHighLightOn) // 하이라이트가 꺼져 있을 때
             {

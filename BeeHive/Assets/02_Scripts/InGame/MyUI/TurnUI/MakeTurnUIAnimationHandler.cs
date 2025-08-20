@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyEvent;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ namespace InGame.MyUI.TurnUI
     {
         public MakeTurnUIAnimationHandler(CanvasGroup canvasGroup, TMP_Text tmpText, float animationDuration) : base(canvasGroup, tmpText, animationDuration)
         {
+
         }
 
         // 애니메이션 실행 함수
@@ -18,7 +20,8 @@ namespace InGame.MyUI.TurnUI
         {
             return DOTween.Sequence()
                 .AppendCallback(() => _tmpText.text = "생산 턴") // 무슨 턴인지 텍스트로 보여주기
-                .Append(base.UIAnimationPlay()); // 이후 동일하게 실행되어야 할 기능 수행
+                .Append(base.UIAnimationPlay()) // 이후 동일하게 실행되어야 할 기능 수행
+                .AppendCallback(() => MakeTurnEvent.OnMakeTurn?.Invoke()); // 생산 턴에 실행되어야 할 기능 받은 액션 실행
         }
     }
 }

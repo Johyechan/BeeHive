@@ -38,8 +38,7 @@ namespace InGame.MyObject
             newRoad.transform.localPosition = Vector3.zero;
             newRoad.SetActive(true);
             PieceBase roadPiece = newRoad.GetComponent<PieceBase>();
-            // 현재 턴의 팀 타입으로 roadPiece 팀 타입 결정
-            roadPiece.teamType = TeamType.Team1; // 임시
+            roadPiece.teamType = TeamManager.Instance.CurrentTeamType; 
 
             if (roadPiece != null)
             {

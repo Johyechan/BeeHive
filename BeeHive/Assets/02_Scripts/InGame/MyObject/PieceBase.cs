@@ -71,7 +71,7 @@ namespace InGame.MyObject
             if (!_isSelected) // 선택된 상태가 아닐 경우
             {
                 if (_canPlaceType != ObjectType.Tank) // 전차가 아닐 경우
-                    PlacePlaneManager.Instance.FindCanPlacePlaneSystem.FindCanMovePlacePlane(_currentPlacePlane, TeamType.Team1); // 한 칸 이동 가능한 칸 찾기
+                    PlacePlaneManager.Instance.FindCanPlacePlaneSystem.FindCanMovePlacePlane(_currentPlacePlane, TeamManager.Instance.CurrentTeamType); // 한 칸 이동 가능한 칸 찾기
 
                 GameManager.Instance.CurrentMovePiece = gameObject; // 현재 객체를 현재 이동하려는 기물로 할당
                 HighLightEvents.SelectedPlacementType = ObjectType.None; // 배치 하는 것이 아닌 이동의 여부이기에 None으로 설정

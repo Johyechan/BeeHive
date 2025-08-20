@@ -11,7 +11,7 @@ namespace InGame.MySystem
     public class FindCanPlacePlaneSystem
     {
         // 배치 가능한 기물 칸들을 찾는 함수
-        public void FindCanPiecePlacePlane(TeamType type)
+        public void FindCanPlacePiecePlane(TeamType type)
         {
             foreach (var piece in PlacePlaneManager.Instance.PlacePlaneMap.PiecePlacePlanes) // 전체 기물 판 순회
             {
@@ -53,7 +53,7 @@ namespace InGame.MySystem
         }
 
         // 배치 가능한 도로 칸들을 찾는 함수
-        public void FindCanRoadPlacePlane(TeamType type)
+        public void FindCanPlaceRoadPlane(TeamType type)
         {
             foreach (var road in PlacePlaneManager.Instance.PlacePlaneMap.RoadPlacePlanes) // 전체 도로 판 순회
             {
@@ -139,4 +139,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.08.19
+// 마지막 작성 일자: 2025.08.20

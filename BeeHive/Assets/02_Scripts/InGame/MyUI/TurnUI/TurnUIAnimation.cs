@@ -1,5 +1,8 @@
 using DG.Tweening;
 using InGame.MyEnum;
+using InGame.MyEvent;
+using InGame.MyManager;
+using InGame.MyManager.MyPlacePlane;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,11 +32,32 @@ namespace InGame.MyUI.TurnUI
             _turnAnimations.Add(TurnType.ChangeTeam, new ChangeTeamUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
         }
 
+        private void OnEnable()
+        {
+            MakeTurnEvent.OnMakeTurn += GetGoldBar; // 생산 이벤트에 금괴 획득 함수 구독
+        }
+
+        private void OnDisable()
+        {
+            MakeTurnEvent.OnMakeTurn += GetGoldBar; // 생산 이벤트에 금괴 획득 함수 구독 해제
+        }
+
+        // 금괴 획득 함수
+        private void GetGoldBar()
+        {
+            if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀과 내 팀이 다르다면
+                return; // 반환
+
+            WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
+        }
+
         // 매개 변수로 받은 턴의 UI 애니메이션을 실행
         public Sequence UIAnimationPlay(TurnType currentTurn)
         {
-            return _turnAnimations[currentTurn].UIAnimationPlay(); // UI 애니메이션 실행
+            return DOTween.Sequence()
+                .Append(PlacePlaneManager.Instance.FindCanPlacePlane()) // 배치 가능한 칸 찾는 기능 실행
+                .Append(_turnAnimations[currentTurn].UIAnimationPlay()); // UI 애니메이션 실행
         }
     }
 }
-// 마지막 작성 일자: 2025.08.01
+// 마지막 작성 일자: 2025.08.20

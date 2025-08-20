@@ -56,8 +56,6 @@ namespace InGame.MyManager
             {
                 Debug.Log($"{maxTeamCount} 수의 인원은 불가 합니다");
             }
-
-            ShuffleUtility.Shuffle(_teamOrder); // 셔플
         }
 
         // 다음 팀 순서를 반환하는 함수(현재 팀)
@@ -85,4 +83,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.08.01
+// 마지막 작성 일자: 2025.08.20

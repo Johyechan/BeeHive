@@ -5,6 +5,8 @@ using DG.Tweening;
 using UnityEngine;
 using InGame.MyEvent;
 using InGame.MyEnum;
+using InGame.MyObject;
+using System.Collections.Generic;
 
 namespace InGame.MyManager.MyPlacePlane
 {
@@ -13,6 +15,10 @@ namespace InGame.MyManager.MyPlacePlane
     public class PlacePlaneManager : MonoSingleton<PlacePlaneManager>
     {
         [SerializeField] private Transform _placePlaneParent; // 배치 판들의 부모
+
+        [SerializeField] private List<RoadPlacePlaneObject> _team1NearRoads = new List<RoadPlacePlaneObject>(); // Team1의 성에 근접한 도로 저장 배열
+        [SerializeField] private List<RoadPlacePlaneObject> _team2NearRoads = new List<RoadPlacePlaneObject>(); // Team2의 성에 근접한 도로 저장 배열
+        [SerializeField] private List<RoadPlacePlaneObject> _team3NearRoads = new List<RoadPlacePlaneObject>(); // Team3의 성에 근접한 도로 저장 배열
 
         private PlacePlaneMap _placePlaneMap; // 전체 기물 판을 가지는 클래스 변수
         public PlacePlaneMap PlacePlaneMap => _placePlaneMap; // get만 가지는 _placePlaneMap 프로퍼티
@@ -34,6 +40,19 @@ namespace InGame.MyManager.MyPlacePlane
             _findCanPlacePlaneSystem = new FindCanPlacePlaneSystem();
 
             _placePlaneMap.PlacePlaneSet(_placePlaneParent); // 전체 배치 판 저장
+
+            switch(TeamManager.Instance.CurrentTeamType)
+            {
+                case TeamType.Team1:
+                    SetNearRoad(_team1NearRoads);
+                    break;
+                case TeamType.Team2:
+                    SetNearRoad(_team2NearRoads);
+                    break;
+                case TeamType.Team3:
+                    SetNearRoad(_team3NearRoads);
+                    break;
+            }
         }
 
         private void OnEnable()
@@ -54,17 +73,22 @@ namespace InGame.MyManager.MyPlacePlane
             HighLightEvents.OnPieceMovementHighLight -= _highLightHandler.PieceHighLight;
         }
 
-        private void Update()
+        public Sequence FindCanPlacePlane()
         {
-            // 임시
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-                Sequence sequence = DOTween.Sequence()
+            return DOTween.Sequence()
                     .AppendCallback(() => _findCanPlacePlaneSystem.ResetPlacePlanes())
-                    .AppendCallback(() => _findCanPlacePlaneSystem.FindCanPiecePlacePlane(TeamType.Team1))
-                    .AppendCallback(() => _findCanPlacePlaneSystem.FindCanRoadPlacePlane(TeamType.Team1));
+                    .AppendCallback(() => _findCanPlacePlaneSystem.FindCanPlacePiecePlane(TeamManager.Instance.CurrentTeamType))
+                    .AppendCallback(() => _findCanPlacePlaneSystem.FindCanPlaceRoadPlane(TeamManager.Instance.CurrentTeamType));
+        }
+
+        // 리스트에 있는 도로들을 전부 성과 근접한 도로로 만드는 함수(성과 근접한 도로로 만들 도로들을 저장하는 리스트)
+        private void SetNearRoad(List<RoadPlacePlaneObject> list)
+        {
+            foreach(var road in list) // 리스트 순회
+            {
+                road.isNearToCastle = true; // 성과 근접한 리스트로 만들기
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.07.21
+// 마지막 작성 일자: 2025.08.20
