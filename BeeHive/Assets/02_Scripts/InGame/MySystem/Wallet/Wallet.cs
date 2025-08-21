@@ -1,4 +1,5 @@
 using InGame.MyEvent;
+using InGame.MyManager;
 using TMPro;
 using UnityEngine;
 
@@ -17,16 +18,14 @@ namespace InGame.MySystem
         private WalletUIHandle _walletUIHandle; // 지갑 UI 핸들러
 
         private WalletObjectHandle _walletObjectHandle; // 지갑 관련 객체 핸들러
+        public WalletObjectHandle WalletObjectHandle { get => _walletObjectHandle; } // 위 변수 프로퍼티
 
         private void Awake()
         {
             _walletUIHandle = new WalletUIHandle(_goldCoinTmpText, _goldBarTmpText);
             _walletObjectHandle = new WalletObjectHandle();
 
-            _walletObjectHandle.Init(); // 금화, 금괴 객체 부모 초기화
-
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // 금화, 금괴 UI 초기화
-            _walletObjectHandle.SetObject(_goldCoinCount, _goldBarCount); // 금화, 금괴 객체 초기화
         }
 
         private void OnEnable()
@@ -50,8 +49,8 @@ namespace InGame.MySystem
 
             ChangeGoldCoinToGoldBar(); // 함수를 통해 금화를 금괴로 치환
 
+            GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-            _walletObjectHandle.SetObject(_goldCoinCount, _goldBarCount); // 객체 변경
         }
 
         // 금괴를 얻는 함수(얻는 값)
@@ -59,8 +58,8 @@ namespace InGame.MySystem
         {
             _goldBarCount += value; // 금괴 증가
 
+            GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-            _walletObjectHandle.SetObject(_goldCoinCount, _goldBarCount); // 객체 변경
         }
 
         // 금괴 사용 함수
@@ -71,8 +70,8 @@ namespace InGame.MySystem
 
             _goldBarCount -= value; // 금괴 감소
 
+            GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-            _walletObjectHandle.SetObject(_goldCoinCount, _goldBarCount); // 객체 변경
             return true;
         }
 
@@ -84,7 +83,23 @@ namespace InGame.MySystem
                 _goldCoinCount -= 5; // 금화 5개 감소
                 _goldBarCount++; // 금괴 1 증가
             }
+
+            GoldSetEventEmit();
+        }
+
+        private void GoldSetEventEmit()
+        {
+            GoldSetInfo goldSetInfo = new GoldSetInfo()
+            {
+                roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                targetID = NetworkManager.Instance.CurrentPlayerID, // 현재 클라이언트 ID
+                goldCoinCount = _goldCoinCount, // 금화 개수
+                goldBarCount = _goldBarCount // 금괴 개수
+            };
+
+            string json = JsonUtility.ToJson(goldSetInfo);
+            NetworkManager.Instance.Socket.Emit("changeGold", json);
         }
     }
 }
-// 마지막 작성 일자: 2025.08.20
+// 마지막 작성 일자: 2025.08.21

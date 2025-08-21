@@ -13,6 +13,9 @@ namespace InGame.MySystem
         public int index; // 슬롯 인덱스
         public bool isRoomManager; // 방장 여부
         public bool isReady; // 준비 완료 여부
+        public int team; // 팀
+        public int goldCoin; // 금화 개수
+        public int goldBar; // 금괴 개수
     }
 }
 // 마지막 작성 일자: 2025.08.08

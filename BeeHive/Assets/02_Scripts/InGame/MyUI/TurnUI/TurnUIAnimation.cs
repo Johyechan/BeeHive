@@ -39,7 +39,7 @@ namespace InGame.MyUI.TurnUI
 
         private void OnDisable()
         {
-            MakeTurnEvent.OnMakeTurn += GetGoldBar; // 생산 이벤트에 금괴 획득 함수 구독 해제
+            MakeTurnEvent.OnMakeTurn -= GetGoldBar; // 생산 이벤트에 금괴 획득 함수 구독 해제
         }
 
         // 금괴 획득 함수
@@ -60,4 +60,4 @@ namespace InGame.MyUI.TurnUI
         }
     }
 }
-// 마지막 작성 일자: 2025.08.20
+// 마지막 작성 일자: 2025.08.21

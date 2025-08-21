@@ -17,7 +17,6 @@ namespace InGame.MyUI.MyUIButton
                 if(SceneMgr.Instance.CurrentRoomID != "") // 현재 방이 있을 경우
                 {
                     socket.Emit("gameStart", SceneMgr.Instance.CurrentRoomID);
-                    Debug.Log("게임 시작");
                 }
             }
         }
