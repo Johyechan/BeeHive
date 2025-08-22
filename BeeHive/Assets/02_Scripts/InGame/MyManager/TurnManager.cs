@@ -30,6 +30,17 @@ namespace InGame.MyManager
         {
             base.Awake();
 
+            var socket = NetworkManager.Instance.Socket; // 서버와 통신하기 위한 객체 받아오기
+            if(socket != null) // 서버와 통신하기 위한 객체가 존재할 때
+            {
+                socket.On("turnChanged", value =>
+                {
+                    int turn = value.GetValue<int>(); // int 자료형으로 읽어오기
+                    TurnType turnType = (TurnType)turn; // TurnType형태로 turn변수 변경
+                    NextTurn(turnType); // turnType 턴 변경
+                });
+            }
+
             _turnUIAnimation = GetComponent<TurnUIAnimation>();
 
             _currentTeamType = TeamType.Team1; // 처음 시작은 Team1부터
@@ -37,38 +48,21 @@ namespace InGame.MyManager
 
         private void Start()
         {
-            Sequence seq = DOTween.Sequence()
-                .Append(TurnChange(TurnType.ChangeTeam)) // 팀 변경 턴으로 변경
-                .Append(TurnChange(TurnType.MakeTurn)); // 생산 턴으로 변경
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.N))
+            MainThreadDispatcher.Enqueue(() =>
             {
-                NextTurn();
-            }
+                Sequence seq = DOTween.Sequence()
+                .Append(TurnChange(TurnType.ChangeTeam)); // 팀 변경 턴으로 변경
+            });
         }
 
         // 턴을 넘기는 함수
-        public void NextTurn()
+        public void NextTurn(TurnType turn)
         {
-            switch (_currentTurnType) // 현재 턴을 확인
+            if (turn == TurnType.ChangeTeam) // 팀을 변경하는 턴 일경우
             {
-                case TurnType.MakeTurn: // 만약 생산 턴이라면
-                    TurnChange(TurnType.DrawTurn); // 드로우 턴으로 변경
-                    break;
-                case TurnType.DrawTurn: // 만약 카드 뽑기 결정 턴이라면
-                    TurnChange(TurnType.MainTurn); // 메인 턴으로 변경
-                    break;
-                case TurnType.MainTurn: // 생성 및 이동 턴이라면
-                    Sequence seq = DOTween.Sequence()
-                        .Append(TurnChange(TurnType.TurnEnd)) // 턴 종료로 변경
-                        .AppendCallback(() => _currentTeamType = GameManager.Instance.NextTeam(_currentTeamType)) // 팀 변경
-                        .Append(TurnChange(TurnType.ChangeTeam)) // 팀 변경 턴으로 변경
-                        .Append(TurnChange(TurnType.MakeTurn)); // 생산 턴으로 변경
-                    break;
+                _currentTeamType = GameManager.Instance.NextTeam(_currentTeamType); // 현재 팀을 다음 팀으로 지정
             }
+            MainThreadDispatcher.Enqueue(() => TurnChange(turn)); // 턴 변경 및 변경된 턴 기능 실행 함수 호출 - DOTween 사용 및 UI를 건드리는 작업을 하기 때문에 MainThreadDispatcher로 감싸기
         }
 
         // 턴 변경 시 현재 턴을 다음 턴으로 변경 및 다음 턴의 애니메이션까지 실행 시키는 함수(다음 턴)
@@ -76,8 +70,13 @@ namespace InGame.MyManager
         {
             return DOTween.Sequence()
                 .AppendCallback(() => _currentTurnType = nextTurn) // 현재 턴 다음 턴으로 변경
-                .Append(_turnUIAnimation.UIAnimationPlay(nextTurn)); // 다음 턴 애니메이션 실행
+                .Append(_turnUIAnimation.UIAnimationPlay(nextTurn)) // 다음 턴 애니메이션 실행
+                .AppendCallback(() =>
+                {
+                    if(nextTurn != TurnType.DrawTurn && nextTurn != TurnType.MainTurn)
+                        NetworkManager.Instance.Socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 신호를 보냄
+                });
         }
     }
 }
-// 마지막 작성 일자: 2025.08.01
+// 마지막 작성 일자: 2025.08.22

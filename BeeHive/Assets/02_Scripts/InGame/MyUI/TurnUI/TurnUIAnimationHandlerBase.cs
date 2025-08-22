@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using MyUtil;
 
 namespace InGame.MyUI.TurnUI
 {

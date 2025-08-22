@@ -65,9 +65,10 @@ namespace InGame.MyManager
 
             foreach(TeamType type in _teamOrder) // 팀 순서 순회
             {
-                if(currentTeamType == type) // 현재 팀과 일치하는 팀을 찾았다면
+                count++; // 순서 증가
+                if (currentTeamType == type) // 현재 팀과 일치하는 팀을 찾았다면
                 {
-                    if(count >= _teamOrder.Count - 1) // 마지막 팀 순서와 현재 센 순서가 같다면
+                    if(count >= _teamOrder.Count) // 마지막 팀 순서와 현재 센 순서가 같다면
                     {
                         return _teamOrder[0]; // 첫 팀을 반환
                     }
@@ -76,11 +77,10 @@ namespace InGame.MyManager
                         return _teamOrder[count]; // 현재 센 순서의 팀 반환
                     }
                 }
-                count++; // 순서 증가
             }
 
             return TeamType.None; // None을 반환하면 현재 팀이 존재하지 않는 것
         }
     }
 }
-// 마지막 작성 일자: 2025.08.20
+// 마지막 작성 일자: 2025.08.22
