@@ -18,10 +18,11 @@ namespace InGame.MyUI.TurnUI
         public override Sequence UIAnimationPlay()
         {
             return DOTween.Sequence()
-                .AppendCallback(() => TurnChangeButtonEvent.OnSetInteractable?.Invoke(false)) // 턴 넘기기 버튼 상화작용 비활성화
+                .AppendCallback(() => TurnEvents.OnSetInteractable?.Invoke(false)) // 턴 넘기기 버튼 상화작용 비활성화
                 .AppendCallback(() => _tmpText.text = TurnManager.Instance.CurrentTeamType.ToString() + " 턴") // 무슨 턴인지 텍스트로 보여주기
-                .Append(base.UIAnimationPlay()); // 이후 동일하게 실행되어야 할 기능 수행
+                .Append(base.UIAnimationPlay()) // 이후 동일하게 실행되어야 할 기능 수행
+                .AppendCallback(() => TurnEvents.OnChangeTurn?.Invoke()); // 자동으로 다음 턴으로 넘어가기
         }
     }
 }
-// 마지막 작성 일자: 2025.08.22
+// 마지막 작성 일자: 2025.08.25

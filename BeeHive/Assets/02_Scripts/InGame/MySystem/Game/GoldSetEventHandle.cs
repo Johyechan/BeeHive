@@ -43,7 +43,6 @@ namespace InGame.MySystem.Game
 
         public void Setting()
         {
-            Debug.Log("일단 금을 세팅 함수까지 오는데?");
             for (int i = 0; i < _players.Length; i++) // 플레이어 순회
             {
                 TeamType type = (TeamType)_players[i].team; // 플레이어의 팀 구하기

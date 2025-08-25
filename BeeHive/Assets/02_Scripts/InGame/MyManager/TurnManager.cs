@@ -3,6 +3,7 @@ using MyUtil;
 using UnityEngine;
 using DG.Tweening;
 using InGame.MyUI.TurnUI;
+using InGame.MyEvent;
 
 namespace InGame.MyManager
 {
@@ -37,6 +38,7 @@ namespace InGame.MyManager
                 {
                     int turn = value.GetValue<int>(); // int 자료형으로 읽어오기
                     TurnType turnType = (TurnType)turn; // TurnType형태로 turn변수 변경
+                    Debug.Log(turnType);
                     NextTurn(turnType); // turnType 턴 변경
                 });
             }
@@ -46,13 +48,19 @@ namespace InGame.MyManager
             _currentTeamType = TeamType.Team1; // 처음 시작은 Team1부터
         }
 
+        private void OnEnable()
+        {
+            TurnEvents.OnChangeTurn += AutoTurnChange; // 턴 변경 이벤트에 자동 턴 전환 함수 구독
+        }
+
+        private void OnDisable()
+        {
+            TurnEvents.OnChangeTurn -= AutoTurnChange; // 턴 변경 이벤트에 자동 턴 전환 함수 구독 해제
+        }
+
         private void Start()
         {
-            MainThreadDispatcher.Enqueue(() =>
-            {
-                Sequence seq = DOTween.Sequence()
-                .Append(TurnChange(TurnType.ChangeTeam)); // 팀 변경 턴으로 변경
-            });
+            TurnChange(TurnType.ChangeTeam); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
         }
 
         // 턴을 넘기는 함수
@@ -62,21 +70,25 @@ namespace InGame.MyManager
             {
                 _currentTeamType = GameManager.Instance.NextTeam(_currentTeamType); // 현재 팀을 다음 팀으로 지정
             }
-            MainThreadDispatcher.Enqueue(() => TurnChange(turn)); // 턴 변경 및 변경된 턴 기능 실행 함수 호출 - DOTween 사용 및 UI를 건드리는 작업을 하기 때문에 MainThreadDispatcher로 감싸기
+
+            TurnChange(turn); // 턴 변경 및 변경된 턴 기능 실행 함수 호출
         }
 
         // 턴 변경 시 현재 턴을 다음 턴으로 변경 및 다음 턴의 애니메이션까지 실행 시키는 함수(다음 턴)
-        private Sequence TurnChange(TurnType nextTurn)
+        private void TurnChange(TurnType nextTurn)
         {
-            return DOTween.Sequence()
-                .AppendCallback(() => _currentTurnType = nextTurn) // 현재 턴 다음 턴으로 변경
-                .Append(_turnUIAnimation.UIAnimationPlay(nextTurn)) // 다음 턴 애니메이션 실행
-                .AppendCallback(() =>
-                {
-                    if(nextTurn != TurnType.DrawTurn && nextTurn != TurnType.MainTurn)
-                        NetworkManager.Instance.Socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 신호를 보냄
-                });
+            _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
+            _turnUIAnimation.UIAnimationPlay(_currentTurnType); // 현재 턴의 UI 애니메이션 실행
+        }
+
+        private void AutoTurnChange()
+        {
+            if (_currentTeamType != TeamManager.Instance.CurrentTeamType) // 내 팀의 차례가 아닐 경우
+                return; // 반환
+
+            if (_currentTurnType != TurnType.DrawTurn && _currentTurnType != TurnType.MainTurn)
+                NetworkManager.Instance.Socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 신호를 보냄
         }
     }
 }
-// 마지막 작성 일자: 2025.08.22
+// 마지막 작성 일자: 2025.08.25

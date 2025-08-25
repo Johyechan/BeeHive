@@ -13,18 +13,8 @@ namespace InGame.MyObject
         private void Awake()
         {
             ParentSet();
-        }
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            MakeTurnEvent.OnMakeTurn += Dig; // 생산 턴에 광부가 금화를 얻는 기능 구독
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            MakeTurnEvent.OnMakeTurn -= Dig; // 생산 턴에 광부가 금화를 얻는 기능 구독 해제
+            TurnEvents.OnMakeTurn.Add(Dig); // 생산 턴에 광부가 금화를 얻는 기능 큐에 추가
         }
 
         // 금화를 얻는 함수
@@ -57,4 +47,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.08.20
+// 마지막 작성 일자: 2025.08.25

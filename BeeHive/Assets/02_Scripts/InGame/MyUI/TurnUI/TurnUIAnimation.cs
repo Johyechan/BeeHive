@@ -30,16 +30,8 @@ namespace InGame.MyUI.TurnUI
             _turnAnimations.Add(TurnType.MainTurn, new MainTurnUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
             _turnAnimations.Add(TurnType.TurnEnd, new TurnEndUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
             _turnAnimations.Add(TurnType.ChangeTeam, new ChangeTeamUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
-        }
 
-        private void OnEnable()
-        {
-            MakeTurnEvent.OnMakeTurn += GetGoldBar; // 생산 이벤트에 금괴 획득 함수 구독
-        }
-
-        private void OnDisable()
-        {
-            MakeTurnEvent.OnMakeTurn -= GetGoldBar; // 생산 이벤트에 금괴 획득 함수 구독 해제
+            TurnEvents.OnMakeTurn.Add(GetGoldBar); // 생산 이벤트에 금괴 획득 함수 큐에 추가
         }
 
         // 금괴 획득 함수
@@ -60,4 +52,4 @@ namespace InGame.MyUI.TurnUI
         }
     }
 }
-// 마지막 작성 일자: 2025.08.21
+// 마지막 작성 일자: 2025.08.25

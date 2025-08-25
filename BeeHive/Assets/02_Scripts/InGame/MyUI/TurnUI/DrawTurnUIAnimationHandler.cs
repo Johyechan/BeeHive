@@ -21,11 +21,11 @@ namespace InGame.MyUI.TurnUI
                 .AppendCallback(() =>
                 {
                     if(TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 내 팀 차례일때
-                        TurnChangeButtonEvent.OnSetInteractable?.Invoke(true); // 턴 넘기기 버튼 상화작용 활성화
+                        TurnEvents.OnSetInteractable?.Invoke(true); // 턴 넘기기 버튼 상화작용 활성화
                 })
                 .AppendCallback(() => _tmpText.text = "드로우 턴") // 무슨 턴인지 텍스트로 보여주기
                 .Append(base.UIAnimationPlay()); // 이후 동일하게 실행되어야 할 기능 수행
         }
     }
 }
-// 마지막 작성 일자: 2025.08.22
+// 마지막 작성 일자: 2025.08.25

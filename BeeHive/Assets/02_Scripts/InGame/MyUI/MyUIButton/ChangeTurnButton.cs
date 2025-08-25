@@ -19,12 +19,12 @@ namespace InGame.MyUI.MyUIButton
 
         private void OnEnable()
         {
-            TurnChangeButtonEvent.OnSetInteractable += SetInteractable;
+            TurnEvents.OnSetInteractable += SetInteractable;
         }
 
         private void OnDisable()
         {
-            TurnChangeButtonEvent.OnSetInteractable -= SetInteractable;
+            TurnEvents.OnSetInteractable -= SetInteractable;
         }
 
         private void SetInteractable(bool interactable)
@@ -39,7 +39,6 @@ namespace InGame.MyUI.MyUIButton
 
             if (socket != null) // 서버와 통신하기 위한 객체가 존재할 때
             {
-                Debug.Log("턴 넘기기 버튼 클릭");
                 socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 이벤트 전달
             }
         }
