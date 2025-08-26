@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -18,7 +19,7 @@ namespace InGame.MyObject
         }
 
         // 금화를 얻는 함수
-        private void Dig()
+        private async Task Dig()
         {
             if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 현재 턴 팀과 나의 팀이 다르다면
                 return; // 반환
@@ -38,6 +39,8 @@ namespace InGame.MyObject
                     WalletEvent.OnGetGoldCoin?.Invoke(_currentPlacePlane.team3GoldCoin); // 현재 칸에서 team3이 얻는 금화만큼 얻기
                     break;
             }
+
+            await Task.CompletedTask; // Taks 완료 반환
         }
 
         // 부모 초기화 함수
@@ -47,4 +50,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.08.25
+// 마지막 작성 일자: 2025.08.26

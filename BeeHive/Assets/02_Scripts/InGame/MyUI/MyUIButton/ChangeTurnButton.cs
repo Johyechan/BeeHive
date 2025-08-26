@@ -39,13 +39,8 @@ namespace InGame.MyUI.MyUIButton
 
             if (socket != null) // 서버와 통신하기 위한 객체가 존재할 때
             {
-                TurnChangeInfo turnChangeInfo = new TurnChangeInfo()
-                {
-                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                    team = (int)TeamManager.Instance.CurrentTeamType, // 현재 팀
-                };
-                string json = JsonUtility.ToJson(turnChangeInfo); // Json으로 변환
-                socket.Emit("changeTurn", json); // 서버에 턴 변경 이벤트 전달
+                if(TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀이 내 팀일 경우
+                    socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 이벤트 전달
             }
         }
     }

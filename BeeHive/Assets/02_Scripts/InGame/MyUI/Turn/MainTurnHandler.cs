@@ -5,13 +5,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InGame.MyUI.TurnUI
+namespace InGame.MyUI.Turn
 {
     // 작성자: 조혜찬
     // 메인(생성 및 이동) 턴에 나올 UI 애니메이션 클래스
-    public class MainTurnUIAnimationHandler : TurnUIAnimationHandlerBase
+    public class MainTurnHandler : TurnUIAnimationHandlerBase
     {
-        public MainTurnUIAnimationHandler(CanvasGroup canvasGroup, TMP_Text tmpText, float animationDuration) : base(canvasGroup, tmpText, animationDuration)
+        public MainTurnHandler(CanvasGroup canvasGroup, TMP_Text tmpText, float animationDuration) : base(canvasGroup, tmpText, animationDuration)
         {
         }
 
@@ -28,4 +28,4 @@ namespace InGame.MyUI.TurnUI
         }
     }
 }
-// 마지막 작성 일자: 2025.08.25
+// 마지막 작성 일자: 2025.08.26

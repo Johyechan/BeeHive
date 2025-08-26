@@ -4,14 +4,15 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace InGame.MyUI.TurnUI
+namespace InGame.MyUI.Turn
 {
     // 작성자: 조혜찬
-    // 각 턴에 따라 실행될 UI 애니메이션을 가지는 클래스
+    // 각 턴에 따라 실행될 작업을 가지는 클래스
     public class TurnUIAnimation : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup; // UI 애니메이션 전체 페이드인, 아웃을 하기 위한 canvasGroup
@@ -26,21 +27,23 @@ namespace InGame.MyUI.TurnUI
         private void Awake()
         {
             _turnAnimations.Add(TurnType.MakeTurn, new MakeTurnUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
-            _turnAnimations.Add(TurnType.DrawTurn, new DrawTurnUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
-            _turnAnimations.Add(TurnType.MainTurn, new MainTurnUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
+            _turnAnimations.Add(TurnType.DrawTurn, new DrawTurnHandler(_canvasGroup, _tmpText, _animationDuration));
+            _turnAnimations.Add(TurnType.MainTurn, new MainTurnHandler(_canvasGroup, _tmpText, _animationDuration));
             _turnAnimations.Add(TurnType.TurnEnd, new TurnEndUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
-            _turnAnimations.Add(TurnType.ChangeTeam, new ChangeTeamUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
+            _turnAnimations.Add(TurnType.ChangeTeam, new ChangeTeamHandler(_canvasGroup, _tmpText, _animationDuration));
 
             TurnEvents.OnMakeTurn.Add(GetGoldBar); // 생산 이벤트에 금괴 획득 함수 큐에 추가
         }
 
         // 금괴 획득 함수
-        private void GetGoldBar()
+        private async Task GetGoldBar()
         {
             if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀과 내 팀이 다르다면
                 return; // 반환
 
             WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
+
+            await Task.CompletedTask; // Task 완료 반환
         }
 
         // 매개 변수로 받은 턴의 UI 애니메이션을 실행
@@ -52,4 +55,4 @@ namespace InGame.MyUI.TurnUI
         }
     }
 }
-// 마지막 작성 일자: 2025.08.25
+// 마지막 작성 일자: 2025.08.26

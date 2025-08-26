@@ -1,10 +1,11 @@
+using DG.Tweening;
+using InGame.MyManager;
+using MyUtil;
 using TMPro;
 using UnityEngine;
-using DG.Tweening;
 using UnityEngine.UI;
-using MyUtil;
 
-namespace InGame.MyUI.TurnUI
+namespace InGame.MyUI.Turn
 {
     // 작성자: 조혜찬
     // 턴마다 나오는 UI 애니메이션 클래스들의 부모 클래스
@@ -34,4 +35,4 @@ namespace InGame.MyUI.TurnUI
         }
     }
 }
-// 마지막 작성 일자: 2025.08.01
+// 마지막 작성 일자: 2025.08.26

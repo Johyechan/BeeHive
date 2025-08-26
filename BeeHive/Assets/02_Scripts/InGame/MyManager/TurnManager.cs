@@ -2,8 +2,9 @@ using InGame.MyEnum;
 using MyUtil;
 using UnityEngine;
 using DG.Tweening;
-using InGame.MyUI.TurnUI;
 using InGame.MyEvent;
+using InGame.MyUI.Turn;
+using System.Threading.Tasks;
 
 namespace InGame.MyManager
 {
@@ -24,8 +25,6 @@ namespace InGame.MyManager
         // UI 애니메이션을 실행 시키는 클래스
         private TurnUIAnimation _turnUIAnimation;
 
-        private bool _canChangeTurn; // 턴을 변경 가능 여부를 결정하는 변수
-
         // 변수 초기화
         protected override void Awake()
         {
@@ -38,7 +37,6 @@ namespace InGame.MyManager
                 {
                     int turn = value.GetValue<int>(); // int 자료형으로 읽어오기
                     TurnType turnType = (TurnType)turn; // TurnType형태로 turn변수 변경
-                    Debug.Log(turnType);
                     NextTurn(turnType); // turnType 턴 변경
                 });
             }
@@ -50,17 +48,17 @@ namespace InGame.MyManager
 
         private void OnEnable()
         {
-            TurnEvents.OnChangeTurn += AutoTurnChange; // 턴 변경 이벤트에 자동 턴 전환 함수 구독
+            TurnEvents.OnTurnCompleted += AutoTurnCompleted; // 턴 변경 이벤트에 자동 턴 완료 함수 구독
         }
 
         private void OnDisable()
         {
-            TurnEvents.OnChangeTurn -= AutoTurnChange; // 턴 변경 이벤트에 자동 턴 전환 함수 구독 해제
+            TurnEvents.OnTurnCompleted -= AutoTurnCompleted; // 턴 변경 이벤트에 자동 턴 완료 함수 구독 해제
         }
 
         private void Start()
         {
-            TurnChange(TurnType.ChangeTeam); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
+            _ = TurnChange(TurnType.ChangeTeam); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
         }
 
         // 턴을 넘기는 함수
@@ -71,29 +69,39 @@ namespace InGame.MyManager
                 _currentTeamType = GameManager.Instance.NextTeam(_currentTeamType); // 현재 팀을 다음 팀으로 지정
             }
 
-            TurnChange(turn); // 턴 변경 및 변경된 턴 기능 실행 함수 호출
+            _= TurnChange(turn); // 턴 변경 및 변경된 턴 기능 실행 함수 호출
         }
 
         // 턴 변경 시 현재 턴을 다음 턴으로 변경 및 다음 턴의 애니메이션까지 실행 시키는 함수(다음 턴)
-        private void TurnChange(TurnType nextTurn)
+        private async Task TurnChange(TurnType nextTurn)
         {
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
-            _turnUIAnimation.UIAnimationPlay(_currentTurnType); // 현재 턴의 UI 애니메이션 실행
+            
+            await _turnUIAnimation.UIAnimationPlay(_currentTurnType).AsyncWait(); // 현재 턴의 작업 실행
+
+            if(_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면
+            {
+                if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
+                    await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
+            }
+
+            TurnEvents.OnTurnCompleted?.Invoke(); // 턴 변경 이벤트 실행
         }
 
-        private void AutoTurnChange()
+        // 서버에 턴 완료 신호를 보내는 함수
+        private void AutoTurnCompleted()
         {
-            if (_currentTurnType != TurnType.DrawTurn && _currentTurnType != TurnType.MainTurn)
+            if (_currentTurnType != TurnType.DrawTurn && _currentTurnType != TurnType.MainTurn) // 드로우 턴이 아니면서 메인 턴도 아닐 경우
             {
-                TurnChangeInfo turnChangeInfo = new TurnChangeInfo()
+                TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                    team = (int)TeamManager.Instance.CurrentTeamType, // 현재 팀
+                    targetID = NetworkManager.Instance.CurrentPlayerID, // 현재 클라이언트 ID
                 };
-                string json = JsonUtility.ToJson(turnChangeInfo); // Json으로 변환
-                NetworkManager.Instance.Socket.Emit("changeTurn", json); // 서버에 턴 변경 신호를 보냄
+                string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
+                NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.08.25
+// 마지막 작성 일자: 2025.08.26
