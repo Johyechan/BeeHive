@@ -83,11 +83,16 @@ namespace InGame.MyManager
 
         private void AutoTurnChange()
         {
-            if (_currentTeamType != TeamManager.Instance.CurrentTeamType) // 내 팀의 차례가 아닐 경우
-                return; // 반환
-
             if (_currentTurnType != TurnType.DrawTurn && _currentTurnType != TurnType.MainTurn)
-                NetworkManager.Instance.Socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 신호를 보냄
+            {
+                TurnChangeInfo turnChangeInfo = new TurnChangeInfo()
+                {
+                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                    team = (int)TeamManager.Instance.CurrentTeamType, // 현재 팀
+                };
+                string json = JsonUtility.ToJson(turnChangeInfo); // Json으로 변환
+                NetworkManager.Instance.Socket.Emit("changeTurn", json); // 서버에 턴 변경 신호를 보냄
+            }
         }
     }
 }
