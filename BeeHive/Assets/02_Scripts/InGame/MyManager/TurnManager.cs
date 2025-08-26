@@ -25,6 +25,9 @@ namespace InGame.MyManager
         // UI 애니메이션을 실행 시키는 클래스
         private TurnUIAnimation _turnUIAnimation;
 
+        private bool _canChangeTurn; // 턴 변경 가능 여부
+        public bool CanChangeTurn { get => _canChangeTurn; set => _canChangeTurn = value; } // 위 변수 프로퍼티
+
         // 변수 초기화
         protected override void Awake()
         {
@@ -75,14 +78,17 @@ namespace InGame.MyManager
         // 턴 변경 시 현재 턴을 다음 턴으로 변경 및 다음 턴의 애니메이션까지 실행 시키는 함수(다음 턴)
         private async Task TurnChange(TurnType nextTurn)
         {
+            _canChangeTurn = false;
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
-            
+
             await _turnUIAnimation.UIAnimationPlay(_currentTurnType).AsyncWait(); // 현재 턴의 작업 실행
 
-            if(_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면
+            if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
             {
-                if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
+                if (_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면
+                {
                     await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
+                }
             }
 
             TurnEvents.OnTurnCompleted?.Invoke(); // 턴 변경 이벤트 실행
@@ -91,6 +97,8 @@ namespace InGame.MyManager
         // 서버에 턴 완료 신호를 보내는 함수
         private void AutoTurnCompleted()
         {
+            _canChangeTurn = true; // 턴 변경 가능
+
             if (_currentTurnType != TurnType.DrawTurn && _currentTurnType != TurnType.MainTurn) // 드로우 턴이 아니면서 메인 턴도 아닐 경우
             {
                 TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()

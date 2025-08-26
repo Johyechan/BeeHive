@@ -3,6 +3,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
+using MyUtil;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
@@ -30,7 +31,7 @@ namespace InGame.MyUI.Turn
             _turnAnimations.Add(TurnType.DrawTurn, new DrawTurnHandler(_canvasGroup, _tmpText, _animationDuration));
             _turnAnimations.Add(TurnType.MainTurn, new MainTurnHandler(_canvasGroup, _tmpText, _animationDuration));
             _turnAnimations.Add(TurnType.TurnEnd, new TurnEndUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
-            _turnAnimations.Add(TurnType.ChangeTeam, new ChangeTeamHandler(_canvasGroup, _tmpText, _animationDuration));
+            _turnAnimations.Add(TurnType.ChangeTeam, new ChangeTeamTurnUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
 
             TurnEvents.OnMakeTurn.Add(GetGoldBar); // 생산 이벤트에 금괴 획득 함수 큐에 추가
         }
