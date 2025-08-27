@@ -87,6 +87,7 @@ namespace InGame.MyManager
             {
                 if (_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면
                 {
+                    NetworkManager.Instance.Socket.Emit("debug", "생산 턴 왔다");
                     await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
                 }
             }

@@ -5575,7 +5575,8 @@ GameObject:
   m_Component:
   - component: {fileID: 588781780}
   - component: {fileID: 588781781}
-  m_Layer: 0
+  - component: {fileID: 588781782}
+  m_Layer: 6
   m_Name: Deck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5621,6 +5622,27 @@ MonoBehaviour:
   _playerCardsParent: {fileID: 1993153890}
   _otherCardsParent: {fileID: 1984745557}
   _playerUICardsParent: {fileID: 1145864087}
+--- !u!65 &588781782
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588781779}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.014935777, y: 0.005399291, z: 0.024979413}
+  m_Center: {x: 0.00021252036, y: 0.0024189076, z: 0.00088659674}
 --- !u!1001 &592692804
 PrefabInstance:
   m_ObjectHideFlags: 0
