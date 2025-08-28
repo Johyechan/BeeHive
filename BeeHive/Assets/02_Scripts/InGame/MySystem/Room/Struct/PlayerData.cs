@@ -16,6 +16,7 @@ namespace InGame.MySystem
         public int team; // 팀
         public int goldCoin; // 금화 개수
         public int goldBar; // 금괴 개수
+        public int card; // 카드 개수
     }
 }
 // 마지막 작성 일자: 2025.08.08

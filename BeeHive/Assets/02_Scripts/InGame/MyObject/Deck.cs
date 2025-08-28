@@ -16,21 +16,18 @@ namespace InGame.MyObject
     // 덱 클래스 - 클릭되었을 때 카드를 추가 시키는 기능을 가지는 클래스
     public class Deck : MonoBehaviour
     {
-        [SerializeField] private Transform _playerCardsParent; // 플레이어 카드들의 부모 Transform 변수
-        [SerializeField] private Transform _otherCardsParent; // 적 카드들의 부모 Transform 변수
+        public Transform player1CardsParent; // 플레이어1 카드들의 부모 Transform 변수
+        public Transform player2CardsParent; // 플레이어2 카드들의 부모 Transform 변수
+        public Transform player3CardsParent; // 플레이어3 카드들의 부모 Transform 변수
 
         [SerializeField] private RectTransform _playerUICardsParent; // 플레이어 UI 카드들의 부모 RectTransform 변수
 
-        private Transform _deckTransform; // 덱 Transform 변수 - 현재 덱에 있는 카드의 수를 알기 위한 변수
-
-        private int _currentDeckCardCount; // 현재 덱에 있는 카드 수
+        public Transform deckTransform; // 덱 Transform 변수 - 현재 덱에 있는 카드의 수를 알기 위한 변수
 
         // 변수 초기화
         private void Awake()
         {
-            _deckTransform = GetComponent<Transform>();
-
-            _currentDeckCardCount = _deckTransform.childCount; 
+            deckTransform = GetComponent<Transform>();
         }
 
         private void Update()
@@ -40,21 +37,6 @@ namespace InGame.MyObject
             {
                 _ = Draw(); // Task 반환 없이 바로 Draw 함수 실행
             }
-        }
-
-        public void DrawCard(bool isPlayerDraw = true)
-        {
-            if (isPlayerDraw) // 만약 플레이어가 드로우하는 상태라면
-            {
-                _deckTransform.GetChild(_currentDeckCardCount - 1).SetParent(_playerCardsParent); // 덱에 있는 카드를 플레이어의 카드로 변경 - 실제 값은 -1을 하지 않아야 하지만 인덱스로 활용할 것이기 때문에 -1을 하여 배열 크기 초과 오류를 방지
-                GameObject uiCard = ObjectPoolManager.Instance.GetObject(ObjectPoolType.UIcard, _playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
-            }
-            else // 만약 적이 드로우하는 상태라면
-            {
-                _deckTransform.GetChild(_currentDeckCardCount - 1).SetParent(_otherCardsParent); // 덱에 있는 카드를 적의 카드로 변경 - 실제 값은 -1을 하지 않아야 하지만 인덱스로 활용할 것이기 때문에 -1을 하여 배열 크기 초과 오류를 방지
-            }
-
-            _currentDeckCardCount--; // 현재 덱에 있는 카드 수 감소
         }
 
         // 드로우 함수
@@ -72,11 +54,29 @@ namespace InGame.MyObject
             if (!WalletEvent.OnUseGoldBar.Invoke(2)) // 금괴 2개를 사용할 수 없다면
                 return; // 반환
 
-            await DOTween.Sequence()
-                .AppendCallback(() => DrawCard()) // 카드 드로우 실행
-                .AppendCallback(() => DrawEventSystem.OnDraw?.Invoke()).AsyncWait(); // 드로우 이벤트 인보크 후 시퀀스 완료 시 Task 완료 반환
+            switch(TeamManager.Instance.CurrentTeamType)
+            {
+                case TeamType.Team1: // 현재 팀이 Team1일 때
+                    await DOTween.Sequence()
+                          .AppendCallback(() => DrawManager.Instance.DrawCard(deckTransform, player1CardsParent, _playerUICardsParent)) // 카드 드로우 실행
+                          .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke())
+                          .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(player2CardsParent)).AsyncWait();// 드로우 이벤트 인보크 후 시퀀스 완료 시 Task 완료 반환
+                    break;
+                case TeamType.Team2: // 현재 팀이 Team1일 때
+                    await DOTween.Sequence()
+                          .AppendCallback(() => DrawManager.Instance.DrawCard(deckTransform, player2CardsParent, _playerUICardsParent)) // 카드 드로우 실행
+                          .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke())
+                          .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(player2CardsParent)).AsyncWait(); // 드로우 이벤트 인보크 후 시퀀스 완료 시 Task 완료 반환
+                    break;
+                case TeamType.Team3: // 현재 팀이 Team1일 때
+                    await DOTween.Sequence()
+                          .AppendCallback(() => DrawManager.Instance.DrawCard(deckTransform, player3CardsParent, _playerUICardsParent)) // 카드 드로우 실행
+                          .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke())
+                          .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(player3CardsParent)).AsyncWait(); // 드로우 이벤트 인보크 후 시퀀스 완료 시 Task 완료 반환
+                    break;
+            }
 
-            NetworkManager.Instance.Socket.Emit("DrawCompleted"); // 서버에 DrawCompleted 신호 보내기
+            NetworkManager.Instance.Socket.Emit("draw"); // 서버에 DrawCompleted 신호 보내기
         }
     }
 }

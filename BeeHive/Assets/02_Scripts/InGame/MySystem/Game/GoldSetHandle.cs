@@ -7,7 +7,7 @@ namespace InGame.MySystem.Game
     // 작성자: 조혜찬
     // 금화 및 금괴 개수를 변경 이벤트 처리 핸들러
 
-    public class GoldSetEventHandle
+    public class GoldSetHandle
     {
         private PlayerData[] _players; // 현재 방에 존재하는 플레이어들을 저장한 배열
 
@@ -22,7 +22,7 @@ namespace InGame.MySystem.Game
         private Transform _team3GoldCoinParent; // 팀3 금화 객체 부모
         private Transform _team3GoldBarParent; // 팀3 금괴 객체 부모
 
-        public GoldSetEventHandle(PlayerData[] players, Wallet wallet)
+        public GoldSetHandle(PlayerData[] players, Wallet wallet)
         {
             _players = players;
 

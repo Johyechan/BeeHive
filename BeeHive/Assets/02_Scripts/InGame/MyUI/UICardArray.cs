@@ -30,7 +30,7 @@ namespace InGame.MyUI
 
         private void OnEnable()
         {
-            DrawEventSystem.OnDraw += ChangeUICardsRotateAndPosition; // 드로우 이벤트 구독
+            DrawEventSystem.OnCardUISet += ChangeUICardsRotateAndPosition; // 드로우 이벤트 구독
         }
 
         // 현재 자식(카드)들의 회전 값을 조정하는 함수

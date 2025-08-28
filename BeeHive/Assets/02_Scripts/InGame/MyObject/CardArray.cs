@@ -8,8 +8,13 @@ namespace InGame.MyObject
     {
         private void OnEnable()
         {
-            DrawEventSystem.OnDraw += ObjectRePlace; // 드로우 이벤트에 구독
+            DrawEventSystem.OnCardObjectSet += ObjectRePlace; // 카드 세팅 이벤트에 구독
+        }
+
+        private void OnDisable()
+        {
+            DrawEventSystem.OnCardObjectSet -= ObjectRePlace; // 카드 세팅 이벤트에서 구독 해제
         }
     }
 }
-// 마지막 작성 일자: 2025.07.23
+// 마지막 작성 일자: 2025.08.28
