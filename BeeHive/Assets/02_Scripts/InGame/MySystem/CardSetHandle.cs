@@ -34,14 +34,19 @@ namespace InGame.MySystem
             _player3CardsParent = cardParents.player3Parent;
         }
 
-        public async Task Setting(PlayerData[] players)
+        public async Task Setting(PlayerData[] players, string targetID, int targetTeam)
         {
             for(int i = 0; i < players.Length; i++)
             {
                 TeamType type = (TeamType)players[i].team; // i 인덱스 플레이어의 팀 구하기
 
-                if (type == TeamManager.Instance.CurrentTeamType) // 드로우를 한 플레이어와 클라이언트의 팀이 같다면
-                    continue; // 넘기기
+                if (NetworkManager.Instance.CurrentPlayerID == targetID) // 드로우를 한 플레이어와 클라이언트의 ID가 같다면
+                {
+                    if(type == (TeamType)targetTeam) // 현재 팀 타입과 드로우 한 팀 타입이 같다면
+                    {
+                        continue; // 넘기기
+                    }
+                }
 
                 switch(type)
                 {
@@ -66,11 +71,13 @@ namespace InGame.MySystem
 
             for(int i = 0; i < count; i++) // 카드 수 차이만큼 반복
             {
-                DrawManager.Instance.DrawCard(_deckParent, playerCardsParent, null, false); // ui는 제외, 객체만 드로우
+                await DOTween.Sequence()
+                    .AppendCallback(() => DrawManager.Instance.DrawCard(_deckParent, playerCardsParent, null, false)) // ui는 제외, 객체만 드로우
+                    .AppendCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(playerCardsParent)) // 카드 객체 정렬
+                    .AsyncWait(); // Task 완료 반환
             }
-
             await Task.CompletedTask; // Task 완료
         }
     }
 }
-// 마지막 작성 일자: 2025.08.28
+// 마지막 작성 일자: 2025.08.29

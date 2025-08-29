@@ -60,7 +60,7 @@ namespace InGame.MyObject
                     await DOTween.Sequence()
                           .AppendCallback(() => DrawManager.Instance.DrawCard(deckTransform, player1CardsParent, _playerUICardsParent)) // 카드 드로우 실행
                           .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke())
-                          .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(player2CardsParent)).AsyncWait();// 드로우 이벤트 인보크 후 시퀀스 완료 시 Task 완료 반환
+                          .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(player1CardsParent)).AsyncWait();// 드로우 이벤트 인보크 후 시퀀스 완료 시 Task 완료 반환
                     break;
                 case TeamType.Team2: // 현재 팀이 Team1일 때
                     await DOTween.Sequence()
@@ -76,8 +76,15 @@ namespace InGame.MyObject
                     break;
             }
 
-            NetworkManager.Instance.Socket.Emit("draw"); // 서버에 DrawCompleted 신호 보내기
+            DrawInfo drawInfo = new DrawInfo()
+            {
+                roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                targetID = NetworkManager.Instance.CurrentPlayerID // 현재 클라이언트 ID
+            };
+
+            string json = JsonUtility.ToJson(drawInfo); // Json 형태로 변환
+            NetworkManager.Instance.Socket.Emit("draw", json); // 서버에 DrawCompleted 신호 보내기
         }
     }
 }
-// 마지막 작성 일자: 2025.07.08
+// 마지막 작성 일자: 2025.08.29

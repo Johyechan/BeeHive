@@ -19,4 +19,4 @@ namespace InGame.MySystem
         public int card; // 카드 개수
     }
 }
-// 마지막 작성 일자: 2025.08.08
+// 마지막 작성 일자: 2025.08.28

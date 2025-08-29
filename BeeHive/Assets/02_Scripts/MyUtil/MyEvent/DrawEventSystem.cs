@@ -11,4 +11,4 @@ namespace MyUtil.MyEvent
         public static Action<Transform> OnCardObjectSet; // 카드 세팅 액션 - 여러 플레이어의 카드들을 세팅할 함수들이 구독하는 이벤트
     }
 }
-// 마지막 작성 일자: 2025.07.08
+// 마지막 작성 일자: 2025.08.28

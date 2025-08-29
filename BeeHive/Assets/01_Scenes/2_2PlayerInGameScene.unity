@@ -5619,9 +5619,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7dfaa185730074b95357ad54a910ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCardsParent: {fileID: 1993153890}
-  _otherCardsParent: {fileID: 1984745557}
+  player1CardsParent: {fileID: 1993153890}
+  player2CardsParent: {fileID: 1984745557}
+  player3CardsParent: {fileID: 0}
   _playerUICardsParent: {fileID: 1145864087}
+  deckTransform: {fileID: 588781780}
 --- !u!65 &588781782
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11730,6 +11732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204dc6a21d6cc7248b6d82ad8b57c625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deck: {fileID: 588781781}
 --- !u!4 &1223835473
 Transform:
   m_ObjectHideFlags: 0
@@ -12240,9 +12243,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7dfaa185730074b95357ad54a910ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCardsParent: {fileID: 0}
-  _otherCardsParent: {fileID: 0}
+  player1CardsParent: {fileID: 0}
+  player2CardsParent: {fileID: 0}
+  player3CardsParent: {fileID: 0}
   _playerUICardsParent: {fileID: 0}
+  deckTransform: {fileID: 0}
 --- !u!1001 &1296143381
 PrefabInstance:
   m_ObjectHideFlags: 0

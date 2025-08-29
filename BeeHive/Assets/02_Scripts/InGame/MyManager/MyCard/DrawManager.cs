@@ -38,7 +38,7 @@ namespace InGame.MyManager.MyCard
             int currentDeckCardCount = deckParent.childCount; // 덱에 있는 카드 수
             deckParent.GetChild(currentDeckCardCount - 1).SetParent(playerCardsParent);// 덱에 있는 카드를 플레이어의 카드로 변경 - 실제 값은 -1을 하지 않아야 하지만 인덱스로 활용할 것이기 때문에 -1을 하여 배열 크기 초과 오류를 방지
 
-            if(includeUI) // UI도 생성해야 할 경우
+            if (includeUI) // UI도 생성해야 할 경우
             {
                 GameObject uiCard = ObjectPoolManager.Instance.GetObject(ObjectPoolType.UIcard, playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
             }

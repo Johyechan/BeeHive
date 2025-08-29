@@ -38,6 +38,8 @@ namespace InGame.MyManager
             {
                 socket.On("turnChanged", value =>
                 {
+                    _canChangeTurn = true; // 턴 변경 가능
+                    socket.Emit("debug", "턴 변경 받음 (TurnManager: 42)");
                     int turn = value.GetValue<int>(); // int 자료형으로 읽어오기
                     TurnType turnType = (TurnType)turn; // TurnType형태로 turn변수 변경
                     NextTurn(turnType); // turnType 턴 변경
@@ -83,11 +85,13 @@ namespace InGame.MyManager
 
             await _turnUIAnimation.UIAnimationPlay(_currentTurnType).AsyncWait(); // 현재 턴의 작업 실행
 
+            NetworkManager.Instance.Socket.Emit("debug", $"{nextTurn} 턴(TurnManager: 88)");
+
             if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
             {
                 if (_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "생산 턴 왔다");
+                    NetworkManager.Instance.Socket.Emit("debug", "생산 턴 왔다 (TurnManager: 94)");
                     await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
                 }
             }
@@ -98,8 +102,6 @@ namespace InGame.MyManager
         // 서버에 턴 완료 신호를 보내는 함수
         private void AutoTurnCompleted()
         {
-            _canChangeTurn = true; // 턴 변경 가능
-
             if (_currentTurnType != TurnType.DrawTurn && _currentTurnType != TurnType.MainTurn) // 드로우 턴이 아니면서 메인 턴도 아닐 경우
             {
                 TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()

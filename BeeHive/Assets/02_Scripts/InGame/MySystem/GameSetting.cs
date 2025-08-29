@@ -31,12 +31,14 @@ namespace InGame.MySystem
                 socket.On("setCard", (data) =>
                 {
                     string json = data.GetValue().ToString(); // 문자열로 data 받기
-                    PlayerDataWrapper wrapper = JsonUtility.FromJson<PlayerDataWrapper>(json); // PlayerData 구조체 배열을 가지는 구조체로 값 받기
-                    PlayerData[] players = wrapper.players; // PlayerData 배열로 저장
-                    _ = DrawManager.Instance.CardSetHandle.Setting(players); // Task 반환 없이 바로 실행 - 이거 위치 조정 하자
+                    SetCardInfo setCardInfo = JsonUtility.FromJson<SetCardInfo>(json); // 카드 세팅에 필요한 값을 가지는 구조체로 값 받기
+                    PlayerData[] players = setCardInfo.players; // PlayerData 배열로 저장
+                    string targetID = setCardInfo.targetID; // 드로우한 클라이언트 ID 저장
+                    int targetTeam = setCardInfo.targetTeam; // 드로우한 클라이언트 팀 저장
+                    _ = DrawManager.Instance.CardSetHandle.Setting(players, targetID, targetTeam); // Task 반환 없이 바로 실행
                 });
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.08.28
+// 마지막 작성 일자: 2025.08.29
