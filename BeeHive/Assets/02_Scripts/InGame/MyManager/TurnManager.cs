@@ -38,8 +38,6 @@ namespace InGame.MyManager
             {
                 socket.On("turnChanged", value =>
                 {
-                    _canChangeTurn = true; // 턴 변경 가능
-                    socket.Emit("debug", "턴 변경 받음 (TurnManager: 42)");
                     int turn = value.GetValue<int>(); // int 자료형으로 읽어오기
                     TurnType turnType = (TurnType)turn; // TurnType형태로 turn변수 변경
                     NextTurn(turnType); // turnType 턴 변경
@@ -99,6 +97,7 @@ namespace InGame.MyManager
         // 서버에 턴 완료 신호를 보내는 함수
         private void AutoTurnCompleted()
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"{_currentTurnType}턴 완료");
             if (_currentTurnType != TurnType.DrawTurn && _currentTurnType != TurnType.MainTurn) // 드로우 턴이 아니면서 메인 턴도 아닐 경우
             {
                 TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()
@@ -109,7 +108,11 @@ namespace InGame.MyManager
                 string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
                 NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
             }
+            else // 드로우 턴 또는 메인 턴인 경우
+            {
+                _canChangeTurn = true; // 턴 변경 버튼 사용 가능
+            }
         }
     }
 }
-// 마지막 작성 일자: 2025.08.26
+// 마지막 작성 일자: 2025.09.01

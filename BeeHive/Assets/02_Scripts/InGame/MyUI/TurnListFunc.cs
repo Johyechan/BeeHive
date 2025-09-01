@@ -28,6 +28,7 @@ namespace MyUtil
         // 리스트에 담긴 액션들 순차적으로 실행
         public async Task ActionlistPlay()
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"생산 턴 액션 개수는 총 {_listActions.Count} 개");
             for(int i = 0; i < _listActions.Count; i++) // 리스트 순회
             {
                 Func<Task> action = null;
@@ -36,6 +37,8 @@ namespace MyUtil
                     action = _listActions[i]; // 리스트에서 액션 꺼내기
                 }
                 await action?.Invoke(); // 액션 실행
+
+                NetworkManager.Instance.Socket.Emit("debug", $"{action} 실행");
             }
         }
     }

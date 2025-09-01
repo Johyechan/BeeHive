@@ -6381,7 +6381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7cea46f333ce54995dc41669a52928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _deck: {fileID: 588781781}
   _playerActionAsset: {fileID: -944628639613478452, guid: 7148f4b17fec4334db1df11803e05fa6, type: 3}
+  _drawMillisecondDelay: 500
 --- !u!1 &667040567
 GameObject:
   m_ObjectHideFlags: 0

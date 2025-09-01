@@ -36,6 +36,7 @@ namespace InGame.MySystem
 
         public async Task Setting(PlayerData[] players, string targetID, int targetTeam)
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"{NetworkManager.Instance.CurrentPlayerID} 클라이언트가 카드 세팅하러 왔습니다 (CardSetHandle: 39)");
             for(int i = 0; i < players.Length; i++)
             {
                 TeamType type = (TeamType)players[i].team; // i 인덱스 플레이어의 팀 구하기
@@ -68,6 +69,7 @@ namespace InGame.MySystem
         private async Task GetCards(PlayerData player, Transform playerCardsParent)
         {
             int count = Mathf.Abs(playerCardsParent.childCount - player.card); // 실제 카드 수와 이미 생성되어 있던 카드 수 차이 구하기
+            NetworkManager.Instance.Socket.Emit("debug", $"원래 가지던 객체 개수: {playerCardsParent.childCount}, 진짜 개수: {player.card}, 생성 개수: {count}");
 
             for(int i = 0; i < count; i++) // 카드 수 차이만큼 반복
             {

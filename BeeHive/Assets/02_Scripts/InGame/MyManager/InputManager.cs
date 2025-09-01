@@ -12,50 +12,47 @@ namespace InGame.MyManager
     // 인풋을 관리하는 싱글톤 매니저
     public class InputManager : MonoSingleton<InputManager>
     {
+        [SerializeField] private Deck _deck; // 드로우에 필요한 객체를 가지는 클래스
         [SerializeField] private InputActionAsset _playerActionAsset; // 플레이어의 인풋 에셋
+
+        [SerializeField] private int _drawMillisecondDelay; // 드로우 딜레이 시간
 
         private InputActionMap _playActionMap; // 인풋 에셋의 액션 맵 - 게임에 필요한 액션들을 가지는 맵
         private InputAction _clickAction; // 액션 맵에 있는 액션 - 클릭 액션
+        private InputAction _drawAction; // 액션 맵에 있는 액션 - 드로우 액션
 
         private InputClickHandler _clickHandler; // 객체 클릭을 인식하기 위한 핸들러
+        private InputDrawHandler _drawHandler; // 드로우를 위한 핸들러
 
         protected override void Awake()
         {
             base.Awake();
 
             _clickHandler = new InputClickHandler();
+            _drawHandler = new InputDrawHandler(_deck, _drawMillisecondDelay);
 
             _playActionMap = _playerActionAsset.FindActionMap("Play"); // 인풋 에셋에서 Play 이름을 가진 액션 맵 탐색
-            _clickAction = _playActionMap.FindAction("Click"); // 액션 맵에서 Click이름을 가진 액션 탐색
+            _clickAction = _playActionMap.FindAction("Click"); // 액션 맵에서 Click 이름을 가진 액션 탐색
+            _drawAction = _playActionMap.FindAction("Draw"); // 액션 맵에서 Draw 이름을 가진 액션 탐색
         }
 
         private void OnEnable()
         {
             _playerActionAsset.Enable(); // 인풋 에셋 활성화
-            _clickAction.performed += MouseClick; // 클릭 액션에 클릭 시 실행될 함수 구독
+            _clickAction.performed += _clickHandler.MouseClick; // 클릭 액션에 클릭 시 실행될 함수 구독
+            _drawAction.performed += _drawHandler.Draw; // 드로우 액션에 드로우 인풋 시 실행될 함수 구독
         }
 
         private void OnDisable()
         {
-            _clickAction.performed -= MouseClick; // 클릭 액션에 구독된 함수 해제
+            _clickAction.performed -= _clickHandler.MouseClick; // 클릭 액션에 구독된 함수 해제
             _playerActionAsset.Disable(); // 인풋 에셋 비활성화
-        }
-
-        private void MouseClick(InputAction.CallbackContext context)
-        {
-            GameObject hitObj = _clickHandler.OnMouseClick(); // 마우스 클릭 시 레이 캐스트를 쏘아 닿은 객체를 반환
-            if (hitObj != null) // 레이캐스트에 닿은 객체가 있을 경우
-            {
-                IClickObject clickObj = hitObj.GetComponent<IClickObject>(); // 클릭 가능한 오브젝트들이 가지는 인터페이스 가져오기
-                clickObj.ObjectClicked(); // 레이 캐스트에 닿은 객체에게 클릭되었다고 함수 호출
-            }
-            
         }
 
         void Update()
         {
-            _clickHandler.IsOverUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(); // 현재 EventSystem이 존재하고 마우스 커서가 UI위에 있다면 true 할당, 둘 중 하나라도 false라면 false 할당
+            _clickHandler.CheckIsMouseOverUI(); // 마우스 커서가 UI 위에 있는지 확인하는 함수
         }
     }
 }
-// 마지막 작성 일자: 2025.07.23
+// 마지막 작성 일자: 2025.09.01
