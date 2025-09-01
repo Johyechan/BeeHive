@@ -41,6 +41,7 @@ namespace InGame.MyUI.MyUIButton
             {
                 if (!TurnManager.Instance.CanChangeTurn) // 턴 변경 가능 상태가 아닐 경우
                 {
+                    // 턴은 변경이 되는데 드로우 턴에 버튼을 누르면 여기로 와서 변경 못한다고 함
                     socket.Emit("debug", "턴 변경 못함 (ChangeTurnButton: 44)");
                     return; // 반환
                 }

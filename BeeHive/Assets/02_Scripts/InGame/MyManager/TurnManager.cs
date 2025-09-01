@@ -85,13 +85,10 @@ namespace InGame.MyManager
 
             await _turnUIAnimation.UIAnimationPlay(_currentTurnType).AsyncWait(); // 현재 턴의 작업 실행
 
-            NetworkManager.Instance.Socket.Emit("debug", $"{nextTurn} 턴(TurnManager: 88)");
-
             if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
             {
                 if (_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "생산 턴 왔다 (TurnManager: 94)");
                     await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
                 }
             }
