@@ -9,7 +9,6 @@ namespace InGame.MyEvent
     {
         public static Action<bool> OnSetInteractable; // 버튼 활성화 여부 액션
         public static TurnListFunc OnMakeTurn = new TurnListFunc(); // 생산 턴에 실행할 큐 클래스
-        public static Action OnTurnCompleted; // 턴 변경 이벤트
     }
 }
 // 마지막 작성 일자: 2025.08.25

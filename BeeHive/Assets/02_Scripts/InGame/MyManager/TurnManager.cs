@@ -49,16 +49,6 @@ namespace InGame.MyManager
             _currentTeamType = TeamType.Team1; // 처음 시작은 Team1부터
         }
 
-        private void OnEnable()
-        {
-            TurnEvents.OnTurnCompleted += AutoTurnCompleted; // 턴 변경 이벤트에 자동 턴 완료 함수 구독
-        }
-
-        private void OnDisable()
-        {
-            TurnEvents.OnTurnCompleted -= AutoTurnCompleted; // 턴 변경 이벤트에 자동 턴 완료 함수 구독 해제
-        }
-
         private void Start()
         {
             _ = TurnChange(TurnType.ChangeTeam); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
@@ -78,10 +68,13 @@ namespace InGame.MyManager
         // 턴 변경 시 현재 턴을 다음 턴으로 변경 및 다음 턴의 애니메이션까지 실행 시키는 함수(다음 턴)
         private async Task TurnChange(TurnType nextTurn)
         {
-            _canChangeTurn = false;
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
 
-            await _turnUIAnimation.UIAnimationPlay(_currentTurnType).AsyncWait(); // 현재 턴의 작업 실행
+            Sequence seq = _turnUIAnimation.UIAnimationPlay(_currentTurnType);
+
+            seq.Play();
+
+            await seq.AsyncWaitForCompletion(); // 현재 턴의 작업 실행
 
             if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
             {
@@ -91,13 +84,13 @@ namespace InGame.MyManager
                 }
             }
 
-            TurnEvents.OnTurnCompleted?.Invoke(); // 턴 변경 이벤트 실행
+            AutoTurnCompleted(); // 턴 완료
         }
 
         // 서버에 턴 완료 신호를 보내는 함수
         private void AutoTurnCompleted()
         {
-            NetworkManager.Instance.Socket.Emit("debug", $"{_currentTurnType}턴 완료");
+            NetworkManager.Instance.Socket.Emit("debug", $"{NetworkManager.Instance.CurrentPlayerID}클라이언트 {_currentTurnType}턴 완료");
             if (_currentTurnType != TurnType.DrawTurn && _currentTurnType != TurnType.MainTurn) // 드로우 턴이 아니면서 메인 턴도 아닐 경우
             {
                 TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()
@@ -108,11 +101,7 @@ namespace InGame.MyManager
                 string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
                 NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
             }
-            else // 드로우 턴 또는 메인 턴인 경우
-            {
-                _canChangeTurn = true; // 턴 변경 버튼 사용 가능
-            }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.01
+// 마지막 작성 일자: 2025.09.02

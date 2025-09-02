@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyManager;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -12,7 +13,17 @@ namespace MyUtil
         public static Task AsyncWait(this Sequence sequence)
         {
             var tcs = new TaskCompletionSource<bool>(); // 외부에서 완료를 알릴 수 있는 객체 Task 생성
-            sequence.OnComplete(() => tcs.SetResult(true)); // 시퀀스가 완료되었을 때 Task가 완료됨
+            sequence.OnComplete(() =>
+            {
+                if(!tcs.Task.IsCompleted)
+                {
+                    tcs.SetResult(true);
+                    NetworkManager.Instance.Socket.Emit("debug", $"{NetworkManager.Instance.CurrentPlayerID} 클라이언트가 UI 닷트윈을 끝내려고 함 + 결과: {tcs.Task.Result}");
+                }
+            }); // 시퀀스가 완료되었을 때 Task가 완료됨
+
+            sequence.Play(); // 시퀀스에 OnComplete 추가 후 지금 시퀀스 실행
+
             return tcs.Task; // Task를 반환하여 이 반환한 Task를 await 할 수 있음
         }
     }

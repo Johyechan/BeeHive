@@ -42,13 +42,13 @@ namespace InGame.MyUI.MyUIButton
                 if (!TurnManager.Instance.CanChangeTurn) // 턴 변경 가능 상태가 아닐 경우
                 {
                     NetworkManager.Instance.Socket.Emit("debug", "턴 넘기기 불가");
-                    // 턴은 변경이 되는데 드로우 턴에 버튼을 누르면 여기로 와서 변경 못한다고 함
                     return; // 반환
                 }
 
                 if(TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀이 내 팀일 경우
                 {
                     socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 이벤트 전달
+                    NetworkManager.Instance.Socket.Emit("debug", "턴 넘기기 버튼");
                     TurnManager.Instance.CanChangeTurn = false; // 턴 변경 가능 여부 false로 초기화
                 }
             }

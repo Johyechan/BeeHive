@@ -75,10 +75,12 @@ namespace InGame.MyManager.MyPlacePlane
 
         public Sequence FindCanPlacePlane()
         {
-            return DOTween.Sequence()
+            Sequence seq = DOTween.Sequence()
                     .AppendCallback(() => _findCanPlacePlaneSystem.ResetPlacePlanes())
                     .AppendCallback(() => _findCanPlacePlaneSystem.FindCanPlacePiecePlane(TeamManager.Instance.CurrentTeamType))
                     .AppendCallback(() => _findCanPlacePlaneSystem.FindCanPlaceRoadPlane(TeamManager.Instance.CurrentTeamType));
+
+            return seq;
         }
 
         // 리스트에 있는 도로들을 전부 성과 근접한 도로로 만드는 함수(성과 근접한 도로로 만들 도로들을 저장하는 리스트)

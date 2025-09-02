@@ -27,12 +27,14 @@ namespace InGame.MyUI.Turn
         // 애니메이션을 구현할 함수
         public virtual Sequence UIAnimationPlay()
         {
-            return DOTween.Sequence() // 차례대로 실행 시키기 위한 DOTween 시퀀스
+            Sequence seq = DOTween.Sequence() // 차례대로 실행 시키기 위한 DOTween 시퀀스
                 .AppendCallback(() => _canvasGroup.gameObject.SetActive(true)) // 캔버스 그룹 오브젝트 활성화
                 .Append(_canvasGroup.DOFade(1, _animationDuration)) // _animationDuration 동안 페이드 인
                 .Append(_canvasGroup.DOFade(0, _animationDuration)) // _animationDuration 동안 페이드 아웃
                 .AppendCallback(() => _canvasGroup.gameObject.SetActive(false)); // 캔버스 그룹 오브젝트 비활성화
+
+            return seq;
         }
     }
 }
-// 마지막 작성 일자: 2025.08.26
+// 마지막 작성 일자: 2025.09.02

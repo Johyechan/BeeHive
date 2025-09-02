@@ -17,15 +17,20 @@ namespace InGame.MyUI.Turn
 
         public override Sequence UIAnimationPlay()
         {
-            return DOTween.Sequence()
+            Sequence seq = DOTween.Sequence()
                 .AppendCallback(() => _tmpText.text = "드로우 턴") // 무슨 턴인지 텍스트로 보여주기
                 .Append(base.UIAnimationPlay()) // 이후 동일하게 실행되어야 할 기능 수행
-                .OnComplete(() =>
+                .AppendCallback(() =>
                 {
                     if (TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 내 팀 차례일때
+                    {
+                        TurnManager.Instance.CanChangeTurn = true; // 턴 변경 버튼으로 넘기기 가능
                         TurnEvents.OnSetInteractable?.Invoke(true); // 턴 넘기기 버튼 상화작용 활성화
+                    }
                 });
+
+            return seq;
         }
     }
 }
-// 마지막 작성 일자: 2025.08.26
+// 마지막 작성 일자: 2025.09.02
