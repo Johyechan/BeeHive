@@ -31,6 +31,13 @@ namespace InGame.MyObject
             set => _currentPlacePlane = value;
         }
 
+        protected int _id = 0; // 객체 id
+
+        protected virtual void Awake()
+        {
+            ObjectIdManager.Instance.AddObject(_id++, gameObject); // 객체 관리 매니저에 id와 함께 추가
+        }
+
         protected virtual void OnEnable()
         {
             HighLightEvents.OnPieceMovementHighLight += HighLightOff;

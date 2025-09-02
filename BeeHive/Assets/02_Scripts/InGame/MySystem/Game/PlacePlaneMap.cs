@@ -2,7 +2,7 @@ using InGame.MyObject;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace InGame.MySystem
+namespace InGame.MySystem.Game
 {
     // 작성자: 조혜찬
     // 전체 기물 판들을 저장하는 클래스

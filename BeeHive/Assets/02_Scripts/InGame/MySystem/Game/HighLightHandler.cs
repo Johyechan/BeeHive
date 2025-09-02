@@ -1,7 +1,7 @@
 using InGame.MyObject;
 using System.Collections.Generic;
 
-namespace InGame.MySystem
+namespace InGame.MySystem.Game
 {
     // 작성자: 조혜찬
     // 배치 가능한 판들에 하이라이트를 관리하기 위한 클래스

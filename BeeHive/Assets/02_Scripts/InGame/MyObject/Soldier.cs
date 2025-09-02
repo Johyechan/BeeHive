@@ -7,8 +7,10 @@ namespace InGame.MyObject
     // 보병 기물 클래스
     public class Soldier : PieceBase
     {
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             ParentSet();
         }
 

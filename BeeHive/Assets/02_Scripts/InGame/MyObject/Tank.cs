@@ -8,8 +8,10 @@ namespace InGame.MyObject
     // 전차 기물 클래스
     public class Tank : PieceBase
     {
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             ParentSet();
         }
 

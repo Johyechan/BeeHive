@@ -11,8 +11,10 @@ namespace InGame.MyObject
     // 광부 기물 클래스
     public class Miner : PieceBase
     {
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             ParentSet();
 
             TurnEvents.OnMakeTurn.Add(Dig); // 생산 턴에 광부가 금화를 얻는 기능 큐에 추가
@@ -46,7 +48,7 @@ namespace InGame.MyObject
         // 부모 초기화 함수
         private void ParentSet()
         {
-            _parent = GameObject.Find(TeamManager.Instance.MinerParentName).transform; // 보병 객체의 부모 할당
+            _parent = GameObject.Find(TeamManager.Instance.MinerParentName).transform; // 광부 객체의 부모 할당
         }
     }
 }

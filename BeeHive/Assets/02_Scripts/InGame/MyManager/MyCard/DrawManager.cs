@@ -1,5 +1,5 @@
 using InGame.MyObject;
-using InGame.MySystem;
+using InGame.MySystem.Game;
 using MyUtil;
 using MyUtil.MyObjectPool;
 using System;

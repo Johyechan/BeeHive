@@ -7,6 +7,7 @@ using InGame.MyEvent;
 using InGame.MyEnum;
 using InGame.MyObject;
 using System.Collections.Generic;
+using InGame.MySystem.Game;
 
 namespace InGame.MyManager.MyPlacePlane
 {

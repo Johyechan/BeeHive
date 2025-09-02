@@ -7,7 +7,7 @@ using MyUtil.MyEvent;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace InGame.MySystem
+namespace InGame.MySystem.Game
 {
     public struct CardParents // 플레이어의 카드 객체 부모를 가지는 구조체
     {
@@ -34,40 +34,29 @@ namespace InGame.MySystem
             _player3CardsParent = cardParents.player3Parent;
         }
 
-        public async Task Setting(PlayerData[] players, string targetID, int targetTeam)
+        public async Task Setting(int targetTeam, int cardCount)
         {
-            for(int i = 0; i < players.Length; i++)
+            TeamType type = (TeamType)targetTeam; // 팀 구하기
+
+            switch (type)
             {
-                TeamType type = (TeamType)players[i].team; // i 인덱스 플레이어의 팀 구하기
-
-                if (NetworkManager.Instance.CurrentPlayerID == targetID) // 드로우를 한 플레이어와 클라이언트의 ID가 같다면
-                {
-                    if(type == (TeamType)targetTeam) // 현재 팀 타입과 드로우 한 팀 타입이 같다면
-                    {
-                        continue; // 넘기기
-                    }
-                }
-
-                switch(type)
-                {
-                    case TeamType.Team1: // 팀1 일 때
-                        await GetCards(players[i], _player1CardsParent); // 해당 플레이어가 카드 드로우
-                        break;
-                    case TeamType.Team2: // 팀2 일 때
-                        await GetCards(players[i], _player2CardsParent); // 해당 플레이어가 카드 드로우
-                        break;
-                    case TeamType.Team3: // 팀3 일 때
-                        await GetCards(players[i], _player3CardsParent); // 해당 플레이어가 카드 드로우
-                        break;
-                }
+                case TeamType.Team1: // 팀1 일 때
+                    await GetCards(cardCount, _player1CardsParent); // 해당 플레이어가 카드 드로우
+                    break;
+                case TeamType.Team2: // 팀2 일 때
+                    await GetCards(cardCount, _player2CardsParent); // 해당 플레이어가 카드 드로우
+                    break;
+                case TeamType.Team3: // 팀3 일 때
+                    await GetCards(cardCount, _player3CardsParent); // 해당 플레이어가 카드 드로우
+                    break;
             }
 
             await Task.CompletedTask; // Task 완료
         }
 
-        private async Task GetCards(PlayerData player, Transform playerCardsParent)
+        private async Task GetCards(int cardCount, Transform playerCardsParent)
         {
-            int count = Mathf.Abs(playerCardsParent.childCount - player.card); // 실제 카드 수와 이미 생성되어 있던 카드 수 차이 구하기
+            int count = Mathf.Abs(playerCardsParent.childCount - cardCount); // 실제 카드 수와 이미 생성되어 있던 카드 수 차이 구하기
 
             for(int i = 0; i < count; i++) // 카드 수 차이만큼 반복
             {
@@ -81,4 +70,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.08.29
+// 마지막 작성 일자: 2025.09.02

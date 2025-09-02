@@ -1,5 +1,6 @@
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MySystem.Game;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ namespace InGame.MySystem
         private int _goldCoinCount = 0; // 금화 개수
         private int _goldBarCount = 0; // 금괴 개수
 
+        private GoldSetHandle _goldSetHandle;
+
         private WalletUIHandle _walletUIHandle; // 지갑 UI 핸들러
 
         private WalletObjectHandle _walletObjectHandle; // 지갑 관련 객체 핸들러
@@ -22,6 +25,7 @@ namespace InGame.MySystem
 
         private void Awake()
         {
+            _goldSetHandle = new GoldSetHandle(this);
             _walletUIHandle = new WalletUIHandle(_goldCoinTmpText, _goldBarTmpText);
             _walletObjectHandle = new WalletObjectHandle();
 
@@ -51,6 +55,7 @@ namespace InGame.MySystem
 
             GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
+            _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
         }
 
         // 금괴를 얻는 함수(얻는 값)
@@ -60,6 +65,7 @@ namespace InGame.MySystem
 
             GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
+            _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
         }
 
         // 금괴 사용 함수
@@ -72,6 +78,7 @@ namespace InGame.MySystem
 
             GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
+            _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
             return true;
         }
 
@@ -89,7 +96,7 @@ namespace InGame.MySystem
 
         private void GoldSetEventEmit()
         {
-            GoldSetInfo goldSetInfo = new GoldSetInfo()
+            ChangeGoldInfo goldSetInfo = new ChangeGoldInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                 targetID = NetworkManager.Instance.CurrentPlayerID, // 현재 클라이언트 ID
@@ -102,4 +109,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.08.21
+// 마지막 작성 일자: 2025.09.02

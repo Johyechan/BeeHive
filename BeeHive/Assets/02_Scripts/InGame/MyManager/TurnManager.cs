@@ -90,7 +90,6 @@ namespace InGame.MyManager
         // 서버에 턴 완료 신호를 보내는 함수
         private void AutoTurnCompleted()
         {
-            NetworkManager.Instance.Socket.Emit("debug", $"{NetworkManager.Instance.CurrentPlayerID}클라이언트 {_currentTurnType}턴 완료");
             if (_currentTurnType != TurnType.DrawTurn && _currentTurnType != TurnType.MainTurn) // 드로우 턴이 아니면서 메인 턴도 아닐 경우
             {
                 TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()
