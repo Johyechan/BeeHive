@@ -3,9 +3,10 @@ using UnityEngine;
 namespace InGame.MyObject
 {
     // 작성자: 조혜찬
-    // 기물을 옮길 때 필요한 값을 가지는 구조체
-    public struct SetPieceInfo
+    // 기물 이동 또는 생성에 필요한 값을 가지는 구조체
+    public struct PieceInfo
     {
+        public string roomID; // 현재 방 ID
         public int pieceID; // 기물 객체 ID
         public int placePlaneID; // 기물 객체가 배치된 칸 객체 ID
         public string parentName; // 부모 객체 명

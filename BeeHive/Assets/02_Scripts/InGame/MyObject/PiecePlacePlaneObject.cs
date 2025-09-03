@@ -76,17 +76,30 @@ namespace InGame.MyObject
                     if(pieceBase.CurrentPlacePlane != null) // 움직일 기물이 배치 되어 있는 칸이 있을 때
                     {
                         pieceBase.CurrentPlacePlane.PlacedObjectType = ObjectType.None; // 움직일 기물이 배치 되어있던 칸을 빈 칸으로 초기화
+                        pieceBase.CurrentPlacePlane.TeamType = TeamType.None; // 팀도 아무 팀도 아닌 상태로 초기화
                     }
                 }
                 pieceBase.CurrentPlacePlane = this; // 현재 기물이 올라가 있는 배치 칸을 자기 자신으로 할당
-
-                pieceBase.teamType = TeamManager.Instance.CurrentTeamType;
 
                 UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
                 PlacedObjectType = CanPlacePieceType; // 현재 배치가 가능한 기물을 이 배치판에 배치되어있는 기물로 지정
                 TeamType = pieceBase.teamType; // 현재 기물 배치 칸의 팀 타입을 기물의 팀 타입으로 할당
 
+                PieceInfo pieceInfo = new PieceInfo()
+                {
+                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                    pieceID = pieceBase.Id, // 기물 객체 ID
+                    placePlaneID = _id, // 배치 칸 ID
+                    parentName = transform.parent.name, // 부모 객체 명
+                    placedObjectType = (int)CanPlacePieceType, // 기물 객체 타입
+                    targetPos = transform.localPosition, // 기물 객체 최종 위치
+                    isMove = isMove // 생성인지 이동인지 여부
+                }; 
+                string json = JsonUtility.ToJson(pieceInfo); // Json으로 변환
+                NetworkManager.Instance.Socket.Emit("movePiece", json); // 서버에 movePiece 이벤트 전달
                 pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
+
+                _ = FindCanPlacePlane();
 
                 HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
@@ -94,4 +107,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.08.19
+// 마지막 작성 일자: 2025.09.03

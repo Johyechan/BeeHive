@@ -32,10 +32,12 @@ namespace InGame.MyObject
         }
 
         protected int _id = 0; // 객체 id
+        public int Id { get => _id; set => _id = value; } // 위 변수 프로퍼티
 
         protected virtual void Awake()
         {
-            ObjectIdManager.Instance.AddObject(_id++, gameObject); // 객체 관리 매니저에 id와 함께 추가
+            _id = ObjectIdManager.Instance.Id++;
+            ObjectIdManager.Instance.AddObject(_id, gameObject); // 객체 관리 매니저에 id와 함께 추가
         }
 
         protected virtual void OnEnable()

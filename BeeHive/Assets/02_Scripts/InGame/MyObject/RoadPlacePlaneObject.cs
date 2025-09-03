@@ -33,23 +33,53 @@ namespace InGame.MyObject
         // 클릭 시 실행될 함수
         public override void ObjectClicked()
         {
-            GameObject newRoad = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Road, _roadParent); // 새로운 도로 기물 생성
+            GameObject newRoad = null;
+
+            switch (TeamManager.Instance.CurrentTeamType) // 현재 팀에 따라 도로 팀 결정
+            {
+                case TeamType.Team1:
+                    newRoad = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, _roadParent); // 새로운 도로 기물 생성
+                    break;
+                case TeamType.Team2:
+                    newRoad = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, _roadParent); // 새로운 도로 기물 생성
+                    break;
+                case TeamType.Team3:
+                    newRoad = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, _roadParent); // 새로운 도로 기물 생성
+                    break;
+            }
+             
             newRoad.SetActive(false);
             newRoad.transform.localPosition = Vector3.zero;
             newRoad.SetActive(true);
             PieceBase roadPiece = newRoad.GetComponent<PieceBase>();
-            roadPiece.teamType = TeamManager.Instance.CurrentTeamType; 
 
             if (roadPiece != null)
             {
                 UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
                 PlacedObjectType = CanPlacePieceType; // 배치 성공 시 배치 가능한 기물이 위에 배치 되었다고 할당
                 TeamType = roadPiece.teamType; // 현재 배치 가능한 칸의 팀 타입을 도로 기물의 팀 타입으로 지정
+
+                RoadInfo roadInfo = new RoadInfo()
+                {
+                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                    placePlaneId = _id, // 현재 객체 ID
+                    placedType = (int)CanPlacePieceType, // 배치 객체 타입
+                    roadTeamType = (int)TeamType, // 배치 객체 팀 타입
+                    roadParentName = _roadParent.name, // 부모 객체 이름
+                    targetParentName = transform.parent.name, // 부모 객체 이름
+                    targetPos = transform.localPosition, // 최종 위치
+                    angle = _roadAngle // 최종 각도
+                };
+                string json = JsonUtility.ToJson(roadInfo); // Json으로 변환
+                NetworkManager.Instance.Socket.Emit("makeRoad", json);
+
                 roadPiece.MoveToPlacePlane(transform.parent, transform.localPosition, _roadAngle); // 기물을 현재 배치 판 부모의 자식으로 변경 + 현재 이 배치판 위치 이동 + 각도 회전
+
+                _ = FindCanPlacePlane();
+
                 HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
             }
         }
-        // 이거 시작했을 때 리스트에 있던 값들 사라짐
     }
 }
-// 마지막 작성 일자: 2025.08.19
+// 마지막 작성 일자: 2025.09.03

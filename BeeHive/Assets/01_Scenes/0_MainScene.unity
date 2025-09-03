@@ -1036,18 +1036,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolDataList:
   - poolType: 1
-    poolCount: 5
+    poolCount: 4
     poolObject: {fileID: 1321742906231919482, guid: 27538c82f8fc54f4694680bab44b294d, type: 3}
   - poolType: 2
     poolCount: 10
     poolObject: {fileID: 1006445174990255016, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
   - poolType: 3
     poolCount: 1
-    poolObject: {fileID: 1750350457765991339, guid: 7d8a4afc03587f54299032cc03dc4de6, type: 3}
+    poolObject: {fileID: 1006445174990255016, guid: d05dd1a7815abc042a6fe2a48374aa23, type: 3}
   - poolType: 4
     poolCount: 5
-    poolObject: {fileID: 3178345233608239537, guid: 77243012df3489e44918caf1d98f0cfe, type: 3}
+    poolObject: {fileID: 1006445174990255016, guid: 0f3ea483eb3cc32448bbb49901ffda5a, type: 3}
   - poolType: 5
+    poolCount: 10
+    poolObject: {fileID: 1750350457765991339, guid: 7d8a4afc03587f54299032cc03dc4de6, type: 3}
+  - poolType: 6
+    poolCount: 10
+    poolObject: {fileID: 3178345233608239537, guid: 77243012df3489e44918caf1d98f0cfe, type: 3}
+  - poolType: 7
     poolCount: 10
     poolObject: {fileID: 5662776212622894042, guid: 6e9f4da0ecb304147a1b15b441ffb3d9, type: 3}
 --- !u!4 &252034718

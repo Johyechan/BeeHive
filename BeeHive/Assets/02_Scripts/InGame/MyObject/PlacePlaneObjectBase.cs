@@ -1,8 +1,11 @@
+using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
+using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.MyObjectInterface;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -36,10 +39,17 @@ namespace InGame.MyObject
         private bool _isChecked; // 이전에 확인이 되었는지 확인하는 변수
         public bool IsChecked { get { return _isChecked; } set { _isChecked = value; } } // 이전에 확인이 되었는지 확인하는 변수 프로퍼티
 
+        protected int _id;
+        
+
         protected virtual void Awake()
         {
+            _id = ObjectIdManager.Instance.Id++;
+            ObjectIdManager.Instance.AddObject(_id, gameObject);
+
             _renderer = GetComponent<Renderer>();
             _collider = GetComponent<Collider>();
+
             _collider.enabled = false; // 콜라이더 비활성화
             _placedObjectType = ObjectType.None; // 아무것도 안 올려져 있는 상태로 초기화
             _canPlaceTypePiece = ObjectType.None; // 아무것도 배치 할 수 없는 상태로 초기화
@@ -67,6 +77,11 @@ namespace InGame.MyObject
         }
 
         public abstract void ObjectClicked();
+
+        protected async Task FindCanPlacePlane()
+        {
+            await PlacePlaneManager.Instance.FindCanPlacePlane().AsyncWaitForCompletion();
+        }
     }
 }
 // 마지막 작성 일자: 2025.08.20

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3020630815217639663}
   - component: {fileID: -3523446613277193137}
   m_Layer: 0
-  m_Name: Bridge
+  m_Name: Team3Bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2faa865e768e9cf4994df2f5dcf19bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamType: 0
+  teamType: 3
   _animationDuration: 0.3
-  _canPlaceType: 0
+  _canPlaceType: 4
 --- !u!1001 &3862270266084375898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _bridge
       objectReference: {fileID: 0}
+    - target: {fileID: 953936575932961283, guid: 75fd225e56eb9074080dbb8b3d154b01, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5ab1953477f997d4aba0efbfa9d0ff05, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 243041194690276544, guid: 75fd225e56eb9074080dbb8b3d154b01, type: 3}

@@ -175,6 +175,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c1947870806696d4882d920bbb0f7692, type: 2}
+    - target: {fileID: 5747962797088880711, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: teamType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -460,6 +464,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c1947870806696d4882d920bbb0f7692, type: 2}
+    - target: {fileID: 6872855046126685614, guid: c8a36783f9066e445889096a9854d924, type: 3}
+      propertyPath: teamType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7392490733645986711, guid: c8a36783f9066e445889096a9854d924, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1630,6 +1638,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c1947870806696d4882d920bbb0f7692, type: 2}
+    - target: {fileID: 6872855046126685614, guid: c8a36783f9066e445889096a9854d924, type: 3}
+      propertyPath: teamType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7392490733645986711, guid: c8a36783f9066e445889096a9854d924, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.007
@@ -2595,6 +2607,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 34064403}
     m_Modifications:
+    - target: {fileID: -3523446613277193137, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: teamType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1006445174990255016, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
       propertyPath: m_Name
       value: Bridge
@@ -4794,6 +4810,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tank 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4549152480045486938, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
+      propertyPath: teamType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5654505790167452514, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -5555,6 +5575,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6d747a8c193936d4bb01d94e3f7c95ef, type: 2}
+    - target: {fileID: 5747962797088880711, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: teamType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6193,6 +6217,10 @@ PrefabInstance:
     - target: {fileID: 3580588991831825165, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: m_Name
       value: Tank 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549152480045486938, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
+      propertyPath: teamType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5654505790167452514, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -6904,6 +6932,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6d747a8c193936d4bb01d94e3f7c95ef, type: 2}
+    - target: {fileID: 5747962797088880711, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: teamType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7244,6 +7276,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6d747a8c193936d4bb01d94e3f7c95ef, type: 2}
+    - target: {fileID: 6872855046126685614, guid: c8a36783f9066e445889096a9854d924, type: 3}
+      propertyPath: teamType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7392490733645986711, guid: c8a36783f9066e445889096a9854d924, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7355,6 +7391,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6d747a8c193936d4bb01d94e3f7c95ef, type: 2}
+    - target: {fileID: 6872855046126685614, guid: c8a36783f9066e445889096a9854d924, type: 3}
+      propertyPath: teamType
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7392490733645986711, guid: c8a36783f9066e445889096a9854d924, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.007
@@ -7893,6 +7933,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1729767050}
     m_Modifications:
+    - target: {fileID: -3523446613277193137, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
+      propertyPath: teamType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1006445174990255016, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
       propertyPath: m_Name
       value: Bridge
@@ -8619,6 +8663,10 @@ PrefabInstance:
     - target: {fileID: 3580588991831825165, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: m_Name
       value: Tank 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549152480045486938, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
+      propertyPath: teamType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5654505790167452514, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -11695,6 +11743,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c1947870806696d4882d920bbb0f7692, type: 2}
+    - target: {fileID: 5747962797088880711, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: teamType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15589,6 +15641,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6d747a8c193936d4bb01d94e3f7c95ef, type: 2}
+    - target: {fileID: 5747962797088880711, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: teamType
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16260,6 +16316,10 @@ PrefabInstance:
     - target: {fileID: 3580588991831825165, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: m_Name
       value: Tank 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549152480045486938, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
+      propertyPath: teamType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5654505790167452514, guid: 58b72746503d7534e9556e7b9416c0be, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -19194,6 +19254,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c1947870806696d4882d920bbb0f7692, type: 2}
+    - target: {fileID: 5747962797088880711, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
+      propertyPath: teamType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

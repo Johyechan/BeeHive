@@ -10,6 +10,9 @@ namespace InGame.MyManager
     {
         private Dictionary<int, GameObject> _idMap = new Dictionary<int, GameObject>();
 
+        private int _id = 0; // 객체 id
+        public int Id { get => _id; set => _id = value; } // 위 변수 프로퍼티
+
         // 외부에서 id를 통해 객체를 찾을 때 사용하는 함수
         public GameObject FindObject(int id)
         {
