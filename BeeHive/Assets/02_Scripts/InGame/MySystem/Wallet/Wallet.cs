@@ -37,6 +37,7 @@ namespace InGame.MySystem
             WalletEvent.OnGetGoldCoin += GetGoldCoin; // 금화 획득 이벤트에 금화 획득 함수 구독
             WalletEvent.OnGetGoldBar += GetGoldBar; // 금괴 획득 이벤트에 금괴 획득 함수 구독
             WalletEvent.OnUseGoldBar += UseGoldBar; // 금괴 사용 이벤트에 금괴 사용 함수 구독
+            WalletEvent.OnCanUseGoldBar += CanUseGoldBar; // 금괴 사용 여부 확인 이벤트에 금괴 사용 여부 확인 함수 구독
         }
 
         private void OnDisable()
@@ -44,10 +45,11 @@ namespace InGame.MySystem
             WalletEvent.OnGetGoldCoin -= GetGoldCoin; // 금화 획득 이벤트에 금화 획득 함수 구독 해제
             WalletEvent.OnGetGoldBar -= GetGoldBar; // 금괴 획득 이벤트에 금괴 획득 함수 구독 해제
             WalletEvent.OnUseGoldBar -= UseGoldBar; // 금괴 사용 이벤트에 금괴 사용 함수 구독 해제
+            WalletEvent.OnCanUseGoldBar -= CanUseGoldBar; // 금괴 사용 여부 확인 이벤트에 금괴 사용 여부 확인 함수 구독
         }
 
         // 금화를 얻는 함수(얻는 값)
-        public void GetGoldCoin(int value)
+        private void GetGoldCoin(int value)
         {
             _goldCoinCount += value; // 금화 증가
 
@@ -59,7 +61,7 @@ namespace InGame.MySystem
         }
 
         // 금괴를 얻는 함수(얻는 값)
-        public void GetGoldBar(int value)
+        private void GetGoldBar(int value)
         {
             _goldBarCount += value; // 금괴 증가
 
@@ -69,9 +71,9 @@ namespace InGame.MySystem
         }
 
         // 금괴 사용 함수
-        public bool UseGoldBar(int value)
+        private bool UseGoldBar(int value)
         {
-            if (_goldBarCount < value) // 사용하려는 값보다 금괴 수가 적다면
+            if (CanUseGoldBar(value)) // 사용하려는 값보다 금괴 수가 적다면
                 return false; // false 반환
 
             _goldBarCount -= value; // 금괴 감소
@@ -80,6 +82,15 @@ namespace InGame.MySystem
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
             _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
             return true;
+        }
+
+        // 금괴 사용 여부 판단 함수
+        private bool CanUseGoldBar(int value)
+        {
+            if (_goldBarCount < value) // 사용하려는 값보다 금괴 수가 적다면
+                return false; // false 반환
+
+            return true; // true 반환
         }
 
         // 금화를 금괴로 바꾸는 함수
@@ -109,4 +120,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.09.02
+// 마지막 작성 일자: 2025.09.04

@@ -37,15 +37,59 @@ namespace InGame.MyObject
             _pieceMap.Add(ObjectType.Tank, _tankParent); // 전차 추가
         }
 
+        private void HighLightOffEvent()
+        {
+            HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
+            HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
+        }
+
         // 마우스로 클릭 시 실행될 함수
         public override void ObjectClicked()
         {
             if (GameManager.Instance.CurrentMovePiece != null) // 현재 이동 가능한 객체 있다면
             {
+                if (!WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
+                {
+                    HighLightOffEvent(); // 하이라이트 끄기
+                    return; // 반환
+                }
+
+                // 현재 턴이 메인 턴이 아니라면
+                if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 배치할 수 없습니다."))
+                {
+                    HighLightOffEvent(); // 하이라이트 끄기
+                    return; // 반환
+                }
+
                 ObjectMove(); // 기물 이동 함수 실행
             }
             else // 현재 이동 가능한 객체가 없다면
             {
+                if (!WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
+                {
+                    HighLightOffEvent(); // 하이라이트 끄기
+                    return; // 반환
+                }
+
+                // 현재 턴이 메인 턴이 아니라면
+                if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 배치할 수 없습니다."))
+                {
+                    HighLightOffEvent(); // 하이라이트 끄기
+                    return; // 반환
+                }
+
+                if (!WarningEvent.OnCheckLeftPieceCount(_leftPieceCount, "남은 기물이 없어 배치할 수 없습니다")) // 남은 도로가 없다면
+                {
+                    HighLightOffEvent(); // 하이라이트 끄기
+                    return; // 반환
+                }
+
+                if (!WarningEvent.OnCanPayCost.Invoke(_cost, "금괴가 부족하여 기물을 배치할 수 없습니다.")) // 비용을 지불할 수 없다면
+                {
+                    HighLightOffEvent(); // 하이라이트 끄기
+                    return; // 반환
+                }
+
                 ObjectPlace(); // 기물 배치 함수 실행
             }
         }
@@ -101,10 +145,9 @@ namespace InGame.MyObject
 
                 _ = FindCanPlacePlane();
 
-                HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
-                HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
+                HighLightOffEvent(); // 하이라이트 끄기
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.03
+// 마지막 작성 일자: 2025.09.04

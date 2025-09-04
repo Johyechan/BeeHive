@@ -1,5 +1,4 @@
 using InGame.MyEnum;
-using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyObject;
 using MyUtil.MyObjectPool;

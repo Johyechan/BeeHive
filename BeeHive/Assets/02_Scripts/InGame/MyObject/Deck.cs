@@ -1,13 +1,6 @@
 using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager;
-using InGame.MyManager.MyCard;
-using InGame.MyObject.MyObjectInterface;
-using MyUtil;
-using MyUtil.MyEvent;
-using MyUtil.MyObjectPool;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyObject

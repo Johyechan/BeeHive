@@ -33,6 +33,31 @@ namespace InGame.MyObject
         // 클릭 시 실행될 함수
         public override void ObjectClicked()
         {
+            if (!WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴의 팀을 확인해서 현재 턴이 내 턴이 아니라면
+            {
+                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
+                return; // 반환
+            }
+
+            // 현재 턴이 메인 턴이 아니라면
+            if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 도로를 배치할 수 없습니다."))
+            {
+                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
+                return; // 반환
+            }
+
+            if (!WarningEvent.OnCheckLeftPieceCount(_leftPieceCount, "남은 도로가 없어 배치할 수 없습니다")) // 남은 도로가 없다면
+            {
+                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
+                return; // 반환
+            }
+
+            if (!WarningEvent.OnCanPayCost.Invoke(_cost, "금괴가 부족하여 도로를 배치할 수 없습니다.")) // 비용을 지불할 수 없다면
+            {
+                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
+                return; // 반환
+            }
+
             GameObject newRoad = null;
 
             switch (TeamManager.Instance.CurrentTeamType) // 현재 팀에 따라 도로 팀 결정
@@ -82,4 +107,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.03
+// 마지막 작성 일자: 2025.09.04

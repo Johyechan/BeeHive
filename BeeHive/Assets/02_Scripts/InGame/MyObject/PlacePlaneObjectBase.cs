@@ -4,7 +4,6 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.MyObjectInterface;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -40,7 +39,11 @@ namespace InGame.MyObject
         public bool IsChecked { get { return _isChecked; } set { _isChecked = value; } } // 이전에 확인이 되었는지 확인하는 변수 프로퍼티
 
         protected int _id;
-        
+        protected int _cost; // 비용
+        public int Cost { get => _cost; set => _cost = value; } // 위 변수 프로퍼티
+
+        protected int _leftPieceCount; // 자식 수(남은 기물 수)
+        public int LeftPieceCount { get => _leftPieceCount; set => _leftPieceCount = value; }
 
         protected virtual void Awake()
         {
@@ -74,6 +77,7 @@ namespace InGame.MyObject
             _canPlaceTypePiece = ObjectType.None; // 배치 가능한 타입 초기화
             _collider.enabled = false; // 클릭이 되지 않도록 콜라이더 비활성화
             _material.color = new Color(_material.color.r, _material.color.g, _material.color.b, 0); // 알파 값을 0으로 바꿔 보이지 않도록 변경
+            _cost = 0; // 비용 초기화
         }
 
         public abstract void ObjectClicked();
@@ -84,4 +88,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.08.20
+// 마지막 작성 일자: 2025.09.04

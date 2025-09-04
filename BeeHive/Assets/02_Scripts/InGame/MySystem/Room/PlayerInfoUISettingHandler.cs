@@ -1,7 +1,6 @@
 using InGame.MyManager;
 using InGame.MyUI.MyUIButton;
 using MyUtil;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

@@ -1,7 +1,6 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
-using InGame.MyManager.MyPlacePlane;
 using System.Threading.Tasks;
 using UnityEngine;
 

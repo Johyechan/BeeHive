@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace InGame.MyUI.MyUIInterface
 {
     // 작성자: 조혜찬

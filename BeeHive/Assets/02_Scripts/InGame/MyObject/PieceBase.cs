@@ -4,7 +4,7 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.MyObjectInterface;
-using InGame.MySystem;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -51,9 +51,9 @@ namespace InGame.MyObject
         }
 
         // 외부에서 하이라이트를 끌 때 현재 스크립트에서 하이라이트 활성화 여부를 끔 상태로 만들어주는 함수
-        private void HighLightOff(bool isOn, bool isMove = true) // 켜졌는지 여부, 이동 상태를 위해 켜졌는지 여부
+        private void HighLightOff(bool isOn, bool isMove = true) // 켜졌는지 여부, 이동 상태를 위해 켜졌는지 여부 = 어떤 값이 와도 상관 없음
         {
-            if(!isOn) // 끄는 상태일 때
+            if(isOn == false) // 끄는 상태일 때
             {
                 GameManager.Instance.CurrentMovePiece = null; // 현재 이동하려는 기물을 null로 할당
                 _isSelected = false; // 선택 해제 된 상태로 할당
@@ -63,7 +63,15 @@ namespace InGame.MyObject
         // 기물들을 지정 위치로 이동 시키는 함수
         public void MoveToPlacePlane(Transform parent, Vector3 targetPos, float angle = 0)
         {
-            transform.SetParent(parent); // 부모 변경
+            if(parent.name == "PlacePos")
+            {
+                gameObject.layer = LayerMask.NameToLayer("ClickObj");
+            }
+            else
+            {
+                gameObject.layer = LayerMask.NameToLayer("Default");
+            }
+                transform.SetParent(parent); // 부모 변경
             float yPos = targetPos.y * 1.5f; // 이후 배치할 때 애니메이션 효과를 위해 1.5배를 하여 조금 더 높이 올려준다
             Sequence sequence = DOTween.Sequence() // 시퀀스를 통해서 차례대로 순차적으로 실행
                 .Append(transform.DOLocalMoveY(yPos, _animationDuration)) // 높이 먼저 올리기
@@ -102,4 +110,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.07.23
+// 마지막 작성 일자: 2025.09.04

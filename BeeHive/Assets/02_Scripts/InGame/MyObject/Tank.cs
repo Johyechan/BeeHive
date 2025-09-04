@@ -1,5 +1,4 @@
 using InGame.MyManager;
-using InGame.MyObject;
 using UnityEngine;
 
 namespace InGame.MyObject

@@ -4,7 +4,6 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyCard;
 using InGame.MyObject;
-using MyUtil;
 using MyUtil.MyEvent;
 using System.Threading.Tasks;
 using UnityEngine;

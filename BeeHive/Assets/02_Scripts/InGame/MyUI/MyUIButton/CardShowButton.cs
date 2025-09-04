@@ -1,4 +1,3 @@
-using InGame.MyUI.MyUIInterface;
 using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton

@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 namespace InGame.MySystem
 {
     // 작성자: 조혜찬
     // 도로 세팅에 필요한 값을 가지는 구조체
+    [Serializable]
     public struct SetRoadInfo
     {
         public int placePlaneId; // 배치 칸 객체 ID
@@ -15,4 +17,4 @@ namespace InGame.MySystem
         public float angle; // 회전 각도
     }
 }
-// 마지막 작성 일자: 2025.09.03
+// 마지막 작성 일자: 2025.09.04

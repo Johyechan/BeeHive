@@ -1,13 +1,14 @@
-using UnityEngine;
+using System;
 
 namespace InGame.MySystem
 {
     // 작성자: 조혜찬
     // 카드 세팅에 필요한 값들을 가지는 구조체
+    [Serializable]
     public struct SetCardInfo
     {
         public int targetTeam; // 드로우를 한 클라이언트 팀
         public int cardCount; // 카드 개수
     }
 }
-// 마지막 작성 일자: 2025.08.29
+// 마지막 작성 일자: 2025.09.04

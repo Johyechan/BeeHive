@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 namespace InGame.MyObject
 {
     // 작성자: 조혜찬
     // 기물 이동 또는 생성에 필요한 값을 가지는 구조체
+    [Serializable]
     public struct PieceInfo
     {
         public string roomID; // 현재 방 ID
@@ -15,4 +17,4 @@ namespace InGame.MyObject
         public bool isMove; // 생성인지 이동인지 여부
     }
 }
-// 마지막 작성 일자: 2025.09.03
+// 마지막 작성 일자: 2025.09.04

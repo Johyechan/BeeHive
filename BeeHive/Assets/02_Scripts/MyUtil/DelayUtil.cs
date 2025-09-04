@@ -1,6 +1,3 @@
-using System.Threading.Tasks;
-using UnityEngine;
-
 namespace MyUtil
 {
     // 작성자: 조혜찬

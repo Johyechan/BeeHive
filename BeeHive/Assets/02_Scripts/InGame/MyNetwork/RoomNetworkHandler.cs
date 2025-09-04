@@ -1,11 +1,6 @@
 using InGame.MyManager;
 using MyUtil;
-using SocketIOClient;
-using UnityEngine;
-using DG.Tweening;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace InGame.MyNetwork
 {

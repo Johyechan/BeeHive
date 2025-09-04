@@ -1,7 +1,6 @@
 using InGame.MyUI.MyUIInterface;
 using UnityEngine;
 using DG.Tweening;
-using MyUtil;
 using MyUtil.MyObjectPool;
 
 namespace InGame.MyUI

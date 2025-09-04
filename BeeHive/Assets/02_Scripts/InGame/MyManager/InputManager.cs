@@ -1,9 +1,7 @@
 using InGame.MyInput;
 using InGame.MyObject;
-using InGame.MyObject.MyObjectInterface;
 using MyUtil;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace InGame.MyManager

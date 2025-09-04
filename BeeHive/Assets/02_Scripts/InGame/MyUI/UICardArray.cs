@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using DG.Tweening;
 using InGame.MyManager.MyCard;
 using MyUtil.MyEvent;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InGame.MyUI

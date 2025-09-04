@@ -1,7 +1,6 @@
 using DG.Tweening;
 using InGame.MyManager;
 using System.Threading.Tasks;
-using UnityEngine;
 
 namespace MyUtil
 {

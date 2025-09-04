@@ -1,5 +1,4 @@
 using DG.Tweening;
-using InGame.MyManager;
 using UnityEngine;
 
 namespace InGame.MyObject

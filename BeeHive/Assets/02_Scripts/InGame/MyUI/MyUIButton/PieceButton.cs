@@ -2,8 +2,6 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
-using InGame.MyUI.MyUIInterface;
-using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -14,13 +12,8 @@ namespace InGame.MyUI.MyUIButton
         // 클릭 시 실행될 함수
         public override void OnUIClick()
         {
-            // 만약 UI 상호작용 불가능 상태라면 또는 배치하려는 객체가 없을 경우(이 경우 특수하게 효과 줄 예정)
-            if (!UIManager.Instance.CanInteractionUI || _objectParent.childCount <= 0)
-            {
-                Debug.Log($"배치하려는 객체의 남은 수: {_objectParent.childCount}");
-                Debug.Log($"배치 불가: {UIManager.Instance.CanInteractionUI}");
-                return; // 반환 - UI 클릭 무시
-            }
+            if (!UIManager.Instance.CanInteractionUI) // 만약 UI 상호작용 불가능 상태라면
+                return; // 반환
 
             if (!_isHighLightOn) // 하이라이트가 꺼져 있을 때
             {
@@ -28,6 +21,8 @@ namespace InGame.MyUI.MyUIButton
                 foreach (var piece in PlacePlaneManager.Instance.HighLightHandler.CanPiecePlacePlanes) // 배치 가능한 기물 칸들 순회
                 {
                     piece.CanPlacePieceType = _canPlaceType; // 배치 가능한 타입을 할당
+                    piece.Cost = _cost; // 비용 할당
+                    piece.LeftPieceCount = _objectParent.childCount; // 남은 기물 수 할당
                 }
 
                 if(HighLightEvents.SelectedPlacementType != _canPlaceType) // 만약 현재 배치 가능한 타입이 다르다면
@@ -50,4 +45,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.07.23
+// 마지막 작성 일자: 2025.09.04

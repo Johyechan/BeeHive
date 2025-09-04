@@ -1,10 +1,6 @@
 using InGame.MyManager;
-using InGame.MySystem;
-using InGame.MySystem.Room;
 using InGame.MyUI.MyUIInterface;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace InGame.MyUI.MyUIButton
 {

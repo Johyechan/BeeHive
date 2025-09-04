@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 namespace InGame.MyObject
 {
     // 작성자: 조혜찬
     // 도로 생성에 필요한 값을 가지는 구조체
+    [Serializable]
     public struct RoadInfo
     {
         public string roomID; // 현재 방 ID
@@ -16,4 +18,4 @@ namespace InGame.MyObject
         public float angle; // 회전 각도
     }
 }
-// 마지막 작성 일자: 2025.09.03
+// 마지막 작성 일자: 2025.09.04

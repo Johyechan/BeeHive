@@ -1,9 +1,10 @@
-using UnityEngine;
+using System;
 
 namespace InGame.MySystem
 {
     // 작성자: 조혜찬
     // 금화 및 금괴를 변경할 때 필요한 값을 가지는 구조체
+    [Serializable]
     public struct ChangeGoldInfo
     {
         public string roomID; // 방 ID

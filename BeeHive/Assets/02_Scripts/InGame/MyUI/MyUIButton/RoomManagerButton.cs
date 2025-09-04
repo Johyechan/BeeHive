@@ -1,8 +1,6 @@
-using InGame.MyUI.MyUIButton;
 using InGame.MyUI.MyUIInterface;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace InGame.MyUI.MyUIButton
 {

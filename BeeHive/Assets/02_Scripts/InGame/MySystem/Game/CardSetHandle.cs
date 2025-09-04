@@ -1,8 +1,6 @@
 using DG.Tweening;
 using InGame.MyEnum;
-using InGame.MyManager;
 using InGame.MyManager.MyCard;
-using MyUtil;
 using MyUtil.MyEvent;
 using System.Threading.Tasks;
 using UnityEngine;

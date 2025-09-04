@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 namespace InGame.MyObject
 {
     // 작성자: 조혜찬
     // 기물을 옮길 때 필요한 값을 가지는 구조체
+    [Serializable]
     public struct SetPieceInfo
     {
         public int pieceID; // 기물 객체 ID
@@ -14,4 +16,4 @@ namespace InGame.MyObject
         public bool isMove; // 생성인지 이동인지 여부
     }
 }
-// 마지막 작성 일자: 2025.09.03
+// 마지막 작성 일자: 2025.09.04

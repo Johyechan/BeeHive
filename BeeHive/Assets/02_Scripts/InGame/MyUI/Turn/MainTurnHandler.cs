@@ -1,9 +1,7 @@
 using DG.Tweening;
-using InGame.MyEvent;
 using InGame.MyManager;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace InGame.MyUI.Turn
 {

@@ -16,11 +16,11 @@ namespace InGame.MyEvent
             set => _selectedPlacementType = value;
         }
 
-        // 기물 배치 가능 칸의 하이라이트 이벤트 (bool: 하이라이트 활성화 여부, bool: 배치용도인지 이동 용도인지 여부)
+        // 기물 배치 가능 칸의 하이라이트 이벤트 (bool: 하이라이트 활성화 여부, bool: 배치용도인지 = true 이동 용도인지 여부 = false)
         public static Action<bool, bool> OnPiecePlacementHighLight;
         // 도로 배치 가능 칸의 하이라이트 이벤트 (bool: 하이라이트 활성화 여부)
         public static Action<bool> OnRoadPlacementHighLight;
-        // 기물 이동 가능 칸의 하이라이트 이벤트 (bool: 하이라이트 활성화 여부, bool: 배치용도인지 이동 용도인지 여부)
+        // 기물 이동 가능 칸의 하이라이트 이벤트 (bool: 하이라이트 활성화 여부, bool: 배치용도인지 = true 이동 용도인지 여부 = false)
         public static Action<bool, bool> OnPieceMovementHighLight;
     }
 }

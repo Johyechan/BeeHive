@@ -1,8 +1,4 @@
-using DG.Tweening;
 using MyUtil;
-using System.Net.Sockets;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace InGame.MyManager
 {

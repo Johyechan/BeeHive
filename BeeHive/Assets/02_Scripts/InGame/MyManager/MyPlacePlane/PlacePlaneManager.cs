@@ -1,5 +1,3 @@
-
-using InGame.MySystem;
 using MyUtil;
 using DG.Tweening;
 using UnityEngine;

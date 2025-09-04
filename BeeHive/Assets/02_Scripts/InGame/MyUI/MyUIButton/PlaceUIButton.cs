@@ -12,13 +12,34 @@ namespace InGame.MyUI.MyUIButton
     {
         [SerializeField] protected ObjectType _canPlaceType; // 배치 가능한 객체 타입 변수
 
-        [SerializeField] protected Transform _objectParent; // 배치하려고 하는 기물의 부모
+        protected Transform _objectParent; // 배치하려고 하는 기물의 부모
 
         protected bool _isHighLightOn; // 하이라이트가 켜졌는지 확인하는 변수
+
+        [SerializeField] protected int _cost; // 가격
 
         private void Awake()
         {
             _isHighLightOn = false; // 하이라이트 꺼짐 상태로 초기화
+        }
+
+        private void Start()
+        {
+            switch(_canPlaceType) // 배치할 객체의 타입에 따라
+            {
+                case ObjectType.Miner: // 광부를 배치할 수 있다면
+                    _objectParent = GameObject.Find(TeamManager.Instance.MinerParentName).transform; // 광부 객체들의 부모를 할당
+                    break;
+                case ObjectType.Soldier: // 보병을 배치할 수 있다면
+                    _objectParent = GameObject.Find(TeamManager.Instance.SoldierParentName).transform; // 보병 객체들의 부모를 할당
+                    break;
+                case ObjectType.Tank: // 전차를 배치할 수 있다면
+                    _objectParent = GameObject.Find(TeamManager.Instance.TankParentName).transform; // 전차 객체들의 부모를 할당
+                    break;
+                case ObjectType.Road: // 도로를 배치할 수 있다면
+                    _objectParent = GameObject.Find(TeamManager.Instance.RoadParentName).transform; // 도로 객체들의 부모를 할당
+                    break;
+            }
         }
 
         private void OnEnable()
@@ -54,4 +75,4 @@ namespace InGame.MyUI.MyUIButton
         public abstract void OnUIClick();
     }
 }
-// 마지막 작성 일자: 2025.07.22
+// 마지막 작성 일자: 2025.09.04

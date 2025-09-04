@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace InGame.MyEvent
 {
@@ -10,6 +9,7 @@ namespace InGame.MyEvent
         public static Action<int> OnGetGoldCoin; // 금화 획득 이벤트
         public static Action<int> OnGetGoldBar; // 금괴 획득 이벤트
         public static Func<int, bool> OnUseGoldBar; // 금괴 사용 이벤트
+        public static Func<int, bool> OnCanUseGoldBar; // 금괴 사용 가능 여부 확인 이벤트
     }
 }
 // 마지막 작성 일자: 2025.08.20

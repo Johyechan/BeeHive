@@ -1,8 +1,5 @@
-using UnityEngine;
 using MyUtil;
-using TMPro;
 using InGame.MyEnum;
-using System;
 
 namespace InGame.MyManager
 {
