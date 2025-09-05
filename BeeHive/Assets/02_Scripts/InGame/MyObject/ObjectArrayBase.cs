@@ -1,4 +1,6 @@
 using DG.Tweening;
+using InGame.MyManager;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -11,10 +13,12 @@ namespace InGame.MyObject
 
         [SerializeField] private float _xPosPerChild; // x축 간격
         [SerializeField] private float _animationDelay; // 애니메이션 실행 시간
+        [SerializeField] private float _angle; // 회전 각도
 
         // 자식 객체들 재배치 함수
         protected void ObjectRePlace(Transform parent)
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"부모: {parent.name}, 자식 수: {parent.childCount}");
             int objectCount = parent.childCount; // 현재 자식 수 - 즉 보유하고 있는 객체 수
 
             if (objectCount <= 0 || objectCount > _maxChild) // 보유 중인 객체 수가 0이하라면 또는 최대 보유 개수 초과라면
@@ -33,4 +37,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.07.08
+// 마지막 작성 일자: 2025.09.05

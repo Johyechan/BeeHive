@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyUI.MyUIInterface;
+using TMPro;
 using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
@@ -17,6 +18,8 @@ namespace InGame.MyUI.MyUIButton
         protected bool _isHighLightOn; // 하이라이트가 켜졌는지 확인하는 변수
 
         [SerializeField] protected int _cost; // 가격
+
+        [SerializeField] private TMP_Text _leftPieceCountText;
 
         private void Awake()
         {
@@ -45,13 +48,17 @@ namespace InGame.MyUI.MyUIButton
         private void OnEnable()
         {
             HighLightEvents.OnPiecePlacementHighLight += HightLightOff; // 기물 전용 이벤트 구독
+            HighLightEvents.OnPiecePlacementHighLight += (_, _) => SetText(); // 기물 전용 이벤트 구독
             HighLightEvents.OnRoadPlacementHighLight += HightLightOff; // 도로 전용 이벤트 구독
+            HighLightEvents.OnRoadPlacementHighLight += _ => SetText(); // 도로 전용 이벤트 구독
         }
 
         private void OnDisable()
         {
             HighLightEvents.OnPiecePlacementHighLight -= HightLightOff; // 기물 전용 이벤트 구독 해제
+            HighLightEvents.OnPiecePlacementHighLight -= (_, _) => SetText(); // 기물 전용 이벤트 구독
             HighLightEvents.OnRoadPlacementHighLight -= HightLightOff; // 도로 전용 이벤트 구독 해제
+            HighLightEvents.OnRoadPlacementHighLight -= _ => SetText(); // 도로 전용 이벤트 구독
         }
 
         // 하이라이트가 꺼질 때 현재 하이라이트 활성화 여부를 끄는 함수 - 기물용
@@ -70,6 +77,12 @@ namespace InGame.MyUI.MyUIButton
             {
                 _isHighLightOn = isOn; // 현재 하이라이트 활성화 여부를 꺼져있는 상태로 할당
             }
+        }
+
+        // UI 텍스트 변경 함수
+        private void SetText()
+        {
+            _leftPieceCountText.text = $"사용 가능 개수: {_objectParent.childCount}";
         }
 
         public abstract void OnUIClick();

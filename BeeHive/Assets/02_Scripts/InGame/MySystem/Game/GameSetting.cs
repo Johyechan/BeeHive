@@ -34,6 +34,12 @@ namespace InGame.MySystem.Game
                     _goldSetEventHandle.Setting(setGoldInfo.team, setGoldInfo.goldCoin, setGoldInfo.goldBar); // 금화 및 금괴 객체 세팅(팀, 금화 개수, 금괴 개수)
                 });
 
+                socket.On("roadAdded", (data) =>
+                {
+                    string json = data.GetValue().ToString(); // 문자열로 data 받기
+                    
+                });
+
                 socket.On("setCard", (data) =>
                 {
                     string json = data.GetValue().ToString(); // 문자열로 data 받기
@@ -52,10 +58,10 @@ namespace InGame.MySystem.Game
                 {
                     string json = data.GetValue().ToString(); // 문자열로 data 받기
                     SetRoadInfo setRoadInfo = JsonUtility.FromJson<SetRoadInfo>(json); // 도로 세팅에 필요한 값을 가지는 구조체로 변경
-                    _setRoadHandle.SetRoad(setRoadInfo.placePlaneId, setRoadInfo.placedType, setRoadInfo.roadTeamType, setRoadInfo.roadParentName, setRoadInfo.targetParentName, setRoadInfo.targetPos, setRoadInfo.angle); // 도로 세팅
+                    _setRoadHandle.SetRoad(setRoadInfo.roadID, setRoadInfo.placePlaneId, setRoadInfo.placedType, setRoadInfo.roadTeamType, setRoadInfo.roadParentName, setRoadInfo.targetParentName, setRoadInfo.targetPos, setRoadInfo.angle); // 도로 세팅
                 });
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.03
+// 마지막 작성 일자: 2025.09.05

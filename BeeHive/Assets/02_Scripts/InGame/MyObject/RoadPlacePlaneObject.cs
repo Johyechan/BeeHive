@@ -58,24 +58,7 @@ namespace InGame.MyObject
                 return; // 반환
             }
 
-            GameObject newRoad = null;
-
-            switch (TeamManager.Instance.CurrentTeamType) // 현재 팀에 따라 도로 팀 결정
-            {
-                case TeamType.Team1:
-                    newRoad = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, _roadParent); // 새로운 도로 기물 생성
-                    break;
-                case TeamType.Team2:
-                    newRoad = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, _roadParent); // 새로운 도로 기물 생성
-                    break;
-                case TeamType.Team3:
-                    newRoad = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, _roadParent); // 새로운 도로 기물 생성
-                    break;
-            }
-             
-            newRoad.SetActive(false);
-            newRoad.transform.localPosition = Vector3.zero;
-            newRoad.SetActive(true);
+            GameObject newRoad = _roadParent.GetChild(_roadParent.childCount - 1).gameObject; // 도로 객체들의 부모 객체에서 도로 객체 가져오기
             PieceBase roadPiece = newRoad.GetComponent<PieceBase>();
 
             if (roadPiece != null)
@@ -87,6 +70,7 @@ namespace InGame.MyObject
                 RoadInfo roadInfo = new RoadInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                    roadID = roadPiece.Id, // 도로 객체 ID
                     placePlaneId = _id, // 현재 객체 ID
                     placedType = (int)CanPlacePieceType, // 배치 객체 타입
                     roadTeamType = (int)TeamType, // 배치 객체 팀 타입
@@ -107,4 +91,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2025.09.05

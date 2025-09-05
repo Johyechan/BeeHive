@@ -30,19 +30,6 @@ namespace InGame.MyUI.Turn
             _turnAnimations.Add(TurnType.MainTurn, new MainTurnHandler(_canvasGroup, _tmpText, _animationDuration));
             _turnAnimations.Add(TurnType.TurnEnd, new TurnEndUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
             _turnAnimations.Add(TurnType.ChangeTeam, new ChangeTeamTurnUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
-
-            TurnEvents.OnMakeTurn.Add(GetGoldBar); // 생산 이벤트에 금괴 획득 함수 큐에 추가
-        }
-
-        // 금괴 획득 함수
-        private async Task GetGoldBar()
-        {
-            if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀과 내 팀이 다르다면
-                return; // 반환
-
-            WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
-
-            await Task.CompletedTask; // Task 완료 반환
         }
 
         // 매개 변수로 받은 턴의 UI 애니메이션을 실행
@@ -56,4 +43,4 @@ namespace InGame.MyUI.Turn
         }
     }
 }
-// 마지막 작성 일자: 2025.09.02
+// 마지막 작성 일자: 2025.09.05

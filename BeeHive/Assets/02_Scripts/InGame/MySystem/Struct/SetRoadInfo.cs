@@ -8,6 +8,7 @@ namespace InGame.MySystem
     [Serializable]
     public struct SetRoadInfo
     {
+        public int roadID; // 도로 객체 ID
         public int placePlaneId; // 배치 칸 객체 ID
         public int placedType; // 배치한 타입
         public int roadTeamType; // 배치한 도로의 팀 타입

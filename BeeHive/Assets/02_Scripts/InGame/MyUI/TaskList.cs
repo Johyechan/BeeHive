@@ -6,7 +6,7 @@ namespace MyUtil
 {
     // 작성자: 조혜찬
     // 순차적인 작업을 할 때 사용하는 클래스
-    public class TurnListFunc
+    public class TaskList
     {
         private List<Func<Task>> _listActions = new List<Func<Task>>();
 

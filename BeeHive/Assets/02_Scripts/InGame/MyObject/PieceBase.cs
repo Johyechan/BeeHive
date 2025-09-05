@@ -87,6 +87,8 @@ namespace InGame.MyObject
             // 클릭 되었을 때 이동 가능한 배치 칸 하이라이트 활성화
             if (!_isSelected) // 선택된 상태가 아닐 경우
             {
+                HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
+
                 if (_canPlaceType != ObjectType.Tank) // 전차가 아닐 경우
                     PlacePlaneManager.Instance.FindCanPlacePlaneSystem.FindCanMovePlacePlane(_currentPlacePlane, TeamManager.Instance.CurrentTeamType); // 한 칸 이동 가능한 칸 찾기
 
@@ -110,4 +112,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2025.09.05

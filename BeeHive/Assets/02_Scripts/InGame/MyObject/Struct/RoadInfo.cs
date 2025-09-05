@@ -9,6 +9,7 @@ namespace InGame.MyObject
     public struct RoadInfo
     {
         public string roomID; // 현재 방 ID
+        public int roadID; // 도로 객체 ID
         public int placePlaneId; // 배치 칸 객체 ID
         public int placedType; // 배치한 타입
         public int roadTeamType; // 배치한 도로의 팀 타입
@@ -18,4 +19,4 @@ namespace InGame.MyObject
         public float angle; // 회전 각도
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2025.09.05

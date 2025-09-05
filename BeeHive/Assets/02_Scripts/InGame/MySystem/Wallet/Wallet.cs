@@ -73,7 +73,7 @@ namespace InGame.MySystem
         // 금괴 사용 함수
         private bool UseGoldBar(int value)
         {
-            if (CanUseGoldBar(value)) // 사용하려는 값보다 금괴 수가 적다면
+            if (!CanUseGoldBar(value)) // 사용하려는 값보다 금괴 수가 적다면
                 return false; // false 반환
 
             _goldBarCount -= value; // 금괴 감소
@@ -120,4 +120,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2025.09.05

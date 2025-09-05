@@ -5,6 +5,7 @@ using DG.Tweening;
 using InGame.MyEvent;
 using InGame.MyUI.Turn;
 using System.Threading.Tasks;
+using InGame.MySystem.Game;
 
 namespace InGame.MyManager
 {
@@ -24,6 +25,8 @@ namespace InGame.MyManager
 
         // UI 애니메이션을 실행 시키는 클래스
         private TurnUIAnimation _turnUIAnimation;
+
+        private MakeTurnAddSystem _makeTurnAddSystem; // 생산 턴에 객체들을 추가하는 기능을 가지는 클래스
 
         private bool _canChangeTurn; // 턴 변경 가능 여부
         public bool CanChangeTurn { get => _canChangeTurn; set => _canChangeTurn = value; } // 위 변수 프로퍼티
@@ -45,8 +48,10 @@ namespace InGame.MyManager
             }
 
             _turnUIAnimation = GetComponent<TurnUIAnimation>();
+            _makeTurnAddSystem = new MakeTurnAddSystem();
 
             _currentTeamType = TeamType.Team1; // 처음 시작은 Team1부터
+            _makeTurnAddSystem.Init(); // 초기화
         }
 
         private void Start()
@@ -103,4 +108,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.09.02
+// 마지막 작성 일자: 2025.09.05
