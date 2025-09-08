@@ -11,6 +11,8 @@ namespace InGame.MyEvent
         public static Func<int, string, bool> OnCanPayCost; // 비용을 지불할 수 있는지 확인하는 델리게이트
         public static Func<int, string, bool> OnCheckLeftPieceCount; // 남은 기물이 있는지 확인하는 델리게이트
         public static Func<bool> OnCheckCurrentTurnTeam; // 현재 턴의 팀을 확인하는 델리게이트
+        public static Func<bool> OnCanMakePiece; // 기물 생성 가능 여부를 확인하는 델리게이트
+        public static Func<ObjectType, bool> OnCanMovePiece; // 특정 타입의 기물이 이동할 수 있는지 확인하는 델리게이트
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2025.09.08

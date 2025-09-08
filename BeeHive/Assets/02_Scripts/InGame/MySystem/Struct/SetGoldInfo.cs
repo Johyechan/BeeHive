@@ -5,7 +5,7 @@ namespace InGame.MySystem
     // 작성자: 조혜찬
     // 금화 및 금괴 객체를 세팅할 때 필요한 구조체
     [Serializable]
-    public class SetGoldInfo
+    public struct SetGoldInfo
     {
         public int team; // 팀
         public int goldCoin; // 금화 개수

@@ -1,3 +1,5 @@
+using InGame.MyEnum;
+using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyCard;
 using InGame.MyObject;
@@ -37,7 +39,18 @@ namespace InGame.MySystem.Game
                 socket.On("roadAdded", (data) =>
                 {
                     string json = data.GetValue().ToString(); // 문자열로 data 받기
-                    
+                    RoadAddedInfo roadAddedInfo = JsonUtility.FromJson<RoadAddedInfo>(json); // RoadAddedInfo로 변환
+                    Transform parent = GameObject.Find(roadAddedInfo.roadParentName).transform;
+                    _ = PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
+                });
+
+                socket.On("roadDestroyed", data =>
+                {
+                    string json = data.GetValue().ToString(); // 문자열로 data 받기
+                    RoadDestroyedInfo roadDestroyedInfo = JsonUtility.FromJson<RoadDestroyedInfo>(json); // RoadAddedInfo로 변환
+                    Transform parent = GameObject.Find(roadDestroyedInfo.roadParentName).transform; // 파괴될 도로의 부모 객체
+                    TeamType type = (TeamType)roadDestroyedInfo.teamType; // 파괴될 도로의 팀 타입
+                    PieceEvents.OnDestroyLeftRoad?.Invoke(parent, type); // 이벤트 호출
                 });
 
                 socket.On("setCard", (data) =>
@@ -64,4 +77,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.09.05
+// 마지막 작성 일자: 2025.09.08

@@ -12,6 +12,10 @@ namespace InGame.MyUI.MyUIButton
         // 클릭 시 실행될 함수
         public override void OnUIClick()
         {
+            if(!WarningEvent.OnCanMakePiece.Invoke()) // 생성이 불가능하다면
+            {
+                return;
+            }
             if (!UIManager.Instance.CanInteractionUI) // 만약 UI 상호작용 불가능 상태라면
                 return; // 반환
 

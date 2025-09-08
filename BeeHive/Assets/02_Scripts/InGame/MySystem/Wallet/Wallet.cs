@@ -51,6 +51,7 @@ namespace InGame.MySystem
         // 금화를 얻는 함수(얻는 값)
         private void GetGoldCoin(int value)
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"금화 {value}만큼 벌림");
             _goldCoinCount += value; // 금화 증가
 
             ChangeGoldCoinToGoldBar(); // 함수를 통해 금화를 금괴로 치환
@@ -98,6 +99,7 @@ namespace InGame.MySystem
         {
             if (_goldCoinCount >= 5) // 금화가 5개 이상이라면
             {
+                NetworkManager.Instance.Socket.Emit("debug", "금화 금괴로 변환");
                 _goldCoinCount -= 5; // 금화 5개 감소
                 _goldBarCount++; // 금괴 1 증가
             }

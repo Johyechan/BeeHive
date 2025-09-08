@@ -17,7 +17,6 @@ namespace MyUtil
                 if(!tcs.Task.IsCompleted)
                 {
                     tcs.SetResult(true);
-                    NetworkManager.Instance.Socket.Emit("debug", $"{NetworkManager.Instance.CurrentPlayerID} 클라이언트가 UI 닷트윈을 끝내려고 함 + 결과: {tcs.Task.Result}");
                 }
             }); // 시퀀스가 완료되었을 때 Task가 완료됨
 

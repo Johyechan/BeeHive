@@ -97,12 +97,20 @@ namespace InGame.MyObject
         // 객체를 이동하는 기능 함수
         private void ObjectMove()
         {
+            if (!WarningEvent.OnCanMovePiece.Invoke(CanPlacePieceType))
+            {
+                HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false);
+                return;
+            }
+
+            GameManager.Instance.PieceCanMoveMap[CanPlacePieceType] = false; // 현재 이동하는 타입의 기물을 이후로는 같은 타입의 기물 이동이 불가한 상태로 할당
             PlacePiece(GameManager.Instance.CurrentMovePiece, true); // 기물 이동
         }
 
         // 객체를 배치하는 기능 함수
         private void ObjectPlace()
         {
+            GameManager.Instance.CanMakePiece = false;
             Transform pieceParent = _pieceMap[CanPlacePieceType]; // 현재 배치 가능한 타입의 객체 부모
             int pieceCount = pieceParent.childCount; // 현재 보유 중인 배치 가능한 타입의 기물 수
 

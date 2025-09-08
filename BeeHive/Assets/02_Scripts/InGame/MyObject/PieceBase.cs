@@ -4,7 +4,6 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.MyObjectInterface;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -112,4 +111,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.05
+// 마지막 작성 일자: 2025.09.08

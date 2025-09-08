@@ -22,13 +22,16 @@ namespace InGame.MyObject
         // 금화를 얻는 함수
         private async Task Dig()
         {
-            if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 현재 턴 팀과 나의 팀이 다르다면
+            if (TurnManager.Instance.CurrentTeamType != teamType) // 현재 턴 팀과 나의 팀이 다르다면
+            {
+                NetworkManager.Instance.Socket.Emit("debug", "내 팀이 아니올시다");
                 return; // 반환
+            }
 
             if (_currentPlacePlane == null) // 자기가 배치된 판이 없다면
                 return; // 반환
 
-            switch(TeamManager.Instance.CurrentTeamType)
+            switch(teamType)
             {
                 case TeamType.Team1: // 플레이어의 팀이 Team1일 경우
                     WalletEvent.OnGetGoldCoin?.Invoke(_currentPlacePlane.team1GoldCoin); // 현재 칸에서 team1이 얻는 금화만큼 얻기
@@ -51,4 +54,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.08.26
+// 마지막 작성 일자: 2025.09.08

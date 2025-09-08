@@ -1,6 +1,9 @@
 using InGame.MyEnum;
 using MyUtil;
+using Newtonsoft.Json.Bson;
+using NUnit.Framework.Constraints;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace InGame.MyManager
@@ -28,7 +31,17 @@ namespace InGame.MyManager
             get => _teamType;
             set => _teamType = value;
         }
-        
+
+        private bool _canMakePiece; // 기물 생성 가능 여부
+        public bool CanMakePiece // 위 변수 프로퍼티
+        {
+            get => _canMakePiece;
+            set => _canMakePiece = value;
+        }
+
+        private Dictionary<ObjectType, bool> _pieceCanMoveMap = new Dictionary<ObjectType, bool>(); // 각 기물마다 이동 가능 여부를 가지는 맵
+        public Dictionary<ObjectType, bool> PieceCanMoveMap { get => _pieceCanMoveMap; }
+
         protected override void Awake()
         {
             base.Awake();
@@ -36,6 +49,23 @@ namespace InGame.MyManager
             // 변수 초기화
             _currentMovePiece = null;
             SetTeamOrder(PlayerCount);
+
+            // 초기화
+            _canMakePiece = true; // 생성 가능 여부
+            _pieceCanMoveMap.Add(ObjectType.Miner, true); // 광부 기물 이동 가능 여부
+            _pieceCanMoveMap.Add(ObjectType.Soldier, true); // 보병 기물 이동 가능 여부
+            _pieceCanMoveMap.Add(ObjectType.Tank, true); // 전차 기물 이동 가능 여부
+        }
+
+        // 기물 생성 및 이동 가능 여부 초기화
+        private void TurnStart()
+        {
+            _canMakePiece = true;
+            var keys = _pieceCanMoveMap.Keys.ToList();
+            for(int i = 0; i < keys.Count; i++)
+            {
+                _pieceCanMoveMap[keys[i]] = true;
+            }
         }
 
         // 팀 순서를 저장하는 함수(최대 팀 수)
@@ -68,6 +98,7 @@ namespace InGame.MyManager
                 count++; // 순서 증가
                 if (currentTeamType == type) // 현재 팀과 일치하는 팀을 찾았다면
                 {
+                    TurnStart();
                     if(count >= _teamOrder.Count) // 마지막 팀 순서와 현재 센 순서가 같다면
                     {
                         return _teamOrder[0]; // 첫 팀을 반환
