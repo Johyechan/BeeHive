@@ -1,6 +1,7 @@
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MySystem.Game;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -49,30 +50,29 @@ namespace InGame.MySystem
         }
 
         // 금화를 얻는 함수(얻는 값)
-        private void GetGoldCoin(int value)
+        private async Task GetGoldCoin(int value)
         {
-            NetworkManager.Instance.Socket.Emit("debug", $"금화 {value}만큼 벌림");
             _goldCoinCount += value; // 금화 증가
 
             ChangeGoldCoinToGoldBar(); // 함수를 통해 금화를 금괴로 치환
 
             GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-            _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
+            await _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
         }
 
         // 금괴를 얻는 함수(얻는 값)
-        private void GetGoldBar(int value)
+        private async Task GetGoldBar(int value)
         {
             _goldBarCount += value; // 금괴 증가
 
             GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-            _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
+            await _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
         }
 
         // 금괴 사용 함수
-        private bool UseGoldBar(int value)
+        private async Task<bool> UseGoldBar(int value)
         {
             if (!CanUseGoldBar(value)) // 사용하려는 값보다 금괴 수가 적다면
                 return false; // false 반환
@@ -81,7 +81,7 @@ namespace InGame.MySystem
 
             GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-            _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
+            await _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
             return true;
         }
 
@@ -99,7 +99,6 @@ namespace InGame.MySystem
         {
             if (_goldCoinCount >= 5) // 금화가 5개 이상이라면
             {
-                NetworkManager.Instance.Socket.Emit("debug", "금화 금괴로 변환");
                 _goldCoinCount -= 5; // 금화 5개 감소
                 _goldBarCount++; // 금괴 1 증가
             }
@@ -122,4 +121,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.09.05
+// 마지막 작성 일자: 2025.09.09

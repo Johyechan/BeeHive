@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using MyUtil;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -32,16 +33,18 @@ namespace InGame.MySystem
                 switch (type)
                 {
                     case TeamType.Team1:
-                        GameObject road1 = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, parent);
-                        PosSet(road1, type, parent);
+                        GameObject road1 = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, parent);
+                        NetworkManager.Instance.Socket.Emit("debug", $"{road1}, {road1.name} (RoadMaker: 37)");
+                        PosSet(road1, type, i);
                         break;
                     case TeamType.Team2:
-                        GameObject road2 = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, parent);
-                        PosSet(road2, type, parent);
+                        GameObject road2 = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, parent);
+                        NetworkManager.Instance.Socket.Emit("debug", $"{road2}, {road2.name} (RoadMaker: 42)");
+                        PosSet(road2, type, i);
                         break;
                     case TeamType.Team3:
-                        GameObject road3 = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, parent);
-                        PosSet(road3, type, parent);
+                        GameObject road3 = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, parent);
+                        PosSet(road3, type, i);
                         break;
                 }
             }
@@ -49,22 +52,24 @@ namespace InGame.MySystem
             await Task.CompletedTask;
         }
 
-        private void PosSet(GameObject obj, TeamType type, Transform parent)
+        private void PosSet(GameObject obj, TeamType type, int count)
         {
-            int count = parent.childCount - 1; // 도로 객체의 수 구하기(-1을 해서 이전 객체 수일 때를 기준으로 위치를 조정)
-            obj.transform.Rotate(0, _angle, 0); // 회전
-            switch(type)
+            MainThreadDispatcher.Enqueue(() =>
             {
-                case TeamType.Team1:
-                    obj.transform.localPosition = new Vector3(count % _maxXCount * _xInterval, 0, count / _maxXCount * _zInterval); // 위치
-                    break;
-                case TeamType.Team2:
-                    obj.transform.localPosition = new Vector3(-(count % _maxXCount * _xInterval), 0, count / _maxXCount * _zInterval); // 위치
-                    break;
-                case TeamType.Team3:
-                    break;
-            }
+                obj.transform.Rotate(0, _angle, 0); // 회전
+                switch (type)
+                {
+                    case TeamType.Team1:
+                        obj.transform.localPosition = new Vector3(count % _maxXCount * _xInterval, 0, count / _maxXCount * _zInterval); // 위치
+                        break;
+                    case TeamType.Team2:
+                        obj.transform.localPosition = new Vector3(-(count % _maxXCount * _xInterval), 0, count / _maxXCount * _zInterval); // 위치
+                        break;
+                    case TeamType.Team3:
+                        break;
+                }
+            });
         }
     }
 }
-// 마지막 작성 일자: 2025.09.08
+// 마지막 작성 일자: 2025.09.09

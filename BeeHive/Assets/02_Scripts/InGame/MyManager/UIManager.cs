@@ -1,5 +1,6 @@
 using MyUtil;
 using MyUtil.MyObjectPool;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -17,10 +18,10 @@ namespace InGame.MyManager
             _canInteractionUI = true; // 처음에는 UI 상호작용 가능하도록 초기화
         }
 
-        public void WarningUIMake(string text)
+        public async Task WarningUIMake(string text)
         {
             GameObject canvas = GameObject.Find("Canvas"); // 캔버스 찾기
-            GameObject uiPanel = ObjectPoolManager.Instance.GetObject(ObjectPoolType.UIPanel, canvas.transform); // 경고, 알림 UI 프리팹 가져오기
+            GameObject uiPanel = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.UIPanel, canvas.transform); // 경고, 알림 UI 프리팹 가져오기
             CanvasGroup canvasGroup = uiPanel.GetComponent<CanvasGroup>();
             RectTransform rect = uiPanel.GetComponent<RectTransform>();
             canvasGroup.alpha = 1.0f; // 불투명도를 최대로 하여 보이도록 하기
@@ -30,4 +31,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.09.08
+// 마지막 작성 일자: 2025.09.09

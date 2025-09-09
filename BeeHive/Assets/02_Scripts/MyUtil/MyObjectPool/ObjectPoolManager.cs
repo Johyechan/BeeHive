@@ -1,4 +1,6 @@
+using InGame.MyManager;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace MyUtil.MyObjectPool
@@ -49,40 +51,58 @@ namespace MyUtil.MyObjectPool
             newObject.transform.position = Vector3.zero; // 새로 생성한 객체 위치 초기화
             newObject.transform.rotation = Quaternion.identity; // 새로 생성한 객체 회전 초기화
             newObject.SetActive(false); // 새로 생성한 객체 비활성화
-            //NetworkServer.Spawn(newObject); // 서버에도 저장
             return newObject; // 새로 생성한 객체 반환
         }
 
         // 외부에서 풀에서 객체를 가져올 때 부르는 함수(매개 변수로 풀링 타입, 부모 = 기본 값 null을 받는다)
-        public GameObject GetObject(ObjectPoolType type, Transform parent = null)
+        public Task<GameObject> GetObject(ObjectPoolType type, Transform parent = null)
         {
             if (_pool[type].Count > 0) // 풀링 타입의 풀에 객체가 존재한다면
             {
+                var tcs = new TaskCompletionSource<GameObject>();
                 GameObject obj = _pool[type].Dequeue(); // 풀링 타입의 풀에 있는 객체를 가져온다.
-                obj.transform.SetParent(parent); // 풀에서 꺼낸 객체의 부모를 할당
-                obj.SetActive(true); // 풀에서 꺼낸 객체 활성화
-                return obj; // 풀에서 꺼낸 객체 반환
+                MainThreadDispatcher.Enqueue(() =>
+                {
+                    obj.transform.SetParent(parent); // 풀에서 꺼낸 객체의 부모를 할당
+                    obj.SetActive(true); // 풀에서 꺼낸 객체 활성화
+
+                    tcs.SetResult(obj); // Task 완료 반환 값을 obj로 할당
+                });
+
+                return tcs.Task; // Task 완료 시 반환되는 GameObject 반환
             }
             else // 만약 풀링 타입의 풀에 객체가 존재하지 않는다면
             {
-                GameObject newObj = CreateObject(type); // 새롭게 풀링 타입에 맞는 객체 생성
-                newObj.transform.SetParent(parent); // 새롭게 생성한 객체의 부모를 할당
-                newObj.SetActive(true); // 새롭게 생성한 객체 활성화
-                return newObj; // 새롭게 생성한 객체 반환
+                var tcs = new TaskCompletionSource<GameObject>();
+                GameObject newObj = null;
+
+                MainThreadDispatcher.Enqueue(() =>
+                {
+                    newObj = CreateObject(type); // 새롭게 풀링 타입에 맞는 객체 생성
+                    newObj.transform.SetParent(parent); // 새롭게 생성한 객체의 부모를 할당
+                    newObj.SetActive(true); // 새롭게 생성한 객체 활성화
+
+                    tcs.SetResult(newObj); // Task 완료 반환 값을 newObj로 할당
+                });
+                
+                return tcs.Task; // Task 완료 시 반환되는 GameObject 반환
             }
         }
 
         // 외부에서 사용했던 객체를 다시 풀에 넣을 때 부르는 함수(매개 변수로 풀링 타입, 반환할 객체를 받는다)
         public void ReturnObject(ObjectPoolType type, GameObject returnObj)
         {
-            returnObj.transform.SetParent(transform); // 반환하는 객체의 부모를 풀 매니저로 지정
-            returnObj.transform.position = Vector3.zero; // 반환하는 객체의 위치 초기화
-            returnObj.transform.rotation = Quaternion.identity; // 반환하는 객체의 회전 초기화
+            MainThreadDispatcher.Enqueue(() =>
+            {
+                returnObj.transform.SetParent(transform); // 반환하는 객체의 부모를 풀 매니저로 지정
+                returnObj.transform.position = Vector3.zero; // 반환하는 객체의 위치 초기화
+                returnObj.transform.rotation = Quaternion.identity; // 반환하는 객체의 회전 초기화
 
-            returnObj.SetActive(false); // 반환하는 객체 비활성화
+                returnObj.SetActive(false); // 반환하는 객체 비활성화
 
-            _pool[type].Enqueue(returnObj); // 풀링 타입의 풀에 객체 추가
+                _pool[type].Enqueue(returnObj); // 풀링 타입의 풀에 객체 추가
+            });
         }
     }
 }
-// 마지막 작성 일자: 2025.08.01
+// 마지막 작성 일자: 2025.09.09

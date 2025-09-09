@@ -1083,13 +1083,13 @@ MonoBehaviour:
     poolCount: 4
     poolObject: {fileID: 1321742906231919482, guid: 27538c82f8fc54f4694680bab44b294d, type: 3}
   - poolType: 2
-    poolCount: 10
+    poolCount: 1
     poolObject: {fileID: 1006445174990255016, guid: 3ac9d538cc4732843942d360f938ea80, type: 3}
   - poolType: 3
     poolCount: 1
     poolObject: {fileID: 1006445174990255016, guid: d05dd1a7815abc042a6fe2a48374aa23, type: 3}
   - poolType: 4
-    poolCount: 5
+    poolCount: 10
     poolObject: {fileID: 1006445174990255016, guid: 0f3ea483eb3cc32448bbb49901ffda5a, type: 3}
   - poolType: 5
     poolCount: 10

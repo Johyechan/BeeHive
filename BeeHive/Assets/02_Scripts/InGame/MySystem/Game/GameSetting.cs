@@ -29,19 +29,19 @@ namespace InGame.MySystem.Game
 
             if(socket != null) // 서버와 통신하기 위한 객체가 존재할 경우
             {
-                socket.On("goldSet", data =>
+                socket.On("goldSet", async data =>
                 {
                     string json = data.GetValue().ToString(); // 문자열로 data 받기
                     SetGoldInfo setGoldInfo = JsonUtility.FromJson<SetGoldInfo>(json); // SetGoldInfo 구조체로 값 받기
-                    _goldSetEventHandle.Setting(setGoldInfo.team, setGoldInfo.goldCoin, setGoldInfo.goldBar); // 금화 및 금괴 객체 세팅(팀, 금화 개수, 금괴 개수)
+                    await _goldSetEventHandle.Setting(setGoldInfo.team, setGoldInfo.goldCoin, setGoldInfo.goldBar); // 금화 및 금괴 객체 세팅(팀, 금화 개수, 금괴 개수)
                 });
 
-                socket.On("roadAdded", (data) =>
+                socket.On("roadAdded", async (data) =>
                 {
                     string json = data.GetValue().ToString(); // 문자열로 data 받기
                     RoadAddedInfo roadAddedInfo = JsonUtility.FromJson<RoadAddedInfo>(json); // RoadAddedInfo로 변환
                     Transform parent = GameObject.Find(roadAddedInfo.roadParentName).transform;
-                    _ = PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
+                    await PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
                 });
 
                 socket.On("roadDestroyed", data =>
@@ -53,11 +53,11 @@ namespace InGame.MySystem.Game
                     PieceEvents.OnDestroyLeftRoad?.Invoke(parent, type); // 이벤트 호출
                 });
 
-                socket.On("setCard", (data) =>
+                socket.On("setCard", async (data) =>
                 {
                     string json = data.GetValue().ToString(); // 문자열로 data 받기
                     SetCardInfo setCardInfo = JsonUtility.FromJson<SetCardInfo>(json); // 카드 세팅에 필요한 값을 가지는 구조체로 값 받기
-                    _ = DrawManager.Instance.CardSetHandle.Setting(setCardInfo.targetTeam, setCardInfo.cardCount); // Task 반환 없이 바로 실행
+                    await DrawManager.Instance.CardSetHandle.Setting(setCardInfo.targetTeam, setCardInfo.cardCount); // Task 반환 없이 바로 실행
                 });
 
                 socket.On("setPiece", (data) =>
@@ -77,4 +77,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.09.08
+// 마지막 작성 일자: 2025.09.09

@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
+using System.Threading.Tasks;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -10,9 +11,9 @@ namespace InGame.MyUI.MyUIButton
     public class PieceButton : PlaceUIButton
     {
         // 클릭 시 실행될 함수
-        public override void OnUIClick()
+        public override async void OnUIClick()
         {
-            if(!WarningEvent.OnCanMakePiece.Invoke()) // 생성이 불가능하다면
+            if(!await WarningEvent.OnCanMakePiece.Invoke()) // 생성이 불가능하다면
             {
                 return;
             }
@@ -49,4 +50,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2025.09.09

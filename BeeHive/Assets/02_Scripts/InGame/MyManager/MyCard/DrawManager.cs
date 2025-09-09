@@ -3,6 +3,7 @@ using InGame.MySystem.Game;
 using MyUtil;
 using MyUtil.MyObjectPool;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyManager.MyCard
@@ -33,16 +34,16 @@ namespace InGame.MyManager.MyCard
             _cardSetHandle = new CardSetHandle(_deck.deckTransform, cardParents); // 카드 세팅 클래스 생성
         }
 
-        public void DrawCard(Transform deckParent, Transform playerCardsParent, Transform playerUICardsParent, bool includeUI = true)
+        public async Task DrawCard(Transform deckParent, Transform playerCardsParent, Transform playerUICardsParent, bool includeUI = true)
         {
             int currentDeckCardCount = deckParent.childCount; // 덱에 있는 카드 수
             deckParent.GetChild(currentDeckCardCount - 1).SetParent(playerCardsParent);// 덱에 있는 카드를 플레이어의 카드로 변경 - 실제 값은 -1을 하지 않아야 하지만 인덱스로 활용할 것이기 때문에 -1을 하여 배열 크기 초과 오류를 방지
 
             if (includeUI) // UI도 생성해야 할 경우
             {
-                GameObject uiCard = ObjectPoolManager.Instance.GetObject(ObjectPoolType.UIcard, playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
+                GameObject uiCard = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.UIcard, playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.08.28
+// 마지막 작성 일자: 2025.09.09

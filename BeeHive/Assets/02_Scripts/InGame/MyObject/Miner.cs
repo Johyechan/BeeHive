@@ -24,7 +24,6 @@ namespace InGame.MyObject
         {
             if (TurnManager.Instance.CurrentTeamType != teamType) // 현재 턴 팀과 나의 팀이 다르다면
             {
-                NetworkManager.Instance.Socket.Emit("debug", "내 팀이 아니올시다");
                 return; // 반환
             }
 

@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyUI.MyUIInterface;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -48,17 +49,15 @@ namespace InGame.MyUI.MyUIButton
         private void OnEnable()
         {
             HighLightEvents.OnPiecePlacementHighLight += HightLightOff; // 기물 전용 이벤트 구독
-            HighLightEvents.OnPiecePlacementHighLight += (_, _) => SetText(); // 기물 전용 이벤트 구독
             HighLightEvents.OnRoadPlacementHighLight += HightLightOff; // 도로 전용 이벤트 구독
-            HighLightEvents.OnRoadPlacementHighLight += _ => SetText(); // 도로 전용 이벤트 구독
+            UIEvents.OnSetLeftPieceText += SetText; // 남은 기물 수 세팅하는 이벤트 구독
         }
 
         private void OnDisable()
         {
             HighLightEvents.OnPiecePlacementHighLight -= HightLightOff; // 기물 전용 이벤트 구독 해제
-            HighLightEvents.OnPiecePlacementHighLight -= (_, _) => SetText(); // 기물 전용 이벤트 구독
             HighLightEvents.OnRoadPlacementHighLight -= HightLightOff; // 도로 전용 이벤트 구독 해제
-            HighLightEvents.OnRoadPlacementHighLight -= _ => SetText(); // 도로 전용 이벤트 구독
+            UIEvents.OnSetLeftPieceText -= SetText; // 남은 기물 수 세팅하는 이벤트 구독
         }
 
         // 하이라이트가 꺼질 때 현재 하이라이트 활성화 여부를 끄는 함수 - 기물용
@@ -88,4 +87,4 @@ namespace InGame.MyUI.MyUIButton
         public abstract void OnUIClick();
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2025.09.09

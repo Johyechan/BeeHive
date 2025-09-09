@@ -33,6 +33,7 @@ namespace InGame.MySystem.Game
             Transform parent = GameObject.Find(TeamManager.Instance.RoadParentName).transform;
             await PieceEvents.OnGetRoad?.Invoke(2, TeamManager.Instance.CurrentTeamType, parent); // 도로 2개 획득
 
+            UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
             AddRoadInfo addRoadInfo = new AddRoadInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
@@ -59,4 +60,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.09.08
+// 마지막 작성 일자: 2025.09.09

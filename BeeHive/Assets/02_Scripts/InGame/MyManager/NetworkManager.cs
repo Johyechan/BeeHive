@@ -52,10 +52,10 @@ namespace InGame.MyManager
                 // 오류 발생 시 오류 표기
                 _socket.On("error", response =>
                 {
-                    MainThreadDispatcher.Enqueue(() =>
+                    MainThreadDispatcher.Enqueue(async () =>
                     {
                         string text = response.GetValue<string>();
-                        UIManager.Instance.WarningUIMake(text);
+                        await UIManager.Instance.WarningUIMake(text);
                     });
                     return;
                 });
@@ -65,4 +65,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.09.08
+// 마지막 작성 일자: 2025.09.09

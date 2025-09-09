@@ -1,5 +1,6 @@
 using InGame.MyEnum;
 using InGame.MyManager;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MySystem.Game
@@ -37,22 +38,22 @@ namespace InGame.MySystem.Game
             }
         }
 
-        public void Setting(int team, int goldCoin, int goldBar)
+        public async Task Setting(int team, int goldCoin, int goldBar)
         {
             TeamType type = (TeamType)team; // 팀 구하기
             switch (type)
             {
                 case TeamType.Team1:
-                    _wallet.WalletObjectHandle.SetObject(_team1GoldCoinParent, _team1GoldBarParent, goldCoin, goldBar); // 금화 및 금괴 객체 개수 세팅
+                    await _wallet.WalletObjectHandle.SetObject(_team1GoldCoinParent, _team1GoldBarParent, goldCoin, goldBar); // 금화 및 금괴 객체 개수 세팅
                     break;
                 case TeamType.Team2:
-                    _wallet.WalletObjectHandle.SetObject(_team2GoldCoinParent, _team2GoldBarParent, goldCoin, goldBar); // 금화 및 금괴 객체 개수 세팅
+                    await _wallet.WalletObjectHandle.SetObject(_team2GoldCoinParent, _team2GoldBarParent, goldCoin, goldBar); // 금화 및 금괴 객체 개수 세팅
                     break;
                 case TeamType.Team3:
-                    _wallet.WalletObjectHandle.SetObject(_team3GoldCoinParent, _team3GoldBarParent, goldCoin, goldBar); // 금화 및 금괴 객체 개수 세팅
+                    await _wallet.WalletObjectHandle.SetObject(_team3GoldCoinParent, _team3GoldBarParent, goldCoin, goldBar); // 금화 및 금괴 객체 개수 세팅
                     break;
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.02
+// 마지막 작성 일자: 2025.09.09

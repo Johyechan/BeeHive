@@ -58,8 +58,8 @@ namespace InGame.MySystem.Game
 
             for(int i = 0; i < count; i++) // 카드 수 차이만큼 반복
             {
+                await DrawManager.Instance.DrawCard(_deckParent, playerCardsParent, null, false); // ui는 제외, 객체만 드로우
                 Sequence seq = DOTween.Sequence()
-                    .AppendCallback(() => DrawManager.Instance.DrawCard(_deckParent, playerCardsParent, null, false)) // ui는 제외, 객체만 드로우
                     .AppendCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(playerCardsParent)); // 카드 객체 정렬
 
                 await seq.AsyncWaitForCompletion(); // Task 완료 대기
@@ -68,4 +68,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.09.02
+// 마지막 작성 일자: 2025.09.09
