@@ -1,5 +1,6 @@
 using InGame.MyEnum;
 using InGame.MyManager;
+using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject;
 
@@ -89,6 +90,9 @@ namespace InGame.MySystem.Game
                 PlacePlaneManager.Instance.HighLightHandler.CanPiecePlacePlanes.Clear(); // 기물 배치 가능한 판 저장 컨테이너 비우기
                 PlacePlaneManager.Instance.HighLightHandler.CanPieceMovePlanes.Clear(); // 기물 이동 가능한 판 저장 컨테이너 비우기
                 PlacePlaneManager.Instance.HighLightHandler.CanRoadPlacePlanes.Clear(); // 도로 배치 가능한 판 저장 컨테이너 비우기
+                //foreach (var piece in PieceManager.Instance.CanAttackPieceMap) // 공격 가능 기물 저장 컨테이너 순회
+                //    piece.Value.Clear(); // 리스트 클리어
+                //PieceManager.Instance.CanAttackPieceMap.Clear(); // 공격 가능 기물 저장 컨테이너 비우기
             }
         }
 
@@ -98,10 +102,28 @@ namespace InGame.MySystem.Game
             road.IsChecked = true; // 체크 완료
             foreach (var nearPiece in road.nearPiecePlaceTransformList) // 인접한 기물 확인
             {
-                if (nearPiece.IsChecked || (nearPiece.TeamType != teamType && nearPiece.TeamType != TeamType.None)) // 이미 확인을 했었다면 또는 (현재 팀이 아니고 다른 팀에 속한 상태라면)
+                if (nearPiece.IsChecked || (nearPiece.TeamType != teamType && nearPiece.TeamType != TeamType.None)) // 이미 확인을 했었다면
                     continue; // 넘기기
 
-                if(nearPiece.PlacedObjectType == ObjectType.None) // 빈 칸이라면
+                //if() // 현재 팀이 아니고 다른 팀에 속한 상태라면
+                //{
+                //    ObjectType objType = nearPiece.PlacedObjectType; // 배치되어 있는 객체 할당
+                //    switch(objType)
+                //    {
+                //        case ObjectType.Miner: // 광부가 배치되어 있다면
+                //            PieceManager.Instance.CanAttackPieceMap[ObjectType.Miner].Add(nearPiece.PlacedPiece); // 공격 가능한 광부 객체 리스트에 추가
+                //            break;
+                //        case ObjectType.Soldier: // 보병이 배치되어 있다면
+                //            PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Add(nearPiece.PlacedPiece); // 공격 가능한 보병 객체 리스트에 추가
+                //            break;
+                //        case ObjectType.Tank: // 전차가 배치되어 있다면
+                //            PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Add(nearPiece.PlacedPiece); // 공격 가능한 전차 객체 리스트에 추가
+                //            break;
+                //    }
+                //    continue;
+                //}
+
+                if (nearPiece.PlacedObjectType == ObjectType.None) // 빈 칸이라면
                 {
                     PlacePlaneManager.Instance.HighLightHandler.CanPieceMovePlanes.Add(nearPiece); // 이동 가능한 기물 배치 칸 추가
 
@@ -138,4 +160,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.08.20
+// 마지막 작성 일자: 2025.09.10

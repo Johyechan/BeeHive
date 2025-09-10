@@ -35,6 +35,9 @@ namespace InGame.MyObject
         private ObjectType _canPlaceTypePiece; // 현재 배치가 가능한 기물 객체를 확인하는 변수
         public ObjectType CanPlacePieceType { get { return _canPlaceTypePiece; } set { _canPlaceTypePiece = value; } } // 외부에서 현재 배치가 가능한 기물 객체를 설정할 프로퍼티
 
+        private PieceBase _placedPiece; // 올려져 있는 기물
+        public PieceBase PlacedPiece { get => _placedPiece; set => _placedPiece = value; } // 위 변수 프로퍼티
+
         private bool _isChecked; // 이전에 확인이 되었는지 확인하는 변수
         public bool IsChecked { get { return _isChecked; } set { _isChecked = value; } } // 이전에 확인이 되었는지 확인하는 변수 프로퍼티
 
@@ -73,6 +76,7 @@ namespace InGame.MyObject
         // 하이라이트를 끄는 함수
         public void HighLightOff()
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"{gameObject.name} 꺼짐");
             HighLightEvents.SelectedPlacementType = ObjectType.None; // 현재 어떤 기물을 배치 할 수 있는지 저장하는 변수 초기화
             _canPlaceTypePiece = ObjectType.None; // 배치 가능한 타입 초기화
             _collider.enabled = false; // 클릭이 되지 않도록 콜라이더 비활성화
@@ -88,4 +92,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2025.09.09

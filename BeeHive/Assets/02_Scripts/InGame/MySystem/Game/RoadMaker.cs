@@ -34,12 +34,10 @@ namespace InGame.MySystem
                 {
                     case TeamType.Team1:
                         GameObject road1 = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, parent);
-                        NetworkManager.Instance.Socket.Emit("debug", $"{road1}, {road1.name} (RoadMaker: 37)");
                         PosSet(road1, type, i);
                         break;
                     case TeamType.Team2:
                         GameObject road2 = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, parent);
-                        NetworkManager.Instance.Socket.Emit("debug", $"{road2}, {road2.name} (RoadMaker: 42)");
                         PosSet(road2, type, i);
                         break;
                     case TeamType.Team3:

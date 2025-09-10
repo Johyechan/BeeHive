@@ -33,9 +33,13 @@ namespace InGame.MySystem
         private async Task<bool> IsCanMovePiece(ObjectType type)
         {
             if (GameManager.Instance.PieceCanMoveMap[type])
+            {
+                NetworkManager.Instance.Socket.Emit("debug", $"이동 가능 (37)");
                 return true;
+            }
 
-            switch(type)
+            NetworkManager.Instance.Socket.Emit("debug", $"이동 불가 (41)");
+            switch (type)
             {
                 case ObjectType.Miner:
                     await UIManager.Instance.WarningUIMake($"더 이상 광부를 이동할 수 없습니다.");
@@ -47,6 +51,7 @@ namespace InGame.MySystem
                     await UIManager.Instance.WarningUIMake($"더 이상 전차를 이동할 수 없습니다.");
                     break;
             }
+            NetworkManager.Instance.Socket.Emit("debug", $"이동 불가 (54)");
             return false;
         }
 

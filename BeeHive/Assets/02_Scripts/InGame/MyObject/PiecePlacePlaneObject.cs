@@ -41,6 +41,7 @@ namespace InGame.MyObject
         {
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
+            //PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
         }
 
         // 마우스로 클릭 시 실행될 함수
@@ -61,6 +62,7 @@ namespace InGame.MyObject
                     return; // 반환
                 }
 
+                NetworkManager.Instance.Socket.Emit("debug", $"{gameObject.name}, {CanPlacePieceType} (65)");
                 ObjectMove(); // 기물 이동 함수 실행
             }
             else // 현재 이동 가능한 객체가 없다면
@@ -97,12 +99,17 @@ namespace InGame.MyObject
         // 객체를 이동하는 기능 함수
         private async void ObjectMove()
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"{gameObject.name}, {CanPlacePieceType} (102)");
+            NetworkManager.Instance.Socket.Emit("debug", $"{gameObject.name}, {CanPlacePieceType} (103)");
             if (!await WarningEvent.OnCanMovePiece.Invoke(CanPlacePieceType))
             {
-                HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false);
+                NetworkManager.Instance.Socket.Emit("debug", $"{gameObject.name} (105)");
+                HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 이동 가능한 판 하이라이트 끄기
+                //PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
                 return;
             }
 
+            NetworkManager.Instance.Socket.Emit("debug", $"{gameObject.name} (109)");
             GameManager.Instance.PieceCanMoveMap[CanPlacePieceType] = false; // 현재 이동하는 타입의 기물을 이후로는 같은 타입의 기물 이동이 불가한 상태로 할당
             PlacePiece(GameManager.Instance.CurrentMovePiece, true); // 기물 이동
         }
@@ -133,6 +140,7 @@ namespace InGame.MyObject
                 }
                 pieceBase.CurrentPlacePlane = this; // 현재 기물이 올라가 있는 배치 칸을 자기 자신으로 할당
 
+                PlacedPiece = pieceBase; // 배치된 기물 할당
                 UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
                 PlacedObjectType = CanPlacePieceType; // 현재 배치가 가능한 기물을 이 배치판에 배치되어있는 기물로 지정
                 TeamType = pieceBase.teamType; // 현재 기물 배치 칸의 팀 타입을 기물의 팀 타입으로 할당
