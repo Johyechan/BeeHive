@@ -31,7 +31,10 @@ namespace InGame.MySystem.Game
         {
             bool findTeamRoad = false; // 팀 도로를 찾았는지 여부를 체크하는 변수로 찾지 못했다고 초기화
 
-            foreach(var nearRoad in piece.nearRoadPlaceTransformList)
+            ResetPlacePlanes(false); // 전체 도로 및 기물 칸 접근 여부 false로 초기화 - 이동 가능한 칸을 찾기 위함
+            PlacePlaneManager.Instance.HighLightHandler.CanPieceMovePlanes.Clear(); // 기물 이동 가능한 판 저장 컨테이너 비우기 - 이전에 저장했던 이동 가능한 판들을 초기화
+
+            foreach (var nearRoad in piece.nearRoadPlaceTransformList) // 해당 기물 칸 주위 도로 칸 순회
             {
                 if(nearRoad.TeamType == teamType && nearRoad.PlacedObjectType == ObjectType.Road) // 내 도로가 있다면
                 {
@@ -40,15 +43,9 @@ namespace InGame.MySystem.Game
                 }
             }
 
-            if(!findTeamRoad) // 팀 도로를 찾지 못했다면
-            {
-                PlacePlaneManager.Instance.HighLightHandler.CanPieceMovePlanes.Clear(); // 기물 이동 가능한 판 저장 컨테이너 비우기
-            }
-
             foreach (var nearRoad in piece.nearRoadPlaceTransformList) // 현재 기물의 근접한 도로 순회
             {
-                ResetPlacePlanes(false); // 이동, 배치가 가능한 칸들을 저장한 곳을 지우지 않고 초기화
-                FindNearPieces(teamType, nearRoad, true); // 근접한 기물 찾기
+                FindNearPieces(teamType, nearRoad, !findTeamRoad); // 근접한 기물 찾기 - 팀 도로를 찾았다면 쭉 탐색, 팀 도로를 찾지 못했다면 한 번만 탐색
             }
         }
 
@@ -85,43 +82,44 @@ namespace InGame.MySystem.Game
                 road.IsChecked = false; // 확인하지 않은 상태로 초기화
             }
 
-            if(isClear) // 완전 초기화라면
+            if(isClear)
             {
                 PlacePlaneManager.Instance.HighLightHandler.CanPiecePlacePlanes.Clear(); // 기물 배치 가능한 판 저장 컨테이너 비우기
-                PlacePlaneManager.Instance.HighLightHandler.CanPieceMovePlanes.Clear(); // 기물 이동 가능한 판 저장 컨테이너 비우기
                 PlacePlaneManager.Instance.HighLightHandler.CanRoadPlacePlanes.Clear(); // 도로 배치 가능한 판 저장 컨테이너 비우기
-                //foreach (var piece in PieceManager.Instance.CanAttackPieceMap) // 공격 가능 기물 저장 컨테이너 순회
-                //    piece.Value.Clear(); // 리스트 클리어
-                //PieceManager.Instance.CanAttackPieceMap.Clear(); // 공격 가능 기물 저장 컨테이너 비우기
+                PlacePlaneManager.Instance.HighLightHandler.CanPieceMovePlanes.Clear(); // 기물 이동 가능한 판 저장 컨테이너 비우기
+
+                foreach (var piece in PieceManager.Instance.CanAttackPieceMap) // 공격 가능 기물 저장 컨테이너 순회
+                    piece.Value.Clear(); // 리스트 클리어                                                                   
             }
+
         }
 
         // 배치 가능한 도로 칸을 추가하고 그 도로에 인접한 기물들을 찾는 함수(팀 타입, 도로 칸, 한 번만 검사할지)
         private void FindNearPieces(TeamType teamType, RoadPlacePlaneObject road, bool once = false)
-        {   
-            road.IsChecked = true; // 체크 완료
+        {
+            road.IsChecked = true;
             foreach (var nearPiece in road.nearPiecePlaceTransformList) // 인접한 기물 확인
             {
-                if (nearPiece.IsChecked || (nearPiece.TeamType != teamType && nearPiece.TeamType != TeamType.None)) // 이미 확인을 했었다면
+                if (nearPiece.IsChecked) // 이미 확인을 했었다면
                     continue; // 넘기기
+                else if ((nearPiece.TeamType != teamType && nearPiece.TeamType != TeamType.None)) // 현재 팀이 아니고 다른 팀에 속한 상태라면
+                {
+                    ObjectType objType = nearPiece.PlacedObjectType; // 배치되어 있는 객체 할당
+                    switch (objType)
+                    {
+                        case ObjectType.Miner: // 광부가 배치되어 있다면
+                            PieceManager.Instance.CanAttackPieceMap[ObjectType.Miner].Add(nearPiece.PlacedPiece); // 공격 가능한 광부 객체 리스트에 추가
+                            break;
+                        case ObjectType.Soldier: // 보병이 배치되어 있다면
+                            PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Add(nearPiece.PlacedPiece); // 공격 가능한 보병 객체 리스트에 추가
+                            break;
+                        case ObjectType.Tank: // 전차가 배치되어 있다면
+                            PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Add(nearPiece.PlacedPiece); // 공격 가능한 전차 객체 리스트에 추가
+                            break;
+                    }
 
-                //if() // 현재 팀이 아니고 다른 팀에 속한 상태라면
-                //{
-                //    ObjectType objType = nearPiece.PlacedObjectType; // 배치되어 있는 객체 할당
-                //    switch(objType)
-                //    {
-                //        case ObjectType.Miner: // 광부가 배치되어 있다면
-                //            PieceManager.Instance.CanAttackPieceMap[ObjectType.Miner].Add(nearPiece.PlacedPiece); // 공격 가능한 광부 객체 리스트에 추가
-                //            break;
-                //        case ObjectType.Soldier: // 보병이 배치되어 있다면
-                //            PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Add(nearPiece.PlacedPiece); // 공격 가능한 보병 객체 리스트에 추가
-                //            break;
-                //        case ObjectType.Tank: // 전차가 배치되어 있다면
-                //            PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Add(nearPiece.PlacedPiece); // 공격 가능한 전차 객체 리스트에 추가
-                //            break;
-                //    }
-                //    continue;
-                //}
+                    continue;
+                }
 
                 if (nearPiece.PlacedObjectType == ObjectType.None) // 빈 칸이라면
                 {
@@ -141,7 +139,7 @@ namespace InGame.MySystem.Game
         // 배치 가능한 기물 칸을 추가하고 그 기물에 인접한 도로들을 찾는 함수(팀 타입, 기물 칸, 한 번만 검사할지)
         private void FindNearRoads(TeamType teamType, PiecePlacePlaneObject piece, bool once = false)
         {
-            piece.IsChecked = true; // 체크 완료
+            piece.IsChecked = true;
             foreach (var nearRoad in piece.nearRoadPlaceTransformList) // 인접한 도로 확인
             {
                 if (nearRoad.IsChecked || (nearRoad.TeamType != teamType && nearRoad.TeamType != TeamType.None)) // 이미 확인을 했었다면 또는 (현재 팀이 아니면서 다른 팀이라면)
@@ -160,4 +158,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.09.10
+// 마지막 작성 일자: 2025.09.11

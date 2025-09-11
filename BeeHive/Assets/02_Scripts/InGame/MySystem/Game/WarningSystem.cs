@@ -34,11 +34,9 @@ namespace InGame.MySystem
         {
             if (GameManager.Instance.PieceCanMoveMap[type])
             {
-                NetworkManager.Instance.Socket.Emit("debug", $"이동 가능 (37)");
                 return true;
             }
 
-            NetworkManager.Instance.Socket.Emit("debug", $"이동 불가 (41)");
             switch (type)
             {
                 case ObjectType.Miner:
@@ -51,7 +49,6 @@ namespace InGame.MySystem
                     await UIManager.Instance.WarningUIMake($"더 이상 전차를 이동할 수 없습니다.");
                     break;
             }
-            NetworkManager.Instance.Socket.Emit("debug", $"이동 불가 (54)");
             return false;
         }
 

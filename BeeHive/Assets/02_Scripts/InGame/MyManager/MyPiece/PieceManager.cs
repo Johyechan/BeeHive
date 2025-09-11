@@ -41,14 +41,16 @@ namespace InGame.MyManager.MyPiece
             {
                 if(piece.Key == type) // 매개 변수로 받은 공격 가능 기물의 타입과 현재 순서의 타입이 같다면
                 {
-                    foreach(var pieceBase in piece.Value) // 해당 타입에 맞는 기물들을 저장한 리스트 순회
+                    foreach (var pieceBase in piece.Value) // 해당 타입에 맞는 기물들을 저장한 리스트 순회
                     {
                         switch(pieceBase.teamType) // 해당 기물의 팀 타입에 따라
                         {
                             case TeamType.Team1:
+                                NetworkManager.Instance.Socket.Emit("debug", $"팀1이 빛나리 (PieceManager: 51)");
                                 pieceBase.Material.SetColor("_EmissionColor", Color.red * _intensity);
                                 break;
                             case TeamType.Team2:
+                                NetworkManager.Instance.Socket.Emit("debug", $"팀2가 빛나리 (PieceManager: 55)");
                                 pieceBase.Material.SetColor("_EmissionColor", Color.blue * _intensity);
                                 break;
                             case TeamType.Team3:

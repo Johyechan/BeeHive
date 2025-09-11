@@ -76,7 +76,6 @@ namespace InGame.MyObject
         // 하이라이트를 끄는 함수
         public void HighLightOff()
         {
-            NetworkManager.Instance.Socket.Emit("debug", $"{gameObject.name} 꺼짐");
             HighLightEvents.SelectedPlacementType = ObjectType.None; // 현재 어떤 기물을 배치 할 수 있는지 저장하는 변수 초기화
             _canPlaceTypePiece = ObjectType.None; // 배치 가능한 타입 초기화
             _collider.enabled = false; // 클릭이 되지 않도록 콜라이더 비활성화

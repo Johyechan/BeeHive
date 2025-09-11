@@ -101,7 +101,7 @@ namespace InGame.MyObject
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
                 HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
                 HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
-                //PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+                PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
 
                 if (_canPlaceType != ObjectType.Tank) // 전차가 아닐 경우
                     PlacePlaneManager.Instance.FindCanPlacePlaneSystem.FindCanMovePlacePlane(_currentPlacePlane, TeamManager.Instance.CurrentTeamType); // 한 칸 이동 가능한 칸 찾기
@@ -111,9 +111,7 @@ namespace InGame.MyObject
 
                 foreach (var piece in PlacePlaneManager.Instance.HighLightHandler.CanPieceMovePlanes) // 배치 가능한 도로 칸들 순회
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", $"{piece.gameObject.name}, {_canPlaceType} (PieceBase: 112)");
                     piece.CanPlacePieceType = _canPlaceType; // 배치 가능한 타입을 할당
-                    NetworkManager.Instance.Socket.Emit("debug", $"{piece.gameObject.name}, {piece.CanPlacePieceType} (PieceBase: 114)");
                 }
 
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(true, false); // 기물 이동 칸 하이라이트 키기, 이동 가능 배치 판 대상
@@ -122,7 +120,7 @@ namespace InGame.MyObject
             else // 선택된 상태일 경우
             {
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
-                //PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+                PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
             }
         }
     }
