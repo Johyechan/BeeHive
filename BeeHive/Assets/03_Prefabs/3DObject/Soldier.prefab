@@ -48,7 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamType: 0
+  _renderer: {fileID: 4811395824308656633}
+  _originMaterial: {fileID: 0}
+  _emissionMaterial: {fileID: 0}
   _animationDuration: 0.3
+  _xInterval: 0.007
   _canPlaceType: 2
 --- !u!65 &9001652827864050983
 BoxCollider:
@@ -144,6 +148,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5f00a5218be4f409bbfc1fba25a25c, type: 3}
+--- !u!23 &4811395824308656633 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 953936575932961283, guid: 2a5f00a5218be4f409bbfc1fba25a25c, type: 3}
+  m_PrefabInstance: {fileID: 5762517627902331898}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5220281360122833937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2a5f00a5218be4f409bbfc1fba25a25c, type: 3}

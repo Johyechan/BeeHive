@@ -3,14 +3,11 @@ using InGame.MyEvent;
 using InGame.MyObject;
 using MyUtil;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace InGame.MyManager.MyPiece
 {
     public class PieceManager : MonoSingleton<PieceManager>
     {
-        [SerializeField] private float _intensity; // Emission의 강도
-
         private Dictionary<ObjectType, List<PieceBase>> _canAttackPieceMap = new Dictionary<ObjectType, List<PieceBase>>(); // 공격 가능한 기물들을 저장하는 맵
         public Dictionary<ObjectType, List<PieceBase>> CanAttackPieceMap { get =>  _canAttackPieceMap; } // 위 변수 프로퍼티
 
@@ -46,15 +43,13 @@ namespace InGame.MyManager.MyPiece
                         switch(pieceBase.teamType) // 해당 기물의 팀 타입에 따라
                         {
                             case TeamType.Team1:
-                                NetworkManager.Instance.Socket.Emit("debug", $"팀1이 빛나리 (PieceManager: 51)");
-                                pieceBase.Material.SetColor("_EmissionColor", Color.red * _intensity);
+                                pieceBase.ChangeMaterial(false);
                                 break;
                             case TeamType.Team2:
-                                NetworkManager.Instance.Socket.Emit("debug", $"팀2가 빛나리 (PieceManager: 55)");
-                                pieceBase.Material.SetColor("_EmissionColor", Color.blue * _intensity);
+                                pieceBase.ChangeMaterial(false);
                                 break;
                             case TeamType.Team3:
-                                pieceBase.Material.SetColor("_EmissionColor", Color.green * _intensity);
+                                pieceBase.ChangeMaterial(false);
                                 break;
                         }
                     }
@@ -69,10 +64,10 @@ namespace InGame.MyManager.MyPiece
             {
                 foreach (var pieceBase in piece.Value) // 해당 타입에 맞는 기물들을 저장한 리스트 순회
                 {
-                    pieceBase.Material.SetColor("_EmissionColor", Color.black); // 블랙으로 Emission이 눈에 안보이도록 설정
+                    pieceBase.ChangeMaterial(true);
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.10
+// 마지막 작성 일자: 2025.09.12

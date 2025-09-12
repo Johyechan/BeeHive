@@ -24,10 +24,7 @@ namespace InGame.MyObject
         public override void ObjectClicked()
         {
             base.ObjectClicked();
-
-            PieceEvents.OnShowCanAttackPieces(MyEnum.ObjectType.Miner); // 공격 가능한 광부 기물들 하이라이트 키기
-            PieceEvents.OnShowCanAttackPieces(MyEnum.ObjectType.Soldier); // 공격 가능한 보병 기물들 하이라이트 키기
         }
     }
 }
-// 마지막 작성 일자: 2025.09.10
+// 마지막 작성 일자: 2025.09.12

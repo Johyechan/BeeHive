@@ -108,13 +108,16 @@ namespace InGame.MySystem.Game
                     switch (objType)
                     {
                         case ObjectType.Miner: // 광부가 배치되어 있다면
-                            PieceManager.Instance.CanAttackPieceMap[ObjectType.Miner].Add(nearPiece.PlacedPiece); // 공격 가능한 광부 객체 리스트에 추가
+                            if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Miner].Contains(nearPiece.PlacedPiece))
+                                PieceManager.Instance.CanAttackPieceMap[ObjectType.Miner].Add(nearPiece.PlacedPiece); // 공격 가능한 광부 객체 리스트에 추가
                             break;
                         case ObjectType.Soldier: // 보병이 배치되어 있다면
-                            PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Add(nearPiece.PlacedPiece); // 공격 가능한 보병 객체 리스트에 추가
+                            if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Contains(nearPiece.PlacedPiece))
+                                PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Add(nearPiece.PlacedPiece); // 공격 가능한 보병 객체 리스트에 추가
                             break;
                         case ObjectType.Tank: // 전차가 배치되어 있다면
-                            PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Add(nearPiece.PlacedPiece); // 공격 가능한 전차 객체 리스트에 추가
+                            if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Contains(nearPiece.PlacedPiece))
+                                PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Add(nearPiece.PlacedPiece); // 공격 가능한 전차 객체 리스트에 추가
                             break;
                     }
 
@@ -158,4 +161,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.09.11
+// 마지막 작성 일자: 2025.09.12
