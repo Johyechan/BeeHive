@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyObject.Piece;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,9 +29,9 @@ namespace InGame.MyObject
         // 부모 초기화 함수
         private void ParentSet()
         {
-            _minerParent = GameObject.Find(TeamManager.Instance.MinerParentName).transform; // 광부 기물들의 부모 탐색 후 할당
-            _soldierParent = GameObject.Find(TeamManager.Instance.SoldierParentName).transform; // 보병 기물들의 부모 탐색 후 할당
-            _tankParent = GameObject.Find(TeamManager.Instance.TankParentName).transform; // 전차 기물들의 부모 탐색 후 할당
+            _minerParent = TeamManager.Instance.GetMinerTransform(TeamManager.Instance.CurrentTeamType); // 광부 기물들의 부모 탐색 후 할당
+            _soldierParent = TeamManager.Instance.GetSoldierTransform(TeamManager.Instance.CurrentTeamType); // 보병 기물들의 부모 탐색 후 할당
+            _tankParent = TeamManager.Instance.GetTankTransform(TeamManager.Instance.CurrentTeamType); // 전차 기물들의 부모 탐색 후 할당
             _pieceMap.Clear(); // 맵 비우기
             _pieceMap.Add(ObjectType.Miner, _minerParent); // 광부 추가
             _pieceMap.Add(ObjectType.Soldier, _soldierParent); // 보병 추가
@@ -127,23 +128,23 @@ namespace InGame.MyObject
             {
                 if(isMove) // 이동 상태이고
                 {
-                    if(pieceBase.CurrentPlacePlane != null) // 움직일 기물이 배치 되어 있는 칸이 있을 때
+                    if(pieceBase.PieceVariable.currentPlacePlane != null) // 움직일 기물이 배치 되어 있는 칸이 있을 때
                     {
-                        pieceBase.CurrentPlacePlane.PlacedObjectType = ObjectType.None; // 움직일 기물이 배치 되어있던 칸을 빈 칸으로 초기화
-                        pieceBase.CurrentPlacePlane.TeamType = TeamType.None; // 팀도 아무 팀도 아닌 상태로 초기화
+                        pieceBase.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None; // 움직일 기물이 배치 되어있던 칸을 빈 칸으로 초기화
+                        pieceBase.PieceVariable.currentPlacePlane.TeamType = TeamType.None; // 팀도 아무 팀도 아닌 상태로 초기화
                     }
                 }
-                pieceBase.CurrentPlacePlane = this; // 현재 기물이 올라가 있는 배치 칸을 자기 자신으로 할당
+                pieceBase.PieceVariable.currentPlacePlane = this; // 현재 기물이 올라가 있는 배치 칸을 자기 자신으로 할당
 
                 PlacedPiece = pieceBase; // 배치된 기물 할당
                 UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
                 PlacedObjectType = CanPlacePieceType; // 현재 배치가 가능한 기물을 이 배치판에 배치되어있는 기물로 지정
-                TeamType = pieceBase.teamType; // 현재 기물 배치 칸의 팀 타입을 기물의 팀 타입으로 할당
+                TeamType = pieceBase.CurrentTeamType; // 현재 기물 배치 칸의 팀 타입을 기물의 팀 타입으로 할당
 
                 PieceInfo pieceInfo = new PieceInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                    pieceID = pieceBase.Id, // 기물 객체 ID
+                    pieceID = pieceBase.PieceVariable.id, // 기물 객체 ID
                     placePlaneID = _id, // 배치 칸 ID
                     parentName = transform.parent.name, // 부모 객체 명
                     placedObjectType = (int)CanPlacePieceType, // 기물 객체 타입

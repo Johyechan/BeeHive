@@ -2,7 +2,9 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyCard;
+using InGame.MyManager.MyPiece;
 using InGame.MyObject;
+using InGame.MyObject.Piece;
 using UnityEngine;
 
 namespace InGame.MySystem.Game
@@ -73,8 +75,25 @@ namespace InGame.MySystem.Game
                     SetRoadInfo setRoadInfo = JsonUtility.FromJson<SetRoadInfo>(json); // 도로 세팅에 필요한 값을 가지는 구조체로 변경
                     _setRoadHandle.SetRoad(setRoadInfo.roadID, setRoadInfo.placePlaneId, setRoadInfo.placedType, setRoadInfo.roadTeamType, setRoadInfo.roadParentName, setRoadInfo.targetParentName, setRoadInfo.targetPos, setRoadInfo.angle); // 도로 세팅
                 });
+
+                socket.On("attackedPiece", (data) =>
+                {
+                    string json = data.GetValue().ToString(); // 문자열로 data 받기
+                    SetAttackRelatedPieceInfo setInfo = JsonUtility.FromJson<SetAttackRelatedPieceInfo>(json); // 공격 관련 기물들을 세팅할 때 필요한 값을 가지는 구조체로 변경
+
+                    GameObject returnPieceObj = ObjectIdManager.Instance.FindObject(setInfo.returnPieceID); // 공격 받은 기물 탐색
+                    PieceBase returnPiece = returnPieceObj.GetComponent<PieceBase>(); // 공격 받은 기물의 PieceBase 가져오기
+
+                    GameObject attackPieceObj = ObjectIdManager.Instance.FindObject(setInfo.attackPieceID); // 공격한 기물 탐색
+                    PieceBase attackPiece = attackPieceObj.GetComponent<PieceBase>(); // 공격한 기물의 PieceBase 가져오기
+
+                    Transform returnParent = GameObject.Find(setInfo.returnParentName).transform; // 공격 받은 기물의 부모 객체
+                    Transform attackParent = attackPieceObj.transform.parent; // 공격한 기물의 부모 객체
+
+                    PieceManager.Instance.MoveAttackRelatedPieces(returnPiece, attackPiece, returnParent, attackParent, setInfo.returnPos, setInfo.attackPos); // 공격 받은 기물 및 공격한 기물 이동 함수
+                });
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2025.09.15

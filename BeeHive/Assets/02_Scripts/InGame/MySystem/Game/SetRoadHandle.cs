@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyObject;
+using InGame.MyObject.Piece;
 using MyUtil.MyObjectPool;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ namespace InGame.MySystem
             PlacePlaneObjectBase placePlaneBase = plane.GetComponent<PlacePlaneObjectBase>();
 
             placePlaneBase.PlacedObjectType = (ObjectType)placedType; // 배치 성공 시 배치된 객체가 배치되었다고 할당
-            placePlaneBase.TeamType = roadPiece.teamType; // 현재 배치 가능한 칸의 팀 타입을 도로 기물의 팀 타입으로 지정
+            placePlaneBase.TeamType = roadPiece.CurrentTeamType; // 현재 배치 가능한 칸의 팀 타입을 도로 기물의 팀 타입으로 지정
             roadPiece.MoveToPlacePlane(targetParent.transform, targetPos, angle); // 기물을 현재 배치 판 부모의 자식으로 변경 + 현재 이 배치판 위치 이동 + 각도 회전
         }
     }

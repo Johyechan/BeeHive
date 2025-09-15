@@ -12,30 +12,6 @@ namespace InGame.MyManager
         // 위에 변수 프로퍼티
         public TeamType CurrentTeamType { get => _currentTeamType; set => _currentTeamType = value; }
 
-        private string _minerParentName; // 광부 객체의 부모 객체 이름
-        // 위 변수 프로퍼티
-        public string MinerParentName { get => _minerParentName; }
-
-        private string _soldierParentName; // 보병 객체의 부모 객체 이름
-        // 위 변수 프로퍼티
-        public string SoldierParentName { get => _soldierParentName; }
-
-        private string _tankParentName; // 전차 객체의 부모 객체 이름
-        // 위 변수 프로퍼티
-        public string TankParentName { get => _tankParentName; }
-
-        private string _roadParentName; // 도로 객체의 부모 객체 이름
-        // 위 변수 프로퍼티
-        public string RoadParentName { get => _roadParentName; }
-
-        private string _goldCoinParentName; // 금화 객체의 부모 객체 이름
-        // 위 변수 프로퍼티
-        public string GoldCoinParentName { get => _goldCoinParentName; }
-
-        private string _goldBarParentName; // 금괴 객체의 부모 객체 이름
-        // 위 변수 프로퍼티
-        public string GoldBarParentName { get => _goldBarParentName; }
-
         protected override void Awake()
         {
             base.Awake();
@@ -48,34 +24,97 @@ namespace InGame.MyManager
                 {
                     int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
                     _currentTeamType = (TeamType)teamType; // 팀 저장
-                    switch (_currentTeamType) // 현재 타입에 따라
-                    {
-                        case TeamType.Team1: // 팀1일 경우
-                            _minerParentName = "Player1Miners";
-                            _soldierParentName = "Player1Soldiers";
-                            _tankParentName = "Player1Tanks";
-                            _roadParentName = "Player1Road";
-                            _goldCoinParentName = "Player1GoldCoins";
-                            _goldBarParentName = "Player1GoldBars";
-                            break;
-                        case TeamType.Team2:// 팀2일 경우
-                            _minerParentName = "Player2Miners";
-                            _soldierParentName = "Player2Soldiers";
-                            _tankParentName = "Player2Tanks";
-                            _roadParentName = "Player2Road";
-                            _goldCoinParentName = "Player2GoldCoins";
-                            _goldBarParentName = "Player2GoldBars";
-                            break;
-                        case TeamType.Team3:// 팀3일 경우
-                            _minerParentName = "Player3Miners";
-                            _soldierParentName = "Player3Soldiers";
-                            _tankParentName = "Player3Tanks";
-                            _roadParentName = "Player3Road";
-                            _goldCoinParentName = "Player3GoldCoins";
-                            _goldBarParentName = "Player3GoldBars";
-                            break;
-                    }
                 });
+            }
+        }
+
+        public Transform GetMinerTransform(TeamType type)
+        {
+            switch(type)
+            {
+                case TeamType.Team1:
+                    return GameObject.Find("Player1Miners").transform;
+                case TeamType.Team2:
+                    return GameObject.Find("Player2Miners").transform;
+                case TeamType.Team3:
+                    return GameObject.Find("Player3Miners").transform;
+                default:
+                    return null;
+            }
+        }
+
+        public Transform GetSoldierTransform(TeamType type)
+        {
+            switch (type)
+            {
+                case TeamType.Team1:
+                    return GameObject.Find("Player1Soldiers").transform;
+                case TeamType.Team2:
+                    return GameObject.Find("Player2Soldiers").transform;
+                case TeamType.Team3:
+                    return GameObject.Find("Player3Soldiers").transform;
+                default:
+                    return null;
+            }
+        }
+
+        public Transform GetTankTransform(TeamType type)
+        {
+            switch (type)
+            {
+                case TeamType.Team1:
+                    return GameObject.Find("Player1Tanks").transform;
+                case TeamType.Team2:
+                    return GameObject.Find("Player2Tanks").transform;
+                case TeamType.Team3:
+                    return GameObject.Find("Player3Tanks").transform;
+                default:
+                    return null;
+            }
+        }
+
+        public Transform GetRoadTransform(TeamType type)
+        {
+            switch (type)
+            {
+                case TeamType.Team1:
+                    return GameObject.Find("Player1Road").transform;
+                case TeamType.Team2:
+                    return GameObject.Find("Player2Road").transform;
+                case TeamType.Team3:
+                    return GameObject.Find("Player3Road").transform;
+                default:
+                    return null;
+            }
+        }
+
+        public Transform GetGoldCoinTransform(TeamType type)
+        {
+            switch (type)
+            {
+                case TeamType.Team1:
+                    return GameObject.Find("Player1GoldCoins").transform;
+                case TeamType.Team2:
+                    return GameObject.Find("Player2GoldCoins").transform;
+                case TeamType.Team3:
+                    return GameObject.Find("Player3GoldCoins").transform;
+                default:
+                    return null;
+            }
+        }
+
+        public Transform GetGoldBarTransform(TeamType type)
+        {
+            switch (type)
+            {
+                case TeamType.Team1:
+                    return GameObject.Find("Player1GoldBars").transform;
+                case TeamType.Team2:
+                    return GameObject.Find("Player2GoldBars").transform;
+                case TeamType.Team3:
+                    return GameObject.Find("Player3GoldBars").transform;
+                default:
+                    return null;
             }
         }
     }

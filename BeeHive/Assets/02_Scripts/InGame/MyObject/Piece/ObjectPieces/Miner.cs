@@ -2,9 +2,8 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using System.Threading.Tasks;
-using UnityEngine;
 
-namespace InGame.MyObject
+namespace InGame.MyObject.Piece.ObjectPieces
 {
     // 작성자: 조혜찬
     // 광부 기물 클래스
@@ -22,24 +21,24 @@ namespace InGame.MyObject
         // 금화를 얻는 함수
         private async Task Dig()
         {
-            if (TurnManager.Instance.CurrentTeamType != teamType) // 현재 턴 팀과 나의 팀이 다르다면
+            if (TurnManager.Instance.CurrentTeamType != CurrentTeamType) // 현재 턴 팀과 나의 팀이 다르다면
             {
                 return; // 반환
             }
 
-            if (_currentPlacePlane == null) // 자기가 배치된 판이 없다면
+            if (PieceVariable.currentPlacePlane == null) // 자기가 배치된 판이 없다면
                 return; // 반환
 
-            switch(teamType)
+            switch(CurrentTeamType)
             {
                 case TeamType.Team1: // 플레이어의 팀이 Team1일 경우
-                    WalletEvent.OnGetGoldCoin?.Invoke(_currentPlacePlane.team1GoldCoin); // 현재 칸에서 team1이 얻는 금화만큼 얻기
+                    WalletEvent.OnGetGoldCoin?.Invoke(PieceVariable.currentPlacePlane.team1GoldCoin); // 현재 칸에서 team1이 얻는 금화만큼 얻기
                     break;
                 case TeamType.Team2: // 플레이어의 팀이 Team2일 경우
-                    WalletEvent.OnGetGoldCoin?.Invoke(_currentPlacePlane.team2GoldCoin); // 현재 칸에서 team2가 얻는 금화만큼 얻기
+                    WalletEvent.OnGetGoldCoin?.Invoke(PieceVariable.currentPlacePlane.team2GoldCoin); // 현재 칸에서 team2가 얻는 금화만큼 얻기
                     break;
                 case TeamType.Team3: // 플레이어의 팀이 Team3일 경우
-                    WalletEvent.OnGetGoldCoin?.Invoke(_currentPlacePlane.team3GoldCoin); // 현재 칸에서 team3이 얻는 금화만큼 얻기
+                    WalletEvent.OnGetGoldCoin?.Invoke(PieceVariable.currentPlacePlane.team3GoldCoin); // 현재 칸에서 team3이 얻는 금화만큼 얻기
                     break;
             }
 
@@ -49,8 +48,8 @@ namespace InGame.MyObject
         // 부모 초기화 함수
         private void ParentSet()
         {
-            _parent = GameObject.Find(TeamManager.Instance.MinerParentName).transform; // 광부 객체의 부모 할당
+            PieceVariable.parent = TeamManager.Instance.GetMinerTransform(TeamManager.Instance.CurrentTeamType); // 광부 객체의 부모 할당
         }
     }
 }
-// 마지막 작성 일자: 2025.09.08
+// 마지막 작성 일자: 2025.09.15

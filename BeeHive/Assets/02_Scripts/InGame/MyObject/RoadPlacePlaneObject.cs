@@ -4,6 +4,7 @@ using MyUtil.MyObjectPool;
 using InGame.MyEnum;
 using System.Collections.Generic;
 using UnityEngine;
+using InGame.MyObject.Piece;
 
 namespace InGame.MyObject
 {
@@ -27,7 +28,7 @@ namespace InGame.MyObject
         // 부모 초기화 함수
         private void ParentSet()
         {
-            _roadParent = GameObject.Find(TeamManager.Instance.RoadParentName).transform; // 도로 기물의 부모 탐색 후 할당
+            _roadParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType); // 도로 기물의 부모 탐색 후 할당
         }
 
         // 클릭 시 실행될 함수
@@ -65,12 +66,12 @@ namespace InGame.MyObject
             {
                 UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
                 PlacedObjectType = CanPlacePieceType; // 배치 성공 시 배치 가능한 기물이 위에 배치 되었다고 할당
-                TeamType = roadPiece.teamType; // 현재 배치 가능한 칸의 팀 타입을 도로 기물의 팀 타입으로 지정
+                TeamType = roadPiece.CurrentTeamType; // 현재 배치 가능한 칸의 팀 타입을 도로 기물의 팀 타입으로 지정
 
                 RoadInfo roadInfo = new RoadInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                    roadID = roadPiece.Id, // 도로 객체 ID
+                    roadID = roadPiece.PieceVariable.id, // 도로 객체 ID
                     placePlaneId = _id, // 현재 객체 ID
                     placedType = (int)CanPlacePieceType, // 배치 객체 타입
                     roadTeamType = (int)TeamType, // 배치 객체 팀 타입

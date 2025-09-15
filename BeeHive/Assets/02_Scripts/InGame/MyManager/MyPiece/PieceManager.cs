@@ -1,8 +1,11 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyObject;
+using InGame.MyObject.Piece;
 using MyUtil;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace InGame.MyManager.MyPiece
 {
@@ -22,17 +25,36 @@ namespace InGame.MyManager.MyPiece
 
         private void OnEnable()
         {
-            PieceEvents.OnShowCanAttackPieces += ShowCanAttackPieces;
-            PieceEvents.OnHideCanAttackPieces += HideCanAttackPieces;
+            // 이벤트 Task로 변경해야함
+            //PieceEvents.OnShowCanAttackPieces += ShowCanAttackPieces;
+            //PieceEvents.OnHideCanAttackPieces += HideCanAttackPieces;
         }
 
         private void OnDisable()
         {
-            PieceEvents.OnShowCanAttackPieces -= ShowCanAttackPieces;
-            PieceEvents.OnHideCanAttackPieces -= HideCanAttackPieces;
+            //PieceEvents.OnShowCanAttackPieces -= ShowCanAttackPieces;
+            //PieceEvents.OnHideCanAttackPieces -= HideCanAttackPieces;
         }
 
-        private void ShowCanAttackPieces(ObjectType type)
+        // 공격 당한 기물과 공격한 기물이 이동하는 함수(공격 당한 기물, 공격한 기물공격 당한 기물의 부모, 공격한 기물의 부모, 공격 당한 기물의 목적지, 공격한 기물의 목적지)
+        public async Task MoveAttackRelatedPieces(PieceBase returnPiece, PieceBase attackPiece, Transform returnParent, Transform attackParent, Vector3 returnPos, Vector3 attackPos)
+        {
+            HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
+            HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
+            HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
+            PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+
+            returnPiece.PieceVariable.currentPlacePlane.PlacedObjectType = attackPiece.CurrentObjectType; // 배치된 기물의 타입을 공격한 기물의 타입으로 변경
+            returnPiece.PieceVariable.currentPlacePlane.PlacedPiece = attackPiece; // 배치된 기물을 공격한 기물로 변경
+            returnPiece.PieceVariable.currentPlacePlane.TeamType = attackPiece.CurrentTeamType; // 공격한 기물의 팀으로 변경
+
+            await returnPiece.MoveToPlacePlane(returnParent, returnPos); // 공격 받은 기물 이동
+            await attackPiece.MoveToPlacePlane(attackParent, attackPos); // 공격한 기물 이동
+
+            await attackPiece.FindCanPlacePlane(); // 다시 이동가능한 위치 찾기
+        }
+
+        private async Task ShowCanAttackPieces(ObjectType type)
         {
             foreach(var piece in _canAttackPieceMap) // 공격 가능 기물들 저장 맵 순회
             {
@@ -40,16 +62,16 @@ namespace InGame.MyManager.MyPiece
                 {
                     foreach (var pieceBase in piece.Value) // 해당 타입에 맞는 기물들을 저장한 리스트 순회
                     {
-                        switch(pieceBase.teamType) // 해당 기물의 팀 타입에 따라
+                        switch(pieceBase.CurrentTeamType) // 해당 기물의 팀 타입에 따라
                         {
                             case TeamType.Team1:
-                                pieceBase.ChangeMaterial(false);
+                                await pieceBase.ChangeMaterial(false);
                                 break;
                             case TeamType.Team2:
-                                pieceBase.ChangeMaterial(false);
+                                await pieceBase.ChangeMaterial(false);
                                 break;
                             case TeamType.Team3:
-                                pieceBase.ChangeMaterial(false);
+                                await pieceBase.ChangeMaterial(false);
                                 break;
                         }
                     }
@@ -58,16 +80,16 @@ namespace InGame.MyManager.MyPiece
             }
         }
 
-        private void HideCanAttackPieces()
+        private async Task HideCanAttackPieces()
         {
             foreach (var piece in _canAttackPieceMap) // 공격 가능 기물들 저장 맵 순회
             {
                 foreach (var pieceBase in piece.Value) // 해당 타입에 맞는 기물들을 저장한 리스트 순회
                 {
-                    pieceBase.ChangeMaterial(true);
+                    await pieceBase.ChangeMaterial(true);
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.12
+// 마지막 작성 일자: 2025.09.15

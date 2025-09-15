@@ -1,8 +1,6 @@
-using InGame.MyEvent;
 using InGame.MyManager;
-using UnityEngine;
 
-namespace InGame.MyObject
+namespace InGame.MyObject.Piece.ObjectPieces
 {
     // 작성자: 조혜찬
     // 전차 기물 클래스
@@ -18,7 +16,7 @@ namespace InGame.MyObject
         // 부모 초기화 함수
         private void ParentSet()
         {
-            _parent = GameObject.Find(TeamManager.Instance.TankParentName).transform; // 보병 객체의 부모 할당
+            PieceVariable.parent = TeamManager.Instance.GetTankTransform(TeamManager.Instance.CurrentTeamType); // 전차 객체의 부모 할당
         }
 
         public override void ObjectClicked()
@@ -27,4 +25,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.12
+// 마지막 작성 일자: 2025.09.15

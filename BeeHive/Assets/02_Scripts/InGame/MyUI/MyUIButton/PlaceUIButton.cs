@@ -32,16 +32,16 @@ namespace InGame.MyUI.MyUIButton
             switch(_canPlaceType) // 배치할 객체의 타입에 따라
             {
                 case ObjectType.Miner: // 광부를 배치할 수 있다면
-                    _objectParent = GameObject.Find(TeamManager.Instance.MinerParentName).transform; // 광부 객체들의 부모를 할당
+                    _objectParent = TeamManager.Instance.GetMinerTransform(TeamManager.Instance.CurrentTeamType); // 광부 객체들의 부모를 할당
                     break;
                 case ObjectType.Soldier: // 보병을 배치할 수 있다면
-                    _objectParent = GameObject.Find(TeamManager.Instance.SoldierParentName).transform; // 보병 객체들의 부모를 할당
+                    _objectParent = TeamManager.Instance.GetSoldierTransform(TeamManager.Instance.CurrentTeamType); // 보병 객체들의 부모를 할당
                     break;
                 case ObjectType.Tank: // 전차를 배치할 수 있다면
-                    _objectParent = GameObject.Find(TeamManager.Instance.TankParentName).transform; // 전차 객체들의 부모를 할당
+                    _objectParent = TeamManager.Instance.GetTankTransform(TeamManager.Instance.CurrentTeamType); // 전차 객체들의 부모를 할당
                     break;
                 case ObjectType.Road: // 도로를 배치할 수 있다면
-                    _objectParent = GameObject.Find(TeamManager.Instance.RoadParentName).transform; // 도로 객체들의 부모를 할당
+                    _objectParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType); // 도로 객체들의 부모를 할당
                     break;
             }
         }
@@ -87,4 +87,4 @@ namespace InGame.MyUI.MyUIButton
         public abstract void OnUIClick();
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2025.09.15

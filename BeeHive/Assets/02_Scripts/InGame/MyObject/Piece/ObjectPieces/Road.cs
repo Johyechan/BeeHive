@@ -1,4 +1,4 @@
-namespace InGame.MyObject
+namespace InGame.MyObject.Piece.ObjectPieces
 {
     // 작성자: 조혜찬
     // 도로 기물 클래스

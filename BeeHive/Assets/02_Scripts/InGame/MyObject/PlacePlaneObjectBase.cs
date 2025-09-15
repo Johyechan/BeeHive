@@ -4,6 +4,7 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.MyObjectInterface;
+using InGame.MyObject.Piece;
 using System.Threading.Tasks;
 using UnityEngine;
 

@@ -30,16 +30,16 @@ namespace InGame.MySystem.Game
         {
             if (IsReturn()) return; // 반환해야할 조건을 충족했을 경우 반환
 
-            Transform parent = GameObject.Find(TeamManager.Instance.RoadParentName).transform;
-            await PieceEvents.OnGetRoad?.Invoke(2, TeamManager.Instance.CurrentTeamType, parent); // 도로 2개 획득
+            Transform roadParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType);
+            await PieceEvents.OnGetRoad?.Invoke(2, TeamManager.Instance.CurrentTeamType, roadParent); // 도로 2개 획득
 
             UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
             AddRoadInfo addRoadInfo = new AddRoadInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                roadCount = parent.transform.childCount, // 도로의 객체 수
+                roadCount = roadParent.transform.childCount, // 도로의 객체 수
                 teamType = (int)TeamManager.Instance.CurrentTeamType, // 팀 타입을 int형 강제형변환 후 저장
-                roadParentName = TeamManager.Instance.RoadParentName, // 현재 팀의 도로 객체 부모 명
+                roadParentName = roadParent.name, // 현재 팀의 도로 객체 부모 명
             };
 
             string json = JsonUtility.ToJson(addRoadInfo); // 구조체를 Json 형태로 변환
@@ -60,4 +60,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2025.09.15

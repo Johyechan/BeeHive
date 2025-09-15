@@ -23,7 +23,7 @@ namespace InGame.MyUI.Turn
                 .Append(base.UIAnimationPlay()) // 이후 동일하게 실행되어야 할 기능 수행
                 .AppendCallback(() =>
                 {
-                    Transform parent = GameObject.Find(TeamManager.Instance.RoadParentName).transform;
+                    Transform parent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType);
                     PieceEvents.OnDestroyLeftRoad?.Invoke(parent, TeamManager.Instance.CurrentTeamType);
 
                     DestroyLeftRoadInfo destroyLeftRoadInfo = new DestroyLeftRoadInfo()
@@ -42,4 +42,4 @@ namespace InGame.MyUI.Turn
         }
     }
 }
-// 마지막 작성 일자: 2025.09.02
+// 마지막 작성 일자: 2025.09.15
