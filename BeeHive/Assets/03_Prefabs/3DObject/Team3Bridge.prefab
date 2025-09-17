@@ -45,9 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2faa865e768e9cf4994df2f5dcf19bf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamType: 3
-  _animationDuration: 0.3
-  _canPlaceType: 4
+  _pieceData:
+    materialData:
+      renderer: {fileID: 0}
+      originMaterial: {fileID: 0}
+      emissionMaterial: {fileID: 0}
+    pieceAttackedHandler: {fileID: 0}
+    teamType: 3
+    currentObjectType: 4
+    animationDuration: 0.25
+    xInterval: 0
 --- !u!1001 &3862270266084375898
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -43,6 +43,7 @@ namespace InGame.MyObject
         public bool IsChecked { get { return _isChecked; } set { _isChecked = value; } } // 이전에 확인이 되었는지 확인하는 변수 프로퍼티
 
         protected int _id;
+        public int Id { get => _id; }
         protected int _cost; // 비용
         public int Cost { get => _cost; set => _cost = value; } // 위 변수 프로퍼티
 
@@ -85,11 +86,6 @@ namespace InGame.MyObject
         }
 
         public abstract void ObjectClicked();
-
-        protected async Task FindCanPlacePlane()
-        {
-            await PlacePlaneManager.Instance.FindCanPlacePlane().AsyncWaitForCompletion();
-        }
     }
 }
 // 마지막 작성 일자: 2025.09.09

@@ -1,10 +1,10 @@
 using InGame.MyEvent;
 using InGame.MyManager;
-using MyUtil.MyObjectPool;
 using InGame.MyEnum;
 using System.Collections.Generic;
 using UnityEngine;
 using InGame.MyObject.Piece;
+using InGame.MyManager.MyPiece;
 
 namespace InGame.MyObject
 {
@@ -67,6 +67,7 @@ namespace InGame.MyObject
                 UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
                 PlacedObjectType = CanPlacePieceType; // 배치 성공 시 배치 가능한 기물이 위에 배치 되었다고 할당
                 TeamType = roadPiece.CurrentTeamType; // 현재 배치 가능한 칸의 팀 타입을 도로 기물의 팀 타입으로 지정
+                PlacedPiece = roadPiece; // 배치된 기물에 도로 할당
 
                 RoadInfo roadInfo = new RoadInfo()
                 {
@@ -83,14 +84,15 @@ namespace InGame.MyObject
                 string json = JsonUtility.ToJson(roadInfo); // Json으로 변환
                 NetworkManager.Instance.Socket.Emit("makeRoad", json);
 
-                roadPiece.MoveToPlacePlane(transform.parent, transform.localPosition, _roadAngle); // 기물을 현재 배치 판 부모의 자식으로 변경 + 현재 이 배치판 위치 이동 + 각도 회전
+                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
 
-                _ = FindCanPlacePlane();
+                await roadPiece.MoveToPlacePlane(transform.parent, transform.localPosition, _roadAngle); // 기물을 현재 배치 판 부모의 자식으로 변경 + 현재 이 배치판 위치 이동 + 각도 회전
+
+                await PieceManager.Instance.FindCanPlacePlane();
 
                 UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
-                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2025.09.17

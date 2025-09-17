@@ -1,0 +1,58 @@
+using InGame.MyEnum;
+using InGame.MyEvent;
+using InGame.MyManager;
+using InGame.MyObject;
+using UnityEngine;
+
+namespace InGame.MySystem.Game.Handler
+{
+    // 작성자: 조혜찬
+    // 도로 관련 소켓 이벤트 연결 핸들러 클래스
+    public class RoadSocketEventHandler : BaseSocketEventHandler
+    {
+        private SetRoadHandle _setRoadHandle; // 도로 세팅 핸들러
+
+        // 생성자(도로 세팅 핸들러)
+        public RoadSocketEventHandler(SetRoadHandle setRoadHandle)
+        {
+            _setRoadHandle = setRoadHandle;
+        }
+
+        public override void OnConnect()
+        {
+            NetworkManager.Instance.Socket.On("roadAdded", async (data) =>
+            {
+                string json = data.GetValue().ToString(); // 문자열로 data 받기
+                RoadAddedInfo roadAddedInfo = JsonUtility.FromJson<RoadAddedInfo>(json); // RoadAddedInfo로 변환
+                Transform parent = GameObject.Find(roadAddedInfo.roadParentName).transform;
+                await PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
+            });
+
+            NetworkManager.Instance.Socket.On("roadDestroyed", data =>
+            {
+                string json = data.GetValue().ToString(); // 문자열로 data 받기
+                RoadDestroyedInfo roadDestroyedInfo = JsonUtility.FromJson<RoadDestroyedInfo>(json); // RoadAddedInfo로 변환
+                Transform parent = GameObject.Find(roadDestroyedInfo.roadParentName).transform; // 파괴될 도로의 부모 객체
+                TeamType type = (TeamType)roadDestroyedInfo.teamType; // 파괴될 도로의 팀 타입
+                PieceEvents.OnDestroyLeftRoad?.Invoke(parent, type); // 이벤트 호출
+            });
+
+            NetworkManager.Instance.Socket.On("setRoad", async (data) =>
+            {
+                string json = data.GetValue().ToString(); // 문자열로 data 받기
+                SetRoadInfo setRoadInfo = JsonUtility.FromJson<SetRoadInfo>(json); // 도로 세팅에 필요한 값을 가지는 구조체로 변경
+                await _setRoadHandle.SetRoad(setRoadInfo.roadID, setRoadInfo.placePlaneId, setRoadInfo.placedType, setRoadInfo.roadTeamType, setRoadInfo.roadParentName, setRoadInfo.targetParentName, setRoadInfo.targetPos, setRoadInfo.angle); // 도로 세팅
+            });
+
+            NetworkManager.Instance.Socket.On("changedRoad", async (data) =>
+            {
+                string json = data.GetValue().ToString(); // 문자열로 data 받기
+                ChangedRoadInfo changedRoadInfo = JsonUtility.FromJson<ChangedRoadInfo>(json); // 도로 변경에 필요한 값을 가지는 구조체로 변경
+                GameObject piecePlacePlaneObj = ObjectIdManager.Instance.FindObject(changedRoadInfo.placePlaneID); // 배치 칸 객체 구하기
+                PiecePlacePlaneObject piecePlacePlane = piecePlacePlaneObj.GetComponent<PiecePlacePlaneObject>(); // 기물 배치 칸 클래스 가져오기
+                await PieceEvents.OnChangeNearRoad((TeamType)changedRoadInfo.teamType, piecePlacePlane); // 주위 도로 변경 이벤트 호출
+            });
+        }
+    }
+}
+// 마지막 작성 일자: 2025.09.17

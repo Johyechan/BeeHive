@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MySystem.Game
@@ -10,7 +11,7 @@ namespace InGame.MySystem.Game
     // 기물 및 도로 위치 이동 핸들
     public class SetPieceHandle
     {
-        public void SetPiece(int pieceID, int placePlaneID, string parentName, int placedObjectType, Vector3 targetPos, bool isMove, float angle = 0)
+        public async Task SetPiece(int pieceID, int placePlaneID, string parentName, int placedObjectType, Vector3 targetPos, bool isMove, float angle = 0)
         {
             GameObject piece = ObjectIdManager.Instance.FindObject(pieceID); // 기물 탐색
             GameObject plane = ObjectIdManager.Instance.FindObject(placePlaneID); // 배치 칸 탐색
@@ -36,8 +37,8 @@ namespace InGame.MySystem.Game
             placePlane.PlacedPiece = pieceBase; // 배치 칸에 배치된 기물 객체 할당
 
             GameObject parent = GameObject.Find(parentName); // 부모 객체 찾기
-            pieceBase.MoveToPlacePlane(parent.transform, targetPos, angle); // 기물 또는 도로 이동
+            await pieceBase.MoveToPlacePlane(parent.transform, targetPos, angle); // 기물 또는 도로 이동
         }
     }
 }
-// 마지막 작성 일자: 2025.09.11
+// 마지막 작성 일자: 2025.09.16

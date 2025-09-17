@@ -25,7 +25,7 @@ namespace InGame.MyObject.Piece.Handler
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
             HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
-            PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+            _ = PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
 
             if (_pieceData.currentObjectType != ObjectType.Tank) // 전차가 아닐 경우
                 PlacePlaneManager.Instance.FindCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType); // 한 칸 이동 가능한 칸 찾기
@@ -42,17 +42,17 @@ namespace InGame.MyObject.Piece.Handler
             switch (_pieceData.currentObjectType) // 현재 배치가능한(즉 배치하려는) 기물의 타입에 따라
             {
                 case ObjectType.Soldier: // 보병일 경우
-                    PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Miner); // 공격 가능한 광부 기물들 하이라이트 키기
-                    PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Soldier); // 공격 가능한 보병 기물들 하이라이트 키기
+                    _ = PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Miner); // 공격 가능한 광부 기물들 하이라이트 키기
+                    _ = PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Soldier); // 공격 가능한 보병 기물들 하이라이트 키기
                     break;
                 case ObjectType.Tank: // 전차일 경우
-                    PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Miner); // 공격 가능한 광부 기물들 하이라이트 키기
-                    PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Soldier); // 공격 가능한 보병 기물들 하이라이트 키기
-                    PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Tank); // 공격 가능한 전차 기물들 하이라이트 키기
+                    _ = PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Miner); // 공격 가능한 광부 기물들 하이라이트 키기
+                    _ = PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Soldier); // 공격 가능한 보병 기물들 하이라이트 키기
+                    _ = PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Tank); // 공격 가능한 전차 기물들 하이라이트 키기
                     break;
             }
             _pieceBase.PieceVariable.isSelected = true; // 선택 되었다고 할당
         }
     }
 }
-// 마지막 작성 일자: 2025.09.15
+// 마지막 작성 일자: 2025.09.16

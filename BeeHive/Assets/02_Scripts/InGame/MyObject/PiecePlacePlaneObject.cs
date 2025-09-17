@@ -1,8 +1,10 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.MyPiece;
 using InGame.MyObject.Piece;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -42,7 +44,7 @@ namespace InGame.MyObject
         {
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
-            PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+            _ = PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
         }
 
         // 마우스로 클릭 시 실행될 함수
@@ -102,25 +104,25 @@ namespace InGame.MyObject
             if (!await WarningEvent.OnCanMovePiece.Invoke(CanPlacePieceType))
             {
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 이동 가능한 판 하이라이트 끄기
-                PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+                _ = PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
                 return;
             }
 
             GameManager.Instance.PieceCanMoveMap[CanPlacePieceType] = false; // 현재 이동하는 타입의 기물을 이후로는 같은 타입의 기물 이동이 불가한 상태로 할당
-            PlacePiece(GameManager.Instance.CurrentMovePiece, true); // 기물 이동
+            await PlacePiece(GameManager.Instance.CurrentMovePiece, true); // 기물 이동
         }
 
         // 객체를 배치하는 기능 함수
-        private void ObjectPlace()
+        private async void ObjectPlace()
         {
             GameManager.Instance.CanMakePiece = false;
             Transform pieceParent = _pieceMap[CanPlacePieceType]; // 현재 배치 가능한 타입의 객체 부모
             int pieceCount = pieceParent.childCount; // 현재 보유 중인 배치 가능한 타입의 기물 수
 
-            PlacePiece(pieceParent.GetChild(pieceCount - 1).gameObject, false); // 기물 배치
+            await PlacePiece(pieceParent.GetChild(pieceCount - 1).gameObject, false); // 기물 배치
         }
 
-        private void PlacePiece(GameObject pieceObj, bool isMove)
+        private async Task PlacePiece(GameObject pieceObj, bool isMove)
         {
             PieceBase pieceBase = pieceObj.GetComponent<PieceBase>(); // 객체의 PieceBase를 가져오기
 
@@ -153,14 +155,16 @@ namespace InGame.MyObject
                 }; 
                 string json = JsonUtility.ToJson(pieceInfo); // Json으로 변환
                 NetworkManager.Instance.Socket.Emit("movePiece", json); // 서버에 movePiece 이벤트 전달
-                pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
 
-                _ = FindCanPlacePlane();
+                HighLightOffEvent(); // 하이라이트 끄기
+
+                await pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
+
+                await PieceManager.Instance.FindCanPlacePlane();
 
                 UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
-                HighLightOffEvent(); // 하이라이트 끄기
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2025.09.16

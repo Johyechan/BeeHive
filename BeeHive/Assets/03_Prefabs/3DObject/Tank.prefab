@@ -47,13 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3009b0213c0de374ca89c5c341fc5de4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamType: 0
-  _renderer: {fileID: 5654505790167452514}
-  _originMaterial: {fileID: 0}
-  _emissionMaterial: {fileID: 0}
-  _animationDuration: 0.3
-  _xInterval: 0.007
-  _canPlaceType: 3
+  _pieceData:
+    materialData:
+      renderer: {fileID: 5654505790167452514}
+      originMaterial: {fileID: 0}
+      emissionMaterial: {fileID: 0}
+    pieceAttackedHandler: {fileID: 0}
+    teamType: 0
+    currentObjectType: 0
+    animationDuration: 0
+    xInterval: 0
 --- !u!65 &4871278116008338751
 BoxCollider:
   m_ObjectHideFlags: 0

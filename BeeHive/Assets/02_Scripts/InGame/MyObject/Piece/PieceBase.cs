@@ -1,9 +1,6 @@
-using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
-using InGame.MyManager.MyPiece;
-using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece.Class;
 using InGame.MyObject.Piece.Handler;
@@ -23,7 +20,7 @@ namespace InGame.MyObject.Piece
 
         public TeamType CurrentTeamType { get => _pieceData.teamType; } // 현재 팀 타입 프로퍼티
 
-        protected PieceVariable _pieceVariable; // 변경이 잦은 변수들을 가지는 클래스
+        protected PieceVariable _pieceVariable = new PieceVariable(); // 변경이 잦은 변수들을 가지는 클래스
         public PieceVariable PieceVariable { get => _pieceVariable; }
 
         protected virtual void Awake()
@@ -31,7 +28,7 @@ namespace InGame.MyObject.Piece
             _pieceVariable.id = ObjectIdManager.Instance.Id++;
             ObjectIdManager.Instance.AddObject(_pieceVariable.id, gameObject); // 객체 관리 매니저에 id와 함께 추가
 
-            _pieceData.changeMaterialHandler = new ChangeMaterialHandler(_pieceData.materialData); // 머티리얼 변경 핸들러 생성
+            _pieceData.changeMaterialHandler = new ChangeMaterialHandler(_pieceData.materialData, gameObject); // 머티리얼 변경 핸들러 생성
             _pieceData.pieceMoveHandler = new PieceMoveHandler(this, _pieceData); // 기물 이동 핸들러 생성
             _pieceData.pieceDeselectHandler = new PieceDeselectHandler(this); // 기물 선택 해제 핸들러 생성
             _pieceData.pieceSelectHandler = new PieceSelectHandler(this, _pieceData); // 기물 선택 핸들러 생성
@@ -66,11 +63,6 @@ namespace InGame.MyObject.Piece
             await _pieceData.pieceMoveHandler.MoveToPlacePlane(parent, targetPos, angle);
         }
 
-        public async Task FindCanPlacePlane()
-        {
-            await PlacePlaneManager.Instance.FindCanPlacePlane().AsyncWaitForCompletion();
-        }
-
         // 오브젝트가 마우스로 클릭되었을 때 실행될 함수
         public virtual void ObjectClicked()
         {
@@ -92,4 +84,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2025.09.15
+// 마지막 작성 일자: 2025.09.17

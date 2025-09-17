@@ -9,7 +9,7 @@ namespace InGame.MyObject.Piece.Handler
 {
     // 작성자: 조혜찬
     // 공격 받는 기능 핸들러 클래스
-    public class PieceAttackedHandler : MonoBehaviour
+    public class PieceAttackedHandler
     {
         private PieceBase _pieceBase; // 기물 클래스
 
@@ -29,6 +29,8 @@ namespace InGame.MyObject.Piece.Handler
             int returnObjID = _pieceBase.PieceVariable.id; // 공격 받은 객체의 ID
 
             Transform returnParent = null; // 공격 받은 기물의 부모 객체
+            Transform returnPieceTrans = ObjectIdManager.Instance.FindObject(returnObjID).transform; // 공격 받은 기물의 트랜스폼
+
             switch (_pieceData.currentObjectType) // 배치 가능한 타입(즉 객체 타입)
             {
                 case ObjectType.Miner:
@@ -43,7 +45,7 @@ namespace InGame.MyObject.Piece.Handler
             }
 
             Vector3 returnPos = new Vector3(_pieceData.xInterval * returnParent.childCount, 0, 0); // 공격 당한 기물의 목적지
-            Vector3 attackPos = transform.localPosition; // 공격한 기물의 목적지
+            Vector3 attackPos = returnPieceTrans.localPosition; // 공격한 기물의 목적지
 
             AttackInfo attackInfo = new AttackInfo()
             {
@@ -59,8 +61,8 @@ namespace InGame.MyObject.Piece.Handler
 
             NetworkManager.Instance.Socket.Emit("attackPiece", json);
 
-            await PieceManager.Instance.MoveAttackRelatedPieces(_pieceBase, attackPieceBase, returnParent, transform.parent, returnPos, attackPos); // 공격 당한 기물과 공격한 기물이 이동하는 함수
+            await PieceManager.Instance.MoveAttackRelatedPieces(_pieceBase, attackPieceBase, returnParent, returnPieceTrans.parent, returnPos, attackPos); // 공격 당한 기물과 공격한 기물이 이동하는 함수
         }
     }
 }
-// 마지막 작성 일자: 2025.09.15
+// 마지막 작성 일자: 2025.09.16
