@@ -64,8 +64,12 @@ namespace InGame.MyObject.Piece
         }
 
         // 오브젝트가 마우스로 클릭되었을 때 실행될 함수
-        public virtual void ObjectClicked()
+        public virtual async void ObjectClicked()
         {
+            // 현재 턴이 메인 턴이 아니라면
+            if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 이동할 수 없습니다."))
+                return; // 반환
+
             if (_pieceData.teamType != TeamManager.Instance.CurrentTeamType) // 현재 팀과 다른 팀의 기물이라면
             {
                 _ = _pieceData.pieceAttackedHandler.PieceAttacked();
@@ -84,4 +88,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2025.09.17
+// 마지막 작성 일자: 2025.09.18

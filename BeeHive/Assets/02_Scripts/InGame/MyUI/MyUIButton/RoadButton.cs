@@ -10,8 +10,12 @@ namespace InGame.MyUI.MyUIButton
     public class RoadButton : PlaceUIButton
     {
         // 클릭 시 실행될 함수
-        public override void OnUIClick()
+        public override async void OnUIClick()
         {
+            // 현재 턴이 메인 턴이 아니라면
+            if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 도로를 생성할 수 없습니다."))
+                return; // 반환
+
             if (!UIManager.Instance.CanInteractionUI) // 만약 UI 상호작용 불가능 상태라면
                 return; // 반환
 
@@ -40,4 +44,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.09.10
+// 마지막 작성 일자: 2025.09.18

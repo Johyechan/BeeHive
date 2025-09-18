@@ -1,6 +1,7 @@
 using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
+using InGame.MyInput.Struct;
 using InGame.MyManager;
 using InGame.MyManager.MyCard;
 using InGame.MyObject;
@@ -21,11 +22,14 @@ namespace InGame.MyInput
 
         private int _delay; // 딜레이 시간
 
-        public InputDrawHandler(Deck deck, int delay)
+        private InputDrawHandlerData _handlerData;
+
+        public InputDrawHandler(Deck deck, int delay, InputDrawHandlerData handlerData)
         {
             _deck = deck;
             _canDraw = true;
             _delay = delay;
+            _handlerData = handlerData;
         }
 
         // 인풋 액션에 구독할 함수 오버라이드
@@ -46,16 +50,7 @@ namespace InGame.MyInput
         // 드로우 함수
         private async Task Draw()
         {
-            if (TurnManager.Instance.CurrentTurnType != TurnType.DrawTurn) // 드로우 턴이 아니라면
-                return; // 반환
-
-            if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 내 팀의 턴이 아니라면
-                return; // 반환
-
-            if (!DrawManager.Instance.IsCanDraw) // 만약 Draw가 불가능하다면
-                return; // 반환
-
-            if (!await WalletEvent.OnUseGoldBar.Invoke(2)) // 금괴 2개를 사용할 수 없다면
+            if (await _handlerData.returnHandler.IsReturn()) // 반환을 해야한다면
                 return; // 반환
 
             _ = Delay(); // 연속적인 드로우를 막기 위한 딜레이 시작
@@ -63,36 +58,19 @@ namespace InGame.MyInput
             switch (TeamManager.Instance.CurrentTeamType)
             {
                 case TeamType.Team1: // 현재 팀이 Team1일 때
-                    await DrawManager.Instance.DrawCard(_deck.deckTransform, _deck.player1CardsParent, _deck._playerUICardsParent); // 카드 드로우 실행
-                    Sequence seq1 = DOTween.Sequence()
-                          .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke())
-                          .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(_deck.player1CardsParent));// 드로우 이벤트 인보크 후 시퀀스 완료
-                    await seq1.AsyncWaitForCompletion(); // Task 완료 반환 대기
+                    await _handlerData.functionHandler.DrawFunction(_deck.deckTransform, _deck.player1CardsParent, _deck._playerUICardsParent);
                     break;
+
                 case TeamType.Team2: // 현재 팀이 Team1일 때
-                    await DrawManager.Instance.DrawCard(_deck.deckTransform, _deck.player2CardsParent, _deck._playerUICardsParent);// 카드 드로우 실행
-                    Sequence seq2 = DOTween.Sequence()
-                          .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke())
-                          .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(_deck.player2CardsParent)); // 드로우 이벤트 인보크 후 시퀀스 완료
-                    await seq2.AsyncWaitForCompletion(); // Task 완료 반환 대기
+                    await _handlerData.functionHandler.DrawFunction(_deck.deckTransform, _deck.player2CardsParent, _deck._playerUICardsParent);
                     break;
+
                 case TeamType.Team3: // 현재 팀이 Team1일 때
-                    await DrawManager.Instance.DrawCard(_deck.deckTransform, _deck.player3CardsParent, _deck._playerUICardsParent);// 카드 드로우 실행
-                    Sequence seq3 = DOTween.Sequence()
-                          .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke())
-                          .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(_deck.player3CardsParent)); // 드로우 이벤트 인보크 후 시퀀스 완료
-                    await seq3.AsyncWaitForCompletion(); // Task 완료 반환 대기
+                    await _handlerData.functionHandler.DrawFunction(_deck.deckTransform, _deck.player3CardsParent, _deck._playerUICardsParent);
                     break;
             }
 
-            DrawInfo drawInfo = new DrawInfo()
-            {
-                roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                targetID = NetworkManager.Instance.CurrentPlayerID // 현재 클라이언트 ID
-            };
-
-            string json = JsonUtility.ToJson(drawInfo); // Json 형태로 변환
-            NetworkManager.Instance.Socket.Emit("draw", json); // 서버에 DrawCompleted 신호 보내기
+            _handlerData.socketEventHandler.CallSocketEvent();
         }
     }
 }

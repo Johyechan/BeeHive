@@ -58,25 +58,11 @@ namespace InGame.MyObject
                     return; // 반환
                 }
 
-                // 현재 턴이 메인 턴이 아니라면
-                if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 배치할 수 없습니다."))
-                {
-                    HighLightOffEvent(); // 하이라이트 끄기
-                    return; // 반환
-                }
-
                 ObjectMove(); // 기물 이동 함수 실행
             }
             else // 현재 이동 가능한 객체가 없다면
             {
                 if (!await WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
-                {
-                    HighLightOffEvent(); // 하이라이트 끄기
-                    return; // 반환
-                }
-
-                // 현재 턴이 메인 턴이 아니라면
-                if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 배치할 수 없습니다."))
                 {
                     HighLightOffEvent(); // 하이라이트 끄기
                     return; // 반환
@@ -167,4 +153,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.16
+// 마지막 작성 일자: 2025.09.18

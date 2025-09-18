@@ -26,6 +26,7 @@ namespace InGame.MyObject.Piece.Handler
 
         public Task HighLightOff(bool isOn, bool isMove = true) // 켜졌는지 여부, 이동 상태를 위해 켜졌는지 여부 = 어떤 값이 와도 상관 없음
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"{_pieceBase}, {_pieceBase.PieceVariable}, {_pieceBase.PieceVariable.isSelected}");
             if (isOn == false) // 끄는 상태일 때
             {
                 GameManager.Instance.CurrentMovePiece = null; // 현재 이동하려는 기물을 null로 할당

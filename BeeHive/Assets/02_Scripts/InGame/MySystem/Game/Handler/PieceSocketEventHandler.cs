@@ -29,7 +29,7 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("attackedPiece", async (data) =>
             {
-                NetworkManager.Instance.Socket.Emit("debug", "공격 받음 들어옴(PIeceSocketEventHandler: 32)");
+                NetworkManager.Instance.Socket.Emit("debug", "공격 받음");
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 SetAttackRelatedPieceInfo setInfo = JsonUtility.FromJson<SetAttackRelatedPieceInfo>(json); // 공격 관련 기물들을 세팅할 때 필요한 값을 가지는 구조체로 변경
 

@@ -1,4 +1,5 @@
 using InGame.MyInput;
+using InGame.MyInput.Struct;
 using InGame.MyObject;
 using MyUtil;
 using UnityEngine;
@@ -22,12 +23,21 @@ namespace InGame.MyManager
         private InputClickHandler _clickHandler; // 객체 클릭을 인식하기 위한 핸들러
         private InputDrawHandler _drawHandler; // 드로우를 위한 핸들러
 
+        private InputDrawHandlerData _inputDrawHandlerData; // 드로우 핸들러에 필요한 핸들러들을 가지는 구조체
+
         protected override void Awake()
         {
             base.Awake();
 
+            _inputDrawHandlerData = new InputDrawHandlerData()
+            {
+                returnHandler = new InputDrawReturnHandler(),
+                socketEventHandler = new InputDrawSocketEventHandler(),
+                functionHandler = new InputDrawFunctionHandler(),
+            };
+
             _clickHandler = new InputClickHandler();
-            _drawHandler = new InputDrawHandler(_deck, _drawMillisecondDelay);
+            _drawHandler = new InputDrawHandler(_deck, _drawMillisecondDelay, _inputDrawHandlerData);
 
             _playActionMap = _playerActionAsset.FindActionMap("Play"); // 인풋 에셋에서 Play 이름을 가진 액션 맵 탐색
             _clickAction = _playActionMap.FindAction("Click"); // 액션 맵에서 Click 이름을 가진 액션 탐색

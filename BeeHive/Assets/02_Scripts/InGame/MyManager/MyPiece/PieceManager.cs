@@ -61,18 +61,21 @@ namespace InGame.MyManager.MyPiece
 
             if(attackPiece.CurrentObjectType == ObjectType.Soldier)
             {
-                ChangeRoadInfo changeRoadInfo = new ChangeRoadInfo
+                if (attackPiece.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 공격한 기물이 현재 팀의 기물일 경우에만
                 {
-                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                    teamType = (int)attackPiece.CurrentTeamType, // 공격한 기물 팀 타입
-                    placePlaneID = attackPiece.PieceVariable.currentPlacePlane.Id // 공격한 기물의 목적지 칸의 ID
-                };
+                    ChangeRoadInfo changeRoadInfo = new ChangeRoadInfo
+                    {
+                        roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                        teamType = (int)attackPiece.CurrentTeamType, // 공격한 기물 팀 타입
+                        placePlaneID = attackPiece.PieceVariable.currentPlacePlane.Id // 공격한 기물의 목적지 칸의 ID
+                    };
 
-                string json = JsonUtility.ToJson(changeRoadInfo);
+                    string json = JsonUtility.ToJson(changeRoadInfo);
 
-                NetworkManager.Instance.Socket.Emit("changeRoad", json);
+                    NetworkManager.Instance.Socket.Emit("changeRoad", json);
 
-                await PieceEvents.OnChangeNearRoad?.Invoke(attackPiece.CurrentTeamType, attackPiece.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
+                    await PieceEvents.OnChangeNearRoad?.Invoke(attackPiece.CurrentTeamType, attackPiece.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
+                }
             }
 
             await FindCanPlacePlane(); // 다시 이동가능한 위치 찾기
@@ -106,6 +109,7 @@ namespace InGame.MyManager.MyPiece
 
         private async Task HideCanAttackPieces()
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"{_canAttackPieceMap}");
             foreach (var piece in _canAttackPieceMap) // 공격 가능 기물들 저장 맵 순회
             {
                 foreach (var pieceBase in piece.Value) // 해당 타입에 맞는 기물들을 저장한 리스트 순회
@@ -121,4 +125,4 @@ namespace InGame.MyManager.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2025.09.17
+// 마지막 작성 일자: 2025.09.18

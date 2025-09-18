@@ -40,13 +40,6 @@ namespace InGame.MyObject
                 return; // 반환
             }
 
-            // 현재 턴이 메인 턴이 아니라면
-            if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 도로를 배치할 수 없습니다."))
-            {
-                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
-                return; // 반환
-            }
-
             if (!await WarningEvent.OnCheckLeftPieceCount(_leftPieceCount, "남은 도로가 없어 배치할 수 없습니다")) // 남은 도로가 없다면
             {
                 HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
@@ -95,4 +88,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.17
+// 마지막 작성 일자: 2025.09.18
