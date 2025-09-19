@@ -51,7 +51,6 @@ namespace InGame.MySystem.Game.Handler
                 GameObject piecePlacePlaneObj = ObjectIdManager.Instance.FindObject(changedRoadInfo.placePlaneID); // 배치 칸 객체 구하기
                 PiecePlacePlaneObject piecePlacePlane = piecePlacePlaneObj.GetComponent<PiecePlacePlaneObject>(); // 기물 배치 칸 클래스 가져오기
 
-                NetworkManager.Instance.Socket.Emit("debug", $"객체: {piecePlacePlaneObj.name}, 클래스: {piecePlacePlane.name}");
                 await PieceEvents.OnChangeNearRoad?.Invoke((TeamType)changedRoadInfo.teamType, piecePlacePlane); // 주위 도로 변경 이벤트 호출
             });
         }

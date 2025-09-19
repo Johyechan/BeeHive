@@ -3,7 +3,7 @@ using InGame.MyObject.Piece.Handler;
 using System;
 using UnityEngine;
 
-namespace InGame.MyObject.Piece.Struct
+namespace InGame.MyObject.Piece.Data
 {
     // 작성자: 조혜찬
     // 기물이 값 형식으로 가져야할 변수들을 가지는 구조체

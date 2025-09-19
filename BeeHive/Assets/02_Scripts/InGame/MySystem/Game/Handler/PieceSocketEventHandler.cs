@@ -29,7 +29,6 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("attackedPiece", async (data) =>
             {
-                NetworkManager.Instance.Socket.Emit("debug", "공격 받음");
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 SetAttackRelatedPieceInfo setInfo = JsonUtility.FromJson<SetAttackRelatedPieceInfo>(json); // 공격 관련 기물들을 세팅할 때 필요한 값을 가지는 구조체로 변경
 
@@ -42,7 +41,7 @@ namespace InGame.MySystem.Game.Handler
                 Transform returnParent = GameObject.Find(setInfo.returnParentName).transform; // 공격 받은 기물의 부모 객체
                 Transform attackParent = attackPieceObj.transform.parent; // 공격한 기물의 부모 객체
 
-                await PieceManager.Instance.MoveAttackRelatedPieces(returnPiece, attackPiece, returnParent, attackParent, setInfo.returnPos, setInfo.attackPos); // 공격 받은 기물 및 공격한 기물 이동 함수
+                await PieceManager.Instance.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, setInfo.returnPos, setInfo.attackPos); // 공격 받은 기물 및 공격한 기물 이동 함수
             });
         }
     }

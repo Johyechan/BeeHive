@@ -1,7 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
-using InGame.MyObject.Piece.Struct;
+using InGame.MyObject.Piece.Data;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -61,7 +61,8 @@ namespace InGame.MyObject.Piece.Handler
 
             NetworkManager.Instance.Socket.Emit("attackPiece", json);
 
-            await PieceManager.Instance.MoveAttackRelatedPieces(_pieceBase, attackPieceBase, returnParent, returnPieceTrans.parent, returnPos, attackPos); // 공격 당한 기물과 공격한 기물이 이동하는 함수
+            NetworkManager.Instance.Socket.Emit("debug", $"공격 당한 기물 ID: {returnObjID}, 공격 당한 기물의 목적지: {returnPos}, 공격 당한 기물의 부모 객체 명: {returnParent.name}, 공격한 기물 ID: {attackObjID}, 공격한 기물의 목적지: {attackPos}");
+            await PieceManager.Instance.AttackRelatedPiecesMove(_pieceBase, attackPieceBase, returnParent, returnPieceTrans.parent, returnPos, attackPos); // 공격 당한 기물과 공격한 기물이 이동하는 함수
         }
     }
 }

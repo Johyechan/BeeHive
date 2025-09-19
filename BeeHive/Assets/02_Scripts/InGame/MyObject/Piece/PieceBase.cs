@@ -2,9 +2,9 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyObject.MyObjectInterface;
-using InGame.MyObject.Piece.Class;
+using InGame.MyObject.Piece.Data;
 using InGame.MyObject.Piece.Handler;
-using InGame.MyObject.Piece.Struct;
+using InGame.MyObject.Piece.Variable;
 using System.Threading.Tasks;
 using UnityEngine;
 

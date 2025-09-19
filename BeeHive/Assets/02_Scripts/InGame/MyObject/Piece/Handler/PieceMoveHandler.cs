@@ -1,6 +1,6 @@
 using DG.Tweening;
 using InGame.MyManager;
-using InGame.MyObject.Piece.Struct;
+using InGame.MyObject.Piece.Data;
 using System.Threading.Tasks;
 using UnityEngine;
 

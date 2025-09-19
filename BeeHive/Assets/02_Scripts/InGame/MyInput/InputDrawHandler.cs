@@ -1,13 +1,8 @@
-using DG.Tweening;
 using InGame.MyEnum;
-using InGame.MyEvent;
 using InGame.MyInput.Struct;
 using InGame.MyManager;
-using InGame.MyManager.MyCard;
 using InGame.MyObject;
-using MyUtil.MyEvent;
 using System.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace InGame.MyInput
@@ -74,4 +69,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2025.09.18

@@ -1,7 +1,6 @@
-using InGame.MyEnum;
 using UnityEngine;
 
-namespace InGame.MyObject.Piece.Class
+namespace InGame.MyObject.Piece.Variable
 {
     // 작성자: 조혜찬
     // 변경이 잦거나 Inspector창에서 할당 받을 필요가 없는 변수들을 가지는 클래스

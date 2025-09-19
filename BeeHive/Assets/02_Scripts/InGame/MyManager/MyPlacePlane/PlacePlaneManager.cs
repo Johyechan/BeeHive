@@ -6,6 +6,11 @@ using InGame.MyEnum;
 using InGame.MyObject;
 using System.Collections.Generic;
 using InGame.MySystem.Game;
+using InGame.MyObject.Piece;
+using InGame.MyObject.Piece.ObjectPieces;
+using InGame.MyManager.MyPlacePlane.Handler;
+using InGame.MyManager.MyPlacePlane.Variable;
+using System.Threading.Tasks;
 
 namespace InGame.MyManager.MyPlacePlane
 {
@@ -19,77 +24,60 @@ namespace InGame.MyManager.MyPlacePlane
         [SerializeField] private List<RoadPlacePlaneObject> _team2NearRoads = new List<RoadPlacePlaneObject>(); // Team2의 성에 근접한 도로 저장 배열
         [SerializeField] private List<RoadPlacePlaneObject> _team3NearRoads = new List<RoadPlacePlaneObject>(); // Team3의 성에 근접한 도로 저장 배열
 
-        private PlacePlaneMap _placePlaneMap; // 전체 기물 판을 가지는 클래스 변수
-        public PlacePlaneMap PlacePlaneMap => _placePlaneMap; // get만 가지는 _placePlaneMap 프로퍼티
-
-        private HighLightHandler _highLightHandler; // 하이라이트를 키고 끄는 기능을 가지는 클래스 변수
-        public HighLightHandler HighLightHandler => _highLightHandler; // get만 가지는 _highLightHandler 프로퍼티
-
-        private FindCanPlacePlaneSystem _findCanPlacePlaneSystem; // 배치 가능한 배치 판들을 찾는 시스템 클래스 변수
-        // 위에 변수를 외부에서 접근하기 위한 프로퍼티
-        public FindCanPlacePlaneSystem FindCanPlacePlaneSystem => _findCanPlacePlaneSystem;
+        private PlacePlaneManagerVariable _variable; // 매니저에 필요한 변수를 가지는 클래스
+        public PlacePlaneManagerVariable Variable { get => _variable; } // 위 변수 프로퍼티
 
         // 변수 초기화
         protected override void Awake()
         {
             base.Awake();
 
-            _placePlaneMap = new PlacePlaneMap();
-            _highLightHandler = new HighLightHandler();
-            _findCanPlacePlaneSystem = new FindCanPlacePlaneSystem();
+            _variable = new PlacePlaneManagerVariable();
 
-            _placePlaneMap.PlacePlaneSet(_placePlaneParent); // 전체 배치 판 저장
+            _variable.placePlaneMap = new PlacePlaneMap();
+            _variable.highLightHandler = new HighLightHandler();
+            _variable.findCanPlacePlaneSystem = new FindCanPlacePlaneSystem();
+            _variable.placePlaneStateHandler = new PlacePlaneStateHandler();
+            _variable.setNearRoadHandler = new SetNearRoadHandler();
 
-            switch(TeamManager.Instance.CurrentTeamType)
-            {
-                case TeamType.Team1:
-                    SetNearRoad(_team1NearRoads);
-                    break;
-                case TeamType.Team2:
-                    SetNearRoad(_team2NearRoads);
-                    break;
-                case TeamType.Team3:
-                    SetNearRoad(_team3NearRoads);
-                    break;
-            }
+            _variable.placePlaneMap.PlacePlaneSet(_placePlaneParent); // 전체 배치 판 저장
+
+            _variable.setNearRoadHandler.Setting(_team1NearRoads, _team2NearRoads, _team3NearRoads); // 주위 도로 세팅
         }
 
         private void OnEnable()
         {
             // 기물 배치 하이라이트 이벤트에 기물 하이라이트 on/off 기능 구독
-            HighLightEvents.OnPiecePlacementHighLight += _highLightHandler.PieceHighLight;
+            HighLightEvents.OnPiecePlacementHighLight += _variable.highLightHandler.PieceHighLight;
             // 도로 배치 하이라이트 이벤트에 도로 하이라이트 on/off 기능 구독
-            HighLightEvents.OnRoadPlacementHighLight += _highLightHandler.RoadHighLight;
+            HighLightEvents.OnRoadPlacementHighLight += _variable.highLightHandler.RoadHighLight;
             // 기물 이동 하이라이트 이벤트에 기물 하이라이트 on/off 기능 구독
-            HighLightEvents.OnPieceMovementHighLight += _highLightHandler.PieceHighLight;
+            HighLightEvents.OnPieceMovementHighLight += _variable.highLightHandler.PieceHighLight;
         }
 
         private void OnDisable()
         {
             // 이벤트 구독 해제
-            HighLightEvents.OnPiecePlacementHighLight -= _highLightHandler.PieceHighLight; 
-            HighLightEvents.OnRoadPlacementHighLight -= _highLightHandler.RoadHighLight;
-            HighLightEvents.OnPieceMovementHighLight -= _highLightHandler.PieceHighLight;
+            HighLightEvents.OnPiecePlacementHighLight -= _variable.highLightHandler.PieceHighLight; 
+            HighLightEvents.OnRoadPlacementHighLight -= _variable.highLightHandler.RoadHighLight;
+            HighLightEvents.OnPieceMovementHighLight -= _variable.highLightHandler.PieceHighLight;
         }
 
         public Sequence FindCanPlacePlane()
         {
             Sequence seq = DOTween.Sequence()
-                    .AppendCallback(() => _findCanPlacePlaneSystem.ResetPlacePlanes())
-                    .AppendCallback(() => _findCanPlacePlaneSystem.FindCanPlacePiecePlane(TeamManager.Instance.CurrentTeamType))
-                    .AppendCallback(() => _findCanPlacePlaneSystem.FindCanPlaceRoadPlane(TeamManager.Instance.CurrentTeamType));
+                    .AppendCallback(() => _variable.findCanPlacePlaneSystem.ResetPlacePlanes())
+                    .AppendCallback(() => _variable.findCanPlacePlaneSystem.FindCanPlacePiecePlane(TeamManager.Instance.CurrentTeamType))
+                    .AppendCallback(() => _variable.findCanPlacePlaneSystem.FindCanPlaceRoadPlane(TeamManager.Instance.CurrentTeamType));
 
             return seq;
         }
 
-        // 리스트에 있는 도로들을 전부 성과 근접한 도로로 만드는 함수(성과 근접한 도로로 만들 도로들을 저장하는 리스트)
-        private void SetNearRoad(List<RoadPlacePlaneObject> list)
+        // 배치 칸 상태 변경 함수(상태 변경될 배치칸, 배치할 기물, 이동 여부)
+        public async Task ChangePlacePlaneState(PlacePlaneObjectBase currentPlacePlane, PieceBase placedPiece, bool isMove)
         {
-            foreach(var road in list) // 리스트 순회
-            {
-                road.isNearToCastle = true; // 성과 근접한 리스트로 만들기
-            }
+            await _variable.placePlaneStateHandler.ChangePlacePlaneState(currentPlacePlane, placedPiece, isMove);
         }
     }
 }
-// 마지막 작성 일자: 2025.08.20
+// 마지막 작성 일자: 2025.09.19

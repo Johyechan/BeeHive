@@ -26,7 +26,7 @@ namespace InGame.MyUI.MyUIButton
                 HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
                 _ = PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
 
-                foreach (var road in PlacePlaneManager.Instance.HighLightHandler.CanRoadPlacePlanes) // 배치 가능한 도로 칸들 순회
+                foreach (var road in PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes) // 배치 가능한 도로 칸들 순회
                 {
                     road.CanPlacePieceType = _canPlaceType; // 배치 가능한 타입을 할당
                     road.Cost = _cost; // 비용 할당

@@ -1,8 +1,7 @@
-using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
-using InGame.MyObject.Piece.Struct;
+using InGame.MyManager.MyPlacePlane;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -72,9 +71,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
             GameObject roadObj = await ObjectPoolManager.Instance.GetObject(type, roadPlacePlaneObject.transform.parent); // 새 도로 객체 생성
             PieceBase road = roadObj.GetComponent<PieceBase>(); // 도로 객체에서 PieceBase 가져오기
 
-            roadPlacePlaneObject.PlacedObjectType = road.CurrentObjectType; // 새로운 도로의 객체 타입 할당
-            roadPlacePlaneObject.TeamType = road.CurrentTeamType; // 새로운 도로의 팀 타입 할당
-            roadPlacePlaneObject.PlacedPiece = road; // 배치된 기물에 도로 할당
+            await PlacePlaneManager.Instance.ChangePlacePlaneState(roadPlacePlaneObject, road, false); // 배치칸 상태 변경
 
             roadObj.transform.localPosition = roadPlacePlaneObject.transform.localPosition; // 현재 배치하는 위치로 도로의 위치 변경
             roadObj.transform.localRotation = Quaternion.Euler(new Vector3(0, targetAngle, 0));
@@ -86,4 +83,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2025.09.17
+// 마지막 작성 일자: 2025.09.19
