@@ -5,6 +5,7 @@ using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -80,8 +81,13 @@ namespace InGame.MyObject
         {
             HighLightEvents.SelectedPlacementType = ObjectType.None; // 현재 어떤 기물을 배치 할 수 있는지 저장하는 변수 초기화
             _canPlaceTypePiece = ObjectType.None; // 배치 가능한 타입 초기화
-            _collider.enabled = false; // 클릭이 되지 않도록 콜라이더 비활성화
-            _material.color = new Color(_material.color.r, _material.color.g, _material.color.b, 0); // 알파 값을 0으로 바꿔 보이지 않도록 변경
+
+            if(_collider != null && _collider.gameObject.activeInHierarchy)
+                _collider.enabled = false; // 클릭이 되지 않도록 콜라이더 비활성화
+
+            if(_material != null)
+                _material.color = new Color(_material.color.r, _material.color.g, _material.color.b, 0); // 알파 값을 0으로 바꿔 보이지 않도록 변경
+
             _cost = 0; // 비용 초기화
         }
 

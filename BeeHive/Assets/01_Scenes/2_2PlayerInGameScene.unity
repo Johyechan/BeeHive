@@ -6728,6 +6728,10 @@ PrefabInstance:
       propertyPath: 'nearPiecePlaceTransformList.Array.data[1]'
       value: 
       objectReference: {fileID: 1401895239}
+    - target: {fileID: 4518505234373498968, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8244229074724728705, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.16183

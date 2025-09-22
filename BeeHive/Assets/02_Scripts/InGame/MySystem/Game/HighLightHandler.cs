@@ -1,4 +1,6 @@
+using InGame.MyManager;
 using InGame.MyObject;
+using System;
 using System.Collections.Generic;
 
 namespace InGame.MySystem.Game
@@ -18,10 +20,12 @@ namespace InGame.MySystem.Game
 
         public void PieceHighLight(bool on, bool isPlace)
         {
-            if(isPlace)
+            if (isPlace)
             {
                 if (_canPiecePlacePlanes.Count <= 0) // 배치 가능한 기물 판 객체 존재하지 않다면
+                {
                     return; // 그냥 반환
+                }
 
                 foreach (var placePlane in _canPiecePlacePlanes) // 배치 가능한 기물 판 객체들 순회
                 {
@@ -38,7 +42,9 @@ namespace InGame.MySystem.Game
             else
             {
                 if (_canPieceMovePlanes.Count <= 0) // 이동 가능한 기물 판 객체 존재하지 않다면
+                {
                     return; // 그냥 반환
+                }
 
                 foreach (var placePlane in _canPieceMovePlanes) // 이동 가능한 기물 판 객체들 순회
                 {
@@ -57,7 +63,9 @@ namespace InGame.MySystem.Game
         public void RoadHighLight(bool on)
         {
             if (_canRoadPlacePlanes.Count <= 0) // 배치 가능한 도로 판 객체 존재하지 않다면
+            {
                 return; // 그냥 반환
+            }
 
             foreach (var placePlane in _canRoadPlacePlanes) // 배치 가능한 도로 판 객체들 순회
             {
@@ -69,7 +77,6 @@ namespace InGame.MySystem.Game
                 {
                     placePlane.HighLightOff(); // 하이라이트 끄기
                 }
-
             }
         }
     }

@@ -46,6 +46,8 @@ namespace InGame.MyManager.MyPiece.Handler
                     await pieceBase.ChangeMaterial(true);
                 }
             }
+
+            await Task.CompletedTask;
         }
     }
 }
