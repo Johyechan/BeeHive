@@ -19,19 +19,19 @@ namespace InGame.MyObject.Handler
         {
             if (!await WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
             {
-                _piecePlacePlaneObject.HighLightOffEvent(); // 하이라이트 끄기
+                await _piecePlacePlaneObject.HighLightOffEvent(); // 하이라이트 끄기
                 return true; // 반환
             }
 
             if (!await WarningEvent.OnCheckLeftPieceCount(leftPieceCount, "남은 기물이 없어 배치할 수 없습니다")) // 남은 도로가 없다면
             {
-                _piecePlacePlaneObject.HighLightOffEvent(); // 하이라이트 끄기
+                await _piecePlacePlaneObject.HighLightOffEvent(); // 하이라이트 끄기
                 return true; // 반환
             }
 
             if (!await WarningEvent.OnCanPayCost.Invoke(cost, "금괴가 부족하여 기물을 배치할 수 없습니다.")) // 비용을 지불할 수 없다면
             {
-                _piecePlacePlaneObject.HighLightOffEvent(); // 하이라이트 끄기
+                await _piecePlacePlaneObject.HighLightOffEvent(); // 하이라이트 끄기
                 return true; // 반환
             }
 
@@ -39,4 +39,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.09.19
+// 마지막 작성 일자: 2025.09.23

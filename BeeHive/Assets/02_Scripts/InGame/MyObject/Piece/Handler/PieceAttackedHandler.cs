@@ -1,4 +1,5 @@
 using InGame.MyEnum;
+using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
 using InGame.MyObject.Piece.Data;
@@ -24,6 +25,17 @@ namespace InGame.MyObject.Piece.Handler
         public async Task PieceAttacked()
         {
             PieceBase attackPieceBase = GameManager.Instance.CurrentMovePiece.GetComponent<PieceBase>(); // 공격한 객체의 PieceBase 가져오기
+
+            if (!await WarningEvent.OnCanMovePiece?.Invoke(attackPieceBase.CurrentObjectType, true)) // 같은 타입의 기물이 공격 했었다면
+            {
+                HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
+                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
+                HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
+                await PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+
+                await Task.CompletedTask; // 테스크 종료
+                return; // 함수 종료
+            }
 
             int attackObjID = attackPieceBase.PieceVariable.id; // 공격한 객체의 ID
             int returnObjID = _pieceBase.PieceVariable.id; // 공격 받은 객체의 ID
@@ -61,9 +73,8 @@ namespace InGame.MyObject.Piece.Handler
 
             NetworkManager.Instance.Socket.Emit("attackPiece", json);
 
-            NetworkManager.Instance.Socket.Emit("debug", $"공격 당한 기물 ID: {returnObjID}, 공격 당한 기물의 목적지: {returnPos}, 공격 당한 기물의 부모 객체 명: {returnParent.name}, 공격한 기물 ID: {attackObjID}, 공격한 기물의 목적지: {attackPos}");
             await PieceManager.Instance.AttackRelatedPiecesMove(_pieceBase, attackPieceBase, returnParent, returnPieceTrans.parent, returnPos, attackPos); // 공격 당한 기물과 공격한 기물이 이동하는 함수
         }
     }
 }
-// 마지막 작성 일자: 2025.09.16
+// 마지막 작성 일자: 2025.09.23

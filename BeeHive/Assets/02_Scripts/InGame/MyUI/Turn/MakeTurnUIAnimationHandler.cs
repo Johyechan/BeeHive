@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyManager;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -15,14 +16,14 @@ namespace InGame.MyUI.Turn
         }
 
         // 애니메이션 실행 함수
-        public override Sequence UIAnimationPlay()
+        public override async Task UIAnimationPlay()
         {
-            Sequence seq = DOTween.Sequence()
+            await DOTween.Sequence()
                 .AppendCallback(() => _tmpText.text = "생산 턴") // 무슨 턴인지 텍스트로 보여주기
-                .Append(base.UIAnimationPlay()); // 이후 동일하게 실행되어야 할 기능 수행
+                .AsyncWaitForCompletion(); // 이후 동일하게 실행되어야 할 기능 수행
 
-            return seq;
+            await base.UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2025.09.02
+// 마지막 작성 일자: 2025.09.23

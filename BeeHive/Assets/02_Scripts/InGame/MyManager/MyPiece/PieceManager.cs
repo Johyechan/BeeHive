@@ -63,8 +63,8 @@ namespace InGame.MyManager.MyPiece
 
         public async Task FindCanPlacePlane()
         {
-            await PlacePlaneManager.Instance.FindCanPlacePlane().AsyncWaitForCompletion();
+            await PlacePlaneManager.Instance.FindCanPlacePlane();
         }
     }
 }
-// 마지막 작성 일자: 2025.09.19
+// 마지막 작성 일자: 2025.09.23

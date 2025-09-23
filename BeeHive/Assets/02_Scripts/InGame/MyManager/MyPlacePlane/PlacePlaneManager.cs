@@ -63,14 +63,13 @@ namespace InGame.MyManager.MyPlacePlane
             HighLightEvents.OnPieceMovementHighLight -= _variable.highLightHandler.PieceHighLight;
         }
 
-        public Sequence FindCanPlacePlane()
+        public async Task FindCanPlacePlane()
         {
-            Sequence seq = DOTween.Sequence()
-                    .AppendCallback(() => _variable.findCanPlacePlaneSystem.ResetPlacePlanes())
-                    .AppendCallback(() => _variable.findCanPlacePlaneSystem.FindCanPlacePiecePlane(TeamManager.Instance.CurrentTeamType))
-                    .AppendCallback(() => _variable.findCanPlacePlaneSystem.FindCanPlaceRoadPlane(TeamManager.Instance.CurrentTeamType));
+            await _variable.findCanPlacePlaneSystem.ResetPlacePlanes();
 
-            return seq;
+            await _variable.findCanPlacePlaneSystem.FindCanPlacePiecePlane(TeamManager.Instance.CurrentTeamType);
+
+            await _variable.findCanPlacePlaneSystem.FindCanPlaceRoadPlane(TeamManager.Instance.CurrentTeamType);
         }
 
         // 배치 칸 상태 변경 함수(상태 변경될 배치칸, 배치할 기물, 이동 여부)
@@ -80,4 +79,4 @@ namespace InGame.MyManager.MyPlacePlane
         }
     }
 }
-// 마지막 작성 일자: 2025.09.19
+// 마지막 작성 일자: 2025.09.23

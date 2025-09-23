@@ -33,14 +33,11 @@ namespace InGame.MyUI.Turn
         }
 
         // 매개 변수로 받은 턴의 UI 애니메이션을 실행
-        public Sequence UIAnimationPlay(TurnType currentTurn)
+        public async Task UIAnimationPlay(TurnType currentTurn)
         {
-            Sequence seq = DOTween.Sequence()
-                .Append(PlacePlaneManager.Instance.FindCanPlacePlane()) // 배치 가능한 칸 찾는 기능 실행
-                .Append(_turnAnimations[currentTurn].UIAnimationPlay()); // UI 애니메이션 실행
-
-            return seq;
+            await PlacePlaneManager.Instance.FindCanPlacePlane();
+            await _turnAnimations[currentTurn].UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2025.09.05
+// 마지막 작성 일자: 2025.09.23

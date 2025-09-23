@@ -72,20 +72,20 @@ namespace InGame.MyObject.Piece
 
             if (_pieceData.teamType != TeamManager.Instance.CurrentTeamType) // 현재 팀과 다른 팀의 기물이라면
             {
-                _ = _pieceData.pieceAttackedHandler.PieceAttacked();
+                await _pieceData.pieceAttackedHandler.PieceAttacked();
                 return; // 반환
             }
 
             // 클릭 되었을 때 이동 가능한 배치 칸 하이라이트 활성화
             if (!_pieceVariable.isSelected) // 선택된 상태가 아닐 경우
             {
-                _pieceData.pieceSelectHandler.PieceSelect(); // 선택 함수 호출
+                await _pieceData.pieceSelectHandler.PieceSelect(); // 선택 함수 호출
             }
             else // 선택된 상태일 경우
             {
-                _pieceData.pieceDeselectHandler.PieceDeselect(); // 선택 해제 함수 호출
+                await _pieceData.pieceDeselectHandler.PieceDeselect(); // 선택 해제 함수 호출
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.18
+// 마지막 작성 일자: 2025.09.23

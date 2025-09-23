@@ -47,6 +47,7 @@ namespace InGame.MyUI.MyUIButton
                 if(TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀이 내 팀일 경우
                 {
                     socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 이벤트 전달
+                    socket.Emit("debug", "턴 넘기기");
                     TurnManager.Instance.CanChangeTurn = false; // 턴 변경 가능 여부 false로 초기화
                 }
             }

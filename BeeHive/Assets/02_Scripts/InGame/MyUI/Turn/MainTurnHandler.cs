@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyManager;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -13,21 +14,23 @@ namespace InGame.MyUI.Turn
         {
         }
 
-        public override Sequence UIAnimationPlay()
+        public override async Task UIAnimationPlay()
         {
-            Sequence seq = DOTween.Sequence()
+            await DOTween.Sequence()
                 .AppendCallback(() => _tmpText.text = "메인 턴") // 무슨 턴인지 텍스트로 보여주기
-                .Append(base.UIAnimationPlay()) // 이후 동일하게 실행되어야 할 기능 수행
+                .AsyncWaitForCompletion(); // 이후 동일하게 실행되어야 할 기능 수행
+
+            await base.UIAnimationPlay();
+
+            await DOTween.Sequence()
                 .AppendCallback(() =>
                 {
                     if (TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 내 팀 차례일때
                     {
                         TurnManager.Instance.CanChangeTurn = true; // 턴 변경 버튼으로 넘기기 가능
                     }
-                });
-
-            return seq;
+                }).AsyncWaitForCompletion();
         }
     }
 }
-// 마지막 작성 일자: 2025.09.02
+// 마지막 작성 일자: 2025.09.23

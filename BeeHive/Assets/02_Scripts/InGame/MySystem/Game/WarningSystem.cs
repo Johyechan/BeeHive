@@ -30,7 +30,7 @@ namespace InGame.MySystem
             WarningEvent.OnCanMovePiece -= IsCanMovePiece; // 기물을 이동할 수 있는지 확인하는 델리게이트에 구독
         }
 
-        private async Task<bool> IsCanMovePiece(ObjectType type)
+        private async Task<bool> IsCanMovePiece(ObjectType type, bool isAttack)
         {
             if (GameManager.Instance.PieceCanMoveMap[type])
             {
@@ -43,10 +43,24 @@ namespace InGame.MySystem
                     await UIManager.Instance.WarningUIMake($"더 이상 광부를 이동할 수 없습니다.");
                     break;
                 case ObjectType.Soldier:
-                    await UIManager.Instance.WarningUIMake($"더 이상 보병을 이동할 수 없습니다.");
+                    if(isAttack) // 공격 관련이라면
+                    {
+                        await UIManager.Instance.WarningUIMake($"더 이상 보병으로 공격할 수 없습니다.");
+                    }
+                    else // 이동 관련일 경우
+                    {
+                        await UIManager.Instance.WarningUIMake($"더 이상 보병을 이동할 수 없습니다.");
+                    }
                     break;
                 case ObjectType.Tank:
-                    await UIManager.Instance.WarningUIMake($"더 이상 전차를 이동할 수 없습니다.");
+                    if(isAttack) // 공격 관련이라면
+                    {
+                        await UIManager.Instance.WarningUIMake($"더 이상 전차로 공격할 수 없습니다.");
+                    }
+                    else // 이동 관련일 경우
+                    {
+                        await UIManager.Instance.WarningUIMake($"더 이상 전차를 이동할 수 없습니다.");
+                    }
                     break;
             }
             return false;
