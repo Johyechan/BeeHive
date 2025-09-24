@@ -135,14 +135,15 @@ namespace InGame.MyObject
                         {
                             roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                             teamType = (int)pieceBase.CurrentTeamType, // 공격한 기물 팀 타입
-                            placePlaneID = pieceBase.PieceVariable.currentPlacePlane.Id // 공격한 기물의 목적지 칸의 ID
+                            placePlaneID = pieceBase.PieceVariable.currentPlacePlane.Id, // 공격한 기물의 목적지 칸의 ID
+                            pieceID = pieceBase.PieceVariable.id // 주위 도로를 변경 시킬 기물 ID
                         };
 
                         string changeRoadjson = JsonUtility.ToJson(changeRoadInfo);
 
                         NetworkManager.Instance.Socket.Emit("changeRoad", changeRoadjson);
 
-                        await PieceEvents.OnChangeNearRoad?.Invoke(pieceBase.CurrentTeamType, pieceBase.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
+                        await PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, pieceBase.CurrentTeamType, pieceBase.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                     }
                 }
 
@@ -153,4 +154,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.23
+// 마지막 작성 일자: 2025.09.24

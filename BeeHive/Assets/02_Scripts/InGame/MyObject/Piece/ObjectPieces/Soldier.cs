@@ -39,8 +39,11 @@ namespace InGame.MyObject.Piece.ObjectPieces
             PieceVariable.parent = TeamManager.Instance.GetSoldierTransform(TeamManager.Instance.CurrentTeamType); // 보병 객체의 부모 할당
         }
 
-        private async Task NearRoadChange(TeamType type, PiecePlacePlaneObject piecePlacePlaneObject)
+        private async Task NearRoadChange(PieceBase pieceBase, TeamType type, PiecePlacePlaneObject piecePlacePlaneObject)
         {
+            if (pieceBase != this) // 자기자신이 부른 게 아닐경우
+                return; // 반환
+
             UIManager.Instance.CanInteractionUI = false;
 
             foreach (var nearRoad in piecePlacePlaneObject.nearRoadPlaceTransformList)
@@ -67,7 +70,19 @@ namespace InGame.MyObject.Piece.ObjectPieces
         private async Task ChangeRoad(ObjectPoolType type, RoadPlacePlaneObject roadPlacePlaneObject)
         {
             float targetAngle = roadPlacePlaneObject.PlacedPiece.gameObject.transform.rotation.eulerAngles.y;
-            ObjectPoolManager.Instance.ReturnObject(type, roadPlacePlaneObject.PlacedPiece.gameObject); // 기존 도로 객체 반환
+            switch(roadPlacePlaneObject.PlacedPiece.CurrentTeamType) // 기존 도로의 팀 타입
+            {
+                case TeamType.Team1:
+                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, roadPlacePlaneObject.PlacedPiece.gameObject); // 기존 도로 객체 반환
+                    break;
+                case TeamType.Team2:
+                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, roadPlacePlaneObject.PlacedPiece.gameObject); // 기존 도로 객체 반환
+                    break;
+                case TeamType.Team3:
+                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, roadPlacePlaneObject.PlacedPiece.gameObject); // 기존 도로 객체 반환
+                    break;
+            }
+            
             GameObject roadObj = await ObjectPoolManager.Instance.GetObject(type, roadPlacePlaneObject.transform.parent); // 새 도로 객체 생성
             PieceBase road = roadObj.GetComponent<PieceBase>(); // 도로 객체에서 PieceBase 가져오기
 
@@ -83,4 +98,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2025.09.19
+// 마지막 작성 일자: 2025.09.24

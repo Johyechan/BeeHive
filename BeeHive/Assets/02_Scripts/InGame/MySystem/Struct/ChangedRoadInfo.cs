@@ -8,6 +8,7 @@ namespace InGame.MySystem
     {
         public int teamType; // 바뀔 도로의 팀 타입
         public int placePlaneID; // 바뀔 도로들의 공통 기물 배치 칸 ID
+        public int pieceID; // 주위 도로를 변경 시킬 기물의 ID
     }
 }
 // 마지막 작성 일자: 2025.09.17
