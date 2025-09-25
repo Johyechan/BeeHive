@@ -29,9 +29,18 @@ namespace InGame.MyObject.Piece.Handler
             await PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
 
             if (_pieceData.currentObjectType != ObjectType.Tank) // 전차가 아닐 경우
+            {
                 await PlacePlaneManager.Instance.Variable.findCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, _pieceData.currentObjectType); // 한 칸 이동 가능한 칸 찾기
+            }
+            else // 전차일 경우
+            {
+                if(CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있을 때
+                {
+                    await PlacePlaneManager.Instance.Variable.findCanPlacePlaneSystem.FindCanFirePowerAttackPiece(_pieceBase.CurrentTeamType, _pieceBase.PieceVariable.currentPlacePlane); // 한 칸 떨어진 기물들을 공격 가능 대상으로 지정
+                }
+            }
 
-            GameManager.Instance.CurrentMovePiece = _pieceBase.gameObject; // 현재 객체를 현재 이동하려는 기물로 할당
+                GameManager.Instance.CurrentMovePiece = _pieceBase.gameObject; // 현재 객체를 현재 이동하려는 기물로 할당
             HighLightEvents.SelectedPlacementType = ObjectType.None; // 배치 하는 것이 아닌 이동의 여부이기에 None으로 설정
 
             foreach (var piece in PlacePlaneManager.Instance.Variable.highLightHandler.CanPieceMovePlanes) // 배치 가능한 도로 칸들 순회
@@ -43,17 +52,17 @@ namespace InGame.MyObject.Piece.Handler
             switch (_pieceData.currentObjectType) // 현재 배치가능한(즉 배치하려는) 기물의 타입에 따라
             {
                 case ObjectType.Soldier: // 보병일 경우
-                    _ = PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Miner); // 공격 가능한 광부 기물들 하이라이트 키기
-                    _ = PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Soldier); // 공격 가능한 보병 기물들 하이라이트 키기
+                    await PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Miner); // 공격 가능한 광부 기물들 하이라이트 키기
+                    await PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Soldier); // 공격 가능한 보병 기물들 하이라이트 키기
                     break;
                 case ObjectType.Tank: // 전차일 경우
-                    _ = PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Miner); // 공격 가능한 광부 기물들 하이라이트 키기
-                    _ = PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Soldier); // 공격 가능한 보병 기물들 하이라이트 키기
-                    _ = PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Tank); // 공격 가능한 전차 기물들 하이라이트 키기
+                    await PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Miner); // 공격 가능한 광부 기물들 하이라이트 키기
+                    await PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Soldier); // 공격 가능한 보병 기물들 하이라이트 키기
+                    await PieceEvents.OnShowCanAttackPieces?.Invoke(ObjectType.Tank); // 공격 가능한 전차 기물들 하이라이트 키기
                     break;
             }
             _pieceBase.PieceVariable.isSelected = true; // 선택 되었다고 할당
         }
     }
 }
-// 마지막 작성 일자: 2025.09.23
+// 마지막 작성 일자: 2025.09.25

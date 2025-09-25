@@ -16,6 +16,9 @@ namespace InGame.MyManager.MyPiece
         private Dictionary<ObjectType, List<PieceBase>> _canAttackPieceMap = new Dictionary<ObjectType, List<PieceBase>>(); // 공격 가능한 기물들을 저장하는 맵
         public Dictionary<ObjectType, List<PieceBase>> CanAttackPieceMap { get =>  _canAttackPieceMap; } // 위 변수 프로퍼티
 
+        private Dictionary<ObjectType, List<PieceBase>> _canFirePowerAttackPieceMap = new Dictionary<ObjectType, List<PieceBase>>(); // 화력으로 공격 가능한 기물들을 저장하는 맵
+        public Dictionary<ObjectType, List<PieceBase>> CanFirePowerAttackPieceMap { get => _canFirePowerAttackPieceMap; } // 위 변수 프로퍼티
+
         private AttackRelatedPiecesMoveHandler _attackRelatedPiecesMoveHandler; // 공격 관련 기물들 이동 핸들러
 
         private CanAttackPieceStateHandler _canAttackPieceStateHandler; // 공격 가능한 기물들의 상태 변경 핸들러
@@ -30,6 +33,10 @@ namespace InGame.MyManager.MyPiece
             _canAttackPieceMap.Add(ObjectType.Miner, new List<PieceBase>());
             _canAttackPieceMap.Add(ObjectType.Soldier, new List<PieceBase>());
             _canAttackPieceMap.Add(ObjectType.Tank, new List<PieceBase>());
+
+            _canFirePowerAttackPieceMap.Add(ObjectType.Miner, new List<PieceBase>());
+            _canFirePowerAttackPieceMap.Add(ObjectType.Soldier, new List<PieceBase>());
+            _canFirePowerAttackPieceMap.Add(ObjectType.Tank, new List<PieceBase>());
         }
 
         private void OnEnable()

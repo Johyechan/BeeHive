@@ -39,6 +39,10 @@ namespace InGame.MyUI.MyUIButton
 
             if (socket != null) // 서버와 통신하기 위한 객체가 존재할 때
             {
+                if(!UIManager.Instance.CanInteractionUI) // UI 상호작용 불가일 때 
+                {
+                    return; // 반환
+                }
                 if (!TurnManager.Instance.CanChangeTurn) // 턴 변경 가능 상태가 아닐 경우
                 {
                     return; // 반환

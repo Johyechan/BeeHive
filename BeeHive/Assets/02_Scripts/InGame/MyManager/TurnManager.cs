@@ -1,10 +1,8 @@
-using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MySystem.Game;
 using InGame.MyUI.Turn;
 using MyUtil;
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -75,7 +73,6 @@ namespace InGame.MyManager
         private async Task TurnChange(TurnType nextTurn)
         {
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
-            NetworkManager.Instance.Socket.Emit("debug", $"현재 턴: {_currentTurnType}");
 
             if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
             {
@@ -110,8 +107,6 @@ namespace InGame.MyManager
                 };
                 string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
                 NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
-
-                NetworkManager.Instance.Socket.Emit("debug", "자동으로 턴 넘기기");
             }
         }
     }

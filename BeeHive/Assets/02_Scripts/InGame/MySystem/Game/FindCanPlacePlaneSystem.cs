@@ -110,24 +110,11 @@ namespace InGame.MySystem.Game
             {
                 if (nearPiece.IsChecked) // 이미 확인을 했었다면
                     continue; // 넘기기
-                else if ((nearPiece.TeamType != teamType && nearPiece.TeamType != TeamType.None)) // 현재 팀이 아니고 다른 팀에 속한 상태라면
+                else if (nearPiece.TeamType != teamType && nearPiece.TeamType != TeamType.None) // 현재 팀이 아니고 다른 팀에 속한 상태라면
                 {
                     ObjectType objType = nearPiece.PlacedObjectType; // 배치되어 있는 객체 할당
-                    switch (objType)
-                    {
-                        case ObjectType.Miner: // 광부가 배치되어 있다면
-                            if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Miner].Contains(nearPiece.PlacedPiece))
-                                PieceManager.Instance.CanAttackPieceMap[ObjectType.Miner].Add(nearPiece.PlacedPiece); // 공격 가능한 광부 객체 리스트에 추가
-                            break;
-                        case ObjectType.Soldier: // 보병이 배치되어 있다면
-                            if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Contains(nearPiece.PlacedPiece))
-                                PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Add(nearPiece.PlacedPiece); // 공격 가능한 보병 객체 리스트에 추가
-                            break;
-                        case ObjectType.Tank: // 전차가 배치되어 있다면
-                            if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Contains(nearPiece.PlacedPiece))
-                                PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Add(nearPiece.PlacedPiece); // 공격 가능한 전차 객체 리스트에 추가
-                            break;
-                    }
+                    if (!PieceManager.Instance.CanAttackPieceMap[objType].Contains(nearPiece.PlacedPiece))
+                        PieceManager.Instance.CanAttackPieceMap[objType].Add(nearPiece.PlacedPiece);
 
                     continue;
                 }
@@ -155,6 +142,33 @@ namespace InGame.MySystem.Game
                         FindNearRoads(teamType, nearPiece); // 해당 기물 칸의 인접한 도로만 탐색
                 }
             }
+        }
+
+        public Task FindCanFirePowerAttackPiece(TeamType teamType, PiecePlacePlaneObject piece)
+        {
+            foreach(var nearRoad in piece.nearRoadPlaceTransformList)
+            {
+                foreach(var nearPiece in nearRoad.nearPiecePlaceTransformList)
+                {
+                    if (nearPiece == piece) // 자기 자신이라면
+                        continue; // 넘기기
+
+                    if (nearPiece.TeamType == teamType || nearPiece.TeamType == TeamType.None) // 공격하려는 전차 기물의 팀이거나 빈 칸이라면
+                        continue; // 넘기기
+
+                    // 근접 공격으로 공격 가능한 대상이라면
+                    if (PieceManager.Instance.CanAttackPieceMap[nearPiece.PlacedObjectType].Contains(nearPiece.PlacedPiece))
+                        continue; // 넘기기
+
+                    // 공격 가능한 기물 중에 일치하는 기물이 없을 경우
+                    if (!PieceManager.Instance.CanFirePowerAttackPieceMap[nearPiece.PlacedObjectType].Contains(nearPiece.PlacedPiece))
+                    {
+                        PieceManager.Instance.CanFirePowerAttackPieceMap[nearPiece.PlacedObjectType].Add(nearPiece.PlacedPiece);
+                    }
+                }
+            }
+
+            return Task.CompletedTask; // 테스크 종료 반환
         }
 
         private bool CheckNearRoad(TeamType teamType, RoadPlacePlaneObject road)
@@ -191,4 +205,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.09.23
+// 마지막 작성 일자: 2025.09.25
