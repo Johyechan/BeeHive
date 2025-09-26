@@ -1,5 +1,6 @@
 using InGame.MyObject;
 using InGame.MySystem.Game;
+using InGame.MyUI.Card;
 using MyUtil;
 using MyUtil.MyObjectPool;
 using System;
@@ -20,6 +21,9 @@ namespace InGame.MyManager.MyCard
         public CardSetHandle CardSetHandle { get => _cardSetHandle; } // 위 변수 프로퍼티
 
         [SerializeField] private Deck _deck; // 덱 클래스
+
+        [SerializeField] private CanvasGroup _cardUsePanelCanvasGroup; // 카드 사용 캔버스 그룹
+        [SerializeField] private CanvasGroup _cardInformationPanelCanvasGroup; // 카드 정보 캔버스 그룹
 
         protected override void Awake()
         {
@@ -42,8 +46,11 @@ namespace InGame.MyManager.MyCard
             if (includeUI) // UI도 생성해야 할 경우
             {
                 GameObject uiCard = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.UIcard, playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
+                UICardBase uiCardBase = uiCard.GetComponent<UICardBase>();
+
+                await uiCardBase.Init(_cardUsePanelCanvasGroup, _cardInformationPanelCanvasGroup);
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2025.09.26

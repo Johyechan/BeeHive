@@ -6,7 +6,7 @@
             "id": "1ba3f712-6c1a-4729-9959-569079784f1d",
             "actions": [
                 {
-                    "name": "Click",
+                    "name": "LClick",
                     "type": "Button",
                     "id": "cac5f56d-ce49-4609-939f-c0d177fb41c0",
                     "expectedControlType": "",
@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RClick",
+                    "type": "Button",
+                    "id": "1049721d-70a2-48f0-98c2-2c16eaeeaa7e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -32,7 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";PC",
-                    "action": "Click",
+                    "action": "LClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -44,6 +53,17 @@
                     "processors": "",
                     "groups": ";PC",
                     "action": "Draw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ae7247d9-1c49-437e-bd68-423647934605",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";PC",
+                    "action": "RClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
