@@ -189,8 +189,16 @@ namespace InGame.MySystem.Game
             piece.IsChecked = true;
             foreach (var nearRoad in piece.nearRoadPlaceTransformList) // 인접한 도로 확인
             {
-                if (nearRoad.IsChecked || (nearRoad.TeamType != teamType && nearRoad.TeamType != TeamType.None)) // 이미 확인을 했었다면 또는 (현재 팀이 아니면서 다른 팀이라면)
+                if (nearRoad.IsChecked) // 이미 확인을 했었다면
                      continue; // 넘기기
+                else if((nearRoad.TeamType != teamType && nearRoad.TeamType != TeamType.None)) // (현재 팀이 아니면서 다른 팀이라면)
+                {
+                    if(!PieceManager.Instance.CanChangeRoadList.Contains(nearRoad.PlacedPiece)) // 이전에 저장했던 도로가 아닐 경우
+                    {
+                        PieceManager.Instance.CanChangeRoadList.Add(nearRoad.PlacedPiece); // 도로 추가
+                    }
+                    continue;
+                }
 
                 if(nearRoad.PlacedObjectType == ObjectType.None) // 빈 칸이라면
                 {
@@ -205,4 +213,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.09.25
+// 마지막 작성 일자: 2025.09.29

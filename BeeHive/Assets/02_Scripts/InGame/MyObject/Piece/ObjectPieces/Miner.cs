@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.MyPiece;
 using System.Threading.Tasks;
 
 namespace InGame.MyObject.Piece.ObjectPieces
@@ -22,14 +23,15 @@ namespace InGame.MyObject.Piece.ObjectPieces
         private async Task Dig()
         {
             if (TurnManager.Instance.CurrentTeamType != CurrentTeamType) // 현재 턴 팀과 나의 팀이 다르다면
-            {
                 return; // 반환
-            }
 
             if (PieceVariable.currentPlacePlane == null) // 자기가 배치된 판이 없다면
                 return; // 반환
 
-            switch(CurrentTeamType)
+            if (PieceManager.Instance.IsDrought) // 가뭄 상태라면
+                return; // 반환
+
+            switch (CurrentTeamType)
             {
                 case TeamType.Team1: // 플레이어의 팀이 Team1일 경우
                     WalletEvent.OnGetGoldCoin?.Invoke(PieceVariable.currentPlacePlane.team1GoldCoin); // 현재 칸에서 team1이 얻는 금화만큼 얻기
@@ -52,4 +54,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2025.09.15
+// 마지막 작성 일자: 2025.09.29

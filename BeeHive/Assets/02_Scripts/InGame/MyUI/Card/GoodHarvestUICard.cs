@@ -1,3 +1,5 @@
+using InGame.MyEvent;
+using InGame.MyManager;
 using UnityEngine;
 
 namespace InGame.MyUI.Card
@@ -9,8 +11,12 @@ namespace InGame.MyUI.Card
         // 카드 기능을 실제로 수행하는 함수
         public override void UseCard()
         {
+            if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 자신의 턴이 아닐 경우
+                return; // 반환
+
             // 금괴 4개 획득(가뭄 카드의 효과를 받지 않음)
+            WalletEvent.OnGetGoldBar?.Invoke(4);
         }
     }
 }
-// 마지막 작성 일자: 2025.09.26
+// 마지막 작성 일자: 2025.09.29

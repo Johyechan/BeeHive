@@ -1,3 +1,4 @@
+using InGame.MyManager;
 using InGame.MyUI.MyUIInterface;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,6 +11,8 @@ namespace InGame.MyUI.MyUIToggle
     public class OneSelectToggle : MonoBehaviour, IUIClick, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private Toggle _otherToggle; // 다른 토글
+
+        [SerializeField] private bool _isTwoPlayer; // 2인용인지 확인하는 값
 
         private Toggle _currentToggle; // 현재 토글
 
@@ -26,6 +29,7 @@ namespace InGame.MyUI.MyUIToggle
         {
             if(_isMouseOn) // 마우스 포인터가 현재 UI 객체 위에 올라가 있다면
             {
+                SceneMgr.Instance.IsTwoPlayerGame = _isTwoPlayer;
                 _currentToggle.isOn = true; // 현재 토글(내 토글) 키기
                 _otherToggle.isOn = false; // 다른 토글 끄기
             }
@@ -44,4 +48,4 @@ namespace InGame.MyUI.MyUIToggle
         }
     }
 }
-// 마지막 작성 일자: 2025.08.05
+// 마지막 작성 일자: 2025.09.29

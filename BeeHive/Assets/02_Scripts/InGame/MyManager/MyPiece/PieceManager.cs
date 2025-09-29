@@ -19,9 +19,15 @@ namespace InGame.MyManager.MyPiece
         private Dictionary<ObjectType, List<PieceBase>> _canFirePowerAttackPieceMap = new Dictionary<ObjectType, List<PieceBase>>(); // 화력으로 공격 가능한 기물들을 저장하는 맵
         public Dictionary<ObjectType, List<PieceBase>> CanFirePowerAttackPieceMap { get => _canFirePowerAttackPieceMap; } // 위 변수 프로퍼티
 
+        private List<PieceBase> _canChangeRoadList = new List<PieceBase>(); // 변경 가능한 도로를 저장하는 리스트
+        public List<PieceBase> CanChangeRoadList { get =>  _canChangeRoadList; } // 위 변수 프로퍼티
+
         private AttackRelatedPiecesMoveHandler _attackRelatedPiecesMoveHandler; // 공격 관련 기물들 이동 핸들러
 
         private CanAttackPieceStateHandler _canAttackPieceStateHandler; // 공격 가능한 기물들의 상태 변경 핸들러
+
+        private bool _isDrought; // 가뭄인지 여부를 확인하는 변수
+        public bool IsDrought { get => _isDrought; set => _isDrought = value; } // 위 변수 프로퍼티
 
         protected override void Awake()
         {
@@ -74,4 +80,4 @@ namespace InGame.MyManager.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2025.09.23
+// 마지막 작성 일자: 2025.09.29

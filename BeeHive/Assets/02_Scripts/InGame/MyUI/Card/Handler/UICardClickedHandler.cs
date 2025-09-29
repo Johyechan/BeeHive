@@ -23,10 +23,18 @@ namespace InGame.MyUI.Card.Handler
 
         public void Clicked()
         {
+            _uiCardVariable.cardUseButton.onClick.RemoveAllListeners(); // 클릭 이벤트 초기화
             _uiCardVariable.cardUseButton.onClick.AddListener(() => _uiCardBase.UseCard()); // 이벤트 추가 - ui 카드의 카드 사용 함수
+            _uiCardVariable.cardUseButton.onClick.AddListener(() => FadeInOut(0)); // 이벤트 추가 - 카드 사용 여부 패널 페이드 아웃
 
-            _uiCardVariable.cardUsePanelCanvasGroup.DOFade(1, _animationDuration); // 카드 사용 여부 패널 페이드 인
+            FadeInOut(1); // 카드 사용 여부 패널 페이드 인
+        }
+
+        // 카드 사용 여부 패널 페이드 인 앤 아웃 함수
+        private void FadeInOut(float value)
+        {
+            _uiCardVariable.cardUsePanelCanvasGroup.DOFade(value, _animationDuration);
         }
     }
 }
-// 마지막 작성 일자: 2025.09.26
+// 마지막 작성 일자: 2025.09.29

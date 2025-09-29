@@ -10,6 +10,7 @@ namespace InGame.MyUI.Card
         public override void UseCard()
         {
             // 상대 도로 1개를 자신을 도로로 변경
+
         }
     }
 }

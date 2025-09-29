@@ -44,9 +44,10 @@ namespace InGame.MyObject
 
             if (roadPiece != null)
             {
+                PlacedPiece = roadPiece; // 배치된 기물에 도로 할당
                 await _roadPlaceHandler.Place(this, roadPiece, _roadParent, _roadAngle); // 도로 배치 기능
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.19
+// 마지막 작성 일자: 2025.09.29

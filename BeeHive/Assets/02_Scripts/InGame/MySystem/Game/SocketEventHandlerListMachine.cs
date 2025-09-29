@@ -20,12 +20,14 @@ namespace InGame.MySystem
             GoldSocketEventHandler goldSocketEventHandler = new GoldSocketEventHandler(goldSetHandle); // 금 관련
             PieceSocketEventHandler pieceSocketEventHandler = new PieceSocketEventHandler(setPieceHandle); // 기물 관련
             RoadSocketEventHandler roadSocketEventHandler = new RoadSocketEventHandler(setRoadHandle); // 도로 관련
+            GameSocketEventHandler gameSocketEventHandler = new GameSocketEventHandler(); // 게임 관련
 
             // 리스트에 추가
             _socketEventList.Add(cardSocketEventHandler);
             _socketEventList.Add(goldSocketEventHandler);
             _socketEventList.Add(pieceSocketEventHandler);
             _socketEventList.Add(roadSocketEventHandler);
+            _socketEventList.Add(gameSocketEventHandler);
         }
 
         // 소켓 이벤트에 연결하는 함수
@@ -38,4 +40,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.09.16
+// 마지막 작성 일자: 2025.09.29

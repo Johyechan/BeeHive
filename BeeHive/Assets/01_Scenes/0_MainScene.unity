@@ -5989,6 +5989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _otherToggle: {fileID: 2017758663}
+  _isTwoPlayer: 1
 --- !u!1 &1977206096
 GameObject:
   m_ObjectHideFlags: 0
@@ -6194,6 +6195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _otherToggle: {fileID: 1915753868}
+  _isTwoPlayer: 0
 --- !u!1 &2029493181
 GameObject:
   m_ObjectHideFlags: 0

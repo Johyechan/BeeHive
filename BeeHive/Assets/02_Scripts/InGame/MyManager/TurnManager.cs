@@ -1,5 +1,6 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
+using InGame.MyManager.MyPiece;
 using InGame.MySystem.Game;
 using InGame.MyUI.Turn;
 using MyUtil;
@@ -83,6 +84,11 @@ namespace InGame.MyManager
 
                 if (_currentTurnType == TurnType.TurnEnd) // 현재 턴이면서 턴 종료일 때
                 {
+                    if(PieceManager.Instance.IsDrought) // 가뭄 상태라면
+                    {
+                        PieceManager.Instance.IsDrought = false; // 가뭄 종료
+                    }
+
                     HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
                     HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
                     HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
@@ -111,4 +117,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.09.23
+// 마지막 작성 일자: 2025.09.29

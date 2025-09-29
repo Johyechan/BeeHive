@@ -1,3 +1,5 @@
+using InGame.MyEnum;
+using InGame.MyManager;
 using UnityEngine;
 
 namespace InGame.MyUI.Card
@@ -10,6 +12,20 @@ namespace InGame.MyUI.Card
         public override void UseCard()
         {
             // 상대 턴에 상대 광부 생산 불가(1턴)
+            if(SceneMgr.Instance.IsTwoPlayerGame)
+            {
+                int target = TeamManager.Instance.CurrentTeamType == TeamType.Team1 ? 2 : 1; // 팀 1일 경우 팀 2를 할당, 팀 2일 경우 팀 1을 할당
+
+                DroughtInfo droughtInfo = new DroughtInfo()
+                {
+                    roomID = SceneMgr.Instance.CurrentRoomID,
+                    targetTeam = target,
+                    isDrought = 1
+                };
+
+                string json = JsonUtility.ToJson(droughtInfo);
+                NetworkManager.Instance.Socket.Emit("makeDrought", json); // 서버에게 1을 보냄으로써 가뭄이 활성화 되었다고 전송
+            }
         }
     }
 }
