@@ -34,7 +34,7 @@ namespace InGame.MyManager.MyPiece.Handler
             {
                 if (attackPiece.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 공격한 기물이 현재 팀의 기물일 경우에만
                 {
-                    ChangeRoadInfo changeRoadInfo = new ChangeRoadInfo
+                    PieceChangeRoadInfo pieceChangeRoadInfo = new PieceChangeRoadInfo
                     {
                         roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                         teamType = (int)attackPiece.CurrentTeamType, // 공격한 기물 팀 타입
@@ -42,9 +42,9 @@ namespace InGame.MyManager.MyPiece.Handler
                         pieceID = attackPiece.PieceVariable.id // 주위 도로를 변경 시킬 기물 ID
                     };
 
-                    string json = JsonUtility.ToJson(changeRoadInfo);
+                    string json = JsonUtility.ToJson(pieceChangeRoadInfo);
 
-                    NetworkManager.Instance.Socket.Emit("changeRoad", json);
+                    NetworkManager.Instance.Socket.Emit("pieceChangeRoad", json);
 
                     await PieceEvents.OnChangeNearRoad?.Invoke(attackPiece, attackPiece.CurrentTeamType, attackPiece.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                 }
@@ -54,4 +54,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.09.24
+// 마지막 작성 일자: 2025.09.30
