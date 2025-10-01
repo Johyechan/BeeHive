@@ -1,6 +1,7 @@
 using MyUtil;
 using InGame.MyEnum;
 using UnityEngine;
+using InGame.MyObject;
 
 namespace InGame.MyManager
 {
@@ -24,7 +25,35 @@ namespace InGame.MyManager
                 {
                     int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
                     _currentTeamType = (TeamType)teamType; // 팀 저장
+                    switch(_currentTeamType)
+                    {
+                        case TeamType.Team1:
+                            GameManager.Instance.MyCastle = GameObject.Find("Team1Castle").GetComponent<Castle>();
+                            break;
+                        case TeamType.Team2:
+                            GameManager.Instance.MyCastle = GameObject.Find("Team2Castle").GetComponent<Castle>();
+                            break;
+                        case TeamType.Team3:
+                            GameManager.Instance.MyCastle = GameObject.Find("Team3Castle").GetComponent<Castle>();
+                            break;
+                    }
                 });
+            }
+        }
+
+        // 팀에 맞는 성을 반환하는 함수
+        public Castle GetCastle(TeamType teamType)
+        {
+            switch(teamType)
+            {
+                case TeamType.Team1: // 팀1 일 때 팀1 성 반환
+                    return GameManager.Instance.MyCastle = GameObject.Find("Team1Castle").GetComponent<Castle>();
+                case TeamType.Team2: // 팀2 일 때 팀2 성 반환
+                    return GameManager.Instance.MyCastle = GameObject.Find("Team2Castle").GetComponent<Castle>();
+                case TeamType.Team3: // 팀3 일 때 팀3 성 반환
+                    return GameManager.Instance.MyCastle = GameObject.Find("Team3Castle").GetComponent<Castle>();
+                default:
+                    return null;
             }
         }
 
@@ -119,4 +148,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.08.19
+// 마지막 작성 일자: 2025.10.01

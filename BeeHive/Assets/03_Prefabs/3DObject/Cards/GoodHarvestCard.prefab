@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2149392041365857948}
+  - component: {fileID: -3101366486788066661}
   m_Layer: 0
-  m_Name: Card
+  m_Name: GoodHarvestCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,6 +35,19 @@ Transform:
   - {fileID: 4574859118430407800}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3101366486788066661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137351099559215060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4d3d7a1f99a57641a5b53f058f96df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolType: 10
 --- !u!1001 &1474293226008004510
 PrefabInstance:
   m_ObjectHideFlags: 0

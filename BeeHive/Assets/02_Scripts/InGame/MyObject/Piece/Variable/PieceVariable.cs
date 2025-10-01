@@ -10,9 +10,11 @@ namespace InGame.MyObject.Piece.Variable
 
         public PiecePlacePlaneObject currentPlacePlane; // 현재 기물이 존재하고 있는 배치 칸
 
+        public RoadPlacePlaneObject currentRoadPlacePlane; // 현재 도로가 존재하고 있는 배치 칸
+
         public bool isSelected = false; // 선택 여부를 확인하는 변수
 
         public int id = 0; // 객체 id
     }
 }
-// 마지막 작성 일자: 2025.09.15
+// 마지막 작성 일자: 2025.10.01

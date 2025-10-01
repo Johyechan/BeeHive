@@ -1,9 +1,12 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
+using InGame.MyObject.Piece.Variable;
 using MyUtil.MyObjectPool;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InGame.MySystem.Game.Handler
@@ -66,7 +69,7 @@ namespace InGame.MySystem.Game.Handler
                 GameObject targetRoadObj = ObjectIdManager.Instance.FindObject(roadID); // 기존 도로
 
                 GameObject newRoadObj = null; // 변경된 도로
-                switch(TurnManager.Instance.CurrentTeamType)
+                switch(TurnManager.Instance.CurrentTeamType) // 현재 턴의 팀
                 {
                     case TeamType.Team1:
                         newRoadObj = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, targetRoadObj.transform.parent);
@@ -82,7 +85,25 @@ namespace InGame.MySystem.Game.Handler
                 newRoadObj.transform.localPosition = targetRoadObj.transform.localPosition;
                 newRoadObj.transform.localRotation = targetRoadObj.transform.localRotation;
 
+                PieceBase targetPieceBase = targetRoadObj.GetComponent<PieceBase>();
+                PieceBase newPieceBase = newRoadObj.GetComponent<PieceBase>();
 
+                await PlacePlaneManager.Instance.ChangePlacePlaneState(targetPieceBase.PieceVariable.currentRoadPlacePlane, newPieceBase, false);
+
+                await PlacePlaneManager.Instance.FindCanPlacePlane();
+
+                switch(targetPieceBase.CurrentTeamType)
+                {
+                    case TeamType.Team1:
+                        ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, targetRoadObj);
+                        break;
+                    case TeamType.Team2:
+                        ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, targetRoadObj);
+                        break;
+                    case TeamType.Team3:
+                        ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, targetRoadObj);
+                        break;
+                }
             });
         }
     }

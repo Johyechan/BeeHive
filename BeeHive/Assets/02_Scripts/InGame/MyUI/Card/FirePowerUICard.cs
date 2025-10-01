@@ -1,3 +1,5 @@
+using InGame.MyManager;
+using InGame.MyManager.MyPiece;
 using UnityEngine;
 
 namespace InGame.MyUI.Card
@@ -10,7 +12,8 @@ namespace InGame.MyUI.Card
         public override void UseCard()
         {
             // 전차의 화력 +1
+            CardManager.Instance.HaveFirePowerCard = true;
         }
     }
 }
-// 마지막 작성 일자: 2025.09.26
+// 마지막 작성 일자: 2025.10.01

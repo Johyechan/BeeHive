@@ -45,6 +45,7 @@ namespace InGame.MyObject
             if (roadPiece != null)
             {
                 PlacedPiece = roadPiece; // 배치된 기물에 도로 할당
+                PlacedPiece.PieceVariable.currentRoadPlacePlane = this; // 배치된 도로의 배치칸을 할당
                 await _roadPlaceHandler.Place(this, roadPiece, _roadParent, _roadAngle); // 도로 배치 기능
             }
         }

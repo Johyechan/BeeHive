@@ -22,11 +22,17 @@ namespace InGame.MyUI.Card
         protected bool _isMouseCursorOn;
 
         [SerializeField] private float _animationDuration; // 애니메이션 시간
+        [SerializeField] private float _animationValueY; // y축으로 올라가는 값
 
         private UICardVariable _uiCardVariable = new UICardVariable(); // 필요한 변수들을 가지는 클래스
 
+        private Vector3 _originPos; // 기존 위치
+
+        private RectTransform _rect;
+
         private void Awake()
         {
+            _rect = GetComponent<RectTransform>();
             _uiCardVariable.initializeHandler = new UICardInitializeHandler(_uiCardVariable);
             _uiCardVariable.showInformationHandler = new UICardShowInformationHandler(_uiCardVariable, _currentCardImage, _cardInformationText, _animationDuration);
             _uiCardVariable.clickedHandler = new UICardClickedHandler(this, _uiCardVariable, _animationDuration);
@@ -52,12 +58,15 @@ namespace InGame.MyUI.Card
         public void OnPointerEnter(PointerEventData eventData)
         {
             _isMouseCursorOn = true;
+            _originPos = _rect.anchoredPosition; // 현재 위치 저장
+            _rect.DOMoveY(_animationValueY, _animationDuration); // y축으로 이동
         }
 
         // 마우스 커서가 UI 위에 올라와 있지 않을 때
         public void OnPointerExit(PointerEventData eventData)
         {
             _isMouseCursorOn = false;
+            _rect.DOMove(_originPos, _animationDuration); // 기존 위치로 이동
         }
 
         // 카드 사용 함수
@@ -79,4 +88,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.09.26
+// 마지막 작성 일자: 2025.10.01
