@@ -1112,6 +1112,21 @@ MonoBehaviour:
   - poolType: 11
     poolCount: 6
     poolObject: {fileID: 1321742906231919482, guid: 77a395defc1d6cc40a2e53f343eef7ba, type: 3}
+  - poolType: 12
+    poolCount: 1
+    poolObject: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  - poolType: 13
+    poolCount: 4
+    poolObject: {fileID: 7137351099559215060, guid: efd38667fbab5bf4689110e386bcbeb4, type: 3}
+  - poolType: 14
+    poolCount: 15
+    poolObject: {fileID: 7137351099559215060, guid: 159b1fdab5fd23b41923b35998bdf8af, type: 3}
+  - poolType: 15
+    poolCount: 4
+    poolObject: {fileID: 7137351099559215060, guid: 7de58b04e394c3f4c81fa79684a0a3da, type: 3}
+  - poolType: 16
+    poolCount: 6
+    poolObject: {fileID: 7137351099559215060, guid: 36211aba84553b54d8ed91eacc477b9d, type: 3}
 --- !u!4 &252034718
 Transform:
   m_ObjectHideFlags: 0

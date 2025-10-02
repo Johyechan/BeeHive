@@ -1,3 +1,4 @@
+using InGame.MyEvent;
 using InGame.MyInput;
 using InGame.MyInput.Struct;
 using InGame.MyObject;
@@ -19,7 +20,7 @@ namespace InGame.MyManager
         private InputActionMap _playActionMap; // 인풋 에셋의 액션 맵 - 게임에 필요한 액션들을 가지는 맵
         private InputAction _lClickAction; // 액션 맵에 있는 액션 - 좌클릭 액션
         private InputAction _drawAction; // 액션 맵에 있는 액션 - 드로우 액션
-        public InputAction rClickAction; // 액션 맵에 있는 액션 - 우클릭 액션
+        private InputAction _rClickAction; // 액션 맵에 있는 액션 - 우클릭 액션
 
         private InputClickHandler _clickHandler; // 객체 클릭을 인식하기 위한 핸들러
         private InputDrawHandler _drawHandler; // 드로우를 위한 핸들러
@@ -43,19 +44,21 @@ namespace InGame.MyManager
             _playActionMap = _playerActionAsset.FindActionMap("Play"); // 인풋 에셋에서 Play 이름을 가진 액션 맵 탐색
             _lClickAction = _playActionMap.FindAction("LClick"); // 액션 맵에서 LClick 이름을 가진 액션 탐색
             _drawAction = _playActionMap.FindAction("Draw"); // 액션 맵에서 Draw 이름을 가진 액션 탐색
-            rClickAction = _playActionMap.FindAction("RClick"); // 액션 맵에서 RClick 이름을 가진 액션 탐색
-        }
+            _rClickAction = _playActionMap.FindAction("RClick"); // 액션 맵에서 RClick 이름을 가진 액션 탐색
 
-        private void OnEnable()
-        {
             _playerActionAsset.Enable(); // 인풋 에셋 활성화
+            _lClickAction.Enable();
+            _drawAction.Enable();
+            _rClickAction.Enable();
             _lClickAction.performed += _clickHandler.MouseClick; // 클릭 액션에 클릭 시 실행될 함수 구독
             _drawAction.performed += _drawHandler.Draw; // 드로우 액션에 드로우 인풋 시 실행될 함수 구독
+            _rClickAction.performed += ctx => UIEvents.OnShowUICardInformation?.Invoke();
         }
 
         private void OnDisable()
         {
             _lClickAction.performed -= _clickHandler.MouseClick; // 클릭 액션에 구독된 함수 해제
+            _drawAction.performed -= _drawHandler.Draw; // 드로우 액션에 구독된 함수 해제
             _playerActionAsset.Disable(); // 인풋 에셋 비활성화
         }
 
@@ -65,4 +68,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.09.26
+// 마지막 작성 일자: 2025.10.02

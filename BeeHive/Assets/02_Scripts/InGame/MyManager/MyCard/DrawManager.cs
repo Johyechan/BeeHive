@@ -44,7 +44,7 @@ namespace InGame.MyManager.MyCard
             Transform currentDrawCardTrans = deckParent.GetChild(currentDeckCardCount - 1);
             CardObject currentDrawCard = currentDrawCardTrans.GetComponent<CardObject>();
 
-            currentDrawCardTrans.SetParent(playerCardsParent);// 덱에 있는 카드를 플레이어의 카드로 변경 - 실제 값은 -1을 하지 않아야 하지만 인덱스로 활용할 것이기 때문에 -1을 하여 배열 크기 초과 오류를 방지
+            currentDrawCardTrans.SetParent(playerCardsParent);// 덱에 있는 카드를 플레이어의 카드로 변경
 
             if (includeUI) // UI도 생성해야 할 경우
             {
@@ -56,4 +56,4 @@ namespace InGame.MyManager.MyCard
         }
     }
 }
-// 마지막 작성 일자: 2025.10.01
+// 마지막 작성 일자: 2025.10.02

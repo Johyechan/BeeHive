@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyUI.Card.Handler;
 using InGame.MyUI.Card.Variable;
@@ -40,12 +41,12 @@ namespace InGame.MyUI.Card
 
         private void OnEnable()
         {
-            InputManager.Instance.rClickAction.performed += ShowInfomation;
+            UIEvents.OnShowUICardInformation += ShowInfomation;
         }
 
         private void OnDisable()
         {
-            InputManager.Instance.rClickAction.performed -= ShowInfomation;
+            UIEvents.OnShowUICardInformation -= ShowInfomation;
         }
 
         // 초기화 함수
@@ -66,15 +67,16 @@ namespace InGame.MyUI.Card
         public void OnPointerExit(PointerEventData eventData)
         {
             _isMouseCursorOn = false;
-            _rect.DOMove(_originPos, _animationDuration); // 기존 위치로 이동
+            _rect.DOAnchorPos(_originPos, _animationDuration); // 기존 위치로 이동
         }
 
         // 카드 사용 함수
         public abstract void UseCard();
 
         // 카드 정보를 보여주는 함수
-        private void ShowInfomation(InputAction.CallbackContext context)
+        private void ShowInfomation()
         {
+            NetworkManager.Instance.Socket.Emit("debug", "보여라");
             if (!_isMouseCursorOn) // 마우스 포인터가 현재 UI에 올려져 있지 않다면
                 return; // 반환
 
@@ -88,4 +90,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.10.01
+// 마지막 작성 일자: 2025.10.02

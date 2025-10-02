@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ca172c836336b4e87db47561e643e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardInformationText: 
+  _cardInformationText: "\uD654\uB825"
   _currentCardImage: {fileID: 1588352487960299254}
   _animationDuration: 0.1
   _animationValueY: 0.5

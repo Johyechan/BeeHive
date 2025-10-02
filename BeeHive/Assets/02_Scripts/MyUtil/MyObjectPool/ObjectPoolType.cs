@@ -16,6 +16,11 @@ namespace MyUtil.MyObjectPool
         FirePowerUICard, // 화력 UI 카드
         GoodHarvestUICard, // 풍년 UI 카드
         RoadChangeUICard, // 도로 변형 UI 카드
+        CastleUpgradeCard, // 성 강화 카드
+        DroughtCard, // 가뭄 카드
+        FirePowerCard, // 화력 카드
+        GoodHarvestCard, // 풍년 카드
+        RoadChangeCard, // 도로 변형 카드
     }
 }
-// 마지막 작성 일자: 2025.07.08
+// 마지막 작성 일자: 2025.10.02

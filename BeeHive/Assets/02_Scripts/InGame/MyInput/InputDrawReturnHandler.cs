@@ -13,20 +13,28 @@ namespace InGame.MyInput
     {
         public async Task<bool> IsReturn()
         {
-            if (TurnManager.Instance.CurrentTurnType != TurnType.DrawTurn) // 드로우 턴이 아니라면
+            if(!await WarningEvent.OnCheckCurrentTurn?.Invoke(TurnType.DrawTurn, "드로우 턴이 아닙니다.")) // 드로우 턴이 아니라면
+            {
                 return true; // 반환
+            }
 
             if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 내 팀의 턴이 아니라면
+            {
                 return true; // 반환
+            }
 
             if (!DrawManager.Instance.IsCanDraw) // 만약 Draw가 불가능하다면
+            {
                 return true; // 반환
+            }
 
             if (!await WalletEvent.OnUseGoldBar.Invoke(2)) // 금괴 2개를 사용할 수 없다면
+            {
                 return true; // 반환
+            }
 
             return false;
         }
     }
 }
-// 마지막 작성 일자: 2025.09.18
+// 마지막 작성 일자: 2025.10.02
