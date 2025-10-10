@@ -1,13 +1,11 @@
 using DG.Tweening;
 using InGame.MyEvent;
-using InGame.MyManager;
 using InGame.MyUI.Card.Handler;
 using InGame.MyUI.Card.Variable;
 using InGame.MyUI.MyUIInterface;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace InGame.MyUI.Card
@@ -26,6 +24,7 @@ namespace InGame.MyUI.Card
         [SerializeField] private float _animationValueY; // y축으로 올라가는 값
 
         private UICardVariable _uiCardVariable = new UICardVariable(); // 필요한 변수들을 가지는 클래스
+        public UICardVariable UICardVariable { get => _uiCardVariable; } // 위 변수 프로퍼티
 
         private Vector3 _originPos; // 기존 위치
 
@@ -76,7 +75,6 @@ namespace InGame.MyUI.Card
         // 카드 정보를 보여주는 함수
         private void ShowInfomation()
         {
-            NetworkManager.Instance.Socket.Emit("debug", "보여라");
             if (!_isMouseCursorOn) // 마우스 포인터가 현재 UI에 올려져 있지 않다면
                 return; // 반환
 
@@ -90,4 +88,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.10.02
+// 마지막 작성 일자: 2025.10.10

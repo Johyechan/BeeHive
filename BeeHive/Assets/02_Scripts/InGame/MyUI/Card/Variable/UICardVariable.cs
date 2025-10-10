@@ -23,6 +23,8 @@ namespace InGame.MyUI.Card.Variable
         public UICardShowInformationHandler showInformationHandler; // 카드 정보 보여주는 핸들러
 
         public UICardClickedHandler clickedHandler; // 클릭 시 실행될 기능을 가지는 핸들러
+
+        public GameObject cardObj; // 현재 UI 카드에 맞는 객체
     }
 }
-// 마지막 작성 일자: 2025.09.26
+// 마지막 작성 일자: 2025.10.10

@@ -41,8 +41,6 @@ namespace InGame.MyObject.Piece.Handler
             else // 0일 경우 곱하는 것이 의미가 없기 때문에
                 yPos = targetPos.y + 0.05f; // 이후 배치할 때 애니메이션 효과를 위해 1.5를 더하여 조금 더 높이 올려준다
 
-            NetworkManager.Instance.Socket.Emit("debug", $"첫 y: {yPos}, 최종 y: {targetPos.y}");
-
             // 높이 먼저 올리기
             await _pieceBase.transform.DOLocalMoveY(yPos, _pieceData.animationDuration).AsyncWaitForCompletion();
 
@@ -56,9 +54,7 @@ namespace InGame.MyObject.Piece.Handler
             await _pieceBase.transform.DOLocalMoveY(targetPos.y, _pieceData.animationDuration).AsyncWaitForCompletion();
 
             UIManager.Instance.CanInteractionUI = true;
-
-            NetworkManager.Instance.Socket.Emit("debug", "이동 종료");
         }
     }
 }
-// 마지막 작성 일자: 2025.09.25
+// 마지막 작성 일자: 2025.10.10

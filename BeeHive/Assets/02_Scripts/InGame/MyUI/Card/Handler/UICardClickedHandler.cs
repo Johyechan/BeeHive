@@ -27,14 +27,24 @@ namespace InGame.MyUI.Card.Handler
             _uiCardVariable.cardUseButton.onClick.AddListener(() => _uiCardBase.UseCard()); // 이벤트 추가 - ui 카드의 카드 사용 함수
             _uiCardVariable.cardUseButton.onClick.AddListener(() => FadeInOut(0)); // 이벤트 추가 - 카드 사용 여부 패널 페이드 아웃
 
-            FadeInOut(1); // 카드 사용 여부 패널 페이드 인
+            DOTween.Sequence()
+                .AppendCallback(() => ReverseCardObject()) // 카드 객체 뒤집기
+                .OnComplete(() => FadeInOut(1)); // 카드 사용 여부 패널 페이드 인
         }
 
         // 카드 사용 여부 패널 페이드 인 앤 아웃 함수
         private void FadeInOut(float value)
         {
+            // 여기 패널 안뜸 로그 찍으면서 버그 해결 ㄱㄱ
             _uiCardVariable.cardUsePanelCanvasGroup.DOFade(value, _animationDuration);
+        }
+
+        // UI 카드에 맞는 카드 객체를 뒤집는 함수
+        private void ReverseCardObject()
+        {
+            _uiCardVariable.cardObj.transform.DORotate(new Vector3(0, 0, 180), _animationDuration);
+            _uiCardVariable.cardObj.transform.DOMoveY(0.0001f, _animationDuration);
         }
     }
 }
-// 마지막 작성 일자: 2025.09.29
+// 마지막 작성 일자: 2025.10.10

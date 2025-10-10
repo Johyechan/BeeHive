@@ -50,10 +50,11 @@ namespace InGame.MyManager.MyCard
             {
                 GameObject uiCard = await ObjectPoolManager.Instance.GetObject(currentDrawCard.PoolType, playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
                 UICardBase uiCardBase = uiCard.GetComponent<UICardBase>();
+                uiCardBase.UICardVariable.cardObj = currentDrawCard.gameObject; // UI 카드에 현재 카드 객체 할당
 
                 await uiCardBase.Init(_cardUsePanelCanvasGroup, _cardInformationPanelCanvasGroup);
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.10.02
+// 마지막 작성 일자: 2025.10.10
