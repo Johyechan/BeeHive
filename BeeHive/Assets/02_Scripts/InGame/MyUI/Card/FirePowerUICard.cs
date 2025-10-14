@@ -11,9 +11,12 @@ namespace InGame.MyUI.Card
         // 카드 기능을 실제로 수행하는 함수
         public override void UseCard()
         {
+            NetworkManager.Instance.Socket.Emit("debug", "화력 1 증가");
             // 전차의 화력 +1
             CardManager.Instance.HaveFirePowerCard = true;
+
+            base.UseCard();
         }
     }
 }
-// 마지막 작성 일자: 2025.10.01
+// 마지막 작성 일자: 2025.10.14

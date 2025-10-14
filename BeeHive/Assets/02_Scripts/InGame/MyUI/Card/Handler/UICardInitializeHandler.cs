@@ -1,4 +1,5 @@
 using InGame.MyUI.Card.Variable;
+using InGame.MyUI.MyUIButton;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -34,10 +35,10 @@ namespace InGame.MyUI.Card.Handler
             Transform buttonsTransform = cardUsePanelTransform.GetChild(1); // 패널의 첫 번째 자식 - 버튼을 모아둔 빈 객체
             Transform cardUseButtonTransform = buttonsTransform.GetChild(0); // 버튼을 모아둔 빈 객체의 첫 번째 자식 - 카드 사용 버튼
 
-            _uiCardVariable.cardUseButton = cardUseButtonTransform.GetComponent<Button>(); // 버튼 할당
+            _uiCardVariable.cardUseButton = cardUseButtonTransform.GetComponent<CardUseButton>(); // 버튼 할당
 
             return Task.CompletedTask; // 테스크 완료 반환
         }
     }
 }
-// 마지막 작성 일자: 2025.09.26
+// 마지막 작성 일자: 2025.10.14

@@ -1,4 +1,5 @@
 using InGame.MyUI.Card.Handler;
+using InGame.MyUI.MyUIButton;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ namespace InGame.MyUI.Card.Variable
 
         public TMP_Text cardInformationTmpText; // 카드 정보에 필요한 텍스트 변수
 
-        public Button cardUseButton; // 카드 사용 버튼 변수
+        public CardUseButton cardUseButton; // 카드 사용 버튼 변수
 
         public UICardInitializeHandler initializeHandler; // 초기화 핸들러
 
@@ -27,4 +28,4 @@ namespace InGame.MyUI.Card.Variable
         public GameObject cardObj; // 현재 UI 카드에 맞는 객체
     }
 }
-// 마지막 작성 일자: 2025.10.10
+// 마지막 작성 일자: 2025.10.14

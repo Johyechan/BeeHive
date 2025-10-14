@@ -148,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardInformationText: "\uD48D\uB144"
   _currentCardImage: {fileID: 1588352487960299254}
+  _poolType: 10
   _animationDuration: 0.1
   _animationValueY: 0.5
 --- !u!1 &3008877774841957085

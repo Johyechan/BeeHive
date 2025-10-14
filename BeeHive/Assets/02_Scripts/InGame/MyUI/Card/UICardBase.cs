@@ -1,8 +1,11 @@
 using DG.Tweening;
 using InGame.MyEvent;
+using InGame.MyManager;
+using InGame.MyObject;
 using InGame.MyUI.Card.Handler;
 using InGame.MyUI.Card.Variable;
 using InGame.MyUI.MyUIInterface;
+using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,13 +15,15 @@ namespace InGame.MyUI.Card
 {
     // 작성자: 조혜찬
     // UI 카드 부모 클래스
-    public abstract class UICardBase : MonoBehaviour, IUIClick, IPointerEnterHandler, IPointerExitHandler
+    public class UICardBase : MonoBehaviour, IUIClick, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected string _cardInformationText; // 카드 정보 텍스트
 
         [SerializeField] protected Image _currentCardImage; // 현재 카드 이미지
 
         protected bool _isMouseCursorOn;
+
+        [SerializeField] private ObjectPoolType _poolType; // 카드의 풀 타입
 
         [SerializeField] private float _animationDuration; // 애니메이션 시간
         [SerializeField] private float _animationValueY; // y축으로 올라가는 값
@@ -29,6 +34,8 @@ namespace InGame.MyUI.Card
         private Vector3 _originPos; // 기존 위치
 
         private RectTransform _rect;
+
+        private UsedDeck _usedCardDeck; // 사용한 카드들을 모아두는 덱
 
         private void Awake()
         {
@@ -41,6 +48,11 @@ namespace InGame.MyUI.Card
         private void OnEnable()
         {
             UIEvents.OnShowUICardInformation += ShowInfomation;
+        }
+
+        private void Start()
+        {
+            _usedCardDeck = GameObject.Find("UsedDeck").GetComponent<UsedDeck>();
         }
 
         private void OnDisable()
@@ -70,7 +82,15 @@ namespace InGame.MyUI.Card
         }
 
         // 카드 사용 함수
-        public abstract void UseCard();
+        public virtual void UseCard()
+        {
+            // 카드 사용 후 사용된 카드들을 모아두는 덱으로 이동
+            if(_usedCardDeck != null) // 사용한 카드들을 모아두는 덱을 찾았을 경우
+            {
+                _usedCardDeck.AddCardInToUsedDeck(_uiCardVariable.cardObj.transform); // 사용한 카드를 추가
+                ObjectPoolManager.Instance.ReturnObject(_poolType, gameObject); // UI 풀에 반환
+            }
+        }
 
         // 카드 정보를 보여주는 함수
         private void ShowInfomation()
@@ -88,4 +108,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.10.10
+// 마지막 작성 일자: 2025.10.14
