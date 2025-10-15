@@ -146,11 +146,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e286be8139004d4a8c074a8e6b427bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardInformationText: "\uAC00\uBB44"
-  _currentCardImage: {fileID: 1588352487960299254}
-  _poolType: 8
-  _animationDuration: 0.1
-  _animationValueY: 0.5
+  _uiCardData:
+    cardInformationText: "\uC0C1\uB300\uAC00 \uB2E4\uC74C \uD134 \uAE08\uD654\uB97C
+      \uC5BB\uC9C0 \uBABB\uD569\uB2C8\uB2E4"
+    currentCardName: "\uAC00\uBB44"
+    currentCardImage: {fileID: 1588352487960299254}
+    poolType: 8
+    animationDuration: 0.1
+    animationValueY: 0.05
 --- !u!1 &5351429680737789649
 GameObject:
   m_ObjectHideFlags: 0

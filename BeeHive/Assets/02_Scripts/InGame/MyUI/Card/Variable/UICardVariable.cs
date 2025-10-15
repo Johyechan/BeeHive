@@ -1,3 +1,4 @@
+using InGame.MyObject;
 using InGame.MyUI.Card.Handler;
 using InGame.MyUI.MyUIButton;
 using TMPro;
@@ -26,6 +27,14 @@ namespace InGame.MyUI.Card.Variable
         public UICardClickedHandler clickedHandler; // 클릭 시 실행될 기능을 가지는 핸들러
 
         public GameObject cardObj; // 현재 UI 카드에 맞는 객체
+
+        public bool isMouseCursorOn;
+
+        public Vector3 originPos; // 기존 위치
+
+        public RectTransform rect;
+
+        public UsedDeck usedCardDeck; // 사용한 카드들을 모아두는 덱
     }
 }
-// 마지막 작성 일자: 2025.10.14
+// 마지막 작성 일자: 2025.10.15
