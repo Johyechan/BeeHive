@@ -1,3 +1,4 @@
+using InGame.MyManager;
 using MyUtil;
 using MyUtil.MyObjectPool;
 using System.Collections.Generic;
@@ -33,34 +34,64 @@ namespace InGame.MyObject
         {
             deckTransform = GetComponent<Transform>();
 
+            DeckShuffleInfo deckShuffleInfo = new DeckShuffleInfo()
+            {
+                roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                castleUpgradeCardCount = _castleUpgradeCardCount, // 성벽 강화 카드 수
+                droughtCardCount = _droughtCardCount, // 가뭄 카드 수
+                goodHarvestCardCount = _goodHarvestCardCount, // 풍년 카드 수
+                roadChangeCardCount = _roadChangeCardCount, // 도로 변형 카드 수
+                firePowerCardCount = _firePowerCardCount, // 화력 카드 수
+            };
+            string json = JsonUtility.ToJson(deckShuffleInfo); // Json 형태로 변환
+
+            if(TeamManager.Instance.CurrentTeamType == MyEnum.TeamType.Team1) // 팀 1이 시작 덱을 만듦 (중복 제작을 통한 30장의 덱이 아닌 60장, 90장의 덱이 만들어지는 것을 막기위함
+            {
+                NetworkManager.Instance.Socket.Emit("shuffle", json); // 서버로 전송
+            }
+
+            NetworkManager.Instance.Socket.On("deckShuffled", (data) => // 서버로부터 덱 받기
+            {
+                NetworkManager.Instance.Socket.Emit("debug", "왔다요");
+                string json = data.GetValue().ToString(); // 서버가 전송한 값 받기
+                DeckInfo deckInfo = JsonUtility.FromJson<DeckInfo>(json); // DeckInfo로 변환
+                for(int i = 0; i < deckInfo.deck.Length; i++) // 덱에 있는 카드 수 만큼 반복
+                {
+                    switch(deckInfo.deck[i])
+                    {
+                        case 1: // 성벽 강화 카드
+                            _deckList.Add(ObjectPoolType.CastleUpgradeCard);
+                            break;
+                        case 2: // 가뭄 카드
+                            _deckList.Add(ObjectPoolType.DroughtCard);
+                            break;
+                        case 3: // 풍년 카드
+                            _deckList.Add(ObjectPoolType.GoodHarvestCard);
+                            break;
+                        case 4: // 도로 변형 카드
+                            _deckList.Add(ObjectPoolType.RoadChangeCard);
+                            break;
+                        case 5: // 화력 카드
+                            _deckList.Add(ObjectPoolType.FirePowerCard);
+                            break;
+                    }
+                }
+            });
+        }
+
+        private void Start()
+        {
             _ = CreateDeck(); // 덱 생성
         }
 
         private async Task CreateDeck()
         {
-            AddCardInToDeck(_castleUpgradeCardCount, ObjectPoolType.CastleUpgradeCard);
-            AddCardInToDeck(_droughtCardCount, ObjectPoolType.DroughtCard);
-            AddCardInToDeck(_firePowerCardCount, ObjectPoolType.FirePowerCard);
-            AddCardInToDeck(_goodHarvestCardCount, ObjectPoolType.GoodHarvestCard);
-            AddCardInToDeck(_roadChangeCardCount, ObjectPoolType.RoadChangeCard);
-
-            ShuffleUtility.Shuffle(_deckList); // 덱 셔플
-
             for(int i = 0; i <  _deckList.Count; i++) // 덱 리스트 순회
             {
                 GameObject card = await ObjectPoolManager.Instance.GetObject(_deckList[i], deckTransform); // 카드 생성
                 card.transform.localPosition = new Vector3(0, _yInterval * i, 0); // 카드를 생성할 수 록 y축 간격 만큼 위로 올리기
             }
         }
-
-        // 덱에 카드를 추가하는 함수
-        private void AddCardInToDeck(int count, ObjectPoolType addType)
-        {
-            for(int i = 0; i < count; i++)
-            {
-                _deckList.Add(addType);
-            }
-        }
     }
 }
-// 마지막 작성 일자: 2025.10.02
+// 마지막 작성 일자: 2025.10.16
