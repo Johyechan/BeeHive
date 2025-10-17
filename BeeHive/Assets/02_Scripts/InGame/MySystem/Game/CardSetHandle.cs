@@ -35,7 +35,6 @@ namespace InGame.MySystem.Game
 
         public async Task Setting(int targetTeam, int cardCount)
         {
-            NetworkManager.Instance.Socket.Emit("debug", "¹¹¾ß");
             TeamType type = (TeamType)targetTeam; // ÆÀ ±¸ÇÏ±â
 
             switch (type)

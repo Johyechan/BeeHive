@@ -23,9 +23,9 @@ namespace InGame.MySystem.Game.Handler
                 int teamType = value.GetValue<int>();
                 TeamType hpChangedCastleTeamType = (TeamType)teamType; // 서버에서 받은 int형식 변수를 TeamType enum 값으로 변경
                 Castle hpChangedCastle = TeamManager.Instance.GetCastle(hpChangedCastleTeamType); // 최대 체력이 올라간 팀에 맞는 성 가져오기
-                hpChangedCastle.HP++; // 최대 체력 증가
+                hpChangedCastle.CastleUpgrade(); // 최대 체력 증가
             });
         }
     }
 }
-// 마지막 작성 일자: 2025.10.01
+// 마지막 작성 일자: 2025.10.17

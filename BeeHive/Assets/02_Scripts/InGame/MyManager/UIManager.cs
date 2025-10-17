@@ -15,6 +15,8 @@ namespace InGame.MyManager
 
         protected override void Awake()
         {
+            base.Awake();
+
             _canInteractionUI = true; // 처음에는 UI 상호작용 가능하도록 초기화
         }
 
@@ -31,4 +33,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2025.10.17

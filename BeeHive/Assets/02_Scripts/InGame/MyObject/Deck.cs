@@ -52,7 +52,6 @@ namespace InGame.MyObject
 
             NetworkManager.Instance.Socket.On("deckShuffled", (data) => // 서버로부터 덱 받기
             {
-                NetworkManager.Instance.Socket.Emit("debug", "왔다요");
                 string json = data.GetValue().ToString(); // 서버가 전송한 값 받기
                 DeckInfo deckInfo = JsonUtility.FromJson<DeckInfo>(json); // DeckInfo로 변환
                 for(int i = 0; i < deckInfo.deck.Length; i++) // 덱에 있는 카드 수 만큼 반복

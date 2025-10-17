@@ -28,7 +28,11 @@ namespace InGame.MyUI.MyUIButton
             DOTween.Sequence()
                 .AppendCallback(() => ReverseCardObject())
                 .Append(_canvasGroup.DOFade(0, _animationDuration)) // 페이드 아웃
-                .OnComplete(() => _canvasGroup.gameObject.SetActive(false)); // 객체 비활성화
+                .OnComplete(() =>
+                {
+                    NetworkManager.Instance.Socket.Emit("debug", "DOTween End");
+                    _canvasGroup.gameObject.SetActive(false);
+                }); // 객체 비활성화
         }
 
         // UI 카드에 맞는 카드 객체를 뒤집는 함수

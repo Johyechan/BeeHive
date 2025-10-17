@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3505843833063883971}
+  - component: {fileID: 6956962594763981666}
   m_Layer: 0
-  m_Name: Castle
+  m_Name: Team1Castle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,6 +33,21 @@ Transform:
   - {fileID: 3152695885841696151}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6956962594763981666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174283884558693585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a9d69915d5aa84d99dad088a72c4a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hpText: {fileID: 0}
+  _castleTeamType: 1
+  _hp: 5
 --- !u!1001 &3191391087920112252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,6 +100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _castle
       objectReference: {fileID: 0}
+    - target: {fileID: 953936575932961283, guid: d8f12a282626f934790716334387c5f1, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c1947870806696d4882d920bbb0f7692, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 243041194690276544, guid: d8f12a282626f934790716334387c5f1, type: 3}

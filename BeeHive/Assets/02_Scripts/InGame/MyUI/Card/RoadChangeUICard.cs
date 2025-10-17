@@ -1,3 +1,4 @@
+using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
 using InGame.MyObject.Piece.ObjectPieces;
@@ -12,6 +13,12 @@ namespace InGame.MyUI.Card
         // 카드 기능을 실제로 수행하는 함수
         public override void UseCard()
         {
+            if(PieceManager.Instance.CanChangeRoadList.Count <= 0) // 도로 변형이 가능한 도로가 없다면
+            {
+                _ = UIManager.Instance.WarningUIMake("도로 변형 가능한 도로가 없어서 사용 불가합니다.");
+                return;
+            }
+
             UsedCardData usedCardData = new UsedCardData()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID

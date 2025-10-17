@@ -22,11 +22,11 @@ namespace InGame.MyUI.Card
 
             NetworkManager.Instance.Socket.Emit("debug", "체력 1 증가");
             // 성 체력 1증가
-            GameManager.Instance.MyCastle.HP++; // 최대 체력 1 증가
+            GameManager.Instance.MyCastle.CastleUpgrade(); // 최대 체력 1 증가
             NetworkManager.Instance.Socket.Emit("castleHpUp", (int)TeamManager.Instance.CurrentTeamType); // 서버에 최대 체력이 올라간 팀 타입 알려주기
 
             base.UseCard();
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.10.17

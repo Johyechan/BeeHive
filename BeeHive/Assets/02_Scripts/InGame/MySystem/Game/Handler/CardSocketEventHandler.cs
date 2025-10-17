@@ -28,8 +28,6 @@ namespace InGame.MySystem.Game.Handler
 
                 GameObject cardObj = ObjectIdManager.Instance.FindObject(cardReverseInfo.cardID); // 뒤집힐 카드 객체 탐색
 
-                NetworkManager.Instance.Socket.Emit("debug", $"카드 객체{cardObj}");
-
                 await cardObj.transform.DORotate(new Vector3(0, cardObj.transform.eulerAngles.y, 90), cardReverseInfo.animationDuration / 2).AsyncWaitForCompletion(); // 카드 뒤집기
                 await cardObj.transform.DORotate(new Vector3(0, cardObj.transform.eulerAngles.y, 180), cardReverseInfo.animationDuration / 2).AsyncWaitForCompletion(); // 카드 뒤집기
 
