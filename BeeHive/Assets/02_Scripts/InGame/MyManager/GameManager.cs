@@ -57,6 +57,19 @@ namespace InGame.MyManager
             _pieceCanMoveMap.Add(ObjectType.Miner, true); // 광부 기물 이동 가능 여부
             _pieceCanMoveMap.Add(ObjectType.Soldier, true); // 보병 기물 이동 가능 여부
             _pieceCanMoveMap.Add(ObjectType.Tank, true); // 전차 기물 이동 가능 여부
+
+            switch(TeamManager.Instance.CurrentTeamType)
+            {
+                case TeamType.Team1: // 팀1 일 때 팀1 성 반환
+                    MyCastle = GameObject.Find("Team1Castle").GetComponent<Castle>();
+                    break;
+                case TeamType.Team2: // 팀2 일 때 팀2 성 반환
+                    MyCastle = GameObject.Find("Team2Castle").GetComponent<Castle>();
+                    break;
+                case TeamType.Team3: // 팀3 일 때 팀3 성 반환
+                    MyCastle = GameObject.Find("Team3Castle").GetComponent<Castle>();
+                    break;
+            }
         }
 
         // 기물 생성 및 이동 가능 여부 초기화

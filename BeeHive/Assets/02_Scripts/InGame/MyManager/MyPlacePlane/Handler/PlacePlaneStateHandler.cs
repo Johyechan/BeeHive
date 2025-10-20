@@ -24,6 +24,7 @@ namespace InGame.MyManager.MyPlacePlane.Handler
             currentPlacePlane.PlacedPiece = placedPiece;
 
             bool isRoad = currentPlacePlane is RoadPlacePlaneObject; // 도로 배치칸인지 확인하기 위한 변수
+
             if (!isRoad) // 도로 배치칸을 변경하는 것이 아닌 기물 배치칸을 변경하는 것이라면
             {
                 placedPiece.PieceVariable.currentPlacePlane = (PiecePlacePlaneObject)currentPlacePlane; // 기물 전용 배치칸 할당

@@ -19,12 +19,6 @@ namespace InGame.MyObject
 
         public Transform deckTransform; // 덱 Transform 변수 - 현재 덱에 있는 카드의 수를 알기 위한 변수
 
-        [SerializeField] private int _castleUpgradeCardCount; // 성벽 강화 카드 수
-        [SerializeField] private int _droughtCardCount; // 가뭄 카드 수
-        [SerializeField] private int _goodHarvestCardCount; // 풍년 카드 수
-        [SerializeField] private int _roadChangeCardCount; // 도로 변형 카드 수
-        [SerializeField] private int _firePowerCardCount; // 화력 카드 수
-
         [SerializeField] private float _yInterval; // 카드 간의 y축 간격
 
         private List<ObjectPoolType> _deckList = new List<ObjectPoolType>(); // 덱 리스트
@@ -33,22 +27,6 @@ namespace InGame.MyObject
         private void Awake()
         {
             deckTransform = GetComponent<Transform>();
-
-            DeckShuffleInfo deckShuffleInfo = new DeckShuffleInfo()
-            {
-                roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                castleUpgradeCardCount = _castleUpgradeCardCount, // 성벽 강화 카드 수
-                droughtCardCount = _droughtCardCount, // 가뭄 카드 수
-                goodHarvestCardCount = _goodHarvestCardCount, // 풍년 카드 수
-                roadChangeCardCount = _roadChangeCardCount, // 도로 변형 카드 수
-                firePowerCardCount = _firePowerCardCount, // 화력 카드 수
-            };
-            string json = JsonUtility.ToJson(deckShuffleInfo); // Json 형태로 변환
-
-            if(TeamManager.Instance.CurrentTeamType == MyEnum.TeamType.Team1) // 팀 1이 시작 덱을 만듦 (중복 제작을 통한 30장의 덱이 아닌 60장, 90장의 덱이 만들어지는 것을 막기위함
-            {
-                NetworkManager.Instance.Socket.Emit("shuffle", json); // 서버로 전송
-            }
 
             NetworkManager.Instance.Socket.On("deckShuffled", (data) => // 서버로부터 덱 받기
             {
@@ -93,4 +71,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.10.16
+// 마지막 작성 일자: 2025.10.20

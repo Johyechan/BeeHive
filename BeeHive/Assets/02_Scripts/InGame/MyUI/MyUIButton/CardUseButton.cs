@@ -23,14 +23,22 @@ namespace InGame.MyUI.MyUIButton
         // 클릭 시 실행될 함수
         public void OnUIClick()
         {
-            _uiCardBase.UseCard(); // 카드 기능 실행
+            if(_uiCardBase.UseCard() == false) // 카드 사용에 예외가 발생했다면
+            {
+                DOTween.Sequence()
+                .Append(_canvasGroup.DOFade(0, _animationDuration)) // 페이드 아웃
+                .OnComplete(() =>
+                {
+                    _canvasGroup.gameObject.SetActive(false);
+                }); // 객체 비활성화
+                return; // 반환
+            }
 
             DOTween.Sequence()
                 .AppendCallback(() => ReverseCardObject())
                 .Append(_canvasGroup.DOFade(0, _animationDuration)) // 페이드 아웃
                 .OnComplete(() =>
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "DOTween End");
                     _canvasGroup.gameObject.SetActive(false);
                 }); // 객체 비활성화
         }
@@ -52,4 +60,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.10.20

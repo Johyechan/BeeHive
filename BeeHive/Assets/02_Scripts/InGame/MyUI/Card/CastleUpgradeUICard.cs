@@ -8,7 +8,7 @@ namespace InGame.MyUI.Card
     public class CastleUpgradeUICard : UICardBase
     {
         // 카드 기능을 실제로 수행하는 함수
-        public override void UseCard()
+        public override bool UseCard()
         {
             UsedCardData usedCardData = new UsedCardData()
             {
@@ -20,13 +20,21 @@ namespace InGame.MyUI.Card
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
             NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
 
-            NetworkManager.Instance.Socket.Emit("debug", "체력 1 증가");
+            NetworkManager.Instance.Socket.Emit("debug", $"클라로: {TeamManager.Instance.CurrentTeamType.ToString()}");
             // 성 체력 1증가
-            GameManager.Instance.MyCastle.CastleUpgrade(); // 최대 체력 1 증가
-            NetworkManager.Instance.Socket.Emit("castleHpUp", (int)TeamManager.Instance.CurrentTeamType); // 서버에 최대 체력이 올라간 팀 타입 알려주기
+            GameManager.Instance.MyCastle.CastleUpgrade(); // 자기 자신 최대 체력 1 증가
 
-            base.UseCard();
+            CastleHpUpInfo castleHpUpInfo = new CastleHpUpInfo()
+            {
+                roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                changeTeamType = (int)TeamManager.Instance.CurrentTeamType, // 체력이 바뀔 성의 팀 타입
+                changedHp = GameManager.Instance.MyCastle.CurrentHp, // 바뀐 체력
+            };
+            string castleJson = JsonUtility.ToJson(castleHpUpInfo); // Json화
+            NetworkManager.Instance.Socket.Emit("castleHpUp", castleJson); // 서버에 최대 체력이 올라간 팀 타입 알려주기
+
+            return base.UseCard();
         }
     }
 }
-// 마지막 작성 일자: 2025.10.17
+// 마지막 작성 일자: 2025.10.20

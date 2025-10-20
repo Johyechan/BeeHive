@@ -16,8 +16,15 @@ namespace InGame.MyObject.Piece.ObjectPieces
     {
         public override async void ObjectClicked()
         {
-            if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 이동할 수 없습니다."))
-                return; // 반환
+            if(!CardManager.Instance.CardUsed) // 카드 사용으로 변경하는 것이 아니라면
+            {
+                if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 이동할 수 없습니다."))
+                    return; // 반환
+            }
+            else // 카드 사용으로 변경하는 것이라면
+            {
+                CardManager.Instance.CardUsed = false; // 카드 사용 끝내기
+            }
 
             GameObject roadObj = null;
             switch (TurnManager.Instance.CurrentTeamType) // 현재 턴의 팀 타입에 따라
@@ -77,4 +84,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2025.10.01
+// 마지막 작성 일자: 2025.10.20

@@ -22,6 +22,7 @@ namespace InGame.MySystem
             PieceBase roadPiece = newRoad.GetComponent<PieceBase>();
             PlacePlaneObjectBase placePlaneBase = plane.GetComponent<PlacePlaneObjectBase>();
 
+            roadPiece.PieceVariable.currentRoadPlacePlane = placePlaneBase as RoadPlacePlaneObject;
             placePlaneBase.PlacedObjectType = (ObjectType)placedType; // 배치 성공 시 배치된 객체가 배치되었다고 할당
             placePlaneBase.TeamType = roadPiece.CurrentTeamType; // 현재 배치 가능한 칸의 팀 타입을 도로 기물의 팀 타입으로 지정
             placePlaneBase.PlacedPiece = roadPiece; // 배치된 기물에 도로 할당
@@ -29,4 +30,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.09.17
+// 마지막 작성 일자: 2025.10.20

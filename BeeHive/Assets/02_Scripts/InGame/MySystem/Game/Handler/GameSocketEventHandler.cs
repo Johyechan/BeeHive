@@ -20,12 +20,15 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("castleHpChanged", (value) =>
             {
-                int teamType = value.GetValue<int>();
-                TeamType hpChangedCastleTeamType = (TeamType)teamType; // 서버에서 받은 int형식 변수를 TeamType enum 값으로 변경
-                Castle hpChangedCastle = TeamManager.Instance.GetCastle(hpChangedCastleTeamType); // 최대 체력이 올라간 팀에 맞는 성 가져오기
-                hpChangedCastle.CastleUpgrade(); // 최대 체력 증가
+                string json = value.GetValue().ToString();
+                CastleHpChangeInfo castleHpChangeInfo = JsonUtility.FromJson<CastleHpChangeInfo>(json); // Json 값 변환
+
+                TeamType hpChangedCastleTeamType = (TeamType)castleHpChangeInfo.changeTeamType; // 서버에서 받은 int형식 변수를 TeamType enum 값으로 변경
+                NetworkManager.Instance.Socket.Emit("debug", $"서버로: {hpChangedCastleTeamType.ToString()}");
+                Castle hpChangedCastle = TeamManager.Instance.GetCastle(hpChangedCastleTeamType); // 체력이 올라간 팀에 맞는 성 가져오기
+                hpChangedCastle.CastleUpgrade(castleHpChangeInfo.changedHp); // 체력 증가
             });
         }
     }
 }
-// 마지막 작성 일자: 2025.10.17
+// 마지막 작성 일자: 2025.10.20

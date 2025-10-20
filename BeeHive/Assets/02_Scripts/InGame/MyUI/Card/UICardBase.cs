@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyEvent;
+using InGame.MyManager;
 using InGame.MyObject;
 using InGame.MyUI.Card.Handler;
 using InGame.MyUI.Card.Variable;
@@ -65,14 +66,18 @@ namespace InGame.MyUI.Card
         }
 
         // 카드 사용 함수
-        public virtual void UseCard()
+        public virtual bool UseCard()
         {
             // 카드 사용 후 사용된 카드들을 모아두는 덱으로 이동
             if(_uiCardVariable.usedCardDeck != null) // 사용한 카드들을 모아두는 덱을 찾았을 경우
             {
                 _uiCardVariable.usedCardDeck.AddCardInToUsedDeck(_uiCardVariable.cardObj.transform); // 사용한 카드를 추가
                 ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject); // UI 풀에 반환
+
+                return true;
             }
+
+            return false;
         }
 
         // 카드 정보를 보여주는 함수
@@ -91,4 +96,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.10.20

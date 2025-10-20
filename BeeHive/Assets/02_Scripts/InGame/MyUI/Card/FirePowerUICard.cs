@@ -9,7 +9,7 @@ namespace InGame.MyUI.Card
     public class FirePowerUICard : UICardBase
     {
         // 카드 기능을 실제로 수행하는 함수
-        public override void UseCard()
+        public override bool UseCard()
         {
             UsedCardData usedCardData = new UsedCardData()
             {
@@ -25,8 +25,8 @@ namespace InGame.MyUI.Card
             // 전차의 화력 +1
             CardManager.Instance.HaveFirePowerCard = true;
 
-            base.UseCard();
+            return base.UseCard();
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.10.20

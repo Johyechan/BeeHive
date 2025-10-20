@@ -9,6 +9,9 @@ namespace InGame.MyManager
     {
         private bool _haveFirePowerCard; // 화력 카드가 패에 있는지 여부
         public bool HaveFirePowerCard { get => _haveFirePowerCard; set => _haveFirePowerCard = value; } // 위 변수 프로퍼티
+
+        private bool _cardUsed; // 카드 사용 여부
+        public bool CardUsed { get => _cardUsed; set => _cardUsed = value; }
     }
 }
-// 마지막 작성 일자: 2025.09.25
+// 마지막 작성 일자: 2025.10.20

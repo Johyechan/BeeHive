@@ -9,7 +9,7 @@ namespace InGame.MyUI.Card
     public class DroughtUICard : UICardBase
     {
         // 카드 기능을 실제로 수행하는 함수
-        public override void UseCard()
+        public override bool UseCard()
         {
             UsedCardData usedCardData = new UsedCardData()
             {
@@ -37,9 +37,11 @@ namespace InGame.MyUI.Card
                 string droughtJson = JsonUtility.ToJson(droughtInfo);
                 NetworkManager.Instance.Socket.Emit("makeDrought", droughtJson); // 서버에게 1을 보냄으로써 가뭄이 활성화 되었다고 전송
 
-                base.UseCard();
+                return base.UseCard();
             }
+
+            return true;
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.10.20

@@ -9,7 +9,7 @@ namespace InGame.MyUI.Card
     public class GoodHarvestUICard : UICardBase
     {
         // 카드 기능을 실제로 수행하는 함수
-        public override void UseCard()
+        public override bool UseCard()
         {
             UsedCardData usedCardData = new UsedCardData()
             {
@@ -22,14 +22,14 @@ namespace InGame.MyUI.Card
             NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
 
             if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 자신의 턴이 아닐 경우
-                return; // 반환
+                return false; // 반환
 
             NetworkManager.Instance.Socket.Emit("debug", "금괴 4개 획득");
             // 금괴 4개 획득(가뭄 카드의 효과를 받지 않음)
             WalletEvent.OnGetGoldBar?.Invoke(4);
 
-            base.UseCard();
+            return base.UseCard();
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.10.20

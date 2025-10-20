@@ -25,18 +25,6 @@ namespace InGame.MyManager
                 {
                     int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
                     _currentTeamType = (TeamType)teamType; // 팀 저장
-                    switch(_currentTeamType)
-                    {
-                        case TeamType.Team1:
-                            GameManager.Instance.MyCastle = GameObject.Find("Team1Castle").GetComponent<Castle>();
-                            break;
-                        case TeamType.Team2:
-                            GameManager.Instance.MyCastle = GameObject.Find("Team2Castle").GetComponent<Castle>();
-                            break;
-                        case TeamType.Team3:
-                            GameManager.Instance.MyCastle = GameObject.Find("Team3Castle").GetComponent<Castle>();
-                            break;
-                    }
                 });
             }
         }
@@ -148,4 +136,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.10.01
+// 마지막 작성 일자: 2025.10.20

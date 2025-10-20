@@ -11,13 +11,15 @@ namespace InGame.MyUI.Card
     public class RoadChangeUICard : UICardBase
     {
         // 카드 기능을 실제로 수행하는 함수
-        public override void UseCard()
+        public override bool UseCard()
         {
             if(PieceManager.Instance.CanChangeRoadList.Count <= 0) // 도로 변형이 가능한 도로가 없다면
             {
                 _ = UIManager.Instance.WarningUIMake("도로 변형 가능한 도로가 없어서 사용 불가합니다.");
-                return;
+                return false;
             }
+
+            CardManager.Instance.CardUsed = true; // 카드 사용
 
             UsedCardData usedCardData = new UsedCardData()
             {
@@ -29,7 +31,6 @@ namespace InGame.MyUI.Card
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
             NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
 
-            NetworkManager.Instance.Socket.Emit("debug", "도로 변형 가능");
             // 상대 도로 1개를 자신을 도로로 변경
             foreach (var pieceBase in PieceManager.Instance.CanChangeRoadList) // 변환 가능한 도로 리스트를 순회
             {
@@ -40,8 +41,8 @@ namespace InGame.MyUI.Card
                 }
             }
 
-            base.UseCard();
+            return base.UseCard();
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.10.20
