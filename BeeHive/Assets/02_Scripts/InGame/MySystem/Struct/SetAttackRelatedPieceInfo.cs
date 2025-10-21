@@ -11,6 +11,7 @@ namespace InGame.MySystem
         public string returnParentName; // 공격 당한 기물의 부모 객체 명
         public int attackPieceID; // 공격한 기물 ID
         public Vector3 attackPos; // 공격한 기물이 가야할 위치
+        public int isFirePowerAttack; // 원거리 공격 여부
     }
 }
 // 마지막 작성 일자: 2025.09.15

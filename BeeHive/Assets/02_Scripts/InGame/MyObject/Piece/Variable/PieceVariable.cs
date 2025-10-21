@@ -14,7 +14,9 @@ namespace InGame.MyObject.Piece.Variable
 
         public bool isSelected = false; // 선택 여부를 확인하는 변수
 
+        public bool isFirePowerAttackTarget = false; // 원거리 공격 대상인지 확인하는 변수
+
         public int id = 0; // 객체 id
     }
 }
-// 마지막 작성 일자: 2025.10.01
+// 마지막 작성 일자: 2025.10.21

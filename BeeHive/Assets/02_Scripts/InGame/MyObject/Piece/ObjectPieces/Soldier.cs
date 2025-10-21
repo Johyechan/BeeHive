@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
@@ -41,8 +42,10 @@ namespace InGame.MyObject.Piece.ObjectPieces
 
         private async Task NearRoadChange(PieceBase pieceBase, TeamType type, PiecePlacePlaneObject piecePlacePlaneObject)
         {
-            if (pieceBase != this) // 자기자신이 부른 게 아닐경우
+            if (pieceBase.PieceVariable.id != PieceVariable.id) // 자기자신이 부른 게 아닐경우 - 왜?
+            {
                 return; // 반환
+            }
 
             UIManager.Instance.CanInteractionUI = false;
 
@@ -64,6 +67,8 @@ namespace InGame.MyObject.Piece.ObjectPieces
                     }
                 }
             }
+
+            UIManager.Instance.CanInteractionUI = true;
         }
 
         // 도로 변경 함수
@@ -98,4 +103,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2025.09.24
+// 마지막 작성 일자: 2025.10.21

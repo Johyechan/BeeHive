@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
@@ -61,6 +62,8 @@ namespace InGame.MySystem.Game.Handler
                 PiecePlacePlaneObject piecePlacePlane = piecePlacePlaneObj.GetComponent<PiecePlacePlaneObject>(); // 기물 배치 칸 클래스 가져오기
 
                 await PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, (TeamType)pieceChangedRoadInfo.teamType, piecePlacePlane); // 주위 도로 변경 이벤트 호출
+
+                await PieceManager.Instance.FindCanPlacePlane();
             });
 
             NetworkManager.Instance.Socket.On("changedRoad", async (data) =>

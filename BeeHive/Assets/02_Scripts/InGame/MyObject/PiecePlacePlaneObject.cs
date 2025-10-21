@@ -129,20 +129,18 @@ namespace InGame.MyObject
 
                 if (pieceBase.CurrentObjectType == ObjectType.Soldier)
                 {
-                    if (pieceBase.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 공격한 기물이 현재 팀의 기물일 경우에만
+                    if (pieceBase.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 이동한 기물이 현재 팀의 기물일 경우에만
                     {
                         PieceChangeRoadInfo pieceChangeRoadInfo = new PieceChangeRoadInfo
                         {
                             roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                            teamType = (int)pieceBase.CurrentTeamType, // 공격한 기물 팀 타입
-                            placePlaneID = pieceBase.PieceVariable.currentPlacePlane.Id, // 공격한 기물의 목적지 칸의 ID
+                            teamType = (int)pieceBase.CurrentTeamType, // 이동한 기물 팀 타입
+                            placePlaneID = pieceBase.PieceVariable.currentPlacePlane.Id, // 이동한 기물의 목적지 칸의 ID
                             pieceID = pieceBase.PieceVariable.id // 주위 도로를 변경 시킬 기물 ID
                         };
 
                         string pieceChangeRoadJson = JsonUtility.ToJson(pieceChangeRoadInfo);
-
                         NetworkManager.Instance.Socket.Emit("pieceChangeRoad", pieceChangeRoadJson);
-
                         await PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, pieceBase.CurrentTeamType, pieceBase.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                     }
                 }

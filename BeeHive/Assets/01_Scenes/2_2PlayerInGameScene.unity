@@ -5244,7 +5244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canPlaceType: 2
-  _cost: 3
+  _cost: 1
   _leftPieceCountText: {fileID: 622323168}
 --- !u!1001 &468912161
 PrefabInstance:
@@ -12812,7 +12812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canPlaceType: 3
-  _cost: 5
+  _cost: 1
   _leftPieceCountText: {fileID: 1750764175}
 --- !u!1 &1128003493
 GameObject:

@@ -128,9 +128,16 @@ namespace InGame.MySystem.Game
                             PlacePlaneManager.Instance.Variable.highLightHandler.CanPieceMovePlanes.Add(nearPiece); // 이동 가능한 기물 배치 칸 추가
                         }
                     }
-                    else // 다른 기물일 경우
+                    else if(currentObjType == ObjectType.Soldier) // 보병일 경우
                     {
                         PlacePlaneManager.Instance.Variable.highLightHandler.CanPieceMovePlanes.Add(nearPiece); // 이동 가능한 기물 배치 칸 추가
+                    }
+                    else // 전차일 경우
+                    {
+                        if(road.TeamType == TeamManager.Instance.CurrentTeamType) // 도로가 내 팀의 도로라면
+                        {
+                            PlacePlaneManager.Instance.Variable.highLightHandler.CanPieceMovePlanes.Add(nearPiece); // 이동 가능한 기물 배치 칸 추가
+                        }
                     }
 
                     if (!once) // 한 번만 확인하는 게 아닐 경우
@@ -213,4 +220,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.09.29
+// 마지막 작성 일자: 2025.10.21

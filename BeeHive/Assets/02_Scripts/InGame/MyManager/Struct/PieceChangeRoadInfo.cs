@@ -10,4 +10,4 @@ namespace InGame.MyManager
         public int pieceID; // 주위 도로를 변경 시킬 기물 ID
     }
 }
-// 마지막 작성 일자: 2025.09.30
+// 마지막 작성 일자: 2025.10.21

@@ -9,8 +9,8 @@ namespace InGame.MyManager.MyPiece.Handler
     // 공격 가능한 기물의 상태를 변화시키는 기능을 처리하는 핸들러
     public class CanAttackPieceStateHandler
     {
-        // 공격 가능한 기물들을 보여주는 함수(보여줄 기물의 객체 타입, (Key)객체의 타입에 따라 (Value)기물 리스트를 가지는 딕셔너리)
-        public async Task ShowCanAttackPieces(ObjectType type, Dictionary<ObjectType, List<PieceBase>> canAttackPieceMap)
+        // 공격 가능한 기물들을 보여주는 함수(보여줄 기물의 객체 타입, (Key)객체의 타입에 따라 (Value)기물 리스트를 가지는 딕셔너리, 원거리 공격인지 여부 - 기본적으로 근접 공격)
+        public async Task ShowCanAttackPieces(ObjectType type, Dictionary<ObjectType, List<PieceBase>> canAttackPieceMap, bool isFirePowerAttack = false)
         {
             foreach (var piece in canAttackPieceMap) // 공격 가능 기물들 저장 맵 순회
             {
@@ -18,6 +18,11 @@ namespace InGame.MyManager.MyPiece.Handler
                 {
                     foreach (var pieceBase in piece.Value) // 해당 타입에 맞는 기물들을 저장한 리스트 순회
                     {
+                        if(isFirePowerAttack) // 원거리 공격이라면
+                        {
+                            pieceBase.PieceVariable.isFirePowerAttackTarget = true; // 원거리 공격 대상으로 설정
+                        }
+
                         switch (pieceBase.CurrentTeamType) // 해당 기물의 팀 타입에 따라
                         {
                             case TeamType.Team1:
@@ -36,13 +41,17 @@ namespace InGame.MyManager.MyPiece.Handler
             }
         }
 
-        // 공격 가능한 기물을 숨기는 함수((Key)객체의 타입에 따라 (Value)기물 리스트를 가지는 딕셔너리)
-        public async Task HideCanAttackPieces(Dictionary<ObjectType, List<PieceBase>> canAttackPieceMap)
+        // 공격 가능한 기물을 숨기는 함수((Key)객체의 타입에 따라 (Value)기물 리스트를 가지는 딕셔너리, 원거리 공격 여부 - 기본적으로 근접 공격)
+        public async Task HideCanAttackPieces(Dictionary<ObjectType, List<PieceBase>> canAttackPieceMap, bool isFirePowerAttack = false)
         {
             foreach (var piece in canAttackPieceMap) // 공격 가능 기물들 저장 맵 순회
             {
                 foreach (var pieceBase in piece.Value) // 해당 타입에 맞는 기물들을 저장한 리스트 순회
                 {
+                    if(isFirePowerAttack) // 원거리 공격이라면
+                    {
+                        pieceBase.PieceVariable.isFirePowerAttackTarget = false; // 원거리 공격 대상에서 제외
+                    }
                     await pieceBase.ChangeMaterial(true);
                 }
             }
@@ -51,4 +60,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.09.19
+// 마지막 작성 일자: 2025.10.21

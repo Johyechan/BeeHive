@@ -14,6 +14,8 @@ namespace InGame.MyManager.MyPiece.Handler
         // 공격 당한 기물과 공격한 기물이 이동하는 함수(공격 당한 기물, 공격한 기물공격 당한 기물의 부모, 공격한 기물의 부모, 공격 당한 기물의 목적지, 공격한 기물의 목적지)
         public async Task AttackRelatedPiecesMove(PieceBase returnPiece, PieceBase attackPiece, Transform returnParent, Transform attackParent, Vector3 returnPos, Vector3 attackPos)
         {
+            int isFirePowerAttack = returnPiece.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
+
             GameManager.Instance.PieceCanMoveMap[attackPiece.CurrentObjectType] = false; // 공격 시 이동 한 것으로 판정
 
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
@@ -28,7 +30,10 @@ namespace InGame.MyManager.MyPiece.Handler
             returnPiece.PieceVariable.currentPlacePlane = null; // 공격 받은 기물의 배치된 칸을 null로 초기화
 
             await returnPiece.MoveToPlacePlane(returnParent, returnPos); // 공격 받은 기물 이동
-            await attackPiece.MoveToPlacePlane(attackParent, attackPos); // 공격한 기물 이동
+            if(isFirePowerAttack == 0) // 공격 받은 기물이 원거리 공격 대상이 아닐 경우
+            {
+                await attackPiece.MoveToPlacePlane(attackParent, attackPos); // 공격한 기물 이동
+            }
 
             if (attackPiece.CurrentObjectType == ObjectType.Soldier)
             {
@@ -54,4 +59,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.09.30
+// 마지막 작성 일자: 2025.10.21

@@ -3383,11 +3383,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deckCardInfo:
-    castleUpgradeCardCount: 10
+    castleUpgradeCardCount: 0
     droughtCardCount: 0
     goodHarvestCardCount: 0
     roadChangeCardCount: 0
-    firePowerCardCount: 0
+    firePowerCardCount: 30
 --- !u!4 &974670140
 Transform:
   m_ObjectHideFlags: 0

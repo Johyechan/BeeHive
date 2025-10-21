@@ -64,14 +64,18 @@ namespace InGame.MyManager.MyPiece
             await _attackRelatedPiecesMoveHandler.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, returnPos, attackPos);
         }
 
-        private async Task ShowCanAttackPieces(ObjectType type)
+        private async Task ShowCanAttackPieces(ObjectType canAttackType, ObjectType currentPieceType)
         {
-            await _canAttackPieceStateHandler.ShowCanAttackPieces(type, _canAttackPieceMap);
+            await _canAttackPieceStateHandler.ShowCanAttackPieces(canAttackType, _canAttackPieceMap); // 근거리 공격 가능 기물 탐색
+
+            if (currentPieceType == ObjectType.Tank) // 현재 기물이 전차일 경우
+                await _canAttackPieceStateHandler.ShowCanAttackPieces(canAttackType, _canFirePowerAttackPieceMap, true); // 원거리 공격 가능 기물 탐색
         }
 
         private async Task HideCanAttackPieces()
         {
-            await _canAttackPieceStateHandler.HideCanAttackPieces(_canAttackPieceMap);
+            await _canAttackPieceStateHandler.HideCanAttackPieces(_canAttackPieceMap); // 근거리 공격 대상 숨기기
+            await _canAttackPieceStateHandler.HideCanAttackPieces(_canFirePowerAttackPieceMap, true); // 원거리 공격 대상 숨기기
         }
 
         public async Task FindCanPlacePlane()
@@ -80,4 +84,4 @@ namespace InGame.MyManager.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2025.09.29
+// 마지막 작성 일자: 2025.10.21

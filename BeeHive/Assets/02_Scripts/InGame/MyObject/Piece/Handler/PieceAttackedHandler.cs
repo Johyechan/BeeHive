@@ -37,6 +37,8 @@ namespace InGame.MyObject.Piece.Handler
                 return; // 함수 종료
             }
 
+            int isFirePowerAttack = _pieceBase.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
+
             int attackObjID = attackPieceBase.PieceVariable.id; // 공격한 객체의 ID
             int returnObjID = _pieceBase.PieceVariable.id; // 공격 받은 객체의 ID
 
@@ -66,7 +68,8 @@ namespace InGame.MyObject.Piece.Handler
                 returnPos = returnPos, // 공격 당한 기물의 목적지
                 returnParentName = returnParent.name, // 공격 당한 기물의 부모 객체 명
                 attackPieceID = attackObjID, // 공격한 기물 ID
-                attackPos = attackPos // 공격한 기물의 목적지
+                attackPos = attackPos, // 공격한 기물의 목적지
+                isFirePowerAttack = isFirePowerAttack, // 원거리 공격 여부 할당(1: 참, 0: 거짓)
             };
 
             string json = JsonUtility.ToJson(attackInfo);
@@ -77,4 +80,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.09.23
+// 마지막 작성 일자: 2025.10.21

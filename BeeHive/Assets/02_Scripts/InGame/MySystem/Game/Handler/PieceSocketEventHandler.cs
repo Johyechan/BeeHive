@@ -34,6 +34,10 @@ namespace InGame.MySystem.Game.Handler
 
                 GameObject returnPieceObj = ObjectIdManager.Instance.FindObject(setInfo.returnPieceID); // 공격 받은 기물 탐색
                 PieceBase returnPiece = returnPieceObj.GetComponent<PieceBase>(); // 공격 받은 기물의 PieceBase 가져오기
+                if(setInfo.isFirePowerAttack == 1) // 원거리 공격이라면(1: 참, 0: 거짓)
+                {
+                    returnPiece.PieceVariable.isFirePowerAttackTarget = true; // 공격 대상 기물을 원거리 공격 대상으로 할당
+                }
 
                 GameObject attackPieceObj = ObjectIdManager.Instance.FindObject(setInfo.attackPieceID); // 공격한 기물 탐색
                 PieceBase attackPiece = attackPieceObj.GetComponent<PieceBase>(); // 공격한 기물의 PieceBase 가져오기
@@ -46,4 +50,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.09.16
+// 마지막 작성 일자: 2025.10.21
