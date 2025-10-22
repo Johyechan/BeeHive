@@ -35,13 +35,10 @@ namespace InGame.MyManager.MyPiece
 
             _attackRelatedPiecesMoveHandler = new AttackRelatedPiecesMoveHandler();
             _canAttackPieceStateHandler = new CanAttackPieceStateHandler();
-
-            _canAttackPieceMap.Add(ObjectType.Miner, new List<PieceBase>());
+            
             _canAttackPieceMap.Add(ObjectType.Soldier, new List<PieceBase>());
             _canAttackPieceMap.Add(ObjectType.Tank, new List<PieceBase>());
 
-            _canFirePowerAttackPieceMap.Add(ObjectType.Miner, new List<PieceBase>());
-            _canFirePowerAttackPieceMap.Add(ObjectType.Soldier, new List<PieceBase>());
             _canFirePowerAttackPieceMap.Add(ObjectType.Tank, new List<PieceBase>());
         }
 
@@ -64,12 +61,17 @@ namespace InGame.MyManager.MyPiece
             await _attackRelatedPiecesMoveHandler.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, returnPos, attackPos);
         }
 
-        private async Task ShowCanAttackPieces(ObjectType canAttackType, ObjectType currentPieceType)
+        private async Task ShowCanAttackPieces(ObjectType attackingType)
         {
-            await _canAttackPieceStateHandler.ShowCanAttackPieces(canAttackType, _canAttackPieceMap); // 근거리 공격 가능 기물 탐색
+            await _canAttackPieceStateHandler.ShowCanAttackPieces(attackingType, _canAttackPieceMap); // 근거리 공격 가능 기물 탐색
 
-            if (currentPieceType == ObjectType.Tank) // 현재 기물이 전차일 경우
-                await _canAttackPieceStateHandler.ShowCanAttackPieces(canAttackType, _canFirePowerAttackPieceMap, true); // 원거리 공격 가능 기물 탐색
+            if (attackingType == ObjectType.Tank) // 현재 기물이 전차일 경우
+            {
+                if(CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있는 경우
+                {
+                    await _canAttackPieceStateHandler.ShowCanAttackPieces(attackingType, _canFirePowerAttackPieceMap, true); // 원거리 공격 가능 기물 탐색
+                }
+            }
         }
 
         private async Task HideCanAttackPieces()
@@ -84,4 +86,4 @@ namespace InGame.MyManager.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2025.10.21
+// 마지막 작성 일자: 2025.10.22

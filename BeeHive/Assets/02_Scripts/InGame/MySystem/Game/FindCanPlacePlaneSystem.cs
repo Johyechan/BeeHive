@@ -112,10 +112,16 @@ namespace InGame.MySystem.Game
                     continue; // 넘기기
                 else if (nearPiece.TeamType != teamType && nearPiece.TeamType != TeamType.None) // 현재 팀이 아니고 다른 팀에 속한 상태라면
                 {
-                    ObjectType objType = nearPiece.PlacedObjectType; // 배치되어 있는 객체 할당
-                    if (!PieceManager.Instance.CanAttackPieceMap[objType].Contains(nearPiece.PlacedPiece))
-                        PieceManager.Instance.CanAttackPieceMap[objType].Add(nearPiece.PlacedPiece);
-
+                    if(road.TeamType == TeamManager.Instance.CurrentTeamType) // 도로가 우리 팀 도로라면
+                    {
+                        if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Contains(nearPiece.PlacedPiece)) // 중복 확인
+                            PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Add(nearPiece.PlacedPiece); // 전차의 공격 대상으로 추가
+                    }
+                    else // 도로가 우리 팀 도로가 아닐 경우
+                    {
+                        if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Contains(nearPiece.PlacedPiece)) // 중복 확인
+                            PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Add(nearPiece.PlacedPiece); // 보병의 공격 대상으로 추가
+                    }
                     continue;
                 }
 
@@ -164,13 +170,13 @@ namespace InGame.MySystem.Game
                         continue; // 넘기기
 
                     // 근접 공격으로 공격 가능한 대상이라면
-                    if (PieceManager.Instance.CanAttackPieceMap[nearPiece.PlacedObjectType].Contains(nearPiece.PlacedPiece))
+                    if (PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Contains(nearPiece.PlacedPiece))
                         continue; // 넘기기
 
                     // 공격 가능한 기물 중에 일치하는 기물이 없을 경우
-                    if (!PieceManager.Instance.CanFirePowerAttackPieceMap[nearPiece.PlacedObjectType].Contains(nearPiece.PlacedPiece))
+                    if (!PieceManager.Instance.CanFirePowerAttackPieceMap[ObjectType.Tank].Contains(nearPiece.PlacedPiece))
                     {
-                        PieceManager.Instance.CanFirePowerAttackPieceMap[nearPiece.PlacedObjectType].Add(nearPiece.PlacedPiece);
+                        PieceManager.Instance.CanFirePowerAttackPieceMap[ObjectType.Tank].Add(nearPiece.PlacedPiece);
                     }
                 }
             }
@@ -220,4 +226,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.10.21
+// 마지막 작성 일자: 2025.10.22
