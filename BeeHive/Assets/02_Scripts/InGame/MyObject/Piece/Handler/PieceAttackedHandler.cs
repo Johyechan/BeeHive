@@ -3,6 +3,7 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
 using InGame.MyObject.Piece.Data;
+using InGame.MyUI;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -22,19 +23,43 @@ namespace InGame.MyObject.Piece.Handler
             _pieceData = pieceData;
         }
 
+        // 반환 시 불리는 기능들을 모아둔 함수
+        private async Task ReturnFunction()
+        {
+            HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
+            HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
+            HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
+            await PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+        }
+
         public async Task PieceAttacked()
         {
             PieceBase attackPieceBase = GameManager.Instance.CurrentMovePiece.GetComponent<PieceBase>(); // 공격한 객체의 PieceBase 가져오기
 
             if (!await WarningEvent.OnCanMovePiece?.Invoke(attackPieceBase.CurrentObjectType, true)) // 같은 타입의 기물이 공격 했었다면
             {
-                HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
-                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
-                HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
-                await PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+                await ReturnFunction();
 
                 await Task.CompletedTask; // 테스크 종료
                 return; // 함수 종료
+            }
+
+            if (attackPieceBase.CurrentObjectType == ObjectType.Tank) // 공격한 기물이 전차일 경우
+            {
+                if (CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있다면
+                {
+                    _pieceData.confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include);
+                    _pieceData.confirmUI.gameObject.SetActive(true); // 객체 활성화
+
+                    bool result = await _pieceData.confirmUI.Confirm();
+                    if(!result) // 결과가 거짓이라면
+                    {
+                        await ReturnFunction();
+
+                        await Task.CompletedTask; // 테스크 종료
+                        return; // 함수 종료
+                    }
+                }
             }
 
             int isFirePowerAttack = _pieceBase.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
@@ -80,4 +105,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.10.21
+// 마지막 작성 일자: 2025.10.23

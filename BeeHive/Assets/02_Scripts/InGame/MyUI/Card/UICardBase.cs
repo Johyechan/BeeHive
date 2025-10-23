@@ -17,6 +17,7 @@ namespace InGame.MyUI.Card
     public class UICardBase : MonoBehaviour, IUIClick, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected UICardData _uiCardData;
+        public UICardData UICardData { get => _uiCardData; } // 외부에서 접근하기 위한 인스펙터 할당 변수들을 가지는 구조체 프로퍼티
 
         protected UICardVariable _uiCardVariable = new UICardVariable(); // 필요한 변수들을 가지는 클래스
         public UICardVariable UICardVariable { get => _uiCardVariable; } // 위 변수 프로퍼티
@@ -92,7 +93,7 @@ namespace InGame.MyUI.Card
         // UI 클릭 함수
         public void OnUIClick()
         {
-            _uiCardVariable.clickedHandler.Clicked();
+            _uiCardVariable.clickedHandler.ShowAskPanel();
         }
     }
 }

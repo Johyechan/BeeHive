@@ -21,10 +21,6 @@ namespace InGame.MyUI.Card
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
             NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
 
-            NetworkManager.Instance.Socket.Emit("debug", "화력 1 증가");
-            // 전차의 화력 +1
-            CardManager.Instance.HaveFirePowerCard = true;
-
             return base.UseCard();
         }
     }

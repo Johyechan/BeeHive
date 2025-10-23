@@ -56,11 +56,11 @@ namespace InGame.MyInput
                     await _handlerData.functionHandler.DrawFunction(_deck.deckTransform, _deck.player1CardsParent, _deck._playerUICardsParent);
                     break;
 
-                case TeamType.Team2: // 현재 팀이 Team1일 때
+                case TeamType.Team2: // 현재 팀이 Team2일 때
                     await _handlerData.functionHandler.DrawFunction(_deck.deckTransform, _deck.player2CardsParent, _deck._playerUICardsParent);
                     break;
 
-                case TeamType.Team3: // 현재 팀이 Team1일 때
+                case TeamType.Team3: // 현재 팀이 Team3일 때
                     await _handlerData.functionHandler.DrawFunction(_deck.deckTransform, _deck.player3CardsParent, _deck._playerUICardsParent);
                     break;
             }

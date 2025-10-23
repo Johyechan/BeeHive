@@ -2,6 +2,7 @@ using DG.Tweening;
 using InGame.MyManager;
 using InGame.MyUI.Card.Variable;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static UnityEngine.Rendering.DebugUI;
@@ -25,15 +26,18 @@ namespace InGame.MyUI.Card.Handler
             _animationDuration = animationDuration;
         }
 
-        public void Clicked()
+        public void ShowAskPanel()
         {
             _uiCardVariable.cardUseButton.UICardBase = _uiCardBase; // 실행될 카드 할당
 
             _uiCardVariable.cardUsePanelCanvasGroup.gameObject.SetActive(true); // UI 활성화
 
-            DOTween.Sequence().Append(_uiCardVariable.cardUsePanelCanvasGroup.DOFade(1, _animationDuration)); // UI 페이드 인
-                
+            Transform panel = _uiCardVariable.cardUsePanelCanvasGroup.transform.GetChild(0); // 패널 가져오기
+            TMP_Text askText = panel.GetChild(0).GetComponent<TMP_Text>(); // 패널의 묻는 텍스트 가져오기
+
+            askText.text = _uiCardBase.UICardData.currentCardName + "카드를 사용하시겠습니까?"; // 텍스트 설정
+            _uiCardVariable.cardUsePanelCanvasGroup.DOFade(1, _animationDuration); // UI 페이드 인
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.10.23

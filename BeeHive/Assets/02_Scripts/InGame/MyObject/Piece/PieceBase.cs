@@ -5,6 +5,7 @@ using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece.Data;
 using InGame.MyObject.Piece.Handler;
 using InGame.MyObject.Piece.Variable;
+using InGame.MyUI;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -96,4 +97,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2025.10.22
+// 마지막 작성 일자: 2025.10.23

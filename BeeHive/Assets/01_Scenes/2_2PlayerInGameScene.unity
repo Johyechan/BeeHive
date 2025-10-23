@@ -18720,6 +18720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1667095410}
   - component: {fileID: 1667095411}
+  - component: {fileID: 1667095412}
   m_Layer: 5
   m_Name: CardUseUI
   m_TagString: Untagged
@@ -18759,6 +18760,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1667095412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667095409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c109647e35259a340855252603f95bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _yesButton: {fileID: 1406560858}
+  _noButton: {fileID: 318712767}
+  _uiCardsParent: {fileID: 1145864087}
+  _animationDuration: 0.1
+  _cardUseButton: {fileID: 1406560861}
+  _askText: {fileID: 1841374094}
 --- !u!114 &1672974187 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
@@ -20683,7 +20702,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCE74\uB4DC\uB97C \uC0AC\uC6A9\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C?"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d724cd26946e592418030edf54f561d4, type: 2}
   m_sharedMaterial: {fileID: 4109280206487976735, guid: d724cd26946e592418030edf54f561d4, type: 2}
