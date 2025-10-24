@@ -97,4 +97,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2025.10.23
+// 마지막 작성 일자: 2025.10.24

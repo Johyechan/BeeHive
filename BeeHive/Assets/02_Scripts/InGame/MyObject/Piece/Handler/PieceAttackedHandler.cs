@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
+using InGame.MyObject.Handler;
 using InGame.MyObject.Piece.Data;
 using InGame.MyUI;
 using System.Threading.Tasks;
@@ -59,6 +60,21 @@ namespace InGame.MyObject.Piece.Handler
                         await Task.CompletedTask; // 테스크 종료
                         return; // 함수 종료
                     }
+
+                    if(_pieceBase.CurrentObjectType == ObjectType.Tank) // 만약 공격 받는 기물도 전차라면
+                    {
+                        NetworkManager.Instance.Socket.Emit("tankAttackedTank", SceneMgr.Instance.CurrentRoomID); // 상대 전차를 공격했다고 서버로 이벤트 호출
+
+                        bool opponentChooseDefense = await PieceManager.Instance.OpponentChoice() == 1 ? true : false; // 상대가 결정할 때까지 대기
+
+                        if(opponentChooseDefense) // 상대가 방어를 했다면
+                        {
+                            await ReturnFunction();
+
+                            await Task.CompletedTask; // 테스크 종료
+                            return; // 함수 종료
+                        }
+                    }
                 }
             }
 
@@ -105,4 +121,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.10.23
+// 마지막 작성 일자: 2025.10.24

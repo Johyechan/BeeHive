@@ -29,6 +29,8 @@ namespace InGame.MyManager.MyPiece
         private bool _isDrought; // 가뭄인지 여부를 확인하는 변수
         public bool IsDrought { get => _isDrought; set => _isDrought = value; } // 위 변수 프로퍼티
 
+        private TaskCompletionSource<int> _tcs; // 1이 참, 0이 거짓
+
         protected override void Awake()
         {
             base.Awake();
@@ -40,6 +42,13 @@ namespace InGame.MyManager.MyPiece
             _canAttackPieceMap.Add(ObjectType.Tank, new List<PieceBase>());
 
             _canFirePowerAttackPieceMap.Add(ObjectType.Tank, new List<PieceBase>());
+
+            NetworkManager.Instance.Socket.On("opponentChooseOne", value =>
+            {
+                int result = value.GetValue<int>();
+
+                _tcs?.TrySetResult(result);
+            });
         }
 
         private void OnEnable()
@@ -53,6 +62,21 @@ namespace InGame.MyManager.MyPiece
         {
             PieceEvents.OnShowCanAttackPieces -= ShowCanAttackPieces;
             PieceEvents.OnHideCanAttackPieces -= HideCanAttackPieces;
+        }
+
+        public async Task<int> OpponentChoice(int delay = 5) // 기본적으로 5초 대기
+        {
+            _tcs = new TaskCompletionSource<int>();
+
+            var delayTask = Task.Delay(delay * 1000); // 1000을 곱함으로써 millisecond에 맞추기
+            var completed = await Task.WhenAny(_tcs.Task, delayTask); // 두 Task중 먼저 끝난 Task를 할당
+
+            if(completed == delayTask) // 대기 시간이 다 지난 상황이라면
+            {
+                return 0;
+            }
+
+            return await _tcs.Task; // 상대가 5초 전에 먼저 선택한 경우 _tcs가 완료 상태가 되기 때문에 더 이상 대기 X 그래서 await를 통해 다시 값 반환
         }
 
         // 공격 당한 기물과 공격한 기물이 이동하는 함수(공격 당한 기물, 공격한 기물공격 당한 기물의 부모, 공격한 기물의 부모, 공격 당한 기물의 목적지, 공격한 기물의 목적지)
@@ -86,4 +110,4 @@ namespace InGame.MyManager.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2025.10.22
+// 마지막 작성 일자: 2025.10.24

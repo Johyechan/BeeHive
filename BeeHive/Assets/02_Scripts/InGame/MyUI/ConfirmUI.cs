@@ -2,7 +2,9 @@ using DG.Tweening;
 using InGame.MyManager;
 using InGame.MyUI.Card;
 using InGame.MyUI.MyUIButton;
+using MyUtil;
 using MyUtil.MyObjectPool;
+using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -17,8 +19,6 @@ namespace InGame.MyUI
     {
         [SerializeField] private Button _yesButton; // 예 버튼
         [SerializeField] private Button _noButton; // 아니오 버튼
-
-        [SerializeField] private Transform _uiCardsParent; // ui 카드 부모
 
         [SerializeField] private float _animationDuration; // 애니메이션 지속 시간
 
@@ -43,12 +43,18 @@ namespace InGame.MyUI
             _tcs?.TrySetResult(value);
         }
 
-        public async Task<bool> Confirm()
+        public async Task<bool> Confirm(string message = "화력을 사용하여 공격하시겠습니까?")
         {
-            _cardUseButton.UICardBase = FindFirePowerCard(); // 화력 카드 할당
-            _askText.text = "화력을 사용하여 공격하시겠습니까?";
+            _cardUseButton.UICardBase = CardManager.Instance.FindFirePowerCard(); // 화력 카드 할당
 
-            await _canvasGroup.DOFade(1, _animationDuration).AsyncWaitForCompletion(); // 페이드 인
+            Canvas.ForceUpdateCanvases();
+
+            await Task.Yield();
+            await Task.Yield();
+            await Task.Yield();
+            await Task.Yield();
+
+            _askText.text = message;
 
             _tcs = new TaskCompletionSource<bool>();
 
@@ -58,6 +64,8 @@ namespace InGame.MyUI
             _yesButton.onClick.AddListener(_yesButtonAction); // 예 버튼에 true를 반환하는 기능 구독
             _noButton.onClick.AddListener(_noButtonAction); // 아니오 버튼에 false 반환하는 기능 구독
 
+            await _canvasGroup.DOFade(1, _animationDuration).AsyncWaitForCompletion(); // 페이드 인
+
             bool result = await _tcs.Task;
 
             _yesButton.onClick.RemoveListener(_yesButtonAction); // 예 버튼 초기화
@@ -65,21 +73,6 @@ namespace InGame.MyUI
 
             return result;
         }
-
-        private UICardBase FindFirePowerCard()
-        {
-            for(int i = _uiCardsParent.childCount - 1; i >= 0; i--)
-            {
-                UICardBase uiCardBase = _uiCardsParent.GetChild(i).GetComponent<UICardBase>(); // 카드의 UICardBase 클래스 가져오기
-                NetworkManager.Instance.Socket.Emit("debug", $"카드 확인: {uiCardBase}");
-                if (uiCardBase.UICardData.poolType == ObjectPoolType.FirePowerUICard) // 화력 카드라면
-                {
-                    return uiCardBase;
-                }
-            }
-
-            return null;
-        }
     }
 }
-// 마지막 작성 일자: 2025.10.23
+// 마지막 작성 일자: 2025.10.24

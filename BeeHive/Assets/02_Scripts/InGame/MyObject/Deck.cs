@@ -53,12 +53,9 @@ namespace InGame.MyObject
                             break;
                     }
                 }
-            });
-        }
 
-        private void Start()
-        {
-            _ = CreateDeck(); // 덱 생성
+                _ = CreateDeck(); // 덱 생성
+            });
         }
 
         private async Task CreateDeck()
@@ -71,4 +68,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.10.20
+// 마지막 작성 일자: 2025.10.24

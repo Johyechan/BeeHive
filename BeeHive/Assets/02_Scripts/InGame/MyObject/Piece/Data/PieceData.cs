@@ -1,4 +1,5 @@
 using InGame.MyEnum;
+using InGame.MyObject.Handler;
 using InGame.MyObject.Piece.Handler;
 using InGame.MyUI;
 using System;
@@ -34,4 +35,4 @@ namespace InGame.MyObject.Piece.Data
         public ConfirmUI confirmUI; // 확인 UI(전차로 원거리 공격 시 화력 카드 사용 여부를 묻기 위한 클래스)
     }
 }
-// 마지막 작성 일자: 2025.10.23
+// 마지막 작성 일자: 2025.10.24

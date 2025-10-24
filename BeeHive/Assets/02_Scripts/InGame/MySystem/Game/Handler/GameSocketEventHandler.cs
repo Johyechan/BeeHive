@@ -2,6 +2,8 @@ using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
 using InGame.MyObject;
+using InGame.MyUI;
+using InGame.MyUI.Card;
 using UnityEngine;
 
 namespace InGame.MySystem.Game.Handler
@@ -28,7 +30,35 @@ namespace InGame.MySystem.Game.Handler
                 Castle hpChangedCastle = TeamManager.Instance.GetCastle(hpChangedCastleTeamType); // 체력이 올라간 팀에 맞는 성 가져오기
                 hpChangedCastle.CastleUpgrade(castleHpChangeInfo.changedHp); // 체력 증가
             });
+
+            NetworkManager.Instance.Socket.On("tankAttacked", async (value) =>
+            {
+                NetworkManager.Instance.Socket.Emit("debug", "일단 클라이언트도 전차가 전차를 공격했다고 인식함");
+                if(CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있다면
+                { 
+                    NetworkManager.Instance.Socket.Emit("debug", "그리고 공격 당한 전차가 화력이 있다는 것도 인식");
+                    ConfirmUI confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 가져오기
+                    NetworkManager.Instance.Socket.Emit("debug", $"확인 UI가 있나요?: {confirmUI}");
+                    
+                    confirmUI.gameObject.SetActive(true); // 확인 UI 활성화
+
+                    bool result = await confirmUI.Confirm("상대 전차에게 공격 당했습니다. \n 화력 카드를 사용하여 방어 하시겠습니까?");
+
+                    if(result) // 화력 카드를 사용해서 방어를 선택했다면
+                    {
+                        NetworkManager.Instance.Socket.Emit("chooseDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
+                    }
+                    else // 화력 카드를 사용하지 않아 방어를 선택하지 않았다면
+                    {
+                        NetworkManager.Instance.Socket.Emit("chooseNoDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
+                    }
+                }
+                else // 화력 카드를 가지고 있지 않을 경우
+                {
+                    NetworkManager.Instance.Socket.Emit("chooseNoDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
+                }
+            });
         }
     }
 }
-// 마지막 작성 일자: 2025.10.20
+// 마지막 작성 일자: 2025.10.24

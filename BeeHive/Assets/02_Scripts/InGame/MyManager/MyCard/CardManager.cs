@@ -1,4 +1,6 @@
+using InGame.MyUI.Card;
 using MyUtil;
+using MyUtil.MyObjectPool;
 using UnityEngine;
 
 namespace InGame.MyManager
@@ -12,6 +14,24 @@ namespace InGame.MyManager
 
         private bool _cardUsed; // 카드 사용 여부
         public bool CardUsed { get => _cardUsed; set => _cardUsed = value; }
+
+        [SerializeField] private Transform _uiCardsParent; // ui 카드 부모
+
+        // 화력 카드 탐색 함수
+        public UICardBase FindFirePowerCard()
+        {
+            for (int i = _uiCardsParent.childCount - 1; i >= 0; i--)
+            {
+                UICardBase uiCardBase = _uiCardsParent.GetChild(i).GetComponent<UICardBase>(); // 카드의 UICardBase 클래스 가져오기
+                NetworkManager.Instance.Socket.Emit("debug", $"카드 확인: {uiCardBase}");
+                if (uiCardBase.UICardData.poolType == ObjectPoolType.FirePowerUICard) // 화력 카드라면
+                {
+                    return uiCardBase;
+                }
+            }
+
+            return null;
+        }
     }
 }
-// 마지막 작성 일자: 2025.10.20
+// 마지막 작성 일자: 2025.10.24

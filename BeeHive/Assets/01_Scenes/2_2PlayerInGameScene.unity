@@ -15085,6 +15085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19dfd0ed3830eac42ac50215375a6d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiCardsParent: {fileID: 1145864087}
 --- !u!4 &1402230656
 Transform:
   m_ObjectHideFlags: 0
@@ -18774,7 +18775,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _yesButton: {fileID: 1406560858}
   _noButton: {fileID: 318712767}
-  _uiCardsParent: {fileID: 1145864087}
   _animationDuration: 0.1
   _cardUseButton: {fileID: 1406560861}
   _askText: {fileID: 1841374094}
