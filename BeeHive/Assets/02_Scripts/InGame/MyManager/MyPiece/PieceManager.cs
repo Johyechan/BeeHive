@@ -64,7 +64,7 @@ namespace InGame.MyManager.MyPiece
             PieceEvents.OnHideCanAttackPieces -= HideCanAttackPieces;
         }
 
-        public async Task<int> OpponentChoice(int delay = 5) // 기본적으로 5초 대기
+        public async Task<int> OpponentChoice(int delay = 100) // 기본적으로 5초 대기
         {
             _tcs = new TaskCompletionSource<int>();
 

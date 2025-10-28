@@ -1,9 +1,13 @@
+using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyObject;
 using MyUtil;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace InGame.MyManager
 {
@@ -11,6 +15,11 @@ namespace InGame.MyManager
     // 게임의 중요한 기능들을 관리하는 싱글톤 클래스
     public class GameManager : MonoSingleton<GameManager>
     {
+        [SerializeField] private CanvasGroup _gameOverUICanvasGroup;
+        [SerializeField] private TMP_Text _gameOverText;
+
+        [SerializeField] private float _animationDuration;
+
         public int PlayerCount; // 현재 게임에 몇 명의 플레이어 있는지 정하는 변수
 
         private List<TeamType> _teamOrder = new List<TeamType>(); // 팀 순서 리스트
@@ -23,20 +32,15 @@ namespace InGame.MyManager
             set => _currentMovePiece = value;
         }
 
-        private TeamType _teamType; // 현재 팀 타입
-        // 위에 변수를 외부에서 사용 및 변경하기 위한 프로퍼티
-        public TeamType TeamType
-        {
-            get => _teamType;
-            set => _teamType = value;
-        }
-
         private bool _canMakePiece; // 기물 생성 가능 여부
         public bool CanMakePiece // 위 변수 프로퍼티
         {
             get => _canMakePiece;
             set => _canMakePiece = value;
         }
+
+        private bool _gameOver; // 게임오버 여부
+        public bool GameOver { get => _gameOver; } // 위 변수 프로퍼티
 
         private Dictionary<ObjectType, bool> _pieceCanMoveMap = new Dictionary<ObjectType, bool>(); // 각 기물마다 이동 가능 여부를 가지는 맵
         public Dictionary<ObjectType, bool> PieceCanMoveMap { get => _pieceCanMoveMap; }
@@ -70,6 +74,25 @@ namespace InGame.MyManager
                     MyCastle = GameObject.Find("Team3Castle").GetComponent<Castle>();
                     break;
             }
+        }
+
+        public void GameIsOver(TeamType loseTeamType)
+        {
+            NetworkManager.Instance.Socket.Emit("debug", "게임 오버 UI 활성화");
+            _gameOver = true;
+
+            _gameOverUICanvasGroup.gameObject.SetActive(true); // 게임 오버 UI 캔버스 그룹 활성화
+
+            if(TeamManager.Instance.CurrentTeamType == loseTeamType) // 패배 팀이라면
+            {
+                _gameOverText.text = "패배 했습니다";
+            }
+            else // 승리 팀이라면
+            {
+                _gameOverText.text = "승리 했습니다";
+            }
+
+            _gameOverUICanvasGroup.DOFade(1, _animationDuration); // 게임 오버 UI 페이드 인
         }
 
         // 기물 생성 및 이동 가능 여부 초기화
@@ -129,4 +152,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.10.01
+// 마지막 작성 일자: 2025.10.28

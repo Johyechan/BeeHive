@@ -5,6 +5,7 @@ using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Handler;
 using InGame.MyObject.Piece;
+using MyUtil.MyObjectPool;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace InGame.MyObject
     // 기물 배치 칸의 기능 클래스
     public class PiecePlacePlaneObject : PlacePlaneObjectBase
     {
+        [SerializeField] private PiecePlacePlaneObject _frontPiecePlacePlaneObject; // 앞에 있는 기물 배치 칸
+        
         public List<RoadPlacePlaneObject> nearRoadPlaceTransformList = new(); // 가깝게 붙어있는 도로 칸을 저장하는 리스트
 
         private Transform _minerParent; // 광부 기물들의 부모
@@ -57,6 +60,16 @@ namespace InGame.MyObject
         // 마우스로 클릭 시 실행될 함수
         public override async void ObjectClicked()
         {
+            if (isNearToCastle) // 성과 근접한 배치칸이면서
+            {
+                if(_frontPiecePlacePlaneObject.PlacedObjectType != ObjectType.None)// 앞에 있는 기물 배치칸에 배치된 상대 기물이 있다면 
+                {
+                    await UIManager.Instance.WarningUIMake("상대가 해당 배치 칸의 앞 칸을 점령 했습니다"); // UI 경고문 생성
+                    await HighLightOffEvent(); // 하이라이트 끄기
+                    return; // 반환
+                }
+            }
+
             if (GameManager.Instance.CurrentMovePiece != null) // 현재 이동 가능한 객체 있다면
             {
                 if (!await WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
@@ -145,6 +158,29 @@ namespace InGame.MyObject
                     }
                 }
 
+                if(isNearToCastle) // 성 주위 배치칸일 때
+                {
+                    if (currentPlayerTeamType != TeamManager.Instance.CurrentTeamType) // 현재 배치칸이 우리팀 배치칸이 아닐 때
+                    {
+                        Castle castle = TeamManager.Instance.GetCastle(currentPlayerTeamType); // 상대 성 가져오기
+                        castle.CastleHit(pieceBase.Damage); // 상대 성 공격
+
+                        CastleAttackInfo castleAttackInfo = new CastleAttackInfo()
+                        {
+                            roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                            attackedCaslteType = (int)currentPlayerTeamType, // 공격 받은 성의 타입
+                            damage = pieceBase.Damage, // 데미지
+                            objectID = pieceBase.PieceVariable.id // 공격한 기물 객체 ID
+                        };
+
+                        string castleAttackJson = JsonUtility.ToJson(castleAttackInfo); // Json 형태로 변환
+
+                        NetworkManager.Instance.Socket.Emit("castleAttack", castleAttackJson); // 서버로 성 공격 신호 보내기
+                        pieceBase.PieceDestroy(); // 공격한 기물 파괴
+                    }
+                }
+                
+
                 await PieceManager.Instance.FindCanPlacePlane();
 
                 UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
@@ -152,4 +188,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.30
+// 마지막 작성 일자: 2025.10.28

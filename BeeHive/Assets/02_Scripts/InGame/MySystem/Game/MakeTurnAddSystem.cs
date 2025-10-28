@@ -31,7 +31,7 @@ namespace InGame.MySystem.Game
             if (IsReturn()) return; // 반환해야할 조건을 충족했을 경우 반환
 
             Transform roadParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType);
-            await PieceEvents.OnGetRoad?.Invoke(2, TeamManager.Instance.CurrentTeamType, roadParent); // 도로 2개 획득
+            await PieceEvents.OnGetRoad?.Invoke(6, TeamManager.Instance.CurrentTeamType, roadParent); // 도로 2개 획득
 
             UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
             AddRoadInfo addRoadInfo = new AddRoadInfo()

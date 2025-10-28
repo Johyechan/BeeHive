@@ -17,13 +17,17 @@ namespace InGame.MyManager.MyPlacePlane.Handler
                 // 배치된 기물의 이전 배치 칸 초기화
                 placedPiece.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None;
                 placedPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None;
+                placedPiece.PieceVariable.currentPlacePlane.PlacedPiece = null;
             }
 
-            currentPlacePlane.PlacedObjectType = placedPiece.CurrentObjectType; // 배치된 기물의 객체 타입 할당
-            currentPlacePlane.TeamType = placedPiece.CurrentTeamType; // 배치된 기물의 팀 타입 할당
-            currentPlacePlane.PlacedPiece = placedPiece;
-
             bool isRoad = currentPlacePlane is RoadPlacePlaneObject; // 도로 배치칸인지 확인하기 위한 변수
+
+            if (!currentPlacePlane.isNearToCastle || isRoad) // 이동하려는 배치칸이 성 주위 배치칸이 아니거나 도로 배치칸 일경우
+            {
+                currentPlacePlane.PlacedObjectType = placedPiece.CurrentObjectType; // 배치된 기물의 객체 타입 할당
+                currentPlacePlane.TeamType = placedPiece.CurrentTeamType; // 배치된 기물의 팀 타입 할당
+                currentPlacePlane.PlacedPiece = placedPiece;
+            }
 
             if (!isRoad) // 도로 배치칸을 변경하는 것이 아닌 기물 배치칸을 변경하는 것이라면
             {
@@ -38,4 +42,4 @@ namespace InGame.MyManager.MyPlacePlane.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.09.19
+// 마지막 작성 일자: 2025.10.28

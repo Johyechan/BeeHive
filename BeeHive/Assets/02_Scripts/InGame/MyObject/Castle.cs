@@ -33,6 +33,35 @@ namespace InGame.MyObject
             }
         }
 
+        public void CastleHit(int damage)
+        {
+            _currentHp -= damage;
+            if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 성의 팀과 현재 팀이 같을 경우
+            {
+                _myHpText.text = $"성 체력: {_currentHp}"; // UI 적용
+            }
+            else // 성의 팀과 현재 팀이 다를 경우
+            {
+                _otherHpText.text = $"성 체력: {_currentHp}"; // UI 적용
+            }
+
+            if(_currentHp <= 0 && TeamManager.Instance.CurrentTeamType == _castleTeamType) // 현재 체력이 0 이하라면 그리고 같은 팀의 성일 경우
+            {
+                NetworkManager.Instance.Socket.Emit("debug", "게임 오버 시작");
+
+                GameOverInfo gameOverInfo = new GameOverInfo()
+                {
+                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                    loseTeamType = (int)_castleTeamType, // 패배 팀 타입
+                };
+                NetworkManager.Instance.Socket.Emit("debug", "구조체는 만듦");
+                string json = JsonUtility.ToJson(gameOverInfo); // Json으로 변환
+                NetworkManager.Instance.Socket.Emit("debug", "Json 전환도 됨");
+                NetworkManager.Instance.Socket.Emit("gameOver", json);
+                NetworkManager.Instance.Socket.Emit("debug", "서버에 보냄");
+            }
+        }
+
         // 성 강화 함수(최대 체력 1증가)
         public void CastleUpgrade(int currentHp = 0)
         {
@@ -52,4 +81,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.10.20
+// 마지막 작성 일자: 2025.10.28

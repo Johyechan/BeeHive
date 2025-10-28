@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyObject.Handler;
 using InGame.MyObject.Piece.Handler;
 using InGame.MyUI;
+using MyUtil.MyObjectPool;
 using System;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ namespace InGame.MyObject.Piece.Data
         public float animationDuration; // 애니메이션 지속시간
         public float xInterval; // 기물 배열의 x축 간격
 
-        public ConfirmUI confirmUI; // 확인 UI(전차로 원거리 공격 시 화력 카드 사용 여부를 묻기 위한 클래스)
+        [HideInInspector] public ConfirmUI confirmUI; // 확인 UI(전차로 원거리 공격 시 화력 카드 사용 여부를 묻기 위한 클래스)
     }
 }
-// 마지막 작성 일자: 2025.10.24
+// 마지막 작성 일자: 2025.10.28
