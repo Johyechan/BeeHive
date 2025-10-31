@@ -73,17 +73,7 @@ namespace InGame.MyUI.Card
             if(_uiCardVariable.usedCardDeck != null) // 사용한 카드들을 모아두는 덱을 찾았을 경우
             {
                 _uiCardVariable.usedCardDeck.AddCardInToUsedDeck(_uiCardVariable.cardObj.transform); // 사용한 카드를 추가
-                ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject); // UI 풀에 반환
-
-                NetworkManager.Instance.Socket.Emit("debug", "설마 여기? 일단 화력 카드가 남았는지 확인");
-                UICardBase uiCardBase = CardManager.Instance.FindFirePowerCard(); // 자신의 패에서 화력 카드 탐색
-                NetworkManager.Instance.Socket.Emit("debug", $"화력 카드 있음?: {uiCardBase}");
-                if (uiCardBase == null) // 자신의 패에 화력 카드가 없다면
-                {
-                    NetworkManager.Instance.Socket.Emit("debug", $"화력 카드 없음");
-                    CardManager.Instance.HaveFirePowerCard = false; // 화력 카드가 없는 상태로 전환
-                    NetworkManager.Instance.Socket.Emit("debug", $"화력 카드 없음 상태로 전환함");
-                }
+                ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject);
 
                 return true;
             }
@@ -107,4 +97,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.10.24
+// 마지막 작성 일자: 2025.10.31

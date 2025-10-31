@@ -96,7 +96,10 @@ namespace InGame.MySystem.Game
                 PlacePlaneManager.Instance.Variable.highLightHandler.CanPieceMovePlanes.Clear(); // 기물 이동 가능한 판 저장 컨테이너 비우기
 
                 foreach (var piece in PieceManager.Instance.CanAttackPieceMap) // 공격 가능 기물 저장 컨테이너 순회
-                    piece.Value.Clear(); // 리스트 클리어                                                                   
+                    piece.Value.Clear(); // 리스트 클리어
+
+                foreach (var piece in PieceManager.Instance.CanFirePowerAttackPieceMap) // 화력 공격 가능 기물 저장 컨테이너 순회
+                    piece.Value.Clear(); // 리스트 클리어
             }
 
             return Task.CompletedTask; // 테스크 종료 반환

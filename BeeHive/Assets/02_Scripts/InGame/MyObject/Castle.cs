@@ -47,18 +47,14 @@ namespace InGame.MyObject
 
             if(_currentHp <= 0 && TeamManager.Instance.CurrentTeamType == _castleTeamType) // 현재 체력이 0 이하라면 그리고 같은 팀의 성일 경우
             {
-                NetworkManager.Instance.Socket.Emit("debug", "게임 오버 시작");
 
                 GameOverInfo gameOverInfo = new GameOverInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                     loseTeamType = (int)_castleTeamType, // 패배 팀 타입
                 };
-                NetworkManager.Instance.Socket.Emit("debug", "구조체는 만듦");
                 string json = JsonUtility.ToJson(gameOverInfo); // Json으로 변환
-                NetworkManager.Instance.Socket.Emit("debug", "Json 전환도 됨");
                 NetworkManager.Instance.Socket.Emit("gameOver", json);
-                NetworkManager.Instance.Socket.Emit("debug", "서버에 보냄");
             }
         }
 
@@ -67,14 +63,12 @@ namespace InGame.MyObject
         {
             if(_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자신의 성이라면
             {
-                NetworkManager.Instance.Socket.Emit("debug", "자기 성 체력 올리기");
                 _currentHp++; // 현재 체력 증가
 
                 _myHpText.text = $"성 체력: {_currentHp}"; // UI 적용
             }
             else // 상대의 성이라면
             {
-                NetworkManager.Instance.Socket.Emit("debug", "상대 성 체력 올리기");
 
                 _otherHpText.text = $"성 체력: {currentHp}"; // UI 적용
             }

@@ -1,15 +1,11 @@
 using DG.Tweening;
 using InGame.MyManager;
-using InGame.MyUI.Card;
 using InGame.MyUI.MyUIButton;
 using MyUtil;
-using MyUtil.MyObjectPool;
-using System.Collections;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace InGame.MyUI
@@ -46,38 +42,41 @@ namespace InGame.MyUI
 
         public async Task<bool> Confirm(string message = "화력을 사용하여 공격하시겠습니까?")
         {
-            NetworkManager.Instance.Socket.Emit("debug", $"일단 gpu가 있습니다 {SystemInfo.graphicsDeviceType}");
+            bool result = false;
+
+            while (!GpuManager.Instance.IsReady) // gpu가 없다면
+                await Task.Yield(); // 대기
+
+            _askText.ForceMeshUpdate(); // TMP를 GPU에 강제로 올리기
 
             _cardUseButton.UICardBase = CardManager.Instance.FindFirePowerCard(); // 화력 카드 할당
-            NetworkManager.Instance.Socket.Emit("debug", $"화력 카드도 할당했죠");
 
-            _askText.text = message;
-            NetworkManager.Instance.Socket.Emit("debug", $"텍스트도 할당");
+            MainThreadDispatcher.Enqueue(() =>
+            {
+                _askText.text = message;
+            });
 
             _tcs = new TaskCompletionSource<bool>();
-            NetworkManager.Instance.Socket.Emit("debug", $"대기 테스크도 생성");
 
             _yesButtonAction = () => Click(true); // 예 버튼 이벤트
             _noButtonAction = () => Click(false); // 아니오 버튼 이벤트
-            NetworkManager.Instance.Socket.Emit("debug", $"델리게이트도 제작");
 
-            _yesButton.onClick.AddListener(_yesButtonAction); // 예 버튼에 true를 반환하는 기능 구독
-            _noButton.onClick.AddListener(_noButtonAction); // 아니오 버튼에 false 반환하는 기능 구독
-            NetworkManager.Instance.Socket.Emit("debug", $"버튼에 이벤트 추가");
+            MainThreadDispatcher.Enqueue(() =>
+            {
+                _yesButton.onClick.AddListener(_yesButtonAction); // 예 버튼에 true를 반환하는 기능 구독
+                _noButton.onClick.AddListener(_noButtonAction); // 아니오 버튼에 false 반환하는 기능 구독
+                _canvasGroup.DOFade(1, _animationDuration); // 페이드 인
+            });
 
-            await _canvasGroup.DOFade(1, _animationDuration).AsyncWaitForCompletion(); // 페이드 인
-            NetworkManager.Instance.Socket.Emit("debug", $"페이드 인 성공");
+            result = await _tcs.Task;
 
-            bool result = await _tcs.Task;
-            NetworkManager.Instance.Socket.Emit("debug", $"결과 받기");
-
-            _yesButton.onClick.RemoveListener(_yesButtonAction); // 예 버튼 초기화
-            _noButton.onClick.RemoveListener(_noButtonAction); // 예 버튼 초기화
-            NetworkManager.Instance.Socket.Emit("debug", $"버튼 이벤트 초기화");
-
-            NetworkManager.Instance.Socket.Emit("debug", $"이제 결과 반환");
+            MainThreadDispatcher.Enqueue(() =>
+            {
+                _yesButton.onClick.RemoveListener(_yesButtonAction); // 예 버튼 초기화
+                _noButton.onClick.RemoveListener(_noButtonAction); // 예 버튼 초기화
+            });
             return result;
         }
     }
 }
-// 마지막 작성 일자: 2025.10.27
+// 마지막 작성 일자: 2025.10.31

@@ -76,12 +76,18 @@ namespace InGame.MyManager
             }
         }
 
-        public void GameIsOver(TeamType loseTeamType)
+        public async void GameIsOver(TeamType loseTeamType)
         {
-            NetworkManager.Instance.Socket.Emit("debug", "게임 오버 UI 활성화");
+            while (!GpuManager.Instance.IsReady) // GPU가 준비 되지 않았다면
+            {
+                await Task.Yield(); // 대기
+            }
+
             _gameOver = true;
 
             _gameOverUICanvasGroup.gameObject.SetActive(true); // 게임 오버 UI 캔버스 그룹 활성화
+
+            _gameOverText.ForceMeshUpdate(); // TMP를 GPU에 강제로 올리기
 
             if(TeamManager.Instance.CurrentTeamType == loseTeamType) // 패배 팀이라면
             {
@@ -152,4 +158,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.10.28
+// 마지막 작성 일자: 2025.10.29

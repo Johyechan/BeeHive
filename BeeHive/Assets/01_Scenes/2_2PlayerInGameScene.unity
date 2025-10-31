@@ -15376,6 +15376,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiCardsParent: {fileID: 1145864087}
+  _team1CardParent: {fileID: 1993153890}
+  _team2CardParent: {fileID: 1984745557}
+  _team3CardParent: {fileID: 0}
 --- !u!4 &1402230656
 Transform:
   m_ObjectHideFlags: 0

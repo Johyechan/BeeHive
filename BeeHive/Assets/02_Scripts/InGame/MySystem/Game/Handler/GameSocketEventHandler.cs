@@ -5,7 +5,10 @@ using InGame.MyObject;
 using InGame.MyObject.Piece;
 using InGame.MyUI;
 using InGame.MyUI.Card;
+using MyUtil;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace InGame.MySystem.Game.Handler
 {
@@ -27,16 +30,17 @@ namespace InGame.MySystem.Game.Handler
                 CastleHpChangeInfo castleHpChangeInfo = JsonUtility.FromJson<CastleHpChangeInfo>(json); // Json 값 변환
 
                 TeamType hpChangedCastleTeamType = (TeamType)castleHpChangeInfo.changeTeamType; // 서버에서 받은 int형식 변수를 TeamType enum 값으로 변경
-                NetworkManager.Instance.Socket.Emit("debug", $"서버로: {hpChangedCastleTeamType.ToString()}");
                 Castle hpChangedCastle = TeamManager.Instance.GetCastle(hpChangedCastleTeamType); // 체력이 올라간 팀에 맞는 성 가져오기
                 hpChangedCastle.CastleUpgrade(castleHpChangeInfo.changedHp); // 체력 증가
             });
 
             NetworkManager.Instance.Socket.On("isGameOver", value =>
             {
-                NetworkManager.Instance.Socket.Emit("debug", "게임 오버 받음");
-                int loseTeamType = value.GetValue<int>();
-                GameManager.Instance.GameIsOver((TeamType)loseTeamType); // 게임 오버
+                MainThreadDispatcher.Enqueue(() =>
+                {
+                    int loseTeamType = value.GetValue<int>();
+                    GameManager.Instance.GameIsOver((TeamType)loseTeamType); // 게임 오버
+                });
             });
 
             NetworkManager.Instance.Socket.On("castleHit", (value) =>
@@ -53,14 +57,17 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("tankAttacked", async (value) =>
             {
-                NetworkManager.Instance.Socket.Emit("debug", "일단 클라이언트도 전차가 전차를 공격했다고 인식함");
                 if(CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있다면
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "그리고 공격 당한 전차가 화력이 있다는 것도 인식");
                     ConfirmUI confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 가져오기
-                    NetworkManager.Instance.Socket.Emit("debug", $"확인 UI가 있나요?: {confirmUI}");
 
-                    confirmUI.gameObject.SetActive(true); // 확인 UI 활성화
+                    if (!GpuManager.Instance.IsReady) // gpu가 없다면
+                        await Task.Yield(); // 대기
+
+                    MainThreadDispatcher.Enqueue(() =>
+                    {
+                        confirmUI.gameObject.SetActive(true); // 확인 UI 활성화
+                    });
 
                     bool result = await confirmUI.Confirm("상대 전차에게 공격 당했습니다. \n 화력 카드를 사용하여 방어 하시겠습니까?");
 
@@ -81,4 +88,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.10.28
+// 마지막 작성 일자: 2025.10.30

@@ -22,18 +22,6 @@ namespace InGame.MyManager
             _canInteractionUI = true; // 처음에는 UI 상호작용 가능하도록 초기화
         }
 
-        public void MakeGameOverUI(TeamType loseTeamType)
-        {
-            if (TeamManager.Instance.CurrentTeamType == loseTeamType) // 패배한 팀이라면
-            {
-                // 패배 팀 UI 띄우기
-            }
-            else
-            {
-                // 승리 팀 UI 띄우기
-            }
-        }
-
         public async Task WarningUIMake(string text)
         {
             GameObject canvas = GameObject.Find("Canvas"); // 캔버스 찾기

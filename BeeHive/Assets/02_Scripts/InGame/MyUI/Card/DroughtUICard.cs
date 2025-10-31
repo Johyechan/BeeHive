@@ -21,7 +21,6 @@ namespace InGame.MyUI.Card
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
             NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
 
-            NetworkManager.Instance.Socket.Emit("debug", "가뭄");
             // 상대 턴에 상대 광부 생산 불가(1턴)
             if (SceneMgr.Instance.IsTwoPlayerGame)
             {

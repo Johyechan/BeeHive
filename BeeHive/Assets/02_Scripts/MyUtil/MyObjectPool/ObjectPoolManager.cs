@@ -1,3 +1,4 @@
+using InGame.MyManager;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -100,6 +101,7 @@ namespace MyUtil.MyObjectPool
                 returnObj.SetActive(false); // 반환하는 객체 비활성화
 
                 _pool[type].Enqueue(returnObj); // 풀링 타입의 풀에 객체 추가
+                NetworkManager.Instance.Socket.Emit("debug", "반환 끝");
             });
         }
     }

@@ -59,7 +59,6 @@ namespace InGame.MyManager
                     });
                     return;
                 });
-
                 _roomNetworkHandler.Init(); // 방과 관련된 서버 신호를 받는 핸들러 초기화
             };
         }

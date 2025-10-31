@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece.Data;
 using InGame.MyObject.Piece.Handler;
@@ -107,4 +108,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2025.10.28
+// 마지막 작성 일자: 2025.10.30

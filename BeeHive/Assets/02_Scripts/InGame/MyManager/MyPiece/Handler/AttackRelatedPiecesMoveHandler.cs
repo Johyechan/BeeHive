@@ -25,7 +25,16 @@ namespace InGame.MyManager.MyPiece.Handler
 
             UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
 
-            await PlacePlaneManager.Instance.ChangePlacePlaneState(returnPiece.PieceVariable.currentPlacePlane, attackPiece, true); // 현재 배치칸 상태 변경
+            if(isFirePowerAttack == 0) // 공격 받은 기물이 원거리 공격 대상이 아닐 경우
+            {
+                await PlacePlaneManager.Instance.ChangePlacePlaneState(returnPiece.PieceVariable.currentPlacePlane, attackPiece, true); // 현재 배치칸 상태 변경
+            }
+            else // 공격 받은 기물이 원거리 공격 대상일 경우
+            {
+                returnPiece.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None; 
+                returnPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None;
+                returnPiece.PieceVariable.currentPlacePlane.PlacedPiece = null;
+            }
 
             returnPiece.PieceVariable.currentPlacePlane = null; // 공격 받은 기물의 배치된 칸을 null로 초기화
 
@@ -59,4 +68,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.10.21
+// 마지막 작성 일자: 2025.10.30
