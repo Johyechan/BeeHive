@@ -7431,6 +7431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7cea46f333ce54995dc41669a52928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyOnLoadScene: 1
   _deck: {fileID: 588781781}
   _playerActionAsset: {fileID: -944628639613478452, guid: 7148f4b17fec4334db1df11803e05fa6, type: 3}
   _drawMillisecondDelay: 500
@@ -8467,6 +8468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae14af774f5ab04a88c716a6c799920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyOnLoadScene: 1
   _gameOverUICanvasGroup: {fileID: 1194231715}
   _gameOverText: {fileID: 236711989}
   _animationDuration: 0.5
@@ -10800,11 +10802,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delayForNext: 0.5
-  _animationDelay: 1
+  _animationDelay: 0.25
   _cardsUI: {fileID: 1145864087}
   _piecesUI: {fileID: 1632149183}
   _showYPos: 0
-  _showDownYPos: -150
+  _showDownYPos: -170
 --- !u!1001 &948703457
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11617,11 +11619,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delayForNext: 0.5
-  _animationDelay: 1
+  _animationDelay: 0.25
   _cardsUI: {fileID: 1145864087}
   _piecesUI: {fileID: 1632149183}
   _showYPos: 0
-  _showDownYPos: -150
+  _showDownYPos: -170
 --- !u!114 &1023890794 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
@@ -13618,6 +13620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204dc6a21d6cc7248b6d82ad8b57c625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyOnLoadScene: 1
   _deck: {fileID: 588781781}
   _cardUsePanelCanvasGroup: {fileID: 1667095411}
   _cardInformationPanelCanvasGroup: {fileID: 137497464}
@@ -15375,6 +15378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19dfd0ed3830eac42ac50215375a6d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyOnLoadScene: 1
   _uiCardsParent: {fileID: 1145864087}
   _team1CardParent: {fileID: 1993153890}
   _team2CardParent: {fileID: 1984745557}
@@ -16179,6 +16183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef748eb4282304b8d1b3c75e47a067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyOnLoadScene: 1
   _placePlaneParent: {fileID: 120938036}
   _team1NearRoads:
   - {fileID: 1584448134}
@@ -17605,6 +17610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197ce9fa2534ea24bace6a29ff2d398b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyOnLoadScene: 1
   _cameraBrain: {fileID: 330585548}
 --- !u!4 &1566061382
 Transform:
@@ -19310,6 +19316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3cc4fe289a89042b066112019ee302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyOnLoadScene: 1
   _teamChangeDelay: 1
 --- !u!4 &1713890272
 Transform:
@@ -22963,6 +22970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470e58b322c829b49bfeafe1f44f72e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _destroyOnLoadScene: 1
 --- !u!4 &2024793782
 Transform:
   m_ObjectHideFlags: 0

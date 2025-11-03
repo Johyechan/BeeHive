@@ -1,5 +1,7 @@
 using DG.Tweening;
 using InGame.MyManager;
+using InGame.MyManager.MyCard;
+using MyUtil.MyEvent;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -19,8 +21,9 @@ namespace InGame.MyObject
 
             DOTween.Sequence()
                 .AppendInterval(_animationDuration) // 대기
-                .Append(addCardTrans.DOLocalMove(new Vector3(0, _yInterval * usedCardCount, 0), _animationDuration)); // 사용한 카드 위치 이동
+                .Append(addCardTrans.DOLocalMove(new Vector3(0, _yInterval * usedCardCount, 0), _animationDuration)) // 사용한 카드 위치 이동
+                .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke()); // 카드 UI 재세팅
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.11.03

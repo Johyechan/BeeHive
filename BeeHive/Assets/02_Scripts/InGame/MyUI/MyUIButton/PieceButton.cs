@@ -28,7 +28,7 @@ namespace InGame.MyUI.MyUIButton
             if (!_isHighLightOn) // 하이라이트가 꺼져 있을 때
             {
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 이동 칸 하이라이트 끄기, 이동 가능한 배치 칸 대상
-                await PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+                await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
                 foreach (var piece in PlacePlaneManager.Instance.Variable.highLightHandler.CanPiecePlacePlanes) // 배치 가능한 기물 칸들 순회
                 {
                     piece.CanPlacePieceType = _canPlaceType; // 배치 가능한 타입을 할당
@@ -56,4 +56,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.09.23
+// 마지막 작성 일자: 2025.11.03

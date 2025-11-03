@@ -98,10 +98,10 @@ namespace InGame.MyManager.MyPiece
             }
         }
 
-        private async Task HideCanAttackPieces()
+        private async Task HideCanAttackPieces(bool changeFirePowerAttack)
         {
             await _canAttackPieceStateHandler.HideCanAttackPieces(_canAttackPieceMap); // 근거리 공격 대상 숨기기
-            await _canAttackPieceStateHandler.HideCanAttackPieces(_canFirePowerAttackPieceMap, true); // 원거리 공격 대상 숨기기
+            await _canAttackPieceStateHandler.HideCanAttackPieces(_canFirePowerAttackPieceMap, true, changeFirePowerAttack); // 원거리 공격 대상 숨기기
         }
 
         public async Task FindCanPlacePlane()
@@ -110,4 +110,4 @@ namespace InGame.MyManager.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2025.10.24
+// 마지막 작성 일자: 2025.11.03

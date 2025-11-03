@@ -54,7 +54,7 @@ namespace InGame.MyObject
         {
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
-            await PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+            await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
         }
 
         // 마우스로 클릭 시 실행될 함수
@@ -95,7 +95,7 @@ namespace InGame.MyObject
             if (!await WarningEvent.OnCanMovePiece.Invoke(CanPlacePieceType, false)) // 같은 타입의 기물이 이동 했었다면
             {
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 이동 가능한 판 하이라이트 끄기
-                await PieceEvents.OnHideCanAttackPieces?.Invoke(); // 공격 가능한 기물들 하이라이트 끄기
+                await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
                 return;
             }
 
@@ -188,4 +188,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.10.28
+// 마지막 작성 일자: 2025.11.03

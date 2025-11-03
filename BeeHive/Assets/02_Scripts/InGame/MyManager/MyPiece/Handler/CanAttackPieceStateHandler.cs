@@ -31,16 +31,20 @@ namespace InGame.MyManager.MyPiece.Handler
         }
 
         // 공격 가능한 기물을 숨기는 함수((Key)객체의 타입에 따라 (Value)기물 리스트를 가지는 딕셔너리, 원거리 공격 여부 - 기본적으로 근접 공격)
-        public async Task HideCanAttackPieces(Dictionary<ObjectType, List<PieceBase>> canAttackPieceMap, bool isFirePowerAttack = false)
+        public async Task HideCanAttackPieces(Dictionary<ObjectType, List<PieceBase>> canAttackPieceMap, bool isFirePowerAttack = false, bool changeFirePowerAttack = false)
         {
             foreach (var piece in canAttackPieceMap) // 공격 가능 기물들 저장 맵 순회
             {
                 foreach (var pieceBase in piece.Value) // 해당 타입에 맞는 기물들을 저장한 리스트 순회
                 {
-                    if(isFirePowerAttack) // 원거리 공격이라면
+                    if (isFirePowerAttack) // 원거리 공격이라면
                     {
-                        pieceBase.PieceVariable.isFirePowerAttackTarget = false; // 원거리 공격 대상에서 제외
+                        if (changeFirePowerAttack) // 원거리 공격 대상을 변경하는 상태라면
+                        {
+                            pieceBase.PieceVariable.isFirePowerAttackTarget = false; // 원거리 공격 대상에서 제외
+                        }
                     }
+
                     await pieceBase.ChangeMaterial(true);
                 }
             }
@@ -49,4 +53,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.10.22
+// 마지막 작성 일자: 2025.11.03

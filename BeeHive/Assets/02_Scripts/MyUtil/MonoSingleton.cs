@@ -7,6 +7,8 @@ namespace MyUtil
     // MonoBehaviour 상속 싱글톤 클래스
     public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour // 기본적으로 이 클래스와 이 클래스의 자식은 MonoBehaviour를 상속 받고 있으며 T가 MonoBehaviour를 상속받고 있는 상태여야지만 이 클래스를 상속 가능
     {
+        [SerializeField] private bool _destroyOnLoadScene = false; // 씬이 변경되었을 때 삭제 여부
+
         // 외부에서 참조 불가능한 인스턴스 
         private static T _instance;
 
@@ -40,9 +42,12 @@ namespace MyUtil
             else // 아니라면
             {
                 _instance = this as T; // 이 객체를 T 타입으로 변형해서 인스턴스 할당
-                DontDestroyOnLoad(gameObject); // 씬이 바뀌어도 삭제되지 않게 설정
+                if(!_destroyOnLoadScene) // 씬 변경 시 삭제 시키지 않을 때
+                {
+                    DontDestroyOnLoad(gameObject); // 씬이 바뀌어도 삭제되지 않게 설정
+                }
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.10.17
+// 마지막 작성 일자: 2025.11.03
