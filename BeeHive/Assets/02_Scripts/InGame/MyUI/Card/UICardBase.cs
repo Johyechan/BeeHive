@@ -22,6 +22,8 @@ namespace InGame.MyUI.Card
         protected UICardVariable _uiCardVariable = new UICardVariable(); // 필요한 변수들을 가지는 클래스
         public UICardVariable UICardVariable { get => _uiCardVariable; } // 위 변수 프로퍼티
 
+        private Tween _upDownAnimationTween; // 위아래 이동 트윈
+
         private void Awake()
         {
             _uiCardVariable.rect = GetComponent<RectTransform>();
@@ -54,16 +56,28 @@ namespace InGame.MyUI.Card
         // 마우스 커서가 UI 위에 올라와 있을 때
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!_uiCardVariable.isAnimationEnd) // 애니메이션이 종료 되지 않았다면
+                return; // 반환
+
             _uiCardVariable.isMouseCursorOn = true;
-            _uiCardVariable.originPos = _uiCardVariable.rect.anchoredPosition; // 현재 위치 저장
-            _uiCardVariable.rect.DOMoveY(_uiCardData.animationValueY, _uiCardData.animationDuration); // y축으로 이동
+            _upDownAnimationTween?.Kill(); // 이전 트윈이 돌고 있다면 삭제
+
+            _uiCardVariable.rect.SetAsLastSibling(); // 가장 위에 UI 그리기
+            _uiCardVariable.isAnimationEnd = false; // 애니메이션 실행
+            _upDownAnimationTween = _uiCardVariable.rect.DOAnchorPosY(_uiCardData.animationYValue, _uiCardData.animationDuration)
+                .OnComplete(() => _uiCardVariable.isAnimationEnd = true); // y축으로 이동 + 닷트윈 종료 시 애니메이션 종료
         }
 
         // 마우스 커서가 UI 위에 올라와 있지 않을 때
         public void OnPointerExit(PointerEventData eventData)
         {
+            _uiCardVariable.rect.SetSiblingIndex(_uiCardVariable.originIndex); // 기존 인덱스로 변경
             _uiCardVariable.isMouseCursorOn = false;
-            _uiCardVariable.rect.DOAnchorPos(_uiCardVariable.originPos, _uiCardData.animationDuration); // 기존 위치로 이동
+            _upDownAnimationTween?.Kill(); // 이전 트윈이 돌고 있다면 삭제
+
+            _uiCardVariable.isAnimationEnd = false; // 애니메이션 실행
+            _upDownAnimationTween = _uiCardVariable.rect.DOAnchorPosY(_uiCardVariable.originYPos, _uiCardData.animationDuration)
+                .OnComplete(() => _uiCardVariable.isAnimationEnd = true); // 기존 위치로 이동 + 닷트윈 종료 시 애니메이션 종료
         }
 
         // 카드 사용 함수
@@ -93,8 +107,15 @@ namespace InGame.MyUI.Card
         // UI 클릭 함수
         public void OnUIClick()
         {
-            _uiCardVariable.clickedHandler.ShowAskPanel();
+            if(_uiCardData.poolType == ObjectPoolType.FirePowerUICard) // 화력 카드일 경우
+            {
+                _ = UIManager.Instance.WarningUIMake("화력 카드는 직접 사용 하는 카드가 아닙니다 \n 전차가 원거리 공격을 할 때 \n 자동으로 사용 여부를 \n 묻습니다"); // 직접 사용 불가 패널 띄우기
+            }
+            else // 화력 카드가 아닐 경우
+            {
+                _uiCardVariable.clickedHandler.ShowAskPanel();
+            }
         }
     }
 }
-// 마지막 작성 일자: 2025.10.31
+// 마지막 작성 일자: 2025.11.04

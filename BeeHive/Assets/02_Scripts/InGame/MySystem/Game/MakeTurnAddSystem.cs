@@ -21,7 +21,7 @@ namespace InGame.MySystem.Game
         {
             if (IsReturn()) return; // ¹ÝÈ¯ÇØ¾ßÇÒ Á¶°ÇÀ» ÃæÁ·ÇßÀ» °æ¿ì ¹ÝÈ¯
 
-            WalletEvent.OnGetGoldBar?.Invoke(4); // ±Ý±« 2°³ È¹µæ
+            WalletEvent.OnGetGoldBar?.Invoke(10); // ±Ý±« 2°³ È¹µæ
 
             await Task.CompletedTask; // Task ¿Ï·á ¹ÝÈ¯
         }

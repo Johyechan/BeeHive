@@ -1,5 +1,7 @@
 using DG.Tweening;
+using InGame.MyManager;
 using InGame.MyManager.MyCard;
+using InGame.MyUI.Card;
 using MyUtil.MyEvent;
 using UnityEngine;
 
@@ -44,7 +46,9 @@ namespace InGame.MyUI
             if (cardCount == 1) // 보유 중인 카드가 1개 라면
             {
                 RectTransform uiCardRectTransform = _rectTransform.GetChild(cardCount - 1).GetComponent<RectTransform>(); // 현재 카드의 RectTransform 할당 - 실제 값은 -1을 하지 않아야 하지만 인덱스로 활용할 것이기 때문에 -1을 하여 배열 크기 초과 오류를 방지
+                uiCardRectTransform.DORotate(Vector3.zero, 0.1f); // angle만큼 회전 (-를 한 이유는 반대로 되야 내가 보기 편해서)
                 uiCardRectTransform.DOAnchorPos(new Vector3(0, _cardBaseYPos, 0), 0.1f, true); // 기존 Y축 위치로 이동 + snapping을 활성화하여 정수값으로 떨어지도록 설정
+                UICardInit(uiCardRectTransform, _cardBaseYPos, 0);
                 return;
             }
                 
@@ -67,8 +71,16 @@ namespace InGame.MyUI
 
                 uiCardRectTransform.DORotate(new Vector3(0, 0, -angle), 0.1f); // angle만큼 회전 (-를 한 이유는 반대로 되야 내가 보기 편해서)
                 uiCardRectTransform.DOAnchorPos(new Vector3(xPos, _cardBaseYPos + yPos, 0), 0.1f, true); // xPos, yPos만큼 이동 + snapping을 활성화하여 정수값으로 떨어지도록 설정
+                UICardInit(uiCardRectTransform, _cardBaseYPos + yPos, i);
             }
+        }
+
+        private void UICardInit(RectTransform uiCardTrans, float yPos, int index)
+        {
+            UICardBase uiCardBase = uiCardTrans.GetComponent<UICardBase>(); // UI 카드 가져오기
+            uiCardBase.UICardVariable.originYPos = yPos; // 기본 y축 위치 할당
+            uiCardBase.UICardVariable.originIndex = index; // 기본 인덱스 할당
         }
     }
 }
-// 마지막 작성 일자: 2025.07.08
+// 마지막 작성 일자: 2025.11.04

@@ -29,12 +29,15 @@ namespace InGame.MyUI.Card.Variable
         public GameObject cardObj; // 현재 UI 카드에 맞는 객체
 
         public bool isMouseCursorOn;
-
-        public Vector3 originPos; // 기존 위치
+        public bool isAnimationEnd = true; // 애니메이션 종료 여부 - 기본 상태: true
 
         public RectTransform rect;
 
         public UsedDeck usedCardDeck; // 사용한 카드들을 모아두는 덱
+
+        public float originYPos; // 기본 Y 위치
+
+        public int originIndex; // 자기자신의 기본 인덱스
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.11.04

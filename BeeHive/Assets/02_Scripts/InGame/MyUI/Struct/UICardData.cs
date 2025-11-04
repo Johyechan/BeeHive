@@ -19,7 +19,7 @@ namespace InGame.MyUI
         public ObjectPoolType poolType; // 카드의 풀 타입
 
         public float animationDuration; // 애니메이션 시간
-        public float animationValueY; // y축으로 올라가는 값
+        public float animationYValue; // y축으로 올라가는 값
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.11.04
