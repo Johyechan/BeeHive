@@ -11,8 +11,16 @@ namespace InGame.MyUI.MyUIButton
     {
         public void OnUIClick()
         {
+            GoToRoomInfo goToRoomInfo = new GoToRoomInfo()
+            {
+                roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                clientID = NetworkManager.Instance.CurrentPlayerID // 현재 클라이언트 ID
+            };
+            string json = JsonUtility.ToJson(goToRoomInfo); // Json 형태로 변환
+            NetworkManager.Instance.Socket.Emit("goToRoom", json);
+
             SceneManager.LoadScene(1); // 방 씬으로 이동
         }
     }
 }
-// 마지막 작성 일자: 2025.11.04
+// 마지막 작성 일자: 2025.11.05
