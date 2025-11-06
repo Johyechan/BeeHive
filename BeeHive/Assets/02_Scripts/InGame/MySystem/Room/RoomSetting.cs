@@ -59,7 +59,7 @@ namespace InGame.MySystem.Room
                 {
                     string json = data.GetValue().ToString(); // string 형태로 값 받기
                     _roomInfo = JsonUtility.FromJson<RoomInfo>(json); // RoomInfo 형태로 json 값을 변경
-                    MainThreadDispatcher.Enqueue(() => _roomID.text = $"방 ID: {_roomInfo.ID}"); // 메인 스레드에서 방 ID UI 변경
+                    MainThreadDispatcher.Enqueue(() => _roomID.text = $"{_roomInfo.ID}"); // 메인 스레드에서 방 ID UI 변경
                     MainThreadDispatcher.Enqueue(() => _roomName.text = $"방 이름: {_roomInfo.Name}"); // 메인 스레드에서 방 이름 UI 변경
                     MainThreadDispatcher.Enqueue(() => _maxPlayer.text = $"인원: {_roomInfo.players.Length} / {_roomInfo.maxPlayer}"); // 메인 스레드에서 인원 수 UI 변경
                     MainThreadDispatcher.Enqueue(() => _playerUISettingHandler.RoomInfo = _roomInfo); // 방 정보 공유
@@ -108,4 +108,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2025.08.18
+// 마지막 작성 일자: 2025.11.06

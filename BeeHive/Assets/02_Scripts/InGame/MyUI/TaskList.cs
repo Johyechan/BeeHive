@@ -14,7 +14,9 @@ namespace MyUtil
         public void Add(Func<Task> action)
         {
             lock (_listActions) // 다른 스레드의 접근 막기
+            {
                 _listActions.Add(action); // 리스트에 액션 추가
+            }
         }
 
         // 큐를 비우는 함수
@@ -38,4 +40,4 @@ namespace MyUtil
         }
     }
 }
-// 마지막 작성 일자: 2025.08.26
+// 마지막 작성 일자: 2025.11.06

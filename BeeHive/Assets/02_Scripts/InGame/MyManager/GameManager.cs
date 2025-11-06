@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyEnum;
+using InGame.MyEvent;
 using InGame.MyObject;
 using MyUtil;
 using System.Collections.Generic;
@@ -83,6 +84,8 @@ namespace InGame.MyManager
                 await Task.Yield(); // 대기
             }
 
+            TurnEvents.OnMakeTurn.Clear(); // 생산 턴에 필요한 액션 리스트 비우기
+
             _gameOver = true;
 
             _gameOverUICanvasGroup.gameObject.SetActive(true); // 게임 오버 UI 캔버스 그룹 활성화
@@ -158,4 +161,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.10.29
+// 마지막 작성 일자: 2025.11.06
