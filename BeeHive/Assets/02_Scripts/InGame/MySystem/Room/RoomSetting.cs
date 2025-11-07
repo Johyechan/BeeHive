@@ -65,6 +65,34 @@ namespace InGame.MySystem.Room
                     MainThreadDispatcher.Enqueue(() => _playerUISettingHandler.RoomInfo = _roomInfo); // 방 정보 공유
                     MainThreadDispatcher.Enqueue(() => FindCurrentPlayer(_roomInfo)); // 방 정보 공유
                     MainThreadDispatcher.Enqueue(() => _playerUISettingHandler.Init()); // 플레이어 정보 UI에 관련해서 변경을 하는 함수 실행
+
+                    bool isRoomManager = false;
+
+                    for(int i = 0; i < _roomInfo.players.Length; i++)
+                    {
+                        if (_roomInfo.players[i].isRoomManager) // 방장이라면
+                        {
+                            isRoomManager = NetworkManager.Instance.CurrentPlayerID == _roomInfo.players[i].id; // 현재 클라이언트 방장 여부 할당
+                        }
+                    }
+
+                    if(isRoomManager) // 현재 클라이언트가 방장이라면
+                    {
+                        int count = 0;
+
+                        for (int i = 0; i < _roomInfo.players.Length; i++) // 현재 방에 있는 플레이어 순회
+                        {
+                            if (_roomInfo.players[i].isReady) // 해당 플레이어가 준비가 되어있다면
+                            {
+                                count++; // 카운팅
+                            }
+                        }
+
+                        if (count >= _roomInfo.maxPlayer) // 카운팅이 최대 플레이어 수 이상이라면
+                        {
+                            NetworkManager.Instance.Socket.Emit("playGameButtonOn");
+                        }
+                    }
                 });
 
                 socket.On("goLobby", _ => MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(0)));// 로비 씬으로 이동
@@ -108,4 +136,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2025.11.06
+// 마지막 작성 일자: 2025.11.07

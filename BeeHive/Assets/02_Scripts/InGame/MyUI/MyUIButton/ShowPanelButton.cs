@@ -1,6 +1,7 @@
 using InGame.MyUI.MyUIInterface;
 using UnityEngine;
 using DG.Tweening;
+using MyUtil;
 
 namespace InGame.MyUI
 {
@@ -15,9 +16,15 @@ namespace InGame.MyUI
         // 클릭 시 실행될 함수
         public void OnUIClick()
         {
-            _targetPanel.gameObject.SetActive(true); // _targetPanel 활성화
-            _targetPanel.DOFade(1, _animationDuration); // _targetPanel을 _animationDuration 동안 페이드 인
+            MainThreadDispatcher.Enqueue(() =>
+            {
+                _targetPanel.gameObject.SetActive(true); // _targetPanel 활성화
+            });
+            MainThreadDispatcher.Enqueue(() =>
+            {
+                _targetPanel.DOFade(1, _animationDuration); // _targetPanel을 _animationDuration 동안 페이드 인
+            });
         }
     }
 }
-// 마지막 작성 일자: 2025.07.29
+// 마지막 작성 일자: 2025.11.07

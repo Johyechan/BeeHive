@@ -23,7 +23,7 @@ namespace InGame.MyUI.Card.Handler
             _uiCardVariable.cardUsePanelCanvasGroup = cardUsePanelCanvaseGroup; // 매개 변수로 받은 카드 사용 여부를 묻는 패널의 캔버스 그룹 할당
             _uiCardVariable.cardInformationCanvasGroup = cardInformationCanvasGroup; // 매개 변수로 받은 카드 정보 패널의 캔버스 그룹 할당
 
-            Transform cardInfoPanelTransform = _uiCardVariable.cardInformationCanvasGroup.transform.GetChild(0); // 카드 정보 패널의 첫 번째 자식 - 패널
+            Transform cardInfoPanelTransform = _uiCardVariable.cardInformationCanvasGroup.transform.GetChild(1); // 카드 정보 패널의 두 번째 자식 - 패널
             Transform uiTransform = cardInfoPanelTransform.GetChild(0); // 패널의 첫 번째 자식 - UI를 모아둔 빈 객체
             Transform imageTransform = uiTransform.GetChild(0); // UI를 모아둔 빈 객체의 첫 번째 자식 - 이미지
             Transform textTransform = uiTransform.GetChild(1); // UI를 모아둔 빈 객체의 두 번째 자식 - 텍스트
@@ -31,7 +31,7 @@ namespace InGame.MyUI.Card.Handler
             _uiCardVariable.cardInformationImage = imageTransform.GetComponent<Image>(); // 이미지 할당
             _uiCardVariable.cardInformationTmpText = textTransform.GetComponent<TMP_Text>(); // 텍스트 할당
 
-            Transform cardUsePanelTransform = _uiCardVariable.cardUsePanelCanvasGroup.transform.GetChild(0); // 카드 사용 패널의 첫 번째 자식 - 패널
+            Transform cardUsePanelTransform = _uiCardVariable.cardUsePanelCanvasGroup.transform.GetChild(1); // 카드 사용 패널의 두 번째 자식 - 패널
             Transform buttonsTransform = cardUsePanelTransform.GetChild(1); // 패널의 첫 번째 자식 - 버튼을 모아둔 빈 객체
             Transform cardUseButtonTransform = buttonsTransform.GetChild(0); // 버튼을 모아둔 빈 객체의 첫 번째 자식 - 카드 사용 버튼
 
@@ -41,4 +41,4 @@ namespace InGame.MyUI.Card.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.10.14
+// 마지막 작성 일자: 2025.11.07
