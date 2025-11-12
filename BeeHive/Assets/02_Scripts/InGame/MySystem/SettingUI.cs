@@ -48,7 +48,7 @@ namespace InGame.MySystem
             else
             {
                 _audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20f); // 마스터 볼륨 할당
-                _masterSoundVolumePercentage.text = $"{volume * 100f}%";
+                _masterSoundVolumePercentage.text = $"{Mathf.Ceil(volume * 100f)}%";
             }
         }
 
@@ -64,7 +64,7 @@ namespace InGame.MySystem
             else
             {
                 _audioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20f);
-                _bgmSoundVolumePercentage.text = $"{volume * 100f}%";
+                _bgmSoundVolumePercentage.text = $"{Mathf.Ceil(volume * 100f)}%";
             }
         }
 
@@ -80,9 +80,9 @@ namespace InGame.MySystem
             else
             {
                 _audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20f);
-                _sfxSoundVolumePercentage.text = $"{volume * 100f}%";
+                _sfxSoundVolumePercentage.text = $"{Mathf.Ceil(volume * 100f)}%";
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.11.11
+// 마지막 작성 일자: 2025.11.12
