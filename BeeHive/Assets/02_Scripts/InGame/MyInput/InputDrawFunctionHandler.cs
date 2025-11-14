@@ -14,7 +14,7 @@ namespace InGame.MyInput
         public async Task DrawFunction(Transform deckTransform, Transform playerCardsParent, RectTransform playerUICardsParent)
         {
             await DrawManager.Instance.DrawCard(deckTransform, playerCardsParent, playerUICardsParent); // 카드 드로우 실행
-            NetworkManager.Instance.Socket.Emit("debug", "여기까지는 옴 (InputDrawFunctionHandler)");
+
             Sequence seq = DOTween.Sequence()
                   .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke())
                   .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(playerCardsParent));// 드로우 이벤트 인보크 후 시퀀스 완료

@@ -53,8 +53,10 @@ namespace InGame.MyObject.Piece.Handler
             // y축 조정
             await _pieceBase.transform.DOLocalMoveY(targetPos.y, _pieceData.animationDuration).AsyncWaitForCompletion();
 
+            SoundManager.Instance.SFXPlay(SFXType.DropSound); // 기물 놓는 효과음 실행
+            
             UIManager.Instance.CanInteractionUI = true;
         }
     }
 }
-// 마지막 작성 일자: 2025.10.10
+// 마지막 작성 일자: 2025.11.14

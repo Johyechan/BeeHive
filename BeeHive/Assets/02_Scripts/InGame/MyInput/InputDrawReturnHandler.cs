@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyCard;
+using InGame.MyObject;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -11,6 +12,13 @@ namespace InGame.MyInput
     // 드로우를 진행할 때 반환하는 경우를 가지는 핸들러
     public class InputDrawReturnHandler : MonoBehaviour
     {
+        private Deck _deck;
+
+        public InputDrawReturnHandler(Deck deck)
+        {
+            _deck = deck;
+        }
+
         public async Task<bool> IsReturn()
         {
             if(!await WarningEvent.OnCheckCurrentTurn?.Invoke(TurnType.DrawTurn, "드로우 턴이 아닙니다.")) // 드로우 턴이 아니라면
@@ -20,6 +28,12 @@ namespace InGame.MyInput
 
             if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 내 팀의 턴이 아니라면
             {
+                return true; // 반환
+            }
+
+            if(_deck.transform.childCount <= 0) // 덱에 더 이상 카드가 없다면
+            {
+                _deck.IsEmpty = true; // 덱이 비어있다고 할당
                 return true; // 반환
             }
 
@@ -37,4 +51,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2025.10.02
+// 마지막 작성 일자: 2025.11.13

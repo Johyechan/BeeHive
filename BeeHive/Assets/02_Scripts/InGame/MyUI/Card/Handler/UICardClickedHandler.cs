@@ -32,7 +32,7 @@ namespace InGame.MyUI.Card.Handler
 
             _uiCardVariable.cardUsePanelCanvasGroup.gameObject.SetActive(true); // UI 활성화
 
-            Transform panel = _uiCardVariable.cardUsePanelCanvasGroup.transform.GetChild(0); // 패널 가져오기
+            Transform panel = _uiCardVariable.cardUsePanelCanvasGroup.transform.GetChild(1); // 패널 가져오기
             TMP_Text askText = panel.GetChild(0).GetComponent<TMP_Text>(); // 패널의 묻는 텍스트 가져오기
 
             askText.text = _uiCardBase.UICardData.currentCardName + "카드를 사용하시겠습니까?"; // 텍스트 설정
@@ -40,4 +40,4 @@ namespace InGame.MyUI.Card.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.10.23
+// 마지막 작성 일자: 2025.11.14

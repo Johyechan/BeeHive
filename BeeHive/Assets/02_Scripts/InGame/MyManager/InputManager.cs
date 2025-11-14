@@ -33,7 +33,7 @@ namespace InGame.MyManager
 
             _inputDrawHandlerData = new InputDrawHandlerData()
             {
-                returnHandler = new InputDrawReturnHandler(),
+                returnHandler = new InputDrawReturnHandler(_deck),
                 socketEventHandler = new InputDrawSocketEventHandler(),
                 functionHandler = new InputDrawFunctionHandler(),
             };
@@ -68,4 +68,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.10.02
+// 마지막 작성 일자: 2025.11.13

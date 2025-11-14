@@ -23,6 +23,9 @@ namespace InGame.MyObject
 
         private List<ObjectPoolType> _deckList = new List<ObjectPoolType>(); // 덱 리스트
 
+        private bool _isEmpty; // 덱이 비어있는지 여부
+        public bool IsEmpty { get => _isEmpty; set => _isEmpty = value; } // 덱이 비어있는지 여부 프로퍼티
+
         // 변수 초기화
         private void Awake()
         {
@@ -65,7 +68,9 @@ namespace InGame.MyObject
                 GameObject card = await ObjectPoolManager.Instance.GetObject(_deckList[i], deckTransform); // 카드 생성
                 card.transform.localPosition = new Vector3(0, _yInterval * i, 0); // 카드를 생성할 수 록 y축 간격 만큼 위로 올리기
             }
+
+            _isEmpty = false; // 덱에 카드가 있다고 할당
         }
     }
 }
-// 마지막 작성 일자: 2025.10.24
+// 마지막 작성 일자: 2025.11.13

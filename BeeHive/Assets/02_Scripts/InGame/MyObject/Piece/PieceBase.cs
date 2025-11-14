@@ -1,13 +1,10 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
-using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece.Data;
 using InGame.MyObject.Piece.Handler;
 using InGame.MyObject.Piece.Variable;
-using InGame.MyUI;
-using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using UnityEngine;
 
