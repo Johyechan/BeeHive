@@ -4252,7 +4252,7 @@ MonoBehaviour:
     FieldOfView: 11
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 1000
+    FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
@@ -4568,7 +4568,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 11
   orthographic: 0
   orthographic size: 5
@@ -12556,7 +12556,7 @@ MonoBehaviour:
     FieldOfView: 11
     OrthographicSize: 5
     NearClipPlane: 0.3
-    FarClipPlane: 1000
+    FarClipPlane: 100
     Dutch: 0
     ModeOverride: 0
     PhysicalProperties:
@@ -16217,10 +16217,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deckTransform: {fileID: 588781780}
-  _cardMoveDuration: 1
+  _cardMoveDuration: 0.25
   _animationDuration: 0.5
   _yInterval: 0.0005
-  _cardHight: 0.01
 --- !u!1001 &1296143381
 PrefabInstance:
   m_ObjectHideFlags: 0

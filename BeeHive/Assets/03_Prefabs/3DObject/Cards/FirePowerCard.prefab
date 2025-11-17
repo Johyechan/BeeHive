@@ -324,6 +324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2149392041365857948}
   - component: {fileID: 6248706650905034275}
+  - component: {fileID: -4814376669821506857}
   m_Layer: 0
   m_Name: FirePowerCard
   m_TagString: Untagged
@@ -363,6 +364,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolType: 9
+--- !u!210 &-4814376669821506857
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137351099559215060}
+  m_Enabled: 1
+  m_SortingLayerID: 753211845
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_SortAtRoot: 1
 --- !u!1001 &1474293226008004510
 PrefabInstance:
   m_ObjectHideFlags: 0

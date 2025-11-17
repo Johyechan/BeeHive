@@ -1,10 +1,12 @@
 using DG.Tweening;
 using InGame.MyManager;
 using InGame.MyManager.MyCard;
+using MyUtil;
 using MyUtil.MyEvent;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace InGame.MyObject
 {
@@ -17,7 +19,6 @@ namespace InGame.MyObject
         [SerializeField] private float _cardMoveDuration; // 카드 이동 지속시간
         [SerializeField] private float _animationDuration; // 애니메이션 지속시간
         [SerializeField] private float _yInterval; // y축 간격
-        [SerializeField] private float _cardHight; // 카드 높이
 
         private void Awake()
         {
@@ -50,32 +51,45 @@ namespace InGame.MyObject
         // 덱 재제작 함수
         public void ReMakeDeck()
         {
-            for(int i = transform.childCount - 1; i >= 0; i--)
-            {
-                Transform cardTrans = transform.GetChild(i); // 현재
-                cardTrans.SetParent(_deckTransform); // 부모 변경
-                StartCoroutine(CardMoveCo(cardTrans));
-            }
+            StartCoroutine(CardMoveCo());
         }
 
-        private IEnumerator CardMoveCo(Transform cardTrans)
+        private IEnumerator CardMoveCo()
         {
-            float currentTime = 0;
-            float currentXPos = cardTrans.localPosition.x; // 현재 x축 값 저장
-
-            while (currentTime < _cardMoveDuration)
+            int childCount = transform.childCount; // 자식 수 저장
+            for (int i = childCount - 1; i >= 0; i--) // 사용한 카드들을 수만큼 반복
             {
-                currentTime += Time.deltaTime;
-                float angle = (180 / _cardMoveDuration) * currentTime; // 현재 각도
-                float hight = Mathf.Sin(Mathf.Deg2Rad * angle); // 현재 각도의 사인 값 구하기
-                float yPos = hight * _cardHight; // y축 좌표
-                float xPos = currentXPos - (currentXPos / _cardMoveDuration) * currentTime; // x축 좌표
-                float zRot = 180 - (180 / _cardMoveDuration) * currentTime; // z축 회전값 (시작값이 180인 이유는 카드가 뒤집혀있는 상태이기 때문)
-                cardTrans.localPosition = new Vector3(xPos, yPos, cardTrans.localPosition.z); // 위치 변경
-                cardTrans.localRotation = Quaternion.Euler(0, 0, zRot); // 회전
                 yield return null;
+
+                Transform cardTrans = transform.GetChild(i); // 맨 위 카드
+                cardTrans.SetParent(_deckTransform); // 부모 변경
+                MainThreadDispatcher.Enqueue(() => { cardTrans.GetComponent<SortingGroup>().sortingOrder = _deckTransform.childCount; });// 랜더링 순서 할당(값이 낮을 수록 뒤에 그려짐)
+
+                float currentTime = 0;
+                float currentYPos = cardTrans.localPosition.y; // 현재 y축 값 저장
+                float currentXPos = cardTrans.localPosition.x; // 현재 x축 값 저장
+
+                while (currentTime <= _cardMoveDuration)
+                {
+                    float t = currentTime / _cardMoveDuration; // 현재 시간 비율
+
+                    float angle = 90 + 90 * t; // 현재 각도 (90부터 시작하는 이유는 sin 값이 1 -> 0으로 가는 형태로 반환하기를 원하기 때문)
+
+                    float hight = Mathf.Sin(Mathf.Deg2Rad * angle); // 현재 각도의 사인 값 구하기
+                    float yPos = hight * currentYPos + _yInterval * _deckTransform.childCount; // y축 좌표 - 현재 sin 값 * 현재 카드 높이 + 각 카드의 y축 간격 * 덱에 있는 자식 수
+
+                    float xPos = Mathf.Lerp(currentXPos, 0, t); // x축 이동
+
+                    float zRot = Mathf.Lerp(180, 0, t); // z축 회전값 (시작값이 180인 이유는 카드가 뒤집혀있는 상태이기 때문)
+
+                    cardTrans.localPosition = new Vector3(xPos, yPos, cardTrans.localPosition.z); // 위치 변경
+                    cardTrans.localRotation = Quaternion.AngleAxis(-zRot, Vector3.forward); // z축 회전
+
+                    currentTime += Time.deltaTime;
+                    yield return null;
+                }
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.11.14
+// 마지막 작성 일자: 2025.11.17
