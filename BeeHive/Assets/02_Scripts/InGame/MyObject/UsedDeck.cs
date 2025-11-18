@@ -1,8 +1,10 @@
 using DG.Tweening;
 using InGame.MyManager;
 using InGame.MyManager.MyCard;
+using InGame.MyUI.Card;
 using MyUtil;
 using MyUtil.MyEvent;
+using MyUtil.MyObjectPool;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -63,7 +65,7 @@ namespace InGame.MyObject
 
                 Transform cardTrans = transform.GetChild(i); // 맨 위 카드
                 cardTrans.SetParent(_deckTransform); // 부모 변경
-                MainThreadDispatcher.Enqueue(() => { cardTrans.GetComponent<SortingGroup>().sortingOrder = _deckTransform.childCount; });// 랜더링 순서 할당(값이 낮을 수록 뒤에 그려짐)
+                MainThreadDispatcher.Enqueue(() => { cardTrans.GetComponent<SortingGroup>().sortingOrder = _deckTransform.childCount; }); // 랜더링 순서 할당(값이 낮을 수록 뒤에 그려짐)
 
                 float currentTime = 0;
                 float currentYPos = cardTrans.localPosition.y; // 현재 y축 값 저장
@@ -88,8 +90,12 @@ namespace InGame.MyObject
                     currentTime += Time.deltaTime;
                     yield return null;
                 }
+
+                ObjectPoolType currentCardObjectPoolType = cardTrans.GetComponent<UICardBase>().UICardData.poolType; // 풀 타입 저장
+                Vector3 currentCardPos = cardTrans.localPosition; // 위치 저장
+                ObjectPoolManager.Instance.ReturnObject(currentCardObjectPoolType, cardTrans.gameObject);
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.11.17
+// 마지막 작성 일자: 2025.11.18

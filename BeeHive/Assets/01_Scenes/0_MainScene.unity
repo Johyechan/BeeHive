@@ -5125,7 +5125,7 @@ MonoBehaviour:
   _deckCardInfo:
     castleUpgradeCardCount: 0
     droughtCardCount: 0
-    goodHarvestCardCount: 30
+    goodHarvestCardCount: 0
     roadChangeCardCount: 0
     firePowerCardCount: 0
 --- !u!4 &974670140

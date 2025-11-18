@@ -625,6 +625,130 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7392490733645986711, guid: c8a36783f9066e445889096a9854d924, type: 3}
   m_PrefabInstance: {fileID: 47119565}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &51259442
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &51259443 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 51259442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &52402523
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0135
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (27)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &52402524 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 52402523}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &56194743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2025,6 +2149,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123828209}
   m_CullTransparentMesh: 1
+--- !u!1001 &125326205
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.009
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (18)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &125326206 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 125326205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &135295016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2255,6 +2441,68 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1001 &145989448
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0095
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (19)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &145989449 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 145989448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &156536060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2444,6 +2692,68 @@ Transform:
   - {fileID: 745886842}
   m_Father: {fileID: 1262243795}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &184976061
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0035
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &184976062 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 184976061}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &186331658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3079,6 +3389,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8244229074724728705, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
   m_PrefabInstance: {fileID: 220886359}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &235514138
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (20)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &235514139 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 235514138}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &236278746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3248,6 +3620,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236711987}
   m_CullTransparentMesh: 1
+--- !u!1001 &239905079
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0045
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &239905080 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 239905079}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &245852948
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3478,6 +3912,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8244229074724728705, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
   m_PrefabInstance: {fileID: 254434514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &257548553
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (28)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &257548554 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 257548553}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &258445726
 PrefabInstance:
@@ -3821,6 +4317,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278027463}
   m_CullTransparentMesh: 1
+--- !u!1001 &282351647
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0145
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (29)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &282351648 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 282351647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &285100794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5086,6 +5644,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca335a8698da93439bed4bbe897cf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &369019000
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &369019001 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 369019000}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &375638561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5878,6 +6498,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8244229074724728705, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
   m_PrefabInstance: {fileID: 457303389}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &467611552
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (25)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &467611553 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 467611552}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &468767782
 GameObject:
@@ -7431,6 +8113,68 @@ MonoBehaviour:
   _playerUICardsParent: {fileID: 1145864087}
   deckTransform: {fileID: 588781780}
   _yInterval: 0.0005
+--- !u!1001 &592006164
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0105
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (21)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &592006165 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 592006164}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &592692804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7660,6 +8404,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 610863440}
   m_CullTransparentMesh: 1
+--- !u!1001 &618941208
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0115
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (23)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &618941209 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 618941208}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &622323166
 GameObject:
   m_ObjectHideFlags: 0
@@ -8695,6 +9501,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8244229074724728705, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
   m_PrefabInstance: {fileID: 689186880}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &695836208
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.013
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (26)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &695836209 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 695836208}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &697525355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9120,6 +9988,68 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 252553519089831707, guid: 419da3d3d1e46c54c866cf0d672b485e, type: 3}
   m_PrefabInstance: {fileID: 710260587}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &718447376
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0015
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &718447377 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 718447376}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &719515723
 GameObject:
@@ -9950,6 +10880,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8244229074724728705, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
   m_PrefabInstance: {fileID: 751922946}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &763621368
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0025
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &763621369 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 763621368}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &764428790 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
@@ -9961,6 +10953,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca335a8698da93439bed4bbe897cf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &767210462
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.008
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (16)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &767210463 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 767210462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &769366813
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10047,6 +11101,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8244229074724728705, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
   m_PrefabInstance: {fileID: 769366813}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &775700593
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (12)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &775700594 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 775700593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &779070668
 GameObject:
   m_ObjectHideFlags: 0
@@ -10080,6 +11196,68 @@ Transform:
   - {fileID: 135295017}
   m_Father: {fileID: 200311275}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &786228632
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0055
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (11)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &786228633 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 786228632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &789813294 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
@@ -10457,6 +11635,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca335a8698da93439bed4bbe897cf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &826338180
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0005
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &826338181 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 826338180}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &830720628
 GameObject:
   m_ObjectHideFlags: 0
@@ -12497,6 +13737,68 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8244229074724728705, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
   m_PrefabInstance: {fileID: 949261571}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &963059966
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0075
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (15)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &963059967 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 963059966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &965129983
 GameObject:
   m_ObjectHideFlags: 0
@@ -14119,6 +15421,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca335a8698da93439bed4bbe897cf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1099553194
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.011
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (22)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &1099553195 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 1099553194}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1105430107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14352,6 +15716,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110471542}
   m_CullTransparentMesh: 1
+--- !u!1001 &1111445319
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &1111445320 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 1111445319}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1125771177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15102,6 +16528,68 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1001 &1181610771
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &1181610772 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 1181610771}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1182567039 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -1463943333394200502, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
@@ -16201,7 +17689,37 @@ Transform:
   m_LocalPosition: {x: 0.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1386109149}
+  - {fileID: 826338181}
+  - {fileID: 51259443}
+  - {fileID: 718447377}
+  - {fileID: 369019001}
+  - {fileID: 763621369}
+  - {fileID: 1181610772}
+  - {fileID: 184976062}
+  - {fileID: 1111445320}
+  - {fileID: 239905080}
+  - {fileID: 1502779033}
+  - {fileID: 786228633}
+  - {fileID: 775700594}
+  - {fileID: 1457532209}
+  - {fileID: 2093051669}
+  - {fileID: 963059967}
+  - {fileID: 767210463}
+  - {fileID: 1857586795}
+  - {fileID: 125326206}
+  - {fileID: 145989449}
+  - {fileID: 235514139}
+  - {fileID: 592006165}
+  - {fileID: 1099553195}
+  - {fileID: 618941209}
+  - {fileID: 1540277372}
+  - {fileID: 467611553}
+  - {fileID: 695836209}
+  - {fileID: 52402524}
+  - {fileID: 257548554}
+  - {fileID: 282351648}
   m_Father: {fileID: 1759363215}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1279848487
@@ -17261,6 +18779,68 @@ Transform:
   m_Children: []
   m_Father: {fileID: 516685352}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1386109148
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &1386109149 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 1386109148}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1387120293
 GameObject:
   m_ObjectHideFlags: 0
@@ -18456,6 +20036,68 @@ MonoBehaviour:
   - {fileID: 1947787920}
   - {fileID: 911689745}
   _team3NearRoads: []
+--- !u!1001 &1457532208
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0065
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (13)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &1457532209 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 1457532208}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1458495065
 GameObject:
   m_ObjectHideFlags: 0
@@ -19185,6 +20827,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca335a8698da93439bed4bbe897cf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1502779032
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &1502779033 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 1502779032}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1504995976
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19579,6 +21283,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893af0465d0efc14d9c9abc30c4d0157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1540277371
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.012
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (24)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &1540277372 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 1540277371}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1540578899
 GameObject:
   m_ObjectHideFlags: 0
@@ -24211,6 +25977,68 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
+--- !u!1001 &1857586794
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0085
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (17)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &1857586795 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 1857586794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1871924972
 GameObject:
   m_ObjectHideFlags: 0
@@ -26722,6 +28550,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3160241d0a842b5418f9dadf0a980e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &2093051668
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1279848486}
+    m_Modifications:
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.007
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7137351099559215060, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+      propertyPath: m_Name
+      value: CastleUpgradeCard (14)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+--- !u!4 &2093051669 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2149392041365857948, guid: bf39ce4f767f5c345bd98ad1570ad83f, type: 3}
+  m_PrefabInstance: {fileID: 2093051668}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2107810612 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
