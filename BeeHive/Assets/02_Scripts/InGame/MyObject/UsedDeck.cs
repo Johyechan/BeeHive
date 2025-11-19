@@ -6,6 +6,7 @@ using MyUtil;
 using MyUtil.MyEvent;
 using MyUtil.MyObjectPool;
 using System.Collections;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -63,39 +64,45 @@ namespace InGame.MyObject
             {
                 yield return null;
 
+                int index = _deckTransform.childCount;
+
                 Transform cardTrans = transform.GetChild(i); // 맨 위 카드
                 cardTrans.SetParent(_deckTransform); // 부모 변경
                 MainThreadDispatcher.Enqueue(() => { cardTrans.GetComponent<SortingGroup>().sortingOrder = _deckTransform.childCount; }); // 랜더링 순서 할당(값이 낮을 수록 뒤에 그려짐)
 
+                Vector3 startPos = cardTrans.transform.localPosition;
+                Vector3 endPos = new Vector3(0, _yInterval * index, 0);
                 float currentTime = 0;
-                float currentYPos = cardTrans.localPosition.y; // 현재 y축 값 저장
-                float currentXPos = cardTrans.localPosition.x; // 현재 x축 값 저장
 
                 while (currentTime <= _cardMoveDuration)
                 {
                     float t = currentTime / _cardMoveDuration; // 현재 시간 비율
 
-                    float angle = 90 + 90 * t; // 현재 각도 (90부터 시작하는 이유는 sin 값이 1 -> 0으로 가는 형태로 반환하기를 원하기 때문)
-
-                    float hight = Mathf.Sin(Mathf.Deg2Rad * angle); // 현재 각도의 사인 값 구하기
-                    float yPos = hight * currentYPos + _yInterval * _deckTransform.childCount; // y축 좌표 - 현재 sin 값 * 현재 카드 높이 + 각 카드의 y축 간격 * 덱에 있는 자식 수
-
-                    float xPos = Mathf.Lerp(currentXPos, 0, t); // x축 이동
-
                     float zRot = Mathf.Lerp(180, 0, t); // z축 회전값 (시작값이 180인 이유는 카드가 뒤집혀있는 상태이기 때문)
 
-                    cardTrans.localPosition = new Vector3(xPos, yPos, cardTrans.localPosition.z); // 위치 변경
+                    cardTrans.localPosition = Vector3.Lerp(startPos, endPos, t);
+
                     cardTrans.localRotation = Quaternion.AngleAxis(-zRot, Vector3.forward); // z축 회전
 
                     currentTime += Time.deltaTime;
                     yield return null;
                 }
 
-                ObjectPoolType currentCardObjectPoolType = cardTrans.GetComponent<UICardBase>().UICardData.poolType; // 풀 타입 저장
-                Vector3 currentCardPos = cardTrans.localPosition; // 위치 저장
-                ObjectPoolManager.Instance.ReturnObject(currentCardObjectPoolType, cardTrans.gameObject);
+                ObjectPoolType curOpt = cardTrans.GetComponent<UICardBase>().UICardData.poolType;
+                ObjectPoolManager.Instance.ReturnObject(curOpt, cardTrans.gameObject);
+
+                var tcs = MakeCard(curOpt, endPos.y);
+                while (!tcs.IsCompleted)
+                    yield return null;
             }
+        }
+
+        private async Task MakeCard(ObjectPoolType type, float yPos)
+        {
+            GameObject newCard = await ObjectPoolManager.Instance.GetObject(type, _deckTransform);
+            newCard.transform.localPosition = new Vector3(0, yPos, 0);
+            await Task.CompletedTask;
         }
     }
 }
-// 마지막 작성 일자: 2025.11.18
+// 마지막 작성 일자: 2025.11.19
