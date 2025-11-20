@@ -22,14 +22,12 @@ namespace InGame.MyObject
         [SerializeField] private float _cardMoveDuration; // 카드 이동 지속시간
         [SerializeField] private float _animationDuration; // 애니메이션 지속시간
         [SerializeField] private float _yInterval; // y축 간격
+        [SerializeField] private float _suffleMinYPos; // 셔플 y 위치
+        [SerializeField] private float _suffleMaxYPos; // 셔플 y 위치
 
-        private void Awake()
-        {
-            NetworkManager.Instance.Socket.On("", (data) =>
-            {
+        [SerializeField] private int _suffleCount; // 셔플 횟수
 
-            });
-        }
+        [SerializeField] private RectTransform _uiCardDeck; // ui 덱
 
         // 사용한 카드들을 덱에 추가하는 함수
         public void AddCardInToUsedDeck(Transform addCardTrans)
@@ -47,62 +45,54 @@ namespace InGame.MyObject
         {
             if(Input.GetKeyDown(KeyCode.R))
             {
-                ReMakeDeck();
+                StartCoroutine(DeckSuffle());
             }
         }
 
-        // 덱 재제작 함수
-        public void ReMakeDeck()
+        private IEnumerator DeckSuffle()
         {
-            StartCoroutine(CardMoveCo());
-        }
-
-        private IEnumerator CardMoveCo()
-        {
-            int childCount = transform.childCount; // 자식 수 저장
-            for (int i = childCount - 1; i >= 0; i--) // 사용한 카드들을 수만큼 반복
+            for (int i = 0; i < _suffleCount; i++)
             {
-                yield return null;
+                int index = Random.Range(4, 8);
+                RectTransform randomUICardRectTrans = _uiCardDeck.GetChild(index).GetComponent<RectTransform>(); // 랜덤 선택 카드
+                RectTransform frontUICardRectTrans = _uiCardDeck.GetChild(_uiCardDeck.childCount - 1).GetComponent<RectTransform>(); // 맨 위 카드
 
-                int index = _deckTransform.childCount;
-
-                Transform cardTrans = transform.GetChild(i); // 맨 위 카드
-                cardTrans.SetParent(_deckTransform); // 부모 변경
-                MainThreadDispatcher.Enqueue(() => { cardTrans.GetComponent<SortingGroup>().sortingOrder = _deckTransform.childCount; }); // 랜더링 순서 할당(값이 낮을 수록 뒤에 그려짐)
-
-                Vector3 startPos = cardTrans.transform.localPosition;
-                Vector3 endPos = new Vector3(0, _yInterval * index, 0);
                 float currentTime = 0;
+                Vector3 randomCardStartPos = randomUICardRectTrans.anchoredPosition;
+                Vector3 randomCardEndPos = new Vector3(0, _suffleMinYPos, 0);
 
-                while (currentTime <= _cardMoveDuration)
+                Vector3 frontCardStartPos = frontUICardRectTrans.anchoredPosition;
+                Vector3 frontCardEndPos = new Vector3(0, _suffleMaxYPos, 0);
+
+                while(currentTime <= _animationDuration)
                 {
-                    float t = currentTime / _cardMoveDuration; // 현재 시간 비율
-
-                    float zRot = Mathf.Lerp(180, 0, t); // z축 회전값 (시작값이 180인 이유는 카드가 뒤집혀있는 상태이기 때문)
-
-                    cardTrans.localPosition = Vector3.Lerp(startPos, endPos, t);
-
-                    cardTrans.localRotation = Quaternion.AngleAxis(-zRot, Vector3.forward); // z축 회전
-
+                    float t = currentTime / _animationDuration;
+                    randomUICardRectTrans.anchoredPosition = Vector3.Lerp(randomCardStartPos, randomCardEndPos, t);
+                    frontUICardRectTrans.anchoredPosition = Vector3.Lerp(frontCardStartPos, frontCardEndPos, t);
                     currentTime += Time.deltaTime;
                     yield return null;
                 }
 
-                ObjectPoolType curOpt = cardTrans.GetComponent<UICardBase>().UICardData.poolType;
-                ObjectPoolManager.Instance.ReturnObject(curOpt, cardTrans.gameObject);
+                currentTime = 0;
+                randomUICardRectTrans.SetAsLastSibling();
+                frontUICardRectTrans.SetSiblingIndex(index);
 
-                var tcs = MakeCard(curOpt, endPos.y);
-                while (!tcs.IsCompleted)
+                randomCardEndPos = frontCardStartPos; // 맨 앞이었던 카드의 처음 위치를 랜덤하게 선택된 카드의 마지막 위치로 할당
+                frontCardEndPos = randomCardStartPos; // 랜덤하게 선택된 카드의 처음 위치를 맨 앞이었던 카드의 마지막 위치로 할당
+
+                frontCardStartPos = frontUICardRectTrans.anchoredPosition; // 맨 앞이었던 카드의 현재 위치 저장
+                randomCardStartPos = randomUICardRectTrans.anchoredPosition; // 랜덤하게 선택된 카드의 현재 위치 저장
+
+                while (currentTime <= _animationDuration)
+                {
+                    float t = currentTime / _animationDuration;
+                    randomUICardRectTrans.anchoredPosition = Vector3.Lerp(randomCardStartPos, randomCardEndPos, t);
+                    frontUICardRectTrans.anchoredPosition = Vector3.Lerp(frontCardStartPos, frontCardEndPos, t);
+                    currentTime += Time.deltaTime;
                     yield return null;
+                }
             }
-        }
-
-        private async Task MakeCard(ObjectPoolType type, float yPos)
-        {
-            GameObject newCard = await ObjectPoolManager.Instance.GetObject(type, _deckTransform);
-            newCard.transform.localPosition = new Vector3(0, yPos, 0);
-            await Task.CompletedTask;
         }
     }
 }
-// 마지막 작성 일자: 2025.11.19
+// 마지막 작성 일자: 2025.11.20
