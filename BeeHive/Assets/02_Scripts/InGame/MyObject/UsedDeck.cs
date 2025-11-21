@@ -17,17 +17,27 @@ namespace InGame.MyObject
     // 사용한 카드들을 모아두는 덱
     public class UsedDeck : MonoBehaviour
     {
-        [SerializeField] private Transform _deckTransform; // 덱 트랜스폼
-
-        [SerializeField] private float _cardMoveDuration; // 카드 이동 지속시간
         [SerializeField] private float _animationDuration; // 애니메이션 지속시간
+        [SerializeField] private float _cardShuffleDuration; // 셔플 시간
         [SerializeField] private float _yInterval; // y축 간격
-        [SerializeField] private float _suffleMinYPos; // 셔플 y 위치
-        [SerializeField] private float _suffleMaxYPos; // 셔플 y 위치
+        [SerializeField] private float _shuffleMinYPos; // 셔플 y 위치
 
-        [SerializeField] private int _suffleCount; // 셔플 횟수
+        [SerializeField] private int _shuffleCount; // 셔플 횟수
 
         [SerializeField] private RectTransform _uiCardDeck; // ui 덱
+
+        [SerializeField] private Deck _deck; // 덱
+
+        private UsedDeckData _usedDeckData = new UsedDeckData();
+        public UsedDeckData UsedDeckData { get => _usedDeckData; }
+
+        private void Update()
+        {
+            if(_deck.IsEmpty && transform.childCount > 0) // 덱이 비어있으며 사용한 카드가 있을 경우
+            {
+                _deck.DeckIsEmpty();
+            }
+        }
 
         // 사용한 카드들을 덱에 추가하는 함수
         public void AddCardInToUsedDeck(Transform addCardTrans)
@@ -35,64 +45,67 @@ namespace InGame.MyObject
             addCardTrans.SetParent(transform); // 추가한 카드의 부모를 자기 자신으로 할당
             int usedCardCount = transform.childCount; // 사용한 카드들을 모아두는 덱에 있는 카드 수
 
+            CardObject cardObject = addCardTrans.GetComponent<CardObject>();
+
+            switch(cardObject.PoolType)
+            {
+                case ObjectPoolType.CastleUpgradeUICard:
+                    _usedDeckData.castleCardCount++;
+                    break;
+                case ObjectPoolType.DroughtUICard:
+                    _usedDeckData.droughtCardCount++;
+                    break;
+                case ObjectPoolType.GoodHarvestUICard:
+                    _usedDeckData.goodHarvestCardCount++;
+                    break;
+                case ObjectPoolType.RoadChangeUICard:
+                    _usedDeckData.roadChangeCardCount++;
+                    break;
+                case ObjectPoolType.FirePowerUICard:
+                    _usedDeckData.firePowerCardCount++;
+                    break;
+            }
+
             DOTween.Sequence()
                 .AppendInterval(_animationDuration) // 대기
                 .Append(addCardTrans.DOLocalMove(new Vector3(0, _yInterval * usedCardCount, 0), _animationDuration)) // 사용한 카드 위치 이동
                 .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke()); // 카드 UI 재세팅
         }
 
-        private void Update()
+        public async Task DeckShuffle()
         {
-            if(Input.GetKeyDown(KeyCode.R))
-            {
-                StartCoroutine(DeckSuffle());
-            }
-        }
+            _usedDeckData.castleCardCount = 0;
+            _usedDeckData.droughtCardCount = 0;
+            _usedDeckData.goodHarvestCardCount = 0;
+            _usedDeckData.roadChangeCardCount = 0;
+            _usedDeckData.firePowerCardCount = 0;
 
-        private IEnumerator DeckSuffle()
-        {
-            for (int i = 0; i < _suffleCount; i++)
+            _uiCardDeck.gameObject.SetActive(true);
+
+            await Task.Delay(100);
+
+            for (int i = 0; i < _shuffleCount; i++)
             {
-                int index = Random.Range(4, 8);
+                int index = Random.Range(4, 8); // 4 ~ 7 인덱스 카드 랜덤 선택
                 RectTransform randomUICardRectTrans = _uiCardDeck.GetChild(index).GetComponent<RectTransform>(); // 랜덤 선택 카드
                 RectTransform frontUICardRectTrans = _uiCardDeck.GetChild(_uiCardDeck.childCount - 1).GetComponent<RectTransform>(); // 맨 위 카드
 
-                float currentTime = 0;
-                Vector3 randomCardStartPos = randomUICardRectTrans.anchoredPosition;
-                Vector3 randomCardEndPos = new Vector3(0, _suffleMinYPos, 0);
+                float randomCardTargetY = frontUICardRectTrans.anchoredPosition.y; // 랜덤하게 선택된 카드의 y 목표 값을 맨 앞 카드의 y값으로 할당
+                float frontCardTargetY = randomUICardRectTrans.anchoredPosition.y; // 맨 앞 카드의 y 목표 값을 랜덤하게 선택된 카드의 y값으로 할당
 
-                Vector3 frontCardStartPos = frontUICardRectTrans.anchoredPosition;
-                Vector3 frontCardEndPos = new Vector3(0, _suffleMaxYPos, 0);
+                await randomUICardRectTrans.DOAnchorPosY(_shuffleMinYPos, _cardShuffleDuration)
+                    .OnComplete(() =>
+                    {
+                        randomUICardRectTrans.SetAsLastSibling();
+                        frontUICardRectTrans.SetSiblingIndex(index);
+                        frontUICardRectTrans.anchoredPosition = new Vector3(0, frontCardTargetY, 0);
+                    }).AsyncWaitForCompletion();
 
-                while(currentTime <= _animationDuration)
-                {
-                    float t = currentTime / _animationDuration;
-                    randomUICardRectTrans.anchoredPosition = Vector3.Lerp(randomCardStartPos, randomCardEndPos, t);
-                    frontUICardRectTrans.anchoredPosition = Vector3.Lerp(frontCardStartPos, frontCardEndPos, t);
-                    currentTime += Time.deltaTime;
-                    yield return null;
-                }
-
-                currentTime = 0;
-                randomUICardRectTrans.SetAsLastSibling();
-                frontUICardRectTrans.SetSiblingIndex(index);
-
-                randomCardEndPos = frontCardStartPos; // 맨 앞이었던 카드의 처음 위치를 랜덤하게 선택된 카드의 마지막 위치로 할당
-                frontCardEndPos = randomCardStartPos; // 랜덤하게 선택된 카드의 처음 위치를 맨 앞이었던 카드의 마지막 위치로 할당
-
-                frontCardStartPos = frontUICardRectTrans.anchoredPosition; // 맨 앞이었던 카드의 현재 위치 저장
-                randomCardStartPos = randomUICardRectTrans.anchoredPosition; // 랜덤하게 선택된 카드의 현재 위치 저장
-
-                while (currentTime <= _animationDuration)
-                {
-                    float t = currentTime / _animationDuration;
-                    randomUICardRectTrans.anchoredPosition = Vector3.Lerp(randomCardStartPos, randomCardEndPos, t);
-                    frontUICardRectTrans.anchoredPosition = Vector3.Lerp(frontCardStartPos, frontCardEndPos, t);
-                    currentTime += Time.deltaTime;
-                    yield return null;
-                }
+                await randomUICardRectTrans.DOAnchorPosY(randomCardTargetY, _cardShuffleDuration).AsyncWaitForCompletion();
             }
+
+            _uiCardDeck.gameObject.SetActive(false);
         }
     }
 }
-// 마지막 작성 일자: 2025.11.20
+// 마지막 작성 일자: 2025.11.21

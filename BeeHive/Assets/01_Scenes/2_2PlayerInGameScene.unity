@@ -7805,6 +7805,7 @@ MonoBehaviour:
   player3CardsParent: {fileID: 0}
   _playerUICardsParent: {fileID: 1145864087}
   deckTransform: {fileID: 588781780}
+  _usedDeck: {fileID: 1279848487}
   _yInterval: 0.0005
 --- !u!1001 &592692804
 PrefabInstance:
@@ -16967,14 +16968,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d368d13b8c115469827c51a96b086f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deckTransform: {fileID: 588781780}
-  _cardMoveDuration: 0.25
   _animationDuration: 0.5
+  _cardShuffleDuration: 0.1
   _yInterval: 0.0005
-  _suffleMinYPos: -30
-  _suffleMaxYPos: 45
-  _suffleCount: 5
+  _shuffleMinYPos: -30
+  _shuffleCount: 5
   _uiCardDeck: {fileID: 1809943858}
+  _deck: {fileID: 588781781}
 --- !u!1001 &1296143381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24480,7 +24480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1807890765
 RectTransform:
   m_ObjectHideFlags: 0
