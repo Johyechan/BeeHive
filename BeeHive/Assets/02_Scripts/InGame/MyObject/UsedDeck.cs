@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.MyCard;
 using InGame.MyUI.Card;
@@ -19,10 +20,13 @@ namespace InGame.MyObject
     {
         [SerializeField] private float _animationDuration; // 애니메이션 지속시간
         [SerializeField] private float _cardShuffleDuration; // 셔플 시간
+        [SerializeField] private float _uiFadeDuration; // ui 활성화 시간
         [SerializeField] private float _yInterval; // y축 간격
         [SerializeField] private float _shuffleMinYPos; // 셔플 y 위치
 
         [SerializeField] private int _shuffleCount; // 셔플 횟수
+
+        [SerializeField] private CanvasGroup _deckShuffleAnimationUI; // 덱 셔플 애니메이션 UI
 
         [SerializeField] private RectTransform _uiCardDeck; // ui 덱
 
@@ -30,14 +34,6 @@ namespace InGame.MyObject
 
         private UsedDeckData _usedDeckData = new UsedDeckData();
         public UsedDeckData UsedDeckData { get => _usedDeckData; }
-
-        private void Update()
-        {
-            if(_deck.IsEmpty && transform.childCount > 0) // 덱이 비어있으며 사용한 카드가 있을 경우
-            {
-                _deck.DeckIsEmpty();
-            }
-        }
 
         // 사용한 카드들을 덱에 추가하는 함수
         public void AddCardInToUsedDeck(Transform addCardTrans)
@@ -47,7 +43,7 @@ namespace InGame.MyObject
 
             CardObject cardObject = addCardTrans.GetComponent<CardObject>();
 
-            switch(cardObject.PoolType)
+            switch(cardObject.CardUIPoolType)
             {
                 case ObjectPoolType.CastleUpgradeUICard:
                     _usedDeckData.castleCardCount++;
@@ -69,7 +65,21 @@ namespace InGame.MyObject
             DOTween.Sequence()
                 .AppendInterval(_animationDuration) // 대기
                 .Append(addCardTrans.DOLocalMove(new Vector3(0, _yInterval * usedCardCount, 0), _animationDuration)) // 사용한 카드 위치 이동
-                .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke()); // 카드 UI 재세팅
+                .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke()) // 카드 UI 재세팅
+                .AppendCallback(() =>
+                {
+                    switch(TurnManager.Instance.CurrentTeamType) // 현재 팀에 따라
+                    {
+                        case TeamType.Team1:
+                            NetworkManager.Instance.Socket.Emit("debug", "팀1이요");
+                            DrawEventSystem.OnCardObjectSet?.Invoke(DeckManager.Instance.DeckProp.player1CardsParent);
+                            break;
+                        case TeamType.Team2:
+                            NetworkManager.Instance.Socket.Emit("debug", "팀2이요");
+                            DrawEventSystem.OnCardObjectSet?.Invoke(DeckManager.Instance.DeckProp.player2CardsParent);
+                            break;
+                    }
+                }); // 카드 재세팅(카드 UI 재세팅과 동시 진행)
         }
 
         public async Task DeckShuffle()
@@ -80,9 +90,16 @@ namespace InGame.MyObject
             _usedDeckData.roadChangeCardCount = 0;
             _usedDeckData.firePowerCardCount = 0;
 
-            _uiCardDeck.gameObject.SetActive(true);
+            _deckShuffleAnimationUI.gameObject.SetActive(true); // ui 객체 활성화
+            await _deckShuffleAnimationUI.DOFade(1, _uiFadeDuration).AsyncWaitForCompletion(); // ui 객체 페이드 인
 
-            await Task.Delay(100);
+            int childCount = transform.childCount;
+            for(int i = childCount - 1; i >= 0; i--)
+            {
+                GameObject cardObj = transform.GetChild(i).gameObject;
+                CardObject card = cardObj.GetComponent<CardObject>();
+                ObjectPoolManager.Instance.ReturnObject(card.CardPoolType, cardObj);
+            }
 
             for (int i = 0; i < _shuffleCount; i++)
             {
@@ -104,8 +121,9 @@ namespace InGame.MyObject
                 await randomUICardRectTrans.DOAnchorPosY(randomCardTargetY, _cardShuffleDuration).AsyncWaitForCompletion();
             }
 
-            _uiCardDeck.gameObject.SetActive(false);
+            await _deckShuffleAnimationUI.DOFade(0, _uiFadeDuration).AsyncWaitForCompletion(); // ui 객체 페이드 아웃
+            _deckShuffleAnimationUI.gameObject.SetActive(false);
         }
     }
 }
-// 마지막 작성 일자: 2025.11.21
+// 마지막 작성 일자: 2025.11.24

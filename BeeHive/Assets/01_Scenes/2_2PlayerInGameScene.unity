@@ -2280,6 +2280,59 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8244229074724728705, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
   m_PrefabInstance: {fileID: 136226440}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &137371534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 137371536}
+  - component: {fileID: 137371535}
+  m_Layer: 0
+  m_Name: DeckManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &137371535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137371534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016fcf39c71482a45a1b558239a55057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyOnLoadScene: 1
+  _deckCardInfo:
+    castleUpgradeCardCount: 0
+    droughtCardCount: 0
+    goodHarvestCardCount: 5
+    roadChangeCardCount: 0
+    firePowerCardCount: 0
+  _deck: {fileID: 588781781}
+  _usedDeck: {fileID: 1279848487}
+--- !u!4 &137371536
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137371534}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 130, y: 150, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &137497462
 GameObject:
   m_ObjectHideFlags: 0
@@ -7805,7 +7858,6 @@ MonoBehaviour:
   player3CardsParent: {fileID: 0}
   _playerUICardsParent: {fileID: 1145864087}
   deckTransform: {fileID: 588781780}
-  _usedDeck: {fileID: 1279848487}
   _yInterval: 0.0005
 --- !u!1001 &592692804
 PrefabInstance:
@@ -16970,9 +17022,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationDuration: 0.5
   _cardShuffleDuration: 0.1
+  _uiFadeDuration: 0.1
   _yInterval: 0.0005
   _shuffleMinYPos: -30
   _shuffleCount: 5
+  _deckShuffleAnimationUI: {fileID: 1807890766}
   _uiCardDeck: {fileID: 1809943858}
   _deck: {fileID: 588781781}
 --- !u!1001 &1296143381
@@ -24474,6 +24528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1807890765}
+  - component: {fileID: 1807890766}
   m_Layer: 5
   m_Name: SuffleAnimation
   m_TagString: Untagged
@@ -24502,6 +24557,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1807890766
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807890764}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1809943857
 GameObject:
   m_ObjectHideFlags: 0
@@ -28307,3 +28374,4 @@ SceneRoots:
   - {fileID: 258812765}
   - {fileID: 2024793782}
   - {fileID: 1402230656}
+  - {fileID: 137371536}

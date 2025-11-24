@@ -19,10 +19,14 @@ namespace InGame.MyObject
         // 자식 객체들 재배치 함수
         protected void ObjectRePlace(Transform parent)
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"부모명: {parent.name}");
             int objectCount = parent.childCount; // 현재 자식 수 - 즉 보유하고 있는 객체 수
 
             if (objectCount <= 0 || objectCount > _maxChild) // 보유 중인 객체 수가 0이하라면 또는 최대 보유 개수 초과라면
+            {
+                NetworkManager.Instance.Socket.Emit("debug", $"{objectCount} 수 봐라 적거나 많네");
                 return; // 반환
+            }
 
             for(int i = 0; i < objectCount; i++)
             {

@@ -44,7 +44,7 @@ namespace InGame.MyManager.MyCard
             Transform currentDrawCardTrans = deckParent.GetChild(currentDeckCardCount - 1);
             CardObject currentDrawCard = currentDrawCardTrans.GetComponent<CardObject>();
 
-            if (currentDrawCard.PoolType == ObjectPoolType.FirePowerUICard) // 드로우한 카드가 화력 카드일 경우
+            if (currentDrawCard.CardUIPoolType == ObjectPoolType.FirePowerUICard) // 드로우한 카드가 화력 카드일 경우
             {
                 CardManager.Instance.HaveFirePowerCard = true; // 화력 카드를 가지고 있다고 할당
             }
@@ -53,7 +53,7 @@ namespace InGame.MyManager.MyCard
 
             if (includeUI) // UI도 생성해야 할 경우
             {
-                GameObject uiCard = await ObjectPoolManager.Instance.GetObject(currentDrawCard.PoolType, playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
+                GameObject uiCard = await ObjectPoolManager.Instance.GetObject(currentDrawCard.CardUIPoolType, playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
                 UICardBase uiCardBase = uiCard.GetComponent<UICardBase>();
                 uiCardBase.UICardVariable.cardObj = currentDrawCard.gameObject; // UI 카드에 현재 카드 객체 할당
 

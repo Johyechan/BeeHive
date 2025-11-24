@@ -39,11 +39,11 @@ namespace InGame.MyManager
             var socket = NetworkManager.Instance.Socket; // 서버와 통신하기 위한 객체 받아오기
             if(socket != null) // 서버와 통신하기 위한 객체가 존재할 때
             {
-                socket.On("turnChanged", value =>
+                socket.On("turnChanged", async value =>
                 {
                     int turn = value.GetValue<int>(); // int 자료형으로 읽어오기
                     TurnType turnType = (TurnType)turn; // TurnType형태로 turn변수 변경
-                    NextTurn(turnType); // turnType 턴 변경
+                    await NextTurn(turnType); // turnType 턴 변경
                 });
             }
 
@@ -56,23 +56,28 @@ namespace InGame.MyManager
 
         private void Start()
         {
-            _ = TurnChange(TurnType.ChangeTeam); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
+            _ = TurnChange(TurnType.ChangeTeam, true); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
         }
 
         // 턴을 넘기는 함수
-        public void NextTurn(TurnType turn)
+        public async Task NextTurn(TurnType turn)
         {
             if (turn == TurnType.ChangeTeam) // 팀을 변경하는 턴 일경우
             {
                 _currentTeamType = GameManager.Instance.NextTeam(_currentTeamType); // 현재 팀을 다음 팀으로 지정
             }
 
-            _= TurnChange(turn); // 턴 변경 및 변경된 턴 기능 실행 함수 호출
+            await TurnChange(turn); // 턴 변경 및 변경된 턴 기능 실행 함수 호출
         }
 
         // 턴 변경 시 현재 턴을 다음 턴으로 변경 및 다음 턴의 애니메이션까지 실행 시키는 함수(다음 턴)
-        private async Task TurnChange(TurnType nextTurn)
+        private async Task TurnChange(TurnType nextTurn, bool isStart = false)
         {
+            if(isStart)
+            {
+                await DeckManager.Instance.MakeDeck(SceneMgr.Instance.CurrentRoomID);
+            }
+
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
 
             if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
@@ -117,4 +122,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.11.03
+// 마지막 작성 일자: 2025.11.24

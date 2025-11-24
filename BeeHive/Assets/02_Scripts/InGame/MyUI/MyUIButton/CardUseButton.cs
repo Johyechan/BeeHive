@@ -40,6 +40,11 @@ namespace InGame.MyUI.MyUIButton
                 .OnComplete(() =>
                 {
                     _canvasGroup.gameObject.SetActive(false);
+                    if(DeckManager.Instance.IsEmpty) // 덱이 비어 있다면
+                    {
+                        DeckManager.Instance.IsEmpty = false;
+                        DeckManager.Instance.ReMakeDeck(); // 덱 다시 만들기
+                    }
                 }); // 객체 비활성화
         }
 
@@ -60,4 +65,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.10.20
+// 마지막 작성 일자: 2025.11.24

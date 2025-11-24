@@ -288,7 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d3d7a1f99a57641a5b53f058f96df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _poolType: 10
+  _cardUIPoolType: 10
+  _cardPoolType: 15
 --- !u!210 &-6903717316662396767
 SortingGroup:
   m_ObjectHideFlags: 0

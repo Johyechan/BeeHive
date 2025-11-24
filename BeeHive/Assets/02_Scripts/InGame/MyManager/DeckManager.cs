@@ -1,5 +1,6 @@
 using InGame.MyObject;
 using MyUtil;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyManager
@@ -10,8 +11,17 @@ namespace InGame.MyManager
     {
         [SerializeField] private DeckCardInfo _deckCardInfo; // 덱에 필요한 카드들의 정보를 가지는 구조체 변수
 
+        [SerializeField] private Deck _deck; // 사용하지 않은 카드들을 모아두는 덱
+        public Deck DeckProp { get => _deck; }
+
+        [SerializeField] private UsedDeck _usedDeck; // 사용된 카드들을 모아두는 덱
+        public UsedDeck UsedDeckProp { get => _usedDeck; }
+
+        private bool _isEmpty;
+        public bool IsEmpty { get => _isEmpty; set => _isEmpty = value; }
+
         // 덱 제작 함수(현재 방 ID)
-        public void MakeDeck(string currentRoomID, int castleUpdradeCardCount = 0, int droughtCardCount = 0, int goodHarvestCardCount = 0, int roadChangeCardCount = 0, int firePowerCardCount = 0)
+        public async Task MakeDeck(string currentRoomID, int castleUpdradeCardCount = 0, int droughtCardCount = 0, int goodHarvestCardCount = 0, int roadChangeCardCount = 0, int firePowerCardCount = 0)
         {
             int castleCard = castleUpdradeCardCount == 0 ? _deckCardInfo.castleUpgradeCardCount : castleUpdradeCardCount; // 성벽 카드 수
             int droughtCard = droughtCardCount == 0 ? _deckCardInfo.droughtCardCount : droughtCardCount; // 가뭄 카드 수
@@ -34,7 +44,14 @@ namespace InGame.MyManager
             {
                 NetworkManager.Instance.Socket.Emit("shuffle", json); // 서버로 전송
             }
+
+            await Task.CompletedTask;
+        }
+
+        public async void ReMakeDeck()
+        {
+            await MakeDeck(SceneMgr.Instance.CurrentRoomID, _usedDeck.UsedDeckData.castleCardCount, _usedDeck.UsedDeckData.droughtCardCount, _usedDeck.UsedDeckData.goodHarvestCardCount, _usedDeck.UsedDeckData.roadChangeCardCount, _usedDeck.UsedDeckData.firePowerCardCount);
         }
     }
 }
-// 마지막 작성 일자: 2025.11.21
+// 마지막 작성 일자: 2025.11.24

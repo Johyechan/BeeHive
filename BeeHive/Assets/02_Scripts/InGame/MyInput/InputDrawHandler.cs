@@ -65,8 +65,11 @@ namespace InGame.MyInput
                     break;
             }
 
+            if (_deck.deckTransform.childCount <= 0) // 덱이 비어있다면
+                DeckManager.Instance.IsEmpty = true;
+
             _handlerData.socketEventHandler.CallSocketEvent();
         }
     }
 }
-// 마지막 작성 일자: 2025.09.18
+// 마지막 작성 일자: 2025.11.24

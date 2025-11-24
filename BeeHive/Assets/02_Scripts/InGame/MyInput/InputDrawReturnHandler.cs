@@ -33,7 +33,7 @@ namespace InGame.MyInput
 
             if(_deck.transform.childCount <= 0) // 덱에 더 이상 카드가 없다면
             {
-                _deck.IsEmpty = true; // 덱 비어있을 때 부르는 함수 부르기
+                DeckManager.Instance.IsEmpty = true;
                 return true; // 반환
             }
 

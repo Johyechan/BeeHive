@@ -78,7 +78,7 @@ namespace InGame.MyObject.Piece.Handler
                                 await HighLightOffFunction(true);
 
                                 UICardBase uiCardBase = CardManager.Instance.FindFirePowerCard(); // 자신의 패에서 화력 카드 탐색
-                                NetworkManager.Instance.Socket.Emit("debug", $"{uiCardBase}");
+
                                 if (uiCardBase == null) // 자신의 패에 화력 카드가 없다면
                                 {
                                     CardManager.Instance.HaveFirePowerCard = false; // 화력 카드가 없는 상태로 전환

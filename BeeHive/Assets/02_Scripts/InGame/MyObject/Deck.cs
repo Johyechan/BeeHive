@@ -18,14 +18,9 @@ namespace InGame.MyObject
 
         public Transform deckTransform; // 덱 Transform 변수 - 현재 덱에 있는 카드의 수를 알기 위한 변수
 
-        [SerializeField] private UsedDeck _usedDeck; // 사용된 카드들을 모아두는 덱
-
         [SerializeField] private float _yInterval; // 카드 간의 y축 간격
 
         private List<ObjectPoolType> _deckList = new List<ObjectPoolType>(); // 덱 리스트
-
-        private bool _isEmpty;
-        public bool IsEmpty { get => _isEmpty; set => _isEmpty = value; }
 
         // 변수 초기화
         private void Awake()
@@ -65,21 +60,14 @@ namespace InGame.MyObject
 
         private async Task CreateDeck()
         {
-            _ = _usedDeck.DeckShuffle();
+            await DeckManager.Instance.UsedDeckProp.DeckShuffle();
 
             for (int i = 0; i <  _deckList.Count; i++) // 덱 리스트 순회
             {
                 GameObject card = await ObjectPoolManager.Instance.GetObject(_deckList[i], deckTransform); // 카드 생성
                 card.transform.localPosition = new Vector3(0, _yInterval * i, 0); // 카드를 생성할 수 록 y축 간격 만큼 위로 올리기
             }
-
-            _isEmpty = false;
-        }
-
-        public void DeckIsEmpty()
-        {
-            DeckManager.Instance.MakeDeck(SceneMgr.Instance.CurrentRoomID, _usedDeck.UsedDeckData.castleCardCount, _usedDeck.UsedDeckData.droughtCardCount, _usedDeck.UsedDeckData.goodHarvestCardCount, _usedDeck.UsedDeckData.roadChangeCardCount, _usedDeck.UsedDeckData.firePowerCardCount);
         }
     }
 }
-// 마지막 작성 일자: 2025.11.21
+// 마지막 작성 일자: 2025.11.24
