@@ -2,9 +2,8 @@ using DG.Tweening;
 using InGame.MyManager;
 using InGame.MyObject;
 using InGame.MyUI.Card;
-using InGame.MyUI.Card.Variable;
 using InGame.MyUI.MyUIInterface;
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
@@ -23,7 +22,7 @@ namespace InGame.MyUI.MyUIButton
         // 클릭 시 실행될 함수
         public void OnUIClick()
         {
-            if(_uiCardBase.UseCard() == false) // 카드 사용에 예외가 발생했다면
+            if (_uiCardBase.UseCard() == false) // 카드 사용에 예외가 발생했다면
             {
                 DOTween.Sequence()
                 .Append(_canvasGroup.DOFade(0, _animationDuration)) // 페이드 아웃
@@ -35,17 +34,12 @@ namespace InGame.MyUI.MyUIButton
             }
 
             DOTween.Sequence()
-                .AppendCallback(() => ReverseCardObject())
-                .Append(_canvasGroup.DOFade(0, _animationDuration)) // 페이드 아웃
+                .Append(_canvasGroup.DOFade(0, _animationDuration))
                 .OnComplete(() =>
                 {
+                    ReverseCardObject(); // 카드 객체 뒤집기
                     _canvasGroup.gameObject.SetActive(false);
-                    if(DeckManager.Instance.IsEmpty) // 덱이 비어 있다면
-                    {
-                        DeckManager.Instance.IsEmpty = false;
-                        DeckManager.Instance.ReMakeDeck(); // 덱 다시 만들기
-                    }
-                }); // 객체 비활성화
+                }); // 페이드 아웃
         }
 
         // UI 카드에 맞는 카드 객체를 뒤집는 함수
@@ -60,9 +54,10 @@ namespace InGame.MyUI.MyUIButton
             string json = JsonUtility.ToJson(reverseCardInfo); // Json 형태로 변환
             NetworkManager.Instance.Socket.Emit("reverseCard", json); // 서버에 전송
 
-            _uiCardBase.UICardVariable.cardObj.transform.DORotate(new Vector3(0, _uiCardBase.UICardVariable.cardObj.transform.eulerAngles.y, 180), _animationDuration); // y축은 Team1의 경우 플레이어의 시야를 고려하여 180도 돌아가 있기 때문에 카드의 y값으로 그대로 적용, z축으로 180도 회전
-            _uiCardBase.UICardVariable.cardObj.transform.DOMoveY(0.0001f, _animationDuration); // y축을 조금 올리는 이유는 안 올릴 경우 바닥을 뚫는 문제 발생
+            DOTween.Sequence()
+                .Append(_uiCardBase.UICardVariable.cardObj.transform.DORotate(new Vector3(0, _uiCardBase.UICardVariable.cardObj.transform.eulerAngles.y, 180), _animationDuration)) // y축은 Team1의 경우 플레이어의 시야를 고려하여 180도 돌아가 있기 때문에 카드의 y값으로 그대로 적용, z축으로 180도 회전
+                .Join(_uiCardBase.UICardVariable.cardObj.transform.DOMoveY(0.0001f, _animationDuration));// y축을 조금 올리는 이유는 안 올릴 경우 바닥을 뚫는 문제 발생
         }
     }
 }
-// 마지막 작성 일자: 2025.11.24
+// 마지막 작성 일자: 2025.11.25

@@ -20,9 +20,14 @@ namespace InGame.MyManager
         private bool _isEmpty;
         public bool IsEmpty { get => _isEmpty; set => _isEmpty = value; }
 
+        private TaskCompletionSource<bool> _deckMakeCheckTcs;
+        public TaskCompletionSource<bool> DeckMakeCheckTcs { get => _deckMakeCheckTcs; set => _deckMakeCheckTcs = value; }
+
         // 덱 제작 함수(현재 방 ID)
         public async Task MakeDeck(string currentRoomID, int castleUpdradeCardCount = 0, int droughtCardCount = 0, int goodHarvestCardCount = 0, int roadChangeCardCount = 0, int firePowerCardCount = 0)
         {
+            _deckMakeCheckTcs = new TaskCompletionSource<bool>(); // 새로운 tcs 할당
+
             int castleCard = castleUpdradeCardCount == 0 ? _deckCardInfo.castleUpgradeCardCount : castleUpdradeCardCount; // 성벽 카드 수
             int droughtCard = droughtCardCount == 0 ? _deckCardInfo.droughtCardCount : droughtCardCount; // 가뭄 카드 수
             int goodHarvestCard = goodHarvestCardCount == 0 ? _deckCardInfo.goodHarvestCardCount : goodHarvestCardCount; // 풍년 카드 수
@@ -48,10 +53,15 @@ namespace InGame.MyManager
             await Task.CompletedTask;
         }
 
+        public async Task DeckMakeEnd()
+        {
+            await _deckMakeCheckTcs.Task;
+        }
+
         public async void ReMakeDeck()
         {
             await MakeDeck(SceneMgr.Instance.CurrentRoomID, _usedDeck.UsedDeckData.castleCardCount, _usedDeck.UsedDeckData.droughtCardCount, _usedDeck.UsedDeckData.goodHarvestCardCount, _usedDeck.UsedDeckData.roadChangeCardCount, _usedDeck.UsedDeckData.firePowerCardCount);
         }
     }
 }
-// 마지막 작성 일자: 2025.11.24
+// 마지막 작성 일자: 2025.11.25

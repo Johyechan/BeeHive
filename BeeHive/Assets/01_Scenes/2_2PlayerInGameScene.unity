@@ -17022,7 +17022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animationDuration: 0.5
   _cardShuffleDuration: 0.1
-  _uiFadeDuration: 0.1
+  _uiFadeDuration: 0.25
   _yInterval: 0.0005
   _shuffleMinYPos: -30
   _shuffleCount: 5

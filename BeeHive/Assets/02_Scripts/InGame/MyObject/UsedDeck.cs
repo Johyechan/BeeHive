@@ -62,24 +62,42 @@ namespace InGame.MyObject
                     break;
             }
 
+            StartCoroutine(CardSettingCo(addCardTrans, usedCardCount));
+        }
+
+        // 카드 세팅 코루틴
+        private IEnumerator CardSettingCo(Transform addCardTrans, int usedCardCount)
+        {
+            bool tweenEnd = false; // 트윈 종료 여부를 판단하는 변수
             DOTween.Sequence()
                 .AppendInterval(_animationDuration) // 대기
-                .Append(addCardTrans.DOLocalMove(new Vector3(0, _yInterval * usedCardCount, 0), _animationDuration)) // 사용한 카드 위치 이동
-                .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke()) // 카드 UI 재세팅
-                .AppendCallback(() =>
-                {
-                    switch(TurnManager.Instance.CurrentTeamType) // 현재 팀에 따라
-                    {
-                        case TeamType.Team1:
-                            NetworkManager.Instance.Socket.Emit("debug", "팀1이요");
-                            DrawEventSystem.OnCardObjectSet?.Invoke(DeckManager.Instance.DeckProp.player1CardsParent);
-                            break;
-                        case TeamType.Team2:
-                            NetworkManager.Instance.Socket.Emit("debug", "팀2이요");
-                            DrawEventSystem.OnCardObjectSet?.Invoke(DeckManager.Instance.DeckProp.player2CardsParent);
-                            break;
-                    }
-                }); // 카드 재세팅(카드 UI 재세팅과 동시 진행)
+                .Append(addCardTrans.DOLocalMove(new Vector3(0, _yInterval * usedCardCount, 0), _animationDuration))
+                .OnComplete(() => tweenEnd = true); // 사용한 카드 위치 이동
+
+            yield return new WaitUntil(() => tweenEnd); // 트윈이 종료될 때까지 대기
+
+            DrawEventSystem.OnCardUISet?.Invoke();// 카드 UI 재세팅
+            switch (TurnManager.Instance.CurrentTeamType) // 현재 팀에 따라 카드 재세팅
+            {
+                case TeamType.Team1:
+                    yield return new WaitUntil(() => DrawEventSystem.OnCardObjectSet.Invoke(DeckManager.Instance.DeckProp.player1CardsParent));
+                    break;
+                case TeamType.Team2:
+                    yield return new WaitUntil(() => DrawEventSystem.OnCardObjectSet.Invoke(DeckManager.Instance.DeckProp.player2CardsParent));
+                    break;
+            }
+
+            if (DeckManager.Instance.IsEmpty) // 덱이 비어 있다면
+            {
+                DeckManager.Instance.IsEmpty = false; // 덱이 비어 있지 않은 상태로 할당
+                DeckManager.Instance.ReMakeDeck(); // 덱 다시 만들기
+            }
+        }
+
+        public async Task DeckShuffleAnimationFadeIn()
+        {
+            _deckShuffleAnimationUI.gameObject.SetActive(true); // ui 객체 활성화
+            await _deckShuffleAnimationUI.DOFade(1, _uiFadeDuration).AsyncWaitForCompletion(); // ui 객체 페이드 인
         }
 
         public async Task DeckShuffle()
@@ -89,10 +107,7 @@ namespace InGame.MyObject
             _usedDeckData.goodHarvestCardCount = 0;
             _usedDeckData.roadChangeCardCount = 0;
             _usedDeckData.firePowerCardCount = 0;
-
-            _deckShuffleAnimationUI.gameObject.SetActive(true); // ui 객체 활성화
-            await _deckShuffleAnimationUI.DOFade(1, _uiFadeDuration).AsyncWaitForCompletion(); // ui 객체 페이드 인
-
+            
             int childCount = transform.childCount;
             for(int i = childCount - 1; i >= 0; i--)
             {
@@ -123,7 +138,10 @@ namespace InGame.MyObject
 
             await _deckShuffleAnimationUI.DOFade(0, _uiFadeDuration).AsyncWaitForCompletion(); // ui 객체 페이드 아웃
             _deckShuffleAnimationUI.gameObject.SetActive(false);
+
+            await Task.Yield(); // 한 프레임 대기를 통한 연출의 자연스러움 추가
+            DeckManager.Instance.DeckMakeCheckTcs?.TrySetResult(true); // 덱 생성 완료
         }
     }
 }
-// 마지막 작성 일자: 2025.11.24
+// 마지막 작성 일자: 2025.11.25

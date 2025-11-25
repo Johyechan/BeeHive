@@ -60,7 +60,9 @@ namespace InGame.MyObject
 
         private async Task CreateDeck()
         {
-            await DeckManager.Instance.UsedDeckProp.DeckShuffle();
+            await DeckManager.Instance.UsedDeckProp.DeckShuffleAnimationFadeIn();
+
+            _ = DeckManager.Instance.UsedDeckProp.DeckShuffle();
 
             for (int i = 0; i <  _deckList.Count; i++) // 덱 리스트 순회
             {
@@ -70,4 +72,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.11.24
+// 마지막 작성 일자: 2025.11.25
