@@ -3,6 +3,8 @@ using InGame.MyUI.Card;
 using MyUtil;
 using MyUtil.MyObjectPool;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace InGame.MyManager
@@ -17,11 +19,52 @@ namespace InGame.MyManager
         private bool _cardUsed; // 카드 사용 여부
         public bool CardUsed { get => _cardUsed; set => _cardUsed = value; }
 
+        private Dictionary<CardType, bool> _cardUsedCheckMap = new Dictionary<CardType, bool>();
+
         [SerializeField] private Transform _uiCardsParent; // ui 카드 부모
 
         [SerializeField] private Transform _team1CardParent; // 팀1카드 부모
         [SerializeField] private Transform _team2CardParent; // 팀2카드 부모
         [SerializeField] private Transform _team3CardParent; // 팀3카드 부모
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _cardUsedCheckMap.Add(CardType.CastleUpgrade, false);
+            _cardUsedCheckMap.Add(CardType.Drought, false);
+            _cardUsedCheckMap.Add(CardType.GoodHarvest, false);
+            _cardUsedCheckMap.Add(CardType.FirePower, false);
+            _cardUsedCheckMap.Add(CardType.RoadChange, false);
+
+            foreach(var card in _cardUsedCheckMap)
+            {
+                NetworkManager.Instance.Socket.Emit("debug", $"{card.Key}, {card.Value}");
+            }
+        }
+
+        // 같은 타입의 카드가 사용됐는지 확인 및 처리하는 함수
+        public bool CheckSameTypeCardWasUsed(CardType type)
+        {
+            if (_cardUsedCheckMap[type]) // type 형태의 카드를 이미 사용 했었다면
+            {
+                _ = UIManager.Instance.WarningUIMake("같은 카드를 두 번 이상 사용할 수 없습니다"); // 경고창 띄우기
+                return true; // 일전에 사용했다고 반환
+            }
+
+            _cardUsedCheckMap[type] = true; // 이미 사용하지 않은 경우 type 형태의 카드를 사용했다고 할당
+            return false; // 그리고 일전에 사용한 적 없다고 반환
+        }
+
+        // 같은 타입의 카드 사용 여부를 초기화 시켜주는 함수
+        public void ResetCardUse()
+        {
+            foreach(var type in _cardUsedCheckMap.Keys.ToList()) // 맵 순회
+            {
+                _cardUsedCheckMap[type] = false; // 해당 타입의 카드가 사용되지 않았다고 할당
+                NetworkManager.Instance.Socket.Emit("debug", $"{type}: {_cardUsedCheckMap[type]}");
+            }
+        }
 
         // 화력 카드 탐색 함수
         public UICardBase FindFirePowerCard()
@@ -54,4 +97,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.10.24
+// 마지막 작성 일자: 2025.11.26

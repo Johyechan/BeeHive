@@ -1,3 +1,4 @@
+using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
@@ -13,7 +14,12 @@ namespace InGame.MyUI.Card
         // 카드 기능을 실제로 수행하는 함수
         public override bool UseCard()
         {
-            if(PieceManager.Instance.CanChangeRoadList.Count <= 0) // 도로 변형이 가능한 도로가 없다면
+            if (CardManager.Instance.CheckSameTypeCardWasUsed(CardType.RoadChange)) // 도로 변형 카드 일전에 사용 했었는지 확인
+            {
+                return false;
+            }
+
+            if (PieceManager.Instance.CanChangeRoadList.Count <= 0) // 도로 변형이 가능한 도로가 없다면
             {
                 _ = UIManager.Instance.WarningUIMake("도로 변형 가능한 도로가 없어서 사용 불가합니다.");
                 return false;
@@ -45,4 +51,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.10.20
+// 마지막 작성 일자: 2025.11.26
