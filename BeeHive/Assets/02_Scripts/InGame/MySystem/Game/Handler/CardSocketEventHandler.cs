@@ -39,4 +39,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2025.11.27

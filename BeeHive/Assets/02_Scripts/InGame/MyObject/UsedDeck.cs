@@ -45,9 +45,6 @@ namespace InGame.MyObject
 
             switch(cardObject.CardUIPoolType)
             {
-                case ObjectPoolType.CastleUpgradeUICard:
-                    _usedDeckData.castleCardCount++;
-                    break;
                 case ObjectPoolType.DroughtUICard:
                     _usedDeckData.droughtCardCount++;
                     break;
@@ -62,19 +59,22 @@ namespace InGame.MyObject
                     break;
             }
 
-            StartCoroutine(CardSettingCo(addCardTrans, usedCardCount));
+            StartCoroutine(CardSettingCo(addCardTrans, cardObject.CardPoolType, usedCardCount));
         }
 
         // 카드 세팅 코루틴
-        private IEnumerator CardSettingCo(Transform addCardTrans, int usedCardCount)
+        private IEnumerator CardSettingCo(Transform addCardTrans, ObjectPoolType cardPoolType, int usedCardCount)
         {
-            bool tweenEnd = false; // 트윈 종료 여부를 판단하는 변수
-            DOTween.Sequence()
-                .AppendInterval(_animationDuration) // 대기
-                .Append(addCardTrans.DOLocalMove(new Vector3(0, _yInterval * usedCardCount, 0), _animationDuration))
-                .OnComplete(() => tweenEnd = true); // 사용한 카드 위치 이동
+            if(cardPoolType != ObjectPoolType.CastleUpgradeCard) // 카드가 성벽 강화 카드가 아닐 경우에만
+            {
+                bool tweenEnd = false; // 트윈 종료 여부를 판단하는 변수
+                DOTween.Sequence()
+                    .AppendInterval(_animationDuration) // 대기
+                    .Append(addCardTrans.DOLocalMove(new Vector3(0, _yInterval * usedCardCount, 0), _animationDuration))
+                    .OnComplete(() => tweenEnd = true); // 사용한 카드 위치 이동
 
-            yield return new WaitUntil(() => tweenEnd); // 트윈이 종료될 때까지 대기
+                yield return new WaitUntil(() => tweenEnd); // 트윈이 종료될 때까지 대기
+            }
 
             DrawEventSystem.OnCardUISet?.Invoke();// 카드 UI 재세팅
             switch (TurnManager.Instance.CurrentTeamType) // 현재 팀에 따라 카드 재세팅
@@ -87,7 +87,7 @@ namespace InGame.MyObject
                     break;
             }
 
-            if (DeckManager.Instance.IsEmpty) // 덱이 비어 있다면
+            if (DeckManager.Instance.IsEmpty && cardPoolType != ObjectPoolType.CastleUpgradeCard) // 덱이 비어 있으며 현재 사용한 카드가 성벽 강화 카드가 아닐 경우
             {
                 DeckManager.Instance.IsEmpty = false; // 덱이 비어 있지 않은 상태로 할당
                 DeckManager.Instance.ReMakeDeck(); // 덱 다시 만들기
@@ -144,4 +144,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.11.25
+// 마지막 작성 일자: 2025.11.27

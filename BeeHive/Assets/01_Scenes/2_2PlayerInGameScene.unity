@@ -2311,9 +2311,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyOnLoadScene: 1
   _deckCardInfo:
-    castleUpgradeCardCount: 0
-    droughtCardCount: 0
-    goodHarvestCardCount: 5
+    castleUpgradeCardCount: 1
+    droughtCardCount: 1
+    goodHarvestCardCount: 1
     roadChangeCardCount: 0
     firePowerCardCount: 0
   _deck: {fileID: 588781781}

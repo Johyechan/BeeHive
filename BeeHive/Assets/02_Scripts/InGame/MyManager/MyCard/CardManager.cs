@@ -36,11 +36,6 @@ namespace InGame.MyManager
             _cardUsedCheckMap.Add(CardType.GoodHarvest, false);
             _cardUsedCheckMap.Add(CardType.FirePower, false);
             _cardUsedCheckMap.Add(CardType.RoadChange, false);
-
-            foreach(var card in _cardUsedCheckMap)
-            {
-                NetworkManager.Instance.Socket.Emit("debug", $"{card.Key}, {card.Value}");
-            }
         }
 
         // 같은 타입의 카드가 사용됐는지 확인 및 처리하는 함수
@@ -62,7 +57,6 @@ namespace InGame.MyManager
             foreach(var type in _cardUsedCheckMap.Keys.ToList()) // 맵 순회
             {
                 _cardUsedCheckMap[type] = false; // 해당 타입의 카드가 사용되지 않았다고 할당
-                NetworkManager.Instance.Socket.Emit("debug", $"{type}: {_cardUsedCheckMap[type]}");
             }
         }
 

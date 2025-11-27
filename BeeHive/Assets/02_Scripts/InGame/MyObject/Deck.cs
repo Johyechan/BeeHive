@@ -32,6 +32,7 @@ namespace InGame.MyObject
                 _deckList.Clear();
                 string json = data.GetValue().ToString(); // 서버가 전송한 값 받기
                 DeckInfo deckInfo = JsonUtility.FromJson<DeckInfo>(json); // DeckInfo로 변환
+
                 for(int i = 0; i < deckInfo.deck.Length; i++) // 덱에 있는 카드 수 만큼 반복
                 {
                     switch(deckInfo.deck[i])

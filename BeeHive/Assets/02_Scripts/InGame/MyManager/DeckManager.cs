@@ -41,7 +41,7 @@ namespace InGame.MyManager
                 droughtCardCount = droughtCard, // 가뭄 카드 수
                 goodHarvestCardCount = goodHarvestCard, // 풍년 카드 수
                 roadChangeCardCount = roadChangeCard, // 도로 변형 카드 수
-                firePowerCardCount = firePowerCardCount, // 화력 카드 수
+                firePowerCardCount = firePowerCard, // 화력 카드 수
             };
             string json = JsonUtility.ToJson(deckShuffleInfo); // Json 형태로 변환
 
@@ -64,4 +64,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.11.25
+// 마지막 작성 일자: 2025.11.27

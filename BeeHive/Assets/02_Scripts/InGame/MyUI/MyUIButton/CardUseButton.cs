@@ -3,6 +3,7 @@ using InGame.MyManager;
 using InGame.MyObject;
 using InGame.MyUI.Card;
 using InGame.MyUI.MyUIInterface;
+using MyUtil.MyObjectPool;
 using System.Collections;
 using UnityEngine;
 
@@ -56,8 +57,16 @@ namespace InGame.MyUI.MyUIButton
 
             DOTween.Sequence()
                 .Append(_uiCardBase.UICardVariable.cardObj.transform.DORotate(new Vector3(0, _uiCardBase.UICardVariable.cardObj.transform.eulerAngles.y, 180), _animationDuration)) // y축은 Team1의 경우 플레이어의 시야를 고려하여 180도 돌아가 있기 때문에 카드의 y값으로 그대로 적용, z축으로 180도 회전
-                .Join(_uiCardBase.UICardVariable.cardObj.transform.DOMoveY(0.0001f, _animationDuration));// y축을 조금 올리는 이유는 안 올릴 경우 바닥을 뚫는 문제 발생
+                .Join(_uiCardBase.UICardVariable.cardObj.transform.DOMoveY(0.0001f, _animationDuration)) // y축을 조금 올리는 이유는 안 올릴 경우 바닥을 뚫는 문제 발생
+                .OnComplete(() =>
+                {
+                    CardObject cardObject = _uiCardBase.UICardVariable.cardObj.GetComponent<CardObject>();
+                    if(cardObject.CardPoolType == ObjectPoolType.CastleUpgradeCard) // 현재 카드가 성벽 강화 카드라면
+                    {
+                        ObjectPoolManager.Instance.ReturnObject(cardObject.CardPoolType, _uiCardBase.UICardVariable.cardObj); // 성벽 강화 카드를 풀에 반환 - 성벽 강화 카드는 재사용 불가 카드이기 때문
+                    }
+                });
         }
     }
 }
-// 마지막 작성 일자: 2025.11.25
+// 마지막 작성 일자: 2025.11.27
