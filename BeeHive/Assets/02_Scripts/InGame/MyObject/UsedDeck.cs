@@ -1,22 +1,18 @@
 using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyManager;
-using InGame.MyManager.MyCard;
-using InGame.MyUI.Card;
-using MyUtil;
+using InGame.MyObject.MyObjectInterface;
 using MyUtil.MyEvent;
 using MyUtil.MyObjectPool;
 using System.Collections;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace InGame.MyObject
 {
     // 작성자: 조혜찬
     // 사용한 카드들을 모아두는 덱
-    public class UsedDeck : MonoBehaviour
+    public class UsedDeck : MonoBehaviour, IClickObject
     {
         [SerializeField] private float _animationDuration; // 애니메이션 지속시간
         [SerializeField] private float _cardShuffleDuration; // 셔플 시간
@@ -76,7 +72,8 @@ namespace InGame.MyObject
                 yield return new WaitUntil(() => tweenEnd); // 트윈이 종료될 때까지 대기
             }
 
-            DrawEventSystem.OnCardUISet?.Invoke();// 카드 UI 재세팅
+            yield return new WaitUntil(() => CardManager.Instance.CardReverseTask.Task.IsCompleted);
+
             switch (TurnManager.Instance.CurrentTeamType) // 현재 팀에 따라 카드 재세팅
             {
                 case TeamType.Team1:
@@ -142,6 +139,11 @@ namespace InGame.MyObject
             await Task.Yield(); // 한 프레임 대기를 통한 연출의 자연스러움 추가
             DeckManager.Instance.DeckMakeCheckTcs?.TrySetResult(true); // 덱 생성 완료
         }
+
+        public void ObjectClicked()
+        {
+            
+        }
     }
 }
-// 마지막 작성 일자: 2025.11.27
+// 마지막 작성 일자: 2025.12.01

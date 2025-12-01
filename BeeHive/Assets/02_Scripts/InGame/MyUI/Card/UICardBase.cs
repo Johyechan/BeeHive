@@ -5,6 +5,7 @@ using InGame.MyObject;
 using InGame.MyUI.Card.Handler;
 using InGame.MyUI.Card.Variable;
 using InGame.MyUI.MyUIInterface;
+using MyUtil.MyEvent;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -88,6 +89,7 @@ namespace InGame.MyUI.Card
             {
                 _uiCardVariable.usedCardDeck.AddCardInToUsedDeck(_uiCardVariable.cardObj.transform); // 사용한 카드를 추가
                 ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject);
+                DrawEventSystem.OnCardUISet?.Invoke();// 카드 UI 재세팅
 
                 return true;
             }
@@ -118,4 +120,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.11.27
+// 마지막 작성 일자: 2025.12.01

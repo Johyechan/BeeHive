@@ -5,6 +5,7 @@ using MyUtil.MyObjectPool;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyManager
@@ -20,6 +21,9 @@ namespace InGame.MyManager
         public bool CardUsed { get => _cardUsed; set => _cardUsed = value; }
 
         private Dictionary<CardType, bool> _cardUsedCheckMap = new Dictionary<CardType, bool>();
+
+        private TaskCompletionSource<bool> _cardReverseTask; // 카드 뒤집기 대기 테스크
+        public TaskCompletionSource<bool> CardReverseTask { get => _cardReverseTask; set => _cardReverseTask = value; } // 카드 뒤집기 대기 테스크 프로퍼티
 
         [SerializeField] private Transform _uiCardsParent; // ui 카드 부모
 
@@ -91,4 +95,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.11.26
+// 마지막 작성 일자: 2025.12.01
