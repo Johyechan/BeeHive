@@ -6,6 +6,7 @@ using MyUtil.MyEvent;
 using MyUtil.MyObjectPool;
 using System.Collections;
 using System.Threading.Tasks;
+using Unity.XR.Oculus.Input;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -28,8 +29,15 @@ namespace InGame.MyObject
 
         [SerializeField] private Deck _deck; // 덱
 
+        [SerializeField] private UsedDeckUIData _usedDeckUIData = new UsedDeckUIData();
+
         private UsedDeckData _usedDeckData = new UsedDeckData();
         public UsedDeckData UsedDeckData { get => _usedDeckData; }
+
+        private void Awake()
+        {
+            _usedDeckUIData.castleUpgradeCardCount.text = "x 0";
+        }
 
         // 사용한 카드들을 덱에 추가하는 함수
         public void AddCardInToUsedDeck(Transform addCardTrans)
@@ -142,8 +150,9 @@ namespace InGame.MyObject
 
         public void ObjectClicked()
         {
-            
+            _usedDeckUIData.usedDeckCanvasGroup.gameObject.SetActive(true); // ui 활성화
+            _usedDeckUIData.usedDeckCanvasGroup.DOFade(1, _uiFadeDuration); // 페이드 인
         }
     }
 }
-// 마지막 작성 일자: 2025.12.01
+// 마지막 작성 일자: 2025.12.02
