@@ -1,4 +1,6 @@
+using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyObject.MyObjectInterface;
 using MyUtil.MyObjectPool;
 using UnityEngine;
 
@@ -6,7 +8,7 @@ namespace InGame.MyObject
 {
     // 작성자: 조혜찬
     // 카드 객체 클래스
-    public class CardObject : MonoBehaviour
+    public class CardObject : MonoBehaviour, IClickObject
     {
         [SerializeField] private ObjectPoolType _cardUIPoolType; // 해당 카드가 생성 시킬 UI 카드 풀 타입
         public ObjectPoolType CardUIPoolType { get => _cardUIPoolType; } // 위 변수 프로퍼티
@@ -22,6 +24,11 @@ namespace InGame.MyObject
             _id = ObjectIdManager.Instance.Id++;
             ObjectIdManager.Instance.AddObject(_id, gameObject);
         }
+
+        public void ObjectClicked()
+        {
+            UsedDeckEvents.OnUsedDeckUIFadeIn?.Invoke();
+        }
     }
 }
-// 마지막 작성 일자: 2025.11.24
+// 마지막 작성 일자: 2025.12.03

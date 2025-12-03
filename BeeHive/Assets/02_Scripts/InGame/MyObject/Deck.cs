@@ -63,7 +63,7 @@ namespace InGame.MyObject
         {
             await DeckManager.Instance.UsedDeckProp.DeckShuffleAnimationFadeIn();
 
-            _ = DeckManager.Instance.UsedDeckProp.DeckShuffle();
+            _ = DeckManager.Instance.UsedDeckProp.UsedDeckShuffle();
 
             for (int i = 0; i <  _deckList.Count; i++) // 덱 리스트 순회
             {

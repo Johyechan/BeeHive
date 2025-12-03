@@ -60,8 +60,8 @@ namespace InGame.MyManager
 
         public async void ReMakeDeck()
         {
-            await MakeDeck(SceneMgr.Instance.CurrentRoomID, _usedDeck.UsedDeckData.castleCardCount, _usedDeck.UsedDeckData.droughtCardCount, _usedDeck.UsedDeckData.goodHarvestCardCount, _usedDeck.UsedDeckData.roadChangeCardCount, _usedDeck.UsedDeckData.firePowerCardCount);
+            await MakeDeck(SceneMgr.Instance.CurrentRoomID, _usedDeck.UsedCardInfo.castleCardCount, _usedDeck.UsedCardInfo.droughtCardCount, _usedDeck.UsedCardInfo.goodHarvestCardCount, _usedDeck.UsedCardInfo.roadChangeCardCount, _usedDeck.UsedCardInfo.firePowerCardCount);
         }
     }
 }
-// 마지막 작성 일자: 2025.11.27
+// 마지막 작성 일자: 2025.12.03
