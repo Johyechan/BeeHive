@@ -37,15 +37,20 @@ namespace InGame.MyObject.Handler
 
             yield return new WaitUntil(() => CardManager.Instance.CardReverseTask.Task.IsCompleted);
 
+            bool end = false;
             switch (TurnManager.Instance.CurrentTeamType) // 현재 팀에 따라 카드 재세팅
             {
                 case TeamType.Team1:
-                    yield return new WaitUntil(() => DrawEventSystem.OnCardObjectSet.Invoke(DeckManager.Instance.DeckProp.player1CardsParent));
+                    end = DrawEventSystem.OnCardObjectSet.Invoke(DeckManager.Instance.DeckProp.player1CardsParent);
+                    yield return new WaitUntil(() => end);
                     break;
                 case TeamType.Team2:
-                    yield return new WaitUntil(() => DrawEventSystem.OnCardObjectSet.Invoke(DeckManager.Instance.DeckProp.player2CardsParent));
+                    end = DrawEventSystem.OnCardObjectSet.Invoke(DeckManager.Instance.DeckProp.player2CardsParent);
+                    yield return new WaitUntil(() => end);
                     break;
             }
+
+            DrawEventSystem.OnCardUISet?.Invoke();// 카드 UI 재세팅
 
             if (DeckManager.Instance.IsEmpty && cardPoolType != ObjectPoolType.CastleUpgradeCard) // 덱이 비어 있으며 현재 사용한 카드가 성벽 강화 카드가 아닐 경우
             {
@@ -55,4 +60,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.12.03
+// 마지막 작성 일자: 2025.12.04

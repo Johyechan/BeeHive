@@ -89,7 +89,6 @@ namespace InGame.MyUI.Card
             {
                 _uiCardVariable.usedCardDeck.AddCardInToUsedDeck(_uiCardVariable.cardObj.transform); // 사용한 카드를 추가
                 ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject);
-                DrawEventSystem.OnCardUISet?.Invoke();// 카드 UI 재세팅
 
                 return true;
             }

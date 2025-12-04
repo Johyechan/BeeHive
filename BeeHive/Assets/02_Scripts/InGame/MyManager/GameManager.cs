@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace InGame.MyManager
 {
@@ -101,7 +100,7 @@ namespace InGame.MyManager
                 _gameOverText.text = "승리 했습니다";
             }
 
-            _gameOverUICanvasGroup.DOFade(1, _animationDuration); // 게임 오버 UI 페이드 인
+            _gameOverUICanvasGroup.DOFade(1, _animationDuration).SetUpdate(true); // 게임 오버 UI 페이드 인 - 실시간 실행
         }
 
         // 기물 생성 및 이동 가능 여부 초기화
@@ -161,4 +160,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.11.06
+// 마지막 작성 일자: 2025.12.04

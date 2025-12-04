@@ -11,7 +11,7 @@ namespace InGame.MyObject
 {
     // 작성자: 조혜찬
     // 사용한 카드들을 모아두는 덱
-    public class UsedDeck : MonoBehaviour
+    public class UsedDeck : MonoBehaviour, IClickObject
     {
         [SerializeField] private UsedDeckData _usedDeckData = new UsedDeckData();
 
@@ -29,16 +29,6 @@ namespace InGame.MyObject
             _usedDeckHandlers.usedDeckShuffleHandler = new UsedDeckShuffleHandler(_usedDeckData, _usedCardInfo, _usedDeckHandlers.usedDeckUIHandler, transform);
 
             _usedDeckHandlers.usedDeckUIHandler.Init();
-        }
-
-        private void OnEnable()
-        {
-            UsedDeckEvents.OnUsedDeckUIFadeIn += UsedDeckUIFadeIn;
-        }
-
-        private void OnDisable()
-        {
-            UsedDeckEvents.OnUsedDeckUIFadeIn -= UsedDeckUIFadeIn;
         }
 
         // 사용한 카드들을 덱에 추가하는 함수
@@ -86,11 +76,11 @@ namespace InGame.MyObject
             await _usedDeckHandlers.usedDeckShuffleHandler.UsedDeckShuffle();
         }
 
-        private void UsedDeckUIFadeIn()
+        public void ObjectClicked()
         {
             _usedDeckUIData.usedDeckCanvasGroup.gameObject.SetActive(true); // ui 활성화
             _usedDeckUIData.usedDeckCanvasGroup.DOFade(1, _usedDeckData.uiFadeDuration); // 페이드 인
         }
     }
 }
-// 마지막 작성 일자: 2025.12.03
+// 마지막 작성 일자: 2025.12.04

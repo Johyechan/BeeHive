@@ -19,8 +19,9 @@ namespace InGame.MyUI.MyUIButton
             string json = JsonUtility.ToJson(goToRoomInfo); // Json 형태로 변환
             NetworkManager.Instance.Socket.Emit("goToRoom", json);
 
+            Time.timeScale = 1; // 시간 흐르기
             SceneManager.LoadScene(1); // 방 씬으로 이동
         }
     }
 }
-// 마지막 작성 일자: 2025.11.05
+// 마지막 작성 일자: 2025.12.04

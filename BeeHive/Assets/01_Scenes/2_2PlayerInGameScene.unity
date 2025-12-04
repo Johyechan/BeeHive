@@ -18088,7 +18088,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1279848486}
   - component: {fileID: 1279848487}
-  m_Layer: 0
+  - component: {fileID: 1279848488}
+  m_Layer: 6
   m_Name: UsedDeck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18139,6 +18140,27 @@ MonoBehaviour:
     droughtCardCount: {fileID: 810765446}
     goodHarvestCardCount: {fileID: 817395358}
     firePowerCardCount: {fileID: 1648213633}
+--- !u!65 &1279848488
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279848485}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.02068457, y: 0.043378267, z: 0.02404097}
+  m_Center: {x: 0.0008892417, y: 0.019931959, z: 0.000086222775}
 --- !u!1001 &1296143381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26088,6 +26110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1831938302}
   - component: {fileID: 1831938303}
+  - component: {fileID: 1831938304}
   m_Layer: 5
   m_Name: TurnUI
   m_TagString: Untagged
@@ -26128,6 +26151,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1831938304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831938301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781d6c55f5cb31344b78352201913f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 1831938303}
+  _animationDuration: 0.1
 --- !u!1 &1834415368
 GameObject:
   m_ObjectHideFlags: 0

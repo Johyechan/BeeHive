@@ -147,7 +147,6 @@ GameObject:
   - component: {fileID: 1889857702923355709}
   - component: {fileID: 4350204663710133529}
   - component: {fileID: 3079582574648341197}
-  - component: {fileID: 5637974733778823325}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -222,23 +221,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &5637974733778823325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5193437039348883844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &7137351099559215060
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +232,6 @@ GameObject:
   - component: {fileID: 2149392041365857948}
   - component: {fileID: -3101366486788066661}
   - component: {fileID: -6903717316662396767}
-  - component: {fileID: -3223438434298020026}
   m_Layer: 6
   m_Name: GoodHarvestCard
   m_TagString: Untagged
@@ -303,27 +284,6 @@ SortingGroup:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_SortAtRoot: 1
---- !u!65 &-3223438434298020026
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7137351099559215060}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.0125182215, y: 0.002164477, z: 0.022046817}
-  m_Center: {x: -0.000057986705, y: 0.00028408365, z: 0.00004170742}
 --- !u!1 &7418195275541810309
 GameObject:
   m_ObjectHideFlags: 0

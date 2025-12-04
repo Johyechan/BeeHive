@@ -55,17 +55,28 @@ namespace InGame.MyManager
             _rClickAction.performed += ctx => UIEvents.OnShowUICardInformation?.Invoke();
         }
 
+        private void OnEnable()
+        {
+            GameOverEvent.OnGameOver += DisableInputSystem;
+        }
+
         private void OnDisable()
         {
-            _lClickAction.performed -= _clickHandler.MouseClick; // 클릭 액션에 구독된 함수 해제
-            _drawAction.performed -= _drawHandler.Draw; // 드로우 액션에 구독된 함수 해제
-            _playerActionAsset.Disable(); // 인풋 에셋 비활성화
+            GameOverEvent.OnGameOver -= DisableInputSystem;
+            DisableInputSystem();
         }
 
         void Update()
         {
             _clickHandler.CheckIsMouseOverUI(); // 마우스 커서가 UI 위에 있는지 확인하는 함수
         }
+
+        public void DisableInputSystem()
+        {
+            _lClickAction.performed -= _clickHandler.MouseClick; // 클릭 액션에 구독된 함수 해제
+            _drawAction.performed -= _drawHandler.Draw; // 드로우 액션에 구독된 함수 해제
+            _playerActionAsset.Disable(); // 인풋 에셋 비활성화
+        }
     }
 }
-// 마지막 작성 일자: 2025.11.13
+// 마지막 작성 일자: 2025.12.04

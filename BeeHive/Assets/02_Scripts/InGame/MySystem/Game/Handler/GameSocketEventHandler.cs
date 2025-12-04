@@ -1,14 +1,13 @@
 using InGame.MyEnum;
+using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 using InGame.MyUI;
-using InGame.MyUI.Card;
 using MyUtil;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace InGame.MySystem.Game.Handler
 {
@@ -39,6 +38,8 @@ namespace InGame.MySystem.Game.Handler
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     int loseTeamType = value.GetValue<int>();
+                    Time.timeScale = 0; // 시간 멈춤
+                    GameOverEvent.OnGameOver?.Invoke();
                     GameManager.Instance.GameIsOver((TeamType)loseTeamType); // 게임 오버
                 });
             });
@@ -88,4 +89,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.10.30
+// 마지막 작성 일자: 2025.12.04

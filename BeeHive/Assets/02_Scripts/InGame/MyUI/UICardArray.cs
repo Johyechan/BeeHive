@@ -47,7 +47,6 @@ namespace InGame.MyUI
             if (cardCount <= 0 || cardCount > _maxCount) // 보유 중인 카드가 0개라면 또는 최대 보유 가능 수 초과라면
                 return; // 그냥 반환
 
-            NetworkManager.Instance.Socket.Emit("debug", "엄");
             if (cardCount == 1) // 보유 중인 카드가 1개 라면
             {
                 RectTransform uiCardRectTransform = _rectTransform.GetChild(cardCount - 1).GetComponent<RectTransform>(); // 현재 카드의 RectTransform 할당 - 실제 값은 -1을 하지 않아야 하지만 인덱스로 활용할 것이기 때문에 -1을 하여 배열 크기 초과 오류를 방지
