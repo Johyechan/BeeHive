@@ -1,6 +1,7 @@
 using DG.Tweening;
 using InGame.MyManager;
 using MyUtil;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -111,6 +112,7 @@ namespace InGame.MySystem.Room
                                     {
                                         if (_roomInfo.players[i].id == NetworkManager.Instance.CurrentPlayerID)
                                         {
+                                            TeamManager.Instance.TeamSetTcs = new TaskCompletionSource<bool>(); // 팀 세팅 대기 Task 생성
                                             socket.Emit("setTeam", SceneMgr.Instance.CurrentRoomID);
                                             break;
                                         }
@@ -136,4 +138,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2025.11.07
+// 마지막 작성 일자: 2025.12.10

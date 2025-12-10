@@ -1,10 +1,7 @@
 using InGame.MyNetwork;
 using MyUtil;
-using MyUtil.MyObjectPool;
 using SocketIOClient;
 using System;
-using TMPro;
-using UnityEngine;
 
 namespace InGame.MyManager
 {
@@ -31,7 +28,7 @@ namespace InGame.MyManager
 
             _roomNetworkHandler = new RoomNetworkHandler(); // 핸들러 초기화
 
-            var uri = new Uri("http://localhost:3000"); // 서버 주소 설정
+            var uri = new Uri("http://129.80.97.177:3000"); // 서버 주소 설정
             var options = new SocketIOOptions()
             {
                 Transport = SocketIOClient.Transport.TransportProtocol.WebSocket // 통신 방식을 WebSocket으로 설정
@@ -64,4 +61,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2025.12.10

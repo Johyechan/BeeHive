@@ -2,6 +2,7 @@ using MyUtil;
 using InGame.MyEnum;
 using UnityEngine;
 using InGame.MyObject;
+using System.Threading.Tasks;
 
 namespace InGame.MyManager
 {
@@ -12,6 +13,9 @@ namespace InGame.MyManager
         private TeamType _currentTeamType; // 현재 팀 타입
         // 위에 변수 프로퍼티
         public TeamType CurrentTeamType { get => _currentTeamType; set => _currentTeamType = value; }
+
+        private TaskCompletionSource<bool> _teamSetTcs; // 팀 세팅 대기 Task
+        public TaskCompletionSource<bool> TeamSetTcs { get => _teamSetTcs; set => _teamSetTcs = value; } // 팀 세팅 대기 Task 프로퍼티
 
         protected override void Awake()
         {
@@ -25,6 +29,7 @@ namespace InGame.MyManager
                 {
                     int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
                     _currentTeamType = (TeamType)teamType; // 팀 저장
+                    _teamSetTcs?.TrySetResult(true); // 팀 세팅 완료
                 });
             }
         }
@@ -136,4 +141,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.10.20
+// 마지막 작성 일자: 2025.12.10
