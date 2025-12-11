@@ -1,5 +1,6 @@
 using InGame.MyEnum;
 using MyUtil;
+using System.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -11,14 +12,7 @@ namespace InGame.MyManager
     {
         [SerializeField] private CinemachineBrain _cameraBrain;
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            SetCamera(TeamManager.Instance.CurrentTeamType);
-        }
-
-        public void SetCamera(TeamType teamType)
+        public async Task SetCamera(TeamType teamType)
         {
             switch(teamType)
             {
@@ -32,7 +26,9 @@ namespace InGame.MyManager
                     _cameraBrain.ChannelMask = OutputChannels.Channel03;
                     break;
             }
+
+            await Task.CompletedTask;
         }
     }
 }
-// 마지막 작성 일자: 2025.08.19
+// 마지막 작성 일자: 2025.12.11

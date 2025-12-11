@@ -112,7 +112,7 @@ namespace InGame.MySystem.Room
                                     {
                                         if (_roomInfo.players[i].id == NetworkManager.Instance.CurrentPlayerID)
                                         {
-                                            TeamManager.Instance.TeamSetTcs = new TaskCompletionSource<bool>(); // 팀 세팅 대기 Task 생성
+                                            NetworkManager.Instance.Socket.Emit("debug", "팀 할당 시키려고 서버로 보냄 + 대기 Task도 생성");
                                             socket.Emit("setTeam", SceneMgr.Instance.CurrentRoomID);
                                             break;
                                         }
@@ -138,4 +138,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2025.12.10
+// 마지막 작성 일자: 2025.12.11

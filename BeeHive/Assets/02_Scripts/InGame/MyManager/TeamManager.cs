@@ -15,7 +15,17 @@ namespace InGame.MyManager
         public TeamType CurrentTeamType { get => _currentTeamType; set => _currentTeamType = value; }
 
         private TaskCompletionSource<bool> _teamSetTcs; // 팀 세팅 대기 Task
-        public TaskCompletionSource<bool> TeamSetTcs { get => _teamSetTcs; set => _teamSetTcs = value; } // 팀 세팅 대기 Task 프로퍼티
+        public TaskCompletionSource<bool> TeamSetTcs
+        {
+            get
+            {
+                if(_teamSetTcs == null) // 팀 세팅 대기 task가 비어 있다면
+                {
+                    _teamSetTcs = new TaskCompletionSource<bool>(); // 새로 생성
+                }
+                return _teamSetTcs;
+            }
+        }// 팀 세팅 대기 Task 프로퍼티
 
         protected override void Awake()
         {
@@ -141,4 +151,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.10
+// 마지막 작성 일자: 2025.12.11

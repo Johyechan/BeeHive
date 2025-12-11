@@ -54,11 +54,6 @@ namespace InGame.MyManager
             _makeTurnAddSystem.Init(); // 초기화
         }
 
-        private void Start()
-        {
-            _ = TurnChange(TurnType.ChangeTeam, true); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
-        }
-
         // 턴을 넘기는 함수
         public async Task NextTurn(TurnType turn)
         {
@@ -71,7 +66,7 @@ namespace InGame.MyManager
         }
 
         // 턴 변경 시 현재 턴을 다음 턴으로 변경 및 다음 턴의 애니메이션까지 실행 시키는 함수(다음 턴)
-        private async Task TurnChange(TurnType nextTurn, bool isStart = false)
+        public async Task TurnChange(TurnType nextTurn, bool isStart = false)
         {
             if(isStart)
             {
@@ -80,6 +75,7 @@ namespace InGame.MyManager
             }
 
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
+            NetworkManager.Instance.Socket.Emit("debug", $"현재 턴: {_currentTurnType}");
 
             if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
             {
@@ -123,4 +119,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.11.25
+// 마지막 작성 일자: 2025.12.11

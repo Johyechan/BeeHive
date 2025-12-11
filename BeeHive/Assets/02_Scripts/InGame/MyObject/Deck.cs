@@ -61,7 +61,7 @@ namespace InGame.MyObject
 
         private async Task CreateDeck()
         {
-            NetworkManager.Instance.Socket.Emit("debug", $"{TeamManager.Instance.CurrentTeamType}");
+            NetworkManager.Instance.Socket.Emit("debug", $"µ¦ ¸¸µé°Å¾ß {TeamManager.Instance.CurrentTeamType}");
 
             await DeckManager.Instance.UsedDeckProp.DeckShuffleAnimationFadeIn();
 
