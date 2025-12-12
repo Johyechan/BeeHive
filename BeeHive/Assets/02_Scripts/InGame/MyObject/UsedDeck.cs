@@ -1,6 +1,4 @@
 using DG.Tweening;
-using InGame.MyEvent;
-using InGame.MyManager;
 using InGame.MyObject.Handler;
 using InGame.MyObject.MyObjectInterface;
 using MyUtil.MyObjectPool;
@@ -45,19 +43,19 @@ namespace InGame.MyObject
                     _usedDeckUIData.castleUpgradeCardCount.text = "x 1";
                     break;
                 case ObjectPoolType.DroughtUICard:
-                    _usedCardInfo.droughtCardCount++;
+                    ++_usedCardInfo.droughtCardCount;
                     _usedDeckUIData.droughtCardCount.text = $"x {_usedCardInfo.droughtCardCount}";
                     break;
                 case ObjectPoolType.GoodHarvestUICard:
-                    _usedCardInfo.goodHarvestCardCount++;
+                    ++_usedCardInfo.goodHarvestCardCount;
                     _usedDeckUIData.goodHarvestCardCount.text = $"x {_usedCardInfo.goodHarvestCardCount}";
                     break;
                 case ObjectPoolType.RoadChangeUICard:
-                    _usedCardInfo.roadChangeCardCount++;
+                    ++_usedCardInfo.roadChangeCardCount;
                     _usedDeckUIData.roadChangeCardCount.text = $"x {_usedCardInfo.roadChangeCardCount}";
                     break;
                 case ObjectPoolType.FirePowerUICard:
-                    _usedCardInfo.firePowerCardCount++;
+                    ++_usedCardInfo.firePowerCardCount;
                     _usedDeckUIData.firePowerCardCount.text = $"x {_usedCardInfo.firePowerCardCount}";
                     break;
             }

@@ -112,7 +112,6 @@ namespace InGame.MySystem.Room
                                     {
                                         if (_roomInfo.players[i].id == NetworkManager.Instance.CurrentPlayerID)
                                         {
-                                            NetworkManager.Instance.Socket.Emit("debug", "팀 할당 시키려고 서버로 보냄 + 대기 Task도 생성");
                                             socket.Emit("setTeam", SceneMgr.Instance.CurrentRoomID);
                                             break;
                                         }

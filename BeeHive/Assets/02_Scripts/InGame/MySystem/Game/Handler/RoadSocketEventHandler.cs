@@ -5,9 +5,8 @@ using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
-using InGame.MyObject.Piece.Variable;
+using MyUtil;
 using MyUtil.MyObjectPool;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InGame.MySystem.Game.Handler
@@ -26,12 +25,16 @@ namespace InGame.MySystem.Game.Handler
 
         public override void OnConnect()
         {
-            NetworkManager.Instance.Socket.On("roadAdded", async (data) =>
+            NetworkManager.Instance.Socket.On("roadAdded", (data) =>
             {
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 RoadAddedInfo roadAddedInfo = JsonUtility.FromJson<RoadAddedInfo>(json); // RoadAddedInfo로 변환
                 Transform parent = GameObject.Find(roadAddedInfo.roadParentName).transform;
-                await PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
+
+                MainThreadDispatcher.Enqueue(async () =>
+                {
+                    await PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
+                });
             });
 
             NetworkManager.Instance.Socket.On("roadDestroyed", data =>
@@ -111,4 +114,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.09.30
+// 마지막 작성 일자: 2025.12.12

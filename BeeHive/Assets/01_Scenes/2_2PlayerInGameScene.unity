@@ -2313,7 +2313,7 @@ MonoBehaviour:
   _deckCardInfo:
     castleUpgradeCardCount: 0
     droughtCardCount: 0
-    goodHarvestCardCount: 10
+    goodHarvestCardCount: 6
     roadChangeCardCount: 0
     firePowerCardCount: 0
   _deck: {fileID: 588781781}
@@ -17265,6 +17265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyOnLoadScene: 1
   _deck: {fileID: 588781781}
+  _usedDeckTrans: {fileID: 1279848486}
   _cardUsePanelCanvasGroup: {fileID: 1667095411}
   _cardInformationPanelCanvasGroup: {fileID: 137497464}
 --- !u!4 &1223835473

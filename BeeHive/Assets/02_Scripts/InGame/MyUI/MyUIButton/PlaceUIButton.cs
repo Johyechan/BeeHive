@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyUI.MyUIInterface;
+using MyUtil;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -81,7 +82,10 @@ namespace InGame.MyUI.MyUIButton
         // UI 텍스트 변경 함수
         private void SetText()
         {
-            _leftPieceCountText.text = $"사용 가능 개수: {_objectParent.childCount}";
+            MainThreadDispatcher.Enqueue(() =>
+            {
+                _leftPieceCountText.text = $"사용 가능 개수: {_objectParent.childCount}";
+            });
         }
 
         public abstract void OnUIClick();

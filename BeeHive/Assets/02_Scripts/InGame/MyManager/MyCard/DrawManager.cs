@@ -22,6 +22,8 @@ namespace InGame.MyManager.MyCard
 
         [SerializeField] private Deck _deck; // 덱 클래스
 
+        [SerializeField] private Transform _usedDeckTrans; // 사용한 카드 덱 Transform
+
         [SerializeField] private CanvasGroup _cardUsePanelCanvasGroup; // 카드 사용 캔버스 그룹
         [SerializeField] private CanvasGroup _cardInformationPanelCanvasGroup; // 카드 정보 캔버스 그룹
 
@@ -59,7 +61,12 @@ namespace InGame.MyManager.MyCard
 
                 await uiCardBase.Init(_cardUsePanelCanvasGroup, _cardInformationPanelCanvasGroup);
             }
+
+            if(_deck.transform.childCount <= 0 && _usedDeckTrans.childCount > 0) // 덱이 비어있고 사용한 카드 덱에 카드가 있을 경우
+            {
+                DeckManager.Instance.ReMakeDeck();
+            }
         }
     }
 }
-// 마지막 작성 일자: 2025.10.23
+// 마지막 작성 일자: 2025.12.12
