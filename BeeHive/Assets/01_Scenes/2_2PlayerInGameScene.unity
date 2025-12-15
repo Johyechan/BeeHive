@@ -2313,9 +2313,9 @@ MonoBehaviour:
   _deckCardInfo:
     castleUpgradeCardCount: 0
     droughtCardCount: 0
-    goodHarvestCardCount: 6
+    goodHarvestCardCount: 0
     roadChangeCardCount: 0
-    firePowerCardCount: 0
+    firePowerCardCount: 10
   _deck: {fileID: 588781781}
   _usedDeck: {fileID: 1279848487}
 --- !u!4 &137371536
@@ -28006,6 +28006,10 @@ PrefabInstance:
     - target: {fileID: 3493824924054405103, guid: 14544afe96e8e154a980390637097dbc, type: 3}
       propertyPath: m_Name
       value: Loading
+      objectReference: {fileID: 0}
+    - target: {fileID: 3493824924054405103, guid: 14544afe96e8e154a980390637097dbc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6025360028448347959, guid: 14544afe96e8e154a980390637097dbc, type: 3}
       propertyPath: m_AnchorMax.y

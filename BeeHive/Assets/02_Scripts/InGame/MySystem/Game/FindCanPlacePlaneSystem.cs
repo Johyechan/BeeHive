@@ -57,17 +57,21 @@ namespace InGame.MySystem.Game
         // 배치 가능한 도로 칸들을 찾는 함수
         public Task FindCanPlaceRoadPlane(TeamType type)
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"도로 찾기 함수 안, 길이: {PlacePlaneManager.Instance.Variable.placePlaneMap.RoadPlacePlanes.Count}");
             foreach (var road in PlacePlaneManager.Instance.Variable.placePlaneMap.RoadPlacePlanes) // 전체 도로 판 순회
             {
                 if (road.TeamType == type && road.PlacedObjectType != ObjectType.None) // 도로 칸의 팀 타입이 현재 탐색 중인 팀 타입이며 빈 곳이 아니라면
                 {
+                    NetworkManager.Instance.Socket.Emit("debug", $"도로의 팀 타입이 같고 도로가 존재하는가 {road}");
                     FindNearPieces(type, road); // 배치가 가능한 도로 배치 칸 저장 후 인접한 기물 탐색
                 }
                 else if (road.isNearToCastle) // 성과 인접한 배치 판이라면
                 {
+                    NetworkManager.Instance.Socket.Emit("debug", $"성과 인접하다 {road}");
                     road.IsChecked = true; // 체크 한 것으로 취급
                     if(road.PlacedObjectType == ObjectType.None) // 아무것도 올라와 있지 않은 상태 일때
                     {
+                        NetworkManager.Instance.Socket.Emit("debug", $"{road}");
                         PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes.Add(road); // 배치가 가능한 도로 배치 칸 저장
                     }
                 }

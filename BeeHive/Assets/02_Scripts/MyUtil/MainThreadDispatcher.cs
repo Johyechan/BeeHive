@@ -11,6 +11,8 @@ namespace MyUtil
     {
         private static readonly Queue<Action> _executionQueue = new Queue<Action>(); // 메인 스레드에서 작동 되어야 할 작업들을 저장하는 큐
 
+        private static readonly Queue<Func<Task>> _asyncExecutionQueue = new Queue<Func<Task>>(); // 메인 스레드에서 작동 되어야 할 비동기 작업들을 저장하는 큐
+
         private void Awake()
         {
             DontDestroyOnLoad(gameObject); // 씬 변경에도 삭제 되지 않는 상태
@@ -25,7 +27,30 @@ namespace MyUtil
             }
         }
 
-        void Update()
+        public static Task Enqueue(Func<Task> func)
+        {
+            var tcs = new TaskCompletionSource<bool>();
+
+            lock(_asyncExecutionQueue)
+            {
+                _asyncExecutionQueue.Enqueue(async () =>
+                {
+                    try
+                    {
+                        await func();
+                        tcs.SetResult(true);
+                    }
+                    catch (Exception ex)
+                    {
+                        tcs.SetException(ex);
+                    }
+                });
+            }
+
+            return tcs.Task;
+        }
+
+        async void Update()
         {
             while(_executionQueue.Count > 0) // 큐에 작업이 있을 경우
             {
@@ -43,7 +68,24 @@ namespace MyUtil
                     Debug.LogException(ex);
                 }
             }
+
+            while(_asyncExecutionQueue.Count > 0)
+            {
+                Func<Task> func = null;
+                lock(_asyncExecutionQueue)
+                {
+                    func = _asyncExecutionQueue.Dequeue();
+                }
+                try
+                {
+                    await func?.Invoke();
+                }
+                catch(Exception ex)
+                {
+                    Debug.LogException(ex);
+                }
+            }
         }
     }
 }
-// 마지막 작성 일자: 2025.08.05
+// 마지막 작성 일자: 2025.12.15

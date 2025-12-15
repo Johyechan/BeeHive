@@ -64,9 +64,13 @@ namespace InGame.MyManager.MyCard
 
             if(_deck.transform.childCount <= 0 && _usedDeckTrans.childCount > 0) // 덱이 비어있고 사용한 카드 덱에 카드가 있을 경우
             {
-                DeckManager.Instance.ReMakeDeck();
+                if(TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀과 클라이언트 팀이 같을 경우
+                {
+                    DeckManager.Instance.IsEmpty = false;
+                    DeckManager.Instance.ReMakeDeck();
+                }
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.12.12
+// 마지막 작성 일자: 2025.12.15

@@ -45,10 +45,7 @@ namespace InGame.MyManager
             };
             string json = JsonUtility.ToJson(deckShuffleInfo); // Json 형태로 변환
 
-            if (TeamManager.Instance.CurrentTeamType == MyEnum.TeamType.Team1) // 팀 1이 시작 덱을 만듦 (중복 제작을 통한 30장의 덱이 아닌 60장, 90장의 덱이 만들어지는 것을 막기위함
-            {
-                NetworkManager.Instance.Socket.Emit("shuffle", json); // 서버로 전송
-            }
+            NetworkManager.Instance.Socket.Emit("shuffle", json); // 서버로 전송
 
             await Task.CompletedTask;
         }
@@ -64,4 +61,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.11
+// 마지막 작성 일자: 2025.12.15

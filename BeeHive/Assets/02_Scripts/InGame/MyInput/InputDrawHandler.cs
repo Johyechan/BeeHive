@@ -66,7 +66,9 @@ namespace InGame.MyInput
             }
 
             if (_deck.deckTransform.childCount <= 0) // 덱이 비어있다면
+            {
                 DeckManager.Instance.IsEmpty = true;
+            }
 
             _handlerData.socketEventHandler.CallSocketEvent();
         }

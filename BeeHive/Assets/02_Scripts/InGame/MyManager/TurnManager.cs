@@ -70,8 +70,11 @@ namespace InGame.MyManager
         {
             if(isStart)
             {
-                await DeckManager.Instance.MakeDeck(SceneMgr.Instance.CurrentRoomID);
-                await DeckManager.Instance.DeckMakeEnd();
+                if(TeamManager.Instance.CurrentTeamType == TeamType.Team1) // 시작 시 제작하는 덱은 팀 1이 전담해서 제작
+                {
+                    await DeckManager.Instance.MakeDeck(SceneMgr.Instance.CurrentRoomID);
+                    await DeckManager.Instance.DeckMakeEnd();
+                }
             }
 
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
@@ -118,4 +121,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.11
+// 마지막 작성 일자: 2025.12.15

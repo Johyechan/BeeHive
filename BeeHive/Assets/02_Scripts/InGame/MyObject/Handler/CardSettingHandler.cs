@@ -54,10 +54,13 @@ namespace InGame.MyObject.Handler
 
             if (DeckManager.Instance.IsEmpty && cardPoolType != ObjectPoolType.CastleUpgradeCard) // 덱이 비어 있으며 현재 사용한 카드가 성벽 강화 카드가 아닐 경우
             {
-                DeckManager.Instance.IsEmpty = false; // 덱이 비어 있지 않은 상태로 할당
-                DeckManager.Instance.ReMakeDeck(); // 덱 다시 만들기
+                if(TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀과 클라이언트의 팀이 같을 경우
+                {
+                    DeckManager.Instance.IsEmpty = false; // 덱이 비어 있지 않은 상태로 할당
+                    DeckManager.Instance.ReMakeDeck(); // 덱 다시 만들기
+                }
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.12.04
+// 마지막 작성 일자: 2025.12.15
