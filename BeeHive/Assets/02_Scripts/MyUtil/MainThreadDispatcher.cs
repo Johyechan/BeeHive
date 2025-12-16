@@ -1,3 +1,4 @@
+using InGame.MyManager;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -39,6 +40,7 @@ namespace MyUtil
                     {
                         await func();
                         tcs.SetResult(true);
+                        NetworkManager.Instance.Socket.Emit("debug", "tcs¿Ï·á");
                     }
                     catch (Exception ex)
                     {
