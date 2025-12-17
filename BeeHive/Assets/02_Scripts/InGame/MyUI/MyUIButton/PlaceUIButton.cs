@@ -28,8 +28,10 @@ namespace InGame.MyUI.MyUIButton
             _isHighLightOn = false; // 하이라이트 꺼짐 상태로 초기화
         }
 
-        private void Start()
+        private async void Start()
         {
+            await GameReady.WaitAsync(); // 게임 준비 대기
+
             switch(_canPlaceType) // 배치할 객체의 타입에 따라
             {
                 case ObjectType.Miner: // 광부를 배치할 수 있다면
@@ -91,4 +93,4 @@ namespace InGame.MyUI.MyUIButton
         public abstract void OnUIClick();
     }
 }
-// 마지막 작성 일자: 2025.09.15
+// 마지막 작성 일자: 2025.12.17

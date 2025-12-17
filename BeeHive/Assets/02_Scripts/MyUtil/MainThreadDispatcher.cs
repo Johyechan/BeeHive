@@ -40,7 +40,6 @@ namespace MyUtil
                     {
                         await func();
                         tcs.SetResult(true);
-                        NetworkManager.Instance.Socket.Emit("debug", "tcs¿Ï·á");
                     }
                     catch (Exception ex)
                     {

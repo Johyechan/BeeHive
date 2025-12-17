@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyEnum;
+using InGame.MyEvent;
 using InGame.MyManager;
 using UnityEngine;
 
@@ -17,12 +18,14 @@ namespace InGame.MySystem.Loading
         {
             await TeamManager.Instance.TeamSetTcs.Task; // 팀이 정해질 때까지 대기
 
-            await CameraManager.Instance.SetCamera(TeamManager.Instance.CurrentTeamType);
+            await CameraManager.Instance.SetCamera(TeamManager.Instance.CurrentTeamType); // 카메라 세팅
 
             await _loadingCanvasGroup.DOFade(0, _animationDuration).OnComplete(() => _loadingCanvasGroup.gameObject.SetActive(false)).AsyncWaitForCompletion(); // 로딩 ui 닫기
 
             await TurnManager.Instance.TurnChange(TurnType.ChangeTeam, true); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
+
+            GameReady.Completed(); // 게임 준비 완료
         }
     }
 }
-// 마지막 작성 일자: 2025.12.11
+// 마지막 작성 일자: 2025.12.17

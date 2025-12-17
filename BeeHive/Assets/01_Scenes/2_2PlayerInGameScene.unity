@@ -2964,6 +2964,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -3697,7 +3701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: currentPlayerTeamType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -8124,7 +8128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: currentPlayerTeamType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -9548,6 +9552,10 @@ PrefabInstance:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -12319,6 +12327,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -12657,6 +12669,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -12993,6 +13009,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -13237,6 +13257,10 @@ PrefabInstance:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -13596,6 +13620,10 @@ PrefabInstance:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -14637,6 +14665,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -15286,6 +15318,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -15372,6 +15408,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
@@ -18188,6 +18228,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -20312,6 +20356,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -21891,7 +21939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: currentPlayerTeamType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -22111,6 +22159,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -22212,7 +22264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: currentPlayerTeamType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
@@ -24791,6 +24843,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -25245,6 +25301,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: isNearToCastle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: currentPlayerTeamType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
@@ -29764,7 +29824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: currentPlayerTeamType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -267463316982301117, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: nearPiecePlaceTransformList.Array.size

@@ -68,7 +68,10 @@ namespace InGame.MySystem.Game
                     road.IsChecked = true; // 체크 한 것으로 취급
                     if(road.PlacedObjectType == ObjectType.None) // 아무것도 올라와 있지 않은 상태 일때
                     {
-                        PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes.Add(road); // 배치가 가능한 도로 배치 칸 저장
+                        if(road.currentPlayerTeamType == type) // 팀 타입이 도로 탐색을 하는 팀과 같을 경우
+                        {
+                            PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes.Add(road); // 배치가 가능한 도로 배치 칸 저장
+                        }
                     }
                 }
             }
@@ -229,4 +232,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.10.22
+// 마지막 작성 일자: 2025.12.17

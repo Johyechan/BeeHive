@@ -71,7 +71,6 @@ namespace InGame.MyManager.MyPlacePlane
 
                 await _variable.findCanPlacePlaneSystem.FindCanPlacePiecePlane(TeamManager.Instance.CurrentTeamType);
 
-                NetworkManager.Instance.Socket.Emit("debug", "도로 찾기 직전");
                 await _variable.findCanPlacePlaneSystem.FindCanPlaceRoadPlane(TeamManager.Instance.CurrentTeamType);
             });
         }
