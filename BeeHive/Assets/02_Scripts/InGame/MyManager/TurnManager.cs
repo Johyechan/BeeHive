@@ -72,6 +72,7 @@ namespace InGame.MyManager
             {
                 if(TeamManager.Instance.CurrentTeamType == TeamType.Team1) // 시작 시 제작하는 덱은 팀 1이 전담해서 제작
                 {
+                    NetworkManager.Instance.Socket.Emit("debug", "셔플 시작");
                     await DeckManager.Instance.MakeDeck(SceneMgr.Instance.CurrentRoomID);
                     await DeckManager.Instance.DeckMakeEnd();
                 }

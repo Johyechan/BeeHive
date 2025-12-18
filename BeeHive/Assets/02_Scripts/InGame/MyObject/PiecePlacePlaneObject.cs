@@ -33,6 +33,11 @@ namespace InGame.MyObject
             base.Awake();
 
             _pieceReturnCheckHandler = new PiecePlaceReturnCheckHandler(this);
+        }
+
+        private async void Start()
+        {
+            await GameReady.WaitAsync();
 
             ParentSet();
         }
@@ -188,4 +193,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.11.03
+// 마지막 작성 일자: 2025.12.18

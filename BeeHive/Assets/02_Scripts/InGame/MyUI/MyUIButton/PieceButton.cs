@@ -34,7 +34,6 @@ namespace InGame.MyUI.MyUIButton
                     await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
                     foreach (var piece in PlacePlaneManager.Instance.Variable.highLightHandler.CanPiecePlacePlanes) // 배치 가능한 기물 칸들 순회
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", $"{piece}");
                         piece.CanPlacePieceType = _canPlaceType; // 배치 가능한 타입을 할당
                         piece.Cost = _cost; // 비용 할당
                         piece.LeftPieceCount = _objectParent.childCount; // 남은 기물 수 할당

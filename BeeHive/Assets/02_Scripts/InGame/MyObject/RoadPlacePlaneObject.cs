@@ -43,9 +43,7 @@ namespace InGame.MyObject
         {
             if (await _roadPlaceReturnCheckHandler.IsReturn(_leftPieceCount, _cost))
                 return;
-
-            NetworkManager.Instance.Socket.Emit("debug", $"부모 있나요?: {_roadParent}");
-
+            
             GameObject newRoad = _roadParent.GetChild(_roadParent.childCount - 1).gameObject; // 도로 객체들의 부모 객체에서 도로 객체 가져오기
             PieceBase roadPiece = newRoad.GetComponent<PieceBase>();
 
