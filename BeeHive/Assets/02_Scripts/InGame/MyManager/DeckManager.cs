@@ -21,7 +21,31 @@ namespace InGame.MyManager
         public bool IsEmpty { get => _isEmpty; set => _isEmpty = value; }
 
         private TaskCompletionSource<bool> _deckMakeCheckTcs;
-        public TaskCompletionSource<bool> DeckMakeCheckTcs { get => _deckMakeCheckTcs; set => _deckMakeCheckTcs = value; }
+
+        // 외부 접근용 덱 제작 대기 tcs 생성 함수
+        public void CreateTcs()
+        {
+            if (_deckMakeCheckTcs == null) // 덱 제작 대기 tcs가 null일 때
+                _deckMakeCheckTcs = new TaskCompletionSource<bool>(); // 새로운 tcs 제작 함수
+        }
+
+        // 외부 접근용 함수
+        public void CompleteTcs()
+        {
+            TryDeckMakeTcsComplete();
+        }
+
+        // 덱 제작 대기 tcs가 완료 가능한지 체크하고 완료 시키는 함수
+        private void TryDeckMakeTcsComplete()
+        {
+            if (_deckMakeCheckTcs == null) // 덱 제작 대기 tcs가 null이면
+                return; // 반환
+
+            if (_deckMakeCheckTcs.Task.IsCompleted) // 덱 제작 대기 tcs가 완료 되었다면
+                return; // 반환
+
+            _deckMakeCheckTcs?.TrySetResult(true);
+        }
 
         // 덱 제작 함수(현재 방 ID)
         public async Task MakeDeck(string currentRoomID, int castleUpdradeCardCount = 0, int droughtCardCount = 0, int goodHarvestCardCount = 0, int roadChangeCardCount = 0, int firePowerCardCount = 0)
@@ -61,4 +85,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.15
+// 마지막 작성 일자: 2025.12.19

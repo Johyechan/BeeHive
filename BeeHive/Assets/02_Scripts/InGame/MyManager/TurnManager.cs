@@ -76,6 +76,11 @@ namespace InGame.MyManager
                     await DeckManager.Instance.MakeDeck(SceneMgr.Instance.CurrentRoomID);
                     await DeckManager.Instance.DeckMakeEnd();
                 }
+                else // 팀 1이 아닐 경우
+                {
+                    DeckManager.Instance.CreateTcs(); // 덱 제작 대기 tcs 생성
+                    await DeckManager.Instance.DeckMakeEnd(); // 덱 제작 대기
+                }
             }
 
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
@@ -122,4 +127,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.15
+// 마지막 작성 일자: 2025.12.19

@@ -2311,11 +2311,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyOnLoadScene: 1
   _deckCardInfo:
-    castleUpgradeCardCount: 0
-    droughtCardCount: 0
-    goodHarvestCardCount: 0
-    roadChangeCardCount: 0
-    firePowerCardCount: 10
+    castleUpgradeCardCount: 1
+    droughtCardCount: 4
+    goodHarvestCardCount: 4
+    roadChangeCardCount: 6
+    firePowerCardCount: 15
   _deck: {fileID: 588781781}
   _usedDeck: {fileID: 1279848487}
 --- !u!4 &137371536
@@ -6719,7 +6719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canPlaceType: 2
-  _cost: 1
+  _cost: 3
   _leftPieceCountText: {fileID: 622323168}
 --- !u!1001 &468912161
 PrefabInstance:
@@ -16341,7 +16341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canPlaceType: 3
-  _cost: 1
+  _cost: 5
   _leftPieceCountText: {fileID: 1750764175}
 --- !u!1 &1128003493
 GameObject:
