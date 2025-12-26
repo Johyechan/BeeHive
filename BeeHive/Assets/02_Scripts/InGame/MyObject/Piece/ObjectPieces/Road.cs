@@ -3,6 +3,7 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
+using InGame.MyManager.Turn;
 using InGame.MyObject.Piece.Data;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;

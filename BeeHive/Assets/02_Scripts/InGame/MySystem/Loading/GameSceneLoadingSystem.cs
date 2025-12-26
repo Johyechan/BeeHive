@@ -2,6 +2,7 @@ using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Turn;
 using UnityEngine;
 
 namespace InGame.MySystem.Loading

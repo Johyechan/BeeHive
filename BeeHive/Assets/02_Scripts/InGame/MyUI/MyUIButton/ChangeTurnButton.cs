@@ -1,5 +1,6 @@
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Turn;
 using InGame.MyUI.MyUIInterface;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,11 +53,10 @@ namespace InGame.MyUI.MyUIButton
 
                 if(TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀이 내 팀일 경우
                 {
-                    socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 이벤트 전달
-                    TurnManager.Instance.CanChangeTurn = false; // 턴 변경 가능 여부 false로 초기화
+                    TurnManager.Instance.TurnTimer.TurnTimerStopImmediately(); // 턴 타이머 종료(즉시 턴 넘기기)
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.08.22
+// 마지막 작성 일자: 2025.12.26

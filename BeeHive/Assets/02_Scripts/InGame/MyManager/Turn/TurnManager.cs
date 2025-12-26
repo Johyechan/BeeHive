@@ -1,19 +1,26 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.MyPiece;
+using InGame.MyManager.Turn.Handler;
 using InGame.MySystem.Game;
 using InGame.MyUI.Turn;
 using MyUtil;
+using NUnit.Framework.Constraints;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace InGame.MyManager
+namespace InGame.MyManager.Turn
 {
     // 작성자: 조혜찬
     // 턴을 관리하는 싱글톤 매니저 클래스
     public class TurnManager : MonoSingleton<TurnManager>
     {
         [SerializeField] private float _teamChangeDelay; // 다른 팀의 턴으로 변경하면서 기다리는 시간 변수
+
+        [SerializeField] private int _turnDurationTime; // 턴 지속 시간
+
+        [SerializeField] private Slider _turnTimerSlider; // 턴 타이머 슬라이더
 
         private TeamType _currentTeamType; // 현재 턴의 팀
         // 위 변수 프로퍼티
@@ -27,6 +34,9 @@ namespace InGame.MyManager
         private TurnUIAnimation _turnUIAnimation;
 
         private MakeTurnAddSystem _makeTurnAddSystem; // 생산 턴에 객체들을 추가하는 기능을 가지는 클래스
+
+        private TurnTimerHandler _turnTimerHandler; // 턴 타이머 핸들러 클래스
+        public TurnTimerHandler TurnTimer { get => _turnTimerHandler; } // 턴 타이머 프로퍼티
 
         private bool _canChangeTurn; // 턴 변경 가능 여부
         public bool CanChangeTurn { get => _canChangeTurn; set => _canChangeTurn = value; } // 위 변수 프로퍼티
@@ -49,6 +59,7 @@ namespace InGame.MyManager
 
             _turnUIAnimation = GetComponent<TurnUIAnimation>();
             _makeTurnAddSystem = new MakeTurnAddSystem();
+            _turnTimerHandler = new TurnTimerHandler();
 
             _currentTeamType = TeamType.Team1; // 처음 시작은 Team1부터
             _makeTurnAddSystem.Init(); // 초기화
@@ -91,8 +102,11 @@ namespace InGame.MyManager
                 {
                     await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
                 }
-
-                if (_currentTurnType == TurnType.TurnEnd) // 현재 턴이면서 턴 종료일 때
+                else if(_currentTurnType == TurnType.DrawTurn || _currentTurnType == TurnType.MainTurn) // 드로우턴 또는 메인턴일 때
+                {
+                    _turnTimerHandler.TurnTimerStart(_turnTimerSlider, _turnDurationTime); // 턴 타이머 시작
+                }
+                else if (_currentTurnType == TurnType.TurnEnd) // 현재 턴이면서 턴 종료일 때
                 {
                     if(PieceManager.Instance.IsDrought) // 가뭄 상태라면
                     {
@@ -127,4 +141,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.19
+// 마지막 작성 일자: 2025.12.26

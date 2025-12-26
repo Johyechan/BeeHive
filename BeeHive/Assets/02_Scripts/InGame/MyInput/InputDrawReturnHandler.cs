@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyCard;
+using InGame.MyManager.Turn;
 using InGame.MyObject;
 using System.Threading.Tasks;
 using UnityEngine;

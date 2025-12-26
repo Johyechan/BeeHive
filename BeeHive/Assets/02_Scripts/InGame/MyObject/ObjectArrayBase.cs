@@ -1,6 +1,7 @@
 using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyManager;
+using InGame.MyManager.Turn;
 using System.Threading.Tasks;
 using UnityEngine;
 

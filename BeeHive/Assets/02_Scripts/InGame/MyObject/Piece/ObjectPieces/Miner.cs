@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
+using InGame.MyManager.Turn;
 using System.Threading.Tasks;
 
 namespace InGame.MyObject.Piece.ObjectPieces
