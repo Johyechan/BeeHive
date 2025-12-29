@@ -31,9 +31,9 @@ namespace InGame.MyNetwork
             MainThreadDispatcher.Enqueue(() =>
             {
                 SceneMgr.Instance.CurrentRoomID = id; // 현재 참가한 방의 ID 저장
-                SceneManager.LoadScene(1); // 방 씬으로 변경 추가
+                SceneManager.LoadScene(2); // 방 씬으로 변경 추가
             });
         }
     }
 }
-// 마지막 작성 일자: 2025.08.18
+// 마지막 작성 일자: 2025.12.29

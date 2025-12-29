@@ -98,14 +98,14 @@ namespace InGame.MySystem.Room
                     RoomReady.Completed(); // 방 준비 완료
                 });
 
-                socket.On("goLobby", _ => MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(0)));// 로비 씬으로 이동
+                socket.On("goLobby", _ => MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(1)));// 로비 씬으로 이동
 
                 socket.On("goGame", _ =>
                 {
                     MainThreadDispatcher.Enqueue(() =>
                     {
                         Sequence sequence = DOTween.Sequence()
-                            .AppendCallback(() => SceneManager.LoadScene(2)) // 게임 씬으로 이동
+                            .AppendCallback(() => SceneManager.LoadScene(3)) // 게임 씬으로 이동
                             .AppendCallback(() =>
                             {
                                 for(int i = 0; i < _roomInfo.players.Length; i++)
@@ -139,4 +139,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2025.12.18
+// 마지막 작성 일자: 2025.12.29

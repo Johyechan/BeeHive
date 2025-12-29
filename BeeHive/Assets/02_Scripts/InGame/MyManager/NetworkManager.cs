@@ -1,6 +1,7 @@
 using InGame.MyNetwork;
 using MyUtil;
 using SocketIOClient;
+using Steamworks;
 using System;
 
 namespace InGame.MyManager
@@ -59,6 +60,19 @@ namespace InGame.MyManager
                 _roomNetworkHandler.Init(); // 방과 관련된 서버 신호를 받는 핸들러 초기화
             };
         }
+
+        private void Update()
+        {
+            if(SteamAPI.IsSteamRunning())
+            {
+                SteamAPI.RunCallbacks(); // 스팀 클라이언트에서 발생한 이벤트들을 게임으로 전달
+            }
+        }
+
+        private void OnApplicationQuit()
+        {
+            SteamAPI.Shutdown(); // 스팀과의 연결 정리
+        }
     }
 }
-// 마지막 작성 일자: 2025.12.10
+// 마지막 작성 일자: 2025.12.29

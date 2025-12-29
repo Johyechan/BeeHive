@@ -44,9 +44,6 @@ namespace InGame.MyUI
         {
             bool result = false;
 
-            while (!GpuManager.Instance.IsReady) // gpu가 없다면
-                await Task.Yield(); // 대기
-
             _askText.ForceMeshUpdate(); // TMP를 GPU에 강제로 올리기
 
             _cardUseButton.UICardBase = CardManager.Instance.FindFirePowerCard(); // 화력 카드 할당
@@ -79,4 +76,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2025.10.31
+// 마지막 작성 일자: 2025.12.29

@@ -1,0 +1,18 @@
+using System.Threading.Tasks;
+using UnityEngine;
+
+namespace InGame.MyManager.Boot
+{
+    // 작성자: 조혜찬
+    // 검증 클래스의 부모 클래스
+    public abstract class CheckerBase
+    {
+        protected abstract Task Check();
+
+        public async Task Init()
+        {
+            await Check();
+        }
+    }
+}
+

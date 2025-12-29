@@ -20,8 +20,8 @@ namespace InGame.MyUI.MyUIButton
             NetworkManager.Instance.Socket.Emit("goToRoom", json);
 
             Time.timeScale = 1; // 시간 흐르기
-            SceneManager.LoadScene(1); // 방 씬으로 이동
+            SceneManager.LoadScene(2); // 방 씬으로 이동
         }
     }
 }
-// 마지막 작성 일자: 2025.12.04
+// 마지막 작성 일자: 2025.12.29

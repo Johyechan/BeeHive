@@ -62,9 +62,6 @@ namespace InGame.MySystem.Game.Handler
                 {
                     ConfirmUI confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 가져오기
 
-                    if (!GpuManager.Instance.IsReady) // gpu가 없다면
-                        await Task.Yield(); // 대기
-
                     MainThreadDispatcher.Enqueue(() =>
                     {
                         confirmUI.gameObject.SetActive(true); // 확인 UI 활성화
@@ -89,4 +86,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.12.04
+// 마지막 작성 일자: 2025.12.29

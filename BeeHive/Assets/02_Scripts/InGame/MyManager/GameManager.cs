@@ -76,13 +76,8 @@ namespace InGame.MyManager
             }
         }
 
-        public async void GameIsOver(TeamType loseTeamType)
+        public void GameIsOver(TeamType loseTeamType)
         {
-            while (!GpuManager.Instance.IsReady) // GPU가 준비 되지 않았다면
-            {
-                await Task.Yield(); // 대기
-            }
-
             TurnEvents.OnMakeTurn.Clear(); // 생산 턴에 필요한 액션 리스트 비우기
 
             _gameOver = true;
@@ -160,4 +155,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.04
+// 마지막 작성 일자: 2025.12.29
