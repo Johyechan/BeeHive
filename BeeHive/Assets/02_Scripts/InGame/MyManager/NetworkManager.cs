@@ -63,7 +63,7 @@ namespace InGame.MyManager
 
         private void Update()
         {
-            if(SteamAPI.IsSteamRunning())
+            if (SteamAPI.IsSteamRunning())
             {
                 SteamAPI.RunCallbacks(); // 스팀 클라이언트에서 발생한 이벤트들을 게임으로 전달
             }

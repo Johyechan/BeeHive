@@ -24487,7 +24487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyOnLoadScene: 1
   _teamChangeDelay: 1
-  _turnDurationTime: 0
+  _turnDurationTime: 10
   _turnTimerSlider: {fileID: 774332522}
 --- !u!4 &1713890272
 Transform:

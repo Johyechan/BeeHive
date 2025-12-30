@@ -1,11 +1,8 @@
-using DG.Tweening;
-using InGame.MyManager.Turn;
 using MyUtil;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace InGame.MyManager
 {
@@ -19,20 +16,7 @@ namespace InGame.MyManager
         protected override void Awake()
         {
             base.Awake();
-
             _canInteractionUI = true; // 처음에는 UI 상호작용 가능하도록 초기화
-        }
-
-        private void OnEnable()
-        {
-            TurnManager.Instance.TurnTimer.OnTimerStart += TurnTimerStart; // 타이머 시작 이벤트에 슬라이더 애니메이션 함수 구독
-            TurnManager.Instance.TurnTimer.OnTimerStop += TurnTimerStop; // 타이머 종료 이벤트에 슬라이더 초기화 함수 구독
-        }
-
-        private void OnDisable()
-        {
-            TurnManager.Instance.TurnTimer.OnTimerStart -= TurnTimerStart; // 타이머 시작 이벤트에 슬라이더 애니메이션 함수 구독 해제
-            TurnManager.Instance.TurnTimer.OnTimerStop -= TurnTimerStop; // 타이머 종료 이벤트에 슬라이더 초기화 함수 구독 해제
         }
 
         public async Task WarningUIMake(string text)
@@ -46,18 +30,6 @@ namespace InGame.MyManager
             TMP_Text tmpText = uiPanel.transform.GetChild(2).GetComponent<TMP_Text>(); // 텍스트 가져오기
             tmpText.text = text; // 경고, 알림 작성
         }
-
-        // 타이머 함수
-        private void TurnTimerStart(Slider timerSlider, int turnTime)
-        {
-            timerSlider.DOValue(1, turnTime); // 슬라이더 채우기
-        }
-
-        // 타이머 종료 함수
-        private void TurnTimerStop(Slider timerSlider)
-        {
-            timerSlider.value = 0; // 슬라이더 값 초기화
-        }
     }
 }
-// 마지막 작성 일자: 2025.12.26
+// 마지막 작성 일자: 2025.12.30

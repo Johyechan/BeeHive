@@ -5,7 +5,7 @@ using InGame.MyManager.Turn.Handler;
 using InGame.MySystem.Game;
 using InGame.MyUI.Turn;
 using MyUtil;
-using NUnit.Framework.Constraints;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,10 +36,12 @@ namespace InGame.MyManager.Turn
         private MakeTurnAddSystem _makeTurnAddSystem; // 생산 턴에 객체들을 추가하는 기능을 가지는 클래스
 
         private TurnTimerHandler _turnTimerHandler; // 턴 타이머 핸들러 클래스
-        public TurnTimerHandler TurnTimer { get => _turnTimerHandler; } // 턴 타이머 프로퍼티
+        private TurnTimerUIHandler _turnTimerUIHandler; // 턴 타이머 UI 핸들러 클래스
 
         private bool _canChangeTurn; // 턴 변경 가능 여부
         public bool CanChangeTurn { get => _canChangeTurn; set => _canChangeTurn = value; } // 위 변수 프로퍼티
+
+        public Action OnTurnTimerStop; // 턴 타이머 종료 이벤트
 
         // 변수 초기화
         protected override void Awake()
@@ -60,9 +62,23 @@ namespace InGame.MyManager.Turn
             _turnUIAnimation = GetComponent<TurnUIAnimation>();
             _makeTurnAddSystem = new MakeTurnAddSystem();
             _turnTimerHandler = new TurnTimerHandler();
+            _turnTimerUIHandler = new TurnTimerUIHandler(_turnTimerSlider, _turnDurationTime);
 
             _currentTeamType = TeamType.Team1; // 처음 시작은 Team1부터
             _makeTurnAddSystem.Init(); // 초기화
+            _turnTimerUIHandler.Init(); // 초기화
+        }
+
+        public void OnEnable()
+        {
+            OnTurnTimerStop += _turnTimerHandler.TurnTimerStopImmediately;
+            OnTurnTimerStop += _turnTimerUIHandler.SliderTimerStop;
+        }
+
+        public void OnDisable()
+        {
+            OnTurnTimerStop -= _turnTimerHandler.TurnTimerStopImmediately;
+            OnTurnTimerStop -= _turnTimerUIHandler.SliderTimerStop;
         }
 
         // 턴을 넘기는 함수
@@ -83,7 +99,6 @@ namespace InGame.MyManager.Turn
             {
                 if(TeamManager.Instance.CurrentTeamType == TeamType.Team1) // 시작 시 제작하는 덱은 팀 1이 전담해서 제작
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "셔플 시작");
                     await DeckManager.Instance.MakeDeck(SceneMgr.Instance.CurrentRoomID);
                     await DeckManager.Instance.DeckMakeEnd();
                 }
@@ -95,6 +110,9 @@ namespace InGame.MyManager.Turn
             }
 
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
+            _turnTimerUIHandler.SliderTimerStop(); // 턴 타이머 슬라이더 초기화
+
+            await _turnUIAnimation.UIAnimationPlay(_currentTurnType); // 현재 턴의 작업 실행
 
             if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
             {
@@ -120,8 +138,6 @@ namespace InGame.MyManager.Turn
                 }
             }
 
-            await _turnUIAnimation.UIAnimationPlay(_currentTurnType); // 현재 턴의 작업 실행
-
             AutoTurnCompleted(); // 턴 완료
         }
 
@@ -141,4 +157,4 @@ namespace InGame.MyManager.Turn
         }
     }
 }
-// 마지막 작성 일자: 2025.12.26
+// 마지막 작성 일자: 2025.12.30

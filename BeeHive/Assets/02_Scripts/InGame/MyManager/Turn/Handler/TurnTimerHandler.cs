@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,9 +11,6 @@ namespace InGame.MyManager.Turn.Handler
     public class TurnTimerHandler
     {
         private CancellationTokenSource _cts; // 취소 스위치
-
-        public event Action<Slider, int> OnTimerStart; // 타이머 시작 이벤트
-        public event Action<Slider> OnTimerStop; // 타이머 종료 이벤트
 
         // 턴 타이머 시작
         public void TurnTimerStart(Slider timerSlider, int time)
@@ -38,7 +36,7 @@ namespace InGame.MyManager.Turn.Handler
         {
             try
             {
-                OnTimerStart?.Invoke(timerSlider, time); // 턴 타이머 실행 이벤트 호출
+                NetworkManager.Instance.Socket.Emit("turnTimerStart", SceneMgr.Instance.CurrentRoomID);
                 await Task.Delay(time * 1000, token); // time초 만큼 대기 또는 token 취소 발생 시 대기 종료
                 TurnTimerEnd(timerSlider); // 턴 종료
             }
@@ -55,9 +53,8 @@ namespace InGame.MyManager.Turn.Handler
             {
                 NetworkManager.Instance.Socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 이벤트 전달
                 TurnManager.Instance.CanChangeTurn = false; // 턴 변경 가능 여부 false로 초기화
-                OnTimerStop?.Invoke(timerSlider); // 턴 타이머 종료 이벤트 호출
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.12.26
+// 마지막 작성 일자: 2025.12.30
