@@ -24,6 +24,8 @@ namespace InGame.MyManager
             _checkerQueue.Enqueue(_steamChecker);
             _checkerQueue.Enqueue(_gpuChecker);
 
+            await NetworkManager.Instance.WaitSocketConnected(); // 서버 연결 대기
+
             foreach(var checker in _checkerQueue)
             {
                 await checker.Init();

@@ -3,6 +3,7 @@ using MyUtil;
 using SocketIOClient;
 using Steamworks;
 using System;
+using System.Threading.Tasks;
 
 namespace InGame.MyManager
 {
@@ -23,9 +24,16 @@ namespace InGame.MyManager
 
         private RoomNetworkHandler _roomNetworkHandler; // 방과 관련된 서버 신호를 받는 핸들러
 
+        private TaskCompletionSource<bool> _socketConnectedTcs; // 소켓 연결 여부 tcs
+
+        // 소켓 연결 여부 대기 함수
+        public Task WaitSocketConnected() => _socketConnectedTcs.Task;
+
         protected override void Awake()
         {
             base.Awake();
+
+            _socketConnectedTcs = new TaskCompletionSource<bool>();
 
             _roomNetworkHandler = new RoomNetworkHandler(); // 핸들러 초기화
 
@@ -40,6 +48,7 @@ namespace InGame.MyManager
 
             _socket.OnConnected += (sender, e) =>
             {
+                _socketConnectedTcs?.SetResult(true);
                 // 현재 클라이언트 ID를 서버에서 받아온다
                 _socket.On("myID", data =>
                 {
