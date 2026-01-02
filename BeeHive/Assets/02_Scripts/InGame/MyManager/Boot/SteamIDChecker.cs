@@ -15,6 +15,8 @@ namespace InGame.MyManager.Boot
 
         protected override async Task Check()
         {
+            BootingManager.Instance.CreateSteamAuthEndTcs(); // 스팀 인증 대기 tcs 생성
+
             SteamNetworkingIdentity identity = new SteamNetworkingIdentity(); // 이 인증 티켓을 누구한테 보여줄 건지 묻는 구조체
             identity.Clear(); // 이 티켓은 특정 클라이언트나 피어에게 제시하는 것이 아니고 중앙 서버 또는 스팀 서버 검증용이다 라고 설정
 
@@ -37,8 +39,9 @@ namespace InGame.MyManager.Boot
             };
 
             NetworkManager.Instance.Socket.Emit("steamAuth", authInfo);
-            await Task.CompletedTask;
+
+            await BootingManager.Instance.WaitSteamAuth();
         }
     }
 }
-// 마지막 작성 일자: 2025.12.31
+// 마지막 작성 일자: 2025.01.02
