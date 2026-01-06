@@ -13,7 +13,7 @@ namespace InGame.MyManager.Boot
         byte[] _ticketBuffer = new byte[1024]; // 스팀이 주인 인증 티켓 저장 배열 - byte 배열인 이유는 authTicket이 암호화된 데이터이기 때문에 임의의 0~255 값이 섞인 순수 이진 데이터이기 때문
         uint _ticketSize; // 스팀이 실제로 몇 바이트를 사용했는지 알기위한 변수
 
-        protected override async Task Check()
+        protected override async Task<bool> Check()
         {
             BootingManager.Instance.CreateSteamAuthEndTcs(); // 스팀 인증 대기 tcs 생성
 
@@ -38,10 +38,18 @@ namespace InGame.MyManager.Boot
                 appID = 480
             };
 
-            NetworkManager.Instance.Socket.Emit("steamAuth", authInfo);
+            NetworkManager.Instance.Socket.Emit("debug", $"AppID: {SteamUtils.GetAppID()}");
+            NetworkManager.Instance.Socket.Emit("debug", $"Steam Init: {SteamAPI.IsSteamRunning()}");
+            NetworkManager.Instance.Socket.Emit("debug", $"LoggedOn: {SteamUser.BLoggedOn()}");
+            string json = JsonUtility.ToJson(authInfo);
+            NetworkManager.Instance.Socket.Emit("steamAuth", json);
 
-            await BootingManager.Instance.WaitSteamAuth();
+            bool result = await BootingManager.Instance.WaitSteamAuth();
+
+            SteamUser.CancelAuthTicket(authTicket);
+
+            return result; 
         }
     }
 }
-// 마지막 작성 일자: 2025.01.02
+// 마지막 작성 일자: 2025.01.06

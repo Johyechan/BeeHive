@@ -32,6 +32,7 @@ namespace InGame.MyManager
         private int _sceneNumber = 1; // 넘어갈 씬 번호 - 로비 씬(1)으로 이동
 
         private bool _isNewUser = false; // 신규 유저 여부
+        private bool _result; // 검증 실패 여부
 
         public void CreateSteamAuthEndTcs()
         {
@@ -43,7 +44,10 @@ namespace InGame.MyManager
             _steamAuthEnd = new TaskCompletionSource<bool>();
         }
 
-        public Task WaitSteamAuth() => _steamAuthEnd.Task;
+        public async Task<bool> WaitSteamAuth()
+        {
+            return await _steamAuthEnd.Task; // 완료 될 때까지 대기, 결과 bool 반환
+        }
 
         protected override async void Awake()
         {
@@ -59,7 +63,7 @@ namespace InGame.MyManager
 
             NetworkManager.Instance.Socket.On("steamAuthFailed", msg =>
             {
-                _steamAuthEnd?.SetResult(true); // 스팀 인증 종료
+                _steamAuthEnd?.SetResult(false); // 스팀 인증 종료
 
                 MainThreadDispatcher.Enqueue(() =>
                 {
@@ -88,14 +92,16 @@ namespace InGame.MyManager
 
             foreach(var checker in _checkerQueue) // 게임 실행을 위한 검증 실행
             {
-                await checker.Init(); // 각 검증 완료 대기
+                _result = await checker.Init(); // 각 검증 완료 대기
+                if (!_result) // 검증을 실패 했다면
+                    break; // 반복문 탈출
             }
 
-            if(!_isNewUser) // 신규 유저가 아닐 경우
+            if(!_isNewUser && _result) // 신규 유저가 아니면서 검증에 성공했다면
             {
                 SceneManager.LoadScene(_sceneNumber); // 로비 씬으로 이동
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.01.05
+// 마지막 작성 일자: 2025.01.06

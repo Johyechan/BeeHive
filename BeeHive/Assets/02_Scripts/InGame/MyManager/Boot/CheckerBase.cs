@@ -7,11 +7,11 @@ namespace InGame.MyManager.Boot
     // 검증 클래스의 부모 클래스
     public abstract class CheckerBase
     {
-        protected abstract Task Check();
+        protected abstract Task<bool> Check();
 
-        public async Task Init()
+        public async Task<bool> Init()
         {
-            await Check();
+            return await Check();
         }
     }
 }

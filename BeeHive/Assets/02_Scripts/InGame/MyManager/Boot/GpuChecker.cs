@@ -10,7 +10,7 @@ namespace InGame.MyManager.Boot
     {
         [SerializeField] private float _waitTime; // 대기 시간
 
-        protected override async Task Check()
+        protected override async Task<bool> Check()
         {
             float currentTime = 0;
 
@@ -28,7 +28,8 @@ namespace InGame.MyManager.Boot
             }
 
             await Task.CompletedTask;
+            return true;
         }
     }
 }
-// 마지막 작성 일자: 2025.12.29
+// 마지막 작성 일자: 2025.01.06

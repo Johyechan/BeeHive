@@ -8,7 +8,7 @@ namespace InGame.MyManager.Boot
     // 스팀 관련 검증 클래스
     public class SteamChecker : CheckerBase
     {
-        protected override async Task Check()
+        protected override async Task<bool> Check()
         {
             if(!SteamAPI.Init())
             {
@@ -17,7 +17,8 @@ namespace InGame.MyManager.Boot
             }
 
             await Task.CompletedTask;
+            return true;
         }
     }
 }
-// 마지막 작성 일자: 2025.12.29
+// 마지막 작성 일자: 2026.01.06
