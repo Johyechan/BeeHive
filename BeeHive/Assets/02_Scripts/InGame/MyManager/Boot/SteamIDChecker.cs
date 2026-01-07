@@ -10,27 +10,63 @@ namespace InGame.MyManager.Boot
     // 스팀 ID 체크로 클라이언트 확인 클래스
     public class SteamIDChecker : CheckerBase
     {
-        byte[] _ticketBuffer = new byte[1024]; // 스팀이 주인 인증 티켓 저장 배열 - byte 배열인 이유는 authTicket이 암호화된 데이터이기 때문에 임의의 0~255 값이 섞인 순수 이진 데이터이기 때문
-        uint _ticketSize; // 스팀이 실제로 몇 바이트를 사용했는지 알기위한 변수
+        private Callback<GetTicketForWebApiResponse_t> _getTicketForWebApiCallback;
+
+        private TaskCompletionSource<string> _getTicketTcs;
+
+        private bool _callbackInitialized; // 콜백 초기화 여부
+
+        private void CallbackInit() // 콜백 초기화
+        {
+            if (_callbackInitialized) // 이미 콜백이 초기화 되어있다면
+                return; // 반환
+
+            _getTicketForWebApiCallback =
+                Callback<GetTicketForWebApiResponse_t>.Create(cb => // 리스너 추가 생성
+                {
+                    if (cb.m_eResult != EResult.k_EResultOK) // 이 Steam API 호출의 결과가 정상 성공이 아닐 경우
+                        _getTicketTcs?.TrySetException(new Exception("Steam auth failed")); // 예외 발생 Steam 검증 실패
+                    else
+                        _getTicketTcs?.TrySetResult(Convert.ToBase64String(
+                            cb.m_rgubTicket, 0, (int)cb.m_cubTicket)); // m_rgubTicket은 Steam이 발급한 인증 티켓의 원본 바이너리 데이터(byte 배열)
+                                                                       // m_cubTicket은 이 티켓 데이터의 실제 길이
+                                                                       // Convert.ToBase64String 함수는 이 바이너리 티켓을 문자열로 변환해라(Base64로 인코딩)
+                                                                       // 0은 함수에서 배열의 변환 인덱스 지점(변환 시작 인덱스)
+
+                    _getTicketTcs = null; // 작업이 끝난 tcs는 초기화(중복 방지)
+                });
+
+            _callbackInitialized = true;
+        }
+
+        // 스팀에게 인증 티켓 발급 요청 함수
+        private Task<string> RequestWebApiTicketAsync()
+        {
+            CallbackInit(); // 콜백 초기화
+            if (_getTicketTcs != null) // 이미 tcs가 존재한다면
+                return _getTicketTcs.Task; // 이미 존재하는 tcs 반환
+
+            _getTicketTcs = new TaskCompletionSource<string>(); // 새로운 티켓 값을 가지는 tcs 생성
+
+            SteamUser.GetAuthTicketForWebApi("my_gameserver"); // Steam 클라이언트에게 Web API 인증용 티켓 발급 요청(문자열은 식별자)
+
+            return _getTicketTcs.Task;
+        }
 
         protected override async Task<bool> Check()
         {
             BootingManager.Instance.CreateSteamAuthEndTcs(); // 스팀 인증 대기 tcs 생성
 
-            SteamNetworkingIdentity identity = new SteamNetworkingIdentity(); // 이 인증 티켓을 누구한테 보여줄 건지 묻는 구조체
-            identity.Clear(); // 이 티켓은 특정 클라이언트나 피어에게 제시하는 것이 아니고 중앙 서버 또는 스팀 서버 검증용이다 라고 설정
-
-            HAuthTicket authTicket = SteamUser.GetAuthSessionTicket(
-                _ticketBuffer, // _ticketBuffer 변수를 사용해라
-                _ticketBuffer.Length, // 티켓 저장 가능 공간은 _ticketBuffer 배열의 길이 만큼 있다
-                out _ticketSize, // 공간을 얼마나 사용했는지 _ticketSize 변수에 저장해라
-                ref identity
-            );
-
-            byte[] authTicketBytes = new byte[_ticketSize]; // 실제 인증 티켓 길이의 byte 배열 생성
-            Array.Copy(_ticketBuffer, authTicketBytes, _ticketSize); // _ticketBuffer배열의 앞부터 _ticketSize 길이 만큼 authTicketBytes 배열에 복사 - 이걸 하는 이유는 뒷부분은 쓸모없는 값들이 있기 때문 그래서 그대로 사용 시 문제 발생 가능
-
-            string authTicketBase64 = Convert.ToBase64String(authTicketBytes); // 이진 데이터를 네트워크로 안전하게 보낼 수 있는 문자열 형태로 변경 - base64는 이진 데이터를 문자로 바꿔주는 포장 규칙(100% 원본 복구 가능, 문자의 집합임, 텍스트 안전 - JSON, URL, HTTP 사용가능) - Convert는 형변환 전문 클래스 - 정리: 스팀에서 받은 티켓은 이진 데이터이기 때문에 그대로 네트워크 전송 불가, Convert(형 변환 전문 클래스)를 사용하여 Base64 문자열 형태로 변환하여 json, url, http 환경에서도 손실없이 서버로 전달할 수 있도록 함
+            string authTicketBase64 = "";
+            try
+            {
+                authTicketBase64 = await RequestWebApiTicketAsync();
+            }
+            catch (Exception ex)
+            {
+                NetworkManager.Instance.Socket.Emit("debug", $"{ex}");
+                return false;
+            }
 
             SteamAuthInfo authInfo = new SteamAuthInfo()
             {
@@ -38,18 +74,13 @@ namespace InGame.MyManager.Boot
                 appID = 480
             };
 
-            NetworkManager.Instance.Socket.Emit("debug", $"AppID: {SteamUtils.GetAppID()}");
-            NetworkManager.Instance.Socket.Emit("debug", $"Steam Init: {SteamAPI.IsSteamRunning()}");
-            NetworkManager.Instance.Socket.Emit("debug", $"LoggedOn: {SteamUser.BLoggedOn()}");
             string json = JsonUtility.ToJson(authInfo);
             NetworkManager.Instance.Socket.Emit("steamAuth", json);
 
             bool result = await BootingManager.Instance.WaitSteamAuth();
 
-            SteamUser.CancelAuthTicket(authTicket);
-
             return result; 
         }
     }
 }
-// 마지막 작성 일자: 2025.01.06
+// 마지막 작성 일자: 2025.01.07

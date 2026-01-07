@@ -22,6 +22,9 @@ namespace InGame.MyManager
         // 현재 클라이언트 ID 프로퍼티
         public string CurrentPlayerID { get => _currentPlayerID; }
 
+        private bool _isSteamAPIInitSuccess = false; // 스팀 api Init 성공 여부
+        public bool IsSteamAPIInitSuccess(bool success) => _isSteamAPIInitSuccess = success; // 스팀 api Init 성공 여부 할당
+
         private RoomNetworkHandler _roomNetworkHandler; // 방과 관련된 서버 신호를 받는 핸들러
 
         private TaskCompletionSource<bool> _socketConnectedTcs; // 소켓 연결 여부 tcs
@@ -73,7 +76,7 @@ namespace InGame.MyManager
 
         private void Update()
         {
-            if (SteamAPI.IsSteamRunning())
+            if (SteamAPI.IsSteamRunning() && _isSteamAPIInitSuccess) // 스팀이 돌아가고 있으며, Init()이 성공 했을 때
             {
                 SteamAPI.RunCallbacks(); // 스팀 클라이언트에서 발생한 이벤트들을 게임으로 전달
             }
@@ -85,4 +88,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.29
+// 마지막 작성 일자: 2025.01.07

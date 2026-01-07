@@ -5,19 +5,20 @@ using UnityEngine;
 namespace InGame.MyUI
 {
     // 작성자: 조혜찬
-    // 닉네임을 정하는 UI - 이후 스팀 닉네임으로 변경
+    // 닉네임 UI
     public class NickNameUI : MonoBehaviour
     {
-        [SerializeField] private TMP_InputField _nickNameField;
+        private TMP_Text _nickName;
 
-        [SerializeField] private TMP_Text _nickNameTmpText;
-
-        public void InputEnd()
+        private void Awake()
         {
-            _nickNameTmpText.text = _nickNameField.text; // 플레이어가 정한 닉네임으로 변경
-            NetworkManager.Instance.CurrentClientName = _nickNameTmpText.text; // 플레이어가 정한 닉네임 저장
-            _nickNameField.text = "";
+            _nickName = GetComponent<TMP_Text>();
+        }
+
+        private void Start()
+        {
+            _nickName.text = NetworkManager.Instance.CurrentClientName;
         }
     }
 }
-// 마지막 작성 일자: 2025.08.07
+// 마지막 작성 일자: 2026.01.07
