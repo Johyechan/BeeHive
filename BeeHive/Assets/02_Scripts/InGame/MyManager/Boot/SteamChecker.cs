@@ -13,16 +13,12 @@ namespace InGame.MyManager.Boot
             if(!SteamAPI.IsSteamRunning()) // 스팀이 돌아가고 있지 않는다면
             {
                 Debug.Log("Steam이 안 돌아가고 있어서 실패");
+                NetworkManager.Instance.Socket.Emit("debug", "스팀이 안 돌아가고 있음 - SteamChecker");
                 Application.Quit(); // 강제 종료
             }
 
-            if(!SteamAPI.Init())
-            {
-                Debug.Log("SteamAPI Init 실패");
-                Application.Quit(); // 강제 종료
-            }
-
-            NetworkManager.Instance.IsSteamAPIInitSuccess(true); // SteamAPI Init 성공 할당
+            
+            NetworkManager.Instance.Socket.Emit("debug", "스팀 API Init 성공 - SteamChecker");
             await Task.CompletedTask;
             return true;
         }

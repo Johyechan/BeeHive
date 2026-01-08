@@ -4,6 +4,7 @@ using SocketIOClient;
 using Steamworks;
 using System;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace InGame.MyManager
 {
@@ -23,7 +24,6 @@ namespace InGame.MyManager
         public string CurrentPlayerID { get => _currentPlayerID; }
 
         private bool _isSteamAPIInitSuccess = false; // 스팀 api Init 성공 여부
-        public bool IsSteamAPIInitSuccess(bool success) => _isSteamAPIInitSuccess = success; // 스팀 api Init 성공 여부 할당
 
         private RoomNetworkHandler _roomNetworkHandler; // 방과 관련된 서버 신호를 받는 핸들러
 
@@ -35,6 +35,8 @@ namespace InGame.MyManager
         protected override void Awake()
         {
             base.Awake();
+
+            _isSteamAPIInitSuccess = SteamAPI.Init(); // SteamAPI Init 성공 여부 할당
 
             _socketConnectedTcs = new TaskCompletionSource<bool>();
 
@@ -76,9 +78,13 @@ namespace InGame.MyManager
 
         private void Update()
         {
-            if (SteamAPI.IsSteamRunning() && _isSteamAPIInitSuccess) // 스팀이 돌아가고 있으며, Init()이 성공 했을 때
+            if (_isSteamAPIInitSuccess) // 스팀이 돌아가고 있으며, Init()이 성공 했을 때
             {
                 SteamAPI.RunCallbacks(); // 스팀 클라이언트에서 발생한 이벤트들을 게임으로 전달
+            }
+            else // 스팀 Init() 실패라면
+            {
+                Application.Quit(); // 어플리케이션 즉시 종료
             }
         }
 
@@ -88,4 +94,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.01.07
+// 마지막 작성 일자: 2025.01.08

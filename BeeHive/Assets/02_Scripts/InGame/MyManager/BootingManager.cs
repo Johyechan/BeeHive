@@ -13,8 +13,6 @@ namespace InGame.MyManager
     // 게임 시작 전 필요한 기능들이 전부 활성화 됐는지 + 필요한 검증이 끝났는지 확인하는 클래스
     public class BootingManager : MonoSingleton<BootingManager>
     {
-        private SteamChecker _steamChecker; // 스팀 관련 검증 클래스
-
         private SteamIDChecker _steamIDChecker; // 스팀ID 검증 클래스
 
         private GpuChecker _gpuChecker; // gpu 관련 검증 클래스
@@ -42,6 +40,7 @@ namespace InGame.MyManager
             }
 
             _steamAuthEnd = new TaskCompletionSource<bool>();
+            NetworkManager.Instance.Socket.Emit("debug", $"steamAuthTcs 생성: {_steamAuthEnd} - BootingManager");
         }
 
         public async Task<bool> WaitSteamAuth()
@@ -51,11 +50,9 @@ namespace InGame.MyManager
 
         protected override async void Awake()
         {
-            _steamChecker = new SteamChecker();
             _steamIDChecker = new SteamIDChecker();
             _gpuChecker = new GpuChecker();
 
-            _checkerQueue.Enqueue(_steamChecker);
             _checkerQueue.Enqueue(_steamIDChecker);
             _checkerQueue.Enqueue(_gpuChecker);
 
@@ -104,4 +101,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.01.06
+// 마지막 작성 일자: 2025.01.08

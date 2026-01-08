@@ -17,15 +17,22 @@ namespace InGame.MySystem.Loading
 
         private async void Awake()
         {
+            NetworkManager.Instance.Socket.Emit("debug", "로딩 시스템 시작");
+            NetworkManager.Instance.Socket.Emit("debug", $"팀 매니저: {TeamManager.Instance}");
             await TeamManager.Instance.TeamSetTcs.Task; // 팀이 정해질 때까지 대기
+            NetworkManager.Instance.Socket.Emit("debug", "팀 정해짐");
 
             await CameraManager.Instance.SetCamera(TeamManager.Instance.CurrentTeamType); // 카메라 세팅
+            NetworkManager.Instance.Socket.Emit("debug", "카메라 세팅 완료");
 
             await _loadingCanvasGroup.DOFade(0, _animationDuration).OnComplete(() => _loadingCanvasGroup.gameObject.SetActive(false)).AsyncWaitForCompletion(); // 로딩 ui 닫기
+            NetworkManager.Instance.Socket.Emit("debug", "로딩 UI 종료");
 
             await TurnManager.Instance.TurnChange(TurnType.ChangeTeam, true); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
+            NetworkManager.Instance.Socket.Emit("debug", "처음 팀 알려주기 완료");
 
             GameReady.Completed(); // 게임 준비 완료
+            NetworkManager.Instance.Socket.Emit("debug", "게임 준비 완료");
         }
     }
 }

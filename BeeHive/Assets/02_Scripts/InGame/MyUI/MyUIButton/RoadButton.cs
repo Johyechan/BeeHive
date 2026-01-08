@@ -17,10 +17,17 @@ namespace InGame.MyUI.MyUIButton
             {
                 // 현재 턴이 메인 턴이 아니라면
                 if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 도로를 생성할 수 없습니다."))
+                {
                     return; // 반환
+                }
 
                 if (!UIManager.Instance.CanInteractionUI) // 만약 UI 상호작용 불가능 상태라면
+                {
+                    NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 불가 상태");
                     return; // 반환
+                }
+
+                NetworkManager.Instance.Socket.Emit("debug", $"배치 가능한 도로 개수:{PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes.Count}");
 
                 if (!_isHighLightOn) // 하이라이트가 꺼져있을 때
                 {
