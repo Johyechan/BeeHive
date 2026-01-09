@@ -13,7 +13,6 @@ namespace InGame.MyInput
             DrawInfo drawInfo = new DrawInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                targetID = NetworkManager.Instance.CurrentPlayerID // 현재 클라이언트 ID
             };
 
             string json = JsonUtility.ToJson(drawInfo); // Json 형태로 변환
@@ -21,4 +20,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2025.09.18
+// 마지막 작성 일자: 2026.01.09

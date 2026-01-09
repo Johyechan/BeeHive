@@ -9,7 +9,6 @@ namespace InGame.MyUI
     public struct GoToRoomInfo
     {
         public string roomID; // 현재 방 ID
-        public string clientID; // 현재 클라이언트 ID
     }
 }
-// 마지막 작성 일자: 2025.11.05
+// 마지막 작성 일자: 2026.01.09

@@ -8,7 +8,6 @@ namespace InGame.MyUI
     public struct LeaveRoomInfo
     {
         public string roomID;
-        public string targetID;
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2026.01.09

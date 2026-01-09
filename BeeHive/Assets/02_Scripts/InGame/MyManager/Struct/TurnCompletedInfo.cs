@@ -8,7 +8,7 @@ namespace InGame.MyManager
     public struct TurnCompletedInfo
     {
         public string roomID; // 현재 방 ID
-        public string targetID; // 현재 클라이언트 ID
+        public int completedTurn; // 완료된 턴
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2026.01.09

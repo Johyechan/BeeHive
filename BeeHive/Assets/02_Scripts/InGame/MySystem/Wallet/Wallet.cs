@@ -111,7 +111,6 @@ namespace InGame.MySystem
             ChangeGoldInfo goldSetInfo = new ChangeGoldInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                targetID = NetworkManager.Instance.CurrentPlayerID, // 현재 클라이언트 ID
                 goldCoinCount = _goldCoinCount, // 금화 개수
                 goldBarCount = _goldBarCount // 금괴 개수
             };
@@ -121,4 +120,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2026.01.09

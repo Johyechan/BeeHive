@@ -149,7 +149,7 @@ namespace InGame.MyManager.Turn
                 TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                    targetID = NetworkManager.Instance.CurrentPlayerID, // 현재 클라이언트 ID
+                    completedTurn = (int)_currentTurnType // 현재 완료한 턴
                 };
                 string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
                 NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
@@ -157,4 +157,4 @@ namespace InGame.MyManager.Turn
         }
     }
 }
-// 마지막 작성 일자: 2025.12.30
+// 마지막 작성 일자: 2026.01.09

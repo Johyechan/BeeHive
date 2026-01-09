@@ -21,7 +21,6 @@ namespace InGame.MyUI.MyUIButton
                     ReadyInfo readyInfo = new ReadyInfo
                     {
                         roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                        targetID = NetworkManager.Instance.CurrentPlayerID, // 현재 클라이언트의 ID
                     };
 
                     string json = JsonUtility.ToJson(readyInfo); // json형태로 변환

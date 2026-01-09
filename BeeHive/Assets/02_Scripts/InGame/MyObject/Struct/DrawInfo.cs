@@ -8,7 +8,6 @@ namespace InGame.MyObject
     public struct DrawInfo
     {
         public string roomID; // 현재 방 ID
-        public string targetID; // 드로우를 진행하는 클라이언트 ID
     }
 }
-// 마지막 작성 일자: 2025.09.04
+// 마지막 작성 일자: 2026.01.09

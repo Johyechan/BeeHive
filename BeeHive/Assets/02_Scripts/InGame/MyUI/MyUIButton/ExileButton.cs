@@ -25,7 +25,6 @@ namespace InGame.MyUI.MyUIButton
                     LeaveRoomInfo leaveRoomInfo = new LeaveRoomInfo()
                     {
                         roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                        targetID = _targetID
                     };
 
                     string json = JsonUtility.ToJson(leaveRoomInfo); // 방 나갈 때 필요한 값을 가지는 구조체를 Json 형태로 변환
@@ -35,4 +34,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.08.18
+// 마지막 작성 일자: 2026.01.09
