@@ -51,11 +51,15 @@ namespace InGame.MyManager.Turn
             var socket = NetworkManager.Instance.Socket; // 서버와 통신하기 위한 객체 받아오기
             if(socket != null) // 서버와 통신하기 위한 객체가 존재할 때
             {
-                socket.On("turnChanged", async value =>
+                socket.On("turnChanged", value =>
                 {
                     int turn = value.GetValue<int>(); // int 자료형으로 읽어오기
                     TurnType turnType = (TurnType)turn; // TurnType형태로 turn변수 변경
-                    await NextTurn(turnType); // turnType 턴 변경
+
+                    MainThreadDispatcher.Enqueue(async () => // NextTurn 함수가 메인스레드에서 실행되어야 함(Unity 기능들을 사용중인 함수)
+                    {
+                        await NextTurn(turnType); // turnType 턴 변경
+                    });
                 });
             }
 
@@ -144,17 +148,27 @@ namespace InGame.MyManager.Turn
         // 서버에 턴 완료 신호를 보내는 함수
         private void AutoTurnCompleted()
         {
-            if (_currentTurnType != TurnType.DrawTurn && _currentTurnType != TurnType.MainTurn) // 드로우 턴이 아니면서 메인 턴도 아닐 경우
+            switch(_currentTurnType)
             {
-                TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()
-                {
-                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                    completedTurn = (int)_currentTurnType // 현재 완료한 턴
-                };
-                string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
-                NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
+                case TurnType.ChangeTeam:
+                case TurnType.MakeTurn:
+                case TurnType.TurnEnd:
+                    TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()
+                    {
+                        roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                        completedTurn = (int)_currentTurnType // 현재 완료한 턴
+                    };
+                    string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
+                    NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
+                    break;
+                case TurnType.DrawTurn:
+                case TurnType.MainTurn:
+                    break;
+                default:
+                    NetworkManager.Instance.Socket.Emit("debug", "이상한 값의 턴이 들어왔다");
+                    break;
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.01.09
+// 마지막 작성 일자: 2026.01.12

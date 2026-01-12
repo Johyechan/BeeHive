@@ -51,10 +51,10 @@ namespace InGame.MyManager.Turn.Handler
         {
             if (TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀이 내 팀일 경우
             {
-                NetworkManager.Instance.Socket.Emit("changeTurn", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 이벤트 전달
+                NetworkManager.Instance.Socket.Emit("turnCompleted", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 이벤트 전달
                 TurnManager.Instance.CanChangeTurn = false; // 턴 변경 가능 여부 false로 초기화
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.12.30
+// 마지막 작성 일자: 2026.01.12
