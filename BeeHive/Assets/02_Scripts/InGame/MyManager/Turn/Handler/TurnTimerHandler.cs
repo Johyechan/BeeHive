@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace InGame.MyManager.Turn.Handler
@@ -51,10 +52,16 @@ namespace InGame.MyManager.Turn.Handler
         {
             if (TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀이 내 팀일 경우
             {
-                NetworkManager.Instance.Socket.Emit("turnCompleted", SceneMgr.Instance.CurrentRoomID); // 서버에 턴 변경 이벤트 전달
+                TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()
+                {
+                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                    completedTurn = (int)TurnManager.Instance.CurrentTurnType // 현재 완료한 턴
+                };
+                string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
+                NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 이벤트 전달
                 TurnManager.Instance.CanChangeTurn = false; // 턴 변경 가능 여부 false로 초기화
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.01.12
+// 마지막 작성 일자: 2026.01.13
