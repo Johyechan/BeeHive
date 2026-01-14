@@ -10,7 +10,7 @@ namespace InGame.MyManager.MyPlacePlane.Handler
     public class PlacePlaneStateHandler
     {
         // 배치 칸 상태 변경 함수(상태 변경될 배치칸, 배치할 기물, 이동 여부)
-        public Task ChangePlacePlaneState(PlacePlaneObjectBase currentPlacePlane, PieceBase placedPiece, bool isMove)
+        public void ChangePlacePlaneState(PlacePlaneObjectBase currentPlacePlane, PieceBase placedPiece, bool isMove)
         {
             if (isMove) // 이동일 경우
             {
@@ -37,9 +37,7 @@ namespace InGame.MyManager.MyPlacePlane.Handler
             {
                 placedPiece.PieceVariable.currentRoadPlacePlane = (RoadPlacePlaneObject)currentPlacePlane; // 도로 전용 배치칸 할당
             }
-
-            return Task.CompletedTask;
         }
     }
 }
-// 마지막 작성 일자: 2025.10.28
+// 마지막 작성 일자: 2026.01.14

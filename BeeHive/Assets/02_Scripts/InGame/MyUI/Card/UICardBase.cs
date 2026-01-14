@@ -49,9 +49,9 @@ namespace InGame.MyUI.Card
         }
 
         // 초기화 함수
-        public async Task Init(CanvasGroup cardUsePanelCanvaseGroup, CanvasGroup cardInformationCanvasGroup)
+        public void Init(CanvasGroup cardUsePanelCanvaseGroup, CanvasGroup cardInformationCanvasGroup)
         {
-            await _uiCardVariable.initializeHandler.Init(cardUsePanelCanvaseGroup, cardInformationCanvasGroup);
+            _uiCardVariable.initializeHandler.Init(cardUsePanelCanvaseGroup, cardInformationCanvasGroup);
         }
 
         // 마우스 커서가 UI 위에 올라와 있을 때

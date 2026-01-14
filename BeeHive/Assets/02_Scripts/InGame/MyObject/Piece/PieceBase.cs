@@ -49,9 +49,9 @@ namespace InGame.MyObject.Piece
         }
 
         // 외부에서 머티리얼을 변경할 때 사용하는 함수(기본 머티리얼로 변경할지 여부)
-        public async Task ChangeMaterial(bool isChangeToOrigin)
+        public void ChangeMaterial(bool isChangeToOrigin)
         {
-            await _pieceData.changeMaterialHandler.ChangeMaterial(isChangeToOrigin); // 머티리얼 변경 핸들러 함수 호출
+            _pieceData.changeMaterialHandler.ChangeMaterial(isChangeToOrigin); // 머티리얼 변경 핸들러 함수 호출
         }
 
         // 공격한 기물 처리 함수
@@ -63,7 +63,7 @@ namespace InGame.MyObject.Piece
         // 외부에서 하이라이트를 끌 때 현재 스크립트에서 하이라이트 활성화 여부를 끔 상태로 만들어주는 함수
         private void HighLightOff(bool isOn, bool isMove = true) // 켜졌는지 여부, 이동 상태를 위해 켜졌는지 여부 = 어떤 값이 와도 상관 없음
         {
-            _ = _pieceData.pieceDeselectHandler.HighLightOff(isOn, isMove); // 하이라이트 해제 함수
+            _pieceData.pieceDeselectHandler.HighLightOff(isOn, isMove); // 하이라이트 해제 함수
         }
 
         // 기물들을 지정 위치로 이동 시키는 함수
@@ -79,7 +79,7 @@ namespace InGame.MyObject.Piece
             {
                 HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
-                await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
+                PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
                 return; // 반환
             }
 
@@ -96,13 +96,13 @@ namespace InGame.MyObject.Piece
             // 클릭 되었을 때 이동 가능한 배치 칸 하이라이트 활성화
             if (!_pieceVariable.isSelected) // 선택된 상태가 아닐 경우
             {
-                await _pieceData.pieceSelectHandler.PieceSelect(); // 선택 함수 호출
+                _pieceData.pieceSelectHandler.PieceSelect(); // 선택 함수 호출
             }
             else // 선택된 상태일 경우
             {
-                await _pieceData.pieceDeselectHandler.PieceDeselect(); // 선택 해제 함수 호출
+                _pieceData.pieceDeselectHandler.PieceDeselect(); // 선택 해제 함수 호출
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.11.03
+// 마지막 작성 일자: 2026.01.14

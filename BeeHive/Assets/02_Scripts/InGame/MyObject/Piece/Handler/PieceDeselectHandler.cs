@@ -16,22 +16,20 @@ namespace InGame.MyObject.Piece.Handler
             _pieceBase = pieceBase;
         }
 
-        public async Task PieceDeselect()
+        public void PieceDeselect()
         {
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
-            await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
+            PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
         }
 
-        public Task HighLightOff(bool isOn, bool isMove = true) // 켜졌는지 여부, 이동 상태를 위해 켜졌는지 여부 = 어떤 값이 와도 상관 없음
+        public void HighLightOff(bool isOn, bool isMove = true) // 켜졌는지 여부, 이동 상태를 위해 켜졌는지 여부 = 어떤 값이 와도 상관 없음
         {
             if (isOn == false) // 끄는 상태일 때
             {
                 GameManager.Instance.CurrentMovePiece = null; // 현재 이동하려는 기물을 null로 할당
                 _pieceBase.PieceVariable.isSelected = false; // 선택 해제 된 상태로 할당
             }
-
-            return Task.CompletedTask; // Task 완료 반환
         }
     }
 }
-// 마지막 작성 일자: 2025.11.03
+// 마지막 작성 일자: 2026.01.14

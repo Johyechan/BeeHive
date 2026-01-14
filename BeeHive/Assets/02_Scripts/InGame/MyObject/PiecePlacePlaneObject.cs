@@ -55,11 +55,11 @@ namespace InGame.MyObject
             _pieceMap.Add(ObjectType.Tank, _tankParent); // 전차 추가
         }
 
-        public async Task HighLightOffEvent()
+        public void HighLightOffEvent()
         {
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
-            await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
+            PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
         }
 
         // 마우스로 클릭 시 실행될 함수
@@ -70,7 +70,7 @@ namespace InGame.MyObject
                 if(_frontPiecePlacePlaneObject.PlacedObjectType != ObjectType.None)// 앞에 있는 기물 배치칸에 배치된 상대 기물이 있다면 
                 {
                     await UIManager.Instance.WarningUIMake("상대가 해당 배치 칸의 앞 칸을 점령 했습니다"); // UI 경고문 생성
-                    await HighLightOffEvent(); // 하이라이트 끄기
+                    HighLightOffEvent(); // 하이라이트 끄기
                     return; // 반환
                 }
             }
@@ -79,7 +79,7 @@ namespace InGame.MyObject
             {
                 if (!await WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
                 {
-                    await HighLightOffEvent(); // 하이라이트 끄기
+                    HighLightOffEvent(); // 하이라이트 끄기
                     return; // 반환
                 }
 
@@ -100,7 +100,7 @@ namespace InGame.MyObject
             if (!await WarningEvent.OnCanMovePiece.Invoke(CanPlacePieceType, false)) // 같은 타입의 기물이 이동 했었다면
             {
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 이동 가능한 판 하이라이트 끄기
-                await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
+                PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
                 return;
             }
 
@@ -126,7 +126,7 @@ namespace InGame.MyObject
             {
                 UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
 
-                await PlacePlaneManager.Instance.ChangePlacePlaneState(this, pieceBase, isMove); // 현재 배치칸 상태 변경
+                PlacePlaneManager.Instance.ChangePlacePlaneState(this, pieceBase, isMove); // 현재 배치칸 상태 변경
 
                 PieceInfo pieceInfo = new PieceInfo()
                 {
@@ -141,7 +141,7 @@ namespace InGame.MyObject
                 string json = JsonUtility.ToJson(pieceInfo); // Json으로 변환
                 NetworkManager.Instance.Socket.Emit("movePiece", json); // 서버에 movePiece 이벤트 전달
 
-                await HighLightOffEvent(); // 하이라이트 끄기
+                HighLightOffEvent(); // 하이라이트 끄기
 
                 await pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
 
@@ -186,11 +186,11 @@ namespace InGame.MyObject
                 }
                 
 
-                await PieceManager.Instance.FindCanPlacePlane();
+                PieceManager.Instance.FindCanPlacePlane();
 
                 UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.12.18
+// 마지막 작성 일자: 2026.01.14

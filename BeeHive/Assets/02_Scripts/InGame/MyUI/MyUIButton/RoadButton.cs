@@ -3,6 +3,7 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
 using MyUtil;
+using System;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -13,46 +14,63 @@ namespace InGame.MyUI.MyUIButton
         // 클릭 시 실행될 함수
         public override async void OnUIClick()
         {
-            await MainThreadDispatcher.Enqueue(async () =>
+            bool isWarning = false;
+
+            try
             {
-                // 현재 턴이 메인 턴이 아니라면
-                if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 도로를 생성할 수 없습니다."))
+                isWarning = await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 도로를 생성할 수 없습니다.");
+            }
+            catch(Exception ex)
+            {
+                NetworkManager.Instance.Socket.Emit("debug", $"경고 이벤트에서 예외 발생: {ex} - RoadButton.cs:24");
+            }
+
+            // 현재 턴이 메인 턴이 아니라면
+            if (!isWarning)
+            {
+                return; // 반환
+            }
+
+            if (!UIManager.Instance.CanInteractionUI) // 만약 UI 상호작용 불가능 상태라면
+            {
+                NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 불가 상태");
+                return; // 반환
+            }
+
+            NetworkManager.Instance.Socket.Emit("debug", $"배치 가능한 도로 개수:{PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes.Count}");
+
+            if (!_isHighLightOn) // 하이라이트가 꺼져있을 때
+            {
+                NetworkManager.Instance.Socket.Emit("debug", $"일단 하이라이트가 꺼져있는 상태는 맞음");
+                HighLightEvents.SelectedPlacementType = _canPlaceType; // 현재 배치 가능한 타입을 현재 타입으로 할당
+                NetworkManager.Instance.Socket.Emit("debug", $"현재 배치 가능한 타입 할당 완료: {HighLightEvents.SelectedPlacementType}");
+                HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 이동 칸 하이라이트 끄기, 이동 가능한 배치 칸 대상
+                HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
+                PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
+                NetworkManager.Instance.Socket.Emit("debug", $"이벤트 완료");
+                NetworkManager.Instance.Socket.Emit("debug", $"PlacePlaneManager: {PlacePlaneManager.Instance}");
+                NetworkManager.Instance.Socket.Emit("debug", $"PlacePlaneManager Variable: {PlacePlaneManager.Instance.Variable}");
+                NetworkManager.Instance.Socket.Emit("debug", $"PlacePlaneManager Variable highLightHandler: {PlacePlaneManager.Instance.Variable.highLightHandler}");
+                NetworkManager.Instance.Socket.Emit("debug", $"PlacePlaneManager Variable highLightHandler CanRoadPlacePlanes: {PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes}");
+                NetworkManager.Instance.Socket.Emit("debug", $"PlacePlaneManager Variable highLightHandler CanRoadPlacePlanes Count: {PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes.Count}");
+
+                foreach (var road in PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes) // 배치 가능한 도로 칸들 순회
                 {
-                    return; // 반환
+                    NetworkManager.Instance.Socket.Emit("debug", $"배치 가능한 도로칸: {road}, 타입: {_canPlaceType}, 코스트: {_cost}, 부모 객체: {_objectParent}, 자식 수: {_objectParent.childCount}");
+                    road.CanPlacePieceType = _canPlaceType; // 배치 가능한 타입을 할당
+                    road.Cost = _cost; // 비용 할당
+                    road.LeftPieceCount = _objectParent.childCount; // 남은 기물 수 할당
                 }
 
-                if (!UIManager.Instance.CanInteractionUI) // 만약 UI 상호작용 불가능 상태라면
-                {
-                    NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 불가 상태");
-                    return; // 반환
-                }
-
-                NetworkManager.Instance.Socket.Emit("debug", $"배치 가능한 도로 개수:{PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes.Count}");
-
-                if (!_isHighLightOn) // 하이라이트가 꺼져있을 때
-                {
-                    HighLightEvents.SelectedPlacementType = _canPlaceType; // 현재 배치 가능한 타입을 현재 타입으로 할당
-                    HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 이동 칸 하이라이트 끄기, 이동 가능한 배치 칸 대상
-                    HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
-                    await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
-
-                    foreach (var road in PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes) // 배치 가능한 도로 칸들 순회
-                    {
-                        road.CanPlacePieceType = _canPlaceType; // 배치 가능한 타입을 할당
-                        road.Cost = _cost; // 비용 할당
-                        road.LeftPieceCount = _objectParent.childCount; // 남은 기물 수 할당
-                    }
-
-                    HighLightEvents.OnRoadPlacementHighLight?.Invoke(true); // 도로 배치 칸 하이라이트 키기
-                    _isHighLightOn = true; // 하이라이트가 켜져있는 상태라고 할당
-                }
-                else // 하이라이트가 켜져있을 때
-                {
-                    HighLightEvents.SelectedPlacementType = ObjectType.None; // 아무것도 배치 할 수 없는 타입으로 초기화
-                    HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 배치 가능한 도로 칸 하이라이트 끄기
-                }
-            });
+                HighLightEvents.OnRoadPlacementHighLight?.Invoke(true); // 도로 배치 칸 하이라이트 키기
+                _isHighLightOn = true; // 하이라이트가 켜져있는 상태라고 할당
+            }
+            else // 하이라이트가 켜져있을 때
+            {
+                HighLightEvents.SelectedPlacementType = ObjectType.None; // 아무것도 배치 할 수 없는 타입으로 초기화
+                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 배치 가능한 도로 칸 하이라이트 끄기
+            }
         }
     }
 }
-// 마지막 작성 일자: 2025.12.16
+// 마지막 작성 일자: 2026.01.14

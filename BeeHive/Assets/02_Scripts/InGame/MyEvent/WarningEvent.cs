@@ -16,4 +16,4 @@ namespace InGame.MyEvent
         public static Func<ObjectType, bool, Task<bool>> OnCanMovePiece; // 특정 타입의 기물이 이동할 수 있는지 확인하는 델리게이트
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2026.01.14

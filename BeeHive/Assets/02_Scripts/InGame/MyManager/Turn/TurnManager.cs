@@ -56,9 +56,9 @@ namespace InGame.MyManager.Turn
                     int turn = value.GetValue<int>(); // int 자료형으로 읽어오기
                     TurnType turnType = (TurnType)turn; // TurnType형태로 turn변수 변경
 
-                    MainThreadDispatcher.Enqueue(async () => // NextTurn 함수가 메인스레드에서 실행되어야 함(Unity 기능들을 사용중인 함수)
+                    MainThreadDispatcher.Enqueue(() => // NextTurn 함수가 메인스레드에서 실행되어야 함(Unity 기능들을 사용중인 함수)
                     {
-                        await NextTurn(turnType); // turnType 턴 변경
+                        _ = NextTurn(turnType); // turnType 턴 변경
                     });
                 });
             }
@@ -103,7 +103,7 @@ namespace InGame.MyManager.Turn
             {
                 if(TeamManager.Instance.CurrentTeamType == TeamType.Team1) // 시작 시 제작하는 덱은 팀 1이 전담해서 제작
                 {
-                    await DeckManager.Instance.MakeDeck(SceneMgr.Instance.CurrentRoomID);
+                    DeckManager.Instance.MakeDeck(SceneMgr.Instance.CurrentRoomID);
                     await DeckManager.Instance.DeckMakeEnd();
                 }
                 else // 팀 1이 아닐 경우
@@ -138,7 +138,7 @@ namespace InGame.MyManager.Turn
                     HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
                     HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
                     HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
-                    await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
+                    PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
                 }
             }
 
@@ -171,4 +171,4 @@ namespace InGame.MyManager.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.01.12
+// 마지막 작성 일자: 2026.01.14

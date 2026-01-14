@@ -48,32 +48,23 @@ namespace InGame.MyUI
 
             _cardUseButton.UICardBase = CardManager.Instance.FindFirePowerCard(); // 화력 카드 할당
 
-            MainThreadDispatcher.Enqueue(() =>
-            {
-                _askText.text = message;
-            });
+            _askText.text = message;
 
             _tcs = new TaskCompletionSource<bool>();
 
             _yesButtonAction = () => Click(true); // 예 버튼 이벤트
             _noButtonAction = () => Click(false); // 아니오 버튼 이벤트
 
-            MainThreadDispatcher.Enqueue(() =>
-            {
-                _yesButton.onClick.AddListener(_yesButtonAction); // 예 버튼에 true를 반환하는 기능 구독
-                _noButton.onClick.AddListener(_noButtonAction); // 아니오 버튼에 false 반환하는 기능 구독
-                _canvasGroup.DOFade(1, _animationDuration); // 페이드 인
-            });
+            _yesButton.onClick.AddListener(_yesButtonAction); // 예 버튼에 true를 반환하는 기능 구독
+            _noButton.onClick.AddListener(_noButtonAction); // 아니오 버튼에 false 반환하는 기능 구독
+            _canvasGroup.DOFade(1, _animationDuration); // 페이드 인
 
             result = await _tcs.Task;
 
-            MainThreadDispatcher.Enqueue(() =>
-            {
-                _yesButton.onClick.RemoveListener(_yesButtonAction); // 예 버튼 초기화
-                _noButton.onClick.RemoveListener(_noButtonAction); // 예 버튼 초기화
-            });
+            _yesButton.onClick.RemoveListener(_yesButtonAction); // 예 버튼 초기화
+            _noButton.onClick.RemoveListener(_noButtonAction); // 예 버튼 초기화
             return result;
         }
     }
 }
-// 마지막 작성 일자: 2025.12.29
+// 마지막 작성 일자: 2026.01.14

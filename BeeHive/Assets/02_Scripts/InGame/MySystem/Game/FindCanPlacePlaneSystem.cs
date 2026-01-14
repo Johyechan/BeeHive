@@ -12,7 +12,7 @@ namespace InGame.MySystem.Game
     public class FindCanPlacePlaneSystem
     {
         // 배치 가능한 기물 칸들을 찾는 함수
-        public Task FindCanPlacePiecePlane(TeamType type)
+        public void FindCanPlacePiecePlane(TeamType type)
         {
             foreach (var piece in PlacePlaneManager.Instance.Variable.placePlaneMap.PiecePlacePlanes) // 전체 기물 판 순회
             {
@@ -25,16 +25,14 @@ namespace InGame.MySystem.Game
                     }
                 }
             }
-
-            return Task.CompletedTask;
         }
 
         // 움직일 수 있는 칸을 찾는 함수
-        public async Task FindCanMovePlacePlane(PiecePlacePlaneObject piece, TeamType teamType, ObjectType currentPieceType)
+        public void FindCanMovePlacePlane(PiecePlacePlaneObject piece, TeamType teamType, ObjectType currentPieceType)
         {
             bool findTeamRoad = false;
 
-            await ResetPlacePlanes(false); // 전체 도로 및 기물 칸 접근 여부 false로 초기화 - 이동 가능한 칸을 찾기 위함
+            ResetPlacePlanes(false); // 전체 도로 및 기물 칸 접근 여부 false로 초기화 - 이동 가능한 칸을 찾기 위함
             PlacePlaneManager.Instance.Variable.highLightHandler.CanPieceMovePlanes.Clear(); // 기물 이동 가능한 판 저장 컨테이너 비우기 - 이전에 저장했던 이동 가능한 판들을 초기화
 
             foreach (var nearRoad in piece.nearRoadPlaceTransformList) // 해당 기물 칸 주위 도로 칸 순회
@@ -50,12 +48,10 @@ namespace InGame.MySystem.Game
             {
                 FindNearPieces(teamType, nearRoad, !findTeamRoad, currentPieceType); // 근접한 기물 찾기 - 팀 도로를 찾았다면 쭉 탐색, 팀 도로를 찾지 못했다면 한 번만 탐색
             }
-
-            await Task.CompletedTask; // 테스크 종료 반환
         }
 
         // 배치 가능한 도로 칸들을 찾는 함수
-        public Task FindCanPlaceRoadPlane(TeamType type)
+        public void FindCanPlaceRoadPlane(TeamType type)
         {
             foreach (var road in PlacePlaneManager.Instance.Variable.placePlaneMap.RoadPlacePlanes) // 전체 도로 판 순회
             {
@@ -75,12 +71,10 @@ namespace InGame.MySystem.Game
                     }
                 }
             }
-
-            return Task.CompletedTask;
         }
 
         // 배치 판 확인 여부 초기화 함수(완전 초기화 할지 여부)
-        public Task ResetPlacePlanes(bool isClear = true)
+        public void ResetPlacePlanes(bool isClear = true)
         {
             foreach (var piece in PlacePlaneManager.Instance.Variable.placePlaneMap.PiecePlacePlanes) // 전체 기물 판 순회
             {
@@ -104,8 +98,6 @@ namespace InGame.MySystem.Game
                 foreach (var piece in PieceManager.Instance.CanFirePowerAttackPieceMap) // 화력 공격 가능 기물 저장 컨테이너 순회
                     piece.Value.Clear(); // 리스트 클리어
             }
-
-            return Task.CompletedTask; // 테스크 종료 반환
         }
 
         // 배치 가능한 도로 칸을 추가하고 그 도로에 인접한 기물들을 찾는 함수(팀 타입, 도로 칸, 한 번만 검사할지)
@@ -163,7 +155,7 @@ namespace InGame.MySystem.Game
             }
         }
 
-        public Task FindCanFirePowerAttackPiece(TeamType teamType, PiecePlacePlaneObject piece)
+        public void FindCanFirePowerAttackPiece(TeamType teamType, PiecePlacePlaneObject piece)
         {
             foreach(var nearRoad in piece.nearRoadPlaceTransformList)
             {
@@ -186,8 +178,6 @@ namespace InGame.MySystem.Game
                     }
                 }
             }
-
-            return Task.CompletedTask; // 테스크 종료 반환
         }
 
         private bool CheckNearRoad(TeamType teamType, RoadPlacePlaneObject road)
@@ -232,4 +222,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.12.17
+// 마지막 작성 일자: 2026.01.14

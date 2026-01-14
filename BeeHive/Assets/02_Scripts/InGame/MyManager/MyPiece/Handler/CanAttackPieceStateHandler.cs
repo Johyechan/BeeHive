@@ -10,7 +10,7 @@ namespace InGame.MyManager.MyPiece.Handler
     public class CanAttackPieceStateHandler
     {
         // 공격 가능한 기물들을 보여주는 함수(공격하는 기물 타입, (Key)공격하는 객체의 타입에 따라 (Value)기물 리스트를 가지는 딕셔너리, 원거리 공격인지 여부 - 기본적으로 근접 공격)
-        public async Task ShowCanAttackPieces(ObjectType attackingType, Dictionary<ObjectType, List<PieceBase>> canAttackPieceMap, bool isFirePowerAttack = false)
+        public void ShowCanAttackPieces(ObjectType attackingType, Dictionary<ObjectType, List<PieceBase>> canAttackPieceMap, bool isFirePowerAttack = false)
         {
             foreach (var piece in canAttackPieceMap) // 공격 가능 기물들 저장 맵 순회
             {
@@ -23,7 +23,7 @@ namespace InGame.MyManager.MyPiece.Handler
                             pieceBase.PieceVariable.isFirePowerAttackTarget = true; // 원거리 공격 대상으로 설정
                         }
 
-                        await pieceBase.ChangeMaterial(false); // 머티리얼 변경
+                        pieceBase.ChangeMaterial(false); // 머티리얼 변경
                     }
                     break;
                 }
@@ -31,7 +31,7 @@ namespace InGame.MyManager.MyPiece.Handler
         }
 
         // 공격 가능한 기물을 숨기는 함수((Key)객체의 타입에 따라 (Value)기물 리스트를 가지는 딕셔너리, 원거리 공격 여부 - 기본적으로 근접 공격)
-        public async Task HideCanAttackPieces(Dictionary<ObjectType, List<PieceBase>> canAttackPieceMap, bool isFirePowerAttack = false, bool changeFirePowerAttack = false)
+        public void HideCanAttackPieces(Dictionary<ObjectType, List<PieceBase>> canAttackPieceMap, bool isFirePowerAttack = false, bool changeFirePowerAttack = false)
         {
             foreach (var piece in canAttackPieceMap) // 공격 가능 기물들 저장 맵 순회
             {
@@ -45,12 +45,10 @@ namespace InGame.MyManager.MyPiece.Handler
                         }
                     }
 
-                    await pieceBase.ChangeMaterial(true);
+                    pieceBase.ChangeMaterial(true);
                 }
             }
-
-            await Task.CompletedTask;
         }
     }
 }
-// 마지막 작성 일자: 2025.11.03
+// 마지막 작성 일자: 2026.01.14

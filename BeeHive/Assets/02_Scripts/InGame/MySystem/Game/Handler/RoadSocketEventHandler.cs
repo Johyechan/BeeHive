@@ -32,9 +32,9 @@ namespace InGame.MySystem.Game.Handler
                 RoadAddedInfo roadAddedInfo = JsonUtility.FromJson<RoadAddedInfo>(json); // RoadAddedInfo로 변환
                 Transform parent = GameObject.Find(roadAddedInfo.roadParentName).transform;
 
-                MainThreadDispatcher.Enqueue(async () =>
+                MainThreadDispatcher.Enqueue(() =>
                 {
-                    await PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
+                    _ = PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
                 });
             });
 
@@ -67,7 +67,7 @@ namespace InGame.MySystem.Game.Handler
 
                 await PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, (TeamType)pieceChangedRoadInfo.teamType, piecePlacePlane); // 주위 도로 변경 이벤트 호출
 
-                await PieceManager.Instance.FindCanPlacePlane();
+                PieceManager.Instance.FindCanPlacePlane();
             });
 
             NetworkManager.Instance.Socket.On("changedRoad", async (data) =>
@@ -95,9 +95,9 @@ namespace InGame.MySystem.Game.Handler
                 PieceBase targetPieceBase = targetRoadObj.GetComponent<PieceBase>();
                 PieceBase newPieceBase = newRoadObj.GetComponent<PieceBase>();
 
-                await PlacePlaneManager.Instance.ChangePlacePlaneState(targetPieceBase.PieceVariable.currentRoadPlacePlane, newPieceBase, false);
+                PlacePlaneManager.Instance.ChangePlacePlaneState(targetPieceBase.PieceVariable.currentRoadPlacePlane, newPieceBase, false);
 
-                await PlacePlaneManager.Instance.FindCanPlacePlane();
+                PlacePlaneManager.Instance.FindCanPlacePlane();
 
                 switch(targetPieceBase.CurrentTeamType)
                 {
@@ -115,4 +115,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.12.12
+// 마지막 작성 일자: 2026.01.14

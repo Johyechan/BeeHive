@@ -91,7 +91,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
             GameObject roadObj = await ObjectPoolManager.Instance.GetObject(type, roadPlacePlaneObject.transform.parent); // 새 도로 객체 생성
             PieceBase road = roadObj.GetComponent<PieceBase>(); // 도로 객체에서 PieceBase 가져오기
 
-            await PlacePlaneManager.Instance.ChangePlacePlaneState(roadPlacePlaneObject, road, false); // 배치칸 상태 변경
+            PlacePlaneManager.Instance.ChangePlacePlaneState(roadPlacePlaneObject, road, false); // 배치칸 상태 변경
 
             roadObj.transform.localPosition = roadPlacePlaneObject.transform.localPosition; // 현재 배치하는 위치로 도로의 위치 변경
             roadObj.transform.localRotation = Quaternion.Euler(new Vector3(0, targetAngle, 0));
@@ -103,4 +103,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2025.10.21
+// 마지막 작성 일자: 2026.01.14

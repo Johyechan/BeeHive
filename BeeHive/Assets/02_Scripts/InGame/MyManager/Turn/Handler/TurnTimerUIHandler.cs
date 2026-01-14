@@ -1,4 +1,5 @@
 using DG.Tweening;
+using MyUtil;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,12 +25,15 @@ namespace InGame.MyManager.Turn.Handler
         {
             NetworkManager.Instance.Socket.On("playTimerSlider", (data) =>
             {
-                StartSliderTimer();
+                MainThreadDispatcher.Enqueue(() => { StartSliderTimer(); });
             });
 
             NetworkManager.Instance.Socket.On("resetTurnTimer", (data) =>
             {
-                TurnManager.Instance.OnTurnTimerStop?.Invoke();
+                MainThreadDispatcher.Enqueue(() =>
+                {
+                    TurnManager.Instance.OnTurnTimerStop?.Invoke();
+                });
             });
         }
 
@@ -50,4 +54,4 @@ namespace InGame.MyManager.Turn.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.12.30
+// 마지막 작성 일자: 2026.01.14

@@ -33,4 +33,4 @@ namespace InGame.MyManager.Boot
         }
     }
 }
-// 마지막 작성 일자: 2025.01.06
+// 마지막 작성 일자: 2026.01.06

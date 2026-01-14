@@ -65,6 +65,7 @@ namespace InGame.MySystem.Game
         {
             if (_canRoadPlacePlanes.Count <= 0) // 배치 가능한 도로 판 객체 존재하지 않다면
             {
+                NetworkManager.Instance.Socket.Emit("debug", "배치 가능한 도로 칸 객체가 존재하지 않음");
                 return; // 그냥 반환
             }
 
@@ -72,6 +73,7 @@ namespace InGame.MySystem.Game
             {
                 if (on) // 킬 것이라면
                 {
+                    NetworkManager.Instance.Socket.Emit("debug", $"하이라이트 키기 {placePlane}");
                     placePlane.HighLightOn(); // 하이라이트 키기
                 }
                 else // 끌 것이라면

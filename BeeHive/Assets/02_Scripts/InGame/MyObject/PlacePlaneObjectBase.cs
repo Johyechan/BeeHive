@@ -66,7 +66,7 @@ namespace InGame.MyObject
         public void HighLightOn()
         {
             _collider.enabled = true; // 클릭이 되도록 콜라이더 활성화
-            _ = _changeMaterialHandler.ChangeMaterial(false);
+            _changeMaterialHandler.ChangeMaterial(false);
         }
 
         // 하이라이트를 끄는 함수
@@ -77,7 +77,7 @@ namespace InGame.MyObject
 
             _collider.enabled = false; // 클릭이 되지 않도록 콜라이더 비활성화
 
-            _ = _changeMaterialHandler.ChangeMaterial(true);
+            _changeMaterialHandler.ChangeMaterial(true);
 
             _cost = 0; // 비용 초기화
         }
@@ -85,4 +85,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2025.09.23
+// 마지막 작성 일자: 2026.01.14

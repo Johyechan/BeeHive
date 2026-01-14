@@ -21,20 +21,20 @@ namespace InGame.MyObject.Piece.Handler
             _pieceData = pieceData;
         }
 
-        public async Task PieceSelect()
+        public void PieceSelect()
         {
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
             HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
-            await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
+            PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
 
-            await PlacePlaneManager.Instance.Variable.findCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, _pieceData.currentObjectType); // 한 칸 이동 가능한 칸 찾기
+            PlacePlaneManager.Instance.Variable.findCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, _pieceData.currentObjectType); // 한 칸 이동 가능한 칸 찾기
 
             if(_pieceBase.CurrentObjectType == ObjectType.Tank) // 전차일 경우
             {
                 if(CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있을 때
                 {
-                    await PlacePlaneManager.Instance.Variable.findCanPlacePlaneSystem.FindCanFirePowerAttackPiece(_pieceBase.CurrentTeamType, _pieceBase.PieceVariable.currentPlacePlane); // 한 칸 떨어진 기물들을 공격 가능 대상으로 지정
+                    PlacePlaneManager.Instance.Variable.findCanPlacePlaneSystem.FindCanFirePowerAttackPiece(_pieceBase.CurrentTeamType, _pieceBase.PieceVariable.currentPlacePlane); // 한 칸 떨어진 기물들을 공격 가능 대상으로 지정
                 }
             }
 
@@ -48,10 +48,10 @@ namespace InGame.MyObject.Piece.Handler
 
             HighLightEvents.OnPieceMovementHighLight?.Invoke(true, false); // 기물 이동 칸 하이라이트 키기, 이동 가능 배치 판 대상
 
-            await PieceEvents.OnShowCanAttackPieces?.Invoke(_pieceData.currentObjectType); // 보병이 공격 가능한 기물들 하이라이트 키기 (공격하는 기물)
+            PieceEvents.OnShowCanAttackPieces?.Invoke(_pieceData.currentObjectType); // 보병이 공격 가능한 기물들 하이라이트 키기 (공격하는 기물)
 
             _pieceBase.PieceVariable.isSelected = true; // 선택 되었다고 할당
         }
     }
 }
-// 마지막 작성 일자: 2025.11.03
+// 마지막 작성 일자: 2026.01.14

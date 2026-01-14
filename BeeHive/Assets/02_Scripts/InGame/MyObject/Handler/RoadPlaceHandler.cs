@@ -17,7 +17,7 @@ namespace InGame.MyObject.Handler
         {
             UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
 
-            await PlacePlaneManager.Instance.ChangePlacePlaneState(roadPlacePlane, roadPiece, false); // 현재 배치칸 상태 변경
+            PlacePlaneManager.Instance.ChangePlacePlaneState(roadPlacePlane, roadPiece, false); // 현재 배치칸 상태 변경
 
             RoadInfo roadInfo = new RoadInfo()
             {
@@ -38,10 +38,10 @@ namespace InGame.MyObject.Handler
 
             await roadPiece.MoveToPlacePlane(roadPlacePlane.transform.parent, roadPlacePlane.transform.localPosition, roadAngle); // 기물을 현재 배치 판 부모의 자식으로 변경 + 현재 이 배치판 위치 이동 + 각도 회전
 
-            await PieceManager.Instance.FindCanPlacePlane();
+            PieceManager.Instance.FindCanPlacePlane();
 
             UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
         }
     }
 }
-// 마지막 작성 일자: 2025.09.19
+// 마지막 작성 일자: 2026.01.14

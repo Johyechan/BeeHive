@@ -60,15 +60,15 @@ namespace InGame.MyObject.Piece.ObjectPieces
                 Road road = canChangeRoad as Road; // Road 클래스로 변환
                 if (road != null) // 성공적으로 변환이 되었다면
                 {
-                    _ = road.ChangeMaterial(true); // 도로를 기본 상태로 전환
+                    road.ChangeMaterial(true); // 도로를 기본 상태로 전환
                 }
             }
 
-            await PlacePlaneManager.Instance.ChangePlacePlaneState(PieceVariable.currentRoadPlacePlane, pieceBase, false);
+            PlacePlaneManager.Instance.ChangePlacePlaneState(PieceVariable.currentRoadPlacePlane, pieceBase, false);
 
-            await PlacePlaneManager.Instance.FindCanPlacePlane();
+            PlacePlaneManager.Instance.FindCanPlacePlane();
 
-            await ChangeMaterial(true); // 기본 머티리얼 상태로 전환
+            ChangeMaterial(true); // 기본 머티리얼 상태로 전환
 
             switch (CurrentTeamType)
             {
@@ -85,4 +85,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2025.10.20
+// 마지막 작성 일자: 2026.01.14

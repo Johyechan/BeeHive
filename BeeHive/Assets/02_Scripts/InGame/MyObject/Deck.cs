@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using MyUtil;
 using MyUtil.MyObjectPool;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,33 +30,37 @@ namespace InGame.MyObject
 
             NetworkManager.Instance.Socket.On("deckShuffled", (data) => // 서버로부터 덱 받기
             {
-                _deckList.Clear();
                 string json = data.GetValue().ToString(); // 서버가 전송한 값 받기
-                DeckInfo deckInfo = JsonUtility.FromJson<DeckInfo>(json); // DeckInfo로 변환
 
-                for(int i = 0; i < deckInfo.deck.Length; i++) // 덱에 있는 카드 수 만큼 반복
+                MainThreadDispatcher.Enqueue(() =>
                 {
-                    switch(deckInfo.deck[i])
-                    {
-                        case 1: // 성벽 강화 카드
-                            _deckList.Add(ObjectPoolType.CastleUpgradeCard);
-                            break;
-                        case 2: // 가뭄 카드
-                            _deckList.Add(ObjectPoolType.DroughtCard);
-                            break;
-                        case 3: // 풍년 카드
-                            _deckList.Add(ObjectPoolType.GoodHarvestCard);
-                            break;
-                        case 4: // 도로 변형 카드
-                            _deckList.Add(ObjectPoolType.RoadChangeCard);
-                            break;
-                        case 5: // 화력 카드
-                            _deckList.Add(ObjectPoolType.FirePowerCard);
-                            break;
-                    }
-                }
+                    _deckList.Clear();
+                    DeckInfo deckInfo = JsonUtility.FromJson<DeckInfo>(json); // DeckInfo로 변환
 
-                _ = CreateDeck(); // 덱 생성
+                    for (int i = 0; i < deckInfo.deck.Length; i++) // 덱에 있는 카드 수 만큼 반복
+                    {
+                        switch (deckInfo.deck[i])
+                        {
+                            case 1: // 성벽 강화 카드
+                                _deckList.Add(ObjectPoolType.CastleUpgradeCard);
+                                break;
+                            case 2: // 가뭄 카드
+                                _deckList.Add(ObjectPoolType.DroughtCard);
+                                break;
+                            case 3: // 풍년 카드
+                                _deckList.Add(ObjectPoolType.GoodHarvestCard);
+                                break;
+                            case 4: // 도로 변형 카드
+                                _deckList.Add(ObjectPoolType.RoadChangeCard);
+                                break;
+                            case 5: // 화력 카드
+                                _deckList.Add(ObjectPoolType.FirePowerCard);
+                                break;
+                        }
+                    }
+
+                    _ = CreateDeck(); // 덱 생성
+                });
             });
         }
 
@@ -73,4 +78,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.11.25
+// 마지막 작성 일자: 2026.01.14

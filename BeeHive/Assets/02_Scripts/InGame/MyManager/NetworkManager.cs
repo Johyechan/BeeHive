@@ -64,10 +64,10 @@ namespace InGame.MyManager
                 // 오류 발생 시 오류 표기
                 _socket.On("error", response =>
                 {
-                    MainThreadDispatcher.Enqueue(async () =>
+                    string text = response.GetValue<string>();
+                    MainThreadDispatcher.Enqueue(() =>
                     {
-                        string text = response.GetValue<string>();
-                        await UIManager.Instance.WarningUIMake(text);
+                        _ = UIManager.Instance.WarningUIMake(text);
                     });
                     return;
                 });

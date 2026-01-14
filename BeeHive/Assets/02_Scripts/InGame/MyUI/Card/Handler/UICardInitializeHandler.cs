@@ -18,7 +18,7 @@ namespace InGame.MyUI.Card.Handler
             _uiCardVariable = uiCardVariable;
         }
 
-        public Task Init(CanvasGroup cardUsePanelCanvaseGroup, CanvasGroup cardInformationCanvasGroup)
+        public void Init(CanvasGroup cardUsePanelCanvaseGroup, CanvasGroup cardInformationCanvasGroup)
         {
             _uiCardVariable.cardUsePanelCanvasGroup = cardUsePanelCanvaseGroup; // 매개 변수로 받은 카드 사용 여부를 묻는 패널의 캔버스 그룹 할당
             _uiCardVariable.cardInformationCanvasGroup = cardInformationCanvasGroup; // 매개 변수로 받은 카드 정보 패널의 캔버스 그룹 할당
@@ -36,9 +36,7 @@ namespace InGame.MyUI.Card.Handler
             Transform cardUseButtonTransform = buttonsTransform.GetChild(0); // 버튼을 모아둔 빈 객체의 첫 번째 자식 - 카드 사용 버튼
 
             _uiCardVariable.cardUseButton = cardUseButtonTransform.GetComponent<CardUseButton>(); // 버튼 할당
-
-            return Task.CompletedTask; // 테스크 완료 반환
         }
     }
 }
-// 마지막 작성 일자: 2025.11.07
+// 마지막 작성 일자: 2026.01.14

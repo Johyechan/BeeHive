@@ -35,7 +35,7 @@ namespace InGame.MyUI.Turn
         // 매개 변수로 받은 턴의 UI 애니메이션을 실행
         public async Task UIAnimationPlay(TurnType currentTurn)
         {
-            await PlacePlaneManager.Instance.FindCanPlacePlane();
+            PlacePlaneManager.Instance.FindCanPlacePlane();
             await _turnAnimations[currentTurn].UIAnimationPlay();
         }
     }

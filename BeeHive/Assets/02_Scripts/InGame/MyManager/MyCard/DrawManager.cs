@@ -60,7 +60,7 @@ namespace InGame.MyManager.MyCard
                 UICardBase uiCardBase = uiCard.GetComponent<UICardBase>();
                 uiCardBase.UICardVariable.cardObj = currentDrawCard.gameObject; // UI 카드에 현재 카드 객체 할당
 
-                await uiCardBase.Init(_cardUsePanelCanvasGroup, _cardInformationPanelCanvasGroup);
+                uiCardBase.Init(_cardUsePanelCanvasGroup, _cardInformationPanelCanvasGroup);
             }
 
             if(_deck.transform.childCount <= 0 && _usedDeckTrans.childCount > 0) // 덱이 비어있고 사용한 카드 덱에 카드가 있을 경우

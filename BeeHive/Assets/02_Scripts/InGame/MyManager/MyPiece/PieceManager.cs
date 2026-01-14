@@ -85,29 +85,29 @@ namespace InGame.MyManager.MyPiece
             await _attackRelatedPiecesMoveHandler.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, returnPos, attackPos);
         }
 
-        private async Task ShowCanAttackPieces(ObjectType attackingType)
+        private void ShowCanAttackPieces(ObjectType attackingType)
         {
-            await _canAttackPieceStateHandler.ShowCanAttackPieces(attackingType, _canAttackPieceMap); // 근거리 공격 가능 기물 탐색
+            _canAttackPieceStateHandler.ShowCanAttackPieces(attackingType, _canAttackPieceMap); // 근거리 공격 가능 기물 탐색
 
             if (attackingType == ObjectType.Tank) // 현재 기물이 전차일 경우
             {
                 if(CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있는 경우
                 {
-                    await _canAttackPieceStateHandler.ShowCanAttackPieces(attackingType, _canFirePowerAttackPieceMap, true); // 원거리 공격 가능 기물 탐색
+                    _canAttackPieceStateHandler.ShowCanAttackPieces(attackingType, _canFirePowerAttackPieceMap, true); // 원거리 공격 가능 기물 탐색
                 }
             }
         }
 
-        private async Task HideCanAttackPieces(bool changeFirePowerAttack)
+        private void HideCanAttackPieces(bool changeFirePowerAttack)
         {
-            await _canAttackPieceStateHandler.HideCanAttackPieces(_canAttackPieceMap); // 근거리 공격 대상 숨기기
-            await _canAttackPieceStateHandler.HideCanAttackPieces(_canFirePowerAttackPieceMap, true, changeFirePowerAttack); // 원거리 공격 대상 숨기기
+            _canAttackPieceStateHandler.HideCanAttackPieces(_canAttackPieceMap); // 근거리 공격 대상 숨기기
+            _canAttackPieceStateHandler.HideCanAttackPieces(_canFirePowerAttackPieceMap, true, changeFirePowerAttack); // 원거리 공격 대상 숨기기
         }
 
-        public async Task FindCanPlacePlane()
+        public void FindCanPlacePlane()
         {
-            await PlacePlaneManager.Instance.FindCanPlacePlane();
+            PlacePlaneManager.Instance.FindCanPlacePlane();
         }
     }
 }
-// 마지막 작성 일자: 2025.11.03
+// 마지막 작성 일자: 2026.01.14

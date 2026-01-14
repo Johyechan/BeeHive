@@ -48,7 +48,7 @@ namespace InGame.MyManager
         }
 
         // 덱 제작 함수(현재 방 ID)
-        public async Task MakeDeck(string currentRoomID, int castleUpdradeCardCount = 0, int droughtCardCount = 0, int goodHarvestCardCount = 0, int roadChangeCardCount = 0, int firePowerCardCount = 0)
+        public void MakeDeck(string currentRoomID, int castleUpdradeCardCount = 0, int droughtCardCount = 0, int goodHarvestCardCount = 0, int roadChangeCardCount = 0, int firePowerCardCount = 0)
         {
             _deckMakeCheckTcs = new TaskCompletionSource<bool>(); // 새로운 tcs 할당
 
@@ -70,8 +70,6 @@ namespace InGame.MyManager
             string json = JsonUtility.ToJson(deckShuffleInfo); // Json 형태로 변환
 
             NetworkManager.Instance.Socket.Emit("shuffle", json); // 서버로 전송
-
-            await Task.CompletedTask;
         }
 
         public async Task DeckMakeEnd()
@@ -79,10 +77,10 @@ namespace InGame.MyManager
             await _deckMakeCheckTcs.Task;
         }
 
-        public async void ReMakeDeck()
+        public void ReMakeDeck()
         {
-            await MakeDeck(SceneMgr.Instance.CurrentRoomID, _usedDeck.UsedCardInfo.castleCardCount, _usedDeck.UsedCardInfo.droughtCardCount, _usedDeck.UsedCardInfo.goodHarvestCardCount, _usedDeck.UsedCardInfo.roadChangeCardCount, _usedDeck.UsedCardInfo.firePowerCardCount);
+            MakeDeck(SceneMgr.Instance.CurrentRoomID, _usedDeck.UsedCardInfo.castleCardCount, _usedDeck.UsedCardInfo.droughtCardCount, _usedDeck.UsedCardInfo.goodHarvestCardCount, _usedDeck.UsedCardInfo.roadChangeCardCount, _usedDeck.UsedCardInfo.firePowerCardCount);
         }
     }
 }
-// 마지막 작성 일자: 2025.12.19
+// 마지막 작성 일자: 2026.01.14

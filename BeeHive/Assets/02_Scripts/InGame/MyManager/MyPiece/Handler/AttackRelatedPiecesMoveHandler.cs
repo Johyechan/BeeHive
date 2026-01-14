@@ -21,13 +21,13 @@ namespace InGame.MyManager.MyPiece.Handler
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
             HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
-            await PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
+            PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
 
             UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
 
             if(isFirePowerAttack == 0) // 공격 받은 기물이 원거리 공격 대상이 아닐 경우
             {
-                await PlacePlaneManager.Instance.ChangePlacePlaneState(returnPiece.PieceVariable.currentPlacePlane, attackPiece, true); // 현재 배치칸 상태 변경
+                PlacePlaneManager.Instance.ChangePlacePlaneState(returnPiece.PieceVariable.currentPlacePlane, attackPiece, true); // 현재 배치칸 상태 변경
             }
             else // 공격 받은 기물이 원거리 공격 대상일 경우
             {
@@ -64,8 +64,8 @@ namespace InGame.MyManager.MyPiece.Handler
                 }
             }
 
-            await PieceManager.Instance.FindCanPlacePlane(); // 다시 이동가능한 위치 찾기
+            PieceManager.Instance.FindCanPlacePlane(); // 다시 이동가능한 위치 찾기
         }
     }
 }
-// 마지막 작성 일자: 2025.11.03
+// 마지막 작성 일자: 2026.01.14

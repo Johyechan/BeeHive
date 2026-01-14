@@ -22,7 +22,7 @@ namespace InGame.MyInput
 
         public async Task<bool> IsReturn()
         {
-            if(!await WarningEvent.OnCheckCurrentTurn?.Invoke(TurnType.DrawTurn, "드로우 턴이 아닙니다.")) // 드로우 턴이 아니라면
+            if(!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.DrawTurn, "드로우 턴이 아닙니다.")) // 드로우 턴이 아니라면
             {
                 return true; // 반환
             }

@@ -43,7 +43,7 @@ namespace InGame.MyUI.Card
                 Road road = pieceBase as Road; // Road 클래스로 변환
                 if(road != null) // 성공적으로 변환이 되었다면
                 {
-                    _ = road.ChangeMaterial(false); // 도로를 선택 가능한 상태로 변경(+ 머티리얼을 이미션 머티리얼로 변경)
+                    road.ChangeMaterial(false); // 도로를 선택 가능한 상태로 변경(+ 머티리얼을 이미션 머티리얼로 변경)
                 }
             }
 

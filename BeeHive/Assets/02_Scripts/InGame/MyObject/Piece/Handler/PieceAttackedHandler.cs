@@ -27,12 +27,12 @@ namespace InGame.MyObject.Piece.Handler
         }
 
         // 배치 칸 비활성화
-        private async Task HighLightOffFunction(bool changeFirePowerAttack)
+        private void HighLightOffFunction(bool changeFirePowerAttack)
         {
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
             HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
-            await PieceEvents.OnHideCanAttackPieces?.Invoke(changeFirePowerAttack); // 공격 가능한 기물들 하이라이트 끄기
+            PieceEvents.OnHideCanAttackPieces?.Invoke(changeFirePowerAttack); // 공격 가능한 기물들 하이라이트 끄기
         }
 
         public async Task PieceAttacked()
@@ -41,7 +41,7 @@ namespace InGame.MyObject.Piece.Handler
 
             if (!await WarningEvent.OnCanMovePiece?.Invoke(attackPieceBase.CurrentObjectType, true)) // 이미 이동 또는 공격을 했던 기물과 같은 타입의 기물이 공격 했었다면
             {
-                await HighLightOffFunction(true);
+                HighLightOffFunction(true);
 
                 await Task.CompletedTask; // 테스크 종료
                 return; // 함수 종료
@@ -53,14 +53,14 @@ namespace InGame.MyObject.Piece.Handler
                 {
                     if (CardManager.Instance.HaveFirePowerCard) // 공격한 기물의 팀이 화력 카드를 가지고 있다면
                     {
-                        await HighLightOffFunction(false); // 배치칸 비활성화
+                        HighLightOffFunction(false); // 배치칸 비활성화
                         _pieceData.confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include);
                         _pieceData.confirmUI.gameObject.SetActive(true); // 객체 활성화
 
                         bool result = await _pieceData.confirmUI.Confirm();
                         if (!result) // 결과가 거짓이라면
                         {
-                            await HighLightOffFunction(true);
+                            HighLightOffFunction(true);
                             await Task.CompletedTask; // 테스크 종료
                             return; // 함수 종료
                         }
@@ -75,7 +75,7 @@ namespace InGame.MyObject.Piece.Handler
                             {
                                 GameManager.Instance.PieceCanMoveMap[attackPieceBase.CurrentObjectType] = false; // 공격한 기물이 이동 한 것으로 판정
 
-                                await HighLightOffFunction(true);
+                                HighLightOffFunction(true);
 
                                 UICardBase uiCardBase = CardManager.Instance.FindFirePowerCard(); // 자신의 패에서 화력 카드 탐색
 
@@ -84,7 +84,7 @@ namespace InGame.MyObject.Piece.Handler
                                     CardManager.Instance.HaveFirePowerCard = false; // 화력 카드가 없는 상태로 전환
                                 }
 
-                                await PieceManager.Instance.FindCanPlacePlane(); // 재탐색
+                                PieceManager.Instance.FindCanPlacePlane(); // 재탐색
                                 await Task.CompletedTask; // 테스크 종료
                                 return; // 함수 종료
                             }
@@ -137,4 +137,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2025.11.03
+// 마지막 작성 일자: 2026.01.14

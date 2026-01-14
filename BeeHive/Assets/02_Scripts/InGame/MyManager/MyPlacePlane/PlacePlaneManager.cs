@@ -63,23 +63,20 @@ namespace InGame.MyManager.MyPlacePlane
             HighLightEvents.OnPieceMovementHighLight -= _variable.highLightHandler.PieceHighLight;
         }
 
-        public async Task FindCanPlacePlane()
+        public void FindCanPlacePlane()
         {
-            await MainThreadDispatcher.Enqueue(async () =>
-            {
-                await _variable.findCanPlacePlaneSystem.ResetPlacePlanes();
+            _variable.findCanPlacePlaneSystem.ResetPlacePlanes();
 
-                await _variable.findCanPlacePlaneSystem.FindCanPlacePiecePlane(TeamManager.Instance.CurrentTeamType);
+            _variable.findCanPlacePlaneSystem.FindCanPlacePiecePlane(TeamManager.Instance.CurrentTeamType);
 
-                await _variable.findCanPlacePlaneSystem.FindCanPlaceRoadPlane(TeamManager.Instance.CurrentTeamType);
-            });
+            _variable.findCanPlacePlaneSystem.FindCanPlaceRoadPlane(TeamManager.Instance.CurrentTeamType);
         }
 
         // 배치 칸 상태 변경 함수(상태 변경될 배치칸, 배치할 기물, 이동 여부)
-        public async Task ChangePlacePlaneState(PlacePlaneObjectBase currentPlacePlane, PieceBase placedPiece, bool isMove)
+        public void ChangePlacePlaneState(PlacePlaneObjectBase currentPlacePlane, PieceBase placedPiece, bool isMove)
         {
-            await _variable.placePlaneStateHandler.ChangePlacePlaneState(currentPlacePlane, placedPiece, isMove);
+            _variable.placePlaneStateHandler.ChangePlacePlaneState(currentPlacePlane, placedPiece, isMove);
         }
     }
 }
-// 마지막 작성 일자: 2025.12.15
+// 마지막 작성 일자: 2026.01.14
