@@ -66,34 +66,43 @@ namespace InGame.MySystem.Game.Handler
                 });
             });
 
-            NetworkManager.Instance.Socket.On("tankAttacked", (value) =>
+            NetworkManager.Instance.Socket.On("tankAttacked", async (value) =>
             {
+                ConfirmUI confirmUI = null;
+                TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>();
+
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     if (CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있다면
                     {
-                        ConfirmUI confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 가져오기
+                        confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 가져오기
 
                         confirmUI.gameObject.SetActive(true); // 확인 UI 활성화
-
-                        bool result = false;//confirmUI.Confirm("상대 전차에게 공격 당했습니다. \n 화력 카드를 사용하여 방어 하시겠습니까?");
-
-                        if (result) // 화력 카드를 사용해서 방어를 선택했다면
+                        confirmUI.Confirm(result =>
                         {
-                            NetworkManager.Instance.Socket.Emit("chooseDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
-                        }
-                        else // 화력 카드를 사용하지 않아 방어를 선택하지 않았다면
-                        {
-                            NetworkManager.Instance.Socket.Emit("chooseNoDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
-                        }
+                            confirmUI.ConfirmEnd();
+                            confirmResultTcs.TrySetResult(result);
+                        },
+                        "상대 전차에게 공격 당했습니다. \n 화력 카드를 사용하여 방어 하시겠습니까?");
                     }
                     else // 화력 카드를 가지고 있지 않을 경우
                     {
-                        NetworkManager.Instance.Socket.Emit("chooseNoDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
+                        confirmResultTcs.SetResult(false);
                     }
                 });
+
+                bool result = await confirmResultTcs.Task; // 결과 대기
+
+                if (result) // 화력 카드를 사용해서 방어를 선택했다면
+                {
+                    NetworkManager.Instance.Socket.Emit("chooseDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
+                }
+                else // 화력 카드를 사용하지 않아 방어를 선택하지 않았다면
+                {
+                    NetworkManager.Instance.Socket.Emit("chooseNoDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
+                }
             });
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.15

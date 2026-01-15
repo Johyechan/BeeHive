@@ -2,6 +2,7 @@ using DG.Tweening;
 using InGame.MyManager;
 using InGame.MyUI.MyUIButton;
 using MyUtil;
+using System;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -25,8 +26,6 @@ namespace InGame.MyUI
 
         private CanvasGroup _canvasGroup; // UI 애니메이션을 위한 canvasGroup 변수
 
-        private TaskCompletionSource<bool> _tcs; // bool 결과 값을 대기하여 받는 변수
-
         private UnityAction _yesButtonAction; // 예 버튼 델리게이트 (여기에 함수를 저장하여 구독 및 해제)
         private UnityAction _noButtonAction; // 아니오 버튼 델리게이트 (여기에 함수를 저장하여 구독 및 해제)
 
@@ -35,36 +34,28 @@ namespace InGame.MyUI
             _canvasGroup = GetComponent<CanvasGroup>();
         }
 
-        private void Click(bool value)
+        // 확인 종료 후 초기화 함수
+        public void ConfirmEnd()
         {
-            _tcs?.TrySetResult(value);
+            _yesButton.onClick.RemoveListener(_yesButtonAction); // 예 버튼 초기화
+            _noButton.onClick.RemoveListener(_noButtonAction); // 아니오 버튼 초기화
         }
 
-        public async Task<bool> Confirm(string message = "화력을 사용하여 공격하시겠습니까?")
+        public void Confirm(Action<bool> onResult, string message = "화력을 사용하여 공격하시겠습니까?")
         {
-            bool result = false;
-
             _askText.ForceMeshUpdate(); // TMP를 GPU에 강제로 올리기
 
             _cardUseButton.UICardBase = CardManager.Instance.FindFirePowerCard(); // 화력 카드 할당
 
             _askText.text = message;
 
-            _tcs = new TaskCompletionSource<bool>();
-
-            _yesButtonAction = () => Click(true); // 예 버튼 이벤트
-            _noButtonAction = () => Click(false); // 아니오 버튼 이벤트
+            _yesButtonAction = () => onResult(true); // 예 버튼 이벤트
+            _noButtonAction = () => onResult(false); // 아니오 버튼 이벤트
 
             _yesButton.onClick.AddListener(_yesButtonAction); // 예 버튼에 true를 반환하는 기능 구독
             _noButton.onClick.AddListener(_noButtonAction); // 아니오 버튼에 false 반환하는 기능 구독
             _canvasGroup.DOFade(1, _animationDuration); // 페이드 인
-
-            result = await _tcs.Task;
-
-            _yesButton.onClick.RemoveListener(_yesButtonAction); // 예 버튼 초기화
-            _noButton.onClick.RemoveListener(_noButtonAction); // 예 버튼 초기화
-            return result;
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.15

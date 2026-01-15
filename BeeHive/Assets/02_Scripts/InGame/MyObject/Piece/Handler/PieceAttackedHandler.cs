@@ -56,8 +56,15 @@ namespace InGame.MyObject.Piece.Handler
                         HighLightOffFunction(false); // 배치칸 비활성화
                         _pieceData.confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include);
                         _pieceData.confirmUI.gameObject.SetActive(true); // 객체 활성화
+                        TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
 
-                        bool result = await _pieceData.confirmUI.Confirm();
+                        _pieceData.confirmUI.Confirm(result =>
+                        {
+                            _pieceData.confirmUI.ConfirmEnd(); // 확인 완료
+                            confirmResultTcs.TrySetResult(result); // 확인 결과(result) 할당
+                        });
+
+                        bool result = await confirmResultTcs.Task; // 확인 대기
                         if (!result) // 결과가 거짓이라면
                         {
                             HighLightOffFunction(true);
@@ -137,4 +144,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.15

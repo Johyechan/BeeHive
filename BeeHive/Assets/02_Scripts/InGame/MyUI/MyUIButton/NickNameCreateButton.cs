@@ -28,19 +28,20 @@ namespace InGame.MyUI.MyUIButton
             NetworkManager.Instance.Socket.On("isNickNameDuplicate", (value) => // 닉네임 중복 여부
             {
                 bool isDuplicate = value.GetValue<bool>(); // 중복 여부 bool 값으로 저장
-                if (isDuplicate) // 중복이라면
+
+                MainThreadDispatcher.Enqueue(() =>
                 {
-                    MainThreadDispatcher.Enqueue(() =>
+                    if (isDuplicate) // 중복이라면
                     {
                         _nickNameDuplicateCanvasGroup.gameObject.SetActive(true); // 닉네임 중복 경고 UI 활성화
                         _nickNameDuplicateCanvasGroup.DOFade(1, _fadeDuration); // 닉네임 중복 경고 UI 페이드 인
-                    });
-                }
-                else // 중복이 아닐경우
-                {
-                    NetworkManager.Instance.CurrentClientName = _currentNickName; // 현재 닉네임 할당
-                    SceneManager.LoadScene(_tutorialSceneNumber); // 튜토리얼 씬으로 이동
-                }
+                    }
+                    else // 중복이 아닐경우
+                    {
+                        NetworkManager.Instance.CurrentClientName = _currentNickName; // 현재 닉네임 할당
+                        SceneManager.LoadScene(_tutorialSceneNumber); // 튜토리얼 씬으로 이동
+                    }
+                });
             });
         }
 
@@ -58,4 +59,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.01.05
+// 마지막 작성 일자: 2026.01.15
