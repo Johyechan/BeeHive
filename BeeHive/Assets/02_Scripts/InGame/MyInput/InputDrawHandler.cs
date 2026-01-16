@@ -45,7 +45,7 @@ namespace InGame.MyInput
         // 드로우 함수
         private async Task Draw()
         {
-            if (await _handlerData.returnHandler.IsReturn()) // 반환을 해야한다면
+            if (_handlerData.returnHandler.IsReturn()) // 반환을 해야한다면
                 return; // 반환
 
             _ = Delay(); // 연속적인 드로우를 막기 위한 딜레이 시작
@@ -74,4 +74,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2025.11.24
+// 마지막 작성 일자: 2026.01.16

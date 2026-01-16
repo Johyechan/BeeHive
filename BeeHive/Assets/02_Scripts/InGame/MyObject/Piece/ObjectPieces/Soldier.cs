@@ -40,7 +40,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
             PieceVariable.parent = TeamManager.Instance.GetSoldierTransform(TeamManager.Instance.CurrentTeamType); // 보병 객체의 부모 할당
         }
 
-        private async Task NearRoadChange(PieceBase pieceBase, TeamType type, PiecePlacePlaneObject piecePlacePlaneObject)
+        private void NearRoadChange(PieceBase pieceBase, TeamType type, PiecePlacePlaneObject piecePlacePlaneObject)
         {
             if (pieceBase.PieceVariable.id != PieceVariable.id) // 자기자신이 부른 게 아닐경우 - 왜?
             {
@@ -56,13 +56,13 @@ namespace InGame.MyObject.Piece.ObjectPieces
                     switch (type)
                     {
                         case TeamType.Team1:
-                            await ChangeRoad(ObjectPoolType.Team1Road, nearRoad); // 도로 변경
+                            ChangeRoad(ObjectPoolType.Team1Road, nearRoad); // 도로 변경
                             break;
                         case TeamType.Team2:
-                            await ChangeRoad(ObjectPoolType.Team2Road, nearRoad); // 도로 변경
+                            ChangeRoad(ObjectPoolType.Team2Road, nearRoad); // 도로 변경
                             break;
                         case TeamType.Team3:
-                            await ChangeRoad(ObjectPoolType.Team3Road, nearRoad); // 도로 변경
+                            ChangeRoad(ObjectPoolType.Team3Road, nearRoad); // 도로 변경
                             break;
                     }
                 }
@@ -72,7 +72,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
 
         // 도로 변경 함수
-        private async Task ChangeRoad(ObjectPoolType type, RoadPlacePlaneObject roadPlacePlaneObject)
+        private void ChangeRoad(ObjectPoolType type, RoadPlacePlaneObject roadPlacePlaneObject)
         {
             float targetAngle = roadPlacePlaneObject.PlacedPiece.gameObject.transform.rotation.eulerAngles.y;
             switch(roadPlacePlaneObject.PlacedPiece.CurrentTeamType) // 기존 도로의 팀 타입
@@ -88,7 +88,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
                     break;
             }
             
-            GameObject roadObj = await ObjectPoolManager.Instance.GetObject(type, roadPlacePlaneObject.transform.parent); // 새 도로 객체 생성
+            GameObject roadObj = ObjectPoolManager.Instance.GetObject(type, roadPlacePlaneObject.transform.parent); // 새 도로 객체 생성
             PieceBase road = roadObj.GetComponent<PieceBase>(); // 도로 객체에서 PieceBase 가져오기
 
             PlacePlaneManager.Instance.ChangePlacePlaneState(roadPlacePlaneObject, road, false); // 배치칸 상태 변경

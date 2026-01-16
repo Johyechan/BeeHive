@@ -75,7 +75,7 @@ namespace InGame.MyObject.Piece
         // 오브젝트가 마우스로 클릭되었을 때 실행될 함수
         public virtual async void ObjectClicked()
         {
-            if (!await WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
+            if (!WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
             {
                 HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
@@ -84,7 +84,7 @@ namespace InGame.MyObject.Piece
             }
 
             // 현재 턴이 메인 턴이 아니라면
-            if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 이동할 수 없습니다."))
+            if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 이동할 수 없습니다."))
                 return; // 반환
 
             if (_pieceData.teamType != TeamManager.Instance.CurrentTeamType) // 현재 팀과 다른 팀의 기물이라면
@@ -105,4 +105,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.16

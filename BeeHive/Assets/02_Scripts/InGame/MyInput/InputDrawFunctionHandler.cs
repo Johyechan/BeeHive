@@ -13,7 +13,7 @@ namespace InGame.MyInput
     {
         public async Task DrawFunction(Transform deckTransform, Transform playerCardsParent, RectTransform playerUICardsParent)
         {
-            await DrawManager.Instance.DrawCard(deckTransform, playerCardsParent, playerUICardsParent); // 카드 드로우 실행
+            DrawManager.Instance.DrawCard(deckTransform, playerCardsParent, playerUICardsParent); // 카드 드로우 실행
 
             Sequence seq = DOTween.Sequence()
                   .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke())
@@ -23,4 +23,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2025.09.18
+// 마지막 작성 일자: 2026.01.16

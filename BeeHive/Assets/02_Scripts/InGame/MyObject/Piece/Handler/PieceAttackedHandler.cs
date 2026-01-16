@@ -39,7 +39,7 @@ namespace InGame.MyObject.Piece.Handler
         {
             PieceBase attackPieceBase = GameManager.Instance.CurrentMovePiece.GetComponent<PieceBase>(); // 공격한 객체의 PieceBase 가져오기
 
-            if (!await WarningEvent.OnCanMovePiece?.Invoke(attackPieceBase.CurrentObjectType, true)) // 이미 이동 또는 공격을 했던 기물과 같은 타입의 기물이 공격 했었다면
+            if (!WarningEvent.OnCanMovePiece.Invoke(attackPieceBase.CurrentObjectType, true)) // 이미 이동 또는 공격을 했던 기물과 같은 타입의 기물이 공격 했었다면
             {
                 HighLightOffFunction(true);
 
@@ -144,4 +144,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.15
+// 마지막 작성 일자: 2026.01.16

@@ -21,7 +21,7 @@ namespace InGame.MyUI.Card
 
             if (PieceManager.Instance.CanChangeRoadList.Count <= 0) // 도로 변형이 가능한 도로가 없다면
             {
-                _ = UIManager.Instance.WarningUIMake("도로 변형 가능한 도로가 없어서 사용 불가합니다.");
+                UIManager.Instance.WarningUIMake("도로 변형 가능한 도로가 없어서 사용 불가합니다.");
                 return false;
             }
 
@@ -51,4 +51,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.11.26
+// 마지막 작성 일자: 2026.01.16

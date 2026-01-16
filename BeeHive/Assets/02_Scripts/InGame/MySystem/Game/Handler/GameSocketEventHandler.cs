@@ -68,14 +68,13 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("tankAttacked", async (value) =>
             {
-                ConfirmUI confirmUI = null;
                 TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>();
 
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     if (CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있다면
                     {
-                        confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 가져오기
+                        ConfirmUI confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 가져오기
 
                         confirmUI.gameObject.SetActive(true); // 확인 UI 활성화
                         confirmUI.Confirm(result =>
@@ -105,4 +104,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.15
+// 마지막 작성 일자: 2026.01.16

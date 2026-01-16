@@ -47,7 +47,7 @@ namespace InGame.MyManager
         {
             if (_cardUsedCheckMap[type]) // type 형태의 카드를 이미 사용 했었다면
             {
-                _ = UIManager.Instance.WarningUIMake("같은 카드를 두 번 이상 사용할 수 없습니다"); // 경고창 띄우기
+                UIManager.Instance.WarningUIMake("같은 카드를 두 번 이상 사용할 수 없습니다"); // 경고창 띄우기
                 return true; // 일전에 사용했다고 반환
             }
 
@@ -95,4 +95,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.01
+// 마지막 작성 일자: 2026.01.16

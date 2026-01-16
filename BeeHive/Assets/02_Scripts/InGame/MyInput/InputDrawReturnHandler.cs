@@ -20,9 +20,9 @@ namespace InGame.MyInput
             _deck = deck;
         }
 
-        public async Task<bool> IsReturn()
+        public bool IsReturn()
         {
-            if(!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.DrawTurn, "드로우 턴이 아닙니다.")) // 드로우 턴이 아니라면
+            if(!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.DrawTurn, "드로우 턴이 아닙니다.")) // 드로우 턴이 아니라면
             {
                 return true; // 반환
             }
@@ -43,7 +43,7 @@ namespace InGame.MyInput
                 return true; // 반환
             }
 
-            if (!await WalletEvent.OnUseGoldBar.Invoke(2)) // 금괴 2개를 사용할 수 없다면
+            if (!WalletEvent.OnUseGoldBar.Invoke(2)) // 금괴 2개를 사용할 수 없다면
             {
                 return true; // 반환
             }
@@ -52,4 +52,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2025.11.13
+// 마지막 작성 일자: 2026.01.16

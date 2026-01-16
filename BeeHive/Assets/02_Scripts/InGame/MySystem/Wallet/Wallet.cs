@@ -50,7 +50,7 @@ namespace InGame.MySystem
         }
 
         // 금화를 얻는 함수(얻는 값)
-        private async Task GetGoldCoin(int value)
+        private void GetGoldCoin(int value)
         {
             _goldCoinCount += value; // 금화 증가
 
@@ -58,21 +58,21 @@ namespace InGame.MySystem
 
             GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-            await _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
+            _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
         }
 
         // 금괴를 얻는 함수(얻는 값)
-        private async Task GetGoldBar(int value)
+        private void GetGoldBar(int value)
         {
             _goldBarCount += value; // 금괴 증가
 
             GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-            await _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
+            _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
         }
 
         // 금괴 사용 함수
-        private async Task<bool> UseGoldBar(int value)
+        private bool UseGoldBar(int value)
         {
             if (!CanUseGoldBar(value)) // 사용하려는 값보다 금괴 수가 적다면
                 return false; // false 반환
@@ -81,7 +81,7 @@ namespace InGame.MySystem
 
             GoldSetEventEmit();
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-            await _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
+            _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
             return true;
         }
 
@@ -120,4 +120,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.01.09
+// 마지막 작성 일자: 2026.01.16

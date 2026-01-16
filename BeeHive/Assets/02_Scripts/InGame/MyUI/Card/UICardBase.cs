@@ -110,7 +110,7 @@ namespace InGame.MyUI.Card
         {
             if(_uiCardData.poolType == ObjectPoolType.FirePowerUICard) // 화력 카드일 경우
             {
-                _ = UIManager.Instance.WarningUIMake("화력 카드는 직접 사용 하는 카드가 아닙니다 \n 전차가 원거리 공격을 할 때 \n 자동으로 사용 여부를 \n 묻습니다"); // 직접 사용 불가 패널 띄우기
+                UIManager.Instance.WarningUIMake("화력 카드는 직접 사용 하는 카드가 아닙니다 \n 전차가 원거리 공격을 할 때 \n 자동으로 사용 여부를 \n 묻습니다"); // 직접 사용 불가 패널 띄우기
             }
             else // 화력 카드가 아닐 경우
             {
@@ -119,4 +119,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.12.01
+// 마지막 작성 일자: 2026.01.16

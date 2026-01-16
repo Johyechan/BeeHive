@@ -26,28 +26,26 @@ namespace InGame.MySystem
         }
 
         // 도로 생성 함수(생성 개수, 어떤 팀의 도로인지)
-        private async Task MakeRoad(int count, TeamType type, Transform parent)
+        private void MakeRoad(int count, TeamType type, Transform parent)
         {
             for (int i = 0; i < count; i++)
             {
                 switch (type)
                 {
                     case TeamType.Team1:
-                        GameObject road1 = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, parent);
+                        GameObject road1 = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, parent);
                         PosSet(road1, type, i);
                         break;
                     case TeamType.Team2:
-                        GameObject road2 = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, parent);
+                        GameObject road2 = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, parent);
                         PosSet(road2, type, i);
                         break;
                     case TeamType.Team3:
-                        GameObject road3 = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, parent);
+                        GameObject road3 = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, parent);
                         PosSet(road3, type, i);
                         break;
                 }
             }
-
-            await Task.CompletedTask;
         }
 
         private void PosSet(GameObject obj, TeamType type, int count)
@@ -70,4 +68,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2026.01.16

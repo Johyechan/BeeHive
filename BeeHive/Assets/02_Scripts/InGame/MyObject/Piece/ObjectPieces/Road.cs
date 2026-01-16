@@ -15,11 +15,11 @@ namespace InGame.MyObject.Piece.ObjectPieces
     // 도로 기물 클래스
     public class Road : PieceBase
     {
-        public override async void ObjectClicked()
+        public override void ObjectClicked()
         {
             if(!CardManager.Instance.CardUsed) // 카드 사용으로 변경하는 것이 아니라면
             {
-                if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 이동할 수 없습니다."))
+                if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 이동할 수 없습니다."))
                     return; // 반환
             }
             else // 카드 사용으로 변경하는 것이라면
@@ -31,13 +31,13 @@ namespace InGame.MyObject.Piece.ObjectPieces
             switch (TurnManager.Instance.CurrentTeamType) // 현재 턴의 팀 타입에 따라
             {
                 case TeamType.Team1:
-                    roadObj = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, transform.parent);
+                    roadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, transform.parent);
                     break;
                 case TeamType.Team2:
-                    roadObj = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, transform.parent);
+                    roadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, transform.parent);
                     break;
                 case TeamType.Team3:
-                    roadObj = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, transform.parent);
+                    roadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, transform.parent);
                     break;
             }
 
@@ -85,4 +85,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.16

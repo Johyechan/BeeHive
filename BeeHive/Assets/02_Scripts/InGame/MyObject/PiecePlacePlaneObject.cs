@@ -63,13 +63,13 @@ namespace InGame.MyObject
         }
 
         // 마우스로 클릭 시 실행될 함수
-        public override async void ObjectClicked()
+        public override void ObjectClicked()
         {
             if (isNearToCastle) // 성과 근접한 배치칸이면서
             {
                 if(_frontPiecePlacePlaneObject.PlacedObjectType != ObjectType.None)// 앞에 있는 기물 배치칸에 배치된 상대 기물이 있다면 
                 {
-                    await UIManager.Instance.WarningUIMake("상대가 해당 배치 칸의 앞 칸을 점령 했습니다"); // UI 경고문 생성
+                    UIManager.Instance.WarningUIMake("상대가 해당 배치 칸의 앞 칸을 점령 했습니다"); // UI 경고문 생성
                     HighLightOffEvent(); // 하이라이트 끄기
                     return; // 반환
                 }
@@ -77,7 +77,7 @@ namespace InGame.MyObject
 
             if (GameManager.Instance.CurrentMovePiece != null) // 현재 이동 가능한 객체 있다면
             {
-                if (!await WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
+                if (!WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
                 {
                     HighLightOffEvent(); // 하이라이트 끄기
                     return; // 반환
@@ -87,7 +87,7 @@ namespace InGame.MyObject
             }
             else // 현재 이동 가능한 객체가 없다면
             {
-                if (await _pieceReturnCheckHandler.IsReturn(_leftPieceCount, _cost)) // 기물 배치가 불가능 할 경우
+                if (_pieceReturnCheckHandler.IsReturn(_leftPieceCount, _cost)) // 기물 배치가 불가능 할 경우
                     return; // 반환
 
                 ObjectPlace(); // 기물 배치 함수 실행
@@ -97,7 +97,7 @@ namespace InGame.MyObject
         // 객체를 이동하는 기능 함수
         private async void ObjectMove()
         {
-            if (!await WarningEvent.OnCanMovePiece.Invoke(CanPlacePieceType, false)) // 같은 타입의 기물이 이동 했었다면
+            if (!WarningEvent.OnCanMovePiece.Invoke(CanPlacePieceType, false)) // 같은 타입의 기물이 이동 했었다면
             {
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 이동 가능한 판 하이라이트 끄기
                 PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
@@ -159,7 +159,7 @@ namespace InGame.MyObject
 
                         string pieceChangeRoadJson = JsonUtility.ToJson(pieceChangeRoadInfo);
                         NetworkManager.Instance.Socket.Emit("pieceChangeRoad", pieceChangeRoadJson);
-                        await PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, pieceBase.CurrentTeamType, pieceBase.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
+                        PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, pieceBase.CurrentTeamType, pieceBase.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                     }
                 }
 
@@ -193,4 +193,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.16

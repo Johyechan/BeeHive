@@ -41,7 +41,7 @@ namespace InGame.MyManager.MyCard
             _cardSetHandle = new CardSetHandle(_deck.deckTransform, cardParents); // 카드 세팅 클래스 생성
         }
 
-        public async Task DrawCard(Transform deckParent, Transform playerCardsParent, Transform playerUICardsParent, bool includeUI = true)
+        public void DrawCard(Transform deckParent, Transform playerCardsParent, Transform playerUICardsParent, bool includeUI = true)
         {
             int currentDeckCardCount = deckParent.childCount; // 덱에 있는 카드 수
             Transform currentDrawCardTrans = deckParent.GetChild(currentDeckCardCount - 1);
@@ -56,7 +56,7 @@ namespace InGame.MyManager.MyCard
 
             if (includeUI) // UI도 생성해야 할 경우
             {
-                GameObject uiCard = await ObjectPoolManager.Instance.GetObject(currentDrawCard.CardUIPoolType, playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
+                GameObject uiCard = ObjectPoolManager.Instance.GetObject(currentDrawCard.CardUIPoolType, playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
                 UICardBase uiCardBase = uiCard.GetComponent<UICardBase>();
                 uiCardBase.UICardVariable.cardObj = currentDrawCard.gameObject; // UI 카드에 현재 카드 객체 할당
 
@@ -74,4 +74,4 @@ namespace InGame.MyManager.MyCard
         }
     }
 }
-// 마지막 작성 일자: 2025.12.15
+// 마지막 작성 일자: 2026.01.16

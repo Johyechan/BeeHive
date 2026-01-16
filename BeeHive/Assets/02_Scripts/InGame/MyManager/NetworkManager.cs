@@ -67,7 +67,7 @@ namespace InGame.MyManager
                     string text = response.GetValue<string>();
                     MainThreadDispatcher.Enqueue(() =>
                     {
-                        _ = UIManager.Instance.WarningUIMake(text);
+                        UIManager.Instance.WarningUIMake(text);
                     });
                     return;
                 });
@@ -95,4 +95,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.01.08
+// 마지막 작성 일자: 2026.01.16

@@ -8,6 +8,7 @@ using InGame.MyObject;
 using InGame.MyObject.Piece;
 using MyUtil;
 using MyUtil.MyObjectPool;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MySystem.Game.Handler
@@ -34,7 +35,7 @@ namespace InGame.MySystem.Game.Handler
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     Transform parent = GameObject.Find(roadAddedInfo.roadParentName).transform;
-                    _ = PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
+                    PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
                 });
             });
 
@@ -73,7 +74,7 @@ namespace InGame.MySystem.Game.Handler
                     PieceBase pieceBase = pieceObj.GetComponent<PieceBase>(); // PieceBase 클래스 가져오기
                     PiecePlacePlaneObject piecePlacePlane = piecePlacePlaneObj.GetComponent<PiecePlacePlaneObject>(); // 기물 배치 칸 클래스 가져오기
 
-                    _ = PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, (TeamType)pieceChangedRoadInfo.teamType, piecePlacePlane); // 주위 도로 변경 이벤트 호출
+                    PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, (TeamType)pieceChangedRoadInfo.teamType, piecePlacePlane); // 주위 도로 변경 이벤트 호출
 
                     PieceManager.Instance.FindCanPlacePlane();
                 });
@@ -86,20 +87,26 @@ namespace InGame.MySystem.Game.Handler
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     GameObject targetRoadObj = ObjectIdManager.Instance.FindObject(roadID); // 기존 도로
+                    if(targetRoadObj == null)
+                    {
+                        NetworkManager.Instance.Socket.Emit("debug", "역시나 ObjectIdManager 쪽에서 오류가 생겼다");
+                        return;
+                    }
 
                     GameObject newRoadObj = null; // 변경된 도로
-                    //switch (TurnManager.Instance.CurrentTeamType) // 현재 턴의 팀
-                    //{
-                    //    case TeamType.Team1:
-                    //        newRoadObj = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, targetRoadObj.transform.parent);
-                    //        break;
-                    //    case TeamType.Team2:
-                    //        newRoadObj = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, targetRoadObj.transform.parent);
-                    //        break;
-                    //    case TeamType.Team3:
-                    //        newRoadObj = await ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, targetRoadObj.transform.parent);
-                    //        break;
-                    //}
+
+                    switch (TurnManager.Instance.CurrentTeamType) // 현재 턴의 팀
+                    {
+                        case TeamType.Team1:
+                            newRoadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, targetRoadObj.transform.parent);
+                            break;
+                        case TeamType.Team2:
+                            newRoadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, targetRoadObj.transform.parent);
+                            break;
+                        case TeamType.Team3:
+                            newRoadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, targetRoadObj.transform.parent);
+                            break;
+                    }
 
                     newRoadObj.transform.localPosition = targetRoadObj.transform.localPosition;
                     newRoadObj.transform.localRotation = targetRoadObj.transform.localRotation;
@@ -124,9 +131,8 @@ namespace InGame.MySystem.Game.Handler
                             break;
                     }
                 });
-                
             });
         }
     }
 }
-// 마지막 작성 일자: 2026.01.15
+// 마지막 작성 일자: 2026.01.16

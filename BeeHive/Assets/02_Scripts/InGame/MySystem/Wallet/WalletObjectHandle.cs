@@ -8,11 +8,11 @@ namespace InGame.MySystem
     // 지갑 관련(금화 및 금괴) 객체 생성 및 삭제 핸들러
     public class WalletObjectHandle
     {
-        public async Task SetObject(Transform goldCoinParent, Transform goldBarParent, int goldCoinCount, int goldBarCount)
+        public void SetObject(Transform goldCoinParent, Transform goldBarParent, int goldCoinCount, int goldBarCount)
         {
             if (goldCoinParent.childCount < goldCoinCount) // 금화 객체가 실제 금화보다 적을 경우
             {
-                await MakeObject(goldCoinParent.childCount, goldCoinCount, ObjectPoolType.GoldCoin, goldCoinParent, 0.006f);
+                MakeObject(goldCoinParent.childCount, goldCoinCount, ObjectPoolType.GoldCoin, goldCoinParent, 0.006f);
             }
             else if (goldCoinParent.childCount > goldCoinCount) // 금화 객체가 실제 금화보다 많을 경우
             {
@@ -21,7 +21,7 @@ namespace InGame.MySystem
 
             if (goldBarParent.childCount < goldBarCount) // 금괴 객체가 실제 금괴보다 적을 경우
             {
-                await MakeObject(goldBarParent.childCount, goldBarCount, ObjectPoolType.GoldBar, goldBarParent, 0.006f);
+                MakeObject(goldBarParent.childCount, goldBarCount, ObjectPoolType.GoldBar, goldBarParent, 0.006f);
             }
             else if (goldBarParent.childCount > goldBarCount) // 금괴 객체 실제 금괴보다 많을 경우
             {
@@ -29,13 +29,13 @@ namespace InGame.MySystem
             }
         }
 
-        private async Task MakeObject(int childCount, int realCount, ObjectPoolType type, Transform parent, float interval)
+        private void MakeObject(int childCount, int realCount, ObjectPoolType type, Transform parent, float interval)
         {
             int count = realCount - childCount;
             for (int i = 0; i < count; i++) // 격차만큼 반복
             {
                 int index = childCount + i;
-                GameObject obj = await ObjectPoolManager.Instance.GetObject(type, parent); // 금화 또는 금괴 가져오기
+                GameObject obj = ObjectPoolManager.Instance.GetObject(type, parent); // 금화 또는 금괴 가져오기
                 obj.transform.localPosition = new Vector3(index % 5 * interval, 0, index / 5 * -0.014f); // x축은 5개를 기준으로 interval * n 번째로 설정, z축은 5개마다 z축 - 0.014f 씩 내리기
             }
         }
@@ -50,4 +50,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.09.09
+// 마지막 작성 일자: 2026.01.16

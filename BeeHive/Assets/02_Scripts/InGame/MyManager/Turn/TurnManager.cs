@@ -113,10 +113,10 @@ namespace InGame.MyManager.Turn
                 }
             }
 
+            await _turnUIAnimation.UIAnimationPlay(nextTurn); // 배치 관련 배열 초기화 및 현재 턴을 알려주는 애니메이션
+
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
             _turnTimerUIHandler.SliderTimerStop(); // 턴 타이머 슬라이더 초기화
-
-            await _turnUIAnimation.UIAnimationPlay(_currentTurnType); // 현재 턴의 작업 실행
 
             if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
             {
@@ -171,4 +171,4 @@ namespace InGame.MyManager.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.16

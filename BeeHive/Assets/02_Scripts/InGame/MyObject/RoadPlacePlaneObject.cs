@@ -41,7 +41,7 @@ namespace InGame.MyObject
         // 클릭 시 실행될 함수
         public override async void ObjectClicked()
         {
-            if (await _roadPlaceReturnCheckHandler.IsReturn(_leftPieceCount, _cost))
+            if (_roadPlaceReturnCheckHandler.IsReturn(_leftPieceCount, _cost))
                 return;
             
             GameObject newRoad = _roadParent.GetChild(_roadParent.childCount - 1).gameObject; // 도로 객체들의 부모 객체에서 도로 객체 가져오기
@@ -56,4 +56,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.09.29
+// 마지막 작성 일자: 2026.01.16

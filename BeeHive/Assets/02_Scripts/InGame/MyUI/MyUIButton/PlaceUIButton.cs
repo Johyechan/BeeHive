@@ -47,6 +47,8 @@ namespace InGame.MyUI.MyUIButton
                     _objectParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType); // 도로 객체들의 부모를 할당
                     break;
             }
+
+            NetworkManager.Instance.Socket.Emit("debug", $"부모 객체: {_objectParent}");
         }
 
         private void OnEnable()
@@ -84,13 +86,10 @@ namespace InGame.MyUI.MyUIButton
         // UI 텍스트 변경 함수
         private void SetText()
         {
-            MainThreadDispatcher.Enqueue(() =>
-            {
-                _leftPieceCountText.text = $"사용 가능 개수: {_objectParent.childCount}";
-            });
+            _leftPieceCountText.text = $"사용 가능 개수: {_objectParent.childCount}";
         }
 
         public abstract void OnUIClick();
     }
 }
-// 마지막 작성 일자: 2025.12.17
+// 마지막 작성 일자: 2026.01.16

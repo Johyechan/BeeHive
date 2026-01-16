@@ -3,6 +3,7 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPlacePlane;
 using MyUtil;
+using System;
 using System.Threading.Tasks;
 
 namespace InGame.MyUI.MyUIButton
@@ -12,13 +13,13 @@ namespace InGame.MyUI.MyUIButton
     public class PieceButton : PlaceUIButton
     {
         // 클릭 시 실행될 함수
-        public override async void OnUIClick()
+        public override void OnUIClick()
         {
             // 현재 턴이 메인 턴이 아니라면
-            if (!await WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 생성할 수 없습니다."))
+            if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 생성할 수 없습니다."))
                 return; // 반환
 
-            if (!await WarningEvent.OnCanMakePiece.Invoke()) // 생성이 불가능하다면
+            if (!WarningEvent.OnCanMakePiece.Invoke()) // 생성이 불가능하다면
             {
                 return;
             }
@@ -30,11 +31,21 @@ namespace InGame.MyUI.MyUIButton
             {
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 이동 칸 하이라이트 끄기, 이동 가능한 배치 칸 대상
                 PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
+
+                NetworkManager.Instance.Socket.Emit("debug", $"CanPiecePlacePlanes 크기: {PlacePlaneManager.Instance.Variable.highLightHandler.CanPiecePlacePlanes.Count}");
+
                 foreach (var piece in PlacePlaneManager.Instance.Variable.highLightHandler.CanPiecePlacePlanes) // 배치 가능한 기물 칸들 순회
                 {
-                    piece.CanPlacePieceType = _canPlaceType; // 배치 가능한 타입을 할당
-                    piece.Cost = _cost; // 비용 할당
-                    piece.LeftPieceCount = _objectParent.childCount; // 남은 기물 수 할당
+                    try
+                    {
+                        piece.CanPlacePieceType = _canPlaceType; // 배치 가능한 타입을 할당
+                        piece.Cost = _cost; // 비용 할당
+                        piece.LeftPieceCount = _objectParent.childCount; // 남은 기물 수 할당
+                    }
+                    catch(Exception ex)
+                    {
+                        NetworkManager.Instance.Socket.Emit("debug", $"예외 발생: {ex}");
+                    }
                 }
 
                 if (HighLightEvents.SelectedPlacementType != _canPlaceType) // 만약 현재 배치 가능한 타입이 다르다면
@@ -57,4 +68,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.16
