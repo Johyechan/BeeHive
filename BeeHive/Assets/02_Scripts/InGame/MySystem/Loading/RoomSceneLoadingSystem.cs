@@ -1,4 +1,5 @@
 using DG.Tweening;
+using MyUtil;
 using UnityEngine;
 
 namespace InGame.MySystem.Loading
@@ -13,11 +14,11 @@ namespace InGame.MySystem.Loading
 
         private async void Awake()
         {
-            await RoomReady.WaitAsync(); // 방 준비 대기
+            await RoomReady.Gate.WaitAsync(); // 방 준비 대기
 
             await _loadingUICanvasGroup.DOFade(0, _animationDuration).AsyncWaitForCompletion(); // 로딩 창 닫기
             _loadingUICanvasGroup.gameObject.SetActive(false); // 비활성화
         }
     }
 }
-// 마지막 작성 일자: 2025.12.18
+// 마지막 작성 일자: 2026.01.19

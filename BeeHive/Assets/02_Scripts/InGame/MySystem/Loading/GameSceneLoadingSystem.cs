@@ -2,7 +2,9 @@ using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Team;
 using InGame.MyManager.Turn;
+using MyUtil;
 using UnityEngine;
 
 namespace InGame.MySystem.Loading
@@ -19,21 +21,33 @@ namespace InGame.MySystem.Loading
         {
             NetworkManager.Instance.Socket.Emit("debug", "로딩 시스템 시작");
             NetworkManager.Instance.Socket.Emit("debug", $"팀 매니저: {TeamManager.Instance}");
+
             await TeamManager.Instance.TeamSetTcs.Task; // 팀이 정해질 때까지 대기
+
             NetworkManager.Instance.Socket.Emit("debug", "팀 정해짐");
 
+            await EventReady.WaitAsync(); // 이벤트 준비 완료까지 대기
+
+            NetworkManager.Instance.Socket.Emit("debug", "이벤트 준비 완료");
+
+            TeamManagerEvents.OnNeedTeamManagerEvent?.Invoke(); // 팀 매니저가 필요한 함수들 실행 이벤트 호출
+
             await CameraManager.Instance.SetCamera(TeamManager.Instance.CurrentTeamType); // 카메라 세팅
+
             NetworkManager.Instance.Socket.Emit("debug", "카메라 세팅 완료");
 
             await _loadingCanvasGroup.DOFade(0, _animationDuration).OnComplete(() => _loadingCanvasGroup.gameObject.SetActive(false)).AsyncWaitForCompletion(); // 로딩 ui 닫기
+
             NetworkManager.Instance.Socket.Emit("debug", "로딩 UI 종료");
 
-            await TurnManager.Instance.TurnChange(TurnType.ChangeTeam, true); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
-            NetworkManager.Instance.Socket.Emit("debug", "처음 팀 알려주기 완료");
+            NetworkManager.Instance.Socket.Emit("debug", "게임 턴 시작");
 
-            GameReady.Completed(); // 게임 준비 완료
+            await TurnManager.Instance.TurnChange(TurnType.ChangeTeam, true); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
+
+            GameReady.Gate.Completed(); // 게임 준비 완료
+
             NetworkManager.Instance.Socket.Emit("debug", "게임 준비 완료");
         }
     }
 }
-// 마지막 작성 일자: 2025.12.17
+// 마지막 작성 일자: 2026.01.19

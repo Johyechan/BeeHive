@@ -29,12 +29,16 @@ namespace InGame.MySystem.Game.Handler
         {
             NetworkManager.Instance.Socket.On("roadAdded", (data) =>
             {
+                NetworkManager.Instance.Socket.Emit("debug", $"서버한테 이벤트 받음");
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
+                NetworkManager.Instance.Socket.Emit("debug", $"서버한테 이벤트 받음 - json: {json}");
                 RoadAddedInfo roadAddedInfo = JsonUtility.FromJson<RoadAddedInfo>(json); // RoadAddedInfo로 변환
+                NetworkManager.Instance.Socket.Emit("debug", $"서버한테 이벤트 받음 - roadAddedInfo: {roadAddedInfo}");
 
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     Transform parent = GameObject.Find(roadAddedInfo.roadParentName).transform;
+                    NetworkManager.Instance.Socket.Emit("debug", $"서버한테 이벤트 받음 - 도로 부모 찾음: {parent}");
                     PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
                 });
             });

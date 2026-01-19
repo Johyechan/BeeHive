@@ -6,6 +6,7 @@ using UnityEngine;
 using InGame.MyObject.Piece;
 using InGame.MyManager.MyPiece;
 using InGame.MyObject.Handler;
+using MyUtil;
 
 namespace InGame.MyObject
 {
@@ -33,7 +34,7 @@ namespace InGame.MyObject
 
         private async void Start()
         {
-            await GameReady.WaitAsync(); // 게임 준비 대기
+            await GameReady.Gate.WaitAsync(); // 게임 준비 대기
 
             _roadParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType); // 도로 기물의 부모 탐색 후 할당
         }
@@ -56,4 +57,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.19

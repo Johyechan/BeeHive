@@ -95,7 +95,7 @@ namespace InGame.MySystem.Room
                         }
                     }
 
-                    RoomReady.Completed(); // 방 준비 완료
+                    RoomReady.Gate.Completed(); // 방 준비 완료
                 });
 
                 socket.On("goLobby", _ => MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(1)));// 로비 씬으로 이동
@@ -139,4 +139,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2025.12.29
+// 마지막 작성 일자: 2026.01.19

@@ -32,9 +32,12 @@ namespace InGame.MySystem.Game
             if (IsReturn()) return; // 반환해야할 조건을 충족했을 경우 반환
 
             Transform roadParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType);
+            NetworkManager.Instance.Socket.Emit("debug", $"도로 부모: {roadParent}");
             PieceEvents.OnGetRoad?.Invoke(2, TeamManager.Instance.CurrentTeamType, roadParent); // 도로 2개 획득
+            NetworkManager.Instance.Socket.Emit("debug", $"도로 생성");
 
             UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
+            NetworkManager.Instance.Socket.Emit("debug", $"도로 남은 기물 수 변경");
             AddRoadInfo addRoadInfo = new AddRoadInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
@@ -44,6 +47,7 @@ namespace InGame.MySystem.Game
             };
 
             string json = JsonUtility.ToJson(addRoadInfo); // 구조체를 Json 형태로 변환
+            NetworkManager.Instance.Socket.Emit("debug", $"json - {json}");
             NetworkManager.Instance.Socket.Emit("addRoad", json); // 서버에 이벤트 전달
 
             await Task.CompletedTask; // Task 완료 반환

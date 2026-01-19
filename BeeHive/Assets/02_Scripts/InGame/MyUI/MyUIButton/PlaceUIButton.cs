@@ -1,8 +1,10 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Team;
 using InGame.MyUI.MyUIInterface;
 using MyUtil;
+using System;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -26,13 +28,29 @@ namespace InGame.MyUI.MyUIButton
         private void Awake()
         {
             _isHighLightOn = false; // 하이라이트 꺼짐 상태로 초기화
+            EventReady.Add(); // 대기 하는 객체 추가
         }
 
-        private async void Start()
+        private void OnEnable()
         {
-            await GameReady.WaitAsync(); // 게임 준비 대기
+            HighLightEvents.OnPiecePlacementHighLight += HightLightOff; // 기물 전용 이벤트 구독
+            HighLightEvents.OnRoadPlacementHighLight += HightLightOff; // 도로 전용 이벤트 구독
+            UIEvents.OnSetLeftPieceText += SetText; // 남은 기물 수 세팅하는 이벤트 구독
+            TeamManagerEvents.OnNeedTeamManagerEvent += Init; // 팀 매니저가 필요한 이벤트에 초기화 함수 구독
+            EventReady.CompletedOne();
+        }
 
-            switch(_canPlaceType) // 배치할 객체의 타입에 따라
+        private void OnDisable()
+        {
+            HighLightEvents.OnPiecePlacementHighLight -= HightLightOff; // 기물 전용 이벤트 구독 해제
+            HighLightEvents.OnRoadPlacementHighLight -= HightLightOff; // 도로 전용 이벤트 구독 해제
+            UIEvents.OnSetLeftPieceText -= SetText; // 남은 기물 수 세팅하는 이벤트 구독
+            TeamManagerEvents.OnNeedTeamManagerEvent -= Init; // 팀 매니저가 필요한 이벤트에 초기화 함수 구독 해제
+        }
+        
+        private void Init()
+        {
+            switch (_canPlaceType) // 배치할 객체의 타입에 따라
             {
                 case ObjectType.Miner: // 광부를 배치할 수 있다면
                     _objectParent = TeamManager.Instance.GetMinerTransform(TeamManager.Instance.CurrentTeamType); // 광부 객체들의 부모를 할당
@@ -49,20 +67,6 @@ namespace InGame.MyUI.MyUIButton
             }
 
             NetworkManager.Instance.Socket.Emit("debug", $"부모 객체: {_objectParent}");
-        }
-
-        private void OnEnable()
-        {
-            HighLightEvents.OnPiecePlacementHighLight += HightLightOff; // 기물 전용 이벤트 구독
-            HighLightEvents.OnRoadPlacementHighLight += HightLightOff; // 도로 전용 이벤트 구독
-            UIEvents.OnSetLeftPieceText += SetText; // 남은 기물 수 세팅하는 이벤트 구독
-        }
-
-        private void OnDisable()
-        {
-            HighLightEvents.OnPiecePlacementHighLight -= HightLightOff; // 기물 전용 이벤트 구독 해제
-            HighLightEvents.OnRoadPlacementHighLight -= HightLightOff; // 도로 전용 이벤트 구독 해제
-            UIEvents.OnSetLeftPieceText -= SetText; // 남은 기물 수 세팅하는 이벤트 구독
         }
 
         // 하이라이트가 꺼질 때 현재 하이라이트 활성화 여부를 끄는 함수 - 기물용
@@ -86,10 +90,18 @@ namespace InGame.MyUI.MyUIButton
         // UI 텍스트 변경 함수
         private void SetText()
         {
-            _leftPieceCountText.text = $"사용 가능 개수: {_objectParent.childCount}";
+            try
+            {
+                NetworkManager.Instance.Socket.Emit("debug", $"부모 객체: {_objectParent}, 자식 수: {_objectParent.childCount}");
+                _leftPieceCountText.text = $"사용 가능 개수: {_objectParent.childCount}";
+            }
+            catch(Exception ex)
+            {
+                NetworkManager.Instance.Socket.Emit("debug", $"{ex}");
+            }
         }
 
         public abstract void OnUIClick();
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.19

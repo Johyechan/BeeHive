@@ -3,6 +3,7 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using MyUtil;
 using MyUtil.MyObjectPool;
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -28,23 +29,20 @@ namespace InGame.MySystem
         // 도로 생성 함수(생성 개수, 어떤 팀의 도로인지)
         private void MakeRoad(int count, TeamType type, Transform parent)
         {
+            NetworkManager.Instance.Socket.Emit("debug", $"도로 생성 함수 들어옴 - Count: {count}, TeamType: {type}, Parent: {parent}");
+            ObjectPoolType objectPoolType = type switch
+            {
+                TeamType.Team1 => ObjectPoolType.Team1Road, // 팀1은 팀1 도로 타입 반환
+                TeamType.Team2 => ObjectPoolType.Team2Road, // 팀2은 팀2 도로 타입 반환
+                TeamType.Team3 => ObjectPoolType.Team3Road, // 팀3은 팀3 도로 타입 반환
+                _ => throw new ArgumentOutOfRangeException() // type이 허용 범위를 벗어남
+            };
+
             for (int i = 0; i < count; i++)
             {
-                switch (type)
-                {
-                    case TeamType.Team1:
-                        GameObject road1 = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, parent);
-                        PosSet(road1, type, i);
-                        break;
-                    case TeamType.Team2:
-                        GameObject road2 = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, parent);
-                        PosSet(road2, type, i);
-                        break;
-                    case TeamType.Team3:
-                        GameObject road3 = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, parent);
-                        PosSet(road3, type, i);
-                        break;
-                }
+                GameObject road = ObjectPoolManager.Instance.GetObject(objectPoolType, parent);
+                PosSet(road, type, i);
+                NetworkManager.Instance.Socket.Emit("debug", $"도로 생성 - {road}");
             }
         }
 
@@ -68,4 +66,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.19

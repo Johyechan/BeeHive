@@ -5,6 +5,7 @@ using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Handler;
 using InGame.MyObject.Piece;
+using MyUtil;
 using MyUtil.MyObjectPool;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -37,7 +38,7 @@ namespace InGame.MyObject
 
         private async void Start()
         {
-            await GameReady.WaitAsync();
+            await GameReady.Gate.WaitAsync(); // 게임 준비 완료 대기
 
             ParentSet();
         }
@@ -193,4 +194,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.19
