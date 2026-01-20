@@ -28,6 +28,11 @@ namespace InGame
             }
         }
 
+        public static void Reset()
+        {
+            _isReady = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        }
+
         // 대기 함수
         public static Task WaitAsync()
         {
@@ -35,4 +40,4 @@ namespace InGame
         }
     }
 }
-// 마지막 작성 일자: 2026.01.19
+// 마지막 작성 일자: 2026.01.20

@@ -68,11 +68,14 @@ namespace InGame.MyObject
         {
             if (isNearToCastle) // 성과 근접한 배치칸이면서
             {
-                if(_frontPiecePlacePlaneObject.PlacedObjectType != ObjectType.None)// 앞에 있는 기물 배치칸에 배치된 상대 기물이 있다면 
+                if(_frontPiecePlacePlaneObject.PlacedObjectType != ObjectType.None)// 앞에 있는 기물 배치칸에 배치된 기물이 있다면 
                 {
-                    UIManager.Instance.WarningUIMake("상대가 해당 배치 칸의 앞 칸을 점령 했습니다"); // UI 경고문 생성
-                    HighLightOffEvent(); // 하이라이트 끄기
-                    return; // 반환
+                    if (_frontPiecePlacePlaneObject.TeamType != TeamManager.Instance.CurrentTeamType) // 앞에 있는 기물 배치칸에 배치된 기물이 내 팀이 아닐 경우
+                    {
+                        UIManager.Instance.WarningUIMake("상대가 해당 배치 칸의 앞 칸을 점령 했습니다"); // UI 경고문 생성
+                        HighLightOffEvent(); // 하이라이트 끄기
+                        return; // 반환
+                    }
                 }
             }
 
@@ -194,4 +197,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.19
+// 마지막 작성 일자: 2026.01.20

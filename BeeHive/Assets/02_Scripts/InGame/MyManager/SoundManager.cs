@@ -13,7 +13,7 @@ namespace InGame.MyManager
 
         private Dictionary<SFXType, AudioSource> _sfxMap = new Dictionary<SFXType, AudioSource>(); // 효과음 맵
 
-        private float _masterVolume = 0; // 마스터
+        private float _masterVolume = 1; // 마스터
         public float MasterVolume { get => _masterVolume; set => _masterVolume = value; } // 마스터 프로퍼티
 
         private float _bgmVolume = 1; // 배경음악

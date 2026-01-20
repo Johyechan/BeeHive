@@ -18,7 +18,7 @@ namespace InGame.MyManager.Turn
     {
         [SerializeField] private float _teamChangeDelay; // 다른 팀의 턴으로 변경하면서 기다리는 시간 변수
 
-        [SerializeField] private int _turnDurationTime; // 턴 지속 시간
+        [SerializeField] private int _turnDurationTime; // 턴 지속 시간(초)
 
         [SerializeField] private Slider _turnTimerSlider; // 턴 타이머 슬라이더
 
