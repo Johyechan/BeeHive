@@ -48,7 +48,7 @@ namespace InGame.MyManager
         private Castle _myCastle; // 플레이어 성
         public Castle MyCastle { get => _myCastle; set => _myCastle = value; }
 
-        protected override void Awake()
+        protected override async void Awake()
         {
             base.Awake();
 
@@ -62,16 +62,18 @@ namespace InGame.MyManager
             _pieceCanMoveMap.Add(ObjectType.Soldier, true); // 보병 기물 이동 가능 여부
             _pieceCanMoveMap.Add(ObjectType.Tank, true); // 전차 기물 이동 가능 여부
 
+            await TeamReady.Gate.WaitAsync(); // 게임 준비 완료 대기
+
             switch(TeamManager.Instance.CurrentTeamType)
             {
                 case TeamType.Team1: // 팀1 일 때 팀1 성 반환
-                    MyCastle = GameObject.Find("Team1Castle").GetComponent<Castle>();
+                    _myCastle = GameObject.Find("Team1Castle").GetComponent<Castle>();
                     break;
                 case TeamType.Team2: // 팀2 일 때 팀2 성 반환
-                    MyCastle = GameObject.Find("Team2Castle").GetComponent<Castle>();
+                    _myCastle = GameObject.Find("Team2Castle").GetComponent<Castle>();
                     break;
                 case TeamType.Team3: // 팀3 일 때 팀3 성 반환
-                    MyCastle = GameObject.Find("Team3Castle").GetComponent<Castle>();
+                    _myCastle = GameObject.Find("Team3Castle").GetComponent<Castle>();
                     break;
             }
         }

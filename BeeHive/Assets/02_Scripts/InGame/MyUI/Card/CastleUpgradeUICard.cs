@@ -25,7 +25,6 @@ namespace InGame.MyUI.Card
 
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
             NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
-
             // 성 체력 1증가
             GameManager.Instance.MyCastle.CastleUpgrade(); // 자기 자신 최대 체력 1 증가
 

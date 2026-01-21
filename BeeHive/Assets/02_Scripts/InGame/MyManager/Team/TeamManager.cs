@@ -27,6 +27,9 @@ namespace InGame.MyManager
             }
         }// 팀 세팅 대기 Task 프로퍼티
 
+        private bool _firstTurn = true; // 팀의 첫 번째 턴 여부
+        public bool FirstTurn { get => _firstTurn; set => _firstTurn = value; } // 팀의 첫 번째 턴 여부 프로퍼티
+
         protected override void Awake()
         {
             base.Awake();

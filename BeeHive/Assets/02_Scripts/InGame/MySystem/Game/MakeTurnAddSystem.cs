@@ -1,3 +1,4 @@
+using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Turn;
@@ -22,7 +23,26 @@ namespace InGame.MySystem.Game
         {
             if (IsReturn()) return; // 반환해야할 조건을 충족했을 경우 반환
 
-            WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
+            if(TeamManager.Instance.FirstTurn) // 각 팀마다 첫 번째 턴일 경우
+            {
+                TeamManager.Instance.FirstTurn = false; // 첫 턴 종료
+                switch (TeamManager.Instance.CurrentTeamType)
+                {
+                    case TeamType.Team1:
+                        WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
+                        break;
+                    case TeamType.Team2:
+                        WalletEvent.OnGetGoldBar?.Invoke(3); // 금괴 3개 획득
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else // 각 팀마다 첫 번째 턴이 아닐경우
+            {
+                WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
+            }
+                
 
             await Task.CompletedTask; // Task 완료 반환
         }
@@ -65,4 +85,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.21
