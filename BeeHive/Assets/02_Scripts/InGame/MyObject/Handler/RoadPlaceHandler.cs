@@ -40,8 +40,11 @@ namespace InGame.MyObject.Handler
 
             PieceManager.Instance.FindCanPlacePlane();
 
+            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                return; // 반환
+
             UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.22

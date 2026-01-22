@@ -19,6 +19,9 @@ namespace InGame.MySystem.Game.Handler
         {
             NetworkManager.Instance.Socket.On("drought", (value) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 int isDrought = value.GetValue<int>();
                 MainThreadDispatcher.Enqueue(() =>
                 {
@@ -28,6 +31,9 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("castleHpChanged", (value) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = value.GetValue().ToString();
                 CastleHpChangeInfo castleHpChangeInfo = JsonUtility.FromJson<CastleHpChangeInfo>(json); // Json 값 변환
 
@@ -41,6 +47,9 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("isGameOver", value =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 int loseTeamType = value.GetValue<int>();
 
                 MainThreadDispatcher.Enqueue(() =>
@@ -53,6 +62,9 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("castleHit", (value) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = value.GetValue().ToString();
                 CastleHitInfo castleHitInfo = JsonUtility.FromJson<CastleHitInfo>(json);
 
@@ -68,6 +80,9 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("tankAttacked", async (value) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>();
 
                 MainThreadDispatcher.Enqueue(() =>
@@ -104,4 +119,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.22

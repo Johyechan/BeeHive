@@ -32,8 +32,6 @@ namespace InGame.MyUI.MyUIButton
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 기물 이동 칸 하이라이트 끄기, 이동 가능한 배치 칸 대상
                 PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
 
-                NetworkManager.Instance.Socket.Emit("debug", $"CanPiecePlacePlanes 크기: {PlacePlaneManager.Instance.Variable.highLightHandler.CanPiecePlacePlanes.Count}");
-
                 foreach (var piece in PlacePlaneManager.Instance.Variable.highLightHandler.CanPiecePlacePlanes) // 배치 가능한 기물 칸들 순회
                 {
                     try

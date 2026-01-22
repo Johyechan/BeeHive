@@ -65,8 +65,6 @@ namespace InGame.MyUI.MyUIButton
                     _objectParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType); // 도로 객체들의 부모를 할당
                     break;
             }
-
-            NetworkManager.Instance.Socket.Emit("debug", $"부모 객체: {_objectParent}");
         }
 
         // 하이라이트가 꺼질 때 현재 하이라이트 활성화 여부를 끄는 함수 - 기물용
@@ -92,7 +90,6 @@ namespace InGame.MyUI.MyUIButton
         {
             try
             {
-                NetworkManager.Instance.Socket.Emit("debug", $"부모 객체: {_objectParent}, 자식 수: {_objectParent.childCount}");
                 _leftPieceCountText.text = $"사용 가능 개수: {_objectParent.childCount}";
             }
             catch(Exception ex)

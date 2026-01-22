@@ -29,7 +29,6 @@ namespace InGame.MySystem
         // 도로 생성 함수(생성 개수, 어떤 팀의 도로인지)
         private void MakeRoad(int count, TeamType type, Transform parent)
         {
-            NetworkManager.Instance.Socket.Emit("debug", $"도로 생성 함수 들어옴 - Count: {count}, TeamType: {type}, Parent: {parent}");
             ObjectPoolType objectPoolType = type switch
             {
                 TeamType.Team1 => ObjectPoolType.Team1Road, // 팀1은 팀1 도로 타입 반환
@@ -42,7 +41,6 @@ namespace InGame.MySystem
             {
                 GameObject road = ObjectPoolManager.Instance.GetObject(objectPoolType, parent);
                 PosSet(road, type, i);
-                NetworkManager.Instance.Socket.Emit("debug", $"도로 생성 - {road}");
             }
         }
 

@@ -53,6 +53,9 @@ namespace InGame.MyManager.Turn
             {
                 socket.On("turnChanged", value =>
                 {
+                    if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
                     int turn = value.GetValue<int>(); // int 자료형으로 읽어오기
                     TurnType turnType = (TurnType)turn; // TurnType형태로 turn변수 변경
 
@@ -135,6 +138,9 @@ namespace InGame.MyManager.Turn
                         PieceManager.Instance.IsDrought = false; // 가뭄 종료
                     }
 
+                    if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
                     HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
                     HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
                     HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
@@ -171,4 +177,4 @@ namespace InGame.MyManager.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.22

@@ -42,7 +42,8 @@ namespace InGame.MyUI.Turn
 
                     NetworkManager.Instance.Socket.Emit("destroyLeftRoad", json); // 서버에 이벤트 전달
                 }).AsyncWaitForCompletion(); // 사용하지 않은 도로 전부 삭제
+
         }
     }
 }
-// 마지막 작성 일자: 2025.09.23
+// 마지막 작성 일자: 2026.01.22

@@ -1,6 +1,8 @@
+using InGame.MyManager;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace MyUtil
 {
@@ -35,9 +37,10 @@ namespace MyUtil
                 {
                     action = _listActions[i]; // 리스트에서 액션 꺼내기
                 }
+
                 await action?.Invoke(); // 액션 실행
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.11.06
+// 마지막 작성 일자: 2026.01.22

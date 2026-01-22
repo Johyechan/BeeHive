@@ -36,6 +36,9 @@ namespace InGame.MyObject
         {
             await GameReady.Gate.WaitAsync(); // 게임 준비 대기
 
+            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                return; // 반환
+
             _roadParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType); // 도로 기물의 부모 탐색 후 할당
         }
 
@@ -57,4 +60,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.19
+// 마지막 작성 일자: 2026.01.22

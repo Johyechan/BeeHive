@@ -27,6 +27,9 @@ namespace InGame.MyUI.MyUIButton
         {
             NetworkManager.Instance.Socket.On("isNickNameDuplicate", (value) => // 닉네임 중복 여부
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 bool isDuplicate = value.GetValue<bool>(); // 중복 여부 bool 값으로 저장
 
                 MainThreadDispatcher.Enqueue(() =>
@@ -59,4 +62,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.01.15
+// 마지막 작성 일자: 2026.01.22

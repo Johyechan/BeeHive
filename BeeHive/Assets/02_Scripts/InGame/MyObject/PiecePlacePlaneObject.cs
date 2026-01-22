@@ -40,6 +40,9 @@ namespace InGame.MyObject
         {
             await GameReady.Gate.WaitAsync(); // 게임 준비 완료 대기
 
+            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                return; // 반환
+
             ParentSet();
         }
 
@@ -149,6 +152,9 @@ namespace InGame.MyObject
 
                 await pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
 
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 if (pieceBase.CurrentObjectType == ObjectType.Soldier)
                 {
                     if (pieceBase.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 이동한 기물이 현재 팀의 기물일 경우에만
@@ -163,6 +169,7 @@ namespace InGame.MyObject
 
                         string pieceChangeRoadJson = JsonUtility.ToJson(pieceChangeRoadInfo);
                         NetworkManager.Instance.Socket.Emit("pieceChangeRoad", pieceChangeRoadJson);
+
                         PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, pieceBase.CurrentTeamType, pieceBase.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                     }
                 }
@@ -197,4 +204,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.20
+// 마지막 작성 일자: 2026.01.22

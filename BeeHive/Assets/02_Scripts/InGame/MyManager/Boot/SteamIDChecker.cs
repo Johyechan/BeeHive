@@ -34,7 +34,6 @@ namespace InGame.MyManager.Boot
                     }
                     else
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", "Steam API 호출 결과가 정상");
                         _getTicketTcs?.TrySetResult(Convert.ToBase64String(
                             cb.m_rgubTicket, 0, (int)cb.m_cubTicket)); // m_rgubTicket은 Steam이 발급한 인증 티켓의 원본 바이너리 데이터(byte 배열)
                                                                        // m_cubTicket은 이 티켓 데이터의 실제 길이
@@ -46,7 +45,6 @@ namespace InGame.MyManager.Boot
                     _getTicketTcs = null; // 작업이 끝난 tcs는 초기화(중복 방지)
                 });
 
-            NetworkManager.Instance.Socket.Emit("debug", $"웹 티켓 콜백 생성: {_getTicketForWebApiCallback}");
             _callbackInitialized = true;
         }
 
@@ -61,17 +59,14 @@ namespace InGame.MyManager.Boot
             }
 
             _getTicketTcs = new TaskCompletionSource<string>(); // 새로운 티켓 값을 가지는 tcs 생성
-            NetworkManager.Instance.Socket.Emit("debug", "새로운 티켓 값을 가지는 tcs 생성");
 
             SteamUser.GetAuthTicketForWebApi("my_gameserver"); // Steam 클라이언트에게 Web API 인증용 티켓 발급 요청(문자열은 식별자)
-            NetworkManager.Instance.Socket.Emit("debug", "웹 인증용 티켓 발급 요청");
 
             return _getTicketTcs.Task;
         }
 
         protected override async Task<bool> Check()
         {
-            NetworkManager.Instance.Socket.Emit("debug", "SteamIDChecker 시작 - SteamIDChecker");
             BootingManager.Instance.CreateSteamAuthEndTcs(); // 스팀 인증 대기 tcs 생성
 
             string authTicketBase64 = "";
@@ -84,8 +79,6 @@ namespace InGame.MyManager.Boot
                 NetworkManager.Instance.Socket.Emit("debug", $"{ex}");
                 return false;
             }
-
-            NetworkManager.Instance.Socket.Emit("debug", $"티켓: {authTicketBase64}");
 
             SteamAuthInfo authInfo = new SteamAuthInfo()
             {

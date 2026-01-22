@@ -29,22 +29,24 @@ namespace InGame.MySystem.Game.Handler
         {
             NetworkManager.Instance.Socket.On("roadAdded", (data) =>
             {
-                NetworkManager.Instance.Socket.Emit("debug", $"서버한테 이벤트 받음");
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
-                NetworkManager.Instance.Socket.Emit("debug", $"서버한테 이벤트 받음 - json: {json}");
                 RoadAddedInfo roadAddedInfo = JsonUtility.FromJson<RoadAddedInfo>(json); // RoadAddedInfo로 변환
-                NetworkManager.Instance.Socket.Emit("debug", $"서버한테 이벤트 받음 - roadAddedInfo: {roadAddedInfo}");
 
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     Transform parent = GameObject.Find(roadAddedInfo.roadParentName).transform;
-                    NetworkManager.Instance.Socket.Emit("debug", $"서버한테 이벤트 받음 - 도로 부모 찾음: {parent}");
                     PieceEvents.OnGetRoad?.Invoke(roadAddedInfo.roadCount, (TeamType)roadAddedInfo.teamType, parent); // 이벤트 호출
                 });
             });
 
             NetworkManager.Instance.Socket.On("roadDestroyed", data =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 RoadDestroyedInfo roadDestroyedInfo = JsonUtility.FromJson<RoadDestroyedInfo>(json); // RoadAddedInfo로 변환
                 MainThreadDispatcher.Enqueue(() =>
@@ -57,6 +59,9 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("setRoad", (data) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 SetRoadInfo setRoadInfo = JsonUtility.FromJson<SetRoadInfo>(json); // 도로 세팅에 필요한 값을 가지는 구조체로 변경
                 MainThreadDispatcher.Enqueue(() =>
@@ -67,6 +72,9 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("pieceChangedRoad", (data) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 PieceChangedRoadInfo pieceChangedRoadInfo = JsonUtility.FromJson<PieceChangedRoadInfo>(json); // 도로 변경에 필요한 값을 가지는 구조체로 변경
 
@@ -86,6 +94,9 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("changedRoad", (data) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 int roadID = data.GetValue<int>();
 
                 MainThreadDispatcher.Enqueue(() =>
@@ -139,4 +150,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.22

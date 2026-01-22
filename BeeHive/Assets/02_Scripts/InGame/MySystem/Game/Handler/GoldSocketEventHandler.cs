@@ -20,6 +20,9 @@ namespace InGame.MySystem.Game.Handler
         {
             NetworkManager.Instance.Socket.On("goldSet", data =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 SetGoldInfo setGoldInfo = JsonUtility.FromJson<SetGoldInfo>(json); // SetGoldInfo 구조체로 값 받기
                 MainThreadDispatcher.Enqueue(() =>
@@ -30,4 +33,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.22

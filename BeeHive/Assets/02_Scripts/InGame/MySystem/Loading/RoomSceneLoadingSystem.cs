@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyManager;
 using MyUtil;
 using UnityEngine;
 
@@ -17,8 +18,12 @@ namespace InGame.MySystem.Loading
             await RoomReady.Gate.WaitAsync(); // 방 준비 대기
 
             await _loadingUICanvasGroup.DOFade(0, _animationDuration).AsyncWaitForCompletion(); // 로딩 창 닫기
+
+            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                return; // 반환
+
             _loadingUICanvasGroup.gameObject.SetActive(false); // 비활성화
         }
     }
 }
-// 마지막 작성 일자: 2026.01.19
+// 마지막 작성 일자: 2026.01.22

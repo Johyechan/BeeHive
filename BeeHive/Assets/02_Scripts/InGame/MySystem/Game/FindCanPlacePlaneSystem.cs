@@ -113,14 +113,31 @@ namespace InGame.MySystem.Game
                     if(road.TeamType == TeamManager.Instance.CurrentTeamType) // 도로가 우리 팀 도로라면
                     {
                         if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Contains(nearPiece.PlacedPiece)) // 중복 확인
-                            PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Add(nearPiece.PlacedPiece); // 전차의 공격 대상으로 추가
+                        {
+                            if(nearPiece.PlacedPiece.CurrentObjectType != ObjectType.Tank) // 근접한 기물 타일에 배치되어있는 기물이 전차가 아닐 경우
+                            {
+                                PieceManager.Instance.CanAttackPieceMap[ObjectType.Tank].Add(nearPiece.PlacedPiece); // 전차의 공격 대상으로 추가
+                            }
+                        }
+
+                        if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Contains(nearPiece.PlacedPiece)) // 중복 확인
+                        {
+                            if (nearPiece.PlacedPiece.CurrentObjectType != ObjectType.Tank) // 근접한 기물 타일에 배치되어있는 기물이 전차가 아닐 경우
+                            {
+                                PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Add(nearPiece.PlacedPiece); // 보병의 공격 대상으로 추가
+                            }
+                        }
                     }
                     else // 도로가 우리 팀 도로가 아닐 경우
                     {
                         if (!PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Contains(nearPiece.PlacedPiece)) // 중복 확인
-                            PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Add(nearPiece.PlacedPiece); // 보병의 공격 대상으로 추가
+                        {
+                            if (nearPiece.PlacedPiece.CurrentObjectType != ObjectType.Tank) // 근접한 기물 타일에 배치되어있는 기물이 전차가 아닐 경우
+                            {
+                                PieceManager.Instance.CanAttackPieceMap[ObjectType.Soldier].Add(nearPiece.PlacedPiece); // 보병의 공격 대상으로 추가
+                            }
+                        }
                     }
-                    continue;
                 }
 
                 if (nearPiece.PlacedObjectType == ObjectType.None) // 빈 칸이라면
@@ -222,4 +239,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.22

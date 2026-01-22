@@ -33,9 +33,7 @@ namespace InGame.MyUI.Turn
                         TurnEvents.OnSetInteractable?.Invoke(true); // 턴 넘기기 버튼 상화작용 활성화
                     }
                 }).AsyncWaitForCompletion();
-
-            
         }
     }
 }
-// 마지막 작성 일자: 2025.09.23
+// 마지막 작성 일자: 2026.01.22

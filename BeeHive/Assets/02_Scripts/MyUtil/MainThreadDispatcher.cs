@@ -20,7 +20,10 @@ namespace MyUtil
         // 외부에서 메인 스레드에서 실행할 작업을 등록하는 정적 메서드
         public static void Enqueue(Action action)
         {
-            lock(_executionQueue) // lock을 통해서 다른 스레드는 해당 큐에 접근 못하도록
+            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                return; // 반환
+
+            lock (_executionQueue) // lock을 통해서 다른 스레드는 해당 큐에 접근 못하도록
             {
                 _executionQueue.Enqueue(action); // 큐에 작업 추가
             }
@@ -47,4 +50,4 @@ namespace MyUtil
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.22

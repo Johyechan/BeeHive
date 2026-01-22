@@ -40,6 +40,9 @@ namespace InGame.MyManager
             {
                 socket.On("teamType", value =>
                 {
+                    if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
                     int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
                     _currentTeamType = (TeamType)teamType; // 팀 저장
                     _teamSetTcs?.TrySetResult(true); // 팀 세팅 완료

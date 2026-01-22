@@ -28,6 +28,9 @@ namespace InGame.MyUI
             {
                 socket.On("usedCardInformation", async (data) =>
                 {
+                    if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
                     string json = data.GetValue().ToString(); // 문자열 형태로 값 받기
                     UsedCardInfo usedCardInfo = JsonUtility.FromJson<UsedCardInfo>(json); // UsedCardInfo 구조체 형태로 json 변환
                     _usedCardName.text = usedCardInfo.usedCardName; // 사용된 카드의 이름을 UI에 할당
@@ -43,4 +46,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2026.01.22

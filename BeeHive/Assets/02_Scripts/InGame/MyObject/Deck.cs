@@ -30,6 +30,9 @@ namespace InGame.MyObject
 
             NetworkManager.Instance.Socket.On("deckShuffled", (data) => // 서버로부터 덱 받기
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = data.GetValue().ToString(); // 서버가 전송한 값 받기
 
                 MainThreadDispatcher.Enqueue(() =>
@@ -70,6 +73,9 @@ namespace InGame.MyObject
 
             _ = DeckManager.Instance.UsedDeckProp.UsedDeckShuffle();
 
+            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                return; // 반환
+
             for (int i = 0; i <  _deckList.Count; i++) // 덱 리스트 순회
             {
                 GameObject card = ObjectPoolManager.Instance.GetObject(_deckList[i], deckTransform); // 카드 생성
@@ -78,4 +84,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.22

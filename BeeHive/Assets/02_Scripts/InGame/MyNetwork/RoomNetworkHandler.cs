@@ -1,5 +1,6 @@
 using InGame.MyManager;
 using MyUtil;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace InGame.MyNetwork
@@ -15,11 +16,17 @@ namespace InGame.MyNetwork
 
             socket.On("roomCreated", data =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string roomID = data.GetValue<string>();
                 ChangeToRoomScene(roomID);
             }); // 서버로부터 방이 만들어졌다는 신호가 오면 방 씬으로 이동
             socket.On("joinedRoom", data =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string roomID = data.GetValue<string>();
                 ChangeToRoomScene(roomID);
             }); // 서버로부터 방에 참가했다는 신호가 오면 방 씬으로 이동
@@ -36,4 +43,4 @@ namespace InGame.MyNetwork
         }
     }
 }
-// 마지막 작성 일자: 2025.12.29
+// 마지막 작성 일자: 2026.01.22

@@ -40,7 +40,6 @@ namespace InGame.MyManager
             }
 
             _steamAuthEnd = new TaskCompletionSource<bool>();
-            NetworkManager.Instance.Socket.Emit("debug", $"steamAuthTcs 생성: {_steamAuthEnd} - BootingManager");
         }
 
         public async Task<bool> WaitSteamAuth()
@@ -60,6 +59,9 @@ namespace InGame.MyManager
 
             NetworkManager.Instance.Socket.On("steamAuthFailed", msg =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 _steamAuthEnd?.SetResult(false); // 스팀 인증 종료
 
                 MainThreadDispatcher.Enqueue(() =>
@@ -72,6 +74,9 @@ namespace InGame.MyManager
 
             NetworkManager.Instance.Socket.On("steamAuthSuccess", nickName => // 스팀 인증 성공 시
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 _steamAuthEnd?.SetResult(true); // 스팀 인증 종료
                 string strNickName = nickName.GetValue<string>();
                 if(string.IsNullOrEmpty(strNickName)) // 닉네임이 비어있을 경우
@@ -90,6 +95,10 @@ namespace InGame.MyManager
             foreach(var checker in _checkerQueue) // 게임 실행을 위한 검증 실행
             {
                 _result = await checker.Init(); // 각 검증 완료 대기
+
+                if (!this || !gameObject) // 자기 자신이 없을 경우
+                    return; // 반환
+
                 if (!_result) // 검증을 실패 했다면
                     break; // 반복문 탈출
             }
@@ -101,4 +110,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.01.08
+// 마지막 작성 일자: 2026.01.22

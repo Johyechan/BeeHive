@@ -3,6 +3,7 @@ using InGame.MyInput.Struct;
 using InGame.MyManager;
 using InGame.MyObject;
 using System.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace InGame.MyInput
@@ -74,4 +75,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.22

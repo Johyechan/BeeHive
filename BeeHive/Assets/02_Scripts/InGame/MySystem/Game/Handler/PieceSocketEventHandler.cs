@@ -23,6 +23,9 @@ namespace InGame.MySystem.Game.Handler
         {
             NetworkManager.Instance.Socket.On("setPiece", (data) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 SetPieceInfo setPieceInfo = JsonUtility.FromJson<SetPieceInfo>(json); // 기물 세팅에 필요한 값을 가지는 구조체로 변경
                 MainThreadDispatcher.Enqueue(() =>
@@ -33,6 +36,9 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("attackedPiece", (data) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 SetAttackRelatedPieceInfo setInfo = JsonUtility.FromJson<SetAttackRelatedPieceInfo>(json); // 공격 관련 기물들을 세팅할 때 필요한 값을 가지는 구조체로 변경
 
@@ -57,4 +63,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.15
+// 마지막 작성 일자: 2026.01.22

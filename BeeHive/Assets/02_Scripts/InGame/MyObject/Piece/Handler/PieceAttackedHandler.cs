@@ -7,6 +7,7 @@ using InGame.MyObject.Handler;
 using InGame.MyObject.Piece.Data;
 using InGame.MyUI;
 using InGame.MyUI.Card;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -38,20 +39,13 @@ namespace InGame.MyObject.Piece.Handler
         public async Task PieceAttacked()
         {
             PieceBase attackPieceBase = GameManager.Instance.CurrentMovePiece.GetComponent<PieceBase>(); // 공격한 객체의 PieceBase 가져오기
-
-            if (!WarningEvent.OnCanMovePiece.Invoke(attackPieceBase.CurrentObjectType, true)) // 이미 이동 또는 공격을 했던 기물과 같은 타입의 기물이 공격 했었다면
-            {
-                HighLightOffFunction(true);
-
-                await Task.CompletedTask; // 테스크 종료
-                return; // 함수 종료
-            }
+            bool isRangedAttack = false; // 전차 원거리 공격 여부
 
             if (attackPieceBase.CurrentObjectType == ObjectType.Tank) // 공격한 기물이 전차일 경우
             {
                 if (_pieceBase.PieceVariable.isFirePowerAttackTarget) // 공격 받은 기물이 원거리 공격 대상이라면
                 {
-                    if (CardManager.Instance.HaveFirePowerCard) // 공격한 기물의 팀이 화력 카드를 가지고 있다면
+                    if (CardManager.Instance.HaveFirePowerCard && !GameManager.Instance.TankRangedAttacked) // 공격한 기물의 팀이 화력 카드를 가지고 있으며 원거리 공격을 한 번도 안한 상태라면
                     {
                         HighLightOffFunction(false); // 배치칸 비활성화
                         _pieceData.confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include);
@@ -65,6 +59,10 @@ namespace InGame.MyObject.Piece.Handler
                         });
 
                         bool result = await confirmResultTcs.Task; // 확인 대기
+
+                        if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                            return; // 반환
+
                         if (!result) // 결과가 거짓이라면
                         {
                             HighLightOffFunction(true);
@@ -72,11 +70,17 @@ namespace InGame.MyObject.Piece.Handler
                             return; // 함수 종료
                         }
 
+                        isRangedAttack = true; // 전차 원거리 공격으로 판정
+                        GameManager.Instance.TankRangedAttacked = true; // 원거리 공격한 것으로 판정
+
                         if (_pieceBase.CurrentObjectType == ObjectType.Tank) // 만약 공격 받는 기물도 전차라면
                         {
                             NetworkManager.Instance.Socket.Emit("tankAttackedTank", SceneMgr.Instance.CurrentRoomID); // 상대 전차를 공격했다고 서버로 이벤트 호출
 
                             bool opponentChooseDefense = await PieceManager.Instance.OpponentChoice() == 1 ? true : false; // 상대가 결정할 때까지 대기
+
+                            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                                return; // 반환
 
                             if (opponentChooseDefense) // 상대가 방어를 했다면
                             {
@@ -98,13 +102,29 @@ namespace InGame.MyObject.Piece.Handler
                         }
                     }
                 }
-                
+            }
+
+            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                return; // 반환
+
+            if (!isRangedAttack) // 전차 원거리 공격이 아닐 경우
+            {
+                if (!WarningEvent.OnCanMovePiece.Invoke(attackPieceBase.CurrentObjectType, true)) // 이미 이동 또는 공격을 했던 기물과 같은 타입의 기물이 공격 했었다면
+                {
+                    HighLightOffFunction(true);
+
+                    await Task.CompletedTask; // 테스크 종료
+                    return; // 함수 종료
+                }
             }
 
             int isFirePowerAttack = _pieceBase.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
 
             int attackObjID = attackPieceBase.PieceVariable.id; // 공격한 객체의 ID
             int returnObjID = _pieceBase.PieceVariable.id; // 공격 받은 객체의 ID
+
+            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                return; // 반환
 
             Transform returnParent = null; // 공격 받은 기물의 부모 객체
             Transform returnPieceTrans = ObjectIdManager.Instance.FindObject(returnObjID).transform; // 공격 받은 기물의 트랜스폼
@@ -144,4 +164,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.22

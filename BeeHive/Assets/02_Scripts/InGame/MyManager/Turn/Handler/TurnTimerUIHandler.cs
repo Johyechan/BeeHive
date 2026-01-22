@@ -25,11 +25,17 @@ namespace InGame.MyManager.Turn.Handler
         {
             NetworkManager.Instance.Socket.On("playTimerSlider", (data) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 MainThreadDispatcher.Enqueue(() => { StartSliderTimer(); });
             });
 
             NetworkManager.Instance.Socket.On("resetTurnTimer", (data) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     TurnManager.Instance.OnTurnTimerStop?.Invoke();
@@ -54,4 +60,4 @@ namespace InGame.MyManager.Turn.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.22

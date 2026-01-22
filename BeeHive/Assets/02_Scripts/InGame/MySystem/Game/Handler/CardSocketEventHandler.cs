@@ -17,6 +17,9 @@ namespace InGame.MySystem.Game.Handler
         {
             NetworkManager.Instance.Socket.On("setCard", (data) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 SetCardInfo setCardInfo = JsonUtility.FromJson<SetCardInfo>(json); // 카드 세팅에 필요한 값을 가지는 구조체로 값 받기
 
@@ -28,6 +31,9 @@ namespace InGame.MySystem.Game.Handler
 
             NetworkManager.Instance.Socket.On("cardReversed", (data) =>
             {
+                if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
                 CardManager.Instance.CardReverseTask = new TaskCompletionSource<bool>();
                 string json = data.GetValue().ToString(); // 문자열로 값 받기
                 CardReverseInfo cardReverseInfo = JsonUtility.FromJson<CardReverseInfo>(json); // CarReverseInfo 형태로 Json을 변환
@@ -49,4 +55,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.01.22

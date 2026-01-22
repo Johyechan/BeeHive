@@ -42,6 +42,9 @@ namespace InGame.MyManager
         private bool _gameOver; // 게임오버 여부
         public bool GameOver { get => _gameOver; } // 위 변수 프로퍼티
 
+        private bool _tankRangedAttacked = false; // 전차 원거리 공격 여부
+        public bool TankRangedAttacked { get => _tankRangedAttacked; set => _tankRangedAttacked = value; } // 전차 원거리 공격 여부 프로퍼티
+
         private Dictionary<ObjectType, bool> _pieceCanMoveMap = new Dictionary<ObjectType, bool>(); // 각 기물마다 이동 가능 여부를 가지는 맵
         public Dictionary<ObjectType, bool> PieceCanMoveMap { get => _pieceCanMoveMap; }
 
@@ -64,7 +67,10 @@ namespace InGame.MyManager
 
             await TeamReady.Gate.WaitAsync(); // 게임 준비 완료 대기
 
-            switch(TeamManager.Instance.CurrentTeamType)
+            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                return; // 반환
+
+            switch (TeamManager.Instance.CurrentTeamType)
             {
                 case TeamType.Team1: // 팀1 일 때 팀1 성 반환
                     _myCastle = GameObject.Find("Team1Castle").GetComponent<Castle>();
@@ -100,10 +106,11 @@ namespace InGame.MyManager
             _gameOverUICanvasGroup.DOFade(1, _animationDuration).SetUpdate(true); // 게임 오버 UI 페이드 인 - 실시간 실행
         }
 
-        // 기물 생성 및 이동 가능 여부 초기화
+        // 기물 생성 및 이동 가능 및 공격 가능 여부 초기화
         private void TurnStart()
         {
             _canMakePiece = true;
+            _tankRangedAttacked = false;
             var keys = _pieceCanMoveMap.Keys.ToList();
             for(int i = 0; i < keys.Count; i++)
             {
@@ -157,4 +164,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.29
+// 마지막 작성 일자: 2026.01.22

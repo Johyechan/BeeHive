@@ -39,25 +39,34 @@ namespace InGame.MySystem.Room
 
             var socket = NetworkManager.Instance.Socket;
 
-            if(socket != null ) // 서버와 통신하기 위한 Socket.IO 객체가 null이 아니라면
+            if (socket != null) // 서버와 통신하기 위한 Socket.IO 객체가 null이 아니라면
             {
-                if(SceneMgr.Instance.CurrentRoomID != "") // 현재 방 ID가 비어있지 않을 경우
+                if (SceneMgr.Instance.CurrentRoomID != "") // 현재 방 ID가 비어있지 않을 경우
                 {
                     socket.Emit("getRoomInfo", SceneMgr.Instance.CurrentRoomID); // 서버에 방 정보를 가져오는 이벤트 호출, 현재 방 ID를 매개 변수로 보내기
                 }
 
                 socket.On("canStartGame", _ =>
                 {
+                    if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
                     MainThreadDispatcher.Enqueue(() => _gameStartButton.interactable = true); // 게임 시작 버튼 활성화
                 });
 
                 socket.On("cantStartGame", _ =>
                 {
+                    if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
                     MainThreadDispatcher.Enqueue(() => _gameStartButton.interactable = false);// 게임 시작 버튼 비활성화
                 });
 
                 socket.On("roomInfo", (data) =>
                 {
+                    if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
                     string json = data.GetValue().ToString(); // string 형태로 값 받기
                     _roomInfo = JsonUtility.FromJson<RoomInfo>(json); // RoomInfo 형태로 json 값을 변경
                     MainThreadDispatcher.Enqueue(() => _roomID.text = $"{_roomInfo.ID}"); // 메인 스레드에서 방 ID UI 변경
@@ -69,7 +78,7 @@ namespace InGame.MySystem.Room
 
                     bool isRoomManager = false;
 
-                    for(int i = 0; i < _roomInfo.players.Length; i++)
+                    for (int i = 0; i < _roomInfo.players.Length; i++)
                     {
                         if (_roomInfo.players[i].isRoomManager) // 방장이라면
                         {
@@ -77,7 +86,7 @@ namespace InGame.MySystem.Room
                         }
                     }
 
-                    if(isRoomManager) // 현재 클라이언트가 방장이라면
+                    if (isRoomManager) // 현재 클라이언트가 방장이라면
                     {
                         int count = 0;
 
@@ -98,10 +107,19 @@ namespace InGame.MySystem.Room
                     RoomReady.Gate.Completed(); // 방 준비 완료
                 });
 
-                socket.On("goLobby", _ => MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(1)));// 로비 씬으로 이동
+                socket.On("goLobby", _ =>
+                {
+                    if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
+                    MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(1));
+                });// 로비 씬으로 이동
 
                 socket.On("goGame", _ =>
                 {
+                    if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
                     MainThreadDispatcher.Enqueue(() =>
                     {
                         Sequence sequence = DOTween.Sequence()
@@ -139,4 +157,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.01.19
+// 마지막 작성 일자: 2026.01.22

@@ -73,7 +73,6 @@ namespace InGame.MySystem.Game
             {
                 if (on) // 킬 것이라면
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", $"하이라이트 키기 {placePlane}");
                     placePlane.HighLightOn(); // 하이라이트 키기
                 }
                 else // 끌 것이라면

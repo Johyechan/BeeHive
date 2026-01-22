@@ -25,6 +25,9 @@ namespace InGame.MyManager
 
         private bool _isSteamAPIInitSuccess = false; // 스팀 api Init 성공 여부
 
+        private bool _isClientOver = false; // 클라이언트 종료 여부
+        public bool IsClientOver { get => _isClientOver; } // 클라이언트 종료 여부 프로퍼티
+
         private RoomNetworkHandler _roomNetworkHandler; // 방과 관련된 서버 신호를 받는 핸들러
 
         private TaskCompletionSource<bool> _socketConnectedTcs; // 소켓 연결 여부 tcs
@@ -57,6 +60,9 @@ namespace InGame.MyManager
                 // 현재 클라이언트 ID를 서버에서 받아온다
                 _socket.On("myID", data =>
                 {
+                    if (_isClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
                     string id = data.GetValue<string>();
                     MainThreadDispatcher.Enqueue(() => _currentPlayerID = id); // 현재 클라이언트 ID 할당
                 });
@@ -64,6 +70,9 @@ namespace InGame.MyManager
                 // 오류 발생 시 오류 표기
                 _socket.On("error", response =>
                 {
+                    if (_isClientOver) // 클라이언트가 종료 되었다면
+                        return; // 반환
+
                     string text = response.GetValue<string>();
                     MainThreadDispatcher.Enqueue(() =>
                     {
@@ -88,11 +97,12 @@ namespace InGame.MyManager
                 Application.Quit(); // 어플리케이션 즉시 종료
             }
         }
-
+        
         private void OnApplicationQuit()
         {
+            _isClientOver = true; // 클라이언트 종료
             SteamAPI.Shutdown(); // 스팀과의 연결 정리
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.01.22

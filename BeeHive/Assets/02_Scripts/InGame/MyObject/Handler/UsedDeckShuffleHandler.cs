@@ -67,8 +67,9 @@ namespace InGame.MyObject.Handler
             _usedDeckData.deckShuffleAnimationUI.gameObject.SetActive(false);
 
             await Task.Yield(); // 한 프레임 대기를 통한 연출의 자연스러움 추가
+
             DeckManager.Instance.CompleteTcs(); // 덱 생성 완료
         }
     }
 }
-// 마지막 작성 일자: 2025.12.19
+// 마지막 작성 일자: 2026.01.22
