@@ -1,12 +1,8 @@
-using InGame.MyEvent;
 using InGame.MyManager;
-using InGame.MyEnum;
 using System.Collections.Generic;
 using UnityEngine;
 using InGame.MyObject.Piece;
-using InGame.MyManager.MyPiece;
 using InGame.MyObject.Handler;
-using MyUtil;
 
 namespace InGame.MyObject
 {

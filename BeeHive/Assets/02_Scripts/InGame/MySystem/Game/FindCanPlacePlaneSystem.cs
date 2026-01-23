@@ -3,7 +3,6 @@ using InGame.MyManager;
 using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject;
-using System.Threading.Tasks;
 
 namespace InGame.MySystem.Game
 {
@@ -104,6 +103,7 @@ namespace InGame.MySystem.Game
         private void FindNearPieces(TeamType teamType, RoadPlacePlaneObject road, bool once = false, ObjectType currentObjType = ObjectType.None)
         {
             road.IsChecked = true;
+
             foreach (var nearPiece in road.nearPiecePlaceTransformList) // 인접한 기물 확인
             {
                 if (nearPiece.IsChecked) // 이미 확인을 했었다면
@@ -139,6 +139,8 @@ namespace InGame.MySystem.Game
                         }
                     }
                 }
+
+               nearPiece.IsConnectedWithCastle = road.IsConnectedWithCastle; // 근접한 기물이 성과 연결되어있는 여부를 도로가 성과 연결이 되어있으면 true
 
                 if (nearPiece.PlacedObjectType == ObjectType.None) // 빈 칸이라면
                 {
@@ -219,6 +221,7 @@ namespace InGame.MySystem.Game
                      continue; // 넘기기
                 else if((nearRoad.TeamType != teamType && nearRoad.TeamType != TeamType.None)) // (현재 팀이 아니면서 다른 팀이라면)
                 {
+                    nearRoad.IsConnectedWithCastle = false; // 성과 연결 끊김
                     if(!PieceManager.Instance.CanChangeRoadList.Contains(nearRoad.PlacedPiece)) // 이전에 저장했던 도로가 아닐 경우
                     {
                         PieceManager.Instance.CanChangeRoadList.Add(nearRoad.PlacedPiece); // 도로 추가
@@ -226,7 +229,9 @@ namespace InGame.MySystem.Game
                     continue;
                 }
 
-                if(nearRoad.PlacedObjectType == ObjectType.None) // 빈 칸이라면
+                nearRoad.IsConnectedWithCastle = piece.IsConnectedWithCastle; // 기물의 성 연결 여부 할당
+
+                if (nearRoad.PlacedObjectType == ObjectType.None) // 빈 칸이라면
                 {
                     PlacePlaneManager.Instance.Variable.highLightHandler.CanRoadPlacePlanes.Add(nearRoad); // 배치 가능한 도로 칸에 추가
                 }
@@ -239,4 +244,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.23

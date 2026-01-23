@@ -141,6 +141,7 @@ namespace InGame.MyManager.Turn
                     if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                         return; // 반환
 
+                    UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경(도로의 남은 기물 수 초기화를 위한 이벤트 호출)
                     HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
                     HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
                     HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
@@ -177,4 +178,4 @@ namespace InGame.MyManager.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.23

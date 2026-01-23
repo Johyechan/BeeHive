@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.MyPiece;
+using InGame.MyManager.MyPlacePlane;
 using InGame.MyManager.Turn;
 using System.Threading.Tasks;
 
@@ -11,9 +12,14 @@ namespace InGame.MyObject.Piece.ObjectPieces
     // 광부 기물 클래스
     public class Miner : PieceBase
     {
+        private bool _isConnectedWithCastle;
+        public bool IsConnectedWithCastle { get => _isConnectedWithCastle; set => _isConnectedWithCastle = value; }
+
         protected override void Awake()
         {
             base.Awake();
+
+            _isConnectedWithCastle = true; // 기본적으로 성과 연결되어있다고 할당
 
             ParentSet();
 
@@ -30,6 +36,9 @@ namespace InGame.MyObject.Piece.ObjectPieces
                 return; // 반환
 
             if (PieceManager.Instance.IsDrought) // 가뭄 상태라면
+                return; // 반환
+
+            if (!_isConnectedWithCastle) // 성과 연결이 되어있지 않다면
                 return; // 반환
 
             switch (CurrentTeamType)
@@ -55,4 +64,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2025.09.29
+// 마지막 작성 일자: 2026.01.23
