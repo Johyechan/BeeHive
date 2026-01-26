@@ -32,6 +32,7 @@ namespace InGame.MyManager.MyPlacePlane.Handler
             if (!isRoad) // 도로 배치칸을 변경하는 것이 아닌 기물 배치칸을 변경하는 것이라면
             {
                 placedPiece.PieceVariable.currentPlacePlane = (PiecePlacePlaneObject)currentPlacePlane; // 기물 전용 배치칸 할당
+                NetworkManager.Instance.Socket.Emit("debug", $"배치했을 때 인스턴스: {placedPiece.PieceVariable.currentPlacePlane.GetInstanceID()}");
             }
             else // 도로 배치칸을 변경하는 것이라면
             {

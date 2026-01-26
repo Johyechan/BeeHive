@@ -172,14 +172,6 @@ namespace InGame.MyObject
                         PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, pieceBase.CurrentTeamType, pieceBase.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                     }
                 }
-                else if(pieceBase.CurrentObjectType == ObjectType.Miner) // 광부 기물일 경우
-                {
-                    Miner miner = pieceBase as Miner; // 광부 형태로 형변환
-                    if(miner) // 광부로 형변환이 됐다면
-                    {
-                        miner.IsConnectedWithCastle = IsConnectedWithCastle; // 현재 배치칸의 성과 연결 여부 할당
-                    }
-                }
 
                 if (isNearToCastle) // 성 주위 배치칸일 때
                 {
@@ -211,4 +203,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.23
+// 마지막 작성 일자: 2026.01.26

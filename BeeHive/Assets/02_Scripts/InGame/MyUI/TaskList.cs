@@ -21,6 +21,15 @@ namespace MyUtil
             }
         }
 
+        // 큐에 액션 삭제 함수
+        public void Remove(Func<Task> action)
+        {
+            lock (_listActions)
+            {
+                _listActions.Remove(action);
+            }
+        }
+
         // 큐를 비우는 함수
         public void Clear()
         {
@@ -43,4 +52,4 @@ namespace MyUtil
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.26

@@ -4,6 +4,7 @@ using InGame.MyManager;
 using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyManager.Turn;
+using InGame.MyObject.Piece.Data;
 using System.Threading.Tasks;
 
 namespace InGame.MyObject.Piece.ObjectPieces
@@ -12,18 +13,25 @@ namespace InGame.MyObject.Piece.ObjectPieces
     // 광부 기물 클래스
     public class Miner : PieceBase
     {
-        private bool _isConnectedWithCastle;
-        public bool IsConnectedWithCastle { get => _isConnectedWithCastle; set => _isConnectedWithCastle = value; }
-
         protected override void Awake()
         {
             base.Awake();
 
-            _isConnectedWithCastle = true; // 기본적으로 성과 연결되어있다고 할당
-
             ParentSet();
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
 
             TurnEvents.OnMakeTurn.Add(Dig); // 생산 턴에 광부가 금화를 얻는 기능 큐에 추가
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            TurnEvents.OnMakeTurn.Remove(Dig); // 생산 턴에 광부가 금화를 얻는 기능 큐에서 삭제
         }
 
         // 금화를 얻는 함수
@@ -32,14 +40,14 @@ namespace InGame.MyObject.Piece.ObjectPieces
             if (TurnManager.Instance.CurrentTeamType != CurrentTeamType) // 현재 턴 팀과 나의 팀이 다르다면
                 return; // 반환
 
-            if (PieceVariable.currentPlacePlane == null) // 자기가 배치된 판이 없다면
+            if (_pieceVariable.currentPlacePlane == null) // 자기가 배치된 판이 없다면
                 return; // 반환
 
             if (PieceManager.Instance.IsDrought) // 가뭄 상태라면
                 return; // 반환
 
-            if (!_isConnectedWithCastle) // 성과 연결이 되어있지 않다면
-                return; // 반환
+            if (!CanDig()) // 생산 불가한 상태라면
+                return;
 
             switch (CurrentTeamType)
             {
@@ -57,6 +65,18 @@ namespace InGame.MyObject.Piece.ObjectPieces
             await Task.CompletedTask; // Taks 완료 반환
         }
 
+        // 생산 가능 여부 확인 함수
+        private bool CanDig()
+        {
+            foreach(var plane in PlacePlaneManager.Instance.Variable.highLightHandler.CanDigCheckPlacePlanes) // 생산 가능 여부 확인 배치칸 순회
+            {
+                if (plane.isNearToCastle) // 성과 근접한 기물 배치칸이 있다면
+                    return true; 
+            }
+
+            return false;
+        }
+
         // 부모 초기화 함수
         private void ParentSet()
         {
@@ -64,4 +84,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.01.23
+// 마지막 작성 일자: 2026.01.26

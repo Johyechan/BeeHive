@@ -19,6 +19,9 @@ namespace InGame.MySystem.Game
         private HashSet<PlacePlaneObjectBase> _canPieceMovePlanes = new(); // 이동 가능한 기물 배치 판들을 저장해두는 해시 테이블 기반 컨테이너
         public HashSet<PlacePlaneObjectBase> CanPieceMovePlanes { get { return _canPieceMovePlanes; } } // _canMovePlacePlanes 프로퍼티
 
+        private HashSet<PlacePlaneObjectBase> _canDigCheckPlacePlanes = new(); // 광부가 생산 가능한지 확인할 때 필요한 배치 칸들을 저장하는 해시 테이블 기반 컨테이너
+        public HashSet<PlacePlaneObjectBase> CanDigCheckPlacePlanes { get { return _canDigCheckPlacePlanes; } } // 광부가 생산 가능한지 확인할 때 필요한 배치 칸들을 저장하는 해시 테이블 컨테이너 프로퍼티
+
         public void PieceHighLight(bool on, bool isPlace)
         {
             if (isPlace)
@@ -83,4 +86,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2025.12.15
+// 마지막 작성 일자: 2026.01.26

@@ -41,9 +41,6 @@ namespace InGame.MyObject
         private bool _isChecked; // 이전에 확인이 되었는지 확인하는 변수
         public bool IsChecked { get { return _isChecked; } set { _isChecked = value; } } // 이전에 확인이 되었는지 확인하는 변수 프로퍼티
 
-        private bool _isConnectedWithCastle; // 성과 연결되어 있는지 확인하는 변수
-        public bool IsConnectedWithCastle { get => _isConnectedWithCastle; set => _isConnectedWithCastle = value; } // 성과 연결되어 있는지 확인하는 프로퍼티
-
         protected int _id;
         public int Id { get => _id; }
         protected int _cost; // 비용
@@ -63,8 +60,6 @@ namespace InGame.MyObject
             _collider.enabled = false; // 콜라이더 비활성화
             _placedObjectType = ObjectType.None; // 아무것도 안 올려져 있는 상태로 초기화
             _canPlaceTypePiece = ObjectType.None; // 아무것도 배치 할 수 없는 상태로 초기화
-
-            _isConnectedWithCastle = isNearToCastle; // 성과 가까운 배치칸일 경우 그냥 성과 연결되어있는 상태로 할당
         }
 
         // 하이라이트를 키는 함수
