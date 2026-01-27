@@ -68,10 +68,14 @@ namespace InGame.MyObject.Piece.ObjectPieces
         // 생산 가능 여부 확인 함수
         private bool CanDig()
         {
-            foreach(var plane in PlacePlaneManager.Instance.Variable.highLightHandler.CanDigCheckPlacePlanes) // 생산 가능 여부 확인 배치칸 순회
+            PlacePlaneManager.Instance.Variable.findCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceVariable.currentPlacePlane, CurrentTeamType, ObjectType.Miner);
+
+            foreach (var plane in PlacePlaneManager.Instance.Variable.highLightHandler.CanDigCheckPlacePlanes) // 생산 가능 여부 확인 배치칸 순회
             {
                 if (plane.isNearToCastle) // 성과 근접한 기물 배치칸이 있다면
+                {
                     return true; 
+                }
             }
 
             return false;
@@ -84,4 +88,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.01.26
+// 마지막 작성 일자: 2026.01.27

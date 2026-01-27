@@ -146,10 +146,11 @@ namespace InGame.MySystem.Game
                 {
                     if(currentObjType == ObjectType.Miner) // 현재 기물이 광부 객체일 때
                     {
-                        if(road.TeamType == TeamManager.Instance.CurrentTeamType) // 도로의 팀 타입이 내 팀이라면
+                        if(road.TeamType == TeamManager.Instance.CurrentTeamType) // 도로가 내 팀 도로라면
                         {
                             PlacePlaneManager.Instance.Variable.highLightHandler.CanDigCheckPlacePlanes.Add(nearPiece); // 생산 가능 여부 확인 배치칸으로 추가
                         }
+
                         if(CheckNearRoad(teamType, road)) // 자기 팀의 도로가 있을 경우
                         {
                             PlacePlaneManager.Instance.Variable.highLightHandler.CanPieceMovePlanes.Add(nearPiece); // 이동 가능한 기물 배치 칸 추가
@@ -159,11 +160,12 @@ namespace InGame.MySystem.Game
                     {
                         PlacePlaneManager.Instance.Variable.highLightHandler.CanPieceMovePlanes.Add(nearPiece); // 이동 가능한 기물 배치 칸 추가
                     }
-                    else // 전차일 경우
+                    else // None 상태일 경우(기본 이동 가능 위치)
                     {
                         if(road.TeamType == TeamManager.Instance.CurrentTeamType) // 도로가 내 팀의 도로라면
                         {
                             PlacePlaneManager.Instance.Variable.highLightHandler.CanPieceMovePlanes.Add(nearPiece); // 이동 가능한 기물 배치 칸 추가
+                            PlacePlaneManager.Instance.Variable.highLightHandler.CanDigCheckPlacePlanes.Add(nearPiece); // 생산 가능 여부 확인 배치칸으로 추가
                         }
                     }
 
@@ -248,4 +250,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.01.26
+// 마지막 작성 일자: 2026.01.27

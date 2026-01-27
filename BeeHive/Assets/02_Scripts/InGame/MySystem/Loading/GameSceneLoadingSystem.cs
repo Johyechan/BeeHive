@@ -19,6 +19,8 @@ namespace InGame.MySystem.Loading
 
         private async void Awake()
         {
+            UIManager.Instance.CanInteractionUI = true; // UI 상호작용 가능 상태로 초기화
+            TeamManager.Instance.FirstTurn = true; // 첫 턴 상태로 할당
 
             await TeamManager.Instance.TeamSetTcs.Task; // 팀이 정해질 때까지 대기
 
@@ -43,4 +45,4 @@ namespace InGame.MySystem.Loading
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.27

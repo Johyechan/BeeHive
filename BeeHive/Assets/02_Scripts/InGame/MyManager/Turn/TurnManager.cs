@@ -121,6 +121,7 @@ namespace InGame.MyManager.Turn
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
             _turnTimerUIHandler.SliderTimerStop(); // 턴 타이머 슬라이더 초기화
 
+            NetworkManager.Instance.Socket.Emit("debug", $"현재 누구 턴: {_currentTeamType}, 현재 턴: {_currentTurnType}");
             if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
             {
                 if (_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면

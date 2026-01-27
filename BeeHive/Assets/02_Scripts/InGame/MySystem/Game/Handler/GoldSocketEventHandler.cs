@@ -25,6 +25,7 @@ namespace InGame.MySystem.Game.Handler
 
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 SetGoldInfo setGoldInfo = JsonUtility.FromJson<SetGoldInfo>(json); // SetGoldInfo 구조체로 값 받기
+                NetworkManager.Instance.Socket.Emit("debug", $"골드 변경을 받은 팀: {setGoldInfo.team.ToString()} - {setGoldInfo.team}");
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     _goldSetHandle.Setting(setGoldInfo.team, setGoldInfo.goldCoin, setGoldInfo.goldBar); // 금화 및 금괴 객체 세팅(팀, 금화 개수, 금괴 개수)
