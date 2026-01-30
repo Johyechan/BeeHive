@@ -50,6 +50,11 @@ namespace InGame.MyManager
             }
         }
 
+        private void OnDisable()
+        {
+            NetworkManager.Instance.Socket.Off("teamType");
+        }
+
         // 팀에 맞는 성을 반환하는 함수
         public Castle GetCastle(TeamType teamType)
         {
@@ -157,4 +162,4 @@ namespace InGame.MyManager
         }
     }
 }
-// 마지막 작성 일자: 2025.12.11
+// 마지막 작성 일자: 2026.01.30

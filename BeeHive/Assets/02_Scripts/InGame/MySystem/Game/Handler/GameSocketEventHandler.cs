@@ -117,6 +117,15 @@ namespace InGame.MySystem.Game.Handler
                 }
             });
         }
+
+        public override void OnDisconnect()
+        {
+            NetworkManager.Instance.Socket.Off("drought");
+            NetworkManager.Instance.Socket.Off("castleHpChanged");
+            NetworkManager.Instance.Socket.Off("isGameOver");
+            NetworkManager.Instance.Socket.Off("castleHit");
+            NetworkManager.Instance.Socket.Off("tankAttacked");
+        }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.30

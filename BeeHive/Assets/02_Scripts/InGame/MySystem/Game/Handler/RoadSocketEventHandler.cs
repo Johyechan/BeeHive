@@ -148,6 +148,15 @@ namespace InGame.MySystem.Game.Handler
                 });
             });
         }
+
+        public override void OnDisconnect()
+        {
+            NetworkManager.Instance.Socket.Off("roadAdded");
+            NetworkManager.Instance.Socket.Off("roadDestroyed");
+            NetworkManager.Instance.Socket.Off("setRoad");
+            NetworkManager.Instance.Socket.Off("pieceChangedRoad");
+            NetworkManager.Instance.Socket.Off("changedRoad");
+        }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.30

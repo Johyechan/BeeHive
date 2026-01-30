@@ -32,6 +32,12 @@ namespace InGame.MyNetwork
             }); // 서버로부터 방에 참가했다는 신호가 오면 방 씬으로 이동
         }
 
+        public void Disable()
+        {
+            NetworkManager.Instance.Socket.Off("roomCreated");
+            NetworkManager.Instance.Socket.Off("joinedRoom");
+        }
+
         // 방 씬으로 이동하는 함수(현재 방 ID)
         private void ChangeToRoomScene(string id)
         {
@@ -43,4 +49,4 @@ namespace InGame.MyNetwork
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.30

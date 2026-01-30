@@ -48,6 +48,11 @@ namespace InGame.MyUI.MyUIButton
             });
         }
 
+        private void OnDisable()
+        {
+            NetworkManager.Instance.Socket.Off("isNickNameDuplicate");
+        }
+
         // 클릭 시 실행될 함수
         public void OnUIClick()
         {
@@ -62,4 +67,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.30

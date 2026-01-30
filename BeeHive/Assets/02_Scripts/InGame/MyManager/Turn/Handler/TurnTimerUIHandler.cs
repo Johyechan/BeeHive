@@ -43,6 +43,12 @@ namespace InGame.MyManager.Turn.Handler
             });
         }
 
+        public void Disable()
+        {
+            NetworkManager.Instance.Socket.Off("playTimerSlider");
+            NetworkManager.Instance.Socket.Off("resetTurnTimer");
+        }
+
         private void StartSliderTimer()
         {
             if (_timerSlider.value != 0) // 타이머 슬라이더가 0으로 초기화가 안되어있다면
@@ -60,4 +66,4 @@ namespace InGame.MyManager.Turn.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.30

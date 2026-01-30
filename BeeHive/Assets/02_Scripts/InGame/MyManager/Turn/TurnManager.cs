@@ -64,6 +64,15 @@ namespace InGame.MyManager.Turn
                         _ = NextTurn(turnType); // turnType 턴 변경
                     });
                 });
+
+                socket.On("nowGameStart", response =>
+                {
+                    MainThreadDispatcher.Enqueue(() =>
+                    {
+                        NetworkManager.Instance.Socket.Emit("debug", "게임 턴 시작");
+                        _ = TurnChange(TurnType.ChangeTeam, true);
+                    });
+                });
             }
 
             _turnUIAnimation = GetComponent<TurnUIAnimation>();
@@ -84,6 +93,9 @@ namespace InGame.MyManager.Turn
 
         public void OnDisable()
         {
+            NetworkManager.Instance.Socket.Off("turnChanged");
+            NetworkManager.Instance.Socket.Off("nowGameStart");
+            _turnTimerUIHandler.Disable();
             OnTurnTimerStop -= _turnTimerHandler.TurnTimerStopImmediately;
             OnTurnTimerStop -= _turnTimerUIHandler.SliderTimerStop;
         }
@@ -179,4 +191,4 @@ namespace InGame.MyManager.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.01.23
+// 마지막 작성 일자: 2026.01.30

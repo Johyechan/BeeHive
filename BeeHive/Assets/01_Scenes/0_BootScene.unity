@@ -2598,10 +2598,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyOnLoadScene: 1
-  _gameQuitUICanvasGroup: {fileID: 1029057604}
-  _makeNickNameCanvasGroup: {fileID: 940547421}
-  _gameQuitTxt: {fileID: 2125897237}
-  _fadeDuration: 0.1
+  _data:
+    _gameQuitUICanvasGroup: {fileID: 1029057604}
+    _makeNickNameCanvasGroup: {fileID: 940547421}
+    _gameQuitTxt: {fileID: 2125897237}
+    _fadeDuration: 0.1
 --- !u!4 &1946434482
 Transform:
   m_ObjectHideFlags: 0

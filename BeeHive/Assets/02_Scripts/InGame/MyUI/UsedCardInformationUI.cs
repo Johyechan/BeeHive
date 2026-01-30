@@ -44,6 +44,11 @@ namespace InGame.MyUI
                 });
             }
         }
+
+        private void OnDisable()
+        {
+            NetworkManager.Instance.Socket.Off("usedCardInformation");
+        }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.30

@@ -35,14 +35,15 @@ namespace InGame.MySystem.Loading
 
             await CameraManager.Instance.SetCamera(TeamManager.Instance.CurrentTeamType); // 카메라 세팅
 
-
             await _loadingCanvasGroup.DOFade(0, _animationDuration).OnComplete(() => _loadingCanvasGroup.gameObject.SetActive(false)).AsyncWaitForCompletion(); // 로딩 ui 닫기
 
-
-            await TurnManager.Instance.TurnChange(TurnType.ChangeTeam, true); // 처음 팀을 알려주기 위해서 현재 팀으로 체인지
+            if(TeamManager.Instance.CurrentTeamType == TeamType.Team1) // 팀 1이 턴 실행 요청(중복 방지)
+            {
+                NetworkManager.Instance.Socket.Emit("turnStart", SceneMgr.Instance.CurrentRoomID);
+            }
 
             GameReady.Gate.Completed(); // 게임 준비 완료
         }
     }
 }
-// 마지막 작성 일자: 2026.01.27
+// 마지막 작성 일자: 2026.01.30

@@ -56,7 +56,7 @@ namespace InGame.MyManager
 
             _socket.OnConnected += (sender, e) =>
             {
-                _socketConnectedTcs?.SetResult(true);
+                _socketConnectedTcs?.TrySetResult(true);
                 // 현재 클라이언트 ID를 서버에서 받아온다
                 _socket.On("myID", data =>
                 {
@@ -85,6 +85,13 @@ namespace InGame.MyManager
             };
         }
 
+        private void OnDisable()
+        {
+            _roomNetworkHandler.Disable();
+            _socket.Off("myID");
+            _socket.Off("error");
+        }
+
         private void Update()
         {
             if (_isSteamAPIInitSuccess) // 스팀이 돌아가고 있으며, Init()이 성공 했을 때
@@ -101,8 +108,9 @@ namespace InGame.MyManager
         private void OnApplicationQuit()
         {
             _isClientOver = true; // 클라이언트 종료
+            _socket.Dispose(); // 소켓 정리
             SteamAPI.Shutdown(); // 스팀과의 연결 정리
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.30

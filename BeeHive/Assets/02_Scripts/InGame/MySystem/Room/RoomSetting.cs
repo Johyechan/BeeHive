@@ -143,6 +143,15 @@ namespace InGame.MySystem.Room
             }
         }
 
+        private void OnDisable()
+        {
+            NetworkManager.Instance.Socket.Off("canStartGame");
+            NetworkManager.Instance.Socket.Off("cantStartGame");
+            NetworkManager.Instance.Socket.Off("roomInfo");
+            NetworkManager.Instance.Socket.Off("goLobby");
+            NetworkManager.Instance.Socket.Off("goGame");
+        }
+
         // 현재 클라이언트의 플레이어를 찾는 함수(방 정보)
         private void FindCurrentPlayer(RoomInfo roomInfo)
         {
@@ -157,4 +166,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.01.27
+// 마지막 작성 일자: 2026.01.30

@@ -8,6 +8,9 @@ namespace InGame.MySystem.Game.Handler
     {
         // 소켓 이벤트 연결 함수
         public abstract void OnConnect();
+
+        // 소켓 이벤트 연결 해제 함수
+        public abstract void OnDisconnect();
     }
 }
-// 마지막 작성 일자: 2025.09.16
+// 마지막 작성 일자: 2026.01.30

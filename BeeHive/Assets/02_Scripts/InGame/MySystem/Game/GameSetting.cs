@@ -31,6 +31,11 @@ namespace InGame.MySystem.Game
                 _socketEventHandlerListMachine.OnConnected(); // 소켓 이벤트 연결
             }
         }
+
+        private void OnDisable()
+        {
+            _socketEventHandlerListMachine.OnDisable();
+        }
     }
 }
-// 마지막 작성 일자: 2025.09.16
+// 마지막 작성 일자: 2026.01.30

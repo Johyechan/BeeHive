@@ -67,6 +67,11 @@ namespace InGame.MyObject
             });
         }
 
+        private void OnDisable()
+        {
+            NetworkManager.Instance.Socket.Off("deckShuffled");
+        }
+
         private async Task CreateDeck()
         {
             await DeckManager.Instance.UsedDeckProp.DeckShuffleAnimationFadeIn();
@@ -84,4 +89,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.01.30

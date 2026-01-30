@@ -38,6 +38,14 @@ namespace InGame.MySystem
                 socketEvent.OnConnect(); // 각 핸들러에서 소켓 이벤트 연결
             }
         }
+
+        public void OnDisable()
+        {
+            foreach(var socketEvent in _socketEventList)
+            {
+                socketEvent.OnDisconnect();
+            }
+        }
     }
 }
-// 마지막 작성 일자: 2025.09.29
+// 마지막 작성 일자: 2026.01.30
