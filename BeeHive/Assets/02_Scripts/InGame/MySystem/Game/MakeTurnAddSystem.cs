@@ -18,6 +18,13 @@ namespace InGame.MySystem.Game
             TurnEvents.OnMakeTurn.Add(GetRoad); // 생산 이벤트에 도로 추가 함수 큐에 추가
         }
 
+        // 구독 해제 함수
+        public void Disable()
+        {
+            TurnEvents.OnMakeTurn.Remove(GetGoldBar); // 생산 이벤트에 금괴 획득 함수 큐에서 제거
+            TurnEvents.OnMakeTurn.Remove(GetRoad); // 생산 이벤트에 도로 추가 함수 큐에서 제거
+        }
+
         // 금괴 획득 함수
         private async Task GetGoldBar()
         {
@@ -81,4 +88,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.02

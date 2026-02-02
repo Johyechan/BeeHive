@@ -96,6 +96,7 @@ namespace InGame.MyManager.Turn
             NetworkManager.Instance.Socket.Off("turnChanged");
             NetworkManager.Instance.Socket.Off("nowGameStart");
             _turnTimerUIHandler.Disable();
+            _makeTurnAddSystem.Disable();
             OnTurnTimerStop -= _turnTimerHandler.TurnTimerStopImmediately;
             OnTurnTimerStop -= _turnTimerUIHandler.SliderTimerStop;
         }
@@ -191,4 +192,4 @@ namespace InGame.MyManager.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.01.30
+// 마지막 작성 일자: 2026.02.02

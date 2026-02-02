@@ -49,6 +49,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
             if (!CanDig()) // 생산 불가한 상태라면
                 return;
 
+            NetworkManager.Instance.Socket.Emit("debug", $"클라에서 골드를 버는 팀: {CurrentTeamType}");
             switch (CurrentTeamType)
             {
                 case TeamType.Team1: // 플레이어의 팀이 Team1일 경우
@@ -88,4 +89,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.01.27
+// 마지막 작성 일자: 2026.02.02
