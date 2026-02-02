@@ -9,33 +9,15 @@ namespace MyUtil
     {
         [SerializeField] private bool _destroyOnLoadScene = false; // 씬이 변경되었을 때 삭제 여부
 
-        // 외부에서 참조 불가능한 인스턴스 
+        // 외부에서 참조 불가능한 인스턴스 - static 타입의 변수는 각 제네릭 타입에 따라 한 개씩만 저장 (객체마다 하나 씩 저장 X) 
         private static T _instance;
 
         // 외부에서 참조 가능한 인스턴스 프로퍼티
-        public static T Instance
-        {
-            get
-            {
-                if(_instance == null) // 만약 _instance가 널이라면
-                {
-                    _instance = FindFirstObjectByType<T>(); // 씬 내에서 가장 먼저 찾은 T 타입으로 지정
-
-                    if(_instance == null) // 씬 내에 T 타입이 존재하지 않아 _instance가 널일 경우
-                    {
-                        NetworkManager.Instance.Socket.Emit("debug", $"{typeof(T).Name} 없음");
-                    }
-                }
-
-                return _instance; // 인스턴스 반환
-            }
-        }
+        public static T Instance { get => _instance; }
 
         protected virtual void Awake()
         {
-            var instance = Instance; // 인스턴스 프로퍼티를 받아와서 _instance가 널일 경우는 새롭게 생성, 존재할 경우 그냥 _instance를 할당
-
-            if(instance != null && instance != this) // 같은 타입의 instance가 이미 존재하는 상태라면
+            if(_instance != null && _instance != this) // 같은 타입의 instance가 이미 존재하는 상태라면
             {
                 Destroy(gameObject); // 현재 이 오브젝트를 삭제
             }
@@ -48,6 +30,14 @@ namespace MyUtil
                 }
             }
         }
+
+        protected virtual void OnDestroy()
+        {
+            if(_instance == this) // 삭제되는 인스턴스가 현재 타입과 같다면
+            {
+                _instance = null; // 인스턴스 초기화
+            }
+        }
     }
 }
-// 마지막 작성 일자: 2025.11.03
+// 마지막 작성 일자: 2026.02.02

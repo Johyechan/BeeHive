@@ -34,6 +34,8 @@ namespace InGame.MyManager
         {
             base.Awake();
 
+            NetworkManager.Instance.Socket.Emit("debug", $"TeamManager Instance Awake: {gameObject.GetInstanceID()}");
+
             var socket = NetworkManager.Instance.Socket; // 서버와 통신하기 위한 객체 받아오기
 
             if(socket != null) // 서버와 통신하기 위한 객체가 null이 아닐 때
@@ -44,7 +46,9 @@ namespace InGame.MyManager
                         return; // 반환
 
                     int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
+                    socket.Emit("debug", $"TeamManager 이벤트 받아서 형변환 전 현재 팀 타입: {teamType}");
                     _currentTeamType = (TeamType)teamType; // 팀 저장
+                    socket.Emit("debug", $"TeamManager 이벤트 받아서 저장하는 현재 팀 타입: {_currentTeamType}");
                     _teamSetTcs?.TrySetResult(true); // 팀 세팅 완료
                 });
             }
@@ -52,6 +56,8 @@ namespace InGame.MyManager
 
         private void OnDisable()
         {
+            NetworkManager.Instance.Socket.Emit("debug", "TeamManager 비활성화 불림");
+            NetworkManager.Instance.Socket.Emit("debug", $"TeamManager Instance Disable: {gameObject.GetInstanceID()}");
             NetworkManager.Instance.Socket.Off("teamType");
         }
 

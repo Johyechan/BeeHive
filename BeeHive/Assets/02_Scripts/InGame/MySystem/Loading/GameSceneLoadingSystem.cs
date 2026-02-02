@@ -25,6 +25,7 @@ namespace InGame.MySystem.Loading
             await TeamManager.Instance.TeamSetTcs.Task; // 팀이 정해질 때까지 대기
 
             TeamReady.Gate.Completed(); // 팀 할당 완료
+            NetworkManager.Instance.Socket.Emit("debug", $"{NetworkManager.Instance.CurrentClientName} 팀: {TeamManager.Instance.CurrentTeamType}");
 
             await EventReady.WaitAsync(); // 이벤트 준비 완료까지 대기
 

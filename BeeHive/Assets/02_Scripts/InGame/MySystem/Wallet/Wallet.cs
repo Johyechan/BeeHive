@@ -116,6 +116,7 @@ namespace InGame.MySystem
             };
 
             string json = JsonUtility.ToJson(goldSetInfo);
+            NetworkManager.Instance.Socket.Emit("debug", $"현재 골드 변경을 보내는 팀: {TeamManager.Instance.CurrentTeamType}, 스팀 아이디: {NetworkManager.Instance.CurrentClientName}");
             NetworkManager.Instance.Socket.Emit("changeGold", json);
         }
     }
