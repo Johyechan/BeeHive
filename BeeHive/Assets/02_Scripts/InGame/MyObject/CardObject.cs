@@ -1,5 +1,6 @@
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MyObject.MyObjectInterface;
 using MyUtil.MyObjectPool;
 using UnityEngine;
@@ -26,4 +27,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.12.04
+// 마지막 작성 일자: 2026.02.03

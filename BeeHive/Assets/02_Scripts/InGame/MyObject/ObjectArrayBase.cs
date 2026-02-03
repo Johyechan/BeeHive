@@ -1,6 +1,7 @@
 using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyManager;
+using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -33,7 +34,7 @@ namespace InGame.MyObject
 
                 Transform trans = parent.GetChild(i); // 자식 객체의 Transform을 저장
 
-                if(TurnManager.Instance.CurrentTeamType == TeamType.Team1) // 현재 턴이 Team1의 팀일 경우
+                if(InGameContext.Current.Data.TurnManager.CurrentTeamType == TeamType.Team1) // 현재 턴이 Team1의 팀일 경우
                 {
                     trans.transform.localRotation = Quaternion.Euler(0, 180, 0); // 카드를 180도 회전(회전을 안할 시 거꾸로 보임)
                 }
@@ -46,4 +47,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2025.11.25
+// 마지막 작성 일자: 2026.02.03

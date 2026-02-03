@@ -1,4 +1,6 @@
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using MyUtil;
 using MyUtil.MyObjectPool;
 using System.Collections.Generic;
@@ -74,9 +76,9 @@ namespace InGame.MyObject
 
         private async Task CreateDeck()
         {
-            await DeckManager.Instance.UsedDeckProp.DeckShuffleAnimationFadeIn();
+            await InGameContext.Current.Data.DeckManager.UsedDeckProp.DeckShuffleAnimationFadeIn();
 
-            _ = DeckManager.Instance.UsedDeckProp.UsedDeckShuffle();
+            _ = InGameContext.Current.Data.DeckManager.UsedDeckProp.UsedDeckShuffle();
 
             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                 return; // 반환
@@ -89,4 +91,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.30
+// 마지막 작성 일자: 2026.02.03

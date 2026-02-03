@@ -1,6 +1,7 @@
 using DG.Tweening;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MySystem;
 using System.Threading.Tasks;
 using TMPro;
@@ -46,4 +47,4 @@ namespace InGame.MyUI.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

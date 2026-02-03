@@ -1,5 +1,6 @@
 using InGame.MyEnum;
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 using System.Threading.Tasks;
@@ -46,4 +47,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

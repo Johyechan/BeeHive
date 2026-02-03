@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using MyUtil.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -89,4 +90,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.02.03

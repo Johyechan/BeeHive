@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyManager.Turn;
@@ -88,7 +90,7 @@ namespace InGame.MySystem.Game.Handler
 
                     PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, (TeamType)pieceChangedRoadInfo.teamType, piecePlacePlane); // 주위 도로 변경 이벤트 호출
 
-                    PieceManager.Instance.FindCanPlacePlane();
+                    InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
                 });
             });
 
@@ -110,7 +112,7 @@ namespace InGame.MySystem.Game.Handler
 
                     GameObject newRoadObj = null; // 변경된 도로
 
-                    switch (TurnManager.Instance.CurrentTeamType) // 현재 턴의 팀
+                    switch (InGameContext.Current.Data.TurnManager.CurrentTeamType) // 현재 턴의 팀
                     {
                         case TeamType.Team1:
                             newRoadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, targetRoadObj.transform.parent);
@@ -129,9 +131,9 @@ namespace InGame.MySystem.Game.Handler
                     PieceBase targetPieceBase = targetRoadObj.GetComponent<PieceBase>();
                     PieceBase newPieceBase = newRoadObj.GetComponent<PieceBase>();
 
-                    PlacePlaneManager.Instance.ChangePlacePlaneState(targetPieceBase.PieceVariable.currentRoadPlacePlane, newPieceBase, false);
+                    InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(targetPieceBase.PieceVariable.currentRoadPlacePlane, newPieceBase, false);
 
-                    PlacePlaneManager.Instance.FindCanPlacePlane();
+                    InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
 
                     switch (targetPieceBase.CurrentTeamType)
                     {
@@ -159,4 +161,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.30
+// 마지막 작성 일자: 2026.02.03

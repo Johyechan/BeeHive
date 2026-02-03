@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyManager;
+using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
 using System.Threading.Tasks;
 using TMPro;
@@ -17,14 +18,14 @@ namespace InGame.MyUI.Turn
 
         public override async Task UIAnimationPlay()
         {
-            CardManager.Instance.ResetCardUse();
+            InGameContext.Current.Data.CardManager.ResetCardUse();
 
             await DOTween.Sequence()
-                .AppendCallback(() => _tmpText.text = TurnManager.Instance.CurrentTeamType.ToString() + " 턴") // 무슨 턴인지 텍스트로 보여주기
+                .AppendCallback(() => _tmpText.text = InGameContext.Current.Data.TurnManager.CurrentTeamType.ToString() + " 턴") // 무슨 턴인지 텍스트로 보여주기
                 .AsyncWaitForCompletion(); // 이후 동일하게 실행되어야 할 기능 수행
 
             await base.UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

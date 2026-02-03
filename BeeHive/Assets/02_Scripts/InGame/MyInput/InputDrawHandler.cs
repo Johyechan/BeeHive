@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyInput.Struct;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyObject;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -68,11 +70,11 @@ namespace InGame.MyInput
 
             if (_deck.deckTransform.childCount <= 0) // 덱이 비어있다면
             {
-                DeckManager.Instance.IsEmpty = true;
+                InGameContext.Current.Data.DeckManager.IsEmpty = true;
             }
 
             _handlerData.socketEventHandler.CallSocketEvent();
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

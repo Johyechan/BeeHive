@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using InGame.MyManager.Global;
 
 namespace InGame.MyObject.Piece.ObjectPieces
 {
@@ -25,4 +26,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2025.09.15
+// 마지막 작성 일자: 2026.02.03

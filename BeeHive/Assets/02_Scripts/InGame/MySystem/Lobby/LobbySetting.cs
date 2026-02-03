@@ -1,4 +1,6 @@
 using InGame.MyManager;
+using InGame.MyManager.Enum;
+using InGame.MyManager.Global;
 using TMPro;
 using UnityEngine;
 
@@ -12,7 +14,11 @@ namespace InGame.MySystem.Lobby
 
         private void Awake()
         {
-            
+            if(SoundManager.Instance.IsFirstStart) // 게임을 이제 처음 시작하는 거라면(로비에 처음 왔다면)
+            {
+                SoundManager.Instance.IsFirstStart = false; // 이제 처음 시작이 아님
+                SoundManager.Instance.SFXPlay(SFXType.BGM); // BGM 실행
+            }
         }
 
         private void Start()
@@ -26,4 +32,4 @@ namespace InGame.MySystem.Lobby
         }
     }
 }
-// 마지막 작성 일자: 2025.08.18
+// 마지막 작성 일자: 2026.02.03

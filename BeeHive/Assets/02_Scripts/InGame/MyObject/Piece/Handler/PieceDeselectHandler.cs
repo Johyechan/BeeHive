@@ -1,5 +1,6 @@
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Local;
 using System.Threading.Tasks;
 
 namespace InGame.MyObject.Piece.Handler
@@ -26,10 +27,10 @@ namespace InGame.MyObject.Piece.Handler
         {
             if (isOn == false) // 끄는 상태일 때
             {
-                GameManager.Instance.CurrentMovePiece = null; // 현재 이동하려는 기물을 null로 할당
+                InGameContext.Current.Data.GameManager.CurrentMovePiece = null; // 현재 이동하려는 기물을 null로 할당
                 _pieceBase.PieceVariable.isSelected = false; // 선택 해제 된 상태로 할당
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.02.03

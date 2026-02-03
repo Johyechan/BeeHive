@@ -1,6 +1,7 @@
 using DG.Tweening;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MyObject;
 using InGame.MyUI.Card.Handler;
 using InGame.MyUI.Card.Variable;
@@ -119,4 +120,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.02.03

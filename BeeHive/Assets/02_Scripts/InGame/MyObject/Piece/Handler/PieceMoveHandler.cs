@@ -1,5 +1,7 @@
 using DG.Tweening;
 using InGame.MyManager;
+using InGame.MyManager.Enum;
+using InGame.MyManager.Global;
 using InGame.MyObject.Piece.Data;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -59,4 +61,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

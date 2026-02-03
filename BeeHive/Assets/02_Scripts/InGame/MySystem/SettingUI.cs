@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -85,4 +86,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2025.11.12
+// 마지막 작성 일자: 2026.02.03

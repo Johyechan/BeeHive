@@ -2,6 +2,7 @@ using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Local;
 using InGame.MyManager.MyPlacePlane;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -35,9 +36,9 @@ namespace InGame.MyUI.Turn
         // 매개 변수로 받은 턴의 UI 애니메이션을 실행
         public async Task UIAnimationPlay(TurnType currentTurn)
         {
-            PlacePlaneManager.Instance.FindCanPlacePlane();
+            InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
             await _turnAnimations[currentTurn].UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

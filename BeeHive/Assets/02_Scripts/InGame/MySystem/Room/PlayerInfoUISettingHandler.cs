@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MyUI.MyUIButton;
 using MyUtil;
 using System.Collections.Generic;
@@ -148,4 +149,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2025.08.18
+// 마지막 작성 일자: 2026.02.03

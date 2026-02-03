@@ -1,7 +1,7 @@
 using DG.Tweening;
 using InGame.MyEnum;
-using InGame.MyManager;
-using InGame.MyManager.MyCard;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using MyUtil.MyEvent;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -62,7 +62,7 @@ namespace InGame.MySystem.Game
 
             for(int i = 0; i < count; i++) // 카드 수 차이만큼 반복
             {
-                DrawManager.Instance.DrawCard(_deckParent, playerCardsParent, null, false); // ui는 제외, 객체만 드로우
+                InGameContext.Current.Data.DrawManager.DrawCard(_deckParent, playerCardsParent, null, false); // ui는 제외, 객체만 드로우
                 Sequence seq = DOTween.Sequence()
                     .AppendCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(playerCardsParent)); // 카드 객체 정렬
 
@@ -72,4 +72,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.02.03

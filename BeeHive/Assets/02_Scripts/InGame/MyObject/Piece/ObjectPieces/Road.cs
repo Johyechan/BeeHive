@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyManager.Turn;
@@ -17,18 +19,18 @@ namespace InGame.MyObject.Piece.ObjectPieces
     {
         public override void ObjectClicked()
         {
-            if(!CardManager.Instance.CardUsed) // 카드 사용으로 변경하는 것이 아니라면
+            if(!InGameContext.Current.Data.CardManager.CardUsed) // 카드 사용으로 변경하는 것이 아니라면
             {
                 if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 이동할 수 없습니다."))
                     return; // 반환
             }
             else // 카드 사용으로 변경하는 것이라면
             {
-                CardManager.Instance.CardUsed = false; // 카드 사용 끝내기
+                InGameContext.Current.Data.CardManager.CardUsed = false; // 카드 사용 끝내기
             }
 
             GameObject roadObj = null;
-            switch (TurnManager.Instance.CurrentTeamType) // 현재 턴의 팀 타입에 따라
+            switch (InGameContext.Current.Data.TurnManager.CurrentTeamType) // 현재 턴의 팀 타입에 따라
             {
                 case TeamType.Team1:
                     roadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, transform.parent);
@@ -55,7 +57,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
             string json = JsonUtility.ToJson(changeRoadInfo);
             NetworkManager.Instance.Socket.Emit("changeRoad", json);
 
-            foreach (var canChangeRoad in PieceManager.Instance.CanChangeRoadList) // 변환 가능한 도로 리스트를 순회
+            foreach (var canChangeRoad in InGameContext.Current.Data.PieceManager.CanChangeRoadList) // 변환 가능한 도로 리스트를 순회
             {
                 Road road = canChangeRoad as Road; // Road 클래스로 변환
                 if (road != null) // 성공적으로 변환이 되었다면
@@ -64,9 +66,9 @@ namespace InGame.MyObject.Piece.ObjectPieces
                 }
             }
 
-            PlacePlaneManager.Instance.ChangePlacePlaneState(PieceVariable.currentRoadPlacePlane, pieceBase, false);
+            InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(PieceVariable.currentRoadPlacePlane, pieceBase, false);
 
-            PlacePlaneManager.Instance.FindCanPlacePlane();
+            InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
 
             ChangeMaterial(true); // 기본 머티리얼 상태로 전환
 
@@ -85,4 +87,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.02.03

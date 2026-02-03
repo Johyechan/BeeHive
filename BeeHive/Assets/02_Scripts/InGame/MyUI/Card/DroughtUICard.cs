@@ -1,5 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using UnityEngine;
 
 namespace InGame.MyUI.Card
@@ -11,7 +13,7 @@ namespace InGame.MyUI.Card
         // 카드 기능을 실제로 수행하는 함수
         public override bool UseCard()
         {
-            if (CardManager.Instance.CheckSameTypeCardWasUsed(CardType.Drought)) // 가뭄 카드 일전에 사용 했었는지 확인
+            if (InGameContext.Current.Data.CardManager.CheckSameTypeCardWasUsed(CardType.Drought)) // 가뭄 카드 일전에 사용 했었는지 확인
             {
                 return false;
             }
@@ -48,4 +50,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2025.11.26
+// 마지막 작성 일자: 2026.02.03

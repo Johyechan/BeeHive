@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -79,7 +81,7 @@ namespace InGame.MySystem.Game
         // 반환 여부 확인 함수
         private bool IsReturn()
         {
-            if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀과 내 팀이 다르다면
+            if (InGameContext.Current.Data.TurnManager.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀과 내 팀이 다르다면
             {
                 return true; // 반환
             }
@@ -88,4 +90,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.02.02
+// 마지막 작성 일자: 2026.02.03

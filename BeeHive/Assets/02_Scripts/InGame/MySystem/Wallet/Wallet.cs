@@ -1,5 +1,6 @@
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MySystem.Game;
 using System.Threading.Tasks;
 using TMPro;
@@ -121,4 +122,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.02.03

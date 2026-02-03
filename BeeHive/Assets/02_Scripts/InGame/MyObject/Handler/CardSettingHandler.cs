@@ -1,6 +1,8 @@
 using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
 using MyUtil.MyEvent;
 using MyUtil.MyObjectPool;
@@ -36,32 +38,32 @@ namespace InGame.MyObject.Handler
                 yield return new WaitUntil(() => tweenEnd); // 트윈이 종료될 때까지 대기
             }
 
-            yield return new WaitUntil(() => CardManager.Instance.CardReverseTask.Task.IsCompleted);
+            yield return new WaitUntil(() => InGameContext.Current.Data.CardManager.CardReverseTask.Task.IsCompleted);
 
             bool end = false;
-            switch (TurnManager.Instance.CurrentTeamType) // 현재 팀에 따라 카드 재세팅
+            switch (InGameContext.Current.Data.TurnManager.CurrentTeamType) // 현재 팀에 따라 카드 재세팅
             {
                 case TeamType.Team1:
-                    end = DrawEventSystem.OnCardObjectSet.Invoke(DeckManager.Instance.DeckProp.player1CardsParent);
+                    end = DrawEventSystem.OnCardObjectSet.Invoke(InGameContext.Current.Data.DeckManager.DeckProp.player1CardsParent);
                     yield return new WaitUntil(() => end);
                     break;
                 case TeamType.Team2:
-                    end = DrawEventSystem.OnCardObjectSet.Invoke(DeckManager.Instance.DeckProp.player2CardsParent);
+                    end = DrawEventSystem.OnCardObjectSet.Invoke(InGameContext.Current.Data.DeckManager.DeckProp.player2CardsParent);
                     yield return new WaitUntil(() => end);
                     break;
             }
 
             DrawEventSystem.OnCardUISet?.Invoke();// 카드 UI 재세팅
 
-            if (DeckManager.Instance.IsEmpty && cardPoolType != ObjectPoolType.CastleUpgradeCard) // 덱이 비어 있으며 현재 사용한 카드가 성벽 강화 카드가 아닐 경우
+            if (InGameContext.Current.Data.DeckManager.IsEmpty && cardPoolType != ObjectPoolType.CastleUpgradeCard) // 덱이 비어 있으며 현재 사용한 카드가 성벽 강화 카드가 아닐 경우
             {
-                if(TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀과 클라이언트의 팀이 같을 경우
+                if(InGameContext.Current.Data.TurnManager.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀과 클라이언트의 팀이 같을 경우
                 {
-                    DeckManager.Instance.IsEmpty = false; // 덱이 비어 있지 않은 상태로 할당
-                    DeckManager.Instance.ReMakeDeck(); // 덱 다시 만들기
+                    InGameContext.Current.Data.DeckManager.IsEmpty = false; // 덱이 비어 있지 않은 상태로 할당
+                    InGameContext.Current.Data.DeckManager.ReMakeDeck(); // 덱 다시 만들기
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.12.15
+// 마지막 작성 일자: 2026.02.03

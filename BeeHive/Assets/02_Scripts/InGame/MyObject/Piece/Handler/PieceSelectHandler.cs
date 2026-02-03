@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Piece.Data;
 using System.Threading.Tasks;
@@ -28,20 +30,20 @@ namespace InGame.MyObject.Piece.Handler
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
             PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
 
-            PlacePlaneManager.Instance.Variable.findCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, _pieceData.currentObjectType); // 한 칸 이동 가능한 칸 찾기
+            InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, _pieceData.currentObjectType); // 한 칸 이동 가능한 칸 찾기
 
             if(_pieceBase.CurrentObjectType == ObjectType.Tank) // 전차일 경우
             {
-                if(CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있을 때
+                if(InGameContext.Current.Data.CardManager.HaveFirePowerCard) // 화력 카드를 가지고 있을 때
                 {
-                    PlacePlaneManager.Instance.Variable.findCanPlacePlaneSystem.FindCanFirePowerAttackPiece(_pieceBase.CurrentTeamType, _pieceBase.PieceVariable.currentPlacePlane); // 한 칸 떨어진 기물들을 공격 가능 대상으로 지정
+                    InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanFirePowerAttackPiece(_pieceBase.CurrentTeamType, _pieceBase.PieceVariable.currentPlacePlane); // 한 칸 떨어진 기물들을 공격 가능 대상으로 지정
                 }
             }
 
-            GameManager.Instance.CurrentMovePiece = _pieceBase.gameObject; // 현재 객체를 현재 이동하려는 기물로 할당
+            InGameContext.Current.Data.GameManager.CurrentMovePiece = _pieceBase.gameObject; // 현재 객체를 현재 이동하려는 기물로 할당
             HighLightEvents.SelectedPlacementType = ObjectType.None; // 배치 하는 것이 아닌 이동의 여부이기에 None으로 설정
 
-            foreach (var piece in PlacePlaneManager.Instance.Variable.highLightHandler.CanPieceMovePlanes) // 배치 가능한 도로 칸들 순회
+            foreach (var piece in InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPieceMovePlanes) // 배치 가능한 도로 칸들 순회
             {
                 piece.CanPlacePieceType = _pieceData.currentObjectType; // 배치 가능한 타입을 할당
             }
@@ -54,4 +56,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.02.03

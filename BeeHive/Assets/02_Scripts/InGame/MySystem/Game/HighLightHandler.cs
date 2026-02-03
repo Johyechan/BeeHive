@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MyObject;
 using MyUtil;
 using System;
@@ -86,4 +87,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.01.26
+// 마지막 작성 일자: 2026.02.03

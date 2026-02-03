@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Handler;
@@ -38,14 +40,14 @@ namespace InGame.MyObject.Piece.Handler
 
         public async Task PieceAttacked()
         {
-            PieceBase attackPieceBase = GameManager.Instance.CurrentMovePiece.GetComponent<PieceBase>(); // 공격한 객체의 PieceBase 가져오기
+            PieceBase attackPieceBase = InGameContext.Current.Data.GameManager.CurrentMovePiece.GetComponent<PieceBase>(); // 공격한 객체의 PieceBase 가져오기
             bool isRangedAttack = false; // 전차 원거리 공격 여부
 
             if (attackPieceBase.CurrentObjectType == ObjectType.Tank) // 공격한 기물이 전차일 경우
             {
                 if (_pieceBase.PieceVariable.isFirePowerAttackTarget) // 공격 받은 기물이 원거리 공격 대상이라면
                 {
-                    if (CardManager.Instance.HaveFirePowerCard && !GameManager.Instance.TankRangedAttacked) // 공격한 기물의 팀이 화력 카드를 가지고 있으며 원거리 공격을 한 번도 안한 상태라면
+                    if (InGameContext.Current.Data.CardManager.HaveFirePowerCard && !InGameContext.Current.Data.GameManager.TankRangedAttacked) // 공격한 기물의 팀이 화력 카드를 가지고 있으며 원거리 공격을 한 번도 안한 상태라면
                     {
                         HighLightOffFunction(false); // 배치칸 비활성화
                         _pieceData.confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include);
@@ -71,31 +73,31 @@ namespace InGame.MyObject.Piece.Handler
                         }
 
                         isRangedAttack = true; // 전차 원거리 공격으로 판정
-                        GameManager.Instance.TankRangedAttacked = true; // 원거리 공격한 것으로 판정
+                        InGameContext.Current.Data.GameManager.TankRangedAttacked = true; // 원거리 공격한 것으로 판정
 
                         if (_pieceBase.CurrentObjectType == ObjectType.Tank) // 만약 공격 받는 기물도 전차라면
                         {
                             NetworkManager.Instance.Socket.Emit("tankAttackedTank", SceneMgr.Instance.CurrentRoomID); // 상대 전차를 공격했다고 서버로 이벤트 호출
 
-                            bool opponentChooseDefense = await PieceManager.Instance.OpponentChoice() == 1 ? true : false; // 상대가 결정할 때까지 대기
+                            bool opponentChooseDefense = await InGameContext.Current.Data.PieceManager.OpponentChoice() == 1 ? true : false; // 상대가 결정할 때까지 대기
 
                             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                                 return; // 반환
 
                             if (opponentChooseDefense) // 상대가 방어를 했다면
                             {
-                                GameManager.Instance.PieceCanMoveMap[attackPieceBase.CurrentObjectType] = false; // 공격한 기물이 이동 한 것으로 판정
+                                InGameContext.Current.Data.GameManager.PieceCanMoveMap[attackPieceBase.CurrentObjectType] = false; // 공격한 기물이 이동 한 것으로 판정
 
                                 HighLightOffFunction(true);
 
-                                UICardBase uiCardBase = CardManager.Instance.FindFirePowerCard(); // 자신의 패에서 화력 카드 탐색
+                                UICardBase uiCardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard(); // 자신의 패에서 화력 카드 탐색
 
                                 if (uiCardBase == null) // 자신의 패에 화력 카드가 없다면
                                 {
-                                    CardManager.Instance.HaveFirePowerCard = false; // 화력 카드가 없는 상태로 전환
+                                    InGameContext.Current.Data.CardManager.HaveFirePowerCard = false; // 화력 카드가 없는 상태로 전환
                                 }
 
-                                PieceManager.Instance.FindCanPlacePlane(); // 재탐색
+                                InGameContext.Current.Data.PieceManager.FindCanPlacePlane(); // 재탐색
                                 await Task.CompletedTask; // 테스크 종료
                                 return; // 함수 종료
                             }
@@ -160,8 +162,8 @@ namespace InGame.MyObject.Piece.Handler
 
             NetworkManager.Instance.Socket.Emit("attackPiece", json);
 
-            await PieceManager.Instance.AttackRelatedPiecesMove(_pieceBase, attackPieceBase, returnParent, returnPieceTrans.parent, returnPos, attackPos); // 공격 당한 기물과 공격한 기물이 이동하는 함수
+            await InGameContext.Current.Data.PieceManager.AttackRelatedPiecesMove(_pieceBase, attackPieceBase, returnParent, returnPieceTrans.parent, returnPos, attackPos); // 공격 당한 기물과 공격한 기물이 이동하는 함수
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

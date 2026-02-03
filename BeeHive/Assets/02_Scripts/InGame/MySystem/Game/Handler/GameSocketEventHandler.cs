@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.MyPiece;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
@@ -25,7 +27,7 @@ namespace InGame.MySystem.Game.Handler
                 int isDrought = value.GetValue<int>();
                 MainThreadDispatcher.Enqueue(() =>
                 {
-                    PieceManager.Instance.IsDrought = isDrought == 1; // 가뭄 여부 변경 - isDrought가 1일 경우 참, 1이 아닐 경우 거짓 할당
+                    InGameContext.Current.Data.PieceManager.IsDrought = isDrought == 1; // 가뭄 여부 변경 - isDrought가 1일 경우 참, 1이 아닐 경우 거짓 할당
                 });
             });
 
@@ -56,7 +58,7 @@ namespace InGame.MySystem.Game.Handler
                 {
                     Time.timeScale = 0; // 시간 멈춤
                     GameOverEvent.OnGameOver?.Invoke();
-                    GameManager.Instance.GameIsOver((TeamType)loseTeamType); // 게임 오버
+                    InGameContext.Current.Data.GameManager.GameIsOver((TeamType)loseTeamType); // 게임 오버
                 });
             });
 
@@ -87,7 +89,7 @@ namespace InGame.MySystem.Game.Handler
 
                 MainThreadDispatcher.Enqueue(() =>
                 {
-                    if (CardManager.Instance.HaveFirePowerCard) // 화력 카드를 가지고 있다면
+                    if (InGameContext.Current.Data.CardManager.HaveFirePowerCard) // 화력 카드를 가지고 있다면
                     {
                         ConfirmUI confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 가져오기
 
@@ -128,4 +130,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.30
+// 마지막 작성 일자: 2026.02.03

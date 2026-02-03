@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Piece;
@@ -17,7 +19,7 @@ namespace InGame.MyObject.Handler
         {
             UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
 
-            PlacePlaneManager.Instance.ChangePlacePlaneState(roadPlacePlane, roadPiece, false); // 현재 배치칸 상태 변경
+            InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(roadPlacePlane, roadPiece, false); // 현재 배치칸 상태 변경
 
             RoadInfo roadInfo = new RoadInfo()
             {
@@ -38,7 +40,7 @@ namespace InGame.MyObject.Handler
 
             await roadPiece.MoveToPlacePlane(roadPlacePlane.transform.parent, roadPlacePlane.transform.localPosition, roadAngle); // 기물을 현재 배치 판 부모의 자식으로 변경 + 현재 이 배치판 위치 이동 + 각도 회전
 
-            PieceManager.Instance.FindCanPlacePlane();
+            InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
 
             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                 return; // 반환
@@ -47,4 +49,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

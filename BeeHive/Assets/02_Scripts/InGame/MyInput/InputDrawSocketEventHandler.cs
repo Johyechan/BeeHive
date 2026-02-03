@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MyObject;
 using UnityEngine;
 
@@ -20,4 +21,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.01.09
+// 마지막 작성 일자: 2026.02.03

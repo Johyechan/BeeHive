@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MyObject;
 using InGame.MyUI.MyUIInterface;
 using UnityEngine;
@@ -24,4 +25,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.11.07
+// 마지막 작성 일자: 2026.02.03

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyManager;
+using InGame.MyManager.Local;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -68,8 +69,8 @@ namespace InGame.MyObject.Handler
 
             await Task.Yield(); // 한 프레임 대기를 통한 연출의 자연스러움 추가
 
-            DeckManager.Instance.CompleteTcs(); // 덱 생성 완료
+            InGameContext.Current.Data.DeckManager.CompleteTcs(); // 덱 생성 완료
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

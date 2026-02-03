@@ -1,8 +1,7 @@
-using InGame.MyUI.MyUIInterface;
 using DG.Tweening;
+using InGame.MyManager.Local;
+using InGame.MyUI.MyUIInterface;
 using UnityEngine;
-using InGame.MyManager;
-using InGame.MyManager.UI.Button;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -31,7 +30,7 @@ namespace InGame.MyUI.MyUIButton
                 .Append(showDownUI.DOAnchorPosY(showDownYPos, _animationDelay)) // 위 아래로만 움직일 것이기 때문에 앵커 포지션 Y축으로만 움직이는 DOTWEEN 함수 사용 - 우선 showDownYPos 위치로 _animationDelay 동안 Y축 이동
                 .Insert(_delayForNext, showUI.DOAnchorPosY(showYPos, _animationDelay)); // 위 아래로만 움직일 것이기 때문에 앵커 포지션 Y축으로만 움직이는 DOTWEEN 함수 사용 - showYPos 위치로 _delayForNext 초 후 _animationDelay 동안 Y축 이동
 
-            ShowButtonManager.Instance.PlaySequence(_seq);
+            InGameContext.Current.Data.ShowButtonManager.PlaySequence(_seq);
         }
 
         // 숨김 함수 - 매개변수로 숨길 UI의 RectTransform, 숨길 UI의 위치
@@ -40,8 +39,8 @@ namespace InGame.MyUI.MyUIButton
             _seq = DOTween.Sequence()
                 .Append(hideUI.DOAnchorPosY(hideYPos, _animationDelay)); // 위 아래로만 움직일 것이기 때문에 앵커 포지션 Y축으로만 움직이는 DOTWEEN 함수 사용 - hideYPos 위치 이동
 
-            ShowButtonManager.Instance.PlaySequence(_seq);
+            InGameContext.Current.Data.ShowButtonManager.PlaySequence(_seq);
         }
     }
 }
-// 마지막 작성 일자: 2026.01.20
+// 마지막 작성 일자: 2026.02.03

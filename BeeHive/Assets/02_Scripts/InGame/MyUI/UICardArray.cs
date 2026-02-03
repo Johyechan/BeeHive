@@ -1,6 +1,5 @@
 using DG.Tweening;
-using InGame.MyManager;
-using InGame.MyManager.MyCard;
+using InGame.MyManager.Local;
 using InGame.MyUI.Card;
 using MyUtil.MyEvent;
 using UnityEngine;
@@ -42,7 +41,7 @@ namespace InGame.MyUI
         private void ChangeUICardsRotateAndPosition()
         {
             int cardCount = _rectTransform.childCount; // 카드의 총 개수
-            DrawManager.Instance.CanDraw = () => cardCount == _maxCount ? false : true; // 현재 보유 카드 수가 최대라면 드로우 불가 상태 아니라면 가능 상태
+            InGameContext.Current.Data.DrawManager.CanDraw = () => cardCount == _maxCount ? false : true; // 현재 보유 카드 수가 최대라면 드로우 불가 상태 아니라면 가능 상태
 
             if (cardCount <= 0 || cardCount > _maxCount) // 보유 중인 카드가 0개라면 또는 최대 보유 가능 수 초과라면
                 return; // 그냥 반환
@@ -87,4 +86,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2025.11.07
+// 마지막 작성 일자: 2026.02.03

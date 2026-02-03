@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece;
 using InGame.MyObject.Piece.Data;
@@ -85,4 +86,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2026.01.23
+// 마지막 작성 일자: 2026.02.03

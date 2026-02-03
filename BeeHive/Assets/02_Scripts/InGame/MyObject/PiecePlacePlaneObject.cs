@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Handler;
@@ -81,7 +83,7 @@ namespace InGame.MyObject
                 }
             }
 
-            if (GameManager.Instance.CurrentMovePiece != null) // 현재 이동 가능한 객체 있다면
+            if (InGameContext.Current.Data.GameManager.CurrentMovePiece != null) // 현재 이동 가능한 객체 있다면
             {
                 if (!WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
                 {
@@ -110,14 +112,14 @@ namespace InGame.MyObject
                 return;
             }
 
-            GameManager.Instance.PieceCanMoveMap[CanPlacePieceType] = false; // 현재 이동하는 타입의 기물을 이후로는 같은 타입의 기물 이동이 불가한 상태로 할당
-            await PlacePiece(GameManager.Instance.CurrentMovePiece, true); // 기물 이동
+            InGameContext.Current.Data.GameManager.PieceCanMoveMap[CanPlacePieceType] = false; // 현재 이동하는 타입의 기물을 이후로는 같은 타입의 기물 이동이 불가한 상태로 할당
+            await PlacePiece(InGameContext.Current.Data.GameManager.CurrentMovePiece, true); // 기물 이동
         }
 
         // 객체를 배치하는 기능 함수
         private async void ObjectPlace()
         {
-            GameManager.Instance.CanMakePiece = false;
+            InGameContext.Current.Data.GameManager.CanMakePiece = false;
             Transform pieceParent = _pieceMap[CanPlacePieceType]; // 현재 배치 가능한 타입의 객체 부모
             int pieceCount = pieceParent.childCount; // 현재 보유 중인 배치 가능한 타입의 기물 수
 
@@ -132,7 +134,7 @@ namespace InGame.MyObject
             {
                 UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
 
-                PlacePlaneManager.Instance.ChangePlacePlaneState(this, pieceBase, isMove); // 현재 배치칸 상태 변경
+                InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(this, pieceBase, isMove); // 현재 배치칸 상태 변경
 
                 PieceInfo pieceInfo = new PieceInfo()
                 {
@@ -196,11 +198,11 @@ namespace InGame.MyObject
                 }
                 
 
-                PieceManager.Instance.FindCanPlacePlane();
+                InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
 
                 UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.01.26
+// 마지막 작성 일자: 2026.02.03

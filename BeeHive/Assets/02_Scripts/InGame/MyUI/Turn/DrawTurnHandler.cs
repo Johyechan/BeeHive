@@ -1,6 +1,8 @@
 using DG.Tweening;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
 using System.Threading.Tasks;
 using TMPro;
@@ -27,13 +29,13 @@ namespace InGame.MyUI.Turn
             await DOTween.Sequence()
                 .AppendCallback(() =>
                 {
-                    if (TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 내 팀 차례일때
+                    if (InGameContext.Current.Data.TurnManager.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 내 팀 차례일때
                     {
-                        TurnManager.Instance.CanChangeTurn = true; // 턴 변경 버튼으로 넘기기 가능
+                        InGameContext.Current.Data.TurnManager.CanChangeTurn = true; // 턴 변경 버튼으로 넘기기 가능
                         TurnEvents.OnSetInteractable?.Invoke(true); // 턴 넘기기 버튼 상화작용 활성화
                     }
                 }).AsyncWaitForCompletion();
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

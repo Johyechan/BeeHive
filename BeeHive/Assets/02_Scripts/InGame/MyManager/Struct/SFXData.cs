@@ -1,3 +1,4 @@
+using InGame.MyManager.Enum;
 using System;
 using UnityEngine;
 
@@ -12,4 +13,4 @@ namespace InGame.MyManager
         public AudioSource audioSource; // 효과음
     }
 }
-// 마지막 작성 일자: 2025.11.14
+// 마지막 작성 일자: 2026.02.03

@@ -1,11 +1,12 @@
 using InGame.MyManager;
+using MyUtil.Interface;
 using UnityEngine;
 
 namespace MyUtil
 {
     // 작성자: 조혜찬
     // MonoBehaviour 상속 싱글톤 클래스
-    public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour // 기본적으로 이 클래스와 이 클래스의 자식은 MonoBehaviour를 상속 받고 있으며 T가 MonoBehaviour를 상속받고 있는 상태여야지만 이 클래스를 상속 가능
+    public class MonoSingleton<T> : MonoBehaviour, ISingletonManager where T : MonoBehaviour // 기본적으로 이 클래스와 이 클래스의 자식은 MonoBehaviour를 상속 받고 있으며 T가 MonoBehaviour를 상속받고 있는 상태여야지만 이 클래스를 상속 가능
     {
         [SerializeField] private bool _destroyOnLoadScene = false; // 씬이 변경되었을 때 삭제 여부
 
@@ -14,6 +15,8 @@ namespace MyUtil
 
         // 외부에서 참조 가능한 인스턴스 프로퍼티
         public static T Instance { get => _instance; }
+
+        public bool IsReady { get; private set; } // 준비 완료 여부
 
         protected virtual void Awake()
         {
@@ -29,6 +32,8 @@ namespace MyUtil
                     DontDestroyOnLoad(gameObject); // 씬이 바뀌어도 삭제되지 않게 설정
                 }
             }
+
+            Ready();
         }
 
         protected virtual void OnDestroy()
@@ -38,6 +43,12 @@ namespace MyUtil
                 _instance = null; // 인스턴스 초기화
             }
         }
+
+        // 준비 완료 함수
+        public void Ready()
+        {
+            IsReady = true;
+        }
     }
 }
-// 마지막 작성 일자: 2026.02.02
+// 마지막 작성 일자: 2026.02.03

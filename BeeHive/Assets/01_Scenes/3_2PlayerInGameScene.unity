@@ -2309,7 +2309,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 016fcf39c71482a45a1b558239a55057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyOnLoadScene: 1
   _deckCardInfo:
     castleUpgradeCardCount: 1
     droughtCardCount: 4
@@ -3123,6 +3122,61 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &207703079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 207703081}
+  - component: {fileID: 207703080}
+  m_Layer: 0
+  m_Name: InGameContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &207703080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207703079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44ef0efa9ffdc8443aad4844663cf4d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    CameraManager: {fileID: 1566061381}
+    CardManager: {fileID: 1402230655}
+    DeckManager: {fileID: 137371535}
+    DrawManager: {fileID: 1223835472}
+    GameManager: {fileID: 733623768}
+    InputManager: {fileID: 662562040}
+    PieceManager: {fileID: 2024793781}
+    PlacePlaneManager: {fileID: 1431473992}
+    ShowButtonManager: {fileID: 1408905230}
+    TurnManager: {fileID: 1713890271}
+--- !u!4 &207703081
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 207703079}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1870, y: 50, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &213028796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9284,7 +9338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7cea46f333ce54995dc41669a52928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyOnLoadScene: 1
   _deck: {fileID: 588781781}
   _playerActionAsset: {fileID: -944628639613478452, guid: 7148f4b17fec4334db1df11803e05fa6, type: 3}
   _drawMillisecondDelay: 500
@@ -10538,7 +10591,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae14af774f5ab04a88c716a6c799920, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyOnLoadScene: 1
   _gameOverUICanvasGroup: {fileID: 1194231715}
   _gameOverText: {fileID: 236711989}
   _animationDuration: 0.5
@@ -17550,7 +17602,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204dc6a21d6cc7248b6d82ad8b57c625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyOnLoadScene: 1
   _deck: {fileID: 588781781}
   _usedDeckTrans: {fileID: 1279848486}
   _cardUsePanelCanvasGroup: {fileID: 1667095411}
@@ -19954,7 +20005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19dfd0ed3830eac42ac50215375a6d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyOnLoadScene: 1
   _uiCardsParent: {fileID: 1145864087}
   _team1CardParent: {fileID: 1993153890}
   _team2CardParent: {fileID: 1984745557}
@@ -20326,7 +20376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b90e6a07521df4492b4be8b0b770c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyOnLoadScene: 1
 --- !u!4 &1408905231
 Transform:
   m_ObjectHideFlags: 0
@@ -20808,7 +20857,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef748eb4282304b8d1b3c75e47a067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyOnLoadScene: 1
   _placePlaneParent: {fileID: 120938036}
   _team1NearRoads:
   - {fileID: 1584448134}
@@ -22376,7 +22424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197ce9fa2534ea24bace6a29ff2d398b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyOnLoadScene: 1
   _cameraBrain: {fileID: 330585548}
 --- !u!4 &1566061382
 Transform:
@@ -24574,7 +24621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3cc4fe289a89042b066112019ee302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyOnLoadScene: 1
   _teamChangeDelay: 1
   _turnDurationTime: 600
   _turnTimerSlider: {fileID: 774332522}
@@ -28909,7 +28955,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 470e58b322c829b49bfeafe1f44f72e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyOnLoadScene: 1
 --- !u!4 &2024793782
 Transform:
   m_ObjectHideFlags: 0
@@ -30551,3 +30596,4 @@ SceneRoots:
   - {fileID: 1842043254}
   - {fileID: 1330515909}
   - {fileID: 1408905231}
+  - {fileID: 207703081}

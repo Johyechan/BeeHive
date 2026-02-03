@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyManager;
+using InGame.MyManager.Local;
 using InGame.MyUI.MyUIButton;
 using MyUtil;
 using System;
@@ -45,7 +46,7 @@ namespace InGame.MyUI
         {
             _askText.ForceMeshUpdate(); // TMP를 GPU에 강제로 올리기
 
-            _cardUseButton.UICardBase = CardManager.Instance.FindFirePowerCard(); // 화력 카드 할당
+            _cardUseButton.UICardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard(); // 화력 카드 할당
 
             _askText.text = message;
 
@@ -58,4 +59,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.01.15
+// 마지막 작성 일자: 2026.02.03

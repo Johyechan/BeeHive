@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyManager.Turn;
@@ -37,13 +39,13 @@ namespace InGame.MyObject.Piece.ObjectPieces
         // 금화를 얻는 함수
         private async Task Dig()
         {
-            if (TurnManager.Instance.CurrentTeamType != CurrentTeamType) // 현재 턴 팀과 나의 팀이 다르다면
+            if (InGameContext.Current.Data.TurnManager.CurrentTeamType != CurrentTeamType) // 현재 턴 팀과 나의 팀이 다르다면
                 return; // 반환
 
             if (_pieceVariable.currentPlacePlane == null) // 자기가 배치된 판이 없다면
                 return; // 반환
 
-            if (PieceManager.Instance.IsDrought) // 가뭄 상태라면
+            if (InGameContext.Current.Data.PieceManager.IsDrought) // 가뭄 상태라면
                 return; // 반환
 
             if (!CanDig()) // 생산 불가한 상태라면
@@ -68,9 +70,9 @@ namespace InGame.MyObject.Piece.ObjectPieces
         // 생산 가능 여부 확인 함수
         private bool CanDig()
         {
-            PlacePlaneManager.Instance.Variable.findCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceVariable.currentPlacePlane, CurrentTeamType, ObjectType.Miner);
+            InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceVariable.currentPlacePlane, CurrentTeamType, ObjectType.Miner);
 
-            foreach (var plane in PlacePlaneManager.Instance.Variable.highLightHandler.CanDigCheckPlacePlanes) // 생산 가능 여부 확인 배치칸 순회
+            foreach (var plane in InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanDigCheckPlacePlanes) // 생산 가능 여부 확인 배치칸 순회
             {
                 if (plane.isNearToCastle) // 성과 근접한 기물 배치칸이 있다면
                 {
@@ -88,4 +90,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.02.02
+// 마지막 작성 일자: 2026.02.03

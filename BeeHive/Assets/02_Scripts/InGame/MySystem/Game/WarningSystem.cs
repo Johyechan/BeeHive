@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -33,7 +35,7 @@ namespace InGame.MySystem
 
         private bool IsCanMovePiece(ObjectType type, bool isAttack)
         {
-            if (GameManager.Instance.PieceCanMoveMap[type])
+            if (InGameContext.Current.Data.GameManager.PieceCanMoveMap[type])
             {
                 return true;
             }
@@ -69,7 +71,7 @@ namespace InGame.MySystem
 
         private bool IsCanMakePiece()
         {
-            if (GameManager.Instance.CanMakePiece)
+            if (InGameContext.Current.Data.GameManager.CanMakePiece)
                 return true;
 
             UIManager.Instance.WarningUIMake("더 이상 기물을 만들 수 없습니다.");
@@ -79,7 +81,7 @@ namespace InGame.MySystem
         // 현재 턴을 확인하는 함수
         private bool IsCurrentTurn(TurnType currentTurn, string text)
         {
-            if (currentTurn != TurnManager.Instance.CurrentTurnType) // 확인하려는 턴이 현재 턴과 다를 경우
+            if (currentTurn != InGameContext.Current.Data.TurnManager.CurrentTurnType) // 확인하려는 턴이 현재 턴과 다를 경우
             {
                 UIManager.Instance.WarningUIMake(text); // 경고 UI 생성
                 return false;
@@ -117,7 +119,7 @@ namespace InGame.MySystem
         private bool CheckCurrentTurnTeam()
         {
             // 현재 턴의 팀과 내 팀이 다르다면
-            if(TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType)
+            if(InGameContext.Current.Data.TurnManager.CurrentTeamType != TeamManager.Instance.CurrentTeamType)
             {
                 UIManager.Instance.WarningUIMake("현재 턴은 당신의 턴이 아닙니다.");
                 return false;
@@ -127,4 +129,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.02.03

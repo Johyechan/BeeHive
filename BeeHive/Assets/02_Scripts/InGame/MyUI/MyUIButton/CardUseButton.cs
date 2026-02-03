@@ -1,5 +1,7 @@
 using DG.Tweening;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyUI.Card;
 using InGame.MyUI.MyUIInterface;
@@ -24,7 +26,7 @@ namespace InGame.MyUI.MyUIButton
         // 클릭 시 실행될 함수
         public void OnUIClick()
         {
-            CardManager.Instance.CardReverseTask = new TaskCompletionSource<bool>(); // 카드 뒤집기 대기 테스크 할당
+            InGameContext.Current.Data.CardManager.CardReverseTask = new TaskCompletionSource<bool>(); // 카드 뒤집기 대기 테스크 할당
             if (_uiCardBase.UseCard() == false) // 카드 사용에 예외가 발생했다면
             {
                 DOTween.Sequence()
@@ -68,9 +70,9 @@ namespace InGame.MyUI.MyUIButton
                     {
                         ObjectPoolManager.Instance.ReturnObject(cardObject.CardPoolType, _uiCardBase.UICardVariable.cardObj); // 성벽 강화 카드를 풀에 반환 - 성벽 강화 카드는 재사용 불가 카드이기 때문
                     }
-                    CardManager.Instance.CardReverseTask.SetResult(true); // 카드 뒤집기 완료
+                    InGameContext.Current.Data.CardManager.CardReverseTask.SetResult(true); // 카드 뒤집기 완료
                 });
         }
     }
 }
-// 마지막 작성 일자: 2025.12.01
+// 마지막 작성 일자: 2026.02.03

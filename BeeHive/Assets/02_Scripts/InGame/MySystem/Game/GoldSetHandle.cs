@@ -1,5 +1,6 @@
 using InGame.MyEnum;
 using InGame.MyManager;
+using InGame.MyManager.Local;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -31,7 +32,7 @@ namespace InGame.MySystem.Game
             _team2GoldCoinParent = GameObject.Find("Player2GoldCoins").transform; // 팀2 금화 객체 부모 초기화
             _team2GoldBarParent = GameObject.Find("Player2GoldBars").transform; // 팀2 금괴 객체 부모 초기화
 
-            if (GameManager.Instance.PlayerCount == 3) // 플레이어 수가 3명이라면
+            if (InGameContext.Current.Data.GameManager.PlayerCount == 3) // 플레이어 수가 3명이라면
             {
                 _team3GoldCoinParent = GameObject.Find("Player3GoldCoins").transform; // 팀3 금화 객체 부모 초기화
                 _team3GoldBarParent = GameObject.Find("Player3GoldBars").transform; // 팀3 금괴 객체 부모 초기화
@@ -56,4 +57,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.02.03

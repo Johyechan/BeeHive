@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using InGame.MyObject.Piece;
 using InGame.MyObject.Handler;
+using InGame.MyManager.Global;
 
 namespace InGame.MyObject
 {
@@ -56,4 +57,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.02.03

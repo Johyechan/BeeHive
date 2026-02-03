@@ -1,6 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.Team;
 using InGame.MyManager.Turn;
 using InGame.MyUI.MyUIInterface;
@@ -89,7 +91,7 @@ namespace InGame.MyUI.MyUIButton
         {
             try
             {
-                if (TurnManager.Instance.CurrentTurnType == TurnType.TurnEnd) // 현재 턴이 턴 종료 턴일 때
+                if (InGameContext.Current.Data.TurnManager.CurrentTurnType == TurnType.TurnEnd) // 현재 턴이 턴 종료 턴일 때
                 {
                     if (_canPlaceType == ObjectType.Road) // 도로 버튼일 경우
                     {
@@ -109,4 +111,4 @@ namespace InGame.MyUI.MyUIButton
         public abstract void OnUIClick();
     }
 }
-// 마지막 작성 일자: 2026.01.23
+// 마지막 작성 일자: 2026.02.03

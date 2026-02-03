@@ -1,8 +1,7 @@
 using DG.Tweening;
-using InGame.MyManager;
-using InGame.MyManager.MyCard;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyObject;
-using InGame.MyUI.Card;
 using MyUtil;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -27,7 +26,7 @@ namespace InGame.MySystem.Game.Handler
 
                 MainThreadDispatcher.Enqueue(() =>
                 {
-                    _ = DrawManager.Instance.CardSetHandle.Setting(setCardInfo.targetTeam, setCardInfo.cardCount); // Task 반환 없이 바로 실행
+                    _ = InGameContext.Current.Data.DrawManager.CardSetHandle.Setting(setCardInfo.targetTeam, setCardInfo.cardCount); // Task 반환 없이 바로 실행
                 });
             });
 
@@ -36,7 +35,7 @@ namespace InGame.MySystem.Game.Handler
                 if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                     return; // 반환
 
-                CardManager.Instance.CardReverseTask = new TaskCompletionSource<bool>();
+                InGameContext.Current.Data.CardManager.CardReverseTask = new TaskCompletionSource<bool>();
                 string json = data.GetValue().ToString(); // 문자열로 값 받기
                 CardReverseInfo cardReverseInfo = JsonUtility.FromJson<CardReverseInfo>(json); // CarReverseInfo 형태로 Json을 변환
 
@@ -48,7 +47,7 @@ namespace InGame.MySystem.Game.Handler
                     _ = cardObj.transform.DORotate(new Vector3(0, cardObj.transform.eulerAngles.y, 90), cardReverseInfo.animationDuration / 2).AsyncWaitForCompletion(); // 카드 뒤집기
                     _ = cardObj.transform.DORotate(new Vector3(0, cardObj.transform.eulerAngles.y, 180), cardReverseInfo.animationDuration / 2).AsyncWaitForCompletion(); // 카드 뒤집기
                     _ = cardObj.transform.DOMoveY(0.0001f, cardReverseInfo.animationDuration).AsyncWaitForCompletion(); // 뒤집힌 카드가 땅을 뚫지 않게 조금 위로 이동
-                    CardManager.Instance.CardReverseTask.SetResult(true);
+                    InGameContext.Current.Data.CardManager.CardReverseTask.SetResult(true);
 
                     UsedDeck usedDeck = GameObject.Find("UsedDeck").GetComponent<UsedDeck>();
                     usedDeck.AddCardInToUsedDeck(cardObj.transform);
@@ -63,4 +62,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.30
+// 마지막 작성 일자: 2026.02.03

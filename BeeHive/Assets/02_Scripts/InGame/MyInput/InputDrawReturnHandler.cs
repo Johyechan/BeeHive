@@ -1,10 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager;
-using InGame.MyManager.MyCard;
-using InGame.MyManager.Turn;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyObject;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyInput
@@ -27,18 +25,18 @@ namespace InGame.MyInput
                 return true; // 반환
             }
 
-            if (TurnManager.Instance.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 내 팀의 턴이 아니라면
+            if (InGameContext.Current.Data.TurnManager.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 내 팀의 턴이 아니라면
             {
                 return true; // 반환
             }
 
             if(_deck.transform.childCount <= 0) // 덱에 더 이상 카드가 없다면
             {
-                DeckManager.Instance.IsEmpty = true;
+                InGameContext.Current.Data.DeckManager.IsEmpty = true;
                 return true; // 반환
             }
 
-            if (!DrawManager.Instance.IsCanDraw) // 만약 Draw가 불가능하다면
+            if (!InGameContext.Current.Data.DrawManager.IsCanDraw) // 만약 Draw가 불가능하다면
             {
                 return true; // 반환
             }
@@ -52,4 +50,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.02.03

@@ -1,6 +1,5 @@
 using DG.Tweening;
-using InGame.MyManager;
-using InGame.MyManager.MyCard;
+using InGame.MyManager.Local;
 using MyUtil.MyEvent;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -13,7 +12,7 @@ namespace InGame.MyInput
     {
         public async Task DrawFunction(Transform deckTransform, Transform playerCardsParent, RectTransform playerUICardsParent)
         {
-            DrawManager.Instance.DrawCard(deckTransform, playerCardsParent, playerUICardsParent); // 카드 드로우 실행
+            InGameContext.Current.Data.DrawManager.DrawCard(deckTransform, playerCardsParent, playerUICardsParent); // 카드 드로우 실행
 
             Sequence seq = DOTween.Sequence()
                   .AppendCallback(() => DrawEventSystem.OnCardUISet?.Invoke())
@@ -23,4 +22,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.02.03

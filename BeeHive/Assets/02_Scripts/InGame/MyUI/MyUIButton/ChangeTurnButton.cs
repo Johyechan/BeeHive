@@ -1,5 +1,7 @@
 using InGame.MyEvent;
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
 using InGame.MyUI.MyUIInterface;
 using UnityEngine;
@@ -45,13 +47,13 @@ namespace InGame.MyUI.MyUIButton
                     NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 안됨");
                     return; // 반환
                 }
-                if (!TurnManager.Instance.CanChangeTurn) // 턴 변경 가능 상태가 아닐 경우
+                if (!InGameContext.Current.Data.TurnManager.CanChangeTurn) // 턴 변경 가능 상태가 아닐 경우
                 {
                     NetworkManager.Instance.Socket.Emit("debug", "턴 변경 가능 상태 아님");
                     return; // 반환
                 }
 
-                if(TurnManager.Instance.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀이 내 팀일 경우
+                if(InGameContext.Current.Data.TurnManager.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀이 내 팀일 경우
                 {
                     NetworkManager.Instance.Socket.Emit("turnTimerStop", SceneMgr.Instance.CurrentRoomID); // 턴 타이머 종료
                 }
@@ -59,4 +61,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.12.30
+// 마지막 작성 일자: 2026.02.03

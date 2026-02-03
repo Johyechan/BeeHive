@@ -1,4 +1,6 @@
 using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyManager.MyPiece;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
@@ -57,7 +59,7 @@ namespace InGame.MySystem.Game.Handler
                     Transform returnParent = GameObject.Find(setInfo.returnParentName).transform; // 공격 받은 기물의 부모 객체
                     Transform attackParent = attackPieceObj.transform.parent; // 공격한 기물의 부모 객체
 
-                    _ = PieceManager.Instance.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, setInfo.returnPos, setInfo.attackPos); // 공격 받은 기물 및 공격한 기물 이동 함수
+                    _ = InGameContext.Current.Data.PieceManager.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, setInfo.returnPos, setInfo.attackPos); // 공격 받은 기물 및 공격한 기물 이동 함수
                 });
             });
         }
@@ -69,4 +71,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.30
+// 마지막 작성 일자: 2026.02.03
