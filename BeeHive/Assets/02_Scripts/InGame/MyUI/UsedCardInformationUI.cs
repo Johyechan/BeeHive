@@ -37,11 +37,15 @@ namespace InGame.MyUI
                     _usedCardName.text = usedCardInfo.usedCardName; // 사용된 카드의 이름을 UI에 할당
                     _usedCardInformation.text = usedCardInfo.usedCardInformation; // 사용된 카드의 정보(효과)를 UI에 할당
 
+                    _canvasGroup.gameObject.SetActive(true); // 활성화
+
                     await _canvasGroup.DOFade(1, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 인
 
                     await Task.Delay((int)(_usedCardUIShowSecond * _makeMillisecondValue)); // 사용된 카드를 보여주는 시간만큼 대기
 
                     await _canvasGroup.DOFade(0, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 아웃
+
+                    _canvasGroup.gameObject.SetActive(true); // 비활성화
                 });
             }
         }
@@ -52,4 +56,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.06

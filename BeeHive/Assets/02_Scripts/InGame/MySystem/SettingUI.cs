@@ -33,6 +33,10 @@ namespace InGame.MySystem
             _masterSoundSlider.value = SoundManager.Instance.MasterVolume;
             _bgmSoundSlider.value = SoundManager.Instance.BgmVolume;
             _sfxSoundSlider.value = SoundManager.Instance.SfxVolume;
+
+            SetMasterVolume(SoundManager.Instance.MasterVolume);
+            SetBGMVolume(SoundManager.Instance.BgmVolume);
+            SetSFXVolume(SoundManager.Instance.SfxVolume);
         }
 
         // dB = 20 X log10(볼륨비) 
@@ -48,7 +52,7 @@ namespace InGame.MySystem
             }
             else
             {
-                _audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20f); // 마스터 볼륨 할당
+                _audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20f); // 마스터 볼륨 할당 (volume이 1일 때: 0 db - 원래 소리 크기)
                 _masterSoundVolumePercentage.text = $"{Mathf.Ceil(volume * 100f)}%";
             }
         }
@@ -86,4 +90,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.06

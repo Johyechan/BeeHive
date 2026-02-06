@@ -15,14 +15,15 @@ namespace InGame.MyManager.Global
 
         private Dictionary<SFXType, AudioSource> _sfxMap = new Dictionary<SFXType, AudioSource>(); // 효과음 맵
 
-        private float _masterVolume = 1; // 마스터
-        public float MasterVolume { get => _masterVolume; set => _masterVolume = value; } // 마스터 프로퍼티
+        private const string MASTER_KEY = "Master"; // PlayerPrefs 마스터 볼륨 키
+        private const string BGM_KEY = "BGM"; // PlayerPrefs bgm 볼륨 키
+        private const string SFX_KEY = "SFX"; // PlayerPrefs sfx 볼륨 키
 
-        private float _bgmVolume = 1; // 배경음악
-        public float BgmVolume { get => _bgmVolume; set => _bgmVolume = value; } // 배경음악 프로퍼티
+        public float MasterVolume { get => PlayerPrefs.GetFloat(MASTER_KEY, 1f); set => PlayerPrefs.SetFloat(MASTER_KEY, value); } // 마스터 프로퍼티
 
-        private float _sfxVolume = 1; // 효과음
-        public float SfxVolume { get => _sfxVolume; set => _sfxVolume = value; } // 효과음 프로퍼티
+        public float BgmVolume { get => PlayerPrefs.GetFloat(BGM_KEY, 1f); set => PlayerPrefs.SetFloat(BGM_KEY, value); } // 배경음악 프로퍼티
+
+        public float SfxVolume { get => PlayerPrefs.GetFloat(SFX_KEY, 1f); set => PlayerPrefs.SetFloat(SFX_KEY, value); } // 효과음 프로퍼티
 
         private bool _isFirstStart = true; // 처음 시작 여부
         public bool IsFirstStart { get => _isFirstStart; set => _isFirstStart = value; } // 처음 시작 여부 프로퍼티
@@ -54,4 +55,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.06

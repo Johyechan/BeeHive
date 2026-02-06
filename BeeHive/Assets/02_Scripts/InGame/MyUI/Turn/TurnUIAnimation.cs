@@ -1,9 +1,5 @@
-using DG.Tweening;
 using InGame.MyEnum;
-using InGame.MyEvent;
-using InGame.MyManager;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPlacePlane;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
@@ -18,6 +14,8 @@ namespace InGame.MyUI.Turn
         [SerializeField] private CanvasGroup _canvasGroup; // UI 애니메이션 전체 페이드인, 아웃을 하기 위한 canvasGroup
 
         [SerializeField] private TMP_Text _tmpText; // 현재 턴을 보여주는 텍스트
+
+        [SerializeField] private TMP_Text _currentTurnTmpText; // 현재 턴을 알려주는 텍스트
 
         [SerializeField] private float _animationDuration; // 애니메이션 시간
 
@@ -38,7 +36,8 @@ namespace InGame.MyUI.Turn
         {
             InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
             await _turnAnimations[currentTurn].UIAnimationPlay();
+            _currentTurnTmpText.text = currentTurn.ToString();
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.06
