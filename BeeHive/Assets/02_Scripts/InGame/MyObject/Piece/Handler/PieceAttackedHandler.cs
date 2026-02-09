@@ -3,13 +3,9 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPiece;
-using InGame.MyManager.MyPlacePlane;
-using InGame.MyObject.Handler;
 using InGame.MyObject.Piece.Data;
 using InGame.MyUI;
 using InGame.MyUI.Card;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using UnityEngine;
 

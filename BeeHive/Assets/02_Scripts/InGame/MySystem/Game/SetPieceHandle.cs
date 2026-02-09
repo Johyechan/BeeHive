@@ -43,7 +43,7 @@ namespace InGame.MySystem.Game
             }
 
             GameObject parent = GameObject.Find(parentName); // 부모 객체 찾기
-            await pieceBase.MoveToPlacePlane(parent.transform, targetPos, angle); // 기물 또는 도로 이동
+            await pieceBase.MoveToPlacePlane(parent.transform, targetPos, isMove, angle); // 기물 또는 도로 이동
         }
     }
 }

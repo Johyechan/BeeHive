@@ -27,24 +27,33 @@ namespace InGame.MyUI.MyUIButton
         public void OnUIClick()
         {
             InGameContext.Current.Data.CardManager.CardReverseTask = new TaskCompletionSource<bool>(); // 카드 뒤집기 대기 테스크 할당
-            if (_uiCardBase.UseCard() == false) // 카드 사용에 예외가 발생했다면
-            {
-                DOTween.Sequence()
-                .Append(_canvasGroup.DOFade(0, _animationDuration)) // 페이드 아웃
-                .OnComplete(() =>
-                {
-                    _canvasGroup.gameObject.SetActive(false);
-                }); // 객체 비활성화
-                return; // 반환
-            }
 
-            DOTween.Sequence()
-                .Append(_canvasGroup.DOFade(0, _animationDuration))
-                .OnComplete(() =>
+            if(_uiCardBase != null) // ui 카드가 존재할 때
+            {
+                if (_uiCardBase.UseCard() == false) // 카드 사용에 예외가 발생했다면
                 {
-                    ReverseCardObject(); // 카드 객체 뒤집기
-                    _canvasGroup.gameObject.SetActive(false);
-                }); // 페이드 아웃
+                    DOTween.Sequence()
+                    .Append(_canvasGroup.DOFade(0, _animationDuration)) // 페이드 아웃
+                    .OnComplete(() =>
+                    {
+                        _canvasGroup.gameObject.SetActive(false);
+                    }); // 객체 비활성화
+                    return; // 반환
+                }
+
+                DOTween.Sequence()
+                    .Append(_canvasGroup.DOFade(0, _animationDuration))
+                    .OnComplete(() =>
+                    {
+                        ReverseCardObject(); // 카드 객체 뒤집기
+                        _canvasGroup.gameObject.SetActive(false);
+                    }); // 페이드 아웃
+            }
+            else // ui 카드가 존재하지 않는다면
+            {
+                UIManager.Instance.WarningUIMake("카드가 존재하지 않습니다");
+                return;
+            }
         }
 
         // UI 카드에 맞는 카드 객체를 뒤집는 함수
@@ -75,4 +84,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.09

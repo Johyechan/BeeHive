@@ -1,5 +1,5 @@
 using DG.Tweening;
-using InGame.MyManager;
+using InGame.MyEnum;
 using InGame.MyManager.Enum;
 using InGame.MyManager.Global;
 using InGame.MyObject.Piece.Data;
@@ -23,7 +23,7 @@ namespace InGame.MyObject.Piece.Handler
             _pieceData = pieceData;
         }
 
-        public async Task MoveToPlacePlane(Transform parent, Vector3 targetPos, float angle = 0)
+        public async Task MoveToPlacePlane(Transform parent, Vector3 targetPos, bool isMove = false, float angle = 0)
         {
             if (parent.name == "PlacePos")
             {
@@ -49,8 +49,21 @@ namespace InGame.MyObject.Piece.Handler
             // 지정한 위치로 이동
             await _pieceBase.transform.DOLocalMove(new Vector3(targetPos.x, yPos, targetPos.z), _pieceData.animationDuration).AsyncWaitForCompletion();
 
-            // 각도 조정
-            await _pieceBase.transform.DOLocalRotate(new Vector3(0, angle, 0), _pieceData.animationDuration).AsyncWaitForCompletion();
+            if(!isMove) // 이동이 아닌 배치일 때
+            {
+                
+
+                if (_pieceBase.CurrentObjectType != ObjectType.Road) // 도로가 아닐 경우
+                {
+                    // 회전 애니메이션
+                    await _pieceBase.transform.DOLocalRotate(new Vector3(0, 360, 0), _pieceData.animationDuration, RotateMode.FastBeyond360).AsyncWaitForCompletion(); // 회전 모드를 360초과 회전을 허용 시켜 한 바퀴 회전하도록 설정(안할 경우 DOTween은 최단 경로를 선택하고 유니티는 Quaternion 기준으로 회전, 그리고 Quaternion에서 360도 = 0도 그래서 가만히 있는 것 처럼 보인다)
+                }
+                else // 도로 일 때
+                {
+                    // 각도 조정
+                    await _pieceBase.transform.DOLocalRotate(new Vector3(0, angle, 0), _pieceData.animationDuration).AsyncWaitForCompletion();
+                }
+            }
 
             // y축 조정
             await _pieceBase.transform.DOLocalMoveY(targetPos.y, _pieceData.animationDuration).AsyncWaitForCompletion();
@@ -61,4 +74,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.09

@@ -67,10 +67,10 @@ namespace InGame.MyObject.Piece
             _pieceData.pieceDeselectHandler.HighLightOff(isOn, isMove); // 하이라이트 해제 함수
         }
 
-        // 기물들을 지정 위치로 이동 시키는 함수
-        public async Task MoveToPlacePlane(Transform parent, Vector3 targetPos, float angle = 0)
+        // 기물들을 지정 위치로 이동 시키는 함수(부모, 이동 위치, 기물 이동인지(첫 배치가 아닌 배치되어있는 상태에서 다른 칸으로 이동), 각도)
+        public async Task MoveToPlacePlane(Transform parent, Vector3 targetPos, bool isMove = false, float angle = 0)
         {
-            await _pieceData.pieceMoveHandler.MoveToPlacePlane(parent, targetPos, angle);
+            await _pieceData.pieceMoveHandler.MoveToPlacePlane(parent, targetPos, isMove, angle);
         }
 
         // 오브젝트가 마우스로 클릭되었을 때 실행될 함수

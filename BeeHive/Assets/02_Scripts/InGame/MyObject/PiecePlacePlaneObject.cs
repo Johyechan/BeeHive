@@ -151,7 +151,7 @@ namespace InGame.MyObject
 
                 HighLightOffEvent(); // 하이라이트 끄기
 
-                await pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동
+                await pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition, isMove); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동, 이동인지 생산인지 여부
 
                 if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                     return; // 반환
@@ -205,4 +205,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.09

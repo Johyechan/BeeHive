@@ -38,7 +38,7 @@ namespace InGame.MyObject.Handler
 
             HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
 
-            await roadPiece.MoveToPlacePlane(roadPlacePlane.transform.parent, roadPlacePlane.transform.localPosition, roadAngle); // 기물을 현재 배치 판 부모의 자식으로 변경 + 현재 이 배치판 위치 이동 + 각도 회전
+            await roadPiece.MoveToPlacePlane(roadPlacePlane.transform.parent, roadPlacePlane.transform.localPosition, false, roadAngle); // 기물을 현재 배치 판 부모의 자식으로 변경 + 현재 이 배치판 위치 이동 + 각도 회전
 
             InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
 

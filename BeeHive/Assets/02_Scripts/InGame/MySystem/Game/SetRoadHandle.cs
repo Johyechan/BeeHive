@@ -27,7 +27,7 @@ namespace InGame.MySystem
             placePlaneBase.PlacedObjectType = (ObjectType)placedType; // 배치 성공 시 배치된 객체가 배치되었다고 할당
             placePlaneBase.TeamType = roadPiece.CurrentTeamType; // 현재 배치 가능한 칸의 팀 타입을 도로 기물의 팀 타입으로 지정
             placePlaneBase.PlacedPiece = roadPiece; // 배치된 기물에 도로 할당
-            await roadPiece.MoveToPlacePlane(targetParent.transform, targetPos, angle); // 기물을 현재 배치 판 부모의 자식으로 변경 + 현재 이 배치판 위치 이동 + 각도 회전
+            await roadPiece.MoveToPlacePlane(targetParent.transform, targetPos, false, angle); // 기물을 현재 배치 판 부모의 자식으로 변경 + 현재 이 배치판 위치 이동 + 각도 회전
         }
     }
 }
