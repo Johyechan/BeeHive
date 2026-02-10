@@ -21,6 +21,7 @@ namespace MyUtil.MyObjectPool
         FirePowerCard, // 화력 카드
         GoodHarvestCard, // 풍년 카드
         RoadChangeCard, // 도로 변형 카드
+        RoomButton, // 방 리스트에 있는 방 버튼
     }
 }
-// 마지막 작성 일자: 2025.10.02
+// 마지막 작성 일자: 2026.02.10
