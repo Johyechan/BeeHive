@@ -35,9 +35,9 @@ namespace InGame.MyUI.Turn
         public async Task UIAnimationPlay(TurnType currentTurn)
         {
             InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
-            await _turnAnimations[currentTurn].UIAnimationPlay();
             _currentTurnTmpText.text = currentTurn.ToString();
+            await _turnAnimations[currentTurn].UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2026.02.06
+// 마지막 작성 일자: 2026.02.11

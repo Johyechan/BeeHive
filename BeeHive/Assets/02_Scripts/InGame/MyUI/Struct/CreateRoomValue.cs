@@ -8,8 +8,7 @@ namespace InGame.MyUI
     public struct CreateRoomValue
     {
         public string roomName;
-        public int maxPlayer;
-        public string socketName;
+        public bool isPublic;
     }
 }
-// 마지막 작성 일자: 2025.08.08
+// 마지막 작성 일자: 2026.02.11

@@ -43,10 +43,9 @@ namespace InGame.MyUI.MyUIButton
             }
             else // 괜찮은 상황이라면
             {
-                SceneMgr.Instance.CurrentRoomID = _roomID; // 방 ID 할당
-                SceneManager.LoadScene(2); // 방 씬으로 변경
+                NetworkManager.Instance.Socket.Emit("joinRoom", _roomID); // 서버에 방을 찾고 있다고 신호를 보냄
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.10
+// 마지막 작성 일자: 2026.02.11

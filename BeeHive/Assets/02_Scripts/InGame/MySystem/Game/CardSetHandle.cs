@@ -35,10 +35,8 @@ namespace InGame.MySystem.Game
 
         public async Task Setting(int targetTeam, int cardCount)
         {
-            NetworkManager.Instance.Socket.Emit("debug", "카드 세팅 함수 들어옴");
             TeamType type = (TeamType)targetTeam; // 팀 구하기
 
-            NetworkManager.Instance.Socket.Emit("debug", $"카드 뽑은 팀: {targetTeam}, 현재 카드 개수: {cardCount}");
             switch (type)
             {
                 case TeamType.Team1: // 팀1 일 때
@@ -58,7 +56,6 @@ namespace InGame.MySystem.Game
         private async Task GetCards(int cardCount, Transform playerCardsParent)
         {
             int count = Mathf.Abs(playerCardsParent.childCount - cardCount); // 실제 카드 수와 이미 생성되어 있던 카드 수 차이 구하기
-            NetworkManager.Instance.Socket.Emit("debug", $"실제 카드 수와 이미 생성된 카드의 수 차이: {count}");
 
             for(int i = 0; i < count; i++) // 카드 수 차이만큼 반복
             {

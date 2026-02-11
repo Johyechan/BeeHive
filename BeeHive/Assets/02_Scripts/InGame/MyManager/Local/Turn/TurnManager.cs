@@ -1,7 +1,6 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
-using InGame.MyManager.MyPiece;
 using InGame.MyManager.Turn.Handler;
 using InGame.MySystem.Game;
 using InGame.MyUI.Turn;
@@ -68,7 +67,6 @@ namespace InGame.MyManager.Local.Turn
                 {
                     MainThreadDispatcher.Enqueue(() =>
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", "게임 턴 시작");
                         _ = TurnChange(TurnType.ChangeTeam, true);
                     });
                 });
@@ -133,7 +131,6 @@ namespace InGame.MyManager.Local.Turn
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
             _turnTimerUIHandler.SliderTimerStop(); // 턴 타이머 슬라이더 초기화
 
-            NetworkManager.Instance.Socket.Emit("debug", $"현재 누구 턴: {_currentTeamType}, 현재 턴: {_currentTurnType}");
             if (_currentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 클라이언트의 팀의 턴이라면
             {
                 if (_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면

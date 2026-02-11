@@ -13,6 +13,7 @@ namespace InGame.MyUI
         public int currentPlayer; // 현재 참가자 수
         public bool isFull; // 참가자가 꽉 찼는지 여부 
         public bool isPlaying; // 플레이 여부
+        public bool isPublic; // 방 공개 여부
     }
 }
-// 마지막 작성 일자: 2026.02.10
+// 마지막 작성 일자: 2026.02.11

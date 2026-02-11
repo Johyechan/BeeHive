@@ -106,7 +106,6 @@ namespace InGame.MySystem.Game.Handler
                     GameObject targetRoadObj = ObjectIdManager.Instance.FindObject(roadID); // 기존 도로
                     if(targetRoadObj == null)
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", "역시나 ObjectIdManager 쪽에서 오류가 생겼다");
                         return;
                     }
 

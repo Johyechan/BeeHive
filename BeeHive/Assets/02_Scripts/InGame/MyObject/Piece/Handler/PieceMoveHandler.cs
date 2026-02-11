@@ -51,8 +51,6 @@ namespace InGame.MyObject.Piece.Handler
 
             if(!isMove) // 이동이 아닌 배치일 때
             {
-                
-
                 if (_pieceBase.CurrentObjectType != ObjectType.Road) // 도로가 아닐 경우
                 {
                     // 회전 애니메이션
