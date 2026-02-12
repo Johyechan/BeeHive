@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
+using InGame.MyObject.Interface;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece.Data;
 using InGame.MyObject.Piece.Handler;
@@ -13,7 +14,7 @@ namespace InGame.MyObject.Piece
 {
     // 작성자: 조혜찬
     // 기물들의 기본적인 기능을 가지는 부모 클래스
-    public abstract class PieceBase : MonoBehaviour, IClickObject
+    public abstract class PieceBase : MonoBehaviour, IClickObject, INetworkIdObject
     {
         [SerializeField] private PieceData _pieceData; // Inspector창에서 할당을 받는 변수들을 가지는 클래스
 
@@ -27,11 +28,12 @@ namespace InGame.MyObject.Piece
         protected PieceVariable _pieceVariable = new PieceVariable(); // 변경이 잦은 변수들을 가지는 클래스
         public PieceVariable PieceVariable { get => _pieceVariable; }
 
+        public int NetworkId { get; set; } // 네트워크 ID
+
+        public GameObject CurrentObject => gameObject;
+
         protected virtual void Awake()
         {
-            _pieceVariable.id = ObjectIdManager.Instance.Id++;
-            ObjectIdManager.Instance.AddObject(_pieceVariable.id, gameObject); // 객체 관리 매니저에 id와 함께 추가
-
             _pieceData.changeMaterialHandler = new ChangeMaterialHandler(_pieceData.materialData, gameObject); // 머티리얼 변경 핸들러 생성
             _pieceData.pieceMoveHandler = new PieceMoveHandler(this, _pieceData); // 기물 이동 핸들러 생성
             _pieceData.pieceDeselectHandler = new PieceDeselectHandler(this); // 기물 선택 해제 핸들러 생성
@@ -106,4 +108,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.12

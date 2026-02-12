@@ -1,3 +1,4 @@
+using InGame.MyManager.Global;
 using UnityEngine;
 
 namespace InGame.MySystem
@@ -8,6 +9,7 @@ namespace InGame.MySystem
     {
         private void Awake()
         {
+            ObjectIdManager.Instance.ResetMap(); // 클라 ID 매니저 초기화
             LocalManagerReady.Gate.Reset(); // 씬 내 매니저 세팅 대기 초기화
             TeamReady.Gate.Reset(); // 팀 할당 대기 초기화
             GameReady.Gate.Reset(); // 게임 준비 대기 초기화
@@ -15,4 +17,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.12

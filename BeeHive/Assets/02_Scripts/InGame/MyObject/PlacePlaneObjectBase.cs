@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
+using InGame.MyObject.Interface;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece;
 using InGame.MyObject.Piece.Data;
@@ -12,7 +13,7 @@ namespace InGame.MyObject
 {
     // 작성자: 조혜찬
     // 배치 칸의 기능 클래스
-    public abstract class PlacePlaneObjectBase : MonoBehaviour, IClickObject
+    public abstract class PlacePlaneObjectBase : MonoBehaviour, IClickObject, INetworkIdObject
     {
         public bool isNearToCastle; // 성과 근접한 배치 판인지 확인
 
@@ -50,11 +51,12 @@ namespace InGame.MyObject
         protected int _leftPieceCount; // 자식 수(남은 기물 수)
         public int LeftPieceCount { get => _leftPieceCount; set => _leftPieceCount = value; }
 
+        public int NetworkId { get; set; } // 네트워크 ID
+
+        GameObject INetworkIdObject.CurrentObject => gameObject;
+
         protected virtual void Awake()
         {
-            _id = ObjectIdManager.Instance.Id++;
-            ObjectIdManager.Instance.AddObject(_id, gameObject);
-
             _changeMaterialHandler = new ChangeMaterialHandler(_materialData, gameObject);
             _collider = GetComponent<Collider>();
 
@@ -86,4 +88,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.12

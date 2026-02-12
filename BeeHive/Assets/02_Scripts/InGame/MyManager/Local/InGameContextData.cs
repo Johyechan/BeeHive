@@ -31,6 +31,8 @@ namespace InGame.MyManager.Local
         public ShowButtonManager ShowButtonManager;
 
         public TurnManager TurnManager;
+
+        public GameMapManager GameMapManager;
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.12

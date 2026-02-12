@@ -3162,6 +3162,7 @@ MonoBehaviour:
     PlacePlaneManager: {fileID: 1431473992}
     ShowButtonManager: {fileID: 1408905230}
     TurnManager: {fileID: 1713890271}
+    GameMapManager: {fileID: 1759363216}
 --- !u!4 &207703081
 Transform:
   m_ObjectHideFlags: 0
@@ -25447,6 +25448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1759363215}
+  - component: {fileID: 1759363216}
   m_Layer: 0
   m_Name: GameMap
   m_TagString: Untagged
@@ -25475,6 +25477,18 @@ Transform:
   - {fileID: 2134945901}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1759363216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759363214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b731d1d88b5cd4fa325d5d65ff0188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1763927011
 PrefabInstance:
   m_ObjectHideFlags: 0

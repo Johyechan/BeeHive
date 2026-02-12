@@ -11,8 +11,7 @@ namespace InGame.MyManager.Global
     {
         private Dictionary<int, GameObject> _idMap = new Dictionary<int, GameObject>();
 
-        private int _id = 0; // 객체 id
-        public int Id { get => _id; set => _id = value; } // 위 변수 프로퍼티
+        public int Id { get; set; } // 객체 ID
 
         // 외부에서 id를 통해 객체를 찾을 때 사용하는 함수
         public GameObject FindObject(int id)
@@ -41,6 +40,13 @@ namespace InGame.MyManager.Global
 
             _idMap[id] = obj; // id 및 객체 추가
         }
+
+        // 초기화 함수
+        public void ResetMap()
+        {
+            Id = 0;
+            _idMap.Clear();
+        }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.12
