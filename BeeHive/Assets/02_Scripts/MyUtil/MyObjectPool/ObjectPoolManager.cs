@@ -1,4 +1,11 @@
+using InGame.MyManager;
+using InGame.MyManager.Global;
+using InGame.MyManager.Local;
+using InGame.MyObject;
+using InGame.MyObject.Interface;
+using InGame.MyObject.Piece;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace MyUtil.MyObjectPool
@@ -19,9 +26,53 @@ namespace MyUtil.MyObjectPool
             Init(); // 풀 생성
         }
 
+        private void OnDisable()
+        {
+            NetworkManager.Instance.Socket.Off("makeObject");
+        }
+
         // 풀 생성 함수
         private void Init()
         {
+            NetworkManager.Instance.Socket.On("makeObject", (data) =>
+            {
+                string json = data.GetValue().ToString();
+
+                MakeObjectPoolData makeObjectPoolData = JsonUtility.FromJson<MakeObjectPoolData>(json);
+                GameObject obj = null;
+                if (makeObjectPoolData.parentName != "") // 부모 객체가 있을 경우
+                {
+                    Transform parent = GameObject.Find(makeObjectPoolData.parentName).transform;
+                    obj = GetObject((ObjectPoolType)makeObjectPoolData.poolType, parent); // 객체 생성
+                }
+                else // 부모 객체가 없을 경우
+                {
+                    obj = GetObject((ObjectPoolType)makeObjectPoolData.poolType); // 객체 생성
+                }
+
+                if(makeObjectPoolData.angle != 0) // 회전 값이 0이 아닐 경우
+                {
+                    obj.transform.Rotate(0, makeObjectPoolData.angle, 0); // 각도 회전
+                }
+
+                obj.transform.localPosition = makeObjectPoolData.pos; // 객체 위치 할당
+                INetworkIdObject networkIdObject = obj.GetComponent<INetworkIdObject>();
+                networkIdObject.NetworkId = makeObjectPoolData.Id; // 객체 ID 할당
+
+                if(makeObjectPoolData.roadPlacePlaneId != -1) // 도로 배치칸이 존재할 경우
+                {
+                    GameObject roadPlacePlaneObj = ObjectIdManager.Instance.FindObject(makeObjectPoolData.roadPlacePlaneId);
+                    if(roadPlacePlaneObj) // 도로 배치칸을 찾았을 때
+                    {
+                        RoadPlacePlaneObject roadPlacePlane = roadPlacePlaneObj.GetComponent<RoadPlacePlaneObject>();
+                        PieceBase pieceBase = obj.GetComponent<PieceBase>();
+                        InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(roadPlacePlane, pieceBase, false); // 배치칸 상태 변경
+                        InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
+                    }
+                    
+                }
+            });
+
             foreach(var data in _poolDataList) // 풀링할 데이터가 담긴 리스트 순회
             {
                 _poolDataMap.Add(data.poolType, data); // 풀링 맵에 리스트에 담겨있던 데이터의 값에서 가져온 풀링 타입과 데이터를 추가
@@ -52,6 +103,27 @@ namespace MyUtil.MyObjectPool
             return newObject; // 새로 생성한 객체 반환
         }
 
+        // 네트워크 ID가 필요한 객체를 만드는 함수
+        public void MakeObject(ObjectPoolType type, Vector3 pos, Transform parent, int roadPlacePlaneId = -1, float angle = 0)
+        {
+            if (_poolDataMap[type].needNetworkID) // 네트워크 ID가 필요한 객체라면
+            {
+                MakeObjectPoolInfo makeObjectPoolInfo = new MakeObjectPoolInfo
+                {
+                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                    parentName = parent.name, // 객체 부모명 
+                    poolType = (int)type, // 풀 타입
+                    roadPlacePlaneId = roadPlacePlaneId,
+                    angle = angle,
+                    pos = pos // 객체 위치
+                };
+
+                string json = JsonUtility.ToJson(makeObjectPoolInfo);
+
+                NetworkManager.Instance.Socket.Emit("makePoolObject", json);
+            }
+        }
+
         // 외부에서 풀에서 객체를 가져올 때 부르는 함수(매개 변수로 풀링 타입, 부모 = 기본 값 null을 받는다)
         public GameObject GetObject(ObjectPoolType type, Transform parent = null)
         {
@@ -77,6 +149,12 @@ namespace MyUtil.MyObjectPool
         // 외부에서 사용했던 객체를 다시 풀에 넣을 때 부르는 함수(매개 변수로 풀링 타입, 반환할 객체를 받는다)
         public void ReturnObject(ObjectPoolType type, GameObject returnObj)
         {
+            if(_poolDataMap[type].needNetworkID) // 네트워크 ID가 필요한 객체라면
+            {
+                INetworkIdObject networkIdObject = returnObj.GetComponent<INetworkIdObject>();
+                networkIdObject.NetworkId = -1; // 네트워크 ID 초기화
+            }
+
             returnObj.transform.SetParent(transform); // 반환하는 객체의 부모를 풀 매니저로 지정
             returnObj.transform.position = Vector3.zero; // 반환하는 객체의 위치 초기화
             returnObj.transform.rotation = Quaternion.identity; // 반환하는 객체의 회전 초기화
@@ -87,4 +165,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.13

@@ -109,28 +109,7 @@ namespace InGame.MySystem.Game.Handler
                         return;
                     }
 
-                    GameObject newRoadObj = null; // 변경된 도로
-
-                    switch (InGameContext.Current.Data.TurnManager.CurrentTeamType) // 현재 턴의 팀
-                    {
-                        case TeamType.Team1:
-                            newRoadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, targetRoadObj.transform.parent);
-                            break;
-                        case TeamType.Team2:
-                            newRoadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, targetRoadObj.transform.parent);
-                            break;
-                        case TeamType.Team3:
-                            newRoadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, targetRoadObj.transform.parent);
-                            break;
-                    }
-
-                    newRoadObj.transform.localPosition = targetRoadObj.transform.localPosition;
-                    newRoadObj.transform.localRotation = targetRoadObj.transform.localRotation;
-
                     PieceBase targetPieceBase = targetRoadObj.GetComponent<PieceBase>();
-                    PieceBase newPieceBase = newRoadObj.GetComponent<PieceBase>();
-
-                    InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(targetPieceBase.PieceVariable.currentRoadPlacePlane, newPieceBase, false);
 
                     InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
 

@@ -39,29 +39,28 @@ namespace InGame.MySystem
 
             for (int i = 0; i < count; i++)
             {
-                GameObject road = ObjectPoolManager.Instance.GetObject(objectPoolType, parent);
-                PosSet(road, type, i);
+                MakeRoad(type, objectPoolType, parent, i);
             }
         }
 
-        private void PosSet(GameObject obj, TeamType type, int count)
+        private void MakeRoad(TeamType type, ObjectPoolType objectPoolType, Transform parent, int count)
         {
-            MainThreadDispatcher.Enqueue(() =>
+            Vector3 pos = Vector3.zero;
+
+            switch (type)
             {
-                obj.transform.Rotate(0, _angle, 0); // 회전
-                switch (type)
-                {
-                    case TeamType.Team1:
-                        obj.transform.localPosition = new Vector3(count % _maxXCount * _xInterval, 0, count / _maxXCount * _zInterval); // 위치
-                        break;
-                    case TeamType.Team2:
-                        obj.transform.localPosition = new Vector3(-(count % _maxXCount * _xInterval), 0, count / _maxXCount * _zInterval); // 위치
-                        break;
-                    case TeamType.Team3:
-                        break;
-                }
-            });
+                case TeamType.Team1:
+                    pos = new Vector3(count % _maxXCount * _xInterval, 0, count / _maxXCount * _zInterval); // 위치
+                    break;
+                case TeamType.Team2:
+                    pos = new Vector3(-(count % _maxXCount * _xInterval), 0, count / _maxXCount * _zInterval); // 위치
+                    break;
+                case TeamType.Team3:
+                    break;
+            }
+
+            ObjectPoolManager.Instance.MakeObject(objectPoolType, pos, parent, -1, _angle); // 도로 생성
         }
     }
 }
-// 마지막 작성 일자: 2026.01.19
+// 마지막 작성 일자: 2026.02.13

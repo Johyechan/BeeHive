@@ -12,7 +12,9 @@ namespace MyUtil.MyObjectPool
 
         public int poolCount; // 처음 생성하여 풀에 담아둘 객체의 수
 
+        public bool needNetworkID; // 네트워크 ID가 필요한지 여부
+
         public GameObject poolObject; // 풀링될 객체
     }
 }
-// 2025.07.08
+// 2026.02.13

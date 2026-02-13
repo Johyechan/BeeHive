@@ -139,8 +139,8 @@ namespace InGame.MyObject
                 PieceInfo pieceInfo = new PieceInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                    pieceID = pieceBase.PieceVariable.id, // 기물 객체 ID
-                    placePlaneID = _id, // 배치 칸 ID
+                    pieceID = pieceBase.NetworkId, // 기물 객체 ID
+                    placePlaneID = NetworkId, // 배치 칸 ID
                     parentName = transform.parent.name, // 부모 객체 명
                     placedObjectType = (int)CanPlacePieceType, // 기물 객체 타입
                     targetPos = transform.localPosition, // 기물 객체 최종 위치
@@ -164,8 +164,8 @@ namespace InGame.MyObject
                         {
                             roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                             teamType = (int)pieceBase.CurrentTeamType, // 이동한 기물 팀 타입
-                            placePlaneID = pieceBase.PieceVariable.currentPlacePlane.Id, // 이동한 기물의 목적지 칸의 ID
-                            pieceID = pieceBase.PieceVariable.id // 주위 도로를 변경 시킬 기물 ID
+                            placePlaneID = pieceBase.PieceVariable.currentPlacePlane.NetworkId, // 이동한 기물의 목적지 칸의 ID
+                            pieceID = pieceBase.NetworkId // 주위 도로를 변경 시킬 기물 ID
                         };
 
                         string pieceChangeRoadJson = JsonUtility.ToJson(pieceChangeRoadInfo);
@@ -187,7 +187,7 @@ namespace InGame.MyObject
                             roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                             attackedCaslteType = (int)currentPlayerTeamType, // 공격 받은 성의 타입
                             damage = pieceBase.Damage, // 데미지
-                            objectID = pieceBase.PieceVariable.id // 공격한 기물 객체 ID
+                            objectID = pieceBase.NetworkId // 공격한 기물 객체 ID
                         };
 
                         string castleAttackJson = JsonUtility.ToJson(castleAttackInfo); // Json 형태로 변환
@@ -205,4 +205,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.02.09
+// 마지막 작성 일자: 2026.02.13

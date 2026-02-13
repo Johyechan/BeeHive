@@ -7,6 +7,7 @@ using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InGame.MyObject.Piece.ObjectPieces
@@ -44,7 +45,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
 
         private void NearRoadChange(PieceBase pieceBase, TeamType type, PiecePlacePlaneObject piecePlacePlaneObject)
         {
-            if (pieceBase.PieceVariable.id != PieceVariable.id) // 자기자신이 부른 게 아닐경우 - 왜?
+            if (pieceBase.NetworkId != NetworkId) // 자기자신이 부른 게 아닐경우 - 왜?
             {
                 return; // 반환
             }
@@ -89,14 +90,8 @@ namespace InGame.MyObject.Piece.ObjectPieces
                     ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, roadPlacePlaneObject.PlacedPiece.gameObject); // 기존 도로 객체 반환
                     break;
             }
-            
-            GameObject roadObj = ObjectPoolManager.Instance.GetObject(type, roadPlacePlaneObject.transform.parent); // 새 도로 객체 생성
-            PieceBase road = roadObj.GetComponent<PieceBase>(); // 도로 객체에서 PieceBase 가져오기
 
-            InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(roadPlacePlaneObject, road, false); // 배치칸 상태 변경
-
-            roadObj.transform.localPosition = roadPlacePlaneObject.transform.localPosition; // 현재 배치하는 위치로 도로의 위치 변경
-            roadObj.transform.localRotation = Quaternion.Euler(new Vector3(0, targetAngle, 0));
+            ObjectPoolManager.Instance.MakeObject(type, roadPlacePlaneObject.transform.localPosition, roadPlacePlaneObject.transform.parent, roadPlacePlaneObject.NetworkId, targetAngle);
         }
 
         public override void ObjectClicked()
@@ -105,4 +100,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.13

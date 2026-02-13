@@ -85,8 +85,8 @@ namespace InGame.MyObject
 
             for (int i = 0; i <  _deckList.Count; i++) // 덱 리스트 순회
             {
-                GameObject card = ObjectPoolManager.Instance.GetObject(_deckList[i], deckTransform); // 카드 생성
-                card.transform.localPosition = new Vector3(0, _yInterval * i, 0); // 카드를 생성할 수 록 y축 간격 만큼 위로 올리기
+                Vector3 pos = new Vector3(0, _yInterval * i, 0); // 카드를 생성할 수 록 y축 간격 만큼 위로 올리기
+                ObjectPoolManager.Instance.MakeObject(_deckList[i], pos, deckTransform);
             }
         }
     }

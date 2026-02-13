@@ -62,7 +62,7 @@ namespace InGame.MyUI.MyUIButton
             ReverseCardInfo reverseCardInfo = new ReverseCardInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                cardID = _uiCardBase.UICardVariable.cardObj.GetComponent<CardObject>().ID, // 뒤집히는 카드의 ID
+                cardID = _uiCardBase.UICardVariable.cardObj.GetComponent<CardObject>().NetworkId, // 뒤집히는 카드의 ID
                 animationDuration = _animationDuration, // 애니메이션 지속 시간
             };
             string json = JsonUtility.ToJson(reverseCardInfo); // Json 형태로 변환
@@ -84,4 +84,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.02.09
+// 마지막 작성 일자: 2026.02.13

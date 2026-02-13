@@ -118,8 +118,8 @@ namespace InGame.MyObject.Piece.Handler
 
             int isFirePowerAttack = _pieceBase.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
 
-            int attackObjID = attackPieceBase.PieceVariable.id; // 공격한 객체의 ID
-            int returnObjID = _pieceBase.PieceVariable.id; // 공격 받은 객체의 ID
+            int attackObjID = attackPieceBase.NetworkId; // 공격한 객체의 ID
+            int returnObjID = _pieceBase.NetworkId; // 공격 받은 객체의 ID
 
             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                 return; // 반환
@@ -162,4 +162,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.13

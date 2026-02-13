@@ -9,6 +9,7 @@ using InGame.MyManager.Turn;
 using InGame.MyObject.Piece.Data;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InGame.MyObject.Piece.ObjectPieces
@@ -29,29 +30,27 @@ namespace InGame.MyObject.Piece.ObjectPieces
                 InGameContext.Current.Data.CardManager.CardUsed = false; // 카드 사용 끝내기
             }
 
-            GameObject roadObj = null;
+            ObjectPoolType poolType = ObjectPoolType.None;
+
             switch (InGameContext.Current.Data.TurnManager.CurrentTeamType) // 현재 턴의 팀 타입에 따라
             {
                 case TeamType.Team1:
-                    roadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team1Road, transform.parent);
+                    poolType = ObjectPoolType.Team1Road;
                     break;
                 case TeamType.Team2:
-                    roadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team2Road, transform.parent);
+                    poolType = ObjectPoolType.Team2Road;
                     break;
                 case TeamType.Team3:
-                    roadObj = ObjectPoolManager.Instance.GetObject(ObjectPoolType.Team3Road, transform.parent);
+                    poolType = ObjectPoolType.Team3Road;
                     break;
             }
 
-            roadObj.transform.localPosition = transform.localPosition;
-            roadObj.transform.localRotation = transform.localRotation;
-
-            PieceBase pieceBase = roadObj.GetComponent<PieceBase>();
+            ObjectPoolManager.Instance.MakeObject(poolType, transform.localPosition, transform.parent, PieceVariable.currentRoadPlacePlane.NetworkId);
 
             ChangeRoadInfo changeRoadInfo = new ChangeRoadInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                roadID = PieceVariable.id // 바뀔 도로 기물 ID
+                roadID = NetworkId // 바뀔 도로 기물 ID
             };
 
             string json = JsonUtility.ToJson(changeRoadInfo);
@@ -65,10 +64,6 @@ namespace InGame.MyObject.Piece.ObjectPieces
                     road.ChangeMaterial(true); // 도로를 기본 상태로 전환
                 }
             }
-
-            InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(PieceVariable.currentRoadPlacePlane, pieceBase, false);
-
-            InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
 
             ChangeMaterial(true); // 기본 머티리얼 상태로 전환
 
@@ -87,4 +82,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.13

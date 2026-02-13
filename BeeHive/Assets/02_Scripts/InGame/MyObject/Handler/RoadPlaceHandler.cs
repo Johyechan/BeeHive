@@ -24,8 +24,8 @@ namespace InGame.MyObject.Handler
             RoadInfo roadInfo = new RoadInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                roadID = roadPiece.PieceVariable.id, // 도로 객체 ID
-                placePlaneId = roadPlacePlane.Id, // 현재 객체 ID
+                roadID = roadPiece.NetworkId, // 도로 객체 ID
+                placePlaneId = roadPlacePlane.NetworkId, // 현재 객체 ID
                 placedType = (int)roadPlacePlane.CanPlacePieceType, // 배치 객체 타입
                 roadTeamType = (int)roadPlacePlane.TeamType, // 배치 객체 팀 타입
                 roadParentName = roadParent.name, // 부모 객체 이름
@@ -49,4 +49,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.13

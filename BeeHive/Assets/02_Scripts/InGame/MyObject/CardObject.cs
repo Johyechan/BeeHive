@@ -18,12 +18,9 @@ namespace InGame.MyObject
         [SerializeField] private ObjectPoolType _cardPoolType; // 해당 카드의 객체 풀 타입
         public ObjectPoolType CardPoolType { get => _cardPoolType; }
 
-        private int _id;
-        public int ID { get => _id; }
-
         public int NetworkId { get; set; } // 네트워크 ID
 
         public GameObject CurrentObject => gameObject;
     }
 }
-// 마지막 작성 일자: 2026.02.12
+// 마지막 작성 일자: 2026.02.13
