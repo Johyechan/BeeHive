@@ -36,6 +36,7 @@ namespace InGame.MySystem.Game
 
             ResetPlacePlanes(false); // 전체 도로 및 기물 칸 접근 여부 false로 초기화 - 이동 가능한 칸을 찾기 위함
             InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPieceMovePlanes.Clear(); // 기물 이동 가능한 판 저장 컨테이너 비우기 - 이전에 저장했던 이동 가능한 판들을 초기화
+            InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanDigCheckPlacePlanes.Clear(); // 생산 가능 확인에 필요한 판 저장 컨테이너 비우기
 
             foreach (var nearRoad in piece.nearRoadPlaceTransformList) // 해당 기물 칸 주위 도로 칸 순회
             {

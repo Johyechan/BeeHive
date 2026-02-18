@@ -1,12 +1,9 @@
 using DG.Tweening;
 using InGame.MyEnum;
-using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyManager.Team;
-using InGame.MyManager.Turn;
-using MyUtil;
 using UnityEngine;
 
 namespace InGame.MySystem.Loading

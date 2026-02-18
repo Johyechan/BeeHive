@@ -16,7 +16,6 @@ namespace InGame.MySystem
         public async Task SetRoad(int roadID, int placePlaneId, int placedType, int roadTeamType, string roadParentName, string targetParentName, Vector3 targetPos, float angle)
         {
             GameObject newRoad = ObjectIdManager.Instance.FindObject(roadID); // µµ·Î °´Ã¼ Å½»ö
-            NetworkManager.Instance.Socket.Emit("debug", $"Ã£Àº µµ·Î: {newRoad}");
             GameObject roadParent = GameObject.Find(roadParentName); // µµ·Î ºÎ¸ð °´Ã¼ Å½»ö
             GameObject targetParent = GameObject.Find(targetParentName); // ÃÖÁ¾ À§Ä¡ÀÇ ºÎ¸ð °´Ã¼ Å½»ö
             GameObject plane = ObjectIdManager.Instance.FindObject(placePlaneId); // ¹èÄ¡ Ä­ Å½»ö

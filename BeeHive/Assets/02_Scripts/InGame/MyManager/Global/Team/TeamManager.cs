@@ -13,10 +13,10 @@ namespace InGame.MyManager.Global
     {
         private TeamType _currentTeamType; // 현재 팀 타입
         // 위에 변수 프로퍼티
-        public TeamType CurrentTeamType { get => _currentTeamType; set => _currentTeamType = value; }
+        public TeamType CurrentTeamType { get => _currentTeamType; }
 
         private TaskCompletionSource<bool> _teamSetTcs; // 팀 세팅 대기 Task
-        public TaskCompletionSource<bool> TeamSetTcs
+        public TaskCompletionSource<bool> TeamSetTcs // 팀 세팅 대기 Task 프로퍼티
         {
             get
             {
@@ -26,7 +26,12 @@ namespace InGame.MyManager.Global
                 }
                 return _teamSetTcs;
             }
-        }// 팀 세팅 대기 Task 프로퍼티
+
+            set
+            {
+                _teamSetTcs = value;
+            }
+        }
 
         private bool _firstTurn = true; // 팀의 첫 번째 턴 여부
         public bool FirstTurn { get => _firstTurn; set => _firstTurn = value; } // 팀의 첫 번째 턴 여부 프로퍼티
@@ -45,7 +50,9 @@ namespace InGame.MyManager.Global
                         return; // 반환
 
                     int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
+                    NetworkManager.Instance.Socket.Emit("debug", $"받은 팀 타입: {(TeamType)teamType}");
                     _currentTeamType = (TeamType)teamType; // 팀 저장
+                    NetworkManager.Instance.Socket.Emit("debug", $"저장된 팀 타입: {CurrentTeamType}");
                     _teamSetTcs?.TrySetResult(true); // 팀 세팅 완료
                 });
             }
@@ -163,4 +170,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.18

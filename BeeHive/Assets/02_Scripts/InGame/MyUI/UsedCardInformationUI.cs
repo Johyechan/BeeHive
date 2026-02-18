@@ -1,6 +1,7 @@
 using DG.Tweening;
 using InGame.MyManager;
 using InGame.MyManager.Global;
+using MyUtil;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -34,18 +35,25 @@ namespace InGame.MyUI
 
                     string json = data.GetValue().ToString(); // 문자열 형태로 값 받기
                     UsedCardInfo usedCardInfo = JsonUtility.FromJson<UsedCardInfo>(json); // UsedCardInfo 구조체 형태로 json 변환
-                    _usedCardName.text = usedCardInfo.usedCardName; // 사용된 카드의 이름을 UI에 할당
-                    _usedCardInformation.text = usedCardInfo.usedCardInformation; // 사용된 카드의 정보(효과)를 UI에 할당
 
-                    _canvasGroup.gameObject.SetActive(true); // 활성화
+                    MainThreadDispatcher.Enqueue(() =>
+                    {
+                        _usedCardName.text = usedCardInfo.usedCardName; // 사용된 카드의 이름을 UI에 할당
+                        _usedCardInformation.text = usedCardInfo.usedCardInformation; // 사용된 카드의 정보(효과)를 UI에 할당
 
-                    await _canvasGroup.DOFade(1, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 인
+                        _canvasGroup.gameObject.SetActive(true); // 활성화
+
+                        _ = _canvasGroup.DOFade(1, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 인
+                    });
 
                     await Task.Delay((int)(_usedCardUIShowSecond * _makeMillisecondValue)); // 사용된 카드를 보여주는 시간만큼 대기
 
-                    await _canvasGroup.DOFade(0, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 아웃
+                    MainThreadDispatcher.Enqueue(() =>
+                    {
+                        _ = _canvasGroup.DOFade(0, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 아웃
 
-                    _canvasGroup.gameObject.SetActive(true); // 비활성화
+                        _canvasGroup.gameObject.SetActive(true); // 비활성화
+                    });
                 });
             }
         }
@@ -56,4 +64,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.02.06
+// 마지막 작성 일자: 2026.02.18

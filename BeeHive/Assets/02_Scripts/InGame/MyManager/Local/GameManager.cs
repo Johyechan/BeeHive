@@ -3,10 +3,8 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyObject;
-using MyUtil;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -89,6 +87,8 @@ namespace InGame.MyManager.Local
 
             _gameOver = true;
 
+            TeamManager.Instance.TeamSetTcs = null; // 팀 세팅 대기 초기화
+
             _gameOverUICanvasGroup.gameObject.SetActive(true); // 게임 오버 UI 캔버스 그룹 활성화
 
             _gameOverText.ForceMeshUpdate(); // TMP를 GPU에 강제로 올리기
@@ -163,4 +163,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.18

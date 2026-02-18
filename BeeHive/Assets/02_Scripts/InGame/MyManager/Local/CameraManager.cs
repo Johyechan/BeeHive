@@ -1,5 +1,5 @@
 using InGame.MyEnum;
-using MyUtil;
+using InGame.MyManager.Global;
 using System.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;

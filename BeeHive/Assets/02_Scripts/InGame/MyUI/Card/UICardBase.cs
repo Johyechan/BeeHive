@@ -6,6 +6,7 @@ using InGame.MyObject;
 using InGame.MyUI.Card.Handler;
 using InGame.MyUI.Card.Variable;
 using InGame.MyUI.MyUIInterface;
+using MyUtil;
 using MyUtil.MyEvent;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
@@ -88,8 +89,11 @@ namespace InGame.MyUI.Card
             // 카드 사용 후 사용된 카드들을 모아두는 덱으로 이동
             if(_uiCardVariable.usedCardDeck != null) // 사용한 카드들을 모아두는 덱을 찾았을 경우
             {
-                _uiCardVariable.usedCardDeck.AddCardInToUsedDeck(_uiCardVariable.cardObj.transform); // 사용한 카드를 추가
-                ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject);
+                MainThreadDispatcher.Enqueue(() =>
+                {
+                    _uiCardVariable.usedCardDeck.AddCardInToUsedDeck(_uiCardVariable.cardObj.transform); // 사용한 카드를 추가
+                    ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject);
+                });
 
                 return true;
             }

@@ -1,10 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPlacePlane;
-using MyUtil;
 using System;
 
 namespace InGame.MyUI.MyUIButton

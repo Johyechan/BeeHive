@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyManager.Global;
 using InGame.MyObject.Handler;
 using InGame.MyObject.MyObjectInterface;
 using MyUtil.MyObjectPool;

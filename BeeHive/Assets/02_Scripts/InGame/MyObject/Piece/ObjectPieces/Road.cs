@@ -45,7 +45,8 @@ namespace InGame.MyObject.Piece.ObjectPieces
                     break;
             }
 
-            ObjectPoolManager.Instance.MakeObject(poolType, transform.localPosition, transform.parent, PieceVariable.currentRoadPlacePlane.NetworkId);
+            float angle = transform.rotation.eulerAngles.y;
+            ObjectPoolManager.Instance.MakeObject(poolType, transform.localPosition, transform.parent, PieceVariable.currentRoadPlacePlane.NetworkId, angle);
 
             ChangeRoadInfo changeRoadInfo = new ChangeRoadInfo()
             {
@@ -82,4 +83,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.02.13
+// 마지막 작성 일자: 2026.02.18

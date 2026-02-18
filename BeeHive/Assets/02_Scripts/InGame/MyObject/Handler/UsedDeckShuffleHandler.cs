@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyManager;
+using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;

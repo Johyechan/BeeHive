@@ -5,7 +5,6 @@ using InGame.MyObject;
 using InGame.MyObject.Interface;
 using InGame.MyObject.Piece;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace MyUtil.MyObjectPool
@@ -39,38 +38,42 @@ namespace MyUtil.MyObjectPool
                 string json = data.GetValue().ToString();
 
                 MakeObjectPoolData makeObjectPoolData = JsonUtility.FromJson<MakeObjectPoolData>(json);
-                GameObject obj = null;
-                if (makeObjectPoolData.parentName != "") // 부모 객체가 있을 경우
+                MainThreadDispatcher.Enqueue(() =>
                 {
-                    Transform parent = GameObject.Find(makeObjectPoolData.parentName).transform;
-                    obj = GetObject((ObjectPoolType)makeObjectPoolData.poolType, parent); // 객체 생성
-                }
-                else // 부모 객체가 없을 경우
-                {
-                    obj = GetObject((ObjectPoolType)makeObjectPoolData.poolType); // 객체 생성
-                }
-
-                if(makeObjectPoolData.angle != 0) // 회전 값이 0이 아닐 경우
-                {
-                    obj.transform.Rotate(0, makeObjectPoolData.angle, 0); // 각도 회전
-                }
-
-                obj.transform.localPosition = makeObjectPoolData.pos; // 객체 위치 할당
-                INetworkIdObject networkIdObject = obj.GetComponent<INetworkIdObject>();
-                networkIdObject.NetworkId = makeObjectPoolData.Id; // 객체 ID 할당
-
-                if(makeObjectPoolData.roadPlacePlaneId != -1) // 도로 배치칸이 존재할 경우
-                {
-                    GameObject roadPlacePlaneObj = ObjectIdManager.Instance.FindObject(makeObjectPoolData.roadPlacePlaneId);
-                    if(roadPlacePlaneObj) // 도로 배치칸을 찾았을 때
+                    GameObject obj = null;
+                    if (makeObjectPoolData.parentName != "") // 부모 객체가 있을 경우
                     {
-                        RoadPlacePlaneObject roadPlacePlane = roadPlacePlaneObj.GetComponent<RoadPlacePlaneObject>();
-                        PieceBase pieceBase = obj.GetComponent<PieceBase>();
-                        InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(roadPlacePlane, pieceBase, false); // 배치칸 상태 변경
-                        InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
+                        Transform parent = GameObject.Find(makeObjectPoolData.parentName).transform;
+                        obj = GetObject((ObjectPoolType)makeObjectPoolData.poolType, parent); // 객체 생성
                     }
-                    
-                }
+                    else // 부모 객체가 없을 경우
+                    {
+                        obj = GetObject((ObjectPoolType)makeObjectPoolData.poolType); // 객체 생성
+                    }
+
+                    if (makeObjectPoolData.angle != 0) // 회전 값이 0이 아닐 경우
+                    {
+                        obj.transform.Rotate(0, makeObjectPoolData.angle, 0); // 각도 회전
+                    }
+
+                    obj.transform.localPosition = makeObjectPoolData.pos; // 객체 위치 할당
+                    INetworkIdObject networkIdObject = obj.GetComponent<INetworkIdObject>();
+                    networkIdObject.NetworkId = makeObjectPoolData.Id; // 객체 ID 할당
+                    ObjectIdManager.Instance.AddObject(networkIdObject.NetworkId, obj); // 객체 Id 정보 저장
+
+                    if (makeObjectPoolData.roadPlacePlaneId != -1) // 도로 배치칸이 존재할 경우
+                    {
+                        GameObject roadPlacePlaneObj = ObjectIdManager.Instance.FindObject(makeObjectPoolData.roadPlacePlaneId);
+                        if (roadPlacePlaneObj) // 도로 배치칸을 찾았을 때
+                        {
+                            RoadPlacePlaneObject roadPlacePlane = roadPlacePlaneObj.GetComponent<RoadPlacePlaneObject>();
+                            PieceBase pieceBase = obj.GetComponent<PieceBase>();
+                            NetworkManager.Instance.Socket.Emit("debug", $"배치 칸: {roadPlacePlane}, 배치 기물: {pieceBase}");
+                            InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(roadPlacePlane, pieceBase, false); // 배치칸 상태 변경
+                            InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
+                        }
+                    }
+                });
             });
 
             foreach(var data in _poolDataList) // 풀링할 데이터가 담긴 리스트 순회
@@ -165,4 +168,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.02.13
+// 마지막 작성 일자: 2026.02.18
