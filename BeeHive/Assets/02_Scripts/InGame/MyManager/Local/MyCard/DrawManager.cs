@@ -1,12 +1,9 @@
 using InGame.MyManager.Global;
-using InGame.MyManager.Turn;
 using InGame.MyObject;
 using InGame.MySystem.Game;
 using InGame.MyUI.Card;
-using MyUtil;
 using MyUtil.MyObjectPool;
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyManager.Local.MyCard
@@ -42,8 +39,7 @@ namespace InGame.MyManager.Local.MyCard
 
         public void DrawCard(Transform deckParent, Transform playerCardsParent, Transform playerUICardsParent, bool includeUI = true)
         {
-            int currentDeckCardCount = deckParent.childCount; // 덱에 있는 카드 수
-            Transform currentDrawCardTrans = deckParent.GetChild(currentDeckCardCount - 1);
+            Transform currentDrawCardTrans = deckParent.GetChild(0); // 맨 위에 있는 카드 할당
             CardObject currentDrawCard = currentDrawCardTrans.GetComponent<CardObject>();
 
             if (currentDrawCard.CardUIPoolType == ObjectPoolType.FirePowerUICard) // 드로우한 카드가 화력 카드일 경우
@@ -73,4 +69,4 @@ namespace InGame.MyManager.Local.MyCard
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.19

@@ -1,9 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyManager.Global;
 using InGame.MyUI.Card;
-using MyUtil;
 using MyUtil.MyObjectPool;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

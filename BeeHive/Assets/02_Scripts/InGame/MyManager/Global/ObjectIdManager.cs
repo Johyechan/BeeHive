@@ -1,5 +1,4 @@
 using MyUtil;
-using MyUtil.Interface;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,12 +32,22 @@ namespace InGame.MyManager.Global
             return false;
         }
 
+        // ID 목록에 객체 및 해당 객체의 ID 추가 함수
         public void AddObject(int id, GameObject obj)
         {
             if (CanFindObject(id)) // 만약 id를 가진 객체가 존재한다면 
                 return; // 반환
 
             _idMap[id] = obj; // id 및 객체 추가
+        }
+
+        // ID 목록에서 객체 삭제 함수
+        public void RemoveObject(int id)
+        {
+            if (!CanFindObject(id)) // 만약 id를 가진 객체가 존재하지 않는다면
+                return; // 반환
+
+            _idMap.Remove(id); // 객체 삭제
         }
 
         // 초기화 함수
@@ -49,4 +58,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.02.12
+// 마지막 작성 일자: 2026.02.19

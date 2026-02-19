@@ -1,3 +1,4 @@
+using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
@@ -83,6 +84,9 @@ namespace InGame.MyObject
             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                 return; // 반환
 
+            if (TeamManager.Instance.CurrentTeamType != TeamType.Team1) // 덱에 필요한 카드 객체를 만드는 권리는 팀 1에게만 부여
+                return;
+
             for (int i = 0; i <  _deckList.Count; i++) // 덱 리스트 순회
             {
                 Vector3 pos = new Vector3(0, _yInterval * i, 0); // 카드를 생성할 수 록 y축 간격 만큼 위로 올리기
@@ -91,4 +95,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.19

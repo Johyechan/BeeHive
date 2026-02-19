@@ -41,6 +41,11 @@ namespace InGame.MySystem.Game.Handler
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     GameObject cardObj = ObjectIdManager.Instance.FindObject(cardReverseInfo.cardID); // 뒤집힐 카드 객체 탐색
+                    if (!cardObj) // 카드 객체를 못 찾은 경우
+                    {
+                        NetworkManager.Instance.Socket.Emit("debug", $"카드 객체 못 찾음");
+                        return; // 반환
+                    }
                     CardObject cardObject = cardObj.GetComponent<CardObject>();
 
                     _ = cardObj.transform.DORotate(new Vector3(0, cardObj.transform.eulerAngles.y, 90), cardReverseInfo.animationDuration / 2).AsyncWaitForCompletion(); // 카드 뒤집기

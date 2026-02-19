@@ -59,6 +59,7 @@ namespace MyUtil.MyObjectPool
                     obj.transform.localPosition = makeObjectPoolData.pos; // 객체 위치 할당
                     INetworkIdObject networkIdObject = obj.GetComponent<INetworkIdObject>();
                     networkIdObject.NetworkId = makeObjectPoolData.Id; // 객체 ID 할당
+                    NetworkManager.Instance.Socket.Emit("debug", $"만들어진 객체: {obj}, 객체 ID: {makeObjectPoolData.Id}");
                     ObjectIdManager.Instance.AddObject(networkIdObject.NetworkId, obj); // 객체 Id 정보 저장
 
                     if (makeObjectPoolData.roadPlacePlaneId != -1) // 도로 배치칸이 존재할 경우
@@ -68,7 +69,6 @@ namespace MyUtil.MyObjectPool
                         {
                             RoadPlacePlaneObject roadPlacePlane = roadPlacePlaneObj.GetComponent<RoadPlacePlaneObject>();
                             PieceBase pieceBase = obj.GetComponent<PieceBase>();
-                            NetworkManager.Instance.Socket.Emit("debug", $"배치 칸: {roadPlacePlane}, 배치 기물: {pieceBase}");
                             InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(roadPlacePlane, pieceBase, false); // 배치칸 상태 변경
                             InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
                         }
@@ -155,7 +155,7 @@ namespace MyUtil.MyObjectPool
             if(_poolDataMap[type].needNetworkID) // 네트워크 ID가 필요한 객체라면
             {
                 INetworkIdObject networkIdObject = returnObj.GetComponent<INetworkIdObject>();
-                networkIdObject.NetworkId = -1; // 네트워크 ID 초기화
+                ObjectIdManager.Instance.RemoveObject(networkIdObject.NetworkId); // id를 가진 객체를 목록에서 제거
             }
 
             returnObj.transform.SetParent(transform); // 반환하는 객체의 부모를 풀 매니저로 지정
@@ -168,4 +168,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.02.18
+// 마지막 작성 일자: 2026.02.19

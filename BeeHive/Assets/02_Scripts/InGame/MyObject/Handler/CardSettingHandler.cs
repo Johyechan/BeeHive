@@ -4,6 +4,7 @@ using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
+using InGame.MyUI.Card;
 using MyUtil.MyEvent;
 using MyUtil.MyObjectPool;
 using System.Collections;
@@ -37,6 +38,10 @@ namespace InGame.MyObject.Handler
 
                 yield return new WaitUntil(() => tweenEnd); // 트윈이 종료될 때까지 대기
             }
+            else // 성벽 강화 카드일 경우
+            {
+                ObjectPoolManager.Instance.ReturnObject(cardPoolType, addCardTrans.gameObject); // 성벽 강화 카드를 풀에 반환 - 성벽 강화 카드는 재사용 불가 카드이기 때문
+            }
 
             yield return new WaitUntil(() => InGameContext.Current.Data.CardManager.CardReverseTask.Task.IsCompleted);
 
@@ -66,4 +71,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.19
