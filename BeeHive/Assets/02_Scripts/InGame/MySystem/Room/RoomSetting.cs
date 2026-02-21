@@ -20,9 +20,6 @@ namespace InGame.MySystem.Room
 
         [SerializeField] private PlayerUI[] _players; // 플레이어 정보 배열
 
-        [SerializeField] private GameObject _player3UI; // player3 정보 UI 객체
-        [SerializeField] private GameObject _vsUI2; // vs 두 번쨰 이미지 UI 객체
-
         [SerializeField] private Button _gameStartButton; // 게임 시작 버튼
         [SerializeField] private Button _readyButton; // 게임 준비 버튼
 
@@ -36,7 +33,7 @@ namespace InGame.MySystem.Room
 
         private void Awake()
         {
-            _playerUISettingHandler = new PlayerInfoUISettingHandler(_players, _player3UI, _vsUI2, _gameStartButton, _readyButton);
+            _playerUISettingHandler = new PlayerInfoUISettingHandler(_players, _gameStartButton, _readyButton);
 
             var socket = NetworkManager.Instance.Socket;
 
@@ -167,4 +164,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.21

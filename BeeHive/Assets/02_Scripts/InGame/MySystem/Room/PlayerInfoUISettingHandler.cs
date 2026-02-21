@@ -18,44 +18,19 @@ namespace InGame.MySystem.Room
         // 방 정보 프로퍼티
         public RoomInfo RoomInfo { get => _roomInfo; set => _roomInfo = value; }
 
-        private bool _isTwoPlayer; // 2인용 게임 방인지 확인하는 변수
-
-        private GameObject _player3UI; // 플레이어 3 객체
-        private GameObject _vsUI2; // 두 번째 vs 이미지 객체
-
         private Button _gameStartButton; // 게임 시작 버튼
         private Button _readyButton; // 게임 준비 버튼
 
         // 생성자에서 변수 초기화
-        public PlayerInfoUISettingHandler(PlayerUI[] players, GameObject player3UI, GameObject vsUI2, Button startButton, Button readyButton)
+        public PlayerInfoUISettingHandler(PlayerUI[] players, Button startButton, Button readyButton)
         {
             _players = players;
-            _isTwoPlayer = false;
-            _player3UI = player3UI;
-            _vsUI2 = vsUI2;
             _gameStartButton = startButton;
             _readyButton = readyButton;
         }
 
         public void Init()
         {
-            MainThreadDispatcher.Enqueue(() =>
-            {
-                if (_roomInfo.maxPlayer < 3) // 최대 입장 가능 플레이어 수가 3인 이하라면
-                {
-                    _isTwoPlayer = true; // 2인용 플레이어로 할당
-                }
-            });
-
-            MainThreadDispatcher.Enqueue(() =>
-            {
-                if (_isTwoPlayer)
-                {
-                    _player3UI.SetActive(false); // 세 번째 플레이어 정보 UI 비활성화
-                    _vsUI2.SetActive(false); // 두 번쨰 vsUI 비활성화 
-                }
-            });
-
             MainThreadDispatcher.Enqueue(() =>
             {
                 bool isCurrentRoomManager = false; // 현재 클라이언트가 방장 클라이언트인지 확인하는 변수
@@ -149,4 +124,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.21
