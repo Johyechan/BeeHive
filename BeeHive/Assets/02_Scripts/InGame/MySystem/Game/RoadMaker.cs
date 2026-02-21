@@ -1,20 +1,15 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager;
-using MyUtil;
 using MyUtil.MyObjectPool;
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MySystem
 {
     public class RoadMaker : MonoBehaviour
     {
-        [SerializeField] private float _xInterval;
-        [SerializeField] private float _zInterval;
-        [SerializeField] private float _angle;
-        [SerializeField] private int _maxXCount;
+        [SerializeField] private float _zInterval; // z축 간격
+        [SerializeField] private float _angle; // 도로 각도
 
         private void OnEnable()
         {
@@ -50,10 +45,10 @@ namespace InGame.MySystem
             switch (type)
             {
                 case TeamType.Team1:
-                    pos = new Vector3(count % _maxXCount * _xInterval, 0, count / _maxXCount * _zInterval); // 위치
+                    pos = new Vector3(0, 0, count * _zInterval); // 위치
                     break;
                 case TeamType.Team2:
-                    pos = new Vector3(-(count % _maxXCount * _xInterval), 0, count / _maxXCount * _zInterval); // 위치
+                    pos = new Vector3(0, 0, count * _zInterval); // 위치
                     break;
                 case TeamType.Team3:
                     break;
@@ -63,4 +58,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.02.13
+// 마지막 작성 일자: 2026.02.21

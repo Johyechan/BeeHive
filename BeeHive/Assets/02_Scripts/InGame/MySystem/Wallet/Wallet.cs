@@ -15,6 +15,11 @@ namespace InGame.MySystem
         [SerializeField] private TMP_Text _goldCoinTmpText; // 금화 개수 UI
         [SerializeField] private TMP_Text _goldBarTmpText; // 금괴 개수 UI
 
+        [SerializeField] private float _team1GoldCoinInterval; // 팀 1 금화 간격
+        [SerializeField] private float _team1GoldBarInterval; // 팀 1 금괴 간격
+        [SerializeField] private float _team2GoldCoinInterval; // 팀 2 금화 간격
+        [SerializeField] private float _team2GoldBarInterval; // 팀 2 금괴 간격
+
         private int _goldCoinCount = 0; // 금화 개수
         private int _goldBarCount = 0; // 금괴 개수
 
@@ -29,7 +34,7 @@ namespace InGame.MySystem
         {
             _goldSetHandle = new GoldSetHandle(this);
             _walletUIHandle = new WalletUIHandle(_goldCoinTmpText, _goldBarTmpText);
-            _walletObjectHandle = new WalletObjectHandle();
+            _walletObjectHandle = new WalletObjectHandle(_team1GoldCoinInterval, _team1GoldBarInterval, _team2GoldCoinInterval, _team2GoldBarInterval);
 
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // 금화, 금괴 UI 초기화
         }
@@ -121,4 +126,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.21
