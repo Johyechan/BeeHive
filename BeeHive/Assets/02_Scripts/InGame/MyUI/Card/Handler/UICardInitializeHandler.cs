@@ -29,7 +29,6 @@ namespace InGame.MyUI.Card.Handler
             Transform textTransform = uiTransform.GetChild(1); // UI를 모아둔 빈 객체의 두 번째 자식 - 텍스트
 
             _uiCardVariable.cardInformationImage = imageTransform.GetComponent<Image>(); // 이미지 할당
-            _uiCardVariable.cardInformationTmpText = textTransform.GetComponent<TMP_Text>(); // 텍스트 할당
 
             Transform cardUsePanelTransform = _uiCardVariable.cardUsePanelCanvasGroup.transform.GetChild(1); // 카드 사용 패널의 두 번째 자식 - 패널
             Transform buttonsTransform = cardUsePanelTransform.GetChild(1); // 패널의 첫 번째 자식 - 버튼을 모아둔 빈 객체
@@ -39,4 +38,4 @@ namespace InGame.MyUI.Card.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.14
+// 마지막 작성 일자: 2026.02.24

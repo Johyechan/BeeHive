@@ -23,16 +23,17 @@ namespace InGame.MyUI.MyUIButton
                 if(SceneMgr.Instance.CurrentRoomID != "") // 현재 방이 존재할 때
                 {
                     // 방을 나갈 때 필요한 값을 가지는 구조체
-                    LeaveRoomInfo leaveRoomInfo = new LeaveRoomInfo()
+                    ExileInfo exileInfo = new ExileInfo()
                     {
                         roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                        targetID = _targetID // 추방 대상
                     };
 
-                    string json = JsonUtility.ToJson(leaveRoomInfo); // 방 나갈 때 필요한 값을 가지는 구조체를 Json 형태로 변환
-                    socket.Emit("leaveRoom", json); // 서버에 leaveRoom 이벤트 전달
+                    string json = JsonUtility.ToJson(exileInfo); // 방 나갈 때 필요한 값을 가지는 구조체를 Json 형태로 변환
+                    socket.Emit("exile", json); // 서버에 leaveRoom 이벤트 전달
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.24

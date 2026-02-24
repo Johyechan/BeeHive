@@ -9,8 +9,7 @@ namespace InGame.MyUI
     public class UsedCardData : MonoBehaviour
     {
         public string roomID; // 현재 방 ID
-        public string usedCardName; // 사용된 카드의 이름
-        public string usedCardInformation; // 사용된 카드의 정보(효과)
+        public int usedCardType; // 사용된 카드의 풀 타입
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2026.02.24

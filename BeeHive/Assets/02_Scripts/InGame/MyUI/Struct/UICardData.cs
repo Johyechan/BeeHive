@@ -11,7 +11,6 @@ namespace InGame.MyUI
     [Serializable]
     public struct UICardData
     {
-        public string cardInformationText; // 카드 정보 텍스트
         public string currentCardName; // 현재 카드 이름
 
         public Image currentCardImage; // 현재 카드 이미지
@@ -22,4 +21,4 @@ namespace InGame.MyUI
         public float animationYValue; // y축으로 올라가는 값
     }
 }
-// 마지막 작성 일자: 2025.11.04
+// 마지막 작성 일자: 2026.02.24

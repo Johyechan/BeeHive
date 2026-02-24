@@ -8,8 +8,7 @@ namespace InGame.MyUI
     [Serializable]
     public struct UsedCardInfo
     {
-        public string usedCardName; // 사용된 카드의 이름
-        public string usedCardInformation; // 사용된 카드의 정보(효과)
+        public int usedCardType; // 사용된 카드의 타입
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2026.02.24

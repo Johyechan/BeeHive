@@ -24,8 +24,6 @@ namespace InGame.MyUI.MyUIButton
 
         [SerializeField] protected int _cost; // 가격
 
-        [SerializeField] private TMP_Text _leftPieceCountText;
-
         private void Awake()
         {
             _isHighLightOn = false; // 하이라이트 꺼짐 상태로 초기화
@@ -36,7 +34,6 @@ namespace InGame.MyUI.MyUIButton
         {
             HighLightEvents.OnPiecePlacementHighLight += HightLightOff; // 기물 전용 이벤트 구독
             HighLightEvents.OnRoadPlacementHighLight += HightLightOff; // 도로 전용 이벤트 구독
-            UIEvents.OnSetLeftPieceText += SetText; // 남은 기물 수 세팅하는 이벤트 구독
             TeamManagerEvents.OnNeedTeamManagerEvent += Init; // 팀 매니저가 필요한 이벤트에 초기화 함수 구독
             EventReady.CompletedOne();
         }
@@ -45,7 +42,6 @@ namespace InGame.MyUI.MyUIButton
         {
             HighLightEvents.OnPiecePlacementHighLight -= HightLightOff; // 기물 전용 이벤트 구독 해제
             HighLightEvents.OnRoadPlacementHighLight -= HightLightOff; // 도로 전용 이벤트 구독 해제
-            UIEvents.OnSetLeftPieceText -= SetText; // 남은 기물 수 세팅하는 이벤트 구독
             TeamManagerEvents.OnNeedTeamManagerEvent -= Init; // 팀 매니저가 필요한 이벤트에 초기화 함수 구독 해제
         }
         
@@ -86,29 +82,7 @@ namespace InGame.MyUI.MyUIButton
             }
         }
 
-        // UI 텍스트 변경 함수
-        private void SetText()
-        {
-            try
-            {
-                if (InGameContext.Current.Data.TurnManager.CurrentTurnType == TurnType.TurnEnd) // 현재 턴이 턴 종료 턴일 때
-                {
-                    if (_canPlaceType == ObjectType.Road) // 도로 버튼일 경우
-                    {
-                        _leftPieceCountText.text = $"사용 가능 개수: 0";
-                        return;
-                    }
-                }
-
-                _leftPieceCountText.text = $"사용 가능 개수: {_objectParent.childCount}";
-            }
-            catch(Exception ex)
-            {
-                NetworkManager.Instance.Socket.Emit("debug", $"{ex}");
-            }
-        }
-
         public abstract void OnUIClick();
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.24

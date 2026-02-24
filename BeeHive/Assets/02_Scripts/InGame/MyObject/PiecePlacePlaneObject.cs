@@ -199,10 +199,8 @@ namespace InGame.MyObject
                 
 
                 InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
-
-                UIEvents.OnSetLeftPieceText?.Invoke(); // 남은 기물 수 변경
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.13
+// 마지막 작성 일자: 2026.02.24

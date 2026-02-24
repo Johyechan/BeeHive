@@ -16,8 +16,6 @@ namespace InGame.MyUI.Card.Variable
 
         public Image cardInformationImage; // 카드 정보에 필요한 이미지 변수
 
-        public TMP_Text cardInformationTmpText; // 카드 정보에 필요한 텍스트 변수
-
         public CardUseButton cardUseButton; // 카드 사용 버튼 변수
 
         public UICardInitializeHandler initializeHandler; // 초기화 핸들러
@@ -40,4 +38,4 @@ namespace InGame.MyUI.Card.Variable
         public int originIndex; // 자기자신의 기본 인덱스
     }
 }
-// 마지막 작성 일자: 2025.11.04
+// 마지막 작성 일자: 2026.02.24

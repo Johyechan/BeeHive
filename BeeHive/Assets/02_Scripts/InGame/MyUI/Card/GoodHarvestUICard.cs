@@ -23,8 +23,7 @@ namespace InGame.MyUI.Card
             UsedCardData usedCardData = new UsedCardData()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                usedCardName = _uiCardData.currentCardName, // 사용한 카드의 이름
-                usedCardInformation = _uiCardData.cardInformationText, // 사용한 카드의 정보(효과)
+                usedCardType = (int)_uiCardData.poolType, // 사용한 카드의 이름
             };
 
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
@@ -40,4 +39,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.24

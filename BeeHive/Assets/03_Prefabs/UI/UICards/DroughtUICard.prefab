@@ -96,7 +96,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -146,8 +146,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiCardData:
-    cardInformationText: "\uC0C1\uB300\uAC00 \uB2E4\uC74C \uD134 \uAE08\uD654\uB97C
-      \uC5BB\uC9C0 \uBABB\uD569\uB2C8\uB2E4"
     currentCardName: "\uAC00\uBB44"
     currentCardImage: {fileID: 1588352487960299254}
     poolType: 8

@@ -31,7 +31,7 @@ namespace InGame.MyUI.Card
         {
             _uiCardVariable.rect = GetComponent<RectTransform>();
             _uiCardVariable.initializeHandler = new UICardInitializeHandler(_uiCardVariable);
-            _uiCardVariable.showInformationHandler = new UICardShowInformationHandler(_uiCardVariable, _uiCardData.currentCardImage, _uiCardData.cardInformationText, _uiCardData.animationDuration);
+            _uiCardVariable.showInformationHandler = new UICardShowInformationHandler(_uiCardVariable, _uiCardData.currentCardImage, _uiCardData.animationDuration);
             _uiCardVariable.clickedHandler = new UICardClickedHandler(this, _uiCardVariable, _uiCardData.animationDuration);
         }
 
@@ -124,4 +124,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.24

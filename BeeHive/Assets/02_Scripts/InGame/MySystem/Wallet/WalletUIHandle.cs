@@ -19,9 +19,9 @@ namespace InGame.MySystem
         // 금화 및 금괴 개수에 따라 UI 변경 함수
         public void SetUI(int goldCoinCount, int goldBarCount)
         {
-            _goldCoinTmpText.text = $"금화 X {goldCoinCount}"; // 금화 개수를 UI로 표기
-            _goldBarTmpText.text = $"금괴 X {goldBarCount}"; // 금괴 개수를 UI로 표기
+            _goldCoinTmpText.text = $"x {goldCoinCount}"; // 금화 개수를 UI로 표기
+            _goldBarTmpText.text = $"x {goldBarCount}"; // 금괴 개수를 UI로 표기
         }
     }
 }
-// 마지막 작성 일자: 2025.08.20
+// 마지막 작성 일자: 2026.02.24

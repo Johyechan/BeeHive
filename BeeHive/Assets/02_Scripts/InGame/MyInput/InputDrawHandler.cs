@@ -31,7 +31,7 @@ namespace InGame.MyInput
         }
 
         // 인풋 액션에 구독할 함수 오버라이드
-        public void Draw(InputAction.CallbackContext context)
+        public void DrawAction()
         {
             if (!_canDraw) return; // _canDraw가 false 일때 바로 반환
             _ = Draw();

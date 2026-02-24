@@ -35,9 +35,26 @@ namespace InGame.MyUI.Turn
         public async Task UIAnimationPlay(TurnType currentTurn)
         {
             InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
-            _currentTurnTmpText.text = currentTurn.ToString();
+            switch(currentTurn)
+            {
+                case TurnType.MakeTurn:
+                    _currentTurnTmpText.text = "[생산 턴]";
+                    break;
+                case TurnType.DrawTurn:
+                    _currentTurnTmpText.text = "[드로우 턴]";
+                    break;
+                case TurnType.MainTurn:
+                    _currentTurnTmpText.text = "[메인 턴]";
+                    break;
+                case TurnType.TurnEnd:
+                    _currentTurnTmpText.text = "[턴 종료 턴]";
+                    break;
+                case TurnType.ChangeTeam:
+                    _currentTurnTmpText.text = "[팀 변경 턴]";
+                    break;
+            }
             await _turnAnimations[currentTurn].UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2026.02.11
+// 마지막 작성 일자: 2026.02.24

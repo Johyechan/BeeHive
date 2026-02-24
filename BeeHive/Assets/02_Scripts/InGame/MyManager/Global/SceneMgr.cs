@@ -13,6 +13,9 @@ namespace InGame.MyManager
 
         private bool _isTwoPlayerGame = true; // 2인용 게임을 시작했는지 3인용 게임을 시작했는지 여부 - 기본 값은 2인용 게임으로 가져가기
         public bool IsTwoPlayerGame { get => _isTwoPlayerGame; set => _isTwoPlayerGame = value; } // 위 변수 프로퍼티
+
+        private string _otherNickName; // 상대 닉네임
+        public string OtherNickName { get => _otherNickName; set => _otherNickName = value; } // 상대 닉네임 프로퍼티
     }
 }
-// 마지막 작성 일자: 2025.11.24
+// 마지막 작성 일자: 2026.02.24

@@ -2,6 +2,7 @@ using DG.Tweening;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using MyUtil;
+using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -14,8 +15,7 @@ namespace InGame.MyUI
     {
         [SerializeField] private CanvasGroup _canvasGroup;
 
-        [SerializeField] private TMP_Text _usedCardName; // 사용한 카드의 이름
-        [SerializeField] private TMP_Text _usedCardInformation; // 사용한 카드의 정보(효과)
+        [SerializeField] private Transform _ImageParent; // 이미지 부모 객체
 
         [SerializeField] private float _animationDuration; // 애니메이션 지속시간
         [SerializeField] private float _usedCardUIShowSecond; // 사용한 카드를 보여주는 시간
@@ -38,8 +38,7 @@ namespace InGame.MyUI
 
                     MainThreadDispatcher.Enqueue(() =>
                     {
-                        _usedCardName.text = usedCardInfo.usedCardName; // 사용된 카드의 이름을 UI에 할당
-                        _usedCardInformation.text = usedCardInfo.usedCardInformation; // 사용된 카드의 정보(효과)를 UI에 할당
+                        ObjectPoolManager.Instance.GetObject((ObjectPoolType)usedCardInfo.usedCardType, _ImageParent); // 사용된 카드 생성
 
                         _canvasGroup.gameObject.SetActive(true); // 활성화
 
@@ -64,4 +63,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.02.18
+// 마지막 작성 일자: 2026.02.24

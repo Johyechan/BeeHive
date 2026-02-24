@@ -20,13 +20,17 @@ namespace InGame.MySystem.Room
 
         private Button _gameStartButton; // 게임 시작 버튼
         private Button _readyButton; // 게임 준비 버튼
+        private Button _exileButton; // 추방 버튼
+        private Button _roomManagerChangeButton; // 방장 변경 버튼
 
         // 생성자에서 변수 초기화
-        public PlayerInfoUISettingHandler(PlayerUI[] players, Button startButton, Button readyButton)
+        public PlayerInfoUISettingHandler(PlayerUI[] players, Button startButton, Button readyButton, Button exileButton, Button roomManagerChangeButton)
         {
             _players = players;
             _gameStartButton = startButton;
             _readyButton = readyButton;
+            _exileButton = exileButton;
+            _roomManagerChangeButton = roomManagerChangeButton;
         }
 
         public void Init()
@@ -57,8 +61,11 @@ namespace InGame.MySystem.Room
 
                     existIndexList.Add(index); // 현재 플레이어의 인덱스 저장
                     _players[index].playerNameText.text = _roomInfo.players[i].nickName; // 각 클라이언트 이름 띄우기
-                    ExileButton exileButton = _players[index].exileButton.GetComponent<ExileButton>(); // 추방 버튼 변수 초기화
-                    exileButton.TargetID = _roomInfo.players[i].id; // 타겟 ID 초기화
+
+                    if (_roomInfo.players[i].nickName != NetworkManager.Instance.CurrentClientName) // 자신의 닉네임이 아닌 것은
+                    {
+                        SceneMgr.Instance.OtherNickName = _roomInfo.players[i].nickName; // 상대팀 닉네임으로 저장
+                    }
 
                     if (_roomInfo.players[i].isReady) // n번째 인덱스 플레이어가 준비 완료 상태라면
                     {
@@ -83,15 +90,15 @@ namespace InGame.MySystem.Room
 
                     if (_roomInfo.players[i].isRoomManager) // 방장 슬롯
                     {
-                        _players[index].roomManagerImage.color = Color.red; // 방장 표시
-                        _players[index].roomManagerButton.gameObject.SetActive(true); // 방장 버튼 활성화
-                        _players[index].exileButton.gameObject.SetActive(false); // 방장 슬롯 추방 버튼 비활성화
+                        _players[index].roomManagerImage.gameObject.SetActive(true); // 방장 표시
                     }
                     else // 일반 슬롯
                     {
-                        _players[index].roomManagerImage.color = Color.white; // 일반 표시
-                        _players[index].roomManagerButton.gameObject.SetActive(isCurrentRoomManager); // 방장 클라이언트라면 활성화
-                        _players[index].exileButton.gameObject.SetActive(isCurrentRoomManager); // 방장 클라이언트라면 활성화
+                        _players[index].roomManagerImage.gameObject.SetActive(false); // 일반 표시
+                        ExileButton exileButton = _exileButton.GetComponent<ExileButton>(); // 추방 버튼
+                        exileButton.TargetID = _roomInfo.players[i].id; // 타겟 ID 초기화
+                        RoomManagerButton roomManagerButton = _roomManagerChangeButton.GetComponent<RoomManagerButton>(); // 방장 변경 버튼
+                        roomManagerButton.TargetIndex = index; // 방장 변경 대상 인덱스 할당
                     }
                 }
 
@@ -101,12 +108,9 @@ namespace InGame.MySystem.Room
                     {
                         if (!existIndexList.Contains(i)) // 만약 사용하는 인덱스 리스트에 존재하지 않는다면
                         {
-                            _players[i].playerNameText.text = "비어 있음";
+                            _players[i].playerNameText.text = "...";
                             _players[i].readyText.text = "준비 중"; // 준비 중 상태
-                            _players[i].readyImage.color = Color.white; // 준비 중 상태
-                            _players[i].roomManagerImage.color = Color.white; // 방장 여부 방장 아님으로 초기화
-                            _players[i].roomManagerButton.gameObject.SetActive(false); // 방장 버튼 비활성화
-                            _players[i].exileButton.gameObject.SetActive(false); // 추방 버튼 비활성화
+                            _players[i].roomManagerImage.gameObject.SetActive(false); // 방장 여부 방장 아님으로 초기화
                         }
                     }
                 }
@@ -120,8 +124,7 @@ namespace InGame.MySystem.Room
         private void ReadyUI(int index, string text, Color color)
         {
             _players[index].readyText.text = text;
-            _players[index].readyImage.color = color;
         }
     }
 }
-// 마지막 작성 일자: 2026.02.21
+// 마지막 작성 일자: 2026.02.24

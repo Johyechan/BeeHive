@@ -22,6 +22,8 @@ namespace InGame.MySystem.Room
 
         [SerializeField] private Button _gameStartButton; // 게임 시작 버튼
         [SerializeField] private Button _readyButton; // 게임 준비 버튼
+        [SerializeField] private Button _exileButton; // 추방 버튼
+        [SerializeField] private Button _roomManagerChangeButton; // 방장 변경 버튼
 
         private PlayerInfoUISettingHandler _playerUISettingHandler; // 플레이어 정보UI를 변경하는 핸들러
 
@@ -33,7 +35,7 @@ namespace InGame.MySystem.Room
 
         private void Awake()
         {
-            _playerUISettingHandler = new PlayerInfoUISettingHandler(_players, _gameStartButton, _readyButton);
+            _playerUISettingHandler = new PlayerInfoUISettingHandler(_players, _gameStartButton, _readyButton, _exileButton, _roomManagerChangeButton);
 
             var socket = NetworkManager.Instance.Socket;
 
@@ -164,4 +166,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.02.21
+// 마지막 작성 일자: 2026.02.24

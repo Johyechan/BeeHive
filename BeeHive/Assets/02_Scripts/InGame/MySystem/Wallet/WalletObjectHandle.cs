@@ -1,5 +1,7 @@
 using InGame.MyEnum;
+using InGame.MyManager.Global;
 using MyUtil.MyObjectPool;
+using TMPro;
 using UnityEngine;
 
 namespace InGame.MySystem
@@ -13,16 +15,27 @@ namespace InGame.MySystem
         private float _team2GoldCoinInterval;
         private float _team2GoldBarInterval;
 
-        public WalletObjectHandle(float team1GoldCoinInterval, float team1GoldBarInterval, float team2GoldCoinInterval, float team2GoldBarInterval)
+        private TMP_Text _otherTeamGoldCoin; // 상대 팀 골드 코인 개수 UI
+        private TMP_Text _otherTeamGoldBar; // 상대 팀 골드 바 개수 UI
+
+        public WalletObjectHandle(float team1GoldCoinInterval, float team1GoldBarInterval, float team2GoldCoinInterval, float team2GoldBarInterval, TMP_Text otherTeamGoldCoin, TMP_Text otherTeamGoldBar)
         {
             _team1GoldCoinInterval = team1GoldCoinInterval;
             _team1GoldBarInterval = team1GoldBarInterval;
             _team2GoldCoinInterval = team2GoldCoinInterval;
             _team2GoldBarInterval = team2GoldBarInterval;
+
+            _otherTeamGoldCoin = otherTeamGoldCoin;
+            _otherTeamGoldBar = otherTeamGoldBar;
         }
 
         public void SetObject(Transform goldCoinParent, Transform goldBarParent, int goldCoinCount, int goldBarCount, TeamType type)
         {
+            if(TeamManager.Instance.CurrentTeamType != type) // 내 팀의 금화 금괴 변경 사항이 아니라면
+            {
+                _otherTeamGoldCoin.text = $"x {goldCoinCount}"; // 상대 팀 금화 개수 UI 변경
+                _otherTeamGoldBar.text = $"x {goldBarCount}"; // 상대 팀 금괴 개수 UI 변경
+            }
             if (goldCoinParent.childCount < goldCoinCount) // 금화 객체가 실제 금화보다 적을 경우
             {
                 float interval = 0;
@@ -83,4 +96,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.02.21
+// 마지막 작성 일자: 2026.02.24
