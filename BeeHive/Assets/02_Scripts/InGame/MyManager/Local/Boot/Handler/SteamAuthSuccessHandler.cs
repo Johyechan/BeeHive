@@ -4,6 +4,7 @@ using InGame.MyUI;
 using MyUtil;
 using SocketIOClient;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InGame.MyManager.Local.Boot.Handler
@@ -44,7 +45,10 @@ namespace InGame.MyManager.Local.Boot.Handler
                 });
             }
             else // 닉네임이 있을 경우
+            {
                 NetworkManager.Instance.CurrentClientName = strNickName; // 닉네임 저장
+                _bootingManager.Variables.steamAuthEnd?.TrySetResult(true); // 스팀 인증 성공
+            }
         }
     }
 }

@@ -21,6 +21,12 @@ namespace InGame.MySystem
         [SerializeField] private float _team1GoldBarInterval; // 팀 1 금괴 간격
         [SerializeField] private float _team2GoldCoinInterval; // 팀 2 금화 간격
         [SerializeField] private float _team2GoldBarInterval; // 팀 2 금괴 간격
+        [SerializeField] private float _zInterval; // z축 간격
+
+        [SerializeField] private int _zValueChangeCount; // z축 값이 변경되는 개수 
+        [SerializeField] private int _goldBarMaxCount; // 금괴 최대 개수
+
+        [SerializeField] private Color _originColor; // 텍스트 기본 색상
 
         private int _goldCoinCount = 0; // 금화 개수
         private int _goldBarCount = 0; // 금괴 개수
@@ -35,8 +41,8 @@ namespace InGame.MySystem
         private void Awake()
         {
             _goldSetHandle = new GoldSetHandle(this);
-            _walletUIHandle = new WalletUIHandle(_goldCoinTmpText, _goldBarTmpText);
-            _walletObjectHandle = new WalletObjectHandle(_team1GoldCoinInterval, _team1GoldBarInterval, _team2GoldCoinInterval, _team2GoldBarInterval, _otherGoldCoinTmpText, _otherGoldBarTmpText);
+            _walletUIHandle = new WalletUIHandle(_goldCoinTmpText, _goldBarTmpText, _goldBarMaxCount, _originColor);
+            _walletObjectHandle = new WalletObjectHandle(_team1GoldCoinInterval, _team1GoldBarInterval, _team2GoldCoinInterval, _team2GoldBarInterval, _zInterval, _zValueChangeCount, _goldBarMaxCount, _originColor, _otherGoldCoinTmpText, _otherGoldBarTmpText);
 
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // 금화, 금괴 UI 초기화
         }
@@ -72,6 +78,11 @@ namespace InGame.MySystem
         // 금괴를 얻는 함수(얻는 값)
         private void GetGoldBar(int value)
         {
+            if(_goldBarCount >= _goldBarMaxCount) // 금괴 수가 최대 금괴 수 이상이라면
+            {
+                UIManager.Instance.WarningUIMake("금괴가 이미 최대 개수 입니다");
+                return; // 반환
+            }
             _goldBarCount += value; // 금괴 증가
 
             GoldSetEventEmit();
@@ -128,4 +139,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.02.25

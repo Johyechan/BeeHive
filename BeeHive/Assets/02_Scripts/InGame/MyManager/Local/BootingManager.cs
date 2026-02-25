@@ -56,8 +56,6 @@ namespace InGame.MyManager.Local
 
             NetworkManager.Instance.Socket.On("steamAuthSuccess", response =>
             {
-                _variables.steamAuthEnd?.TrySetResult(true); // 스팀 인증 성공
-
                 _variables.steamAuthSuccessHandler.OnSteamAuthSuccess(response);
             }); // 스팀 인증 성공 구독
 
@@ -82,7 +80,6 @@ namespace InGame.MyManager.Local
 
             if(!_variables.result)
             {
-                NetworkManager.Instance.Socket.Emit("debug", "검증 실패");
                 Application.Quit();
             }
         }

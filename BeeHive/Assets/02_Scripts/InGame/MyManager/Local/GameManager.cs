@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace InGame.MyManager.Local
 {
@@ -15,7 +16,8 @@ namespace InGame.MyManager.Local
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _gameOverUICanvasGroup;
-        [SerializeField] private TMP_Text _gameOverText;
+        [SerializeField] private Image _victoryImage; 
+        [SerializeField] private Image _defeatImage;
 
         [SerializeField] private float _animationDuration;
 
@@ -91,15 +93,15 @@ namespace InGame.MyManager.Local
 
             _gameOverUICanvasGroup.gameObject.SetActive(true); // 게임 오버 UI 캔버스 그룹 활성화
 
-            _gameOverText.ForceMeshUpdate(); // TMP를 GPU에 강제로 올리기
-
             if(TeamManager.Instance.CurrentTeamType == loseTeamType) // 패배 팀이라면
             {
-                _gameOverText.text = "패배 했습니다";
+                _victoryImage.gameObject.SetActive(false); // 승리 이미지 비활성화
+                _defeatImage.gameObject.SetActive(true); // 패배 이미지 활성화
             }
             else // 승리 팀이라면
             {
-                _gameOverText.text = "승리 했습니다";
+                _victoryImage.gameObject.SetActive(true); // 승리 이미지 활성화
+                _defeatImage.gameObject.SetActive(false); // 패배 이미지 비활성화
             }
 
             _gameOverUICanvasGroup.DOFade(1, _animationDuration).SetUpdate(true); // 게임 오버 UI 페이드 인 - 실시간 실행
@@ -163,4 +165,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.02.18
+// 마지막 작성 일자: 2026.02.25
