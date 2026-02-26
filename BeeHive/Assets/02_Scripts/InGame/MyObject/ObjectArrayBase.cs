@@ -1,9 +1,6 @@
 using DG.Tweening;
 using InGame.MyEnum;
-using InGame.MyManager;
 using InGame.MyManager.Local;
-using InGame.MyManager.Turn;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -30,7 +27,8 @@ namespace InGame.MyObject
 
             for(int i = 0; i < objectCount; i++)
             {
-                float currentYPos = parent.GetChild(i).transform.position.y; // 현재 객체의 y축 위치를 저장 - x축과 z축을 전부 이동 후 y축을 움직이기 위함
+                int dir = 1;
+                float currentYPos = parent.GetChild(i).transform.localPosition.y; // 현재 객체의 y축 위치를 저장 - x축과 z축을 전부 이동 후 y축을 움직이기 위함
 
                 Transform trans = parent.GetChild(i); // 자식 객체의 Transform을 저장
 
@@ -38,9 +36,14 @@ namespace InGame.MyObject
                 {
                     trans.transform.localRotation = Quaternion.Euler(0, 180, 0); // 카드를 180도 회전(회전을 안할 시 거꾸로 보임)
                 }
-
+                else // 현재 턴이 Team2의 팀일 경우
+                {
+                    trans.transform.localRotation = Quaternion.Euler(0, 0, 0); // 카드를 0도 회전(회전을 안할 시 거꾸로 보임)
+                    dir = -1;
+                }
+                
                 Sequence sequence = DOTween.Sequence() // 시퀀스를 통해 한 함수가 실행이 종료되고 다음 함수가 실행
-                    .Append(trans.DOLocalMove(new Vector3(_xPosPerChild * i, currentYPos, 0), _animationDelay)) // 자식 객체를 x축과 z축은 옮겨야 할 위치로 이동
+                    .Append(trans.DOLocalMove(new Vector3(dir * _xPosPerChild * i, currentYPos, 0), _animationDelay)) // 자식 객체를 x축과 z축은 옮겨야 할 위치로 이동
                     .Append(trans.DOLocalMoveY(0, _animationDelay)); // y축을 0으로 이동
             }
             return true;

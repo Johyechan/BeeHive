@@ -464,7 +464,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
+    rgba: 4280956739
   m_fontColor: {r: 0.2627451, g: 0.21568628, b: 0.16470589, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -1927,7 +1927,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 5
     m_Bottom: 0
-  m_ChildAlignment: 1
+  m_ChildAlignment: 4
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
@@ -5132,7 +5132,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 180642376}
         m_TargetAssemblyTypeName: InGame.MyUI.ClosePanelButton, Assembly-CSharp
         m_MethodName: OnUIClick
         m_Mode: 1
@@ -5444,7 +5444,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 50, y: -72.5}
-  m_SizeDelta: {x: 200, y: 30}
+  m_SizeDelta: {x: 300, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &964101165
 MonoBehaviour:

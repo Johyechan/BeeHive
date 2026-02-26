@@ -90,6 +90,12 @@ namespace InGame.MySystem.Room
                     {
                         int count = 0;
 
+                        _exileButton.gameObject.SetActive(true); // 추방 버튼 활성화
+                        _roomManagerChangeButton.gameObject.SetActive(true); // 방장 변경 버튼 활성화
+
+                        _exileButton.interactable = _roomInfo.players.Length > 1; // 방에 있는 플레이어가 자신 밖에 없다면 추방 버튼 클릭 비활성화
+                        _roomManagerChangeButton.interactable = _roomInfo.players.Length > 1; //  방에 있는 플레이어가 자신 밖에 없다면 방장 버튼 클릭 비활성화
+
                         for (int i = 0; i < _roomInfo.players.Length; i++) // 현재 방에 있는 플레이어 순회
                         {
                             if (_roomInfo.players[i].isReady) // 해당 플레이어가 준비가 되어있다면
@@ -102,6 +108,11 @@ namespace InGame.MySystem.Room
                         {
                             NetworkManager.Instance.Socket.Emit("playGameButtonOn");
                         }
+                    }
+                    else // 방장이 아니라면
+                    {
+                        _exileButton.gameObject.SetActive(false); // 추방 버튼 비활성화
+                        _roomManagerChangeButton.gameObject.SetActive(false); // 방장 변경 버튼 비활성화
                     }
 
                     RoomReady.Gate.Completed(); // 방 준비 완료
@@ -166,4 +177,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.02.26

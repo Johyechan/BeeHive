@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using MyUtil.MyEvent;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace InGame.MyInput
     {
         public async Task DrawFunction(Transform deckTransform, Transform playerCardsParent, RectTransform playerUICardsParent)
         {
+            NetworkManager.Instance.Socket.Emit("debug", "드로우 함수 들어옴");
             InGameContext.Current.Data.DrawManager.DrawCard(deckTransform, playerCardsParent, playerUICardsParent); // 카드 드로우 실행
 
             Sequence seq = DOTween.Sequence()

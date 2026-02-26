@@ -59,7 +59,6 @@ namespace MyUtil.MyObjectPool
                     obj.transform.localPosition = makeObjectPoolData.pos; // 객체 위치 할당
                     INetworkIdObject networkIdObject = obj.GetComponent<INetworkIdObject>();
                     networkIdObject.NetworkId = makeObjectPoolData.Id; // 객체 ID 할당
-                    NetworkManager.Instance.Socket.Emit("debug", $"만들어진 객체: {obj}, 객체 ID: {makeObjectPoolData.Id}");
                     ObjectIdManager.Instance.AddObject(networkIdObject.NetworkId, obj); // 객체 Id 정보 저장
 
                     if (makeObjectPoolData.roadPlacePlaneId != -1) // 도로 배치칸이 존재할 경우

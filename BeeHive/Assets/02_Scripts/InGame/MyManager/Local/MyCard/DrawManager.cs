@@ -12,9 +12,7 @@ namespace InGame.MyManager.Local.MyCard
     // 드로우를 관리하는 클래스
     public class DrawManager : MonoBehaviour
     {
-        public Func<bool> CanDraw; // 드로우가 가능한지 확인하는 델리게이트
-
-        public bool IsCanDraw => CanDraw == null ? true : CanDraw.Invoke(); // 만약 Func가 null이라면 - 아직 드로우가 한 번도 진행되지 않은 상태(즉 보유 카드가 0개인 상태 + 시작 상태)이고 그렇기에 드로우가 진행되도 무리가 없기에 true를 반환 이후 null이 아닌 상태일 때는 CanDraw의 값을 반환
+        public bool CanDraw { get; set; } // 드로우 가능 여부 프로퍼티
 
         private CardSetHandle _cardSetHandle; // 카드 세팅 핸들
         public CardSetHandle CardSetHandle { get => _cardSetHandle; } // 위 변수 프로퍼티
@@ -37,7 +35,7 @@ namespace InGame.MyManager.Local.MyCard
             _cardSetHandle = new CardSetHandle(_deck.deckTransform, cardParents); // 카드 세팅 클래스 생성
         }
 
-        public void DrawCard(Transform deckParent, Transform playerCardsParent, Transform playerUICardsParent, bool includeUI = true)
+        public void DrawCard(Transform deckParent, Transform playerCardsParent, RectTransform playerUICardsParent, bool includeUI = true)
         {
             Transform currentDrawCardTrans = deckParent.GetChild(0); // 맨 위에 있는 카드 할당
             CardObject currentDrawCard = currentDrawCardTrans.GetComponent<CardObject>();
@@ -51,7 +49,8 @@ namespace InGame.MyManager.Local.MyCard
 
             if (includeUI) // UI도 생성해야 할 경우
             {
-                GameObject uiCard = ObjectPoolManager.Instance.GetObject(currentDrawCard.CardUIPoolType, playerUICardsParent); // UI 카드를 추가하여 플레이어 UI 카드에 추가
+                GameObject uiCard = ObjectPoolManager.Instance.GetObject(currentDrawCard.CardUIPoolType); // UI 카드를 추가하여 플레이어 UI 카드에 추가
+                uiCard.GetComponent<RectTransform>().SetParent(playerUICardsParent);
                 UICardBase uiCardBase = uiCard.GetComponent<UICardBase>();
                 uiCardBase.UICardVariable.cardObj = currentDrawCard.gameObject; // UI 카드에 현재 카드 객체 할당
 
@@ -69,4 +68,4 @@ namespace InGame.MyManager.Local.MyCard
         }
     }
 }
-// 마지막 작성 일자: 2026.02.19
+// 마지막 작성 일자: 2026.02.26

@@ -49,7 +49,11 @@ namespace InGame.MyInput
         private async Task Draw()
         {
             if (_handlerData.returnHandler.IsReturn()) // 반환을 해야한다면
+            {
                 return; // 반환
+            }
+
+            InGameContext.Current.Data.DrawManager.CanDraw = false; // 드로우 불가 상태로 변경
 
             _ = Delay(); // 연속적인 드로우를 막기 위한 딜레이 시작
 
@@ -77,4 +81,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.26

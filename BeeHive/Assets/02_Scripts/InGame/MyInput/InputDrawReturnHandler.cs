@@ -27,22 +27,26 @@ namespace InGame.MyInput
 
             if (InGameContext.Current.Data.TurnManager.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 내 팀의 턴이 아니라면
             {
+                UIManager.Instance.WarningUIMake("당신의 턴이 아닙니다.");
                 return true; // 반환
             }
 
             if(_deck.transform.childCount <= 0) // 덱에 더 이상 카드가 없다면
             {
                 InGameContext.Current.Data.DeckManager.IsEmpty = true;
+                UIManager.Instance.WarningUIMake("더 이상 드로우를 할 수 없습니다.\n(덱에 더 이상 카드가 없습니다)");
                 return true; // 반환
             }
 
-            if (!InGameContext.Current.Data.DrawManager.IsCanDraw) // 만약 Draw가 불가능하다면
+            if (!InGameContext.Current.Data.DrawManager.CanDraw) // 만약 Draw가 불가능하다면
             {
+                UIManager.Instance.WarningUIMake("더 이상 드로우를 할 수 없습니다.\n(한 턴에 한 장 드로우 가능)");
                 return true; // 반환
             }
 
             if (!WalletEvent.OnUseGoldBar.Invoke(2)) // 금괴 2개를 사용할 수 없다면
             {
+                UIManager.Instance.WarningUIMake("더 이상 드로우를 할 수 없습니다.\n(금괴가 부족합니다 - 필요 비용: 금괴 2개)");
                 return true; // 반환
             }
 
@@ -50,4 +54,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.02.26
