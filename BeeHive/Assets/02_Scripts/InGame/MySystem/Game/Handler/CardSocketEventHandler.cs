@@ -22,7 +22,6 @@ namespace InGame.MySystem.Game.Handler
                 string json = data.GetValue().ToString(); // 문자열로 data 받기
                 SetCardInfo setCardInfo = JsonUtility.FromJson<SetCardInfo>(json); // 카드 세팅에 필요한 값을 가지는 구조체로 값 받기
 
-
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     _ = InGameContext.Current.Data.DrawManager.CardSetHandle.Setting(setCardInfo.targetTeam, setCardInfo.cardCount); // Task 반환 없이 바로 실행

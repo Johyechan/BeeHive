@@ -44,6 +44,7 @@ namespace MyUtil.MyObjectPool
                     if (makeObjectPoolData.parentName != "") // 부모 객체가 있을 경우
                     {
                         Transform parent = GameObject.Find(makeObjectPoolData.parentName).transform;
+                        NetworkManager.Instance.Socket.Emit("debug", $"객체 생성할 때 부모:{parent}");
                         obj = GetObject((ObjectPoolType)makeObjectPoolData.poolType, parent); // 객체 생성
                     }
                     else // 부모 객체가 없을 경우
@@ -132,7 +133,7 @@ namespace MyUtil.MyObjectPool
             if (_pool[type].Count > 0) // 풀링 타입의 풀에 객체가 존재한다면
             {
                 GameObject obj = _pool[type].Dequeue(); // 풀링 타입의 풀에 있는 객체를 가져온다.
-                obj.transform.SetParent(parent); // 풀에서 꺼낸 객체의 부모를 할당
+                obj.transform.SetParent(parent, false); // 풀에서 꺼낸 객체의 부모를 할당
                 obj.SetActive(true); // 풀에서 꺼낸 객체 활성화
 
                 return obj; // Task 완료 시 반환되는 GameObject 반환
@@ -141,7 +142,7 @@ namespace MyUtil.MyObjectPool
             {
                 GameObject newObj = null;
                 newObj = CreateObject(type); // 새롭게 풀링 타입에 맞는 객체 생성
-                newObj.transform.SetParent(parent); // 새롭게 생성한 객체의 부모를 할당
+                newObj.transform.SetParent(parent, false); // 새롭게 생성한 객체의 부모를 할당
                 newObj.SetActive(true); // 새롭게 생성한 객체 활성화
 
                 return newObj; // Task 완료 시 반환되는 GameObject 반환
@@ -158,8 +159,9 @@ namespace MyUtil.MyObjectPool
             }
 
             returnObj.transform.SetParent(transform); // 반환하는 객체의 부모를 풀 매니저로 지정
-            returnObj.transform.position = Vector3.zero; // 반환하는 객체의 위치 초기화
-            returnObj.transform.rotation = Quaternion.identity; // 반환하는 객체의 회전 초기화
+            returnObj.transform.localPosition = Vector3.zero; // 반환하는 객체의 위치 초기화
+            returnObj.transform.localRotation = Quaternion.identity; // 반환하는 객체의 회전 초기화
+            returnObj.transform.localScale = Vector3.one; // 크기 초기화
 
             returnObj.SetActive(false); // 반환하는 객체 비활성화
 
@@ -167,4 +169,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.02.19
+// 마지막 작성 일자: 2026.02.27
