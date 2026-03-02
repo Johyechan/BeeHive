@@ -96,7 +96,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c1947870806696d4882d920bbb0f7692, type: 2}
+  - {fileID: 2100000, guid: ccb64ab5655b09f46a9f13f15ddf715d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -167,8 +167,8 @@ MonoBehaviour:
   _pieceData:
     materialData:
       renderer: {fileID: 1681334492474328077}
-      originMaterial: {fileID: 2100000, guid: c1947870806696d4882d920bbb0f7692, type: 2}
-      emissionMaterial: {fileID: 2100000, guid: 0e24f797950869f4db16087cee98244c, type: 2}
+      originMaterial: {fileID: 2100000, guid: ccb64ab5655b09f46a9f13f15ddf715d, type: 2}
+      emissionMaterial: {fileID: 2100000, guid: eb91b779ad3adeb48bf45feeb12f8077, type: 2}
     teamType: 1
     currentObjectType: 4
     animationDuration: 0.25
