@@ -28,17 +28,17 @@ namespace InGame.MySystem
                 switch (type)
                 {
                     case TeamType.Team1:
-                        ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, road);
+                        ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, road, true);
                         break;
                     case TeamType.Team2:
-                        ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, road);
+                        ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, road, true);
                         break;
                     case TeamType.Team3:
-                        ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, road);
+                        ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, road, true);
                         break;
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2025.09.08
+// 마지막 작성 일자: 2026.03.03

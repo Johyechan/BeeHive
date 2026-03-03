@@ -1,3 +1,4 @@
+using DG.Tweening;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
@@ -6,6 +7,7 @@ using InGame.MyObject.Interface;
 using InGame.MyObject.Piece;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MyUtil.MyObjectPool
 {
@@ -14,6 +16,8 @@ namespace MyUtil.MyObjectPool
     public class ObjectPoolManager : MonoSingleton<ObjectPoolManager>
     {
         [SerializeField] private List<ObjectPoolData> _poolDataList; // 인스펙터에서 풀링할 데이터를 담는 리스트 변수
+
+        [SerializeField] private float _animationDuration; // 애니메이션 지속 시간
 
         private Dictionary<ObjectPoolType, ObjectPoolData> _poolDataMap = new(); // 풀링 맵 - 타입에 맞는 풀링 데이트를 할당
         private Dictionary<ObjectPoolType, Queue<GameObject>> _pool = new(); // 실제 풀 - 여기에 풀링 객체를 풀링 타입에 맞게 추가
@@ -44,7 +48,7 @@ namespace MyUtil.MyObjectPool
                     if (makeObjectPoolData.parentName != "") // 부모 객체가 있을 경우
                     {
                         Transform parent = GameObject.Find(makeObjectPoolData.parentName).transform;
-                        NetworkManager.Instance.Socket.Emit("debug", $"객체 생성할 때 부모:{parent}");
+
                         obj = GetObject((ObjectPoolType)makeObjectPoolData.poolType, parent); // 객체 생성
                     }
                     else // 부모 객체가 없을 경우
@@ -58,6 +62,12 @@ namespace MyUtil.MyObjectPool
                     }
 
                     obj.transform.localPosition = makeObjectPoolData.pos; // 객체 위치 할당
+
+                    if(makeObjectPoolData.needAnimation) // 애니메이션이 필요하다면
+                    {
+                        Animation(obj, true, true);
+                    }
+
                     INetworkIdObject networkIdObject = obj.GetComponent<INetworkIdObject>();
                     networkIdObject.NetworkId = makeObjectPoolData.Id; // 객체 ID 할당
                     ObjectIdManager.Instance.AddObject(networkIdObject.NetworkId, obj); // 객체 Id 정보 저장
@@ -107,7 +117,7 @@ namespace MyUtil.MyObjectPool
         }
 
         // 네트워크 ID가 필요한 객체를 만드는 함수
-        public void MakeObject(ObjectPoolType type, Vector3 pos, Transform parent, int roadPlacePlaneId = -1, float angle = 0)
+        public void MakeObject(ObjectPoolType type, Vector3 pos, Transform parent, bool needAnimation = false, int roadPlacePlaneId = -1, float angle = 0)
         {
             if (_poolDataMap[type].needNetworkID) // 네트워크 ID가 필요한 객체라면
             {
@@ -117,6 +127,7 @@ namespace MyUtil.MyObjectPool
                     parentName = parent.name, // 객체 부모명 
                     poolType = (int)type, // 풀 타입
                     roadPlacePlaneId = roadPlacePlaneId,
+                    needAnimation = needAnimation,
                     angle = angle,
                     pos = pos // 객체 위치
                 };
@@ -149,15 +160,32 @@ namespace MyUtil.MyObjectPool
             }
         }
 
-        // 외부에서 사용했던 객체를 다시 풀에 넣을 때 부르는 함수(매개 변수로 풀링 타입, 반환할 객체를 받는다)
-        public void ReturnObject(ObjectPoolType type, GameObject returnObj)
+        // 외부에서 사용했던 객체를 다시 풀에 넣을 때 부르는 함수(매개 변수로 풀링 타입, 반환할 객체를 받는다, 객체인지 UI인지 여부, 애니메이션 필요 여부)
+        public void ReturnObject(ObjectPoolType type, GameObject returnObj, bool needAnimation = false, bool isObject = true)
         {
-            if(_poolDataMap[type].needNetworkID) // 네트워크 ID가 필요한 객체라면
+            if (_poolDataMap[type].needNetworkID) // 네트워크 ID가 필요한 객체라면
             {
                 INetworkIdObject networkIdObject = returnObj.GetComponent<INetworkIdObject>();
                 ObjectIdManager.Instance.RemoveObject(networkIdObject.NetworkId); // id를 가진 객체를 목록에서 제거
             }
 
+            if (needAnimation) // 애니메이션이 필요하다면
+            {
+                Animation(returnObj, isObject, false)
+                    .OnComplete(() =>
+                    {
+                        ResetObject(type, returnObj);
+                    });
+            }
+            else // 애니메이션이 필요 없다면
+            {
+                ResetObject(type, returnObj);
+            }
+        }
+
+        // 풀링 대상 초기화 함수
+        private void ResetObject(ObjectPoolType type, GameObject returnObj)
+        {
             returnObj.transform.SetParent(transform); // 반환하는 객체의 부모를 풀 매니저로 지정
             returnObj.transform.localPosition = Vector3.zero; // 반환하는 객체의 위치 초기화
             returnObj.transform.localRotation = Quaternion.identity; // 반환하는 객체의 회전 초기화
@@ -167,6 +195,27 @@ namespace MyUtil.MyObjectPool
 
             _pool[type].Enqueue(returnObj); // 풀링 타입의 풀에 객체 추가
         }
+
+        public Tween Animation(GameObject obj, bool isObject, bool isCreate)
+        {
+            float startValue = isCreate ? 1f : 0f; // 생성일 경우 1 할당 아닐 경우 0 할당
+            float endValue = isObject ? isCreate ? 0f : 1f : isCreate ? 1f : 0f; // 객체이면서 생성일 경우 0 할당 객체이면서 생성이 아닐 경우 1 할당
+                                                                                // UI이면서 생성일 경우 1 할당 UI이면서 생성이 아닐 경우 0 할당
+
+            if (isObject) // 객체일 때
+            {
+                Renderer renderer = obj.GetComponentInChildren<Renderer>(); // 객체 랜더 탐색
+                Material mat = new Material(renderer.sharedMaterial); // 공유 머티리얼로 새 머티리얼 생성
+                renderer.material = mat; // 객체 랜더에 새 머티리얼 할당
+                mat.SetFloat("_Cutoff", startValue); // 객체 보임 상태
+                return mat.DOFloat(endValue, "_Cutoff", _animationDuration); // _animationDuration초 동안 페이드 아웃;
+            }
+            else // UI 일 때
+            {
+                CanvasGroup canvasGroup = obj.GetComponent<CanvasGroup>(); // 캔버스 그룹 가져오기
+                return canvasGroup.DOFade(endValue, _animationDuration); // 이미지 페이드 아웃
+            }
+        }
     }
 }
-// 마지막 작성 일자: 2026.02.27
+// 마지막 작성 일자: 2026.03.03

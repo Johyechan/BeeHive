@@ -68,4 +68,4 @@ namespace InGame.MyManager.Local.MyCard
         }
     }
 }
-// 마지막 작성 일자: 2026.02.26
+// 마지막 작성 일자: 2026.03.03

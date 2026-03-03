@@ -41,6 +41,7 @@ namespace InGame.MyUI
                         GameObject uiCard = ObjectPoolManager.Instance.GetObject((ObjectPoolType)usedCardInfo.usedCardType); // 사용된 카드 생성
                         uiCard.GetComponent<RectTransform>().SetParent(_ImageParent); // 부모 할당
                         uiCard.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                        ObjectPoolManager.Instance.Animation(uiCard, false, true);
 
                         _canvasGroup.gameObject.SetActive(true); // 활성화
 

@@ -3,6 +3,7 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyUI.Card;
 using MyUtil.MyEvent;
+using MyUtil.MyObjectPool;
 using UnityEngine;
 
 namespace InGame.MyUI
@@ -53,6 +54,7 @@ namespace InGame.MyUI
                 uiCardRectTransform.DOAnchorPos(new Vector3(0, _cardBaseYPos, 0), 0.1f, true); // 기존 Y축 위치로 이동 + snapping을 활성화하여 정수값으로 떨어지도록 설정
                 NetworkManager.Instance.Socket.Emit("debug", "카드 한 장일 때 - 위치 조정 끝");
                 UICardInit(uiCardRectTransform, _cardBaseYPos, 0);
+                ObjectPoolManager.Instance.Animation(uiCardRectTransform.gameObject, false, true);
                 return;
             }
                 
@@ -88,4 +90,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.02.26
+// 마지막 작성 일자: 2026.03.03

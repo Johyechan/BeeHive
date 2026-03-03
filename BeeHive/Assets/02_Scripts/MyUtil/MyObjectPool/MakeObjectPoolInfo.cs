@@ -12,8 +12,9 @@ namespace MyUtil.MyObjectPool
         public string parentName; // 부모 객체 명
         public int poolType; // 풀 타입
         public int roadPlacePlaneId; // 도로 배치 칸 ID
+        public bool needAnimation; // 애니메이션 필요 여부
         public float angle; // 각도
         public Vector3 pos; // 배치할 위치
     }
 }
-// 마지막 작성 일자: 2026.02.13
+// 마지막 작성 일자: 2026.03.03

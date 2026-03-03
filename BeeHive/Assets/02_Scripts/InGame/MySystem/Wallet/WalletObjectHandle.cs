@@ -103,6 +103,7 @@ namespace InGame.MySystem
                 int index = childCount + i;
                 GameObject obj = ObjectPoolManager.Instance.GetObject(type, parent); // 금화 또는 금괴 가져오기
                 obj.transform.localPosition = new Vector3(index % _zValueChangeCount * interval, 0, childCount / _zValueChangeCount * _zInterval); // 금 개수가 z축 값이 변경되는 개수 초과이면 z축으로 _zInterval만큼 올라가고 x축은 초기화 돼서 0부터 다시 interval 간격으로 배치
+                ObjectPoolManager.Instance.Animation(obj, true, true); // 애니메이션 실행
             }
         }
 
@@ -111,9 +112,9 @@ namespace InGame.MySystem
             for (int i = childCount - 1; i >= realCount; i--) // 끝부터 실제 개수까지 반복
             {
                 GameObject obj = parent.GetChild(i).gameObject; // 금화 객체 저장
-                ObjectPoolManager.Instance.ReturnObject(type, obj); // 금화 객체 오브젝트 풀에 다시 반환
+                ObjectPoolManager.Instance.ReturnObject(type, obj, true); // 금화 객체 오브젝트 풀에 다시 반환
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.25
+// 마지막 작성 일자: 2026.03.03

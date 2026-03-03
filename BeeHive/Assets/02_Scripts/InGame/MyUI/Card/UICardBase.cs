@@ -92,7 +92,7 @@ namespace InGame.MyUI.Card
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     _uiCardVariable.usedCardDeck.AddCardInToUsedDeck(_uiCardVariable.cardObj.transform); // 사용한 카드를 추가
-                    ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject);
+                    ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject, true, false);
                 });
 
                 return true;
@@ -124,4 +124,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.03.03

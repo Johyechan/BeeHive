@@ -116,13 +116,13 @@ namespace InGame.MySystem.Game.Handler
                     switch (targetPieceBase.CurrentTeamType)
                     {
                         case TeamType.Team1:
-                            ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, targetRoadObj);
+                            ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, targetRoadObj, true);
                             break;
                         case TeamType.Team2:
-                            ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, targetRoadObj);
+                            ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, targetRoadObj, true);
                             break;
                         case TeamType.Team3:
-                            ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, targetRoadObj);
+                            ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, targetRoadObj, true);
                             break;
                     }
                 });
@@ -139,4 +139,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.03

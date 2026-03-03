@@ -81,17 +81,17 @@ namespace InGame.MyObject.Piece.ObjectPieces
             switch(roadPlacePlaneObject.PlacedPiece.CurrentTeamType) // 기존 도로의 팀 타입
             {
                 case TeamType.Team1:
-                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, roadPlacePlaneObject.PlacedPiece.gameObject); // 기존 도로 객체 반환
+                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, roadPlacePlaneObject.PlacedPiece.gameObject, true); // 기존 도로 객체 반환
                     break;
                 case TeamType.Team2:
-                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, roadPlacePlaneObject.PlacedPiece.gameObject); // 기존 도로 객체 반환
+                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, roadPlacePlaneObject.PlacedPiece.gameObject, true); // 기존 도로 객체 반환
                     break;
                 case TeamType.Team3:
-                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, roadPlacePlaneObject.PlacedPiece.gameObject); // 기존 도로 객체 반환
+                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, roadPlacePlaneObject.PlacedPiece.gameObject, true); // 기존 도로 객체 반환
                     break;
             }
 
-            ObjectPoolManager.Instance.MakeObject(type, roadPlacePlaneObject.transform.localPosition, roadPlacePlaneObject.transform.parent, roadPlacePlaneObject.NetworkId, targetAngle);
+            ObjectPoolManager.Instance.MakeObject(type, roadPlacePlaneObject.transform.localPosition, roadPlacePlaneObject.transform.parent, true, roadPlacePlaneObject.NetworkId, targetAngle);
         }
 
         public override void ObjectClicked()
@@ -100,4 +100,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.02.13
+// 마지막 작성 일자: 2026.03.03

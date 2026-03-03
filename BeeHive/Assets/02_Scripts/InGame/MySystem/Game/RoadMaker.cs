@@ -54,8 +54,8 @@ namespace InGame.MySystem
                     break;
             }
 
-            ObjectPoolManager.Instance.MakeObject(objectPoolType, pos, parent, -1, _angle); // 도로 생성
+            ObjectPoolManager.Instance.MakeObject(objectPoolType, pos, parent, true, -1, _angle); // 도로 생성
         }
     }
 }
-// 마지막 작성 일자: 2026.02.21
+// 마지막 작성 일자: 2026.03.03

@@ -17,4 +17,4 @@ namespace MyUtil.MyObjectPool
         public GameObject poolObject; // 풀링될 객체
     }
 }
-// 2026.02.13
+// 마지막 작성 일자: 2026.02.13

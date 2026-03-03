@@ -46,7 +46,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
             }
 
             float angle = transform.rotation.eulerAngles.y;
-            ObjectPoolManager.Instance.MakeObject(poolType, transform.localPosition, transform.parent, PieceVariable.currentRoadPlacePlane.NetworkId, angle);
+            ObjectPoolManager.Instance.MakeObject(poolType, transform.localPosition, transform.parent, true, PieceVariable.currentRoadPlacePlane.NetworkId, angle);
 
             ChangeRoadInfo changeRoadInfo = new ChangeRoadInfo()
             {
@@ -71,16 +71,16 @@ namespace InGame.MyObject.Piece.ObjectPieces
             switch (CurrentTeamType)
             {
                 case TeamType.Team1:
-                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, gameObject);
+                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, gameObject, true);
                     break;
                 case TeamType.Team2:
-                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, gameObject);
+                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, gameObject, true);
                     break;
                 case TeamType.Team3:
-                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, gameObject);
+                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, gameObject, true);
                     break;
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.18
+// 마지막 작성 일자: 2026.03.03
