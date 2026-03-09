@@ -25,7 +25,8 @@ namespace InGame.MySystem.Loading
 
             await LocalManagerReady.Gate.WaitAsync(); // 씬 내 매니저 세팅 대기
 
-            await TeamManager.Instance.TeamSetTcs.Task; // 팀이 정해질 때까지 대기
+            if(!SceneMgr.Instance.IsTutorial) // 튜토리얼 씬이 아닐 때
+                await TeamManager.Instance.TeamSetTcs.Task; // 팀이 정해질 때까지 대기
 
             TeamReady.Gate.Completed(); // 팀 할당 완료
 
@@ -40,7 +41,7 @@ namespace InGame.MySystem.Loading
 
             await _loadingCanvasGroup.DOFade(0, _animationDuration).OnComplete(() => _loadingCanvasGroup.gameObject.SetActive(false)).AsyncWaitForCompletion(); // 로딩 ui 닫기
 
-            if(TeamManager.Instance.CurrentTeamType == TeamType.Team1) // 팀 1이 턴 실행 요청(중복 방지)
+            if(TeamManager.Instance.CurrentTeamType == TeamType.Team1 && !SceneMgr.Instance.IsTutorial) // 팀 1이 턴 실행 요청(중복 방지) + 튜토리얼 씬이 아닐 경우
             {
                 NetworkManager.Instance.Socket.Emit("turnStart", SceneMgr.Instance.CurrentRoomID);
             }
@@ -49,4 +50,4 @@ namespace InGame.MySystem.Loading
         }
     }
 }
-// 마지막 작성 일자: 2026.02.12
+// 마지막 작성 일자: 2026.03.09

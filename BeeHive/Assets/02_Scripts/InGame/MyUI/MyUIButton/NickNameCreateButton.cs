@@ -46,6 +46,7 @@ namespace InGame.MyUI.MyUIButton
                     {
                         NetworkManager.Instance.CurrentClientName = _currentNickName; // 현재 닉네임 할당
                         SceneManager.LoadScene(_tutorialSceneNumber); // 튜토리얼 씬으로 이동
+                        SceneMgr.Instance.IsTutorial = true; // 현재 씬이 튜토리얼 씬이라고 할당
                     }
                 });
             });
@@ -84,4 +85,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.02.25
+// 마지막 작성 일자: 2026.03.09
