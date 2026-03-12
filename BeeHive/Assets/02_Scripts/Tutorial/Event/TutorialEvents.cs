@@ -1,0 +1,13 @@
+using System;
+using UnityEngine;
+
+namespace Tutorial.Event
+{
+    // 작성자: 조혜찬
+    // 튜토리얼에 필요한 이벤트들을 가지는 클래스
+    public static class TutorialEvents
+    {
+        public static Action OnIntroEnd; // 인트로 종료 이벤트
+    }
+}
+// 마지막 작성 일자: 2026.03.12

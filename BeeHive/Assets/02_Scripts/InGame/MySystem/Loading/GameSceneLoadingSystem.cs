@@ -4,6 +4,7 @@ using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyManager.Team;
+using MyUtil.GameMode;
 using UnityEngine;
 
 namespace InGame.MySystem.Loading
@@ -18,6 +19,7 @@ namespace InGame.MySystem.Loading
 
         private async void Awake()
         {
+            GameModeManager.Instance.SetMode(new MultiplayMode()); // 현재 게임 모드를 멀티 플레이 모드로 할당
             UIManager.Instance.CanInteractionUI = true; // UI 상호작용 가능 상태로 초기화
             TeamManager.Instance.FirstTurn = true; // 첫 턴 상태로 할당
 
@@ -50,4 +52,4 @@ namespace InGame.MySystem.Loading
         }
     }
 }
-// 마지막 작성 일자: 2026.03.09
+// 마지막 작성 일자: 2026.03.12
