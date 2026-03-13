@@ -8,6 +8,7 @@ Shader "UI/StencilHole"
         _HoleRadius ("Hole Radius", Float) = 0.45
         _OutlineWidth ("Outline Width", Float) = 0.02
         _HoleCenter("Hole Center", Vector) = (0.5, 0.5, 0, 0)
+        _HoleScale ("Hole Scale (X,Y)", Vector) = (1,1,0,0)
     }
 
     SubShader
@@ -44,6 +45,7 @@ Shader "UI/StencilHole"
             float _HoleRadius;
             float _OutlineWidth;
             float4 _HoleCenter;
+            float4 _HoleScale;
 
             struct appdata
             {
@@ -69,8 +71,9 @@ Shader "UI/StencilHole"
             {
                 float2 center = _HoleCenter.xy; // 중복 제거
                 float2 aspect = float2(_ScreenParams.x / _ScreenParams.y, 1.0);
-                float2 uvCorrected = (i.uv - center) * aspect;
-                float dist = length(uvCorrected);
+                float2 uvOffset = i.uv - center;
+                float2 ellipse = uvOffset * aspect / _HoleScale.xy;
+                float dist = length(ellipse);
             
                 half4 color;
             

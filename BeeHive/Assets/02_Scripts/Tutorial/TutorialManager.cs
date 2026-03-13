@@ -1,3 +1,4 @@
+using DG.Tweening;
 using MyUtil.GameMode;
 using MyUtil.Interface;
 using Tutorial.Event;
@@ -26,7 +27,7 @@ namespace Tutorial
 
             GameModeManager.Instance.SetMode(new TutorialMode()); // 현재 게임 모드를 튜토리얼 모드로 할당
             
-            _eventHandlerVariables = new TutorialEventHandlerVariables(_tutorialManagerData.tutorialOverlay, _tutorialManagerData.animationDuration);
+            _eventHandlerVariables = new TutorialEventHandlerVariables();
 
             _fsmVariables = new TutorialFSMVariables();
             _fsmVariables.Init(); // 튜토리얼 fsm 관련 변수 초기화
@@ -74,6 +75,50 @@ namespace Tutorial
             return null; // 아예 튜토리얼 상태 맵에 없다면 null 반환
         }
 
+        // 튜토리얼 UI 패널 세팅 함수
+        public void SetTutorialPanel(bool showDimmer, string guideStr = "", float holeRadius = 0, float outlineWidth = 0, Vector4 holeCenter = default, Vector4 holeScale = default)
+        {
+            if(showDimmer)
+            {
+                _tutorialManagerData.guideTxt.text = guideStr;
+
+                _tutorialManagerData.dimmerMat.SetFloat("_HoleRadius", holeRadius);
+                _tutorialManagerData.dimmerMat.SetFloat("_OutlineWidth", outlineWidth);
+                _tutorialManagerData.dimmerMat.SetVector("_HoleCenter", holeCenter == default ? Vector4.zero : holeCenter);
+                _tutorialManagerData.dimmerMat.SetVector("_HoleScale", holeScale == default ? Vector4.zero : holeScale);
+
+                if(_tutorialManagerData.tutorialBlockPanel.gameObject.activeSelf) // 클릭을 완전히 막는 패널이 활성화 상태라면
+                {
+                    // 클릭을 완전히 막는 패널 비활성화
+                    _tutorialManagerData.tutorialBlockPanel.DOFade(0, _tutorialManagerData.animationDuration);
+                    _tutorialManagerData.tutorialBlockPanel.gameObject.SetActive(false);
+                }
+
+                if(!_tutorialManagerData.tutorialDimmer.gameObject.activeSelf) // 클릭 가능한 위치를 정해주는 패널이 비활성화 상태라면
+                {
+                    // 클릭 가능한 위치를 정해주는 패널 활성화
+                    _tutorialManagerData.tutorialDimmer.gameObject.SetActive(true);
+                    _tutorialManagerData.tutorialDimmer.DOFade(1, _tutorialManagerData.animationDuration);
+                }
+            }
+            else
+            {
+                if(_tutorialManagerData.tutorialDimmer.gameObject.activeSelf) // 클릭 가능한 위치를 정해주는 패널이 활성화 상태라면
+                {
+                    // 클릭 가능한 위치를 정해주는 패널 비활성화
+                    _tutorialManagerData.tutorialDimmer.DOFade(0, _tutorialManagerData.animationDuration);
+                    _tutorialManagerData.tutorialDimmer.gameObject.SetActive(false);
+                }
+                
+                if(!_tutorialManagerData.tutorialBlockPanel.gameObject.activeSelf) // 클릭을 완전히 막는 패널이 비활성화 상태라면
+                {
+                    // 클릭을 완전히 막는 패널 활성화
+                    _tutorialManagerData.tutorialBlockPanel.gameObject.SetActive(true);
+                    _tutorialManagerData.tutorialBlockPanel.DOFade(1, _tutorialManagerData.animationDuration);
+                }
+            }
+        }
+
         // 튜토리얼 상태 변경 함수(변경 시킬 상태)
         public void ChangeTutorialState(TutorialState changeState)
         {
@@ -82,4 +127,4 @@ namespace Tutorial
         }
     }
 }
-// 마지막 작성 일자: 2026.03.12
+// 마지막 작성 일자: 2026.03.13
