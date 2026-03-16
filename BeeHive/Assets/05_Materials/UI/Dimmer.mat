@@ -100,7 +100,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HoleRadius: 0.07
+    - _HoleRadius: 0.18
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _OutlinePulseAmount: 0.01
@@ -123,8 +123,8 @@ Material:
     - _Color: {r: 0, g: 0, b: 0, a: 0.7490196}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GlowColor: {r: 1, g: 1, b: 1, a: 0.7254902}
-    - _HoleCenter: {r: 0.565, g: 0.958, b: 0, a: 0}
-    - _HoleScale: {r: 1.2, g: 0.3, b: 0, a: 0}
+    - _HoleCenter: {r: 0.92, g: 0.095, b: 0, a: 0}
+    - _HoleScale: {r: 0.66, g: 0.4, b: 0, a: 0}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

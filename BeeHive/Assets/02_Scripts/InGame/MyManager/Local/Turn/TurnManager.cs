@@ -5,8 +5,10 @@ using InGame.MyManager.Turn.Handler;
 using InGame.MySystem.Game;
 using InGame.MyUI.Turn;
 using MyUtil;
+using MyUtil.GameMode;
 using System;
 using System.Threading.Tasks;
+using Tutorial.Event;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -159,7 +161,14 @@ namespace InGame.MyManager.Local.Turn
                 PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
             }
 
-            AutoTurnCompleted(); // 턴 완료
+            if(GameModeManager.Instance.CurrentGameMode.UseServer()) // 현재 게임 모드가 서버를 사용하는 멀티 플레이라면
+            {
+                AutoTurnCompleted(); // 턴 완료
+            }
+            else // 현제 게임 모드가 서버를 사용하지 않는다면
+            {
+                TutorialEvents.OnTurnEnd?.Invoke(); // 튜토리얼 턴 종료 이벤트 호출
+            }
         }
 
         // 서버에 턴 완료 신호를 보내는 함수
@@ -188,4 +197,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.02.26
+// 마지막 작성 일자: 2026.03.16

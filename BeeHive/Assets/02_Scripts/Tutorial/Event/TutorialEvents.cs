@@ -1,3 +1,4 @@
+using InGame.MyEnum;
 using System;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Tutorial.Event
     public static class TutorialEvents
     {
         public static Action OnIntroEnd; // 인트로 종료 이벤트
+        public static Action OnTurnEnd; // 턴 종료 이벤트
     }
 }
-// 마지막 작성 일자: 2026.03.12
+// 마지막 작성 일자: 2026.03.16

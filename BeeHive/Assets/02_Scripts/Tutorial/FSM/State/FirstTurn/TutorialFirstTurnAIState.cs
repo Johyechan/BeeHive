@@ -1,3 +1,5 @@
+using InGame.MyEnum;
+using InGame.MyManager.Local;
 using MyUtil.Interface;
 using UnityEngine;
 
@@ -9,17 +11,17 @@ namespace Tutorial.FSM.State.First
     {
         public void Enter()
         {
-            throw new System.NotImplementedException();
+
         }
 
         public void Exit()
         {
-            throw new System.NotImplementedException();
+
         }
 
         public void Update()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

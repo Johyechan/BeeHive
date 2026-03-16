@@ -21,6 +21,10 @@ namespace Tutorial
 
         [SerializeField] private TutorialManagerData _tutorialManagerData; // Inspector 창에서 할당받을 변수를 가지는 구조체
 
+        public bool TurnEnd { get; set; } // 턴 종료 확인 프로퍼티
+
+        private float _nextInputTime; // 다음 클릭 가능 시간
+
         private void Awake()
         {
             Instance = this; // 자기 자신 할당
@@ -125,6 +129,14 @@ namespace Tutorial
             _fsmVariables.currentState = changeState; // 현재 튜토리얼 상태를 변경 시킬 상태로 변경
             _fsmVariables.machine.ChangeState(GetState(changeState)); // 상태 변경
         }
+
+        // 인풋 딜레이 함수
+        public bool IsInputDelayOver()
+        {
+            float currentInputTime = _nextInputTime;
+            _nextInputTime = Time.time + _tutorialManagerData.inputDelay; // 다음 클릭 가능 시간을 현재 시간 + 딜레이로 할당
+            return Input.GetKeyDown(KeyCode.Return) && Time.time >= currentInputTime; // 엔터 키 클릭 + 딜레이가 지나야 true 반환
+        }
     }
 }
-// 마지막 작성 일자: 2026.03.13
+// 마지막 작성 일자: 2026.03.16

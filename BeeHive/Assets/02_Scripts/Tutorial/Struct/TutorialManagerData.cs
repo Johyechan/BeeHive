@@ -17,6 +17,7 @@ namespace Tutorial.Struct
         public Material dimmerMat; // 튜토리얼 UI (클릭 가능한 대상을 알려주는 UI) 머티리얼
 
         public float animationDuration; // 애니메이션 지속시간
+        public float inputDelay; // 인풋 딜레이
     }
 }
-// 마지막 작성 일자: 2026.03.13
+// 마지막 작성 일자: 2026.03.16
