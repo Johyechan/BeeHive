@@ -21,6 +21,8 @@ namespace Tutorial
 
         [SerializeField] private TutorialManagerData _tutorialManagerData; // Inspector 창에서 할당받을 변수를 가지는 구조체
 
+        public TutorialState CurrentTutorialState { get => _fsmVariables.currentState; }
+
         public bool TurnEnd { get; set; } // 턴 종료 확인 프로퍼티
 
         private float _nextInputTime; // 다음 클릭 가능 시간
@@ -80,11 +82,15 @@ namespace Tutorial
         }
 
         // 튜토리얼 UI 패널 세팅 함수
-        public void SetTutorialPanel(bool showDimmer, string guideStr = "", float holeRadius = 0, float outlineWidth = 0, Vector4 holeCenter = default, Vector4 holeScale = default)
+        public void SetTutorialPanel(bool showDimmer, string guideStr = "", string helpStr = "", float holeRadius = 0, float outlineWidth = 0, Vector4 holeCenter = default, Vector4 holeScale = default, Vector2 guideTxtPos = default)
         {
             if(showDimmer)
             {
                 _tutorialManagerData.guideTxt.text = guideStr;
+                _tutorialManagerData.helpTxt.text = helpStr;
+
+                _tutorialManagerData.guideTxt.GetComponent<RectTransform>().anchoredPosition = guideTxtPos == default ? Vector2.zero : guideTxtPos;
+                _tutorialManagerData.helpTxt.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, guideTxtPos.y - 75f);
 
                 _tutorialManagerData.dimmerMat.SetFloat("_HoleRadius", holeRadius);
                 _tutorialManagerData.dimmerMat.SetFloat("_OutlineWidth", outlineWidth);
@@ -139,4 +145,4 @@ namespace Tutorial
         }
     }
 }
-// 마지막 작성 일자: 2026.03.16
+// 마지막 작성 일자: 2026.03.17

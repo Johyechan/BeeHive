@@ -8,6 +8,8 @@ namespace MyUtil.GameMode
     public class TutorialMode : IGameMode
     {
         public bool UseServer() => false; // 서버 사용 안함
+
+        public bool IsTutorial() => true; // 튜토리얼
     }
 }
-// 마지막 작성 일자: 2026.03.12
+// 마지막 작성 일자: 2026.03.17

@@ -1,12 +1,11 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPlacePlane;
-using MyUtil;
+using MyUtil.GameMode;
 using System;
-using System.Threading.Tasks;
+using Tutorial;
+using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -48,6 +47,19 @@ namespace InGame.MyUI.MyUIButton
                     }
                 }
 
+                if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 현재 게임 모드가 튜토리얼일 경우
+                {
+                    switch(_canPlaceType)
+                    {
+                        case ObjectType.Miner:
+                            TutorialManager.Instance.SetTutorialPanel(true, "광부 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                            break;
+                        case ObjectType.Soldier:
+                            TutorialManager.Instance.SetTutorialPanel(true, "보병 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                            break;
+                    }
+                }
+
                 if (HighLightEvents.SelectedPlacementType != _canPlaceType) // 만약 현재 배치 가능한 타입이 다르다면
                 {
                     HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
@@ -55,6 +67,7 @@ namespace InGame.MyUI.MyUIButton
                     _isHighLightOn = true; // 현재 하이라이트가 켜져있다고 할당
                     HighLightEvents.SelectedPlacementType = _canPlaceType; // 현재 배치 가능한 타입을 변경
                 }
+
             }
             else // 하이라이트가 켜져있을 때
             {
@@ -68,4 +81,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.17

@@ -20,7 +20,7 @@ namespace Tutorial.FSM.State.First
 
         public void Exit()
         {
-            
+            _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 AI 턴)으로 변경
         }
 
         public void Update()
@@ -36,17 +36,11 @@ namespace Tutorial.FSM.State.First
                     switch (_count) // 카운팅 된 개수가
                     {
                         case 1:
-                            TutorialManager.Instance.SetTutorialPanel(true, "금괴도 2개 생성됩니다.", 0.16f, 0.008f, new Vector4(0.2f, 0.29f), new Vector4(1.5f, 0.6f));
+                            TutorialManager.Instance.SetTutorialPanel(true, "금괴도 2개 생성됩니다.", "엔터 클릭", 0.16f, 0.008f, new Vector4(0.2f, 0.29f), new Vector4(1.5f, 0.6f));
                             break;
                         case 2:
-                            _ = InGameContext.Current.Data.TurnManager.TurnChange(TurnType.DrawTurn); // 드로우 턴으로 턴 넘기기
-                            break;
-                    }
-                    break;
-                case TurnType.MainTurn: // 메인 턴일 때
-                    switch(_count)
-                    {
-                        case 1:
+                            TutorialManager.Instance.SetTutorialPanel(false);
+                            _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 넘기기
                             break;
                     }
                     break;
@@ -59,20 +53,31 @@ namespace Tutorial.FSM.State.First
                 switch (InGameContext.Current.Data.TurnManager.CurrentTurnType) // 현재 턴이
                 {
                     case TurnType.ChangeTeam: // 팀 변경 턴일 경우
-                        _ = InGameContext.Current.Data.TurnManager.TurnChange(TurnType.MakeTurn); // 생성 턴으로 턴 넘기기
+                        _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MakeTurn); // 생성 턴으로 턴 넘기기
                         break;
                     case TurnType.MakeTurn: // 생성 턴일 경우
-                        TutorialManager.Instance.SetTutorialPanel(true, "매 턴 도로가 2개 생성되고,", 0.07f, 0.008f, new Vector4(0.271f, 0.533f), new Vector4(0.55f, 0.55f));
-                        _count = 0;
-                        _currentTurnType = TurnType.MakeTurn;
+                        TutorialManager.Instance.SetTutorialPanel(true, "매 턴 도로가 2개 생성되고,", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.271f, 0.533f), new Vector4(0.55f, 0.55f));
+                        SetCountAndTurn(TurnType.MakeTurn);
                         break;
                     case TurnType.DrawTurn: // 드로우 턴일 경우
-                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 메인 턴을 진행합시다.", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 메인 턴을 진행합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        SetCountAndTurn(TurnType.DrawTurn);
                         break;
                     case TurnType.MainTurn: // 메인 턴일 경우 
+                        TutorialManager.Instance.SetTutorialPanel(true, "기물 버튼을 눌러 기물을 배치해봅시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.196f, 0.095f), new Vector4(0.7f, 0.7f));
+                        SetCountAndTurn(TurnType.MainTurn);
+                        break;
+                    case TurnType.TurnEnd: // 턴 종료 턴일 경우
+                        TutorialManager.Instance.ChangeTutorialState(MyEnum.TutorialState.Turn1_AI); // 첫 번째 턴(AI 턴)으로 튜토리얼 상태 변경
                         break;
                 }
             }
+        }
+
+        private void SetCountAndTurn(TurnType turnType)
+        {
+            _count = 0;
+            _currentTurnType = turnType;
         }
     }
 }

@@ -5,7 +5,11 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Piece.Data;
+using MyUtil.GameMode;
 using System.Threading.Tasks;
+using Tutorial;
+using Tutorial.MyEnum;
+using UnityEngine;
 
 namespace InGame.MyObject.Piece.Handler
 {
@@ -53,7 +57,26 @@ namespace InGame.MyObject.Piece.Handler
             PieceEvents.OnShowCanAttackPieces?.Invoke(_pieceData.currentObjectType); // 보병이 공격 가능한 기물들 하이라이트 키기 (공격하는 기물)
 
             _pieceBase.PieceVariable.isSelected = true; // 선택 되었다고 할당
+
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+            {
+                switch(TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
+                {
+                    case TutorialState.Turn1_Player: // 첫 번째 턴(플레이어 턴)인 경우
+                        switch(_pieceBase.CurrentObjectType) // 기물이
+                        {
+                            case ObjectType.Miner: // 광부 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                break;
+                            case ObjectType.Soldier: // 보병 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "공격 대상을 선택합시다. \n (공격 시 공격과 이동을 동시에 합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.479f, 0.635f), new Vector4(0.3f, 0.3f), new Vector2(0, 300f));
+                                break;
+                        }
+                        break;
+
+                }
+            }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.17

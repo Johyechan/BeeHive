@@ -8,6 +8,8 @@ namespace MyUtil.GameMode
     public class MultiplayMode : IGameMode
     {
         public bool UseServer() => true; // 서버 사용함
+
+        public bool IsTutorial() => false; // 멀티 플레이
     }
 }
-// 마지막 작성 일자: 2026.03.12
+// 마지막 작성 일자: 2026.03.17

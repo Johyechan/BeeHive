@@ -10,13 +10,13 @@ namespace InGame.MyUI.MyUIButton
     public abstract class ShowButtonBase : MonoBehaviour, IUIClick
     {
         [SerializeField] private float _delayForNext; // 다음 함수를 실행하기까지 대기 시간
-        [SerializeField] private float _animationDelay; // 애니메이션 실행 시간 변수
 
         [SerializeField] protected RectTransform _cardsUI; // 카드 UI RectTransform 변수 - 위치 변경을 위해 필요
         [SerializeField] protected RectTransform _piecesUI; // 기물 UI RectTransform 변수 - 위치 변경을 위해 필요
 
         [SerializeField] protected float _showYPos; // 보여주기 위한 Y축 값
         [SerializeField] protected float _showDownYPos; // 안 보여주기 위한 Y축 값
+        [SerializeField] protected float _animationDelay; // 애니메이션 실행 시간 변수
 
         private Sequence _seq;
 

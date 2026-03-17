@@ -2810,6 +2810,7 @@ GameObject:
   - component: {fileID: 162416167}
   - component: {fileID: 162416169}
   - component: {fileID: 162416168}
+  - component: {fileID: 162416170}
   m_Layer: 5
   m_Name: Dimmer
   m_TagString: Untagged
@@ -2828,7 +2829,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1113354472}
+  - {fileID: 488244176}
   m_Father: {fileID: 763208015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2874,6 +2877,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162416166}
   m_CullTransparentMesh: 1
+--- !u!225 &162416170
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162416166}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &168286104
 GameObject:
   m_ObjectHideFlags: 0
@@ -4641,6 +4656,10 @@ PrefabInstance:
       propertyPath: 'nearRoadPlaceTransformList.Array.data[2]'
       value: 
       objectReference: {fileID: 1110887553}
+    - target: {fileID: 2539139066115289158, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a1f67c7870dede41839fe7d3b99849a, type: 2}
     - target: {fileID: 8244229074724728705, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.10741
@@ -8991,18 +9010,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488244175}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 763208015}
+  m_Father: {fileID: 162416167}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -130}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 225}
   m_SizeDelta: {x: 200, y: 50}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &488244177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10746,6 +10765,10 @@ PrefabInstance:
       propertyPath: 'nearPiecePlaceTransformList.Array.data[1]'
       value: 
       objectReference: {fileID: 716381259}
+    - target: {fileID: 2539139066115289158, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a1f67c7870dede41839fe7d3b99849a, type: 2}
     - target: {fileID: 8244229074724728705, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.11168
@@ -14089,6 +14112,7 @@ GameObject:
   - component: {fileID: 719506586}
   - component: {fileID: 719506588}
   - component: {fileID: 719506587}
+  - component: {fileID: 719506589}
   m_Layer: 5
   m_Name: BlockPanel
   m_TagString: Untagged
@@ -14153,6 +14177,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719506585}
   m_CullTransparentMesh: 1
+--- !u!225 &719506589
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719506585}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &720621595
 GameObject:
   m_ObjectHideFlags: 0
@@ -15307,8 +15343,6 @@ RectTransform:
   m_Children:
   - {fileID: 719506586}
   - {fileID: 162416167}
-  - {fileID: 1113354472}
-  - {fileID: 488244176}
   m_Father: {fileID: 615812864}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -23860,6 +23894,10 @@ PrefabInstance:
       propertyPath: 'nearPiecePlaceTransformList.Array.data[1]'
       value: 
       objectReference: {fileID: 313815504}
+    - target: {fileID: 2539139066115289158, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a1f67c7870dede41839fe7d3b99849a, type: 2}
     - target: {fileID: 8244229074724728705, guid: e94071fcfcdb9a845a6311746783b79e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.11168
@@ -24569,16 +24607,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113354471}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 763208015}
+  m_Father: {fileID: 162416167}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 300}
   m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1113354473
@@ -32730,11 +32768,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delayForNext: 0.5
-  _animationDelay: 0.25
   _cardsUI: {fileID: 1069040668}
   _piecesUI: {fileID: 2019370935}
   _showYPos: 40
   _showDownYPos: -350
+  _animationDelay: 0.25
 --- !u!114 &1542402577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34747,6 +34785,10 @@ PrefabInstance:
       propertyPath: 'nearRoadPlaceTransformList.Array.data[2]'
       value: 
       objectReference: {fileID: 2016915335}
+    - target: {fileID: 2539139066115289158, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a1f67c7870dede41839fe7d3b99849a, type: 2}
     - target: {fileID: 8244229074724728705, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.1314
@@ -38362,11 +38404,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _delayForNext: 0.5
-  _animationDelay: 0.25
   _cardsUI: {fileID: 1069040668}
   _piecesUI: {fileID: 2019370935}
   _showYPos: 0
   _showDownYPos: -350
+  _animationDelay: 0.25
 --- !u!114 &1790969181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41823,12 +41865,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tutorialManagerData:
-    tutorialDimmer: {fileID: 0}
-    tutorialBlockPanel: {fileID: 0}
-    guideTxt: {fileID: 0}
-    dimmerMat: {fileID: 0}
-    animationDuration: 0.5
-    inputDelay: 0
+    tutorialDimmer: {fileID: 162416170}
+    tutorialBlockPanel: {fileID: 719506589}
+    guideTxt: {fileID: 1113354473}
+    helpTxt: {fileID: 488244177}
+    dimmerMat: {fileID: 2100000, guid: 548e8885aa25de244b085f50a93942cc, type: 2}
+    animationDuration: 0.25
+    inputDelay: 1
 --- !u!1001 &2011264372
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42176,7 +42219,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: 40}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1001 &2020531490

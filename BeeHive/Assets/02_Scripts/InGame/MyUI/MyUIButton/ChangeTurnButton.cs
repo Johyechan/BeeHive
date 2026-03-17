@@ -1,9 +1,11 @@
+using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.Turn;
 using InGame.MyUI.MyUIInterface;
+using MyUtil.GameMode;
+using Tutorial;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,10 +57,27 @@ namespace InGame.MyUI.MyUIButton
 
                 if(InGameContext.Current.Data.TurnManager.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀이 내 팀일 경우
                 {
-                    NetworkManager.Instance.Socket.Emit("turnTimerStop", SceneMgr.Instance.CurrentRoomID); // 턴 타이머 종료
+                    if(GameModeManager.Instance.CurrentGameMode.UseServer()) // 서버를 사용하는 게임 모드라면
+                    {
+                        NetworkManager.Instance.Socket.Emit("turnTimerStop", SceneMgr.Instance.CurrentRoomID); // 턴 타이머 종료
+                    }
+                    else // 서버를 사용하지 않는 게임 모드라면
+                    {
+                        TutorialManager.Instance.SetTutorialPanel(false);
+
+                        switch (InGameContext.Current.Data.TurnManager.CurrentTurnType) // 현재 턴이
+                        {
+                            case TurnType.DrawTurn: // 드로우 턴일 때
+                                _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MainTurn); // 메인 턴으로 턴 변경
+                                break;
+                            case TurnType.MainTurn: // 메인 턴일 때
+                                _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.TurnEnd); // 턴 종료 턴으로 턴 변경
+                                break;
+                        }
+                    }
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.17

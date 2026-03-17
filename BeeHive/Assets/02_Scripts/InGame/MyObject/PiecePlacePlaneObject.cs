@@ -3,13 +3,13 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPiece;
-using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Handler;
 using InGame.MyObject.Piece;
-using InGame.MyObject.Piece.ObjectPieces;
+using MyUtil.GameMode;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Tutorial;
+using Tutorial.MyEnum;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -70,6 +70,11 @@ namespace InGame.MyObject
         // 마우스로 클릭 시 실행될 함수
         public override void ObjectClicked()
         {
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 현재 게임 모드가 튜토리얼 일때
+            {
+                TutorialManager.Instance.SetTutorialPanel(false);
+            }
+
             if (isNearToCastle) // 성과 근접한 배치칸이면서
             {
                 if(_frontPiecePlacePlaneObject.PlacedObjectType != ObjectType.None)// 앞에 있는 기물 배치칸에 배치된 기물이 있다면 
@@ -136,18 +141,21 @@ namespace InGame.MyObject
 
                 InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(this, pieceBase, isMove); // 현재 배치칸 상태 변경
 
-                PieceInfo pieceInfo = new PieceInfo()
+                if(GameModeManager.Instance.CurrentGameMode.UseServer()) // 현재 게임 모드가 서버를 사용하는 게임 모드라면
                 {
-                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                    pieceID = pieceBase.NetworkId, // 기물 객체 ID
-                    placePlaneID = NetworkId, // 배치 칸 ID
-                    parentName = transform.parent.name, // 부모 객체 명
-                    placedObjectType = (int)CanPlacePieceType, // 기물 객체 타입
-                    targetPos = transform.localPosition, // 기물 객체 최종 위치
-                    isMove = isMove // 생성인지 이동인지 여부
-                };
-                string json = JsonUtility.ToJson(pieceInfo); // Json으로 변환
-                NetworkManager.Instance.Socket.Emit("movePiece", json); // 서버에 movePiece 이벤트 전달
+                    PieceInfo pieceInfo = new PieceInfo()
+                    {
+                        roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                        pieceID = pieceBase.NetworkId, // 기물 객체 ID
+                        placePlaneID = NetworkId, // 배치 칸 ID
+                        parentName = transform.parent.name, // 부모 객체 명
+                        placedObjectType = (int)CanPlacePieceType, // 기물 객체 타입
+                        targetPos = transform.localPosition, // 기물 객체 최종 위치
+                        isMove = isMove // 생성인지 이동인지 여부
+                    };
+                    string json = JsonUtility.ToJson(pieceInfo); // Json으로 변환
+                    NetworkManager.Instance.Socket.Emit("movePiece", json); // 서버에 movePiece 이벤트 전달
+                }
 
                 HighLightOffEvent(); // 하이라이트 끄기
 
@@ -197,10 +205,41 @@ namespace InGame.MyObject
                     }
                 }
                 
+                if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 때
+                {
+                    switch(TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
+                    {
+                        case TutorialState.Turn1_Player: // 첫 번째 턴(플레이어 턴)일 때
+                            switch(pieceBase.CurrentObjectType) // 대상 기물이
+                            {
+                                case ObjectType.Miner: // 광부일 때
+                                    if(isMove) // 이동된 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "이번에는 도로를 생성합시다. \n (도로 생성에는 금괴가 소모되지 않습니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                                    }
+                                    else // 배치된 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "광부를 클릭해서 이동을 합시다. \n (배치 이후 바로 이동이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                    }
+                                    break;
+                                case ObjectType.Soldier:
+                                    if(isMove) // 이동된 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                                    }
+                                    else // 배치된 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "보병을 클릭해서 공격을 합시다. \n (배치 이후 바로 공격이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                    }
+                                    break;
+                            }
+                            break;
+                    }
+                }
 
                 InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.03.17

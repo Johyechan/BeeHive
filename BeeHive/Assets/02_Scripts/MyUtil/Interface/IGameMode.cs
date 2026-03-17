@@ -7,6 +7,8 @@ namespace MyUtil.Interface
     public interface IGameMode
     {
         public bool UseServer(); // 서버 사용 여부 함수
+
+        public bool IsTutorial(); // 튜토리얼 여부 함수
     }
 }
 // 마지막 작성 일자: 2026.03.12

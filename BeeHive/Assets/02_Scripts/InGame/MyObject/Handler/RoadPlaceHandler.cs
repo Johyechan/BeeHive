@@ -1,12 +1,11 @@
-using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPiece;
-using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Piece;
+using MyUtil.GameMode;
 using System.Threading.Tasks;
+using Tutorial;
 using UnityEngine;
 
 namespace InGame.MyObject.Handler
@@ -15,26 +14,31 @@ namespace InGame.MyObject.Handler
     // 도로 배치 기능 핸들러
     public class RoadPlaceHandler
     {
+        private float _tutorialCreateCount = 0; // 튜토리얼에서 도로 생성 카운팅 변수
+
         public async Task Place(RoadPlacePlaneObject roadPlacePlane, PieceBase roadPiece, Transform roadParent, float roadAngle)
         {
             UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
 
             InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(roadPlacePlane, roadPiece, false); // 현재 배치칸 상태 변경
 
-            RoadInfo roadInfo = new RoadInfo()
+            if(GameModeManager.Instance.CurrentGameMode.UseServer()) // 서버를 사용하는 경우에만
             {
-                roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                roadID = roadPiece.NetworkId, // 도로 객체 ID
-                placePlaneId = roadPlacePlane.NetworkId, // 현재 객체 ID
-                placedType = (int)roadPlacePlane.CanPlacePieceType, // 배치 객체 타입
-                roadTeamType = (int)roadPlacePlane.TeamType, // 배치 객체 팀 타입
-                roadParentName = roadParent.name, // 부모 객체 이름
-                targetParentName = roadPlacePlane.transform.parent.name, // 부모 객체 이름
-                targetPos = roadPlacePlane.transform.localPosition, // 최종 위치
-                angle = roadAngle // 최종 각도
-            };
-            string json = JsonUtility.ToJson(roadInfo); // Json으로 변환
-            NetworkManager.Instance.Socket.Emit("makeRoad", json);
+                RoadInfo roadInfo = new RoadInfo()
+                {
+                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                    roadID = roadPiece.NetworkId, // 도로 객체 ID
+                    placePlaneId = roadPlacePlane.NetworkId, // 현재 객체 ID
+                    placedType = (int)roadPlacePlane.CanPlacePieceType, // 배치 객체 타입
+                    roadTeamType = (int)roadPlacePlane.TeamType, // 배치 객체 팀 타입
+                    roadParentName = roadParent.name, // 부모 객체 이름
+                    targetParentName = roadPlacePlane.transform.parent.name, // 부모 객체 이름
+                    targetPos = roadPlacePlane.transform.localPosition, // 최종 위치
+                    angle = roadAngle // 최종 각도
+                };
+                string json = JsonUtility.ToJson(roadInfo); // Json으로 변환
+                NetworkManager.Instance.Socket.Emit("makeRoad", json);
+            }
 
             HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
 
@@ -42,9 +46,23 @@ namespace InGame.MyObject.Handler
 
             InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
 
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+            {
+                if(_tutorialCreateCount <= 0) // 처음 도로를 생성하는 경우
+                {
+                    TutorialManager.Instance.SetTutorialPanel(true, "도로를 한 번 더 생성합시다. \n (도로는 가지고 있는 도로 개수만큼 중복 생성 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                    _tutorialCreateCount++;
+                }
+                else // 두 번째 도로를 생성하는 경우
+                {
+                    TutorialManager.Instance.SetTutorialPanel(true, "이번에는 보병을 생성합시다. \n (금괴가 부족하지 않다면 각 기물 당 하나 씩 생성 및 이동이 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.552f, 0.123f), new Vector4(0.3f, 0.3f));
+                    _tutorialCreateCount = 0;
+                }
+            }
+
             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                 return; // 반환
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.03.17

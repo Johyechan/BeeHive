@@ -2,7 +2,11 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
+using MyUtil.GameMode;
 using System;
+using Tutorial;
+using Tutorial.MyEnum;
+using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -10,6 +14,8 @@ namespace InGame.MyUI.MyUIButton
     // 도로 UI 버튼 클래스
     public class RoadButton : PlaceUIButton
     {
+        private int _tutorialCreateCount = 0; // 튜토리얼 전용 도로 생성 카운팅 변수
+
         // 클릭 시 실행될 함수
         public override void OnUIClick()
         {
@@ -58,6 +64,26 @@ namespace InGame.MyUI.MyUIButton
                 }
 
                 HighLightEvents.OnRoadPlacementHighLight?.Invoke(true); // 도로 배치 칸 하이라이트 키기
+
+                if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+                {
+                    switch(TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
+                    {
+                        case TutorialState.Turn1_Player: // 첫 번째 턴(플레이어 턴) 일 경우
+                            if(_tutorialCreateCount == 0) // 처음 도로를 생성하는 경우
+                            {
+                                TutorialManager.Instance.SetTutorialPanel(true, "도로를 연결해봅시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.465f, 0.547f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                _tutorialCreateCount++;
+                            }
+                            else // 두 번째 도로를 생성하는 경우
+                            {
+                                TutorialManager.Instance.SetTutorialPanel(true, "한 번 더 도로를 연결해봅시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.466f, 0.605f), new Vector4(0.3f, 0.3f), new Vector2(0, 300f));
+                                _tutorialCreateCount = 0;
+                            }
+                            break;
+                    }
+                }
+
                 _isHighLightOn = true; // 하이라이트가 켜져있는 상태라고 할당
             }
             else // 하이라이트가 켜져있을 때
@@ -68,4 +94,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.17

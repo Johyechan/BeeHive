@@ -1,9 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyManager.Local;
-using InGame.MyManager.Local.Turn;
 using MyUtil.Interface;
 using Tutorial.Event;
-using Tutorial.MyEnum;
 using UnityEngine;
 
 namespace Tutorial.FSM.State
@@ -29,19 +27,19 @@ namespace Tutorial.FSM.State
             switch(_count) // 카운팅 된 수가
             {
                 case 1:
-                    TutorialManager.Instance.SetTutorialPanel(true, "그리고 현재 당신의 체력입니다.", 0.07f, 0.008f, new Vector4(0.443f, 0.958f), new Vector4(1f, 0.3f));
+                    TutorialManager.Instance.SetTutorialPanel(true, "그리고 현재 당신의 체력입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.443f, 0.958f), new Vector4(1f, 0.3f));
                     break;
                 case 2:
-                    TutorialManager.Instance.SetTutorialPanel(true, "현재 상대의 성이고,", 0.07f, 0.008f, new Vector4(0.5f, 0.78f), new Vector4(1f, 1f));
+                    TutorialManager.Instance.SetTutorialPanel(true, "현재 상대의 성이고,", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.5f, 0.78f), new Vector4(1f, 1f));
                     break;
                 case 3:
-                    TutorialManager.Instance.SetTutorialPanel(true, "그리고 현재 상대의 체력입니다.", 0.07f, 0.008f, new Vector4(0.565f, 0.958f), new Vector4(1.2f, 0.3f));
+                    TutorialManager.Instance.SetTutorialPanel(true, "그리고 현재 상대의 체력입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.565f, 0.958f), new Vector4(1.2f, 0.3f));
                     break;
                 case 4:
-                    TutorialManager.Instance.SetTutorialPanel(true, "당신이 바라보는 시점의 성이 당신의 팀이니 유의하세요.");
+                    TutorialManager.Instance.SetTutorialPanel(true, "당신이 바라보는 시점의 성이 당신의 팀이니 유의합시다.", "엔터 클릭");
                     break;
                 case 5:
-                    TutorialManager.Instance.SetTutorialPanel(true, "상대를 공격하여 승리하세요!");
+                    TutorialManager.Instance.SetTutorialPanel(true, "상대를 공격하여 승리합시다!", "엔터 클릭");
                     break;
                 case 6:
                     TutorialEvents.OnIntroEnd?.Invoke(); // 인트로 종료 이벤트 호출
@@ -55,4 +53,4 @@ namespace Tutorial.FSM.State
         }
     }
 }
-// 마지막 작성 일자: 2026.03.16
+// 마지막 작성 일자: 2026.03.17

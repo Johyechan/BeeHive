@@ -1,9 +1,10 @@
-using InGame.MyManager;
 using System.Collections.Generic;
 using UnityEngine;
 using InGame.MyObject.Piece;
 using InGame.MyObject.Handler;
 using InGame.MyManager.Global;
+using MyUtil.GameMode;
+using Tutorial;
 
 namespace InGame.MyObject
 {
@@ -50,6 +51,11 @@ namespace InGame.MyObject
 
             if (roadPiece != null)
             {
+                if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+                {
+                    TutorialManager.Instance.SetTutorialPanel(false);
+                }
+
                 PlacedPiece = roadPiece; // 배치된 기물에 도로 할당
                 PlacedPiece.PieceVariable.currentRoadPlacePlane = this; // 배치된 도로의 배치칸을 할당
                 await _roadPlaceHandler.Place(this, roadPiece, _roadParent, _roadAngle); // 도로 배치 기능
@@ -57,4 +63,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.17
