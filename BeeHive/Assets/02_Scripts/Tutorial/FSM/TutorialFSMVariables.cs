@@ -7,6 +7,7 @@ using Tutorial.FSM.State.Fourth;
 using Tutorial.FSM.State.Second;
 using Tutorial.FSM.State.Third;
 using Tutorial.MyEnum;
+using Tutorial.Struct;
 
 namespace Tutorial.FSM
 {
@@ -38,6 +39,19 @@ namespace Tutorial.FSM
 
         public TutorialEndState endState; // 튜토리얼 종료 상태
 
+        public TutorialFSMVariables(TutorialManagerData tutorialManagerData)
+        {
+            introState = new TutorialIntroState();
+            firstTurnPlayerState = new TutorialFirstTurnPlayerState();
+            firstTurnAIState = new TutorialFirstTurnAIState(tutorialManagerData.firstTurnAIuseSoldier, tutorialManagerData.firstTurnAISoldierCreatePlace, tutorialManagerData.firstTurnAISoldierMovePlace);
+            secondTurnPlayerState = new TutorialSecondTurnPlayerState();
+            secondTurnAIState = new TutorialSecondTurnAIState(tutorialManagerData.secondTurnAIuseTank, tutorialManagerData.secondTurnAITankCreatePlace, tutorialManagerData.secondTurnAITankMovePlace, tutorialManagerData.confirmUI);
+            thirdTurnPlayerState = new TutorialThirdTurnPlayerState(tutorialManagerData.confirmUI);
+            thirdTurnAIState = new TutorialThirdTurnAIState();
+            fourthTurnPlayerState = new TutorialFourthTurnPlayerState();
+            endState = new TutorialEndState();
+        }
+
         // 초기화 함수
         public void Init()
         {
@@ -53,4 +67,4 @@ namespace Tutorial.FSM
         }
     }
 }
-// 마지막 작성 일자: 2026.03.12
+// 마지막 작성 일자: 2026.03.18

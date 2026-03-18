@@ -35,7 +35,7 @@ namespace Tutorial
             
             _eventHandlerVariables = new TutorialEventHandlerVariables();
 
-            _fsmVariables = new TutorialFSMVariables();
+            _fsmVariables = new TutorialFSMVariables(_tutorialManagerData);
             _fsmVariables.Init(); // 튜토리얼 fsm 관련 변수 초기화
         }
 
@@ -90,7 +90,7 @@ namespace Tutorial
                 _tutorialManagerData.helpTxt.text = helpStr;
 
                 _tutorialManagerData.guideTxt.GetComponent<RectTransform>().anchoredPosition = guideTxtPos == default ? Vector2.zero : guideTxtPos;
-                _tutorialManagerData.helpTxt.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, guideTxtPos.y - 75f);
+                _tutorialManagerData.helpTxt.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, guideTxtPos.y - 100f);
 
                 _tutorialManagerData.dimmerMat.SetFloat("_HoleRadius", holeRadius);
                 _tutorialManagerData.dimmerMat.SetFloat("_OutlineWidth", outlineWidth);

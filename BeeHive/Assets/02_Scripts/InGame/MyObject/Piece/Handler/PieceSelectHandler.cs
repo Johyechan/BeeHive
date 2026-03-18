@@ -20,6 +20,8 @@ namespace InGame.MyObject.Piece.Handler
 
         private PieceData _pieceData; // 불변 변수를 가지는 구조체
 
+        private int _tutorialSelectedCount = 0; // 튜토리얼에서 선택된 횟수 카운팅 변수
+
         // 생성자(불변 변수를 가지는 구조체)
         public PieceSelectHandler(PieceBase pieceBase, PieceData pieceData)
         {
@@ -73,10 +75,26 @@ namespace InGame.MyObject.Piece.Handler
                                 break;
                         }
                         break;
-
+                    case TutorialState.Turn2_Player: // 두 번째 턴(플레이어 턴)인 경우
+                        switch(_pieceBase.CurrentObjectType) // 기물이
+                        {
+                            case ObjectType.Tank: // 전차 일 경우
+                                if(_tutorialSelectedCount == 0) // 처음 선택하는 경우
+                                {
+                                    TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.524f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 300f));
+                                    _tutorialSelectedCount++;
+                                }
+                                else // 중복 선택하는 경우
+                                {
+                                    TutorialManager.Instance.SetTutorialPanel(true, "원거리 공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.545f, 0.576f), new Vector4(0.3f, 0.3f), new Vector2(0, 300f));
+                                    _tutorialSelectedCount = 0;
+                                }
+                                break;
+                        }
+                        break;
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.17
+// 마지막 작성 일자: 2026.03.18

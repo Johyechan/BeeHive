@@ -1,3 +1,5 @@
+using InGame.MyEnum;
+using InGame.MyManager.Local;
 using MyUtil.Interface;
 using UnityEngine;
 
@@ -9,17 +11,17 @@ namespace Tutorial.FSM.State.Third
     {
         public void Enter()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void Exit()
         {
-            throw new System.NotImplementedException();
+            _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 두 번째 플레이어 턴)으로 변경
         }
 
         public void Update()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

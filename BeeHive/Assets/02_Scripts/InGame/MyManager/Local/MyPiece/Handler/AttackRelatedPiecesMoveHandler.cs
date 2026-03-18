@@ -4,7 +4,11 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Piece;
+using MyUtil.GameMode;
+using System.Collections;
 using System.Threading.Tasks;
+using Tutorial;
+using Tutorial.MyEnum;
 using UnityEngine;
 
 namespace InGame.MyManager.MyPiece.Handler
@@ -69,8 +73,21 @@ namespace InGame.MyManager.MyPiece.Handler
                 }
             }
 
+            if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 때
+            {
+                switch (TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
+                {
+                    case TutorialState.Turn1_Player:
+                        TutorialManager.Instance.SetTutorialPanel(true, "보병은 이동한 위치 주변의 도로를 자신의 도로로 변경합니다. \n 다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        break;
+                    case TutorialState.Turn2_Player:
+                        TutorialManager.Instance.SetTutorialPanel(true, "보병과 광부는 원거리 공격을 당하면 즉시 파괴됩니다. \n 다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        break;
+                }
+            }
+
             InGameContext.Current.Data.PieceManager.FindCanPlacePlane(); // 다시 이동가능한 위치 찾기
         }
     }
 }
-// 마지막 작성 일자: 2026.02.13
+// 마지막 작성 일자: 2026.03.18

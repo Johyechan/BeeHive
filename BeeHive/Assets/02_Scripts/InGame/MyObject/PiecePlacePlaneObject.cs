@@ -223,13 +223,24 @@ namespace InGame.MyObject
                                     }
                                     break;
                                 case ObjectType.Soldier:
+                                    if(!isMove) // 배치된 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "보병을 클릭해서 공격을 합시다. \n (배치 이후 바로 공격이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                    }
+                                    break;
+                            }
+                            break;
+                        case TutorialState.Turn2_Player: // 두 번째 턴(플레이어 턴) 일 경우
+                            switch(pieceBase.CurrentObjectType) // 기물이
+                            {
+                                case ObjectType.Tank: // 전차일 경우
                                     if(isMove) // 이동된 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                                        TutorialManager.Instance.SetTutorialPanel(true, "전차는 이동 후에도 화력 카드가 있을 경우 \n 원거리 공격이 가능합니다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.524f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 300f));
                                     }
                                     else // 배치된 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "보병을 클릭해서 공격을 합시다. \n (배치 이후 바로 공격이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                        TutorialManager.Instance.SetTutorialPanel(true, "전차를 클릭해서 이동을 합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.526f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                     }
                                     break;
                             }
@@ -242,4 +253,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.03.17
+// 마지막 작성 일자: 2026.03.18

@@ -51,7 +51,7 @@ namespace InGame.MyObject.Piece.Handler
 
             if(!isMove) // 이동이 아닌 배치일 때
             {
-                if (_pieceBase.CurrentObjectType == ObjectType.Road) // 도로가 아닐 경우
+                if (_pieceBase.CurrentObjectType == ObjectType.Road) // 도로일 경우
                 {
                     // 각도 조정
                     await _pieceBase.transform.DOLocalRotate(new Vector3(0, angle, 0), _pieceData.animationDuration).AsyncWaitForCompletion();

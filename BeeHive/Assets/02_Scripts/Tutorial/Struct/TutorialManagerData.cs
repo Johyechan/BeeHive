@@ -1,3 +1,6 @@
+using InGame.MyObject;
+using InGame.MyObject.Piece;
+using InGame.MyUI;
 using System;
 using TMPro;
 using UnityEngine;
@@ -19,6 +22,20 @@ namespace Tutorial.Struct
 
         public float animationDuration; // 애니메이션 지속시간
         public float inputDelay; // 인풋 딜레이
+
+        public PieceBase firstTurnAIuseSoldier; // 첫 번째 턴(AI 턴)에 사용할 보병
+        public PiecePlacePlaneObject firstTurnAISoldierCreatePlace; // 첫 번째 턴(AI 턴)에 보병을 생성 시킬 위치
+        public PiecePlacePlaneObject firstTurnAISoldierMovePlace; // 첫 번째 턴(AI 턴)에 보병을 이동 시킬 위치
+
+        public PieceBase secondTurnAIuseTank; // 첫 번째 턴(AI 턴)에 사용할 보병
+        public PiecePlacePlaneObject secondTurnAITankCreatePlace; // 첫 번째 턴(AI 턴)에 보병을 생성 시킬 위치
+        public PiecePlacePlaneObject secondTurnAITankMovePlace; // 첫 번째 턴(AI 턴)에 보병을 이동 시킬 위치
+
+        public PieceBase thirdTurnAIuseSoldier; // 첫 번째 턴(AI 턴)에 사용할 보병
+        public PiecePlacePlaneObject thirdTurnAISoldierCreatePlace; // 첫 번째 턴(AI 턴)에 보병을 생성 시킬 위치
+        public PiecePlacePlaneObject thirdTurnAISoldierMovePlace; // 첫 번째 턴(AI 턴)에 보병을 이동 시킬 위치
+
+        public ConfirmUI confirmUI; // 첫 번째 턴(AI 턴)에 보병을 공격 시킬 위치
     }
 }
 // 마지막 작성 일자: 2026.03.17

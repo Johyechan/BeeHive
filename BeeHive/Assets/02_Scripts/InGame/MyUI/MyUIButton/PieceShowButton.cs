@@ -3,6 +3,7 @@ using InGame.MyManager.Local;
 using MyUtil.GameMode;
 using System.Collections;
 using Tutorial;
+using Tutorial.MyEnum;
 using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
@@ -25,7 +26,7 @@ namespace InGame.MyUI.MyUIButton
 
                 if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 현재 게임 모드가 튜토리얼일 경우
                 {
-                    StartCoroutine(TutorialCo()); //
+                    StartCoroutine(TutorialCo());
                 }
             }
         }
@@ -37,8 +38,16 @@ namespace InGame.MyUI.MyUIButton
 
             yield return new WaitForSeconds(_animationDelay); // _animationDelay 만큼 대기 후
 
-            TutorialManager.Instance.SetTutorialPanel(true, "광부를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.4475f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
+            switch(TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
+            {
+                case TutorialState.Turn1_Player:
+                    TutorialManager.Instance.SetTutorialPanel(true, "광부를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.4475f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
+                    break;
+                case TutorialState.Turn2_Player:
+                    TutorialManager.Instance.SetTutorialPanel(true, "전차를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
+                    break;
+            }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.17
+// 마지막 작성 일자: 2026.03.18

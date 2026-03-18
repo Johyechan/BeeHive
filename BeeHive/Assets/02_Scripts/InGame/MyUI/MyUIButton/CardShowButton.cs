@@ -1,5 +1,8 @@
 using InGame.MyEnum;
 using InGame.MyManager.Local;
+using MyUtil.GameMode;
+using Tutorial;
+using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -18,8 +21,13 @@ namespace InGame.MyUI.MyUIButton
             {
                 InGameContext.Current.Data.ShowButtonManager.SetShowType(ShowUIType.Card);
                 ShowAnimationY(_cardsUI, _piecesUI, _showYPos, _showDownYPos); // 노출 함수 실행
+
+                if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+                {
+                    TutorialManager.Instance.SetTutorialPanel(true, "카드를 확인 해봅시다.", "대상 우클릭", 0.1f, 0.008f, new Vector4(0.528f, 0.15f), new Vector4(0.8f, 0.8f));
+                }
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.18

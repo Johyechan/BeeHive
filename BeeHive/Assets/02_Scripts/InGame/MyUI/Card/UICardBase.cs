@@ -7,9 +7,11 @@ using InGame.MyUI.Card.Handler;
 using InGame.MyUI.Card.Variable;
 using InGame.MyUI.MyUIInterface;
 using MyUtil;
+using MyUtil.GameMode;
 using MyUtil.MyEvent;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
+using Tutorial;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -107,12 +109,22 @@ namespace InGame.MyUI.Card
             if (!_uiCardVariable.isMouseCursorOn) // 마우스 포인터가 현재 UI에 올려져 있지 않다면
                 return; // 반환
 
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+            {
+                TutorialManager.Instance.SetTutorialPanel(true, "화력 카드 입니다. \n 전차간의 전투 및 원거리 공격에 사용되는 카드 입니다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.5f, 0.237f), new Vector4(0.8f, 0.35f), new Vector2(0, -400f));
+            }
+
             _uiCardVariable.showInformationHandler.ShowInfomation();
         }
 
         // UI 클릭 함수
         public void OnUIClick()
         {
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+            {
+                return; // 반환
+            }
+
             if(_uiCardData.poolType == ObjectPoolType.FirePowerUICard) // 화력 카드일 경우
             {
                 UIManager.Instance.WarningUIMake("화력 카드는 직접 사용 하는 카드가 아닙니다 \n 전차가 원거리 공격을 할 때 \n 자동으로 사용 여부를 \n 묻습니다"); // 직접 사용 불가 패널 띄우기
@@ -124,4 +136,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.03.03
+// 마지막 작성 일자: 2026.03.18

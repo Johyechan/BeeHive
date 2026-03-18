@@ -2,6 +2,8 @@ using InGame.MyInput;
 using InGame.MyInput.Struct;
 using InGame.MyObject;
 using InGame.MyUI.MyUIInterface;
+using MyUtil.GameMode;
+using Tutorial;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -34,7 +36,12 @@ namespace InGame.MyUI.MyUIButton
         public void OnUIClick()
         {
             _drawHandler.DrawAction();
+
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+            {
+                TutorialManager.Instance.SetTutorialPanel(true, "뽑은 카드를 확인 합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.128f, 0.094f), new Vector4(0.65f, 0.65f));
+            }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.26
+// 마지막 작성 일자: 2026.03.18

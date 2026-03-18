@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyManager.Local;
 using MyUtil.Interface;
+using Tutorial.MyEnum;
 using UnityEngine;
 
 namespace Tutorial.FSM.State.First
@@ -20,7 +21,7 @@ namespace Tutorial.FSM.State.First
 
         public void Exit()
         {
-            _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 AI 턴)으로 변경
+            _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 첫 번째 AI 턴)으로 변경
         }
 
         public void Update()
@@ -68,7 +69,7 @@ namespace Tutorial.FSM.State.First
                         SetCountAndTurn(TurnType.MainTurn);
                         break;
                     case TurnType.TurnEnd: // 턴 종료 턴일 경우
-                        TutorialManager.Instance.ChangeTutorialState(MyEnum.TutorialState.Turn1_AI); // 첫 번째 턴(AI 턴)으로 튜토리얼 상태 변경
+                        TutorialManager.Instance.ChangeTutorialState(TutorialState.Turn1_AI); // 첫 번째 턴(AI 턴)으로 튜토리얼 상태 변경
                         break;
                 }
             }
@@ -81,4 +82,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.16
+// 마지막 작성 일자: 2026.03.18
