@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using MyUtil;
+using MyUtil.GameMode;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace InGame.MyManager.Global
     {
         private TeamType _currentTeamType; // 현재 팀 타입
         // 위에 변수 프로퍼티
-        public TeamType CurrentTeamType { get => _currentTeamType; }
+        public TeamType CurrentTeamType { get => _currentTeamType; set => _currentTeamType = value; }
 
         private TaskCompletionSource<bool> _teamSetTcs; // 팀 세팅 대기 Task
         public TaskCompletionSource<bool> TeamSetTcs // 팀 세팅 대기 Task 프로퍼티
@@ -49,11 +50,14 @@ namespace InGame.MyManager.Global
                     if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                         return; // 반환
 
-                    int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
-                    NetworkManager.Instance.Socket.Emit("debug", $"받은 팀 타입: {(TeamType)teamType}");
-                    _currentTeamType = (TeamType)teamType; // 팀 저장
-                    NetworkManager.Instance.Socket.Emit("debug", $"저장된 팀 타입: {CurrentTeamType}");
-                    _teamSetTcs?.TrySetResult(true); // 팀 세팅 완료
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer()) // 게임 서버를 사용하는 경우
+                    {
+                        int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
+                        NetworkManager.Instance.Socket.Emit("debug", $"받은 팀 타입: {(TeamType)teamType}");
+                        _currentTeamType = (TeamType)teamType; // 팀 저장
+                        NetworkManager.Instance.Socket.Emit("debug", $"저장된 팀 타입: {CurrentTeamType}");
+                        _teamSetTcs?.TrySetResult(true); // 팀 세팅 완료
+                    }
                 });
             }
         }
@@ -170,4 +174,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.02.18
+// 마지막 작성 일자: 2026.03.19

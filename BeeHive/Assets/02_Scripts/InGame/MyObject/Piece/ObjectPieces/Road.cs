@@ -7,6 +7,7 @@ using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyManager.Turn;
 using InGame.MyObject.Piece.Data;
+using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
@@ -55,7 +56,8 @@ namespace InGame.MyObject.Piece.ObjectPieces
             };
 
             string json = JsonUtility.ToJson(changeRoadInfo);
-            NetworkManager.Instance.Socket.Emit("changeRoad", json);
+            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                NetworkManager.Instance.Socket.Emit("changeRoad", json);
 
             foreach (var canChangeRoad in InGameContext.Current.Data.PieceManager.CanChangeRoadList) // 변환 가능한 도로 리스트를 순회
             {
@@ -83,4 +85,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.03.03
+// 마지막 작성 일자: 2026.03.19

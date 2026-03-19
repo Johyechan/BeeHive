@@ -47,6 +47,8 @@ namespace Tutorial.FSM.State.First
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MakeTurn); // 생성 턴으로 턴 변경
                         break;
                     case TurnType.MakeTurn: // 생성 턴이라면
+                        await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
+
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 변경
                         break;
                     case TurnType.DrawTurn: // 드로우 턴이라면
@@ -59,7 +61,7 @@ namespace Tutorial.FSM.State.First
                         // 보병 생성 위치로 이동
                         await _soldier.MoveToPlacePlane(_createPlacePlane.transform.parent, _createPlacePlane.transform.localPosition, false);
 
-                        InGameContext.Current.Data.GameManager.CurrentMovePiece = _soldier.gameObject;
+                        InGameContext.Current.Data.GameManager.CurrentMovePiece = _soldier.gameObject; // 현재 선택된 객체를 할당
 
                         // 보병 이동 칸 상태 변경
                         InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(_movePlacePlane, _soldier, true);
@@ -79,4 +81,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.19

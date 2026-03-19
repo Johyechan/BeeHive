@@ -35,7 +35,7 @@ namespace Tutorial.FSM.State.Second
 
         public void Enter()
         {
-            
+            TutorialManager.Instance.IsInputDelayOver = false;
         }
 
         public void Exit()
@@ -47,9 +47,10 @@ namespace Tutorial.FSM.State.Second
         {
             if(_confirmEnd) // 확인이 끝났을 때
             {
-                if (TutorialManager.Instance.IsInputDelayOver()) // 인풋 딜레이가 지났나서 인풋이 들어왔다면
+                if (TutorialManager.Instance.IsInputDelayOver) // 인풋 딜레이가 지났나서 인풋이 들어왔다면
                 {
                     _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.TurnEnd); // 턴 종료 턴으로 턴 변경
+                    TutorialManager.Instance.IsInputDelayOver = false;
                 }
             }
 
@@ -62,6 +63,8 @@ namespace Tutorial.FSM.State.Second
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MakeTurn); // 생성 턴으로 턴 변경
                         break;
                     case TurnType.MakeTurn: // 생성 턴이라면
+                        await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
+
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 변경
                         break;
                     case TurnType.DrawTurn: // 드로우 턴이라면
@@ -85,6 +88,7 @@ namespace Tutorial.FSM.State.Second
                         _confirmUI.gameObject.SetActive(true);
                         _confirmUI.Confirm(result =>
                         {
+                            TutorialManager.Instance.IsInputDelayOver = false;
                             TutorialManager.Instance.SetTutorialPanel(true, "전차간의 싸움에서는 화력을 소모하여 방어할 수 있습니다.", "엔터 클릭");
                             _confirmEnd = true;
                         }, "화력을 사용하여 방어하시겠습니까?");
@@ -100,4 +104,4 @@ namespace Tutorial.FSM.State.Second
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.19

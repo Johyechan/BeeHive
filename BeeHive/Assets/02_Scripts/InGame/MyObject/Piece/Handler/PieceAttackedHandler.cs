@@ -6,6 +6,7 @@ using InGame.MyManager.Local;
 using InGame.MyObject.Piece.Data;
 using InGame.MyUI;
 using InGame.MyUI.Card;
+using MyUtil.GameMode;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -73,7 +74,8 @@ namespace InGame.MyObject.Piece.Handler
 
                         if (_pieceBase.CurrentObjectType == ObjectType.Tank) // 만약 공격 받는 기물도 전차라면
                         {
-                            NetworkManager.Instance.Socket.Emit("tankAttackedTank", SceneMgr.Instance.CurrentRoomID); // 상대 전차를 공격했다고 서버로 이벤트 호출
+                            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                                NetworkManager.Instance.Socket.Emit("tankAttackedTank", SceneMgr.Instance.CurrentRoomID); // 상대 전차를 공격했다고 서버로 이벤트 호출
 
                             bool opponentChooseDefense = await InGameContext.Current.Data.PieceManager.OpponentChoice() == 1 ? true : false; // 상대가 결정할 때까지 대기
 
@@ -155,11 +157,11 @@ namespace InGame.MyObject.Piece.Handler
             };
 
             string json = JsonUtility.ToJson(attackInfo);
-
-            NetworkManager.Instance.Socket.Emit("attackPiece", json);
+            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                NetworkManager.Instance.Socket.Emit("attackPiece", json);
 
             await InGameContext.Current.Data.PieceManager.AttackRelatedPiecesMove(_pieceBase, attackPieceBase, returnParent, returnPieceTrans.parent, returnPos, attackPos); // 공격 당한 기물과 공격한 기물이 이동하는 함수
         }
     }
 }
-// 마지막 작성 일자: 2026.02.13
+// 마지막 작성 일자: 2026.03.19

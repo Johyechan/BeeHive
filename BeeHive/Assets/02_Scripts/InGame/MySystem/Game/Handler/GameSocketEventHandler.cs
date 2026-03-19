@@ -8,6 +8,7 @@ using InGame.MyObject;
 using InGame.MyObject.Piece;
 using InGame.MyUI;
 using MyUtil;
+using MyUtil.GameMode;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -111,11 +112,13 @@ namespace InGame.MySystem.Game.Handler
 
                 if (result) // 화력 카드를 사용해서 방어를 선택했다면
                 {
-                    NetworkManager.Instance.Socket.Emit("chooseDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                        NetworkManager.Instance.Socket.Emit("chooseDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
                 }
                 else // 화력 카드를 사용하지 않아 방어를 선택하지 않았다면
                 {
-                    NetworkManager.Instance.Socket.Emit("chooseNoDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                        NetworkManager.Instance.Socket.Emit("chooseNoDefense", SceneMgr.Instance.CurrentRoomID); // 방어하지 않는 것을 선택했다고 서버 호출
                 }
             });
         }
@@ -130,4 +133,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.19

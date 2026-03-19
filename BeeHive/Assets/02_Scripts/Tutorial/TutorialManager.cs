@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyManager.Global;
 using MyUtil.GameMode;
 using MyUtil.Interface;
 using Tutorial.Event;
@@ -6,6 +7,7 @@ using Tutorial.FSM;
 using Tutorial.MyEnum;
 using Tutorial.Struct;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Tutorial
 {
@@ -25,6 +27,8 @@ namespace Tutorial
 
         public bool TurnEnd { get; set; } // 턴 종료 확인 프로퍼티
 
+        public bool IsInputDelayOver { get; set; } = false; // 인풋 대기 시간 종료 여부
+
         private float _nextInputTime; // 다음 클릭 가능 시간
 
         private void Awake()
@@ -34,6 +38,7 @@ namespace Tutorial
             GameModeManager.Instance.SetMode(new TutorialMode()); // 현재 게임 모드를 튜토리얼 모드로 할당
             
             _eventHandlerVariables = new TutorialEventHandlerVariables();
+            _eventHandlerVariables.Init();
 
             _fsmVariables = new TutorialFSMVariables(_tutorialManagerData);
             _fsmVariables.Init(); // 튜토리얼 fsm 관련 변수 초기화
@@ -51,6 +56,7 @@ namespace Tutorial
 
         private void Start()
         {
+            _nextInputTime = Time.time + _tutorialManagerData.inputDelay; // 처음 inputDelay초 동안 입력 방지
             ChangeTutorialState(TutorialState.Intro); // 인트로 상태 시작
         }
 
@@ -133,16 +139,27 @@ namespace Tutorial
         public void ChangeTutorialState(TutorialState changeState)
         {
             _fsmVariables.currentState = changeState; // 현재 튜토리얼 상태를 변경 시킬 상태로 변경
+            NetworkManager.Instance.Socket.Emit("debug", $"{GetState(changeState)}");
             _fsmVariables.machine.ChangeState(GetState(changeState)); // 상태 변경
         }
 
         // 인풋 딜레이 함수
-        public bool IsInputDelayOver()
+        public void OnConfirm(InputAction.CallbackContext ctx)
         {
-            float currentInputTime = _nextInputTime;
-            _nextInputTime = Time.time + _tutorialManagerData.inputDelay; // 다음 클릭 가능 시간을 현재 시간 + 딜레이로 할당
-            return Input.GetKeyDown(KeyCode.Return) && Time.time >= currentInputTime; // 엔터 키 클릭 + 딜레이가 지나야 true 반환
+            switch(_fsmVariables.currentState)
+            {
+                case TutorialState.Intro:
+                case TutorialState.Turn1_Player:
+                case TutorialState.Turn2_AI:
+                    if (Time.time >= _nextInputTime)
+                    {
+                        NetworkManager.Instance.Socket.Emit("debug", "클릭 입력 확인");
+                        IsInputDelayOver = true;
+                        _nextInputTime = Time.time + _tutorialManagerData.inputDelay; // 다음 클릭 가능 시간을 현재 시간 + 딜레이로 할당
+                    }
+                    break;
+            }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.17
+// 마지막 작성 일자: 2026.03.19

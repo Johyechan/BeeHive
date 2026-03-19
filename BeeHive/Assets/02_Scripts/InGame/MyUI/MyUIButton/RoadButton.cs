@@ -27,7 +27,8 @@ namespace InGame.MyUI.MyUIButton
             }
             catch(Exception ex)
             {
-                NetworkManager.Instance.Socket.Emit("debug", $"경고 이벤트에서 예외 발생: {ex} - RoadButton.cs:24");
+                if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                    NetworkManager.Instance.Socket.Emit("debug", $"경고 이벤트에서 예외 발생: {ex} - RoadButton.cs:24");
             }
 
             // 현재 턴이 메인 턴이 아니라면
@@ -38,7 +39,8 @@ namespace InGame.MyUI.MyUIButton
 
             if (!UIManager.Instance.CanInteractionUI) // 만약 UI 상호작용 불가능 상태라면
             {
-                NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 불가 상태");
+                if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                    NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 불가 상태");
                 return; // 반환
             }
 
@@ -59,7 +61,8 @@ namespace InGame.MyUI.MyUIButton
                     }
                     catch(Exception ex)
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", $"예외 발생: {ex}");
+                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                            NetworkManager.Instance.Socket.Emit("debug", $"예외 발생: {ex}");
                     }
                 }
 

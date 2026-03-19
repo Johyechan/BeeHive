@@ -3,9 +3,12 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyObject;
+using MyUtil.GameMode;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Tutorial;
+using Tutorial.MyEnum;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -104,7 +107,14 @@ namespace InGame.MyManager.Local
                 _defeatImage.gameObject.SetActive(false); // 패배 이미지 비활성화
             }
 
-            _gameOverUICanvasGroup.DOFade(1, _animationDuration).SetUpdate(true); // 게임 오버 UI 페이드 인 - 실시간 실행
+            _gameOverUICanvasGroup.DOFade(1, _animationDuration).SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+                    {
+                        TutorialManager.Instance.ChangeTutorialState(TutorialState.End); // 튜토리얼 종료 상태로 이동
+                    }
+                }); // 게임 오버 UI 페이드 인 - 실시간 실행
         }
 
         // 기물 생성 및 이동 가능 및 공격 가능 여부 초기화
@@ -165,4 +175,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.02.25
+// 마지막 작성 일자: 2026.03.19

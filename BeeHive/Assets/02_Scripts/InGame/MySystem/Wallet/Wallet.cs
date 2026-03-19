@@ -2,6 +2,7 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MySystem.Game;
+using MyUtil.GameMode;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -135,8 +136,9 @@ namespace InGame.MySystem
             };
 
             string json = JsonUtility.ToJson(goldSetInfo);
-            NetworkManager.Instance.Socket.Emit("changeGold", json);
+            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                NetworkManager.Instance.Socket.Emit("changeGold", json);
         }
     }
 }
-// 마지막 작성 일자: 2026.02.25
+// 마지막 작성 일자: 2026.03.19

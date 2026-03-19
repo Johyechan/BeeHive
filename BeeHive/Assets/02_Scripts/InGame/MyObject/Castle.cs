@@ -1,6 +1,9 @@
 using InGame.MyEnum;
+using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
+using MyUtil.GameMode;
 using TMPro;
 using UnityEngine;
 
@@ -51,16 +54,23 @@ namespace InGame.MyObject
                 GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName}: {_currentHp}  HP"; // UI 적용
             }
 
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+            {
+                GameOverEvent.OnGameOver?.Invoke();
+                InGameContext.Current.Data.GameManager.GameIsOver(TeamType.Team2);
+                
+            }
+
             if(_currentHp <= 0 && TeamManager.Instance.CurrentTeamType == _castleTeamType) // 현재 체력이 0 이하라면 그리고 같은 팀의 성일 경우
             {
-
                 GameOverInfo gameOverInfo = new GameOverInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                     loseTeamType = (int)_castleTeamType, // 패배 팀 타입
                 };
                 string json = JsonUtility.ToJson(gameOverInfo); // Json으로 변환
-                NetworkManager.Instance.Socket.Emit("gameOver", json);
+                if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                    NetworkManager.Instance.Socket.Emit("gameOver", json);
             }
         }
 
@@ -99,4 +109,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.03.19

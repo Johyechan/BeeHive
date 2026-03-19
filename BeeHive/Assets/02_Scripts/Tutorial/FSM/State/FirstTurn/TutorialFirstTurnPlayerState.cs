@@ -16,7 +16,7 @@ namespace Tutorial.FSM.State.First
 
         public void Enter()
         {
-            
+            TutorialManager.Instance.IsInputDelayOver = false;
         }
 
         public void Exit()
@@ -26,9 +26,10 @@ namespace Tutorial.FSM.State.First
 
         public void Update()
         {
-            if(TutorialManager.Instance.IsInputDelayOver()) // 인풋이 딜레이 이후 들어오면
+            if(TutorialManager.Instance.IsInputDelayOver) // 인풋이 딜레이 이후 들어오면
             {
                 _count++; // 카운팅
+                TutorialManager.Instance.IsInputDelayOver = false;
             }
 
             switch(_currentTurnType) // 현재 턴이
@@ -82,4 +83,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.19

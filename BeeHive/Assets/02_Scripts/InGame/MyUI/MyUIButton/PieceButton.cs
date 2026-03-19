@@ -43,7 +43,8 @@ namespace InGame.MyUI.MyUIButton
                     }
                     catch(Exception ex)
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", $"예외 발생: {ex}");
+                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                            NetworkManager.Instance.Socket.Emit("debug", $"예외 발생: {ex}");
                     }
                 }
 
@@ -84,4 +85,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.17
+// 마지막 작성 일자: 2026.03.19

@@ -62,7 +62,7 @@ Shader "UI/StencilHole"
             v2f vert(appdata v)
             {
                 v2f o;
-                o.pos = TransformObjectToHClip(v.positionOS);
+                o.pos = TransformObjectToHClip(v.positionOS.xyz);
                 o.uv  = v.uv;
                 return o;
             }

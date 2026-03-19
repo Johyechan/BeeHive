@@ -37,7 +37,8 @@ namespace InGame.MyObject.Handler
                     angle = roadAngle // 최종 각도
                 };
                 string json = JsonUtility.ToJson(roadInfo); // Json으로 변환
-                NetworkManager.Instance.Socket.Emit("makeRoad", json);
+                if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                    NetworkManager.Instance.Socket.Emit("makeRoad", json);
             }
 
             HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
@@ -65,4 +66,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.17
+// 마지막 작성 일자: 2026.03.19

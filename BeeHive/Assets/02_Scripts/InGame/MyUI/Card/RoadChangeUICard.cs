@@ -5,6 +5,7 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyManager.MyPiece;
 using InGame.MyObject.Piece.ObjectPieces;
+using MyUtil.GameMode;
 using UnityEngine;
 
 namespace InGame.MyUI.Card
@@ -36,7 +37,8 @@ namespace InGame.MyUI.Card
             };
 
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
-            NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
+            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
 
             // 상대 도로 1개를 자신을 도로로 변경
             foreach (var pieceBase in InGameContext.Current.Data.PieceManager.CanChangeRoadList) // 변환 가능한 도로 리스트를 순회
@@ -52,4 +54,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.03.19

@@ -1,6 +1,7 @@
 using InGame.MyManager.Global;
 using InGame.MyObject;
 using MyUtil;
+using MyUtil.GameMode;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -51,26 +52,29 @@ namespace InGame.MyManager.Local
         // 덱 제작 함수(현재 방 ID)
         public void MakeDeck(string currentRoomID, int castleUpdradeCardCount = 0, int droughtCardCount = 0, int goodHarvestCardCount = 0, int roadChangeCardCount = 0, int firePowerCardCount = 0)
         {
-            _deckMakeCheckTcs = new TaskCompletionSource<bool>(); // 새로운 tcs 할당
-
-            int castleCard = castleUpdradeCardCount == 0 ? _deckCardInfo.castleUpgradeCardCount : castleUpdradeCardCount; // 성벽 카드 수
-            int droughtCard = droughtCardCount == 0 ? _deckCardInfo.droughtCardCount : droughtCardCount; // 가뭄 카드 수
-            int goodHarvestCard = goodHarvestCardCount == 0 ? _deckCardInfo.goodHarvestCardCount : goodHarvestCardCount; // 풍년 카드 수
-            int roadChangeCard = roadChangeCardCount == 0 ? _deckCardInfo.roadChangeCardCount : roadChangeCardCount; // 도로 변형 카드 수
-            int firePowerCard = firePowerCardCount == 0 ? _deckCardInfo.firePowerCardCount : firePowerCardCount; // 화력 카드 수
-
-            DeckShuffleInfo deckShuffleInfo = new DeckShuffleInfo()
+            if (GameModeManager.Instance.CurrentGameMode.UseServer()) // 게임 서버를 사용하는 경우
             {
-                roomID = currentRoomID, // 현재 방 ID
-                castleUpgradeCardCount = castleCard, // 성벽 강화 카드 수
-                droughtCardCount = droughtCard, // 가뭄 카드 수
-                goodHarvestCardCount = goodHarvestCard, // 풍년 카드 수
-                roadChangeCardCount = roadChangeCard, // 도로 변형 카드 수
-                firePowerCardCount = firePowerCard, // 화력 카드 수
-            };
-            string json = JsonUtility.ToJson(deckShuffleInfo); // Json 형태로 변환
+                _deckMakeCheckTcs = new TaskCompletionSource<bool>(); // 새로운 tcs 할당
 
-            NetworkManager.Instance.Socket.Emit("shuffle", json); // 서버로 전송
+                int castleCard = castleUpdradeCardCount == 0 ? _deckCardInfo.castleUpgradeCardCount : castleUpdradeCardCount; // 성벽 카드 수
+                int droughtCard = droughtCardCount == 0 ? _deckCardInfo.droughtCardCount : droughtCardCount; // 가뭄 카드 수
+                int goodHarvestCard = goodHarvestCardCount == 0 ? _deckCardInfo.goodHarvestCardCount : goodHarvestCardCount; // 풍년 카드 수
+                int roadChangeCard = roadChangeCardCount == 0 ? _deckCardInfo.roadChangeCardCount : roadChangeCardCount; // 도로 변형 카드 수
+                int firePowerCard = firePowerCardCount == 0 ? _deckCardInfo.firePowerCardCount : firePowerCardCount; // 화력 카드 수
+
+                DeckShuffleInfo deckShuffleInfo = new DeckShuffleInfo()
+                {
+                    roomID = currentRoomID, // 현재 방 ID
+                    castleUpgradeCardCount = castleCard, // 성벽 강화 카드 수
+                    droughtCardCount = droughtCard, // 가뭄 카드 수
+                    goodHarvestCardCount = goodHarvestCard, // 풍년 카드 수
+                    roadChangeCardCount = roadChangeCard, // 도로 변형 카드 수
+                    firePowerCardCount = firePowerCard, // 화력 카드 수
+                };
+                string json = JsonUtility.ToJson(deckShuffleInfo); // Json 형태로 변환
+
+                NetworkManager.Instance.Socket.Emit("shuffle", json); // 서버로 전송
+            }
         }
 
         public async Task DeckMakeEnd()
@@ -84,4 +88,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.19

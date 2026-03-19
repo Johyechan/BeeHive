@@ -185,16 +185,18 @@ namespace InGame.MyManager.Local.Turn
                         completedTurn = (int)_currentTurnType // 현재 완료한 턴
                     };
                     string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
-                    NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
+                    if(GameModeManager.Instance.CurrentGameMode.UseServer())
+                        NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
                     break;
                 case TurnType.DrawTurn:
                 case TurnType.MainTurn:
                     break;
                 default:
-                    NetworkManager.Instance.Socket.Emit("debug", "이상한 값의 턴이 들어왔다");
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                        NetworkManager.Instance.Socket.Emit("debug", "이상한 값의 턴이 들어왔다");
                     break;
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.16
+// 마지막 작성 일자: 2026.03.19

@@ -46,12 +46,14 @@ namespace InGame.MyUI.MyUIButton
             {
                 if(!UIManager.Instance.CanInteractionUI) // UI 상호작용 불가일 때 
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 안됨");
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                        NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 안됨");
                     return; // 반환
                 }
                 if (!InGameContext.Current.Data.TurnManager.CanChangeTurn) // 턴 변경 가능 상태가 아닐 경우
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "턴 변경 가능 상태 아님");
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                        NetworkManager.Instance.Socket.Emit("debug", "턴 변경 가능 상태 아님");
                     return; // 반환
                 }
 
@@ -59,7 +61,8 @@ namespace InGame.MyUI.MyUIButton
                 {
                     if(GameModeManager.Instance.CurrentGameMode.UseServer()) // 서버를 사용하는 게임 모드라면
                     {
-                        NetworkManager.Instance.Socket.Emit("turnTimerStop", SceneMgr.Instance.CurrentRoomID); // 턴 타이머 종료
+                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                            NetworkManager.Instance.Socket.Emit("turnTimerStop", SceneMgr.Instance.CurrentRoomID); // 턴 타이머 종료
                     }
                     else // 서버를 사용하지 않는 게임 모드라면
                     {
@@ -80,4 +83,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.17
+// 마지막 작성 일자: 2026.03.19

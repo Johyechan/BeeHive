@@ -9,6 +9,5 @@ public class TutorialTestButton : MonoBehaviour, IUIClick
     public void OnUIClick()
     {
         SceneManager.LoadScene(4);
-        SceneMgr.Instance.IsTutorial = true;
     }
 }

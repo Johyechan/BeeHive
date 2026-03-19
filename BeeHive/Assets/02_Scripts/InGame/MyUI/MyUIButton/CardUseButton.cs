@@ -5,6 +5,7 @@ using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyUI.Card;
 using InGame.MyUI.MyUIInterface;
+using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
 using System.Collections;
 using System.Threading.Tasks;
@@ -66,7 +67,8 @@ namespace InGame.MyUI.MyUIButton
                 animationDuration = _animationDuration, // 애니메이션 지속 시간
             };
             string json = JsonUtility.ToJson(reverseCardInfo); // Json 형태로 변환
-            NetworkManager.Instance.Socket.Emit("reverseCard", json); // 서버에 전송
+            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                NetworkManager.Instance.Socket.Emit("reverseCard", json); // 서버에 전송
 
             DOTween.Sequence()
                 .Append(_uiCardBase.UICardVariable.cardObj.transform.DORotate(new Vector3(0, _uiCardBase.UICardVariable.cardObj.transform.eulerAngles.y, 180), _animationDuration)) // y축은 Team1의 경우 플레이어의 시야를 고려하여 180도 돌아가 있기 때문에 카드의 y값으로 그대로 적용, z축으로 180도 회전
@@ -84,4 +86,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.02.13
+// 마지막 작성 일자: 2026.03.19

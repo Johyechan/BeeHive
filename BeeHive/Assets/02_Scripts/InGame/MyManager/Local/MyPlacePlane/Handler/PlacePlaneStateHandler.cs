@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyManager.Global;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
+using MyUtil.GameMode;
 using System.Threading.Tasks;
 
 namespace InGame.MyManager.MyPlacePlane.Handler
@@ -25,7 +26,9 @@ namespace InGame.MyManager.MyPlacePlane.Handler
 
             if (!currentPlacePlane.isNearToCastle || isRoad) // 이동하려는 배치칸이 성 주위 배치칸이 아니거나 도로 배치칸 일경우
             {
-                NetworkManager.Instance.Socket.Emit("debug", "도로 배치칸 변경");
+                if(GameModeManager.Instance.CurrentGameMode.UseServer()) // 게임 서버를 사용하는 경우
+                    NetworkManager.Instance.Socket.Emit("debug", "도로 배치칸 변경");
+
                 currentPlacePlane.PlacedObjectType = placedPiece.CurrentObjectType; // 배치된 기물의 객체 타입 할당
                 currentPlacePlane.TeamType = placedPiece.CurrentTeamType; // 배치된 기물의 팀 타입 할당
                 currentPlacePlane.PlacedPiece = placedPiece;
@@ -42,4 +45,4 @@ namespace InGame.MyManager.MyPlacePlane.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.19

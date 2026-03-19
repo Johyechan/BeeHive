@@ -1,6 +1,7 @@
 using DG.Tweening;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
+using MyUtil.GameMode;
 using MyUtil.MyEvent;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -13,7 +14,10 @@ namespace InGame.MyInput
     {
         public async Task DrawFunction(Transform deckTransform, Transform playerCardsParent, RectTransform playerUICardsParent)
         {
-            NetworkManager.Instance.Socket.Emit("debug", "드로우 함수 들어옴");
+            if(GameModeManager.Instance.CurrentGameMode.UseServer()) // 서버를 사용하는 경우
+            {
+                NetworkManager.Instance.Socket.Emit("debug", "드로우 함수 들어옴");
+            }
             InGameContext.Current.Data.DrawManager.DrawCard(deckTransform, playerCardsParent, playerUICardsParent); // 카드 드로우 실행
 
             Sequence seq = DOTween.Sequence()
@@ -24,4 +28,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.19

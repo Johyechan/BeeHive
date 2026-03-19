@@ -4,6 +4,7 @@ using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
+using MyUtil.GameMode;
 using UnityEngine;
 
 namespace InGame.MyUI.Card
@@ -27,7 +28,8 @@ namespace InGame.MyUI.Card
             };
 
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
-            NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
+            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
 
             if (InGameContext.Current.Data.TurnManager.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 자신의 턴이 아닐 경우
                 return false; // 반환
@@ -39,4 +41,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.03.19

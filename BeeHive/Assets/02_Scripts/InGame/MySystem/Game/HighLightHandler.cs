@@ -2,6 +2,7 @@ using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyObject;
 using MyUtil;
+using MyUtil.GameMode;
 using System;
 using System.Collections.Generic;
 
@@ -36,12 +37,14 @@ namespace InGame.MySystem.Game
                 {
                     if (on) // 킬 것이라면
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", $"켜지는 발판: {placePlane}");
+                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                            NetworkManager.Instance.Socket.Emit("debug", $"켜지는 발판: {placePlane}");
                         placePlane.HighLightOn(); // 하이라이트 키기
                     }
                     else // 끌 것이라면
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", $"꺼지는 발판: {placePlane}");
+                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                            NetworkManager.Instance.Socket.Emit("debug", $"꺼지는 발판: {placePlane}");
                         placePlane.HighLightOff(); // 하이라이트 끄기
                     }
                 }
@@ -88,4 +91,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.19

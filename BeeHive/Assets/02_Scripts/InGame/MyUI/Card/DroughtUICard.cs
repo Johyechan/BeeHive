@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
+using MyUtil.GameMode;
 using UnityEngine;
 
 namespace InGame.MyUI.Card
@@ -25,7 +26,8 @@ namespace InGame.MyUI.Card
             };
 
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
-            NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
+            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
 
             // 상대 턴에 상대 광부 생산 불가(1턴)
             if (SceneMgr.Instance.IsTwoPlayerGame)
@@ -40,7 +42,8 @@ namespace InGame.MyUI.Card
                 };
 
                 string droughtJson = JsonUtility.ToJson(droughtInfo);
-                NetworkManager.Instance.Socket.Emit("makeDrought", droughtJson); // 서버에게 1을 보냄으로써 가뭄이 활성화 되었다고 전송
+                if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                    NetworkManager.Instance.Socket.Emit("makeDrought", droughtJson); // 서버에게 1을 보냄으로써 가뭄이 활성화 되었다고 전송
 
                 return base.UseCard();
             }
@@ -49,4 +52,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.03.19

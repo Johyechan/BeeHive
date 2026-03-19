@@ -92,9 +92,20 @@ namespace InGame.MyObject.Piece.Handler
                                 break;
                         }
                         break;
+                    case TutorialState.Turn3_Player: // 세 번째 턴(플레이어 턴) 일 경우
+                        switch(_pieceBase.CurrentObjectType) // 현재 기물이
+                        {
+                            case ObjectType.Soldier: // 보병일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "이동할 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.457f, 0.685f), new Vector4(0.3f, 0.3f), new Vector2(0, 400f));
+                                break;
+                            case ObjectType.Tank: // 전차일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "공격할 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.546f, 0.576f), new Vector4(0.3f, 0.3f), new Vector2(0, 400f));
+                                break;
+                        }
+                        break;
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.19

@@ -1,4 +1,5 @@
 using InGame.MyEnum;
+using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using MyUtil.Interface;
 using Tutorial.Event;
@@ -14,14 +15,18 @@ namespace Tutorial.FSM.State
 
         public void Enter()
         {
+            NetworkManager.Instance.Socket.Emit("debug", "인트로 시작");
+            TutorialManager.Instance.IsInputDelayOver = false;
             _count = 0;
         }
 
         public void Update()
         {
-            if(TutorialManager.Instance.IsInputDelayOver()) // 인풋 딜레이가 지나고 인풋이 들어왔다면
+            if(TutorialManager.Instance.IsInputDelayOver) // 인풋 딜레이가 지나고 인풋이 들어왔다면
             {
+                NetworkManager.Instance.Socket.Emit("debug", "인트로 상태에서 입력 인식");
                 _count++; // 카운팅
+                TutorialManager.Instance.IsInputDelayOver = false;
             }
 
             switch(_count) // 카운팅 된 수가
@@ -53,4 +58,4 @@ namespace Tutorial.FSM.State
         }
     }
 }
-// 마지막 작성 일자: 2026.03.17
+// 마지막 작성 일자: 2026.03.19

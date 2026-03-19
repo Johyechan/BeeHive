@@ -54,17 +54,20 @@ namespace InGame.MyManager.MyPiece.Handler
             {
                 if (attackPiece.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 공격한 기물이 현재 팀의 기물일 경우에만
                 {
-                    PieceChangeRoadInfo pieceChangeRoadInfo = new PieceChangeRoadInfo
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer()) // 게임 서버를 사용하는 경우
                     {
-                        roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                        teamType = (int)attackPiece.CurrentTeamType, // 공격한 기물 팀 타입
-                        placePlaneID = attackPiece.PieceVariable.currentPlacePlane.NetworkId, // 공격한 기물의 목적지 칸의 ID
-                        pieceID = attackPiece.NetworkId // 주위 도로를 변경 시킬 기물 ID
-                    };
+                        PieceChangeRoadInfo pieceChangeRoadInfo = new PieceChangeRoadInfo
+                        {
+                            roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                            teamType = (int)attackPiece.CurrentTeamType, // 공격한 기물 팀 타입
+                            placePlaneID = attackPiece.PieceVariable.currentPlacePlane.NetworkId, // 공격한 기물의 목적지 칸의 ID
+                            pieceID = attackPiece.NetworkId // 주위 도로를 변경 시킬 기물 ID
+                        };
 
-                    string json = JsonUtility.ToJson(pieceChangeRoadInfo);
+                        string json = JsonUtility.ToJson(pieceChangeRoadInfo);
 
-                    NetworkManager.Instance.Socket.Emit("pieceChangeRoad", json);
+                        NetworkManager.Instance.Socket.Emit("pieceChangeRoad", json);
+                    }
 
                     if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                         return; // 반환
@@ -83,6 +86,9 @@ namespace InGame.MyManager.MyPiece.Handler
                     case TutorialState.Turn2_Player:
                         TutorialManager.Instance.SetTutorialPanel(true, "보병과 광부는 원거리 공격을 당하면 즉시 파괴됩니다. \n 다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                         break;
+                    case TutorialState.Turn3_Player:
+                        TutorialManager.Instance.SetTutorialPanel(true, "상대가 전차간의 싸움에서 화력을 사용하지 않는다면 전차 또한 즉시 파괴됩니다. \n 다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        break;
                 }
             }
 
@@ -90,4 +96,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.19

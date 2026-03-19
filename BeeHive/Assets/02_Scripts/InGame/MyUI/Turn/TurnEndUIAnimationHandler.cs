@@ -3,6 +3,7 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MySystem;
+using MyUtil.GameMode;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -41,10 +42,11 @@ namespace InGame.MyUI.Turn
 
                     string json = JsonUtility.ToJson(destroyLeftRoadInfo); // Json으로 변환
 
-                    NetworkManager.Instance.Socket.Emit("destroyLeftRoad", json); // 서버에 이벤트 전달
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                        NetworkManager.Instance.Socket.Emit("destroyLeftRoad", json); // 서버에 이벤트 전달
                 }).AsyncWaitForCompletion(); // 사용하지 않은 도로 전부 삭제
 
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.19

@@ -6268,6 +6268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loadingCanvasGroup: {fileID: 548742259}
   _animationDuration: 0.1
+  _isTutorial: 1
 --- !u!4 &357439054
 Transform:
   m_ObjectHideFlags: 0
@@ -9019,7 +9020,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 300}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &488244177
@@ -24616,7 +24617,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 400}
+  m_AnchoredPosition: {x: 0, y: 100}
   m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1113354473
@@ -29487,9 +29488,9 @@ RectTransform:
   - {fileID: 1519092988}
   m_Father: {fileID: 1807623030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 450, y: -50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1403018764
@@ -36678,6 +36679,10 @@ PrefabInstance:
       propertyPath: 'nearRoadPlaceTransformList.Array.data[2]'
       value: 
       objectReference: {fileID: 1602719289}
+    - target: {fileID: 2539139066115289158, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a1f67c7870dede41839fe7d3b99849a, type: 2}
     - target: {fileID: 8244229074724728705, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.11564
@@ -39116,9 +39121,9 @@ RectTransform:
   - {fileID: 513927407}
   m_Father: {fileID: 1807623030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 150, y: -50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1830080114
@@ -41612,6 +41617,10 @@ PrefabInstance:
       propertyPath: 'nearRoadPlaceTransformList.Array.data[2]'
       value: 
       objectReference: {fileID: 1885514230}
+    - target: {fileID: 2539139066115289158, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a1f67c7870dede41839fe7d3b99849a, type: 2}
     - target: {fileID: 8244229074724728705, guid: ea686b78a859e724f8cb63e012a8a069, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.10741
@@ -42241,7 +42250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 40}
+  m_AnchoredPosition: {x: 0, y: -350}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1001 &2020531490
@@ -42787,7 +42796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2061174659
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42817,7 +42826,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061174658}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0

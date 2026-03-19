@@ -154,7 +154,8 @@ namespace InGame.MyObject
                         isMove = isMove // 생성인지 이동인지 여부
                     };
                     string json = JsonUtility.ToJson(pieceInfo); // Json으로 변환
-                    NetworkManager.Instance.Socket.Emit("movePiece", json); // 서버에 movePiece 이벤트 전달
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                        NetworkManager.Instance.Socket.Emit("movePiece", json); // 서버에 movePiece 이벤트 전달
                 }
 
                 HighLightOffEvent(); // 하이라이트 끄기
@@ -177,7 +178,8 @@ namespace InGame.MyObject
                         };
 
                         string pieceChangeRoadJson = JsonUtility.ToJson(pieceChangeRoadInfo);
-                        NetworkManager.Instance.Socket.Emit("pieceChangeRoad", pieceChangeRoadJson);
+                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                            NetworkManager.Instance.Socket.Emit("pieceChangeRoad", pieceChangeRoadJson);
 
                         PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, pieceBase.CurrentTeamType, pieceBase.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                     }
@@ -199,8 +201,8 @@ namespace InGame.MyObject
                         };
 
                         string castleAttackJson = JsonUtility.ToJson(castleAttackInfo); // Json 형태로 변환
-
-                        NetworkManager.Instance.Socket.Emit("castleAttack", castleAttackJson); // 서버로 성 공격 신호 보내기
+                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                            NetworkManager.Instance.Socket.Emit("castleAttack", castleAttackJson); // 서버로 성 공격 신호 보내기
                         pieceBase.PieceDestroy(); // 공격한 기물 파괴
                     }
                 }
@@ -245,6 +247,16 @@ namespace InGame.MyObject
                                     break;
                             }
                             break;
+                        case TutorialState.Turn3_Player: // 세 번째 턴(플레이어 턴)일 경우
+                            switch(pieceBase.CurrentObjectType) // 현재 기물이
+                            {
+                                case ObjectType.Soldier: // 보병일 경우
+                                    TutorialManager.Instance.SetTutorialPanel(true, "이제 전차를 사용하여 상대 전차를 파괴해봅시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.524f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 400f));
+                                    break;
+                                case ObjectType.Tank: // 전차일 경우
+                                    break;
+                            }
+                            break;
                     }
                 }
 
@@ -253,4 +265,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.19

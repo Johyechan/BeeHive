@@ -41,13 +41,14 @@ namespace Tutorial.FSM
 
         public TutorialFSMVariables(TutorialManagerData tutorialManagerData)
         {
+            machine = new StateMachine();
             introState = new TutorialIntroState();
             firstTurnPlayerState = new TutorialFirstTurnPlayerState();
             firstTurnAIState = new TutorialFirstTurnAIState(tutorialManagerData.firstTurnAIuseSoldier, tutorialManagerData.firstTurnAISoldierCreatePlace, tutorialManagerData.firstTurnAISoldierMovePlace);
             secondTurnPlayerState = new TutorialSecondTurnPlayerState();
             secondTurnAIState = new TutorialSecondTurnAIState(tutorialManagerData.secondTurnAIuseTank, tutorialManagerData.secondTurnAITankCreatePlace, tutorialManagerData.secondTurnAITankMovePlace, tutorialManagerData.confirmUI);
             thirdTurnPlayerState = new TutorialThirdTurnPlayerState(tutorialManagerData.confirmUI);
-            thirdTurnAIState = new TutorialThirdTurnAIState();
+            thirdTurnAIState = new TutorialThirdTurnAIState(tutorialManagerData.thirdTurnAIuseSoldier, tutorialManagerData.thirdTurnAISoldierCreatePlace, tutorialManagerData.thirdTurnAISoldierMovePlace);
             fourthTurnPlayerState = new TutorialFourthTurnPlayerState();
             endState = new TutorialEndState();
         }
@@ -67,4 +68,4 @@ namespace Tutorial.FSM
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.19

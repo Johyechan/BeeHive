@@ -2,6 +2,7 @@ using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyObject;
 using InGame.MyUI.MyUIInterface;
+using MyUtil.GameMode;
 using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
@@ -21,7 +22,8 @@ namespace InGame.MyUI.MyUIButton
 
             string json = JsonUtility.ToJson(gameOverInfo);
 
-            NetworkManager.Instance.Socket.Emit("gameOver", json);
+            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                NetworkManager.Instance.Socket.Emit("gameOver", json);
         }
     }
 }

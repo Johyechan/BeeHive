@@ -1,6 +1,7 @@
 using DG.Tweening;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
+using MyUtil.GameMode;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,7 +40,9 @@ namespace InGame.MyManager.Turn.Handler
         {
             try
             {
-                NetworkManager.Instance.Socket.Emit("turnTimerStart", SceneMgr.Instance.CurrentRoomID);
+                if(GameModeManager.Instance.CurrentGameMode.UseServer())
+                    NetworkManager.Instance.Socket.Emit("turnTimerStart", SceneMgr.Instance.CurrentRoomID);
+
                 await Task.Delay(time * 1000, token); // time초 만큼 대기 또는 token 취소 발생 시 대기 종료
 
                 TurnTimerEnd(timerSlider); // 턴 종료
@@ -61,10 +64,13 @@ namespace InGame.MyManager.Turn.Handler
                     completedTurn = (int)InGameContext.Current.Data.TurnManager.CurrentTurnType // 현재 완료한 턴
                 };
                 string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
-                NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 이벤트 전달
+
+                if(GameModeManager.Instance.CurrentGameMode.UseServer())
+                    NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 이벤트 전달
+
                 InGameContext.Current.Data.TurnManager.CanChangeTurn = false; // 턴 변경 가능 여부 false로 초기화
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.19

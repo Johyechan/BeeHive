@@ -9,7 +9,7 @@ namespace Tutorial.FSM.State
     {
         public void Enter()
         {
-            
+            TutorialManager.Instance.SetTutorialPanel(true, "수고하셨습니다.", "버튼 클릭", 0.2f, 0.008f, new Vector4(0.5f, 0.247f), new Vector4(1f, 0.3f), new Vector2(0, 400f));
         }
 
         public void Exit()
@@ -23,4 +23,4 @@ namespace Tutorial.FSM.State
         }
     }
 }
-// 마지막 작성 일자: 2026.03.12
+// 마지막 작성 일자: 2026.03.19

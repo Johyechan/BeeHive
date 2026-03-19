@@ -4,6 +4,7 @@ using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
+using MyUtil.GameMode;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -72,7 +73,8 @@ namespace InGame.MySystem.Game
             };
 
             string json = JsonUtility.ToJson(addRoadInfo); // 구조체를 Json 형태로 변환
-            NetworkManager.Instance.Socket.Emit("addRoad", json); // 서버에 이벤트 전달
+            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                NetworkManager.Instance.Socket.Emit("addRoad", json); // 서버에 이벤트 전달
 
             await Task.CompletedTask; // Task 완료 반환
         }
@@ -89,4 +91,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.02.18
+// 마지막 작성 일자: 2026.03.19

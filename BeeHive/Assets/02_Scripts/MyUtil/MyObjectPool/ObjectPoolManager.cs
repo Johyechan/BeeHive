@@ -5,6 +5,7 @@ using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyObject.Interface;
 using InGame.MyObject.Piece;
+using MyUtil.GameMode;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -134,7 +135,8 @@ namespace MyUtil.MyObjectPool
 
                 string json = JsonUtility.ToJson(makeObjectPoolInfo);
 
-                NetworkManager.Instance.Socket.Emit("makePoolObject", json);
+                if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                    NetworkManager.Instance.Socket.Emit("makePoolObject", json);
             }
         }
 
@@ -218,4 +220,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.03.03
+// 마지막 작성 일자: 2026.03.19
