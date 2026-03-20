@@ -40,6 +40,7 @@ namespace Tutorial.FSM.State.Second
 
         public void Exit()
         {
+            TutorialManager.Instance.InputOn = false;
             _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 두 번째 플레이어 턴)으로 변경
         }
 
@@ -89,6 +90,7 @@ namespace Tutorial.FSM.State.Second
                         _confirmUI.Confirm(result =>
                         {
                             TutorialManager.Instance.IsInputDelayOver = false;
+                            TutorialManager.Instance.InputOn = true;
                             TutorialManager.Instance.SetTutorialPanel(true, "전차간의 싸움에서는 화력을 소모하여 방어할 수 있습니다.", "엔터 클릭");
                             _confirmEnd = true;
                         }, "화력을 사용하여 방어하시겠습니까?");
@@ -104,4 +106,4 @@ namespace Tutorial.FSM.State.Second
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.20

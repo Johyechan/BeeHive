@@ -39,13 +39,24 @@ namespace InGame.MySystem
         private WalletObjectHandle _walletObjectHandle; // 지갑 관련 객체 핸들러
         public WalletObjectHandle WalletObjectHandle { get => _walletObjectHandle; } // 위 변수 프로퍼티
 
-        private void Awake()
+        private async void Awake()
         {
+            await GameReady.Gate.WaitAsync();
+
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial())
+            {
+                _goldBarCount = 9;
+            }
+
+
             _goldSetHandle = new GoldSetHandle(this);
+
             _walletUIHandle = new WalletUIHandle(_goldCoinTmpText, _goldBarTmpText, _goldBarMaxCount, _originColor);
+
             _walletObjectHandle = new WalletObjectHandle(_team1GoldCoinInterval, _team1GoldBarInterval, _team2GoldCoinInterval, _team2GoldBarInterval, _zInterval, _zValueChangeCount, _goldBarMaxCount, _originColor, _otherGoldCoinTmpText, _otherGoldBarTmpText);
 
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // 금화, 금괴 UI 초기화
+
         }
 
         private void OnEnable()
@@ -81,9 +92,9 @@ namespace InGame.MySystem
         {
             if(_goldBarCount >= _goldBarMaxCount) // 금괴 수가 최대 금괴 수 이상이라면
             {
-                UIManager.Instance.WarningUIMake("금괴가 이미 최대 개수 입니다");
                 return; // 반환
             }
+
             _goldBarCount += value; // 금괴 증가
 
             GoldSetEventEmit();

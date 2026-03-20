@@ -13,12 +13,9 @@ namespace MyUtil.FSM
         // 상태 변경 함수
         public void ChangeState(IState changeState)
         {
-            NetworkManager.Instance.Socket.Emit("debug", $"일단 변경 함수는 들어오는데");
             _currentState?.Exit(); // 현재 상태 탈출
-            NetworkManager.Instance.Socket.Emit("debug", $"이게 안된다고 진짜로");
 
             _currentState = changeState; // 현재 상태를 변경 상태로 할당
-            NetworkManager.Instance.Socket.Emit("debug", $"{_currentState}, 원래 바꿔야 할 거{changeState}");
 
             _currentState.Enter(); // 현재 상태 진입
         }

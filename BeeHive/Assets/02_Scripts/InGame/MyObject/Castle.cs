@@ -32,26 +32,55 @@ namespace InGame.MyObject
             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                 return; // 반환
 
-            if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
-                GetCastleHpTmpTxt().text = $"{NetworkManager.Instance.CurrentClientName}: {_currentHp} HP"; // UI 적용
+                if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
+                {
+                    GetCastleHpTmpTxt().text = $"나: {_currentHp} HP"; // UI 적용
+                }
+                else // 자기 성이 아닐 경우
+                {
+                    GetCastleHpTmpTxt(false).text = $"적: {_currentHp} HP"; // UI 적용
+                }
             }
-            else // 자기 성이 아닐 경우
+            else // 튜토리얼이 아닐 경우
             {
-                GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName}: {_currentHp} HP"; // UI 적용
+                if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
+                {
+                    GetCastleHpTmpTxt().text = $"{NetworkManager.Instance.CurrentClientName}: {_currentHp} HP"; // UI 적용
+                }
+                else // 자기 성이 아닐 경우
+                {
+                    GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName}: {_currentHp} HP"; // UI 적용
+                }
             }
         }
 
         public void CastleHit(int damage)
         {
             _currentHp -= damage;
-            if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
+
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
-                GetCastleHpTmpTxt().text = $"{NetworkManager.Instance.CurrentClientName} : {_currentHp} HP"; // UI 적용
+                if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
+                {
+                    GetCastleHpTmpTxt().text = $"나: {_currentHp} HP"; // UI 적용
+                }
+                else // 자기 성이 아닐 경우
+                {
+                    GetCastleHpTmpTxt(false).text = $"적: {_currentHp}  HP"; // UI 적용
+                }
             }
-            else // 자기 성이 아닐 경우
+            else // 튜토리얼이 아닐 경우
             {
-                GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName}: {_currentHp}  HP"; // UI 적용
+                if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
+                {
+                    GetCastleHpTmpTxt().text = $"{NetworkManager.Instance.CurrentClientName} : {_currentHp} HP"; // UI 적용
+                }
+                else // 자기 성이 아닐 경우
+                {
+                    GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName}: {_currentHp}  HP"; // UI 적용
+                }
             }
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
@@ -109,4 +138,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.20

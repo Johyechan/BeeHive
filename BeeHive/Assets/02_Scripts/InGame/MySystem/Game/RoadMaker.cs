@@ -1,5 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
+using InGame.MyManager.Global;
+using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
 using System;
 using UnityEngine;
@@ -54,8 +56,18 @@ namespace InGame.MySystem
                     break;
             }
 
-            ObjectPoolManager.Instance.MakeObject(objectPoolType, pos, parent, true, -1, _angle); // 도로 생성
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+            {
+                GameObject road = ObjectPoolManager.Instance.GetObject(objectPoolType, parent);
+                road.transform.localPosition = pos;
+                road.transform.Rotate(0, _angle, 0);
+                ObjectPoolManager.Instance.Animation(road, true, true);
+            }
+            else // 튜토리얼이 아닐 때
+            {
+                ObjectPoolManager.Instance.MakeObject(objectPoolType, pos, parent, true, -1, _angle); // 도로 생성
+            }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.03
+// 마지막 작성 일자: 2026.03.20

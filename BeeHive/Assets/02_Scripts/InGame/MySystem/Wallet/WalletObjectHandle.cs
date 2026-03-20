@@ -102,7 +102,7 @@ namespace InGame.MySystem
             {
                 int index = childCount + i;
                 GameObject obj = ObjectPoolManager.Instance.GetObject(type, parent); // 금화 또는 금괴 가져오기
-                obj.transform.localPosition = new Vector3(index % _zValueChangeCount * interval, 0, childCount / _zValueChangeCount * _zInterval); // 금 개수가 z축 값이 변경되는 개수 초과이면 z축으로 _zInterval만큼 올라가고 x축은 초기화 돼서 0부터 다시 interval 간격으로 배치
+                obj.transform.localPosition = new Vector3(index % _zValueChangeCount * interval, 0, index / _zValueChangeCount * _zInterval); // 금 개수가 z축 값이 변경되는 개수 초과이면 z축으로 _zInterval만큼 올라가고 x축은 초기화 돼서 0부터 다시 interval 간격으로 배치
                 ObjectPoolManager.Instance.Animation(obj, true, true); // 애니메이션 실행
             }
         }

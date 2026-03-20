@@ -1,3 +1,4 @@
+using InGame.MyManager.Global;
 using TMPro;
 using UnityEngine;
 

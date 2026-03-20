@@ -50,6 +50,7 @@ namespace InGame.MySystem.Game
             }
             else // 각 팀마다 첫 번째 턴이 아닐경우
             {
+                NetworkManager.Instance.Socket.Emit("debug", "그냥 이제 돈 벌자");
                 WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
             }
                 

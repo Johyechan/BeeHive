@@ -142,7 +142,10 @@ namespace InGame.MyManager.Local.Turn
                 }
                 else if(_currentTurnType == TurnType.DrawTurn || _currentTurnType == TurnType.MainTurn) // 드로우턴 또는 메인턴일 때
                 {
-                    _turnTimerHandler.TurnTimerStart(_turnTimerSlider, _turnDurationTime); // 턴 타이머 시작
+                    if(!GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼이 아닐 때
+                    {
+                        _turnTimerHandler.TurnTimerStart(_turnTimerSlider, _turnDurationTime); // 턴 타이머 시작
+                    }
                 }
                 else if (_currentTurnType == TurnType.TurnEnd) // 현재 턴이면서 턴 종료일 때
                 {

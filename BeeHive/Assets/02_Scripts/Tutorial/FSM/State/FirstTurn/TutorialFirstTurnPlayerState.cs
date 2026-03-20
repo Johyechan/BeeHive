@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyManager.Local;
 using MyUtil.Interface;
+using MyUtil.MyObjectPool;
 using Tutorial.MyEnum;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ namespace Tutorial.FSM.State.First
 
         public void Exit()
         {
+            TutorialManager.Instance.InputOn = false;
             _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 첫 번째 AI 턴)으로 변경
         }
 
@@ -58,6 +60,7 @@ namespace Tutorial.FSM.State.First
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MakeTurn); // 생성 턴으로 턴 넘기기
                         break;
                     case TurnType.MakeTurn: // 생성 턴일 경우
+                        TutorialManager.Instance.InputOn = true;
                         TutorialManager.Instance.SetTutorialPanel(true, "매 턴 도로가 2개 생성되고,", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.271f, 0.533f), new Vector4(0.55f, 0.55f));
                         SetCountAndTurn(TurnType.MakeTurn);
                         break;
@@ -83,4 +86,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.20

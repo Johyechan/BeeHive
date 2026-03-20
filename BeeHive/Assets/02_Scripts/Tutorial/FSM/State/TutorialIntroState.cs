@@ -15,7 +15,7 @@ namespace Tutorial.FSM.State
 
         public void Enter()
         {
-            NetworkManager.Instance.Socket.Emit("debug", "인트로 시작");
+            TutorialManager.Instance.InputOn = true;
             TutorialManager.Instance.IsInputDelayOver = false;
             _count = 0;
         }
@@ -24,7 +24,6 @@ namespace Tutorial.FSM.State
         {
             if(TutorialManager.Instance.IsInputDelayOver) // 인풋 딜레이가 지나고 인풋이 들어왔다면
             {
-                NetworkManager.Instance.Socket.Emit("debug", "인트로 상태에서 입력 인식");
                 _count++; // 카운팅
                 TutorialManager.Instance.IsInputDelayOver = false;
             }
@@ -32,13 +31,13 @@ namespace Tutorial.FSM.State
             switch(_count) // 카운팅 된 수가
             {
                 case 1:
-                    TutorialManager.Instance.SetTutorialPanel(true, "그리고 현재 당신의 체력입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.443f, 0.958f), new Vector4(1f, 0.3f));
+                    TutorialManager.Instance.SetTutorialPanel(true, "그리고 이건 당신의 체력입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.448f, 0.958f), new Vector4(1f, 0.3f));
                     break;
                 case 2:
-                    TutorialManager.Instance.SetTutorialPanel(true, "현재 상대의 성이고,", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.5f, 0.78f), new Vector4(1f, 1f));
+                    TutorialManager.Instance.SetTutorialPanel(true, "이건 상대의 성입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.5f, 0.78f), new Vector4(1f, 1f));
                     break;
                 case 3:
-                    TutorialManager.Instance.SetTutorialPanel(true, "그리고 현재 상대의 체력입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.565f, 0.958f), new Vector4(1.2f, 0.3f));
+                    TutorialManager.Instance.SetTutorialPanel(true, "그리고 이건 상대의 체력입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.55f, 0.958f), new Vector4(1f, 0.3f));
                     break;
                 case 4:
                     TutorialManager.Instance.SetTutorialPanel(true, "당신이 바라보는 시점의 성이 당신의 팀이니 유의합시다.", "엔터 클릭");
@@ -54,8 +53,9 @@ namespace Tutorial.FSM.State
 
         public void Exit()
         {
+            TutorialManager.Instance.InputOn = false;
             _ = InGameContext.Current.Data.TurnManager.TurnChange(TurnType.ChangeTeam); // 턴 시작
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.20

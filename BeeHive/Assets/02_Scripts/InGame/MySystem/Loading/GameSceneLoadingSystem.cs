@@ -21,12 +21,9 @@ namespace InGame.MySystem.Loading
 
         private async void Awake()
         {
-            NetworkManager.Instance.Socket.Emit("debug", "아니 오긴 해?");
-
             if (_isTutorial) // 튜토리얼인 경우
             {
                 GameModeManager.Instance.SetMode(new TutorialMode()); // 현재 게임 모드를 튜토리얼 모드로 할당
-                NetworkManager.Instance.Socket.Emit("debug", "그래 튜토리얼 모드다");
             }
             else // 튜토리얼이 아닐 경우
             {
@@ -41,8 +38,6 @@ namespace InGame.MySystem.Loading
 
             await LocalManagerReady.Gate.WaitAsync(); // 씬 내 매니저 세팅 대기
 
-            NetworkManager.Instance.Socket.Emit("debug", "씬 내 매니저 세팅 끝");
-
             if (!GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 씬이 아닐 때
                 await TeamManager.Instance.TeamSetTcs.Task; // 팀이 정해질 때까지 대기
             else // 튜토리얼인 경우
@@ -54,8 +49,6 @@ namespace InGame.MySystem.Loading
 
             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                 return; // 반환
-
-            NetworkManager.Instance.Socket.Emit("debug", "이벤트 준비 완료");
 
             TeamManagerEvents.OnNeedTeamManagerEvent?.Invoke(); // 팀 매니저가 필요한 함수들 실행 이벤트 호출
 
@@ -71,8 +64,6 @@ namespace InGame.MySystem.Loading
                 if (GameModeManager.Instance.CurrentGameMode.UseServer())
                     NetworkManager.Instance.Socket.Emit("turnStart", SceneMgr.Instance.CurrentRoomID);
             }
-
-            NetworkManager.Instance.Socket.Emit("debug", "그래 게임 준비가 끝났다");
 
             GameReady.Gate.Completed(); // 게임 준비 완료
         }

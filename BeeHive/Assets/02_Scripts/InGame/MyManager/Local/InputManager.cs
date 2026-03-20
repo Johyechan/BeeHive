@@ -41,7 +41,6 @@ namespace InGame.MyManager.Local
             _rClickAction.performed += ctx => UIEvents.OnShowUICardInformation?.Invoke();
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
-                NetworkManager.Instance.Socket.Emit("debug", "그래 엔터 키 등록했는데");
                 _enterClickAction = _playActionMap.FindAction("EnterClick"); // 액션 맵에서 EnterClick 이름을 가진 액션 탐색
                 _enterClickAction.Enable();
                 _enterClickAction.performed += TutorialManager.Instance.OnConfirm;

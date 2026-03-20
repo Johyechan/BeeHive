@@ -1,7 +1,9 @@
 using DG.Tweening;
+using InGame.MyEnum;
 using InGame.MyManager.Global;
 using MyUtil.GameMode;
 using MyUtil.Interface;
+using MyUtil.MyObjectPool;
 using Tutorial.Event;
 using Tutorial.FSM;
 using Tutorial.MyEnum;
@@ -26,6 +28,7 @@ namespace Tutorial
         public TutorialState CurrentTutorialState { get => _fsmVariables.currentState; }
 
         public bool TurnEnd { get; set; } // 턴 종료 확인 프로퍼티
+        public bool InputOn { get; set; } = false; // 인풋 허용 프로퍼티
 
         public bool IsInputDelayOver { get; set; } = false; // 인풋 대기 시간 종료 여부
 
@@ -139,7 +142,6 @@ namespace Tutorial
         public void ChangeTutorialState(TutorialState changeState)
         {
             _fsmVariables.currentState = changeState; // 현재 튜토리얼 상태를 변경 시킬 상태로 변경
-            NetworkManager.Instance.Socket.Emit("debug", $"{GetState(changeState)}");
             _fsmVariables.machine.ChangeState(GetState(changeState)); // 상태 변경
         }
 
@@ -151,15 +153,17 @@ namespace Tutorial
                 case TutorialState.Intro:
                 case TutorialState.Turn1_Player:
                 case TutorialState.Turn2_AI:
-                    if (Time.time >= _nextInputTime)
+                    if(InputOn) // 인풋이 허용 됐을 때
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", "클릭 입력 확인");
-                        IsInputDelayOver = true;
-                        _nextInputTime = Time.time + _tutorialManagerData.inputDelay; // 다음 클릭 가능 시간을 현재 시간 + 딜레이로 할당
+                        if (Time.time >= _nextInputTime)
+                        {
+                            IsInputDelayOver = true;
+                            _nextInputTime = Time.time + _tutorialManagerData.inputDelay; // 다음 클릭 가능 시간을 현재 시간 + 딜레이로 할당
+                        }
                     }
                     break;
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.20
