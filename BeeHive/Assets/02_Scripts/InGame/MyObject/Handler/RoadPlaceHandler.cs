@@ -14,8 +14,6 @@ namespace InGame.MyObject.Handler
     // 도로 배치 기능 핸들러
     public class RoadPlaceHandler
     {
-        private float _tutorialCreateCount = 0; // 튜토리얼에서 도로 생성 카운팅 변수
-
         public async Task Place(RoadPlacePlaneObject roadPlacePlane, PieceBase roadPiece, Transform roadParent, float roadAngle)
         {
             UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
@@ -49,15 +47,16 @@ namespace InGame.MyObject.Handler
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
-                if(_tutorialCreateCount <= 0) // 처음 도로를 생성하는 경우
+                if(TutorialManager.Instance.TutorialRoadCreateCount <= 0) // 처음 도로를 생성하는 경우
                 {
                     TutorialManager.Instance.SetTutorialPanel(true, "도로를 한 번 더 생성합시다. \n (도로는 가지고 있는 도로 개수만큼 중복 생성 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
-                    _tutorialCreateCount++;
+                    TutorialManager.Instance.TutorialRoadCreateCount++;
                 }
                 else // 두 번째 도로를 생성하는 경우
                 {
+                    NetworkManager.Instance.Socket.Emit("debug", "보병 배치해야함");
                     TutorialManager.Instance.SetTutorialPanel(true, "이번에는 보병을 생성합시다. \n (금괴가 부족하지 않다면 각 기물 당 하나 씩 생성 및 이동이 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.552f, 0.123f), new Vector4(0.3f, 0.3f));
-                    _tutorialCreateCount = 0;
+                    TutorialManager.Instance.TutorialRoadCreateCount = 0;
                 }
             }
 
@@ -66,4 +65,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.23

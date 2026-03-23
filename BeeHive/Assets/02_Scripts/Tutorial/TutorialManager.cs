@@ -29,8 +29,9 @@ namespace Tutorial
 
         public bool TurnEnd { get; set; } // 턴 종료 확인 프로퍼티
         public bool InputOn { get; set; } = false; // 인풋 허용 프로퍼티
-
         public bool IsInputDelayOver { get; set; } = false; // 인풋 대기 시간 종료 여부
+
+        public int TutorialRoadCreateCount { get; set; } = 0; // 도로 생성 개수
 
         private float _nextInputTime; // 다음 클릭 가능 시간
 
@@ -166,4 +167,4 @@ namespace Tutorial
         }
     }
 }
-// 마지막 작성 일자: 2026.03.20
+// 마지막 작성 일자: 2026.03.23

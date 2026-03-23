@@ -45,6 +45,7 @@ namespace Tutorial.FSM.State.First
                         case 2:
                             TutorialManager.Instance.SetTutorialPanel(false);
                             _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 넘기기
+                            _currentTurnType = TurnType.DrawTurn; // 현재 턴 변경(이걸 안하면 계속 생산 턴으로 인식하는 문제 발생)
                             break;
                     }
                     break;
@@ -66,11 +67,9 @@ namespace Tutorial.FSM.State.First
                         break;
                     case TurnType.DrawTurn: // 드로우 턴일 경우
                         TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 메인 턴을 진행합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
-                        SetCountAndTurn(TurnType.DrawTurn);
                         break;
                     case TurnType.MainTurn: // 메인 턴일 경우 
                         TutorialManager.Instance.SetTutorialPanel(true, "기물 버튼을 눌러 기물을 배치해봅시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.196f, 0.095f), new Vector4(0.7f, 0.7f));
-                        SetCountAndTurn(TurnType.MainTurn);
                         break;
                     case TurnType.TurnEnd: // 턴 종료 턴일 경우
                         TutorialManager.Instance.ChangeTutorialState(TutorialState.Turn1_AI); // 첫 번째 턴(AI 턴)으로 튜토리얼 상태 변경
@@ -86,4 +85,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.20
+// 마지막 작성 일자: 2026.03.23

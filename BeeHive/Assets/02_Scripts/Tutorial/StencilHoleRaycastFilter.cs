@@ -1,6 +1,7 @@
 using InGame.MyManager.Global;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Tutorial
 {
@@ -12,22 +13,21 @@ namespace Tutorial
 
         [SerializeField] private Material _stencilMat; // 스탠실 머티리얼
 
-        private Vector2 holeCenter = new(0.5f, 0.5f);
-        private Vector2 holeScale = Vector2.one;
+        private Vector2 _holeCenter = new(0.5f, 0.5f);
+        private Vector2 _holeScale = Vector2.one;
 
-        private float holeRadius = 0.45f;
+        private float _holeRadius = 0.45f;
         
         // 레이캐스트가 유효한 위치인지 확인하는 함수(화면 클릭 좌표, 카메라)
         public bool IsRaycastLocationValid(Vector2 sp, Camera eventCamera)
         {
-            NetworkManager.Instance.Socket.Emit("debug", "클릭 함수 들어왔다");
             RectTransformUtility.ScreenPointToLocalPointInRectangle(_rect, sp, eventCamera, out var local); // 클릭 위치를 UI 내부 위치로 변경(기준 UI 영역, 화면 클릭 좌표, 카메라, 변환된 로컬 좌표)
 
-            var realMat = _stencilMat.GetComponent<UnityEngine.UI.Graphic>().materialForRendering;
+            var realMat = _rect.GetComponent<Graphic>().materialForRendering;
 
-            holeCenter = realMat.GetVector("_HoleCenter");
-            holeScale = realMat.GetVector("_HoleScale");
-            holeRadius = realMat.GetFloat("_HoleRadius");
+            _holeCenter = realMat.GetVector("_HoleCenter");
+            _holeScale = realMat.GetVector("_HoleScale");
+            _holeRadius = realMat.GetFloat("_HoleRadius");
 
             var r = _rect.rect;
 
@@ -42,18 +42,18 @@ namespace Tutorial
                 // 그래서 셰이더에서 정한 구멍의 위치를 찾기 위해서 좌하단 기준 좌표로 변경을 하면서(원점으로 이동) 정규화를 진행(크기로 나누기)
 
             // 셰이더와 동일 계산 (클릭 위치와 구멍의 중앙 값과 얼마나 떨어졌는지 확인)
-            Vector2 offset = uv - holeCenter;
+            Vector2 offset = uv - _holeCenter;
 
             // 화면 비율 맞추기
             float aspect = (float)Screen.width / Screen.height;
             offset.x *= aspect;
 
-            offset /= holeScale;
+            offset /= _holeScale;
 
             float dist = offset.magnitude;
 
-            return dist >= holeRadius;
+            return dist >= _holeRadius;
         }
     }
 }
-// 마지막 작성 일자: 2026.03.20
+// 마지막 작성 일자: 2026.03.23
