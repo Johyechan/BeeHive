@@ -70,9 +70,6 @@ namespace InGame.MyObject.Piece.Handler
                             case ObjectType.Miner: // 광부 일 경우
                                 TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                 break;
-                            case ObjectType.Soldier: // 보병 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "공격 대상을 선택합시다. \n (공격 시 공격과 이동을 동시에 합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.479f, 0.635f), new Vector4(0.3f, 0.3f), new Vector2(0, 300f));
-                                break;
                         }
                         break;
                     case TutorialState.Turn2_Player: // 두 번째 턴(플레이어 턴)인 경우

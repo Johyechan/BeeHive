@@ -5,6 +5,7 @@ using InGame.MyManager.Local;
 using MyUtil.GameMode;
 using System;
 using Tutorial;
+using Tutorial.MyEnum;
 using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
@@ -50,16 +51,10 @@ namespace InGame.MyUI.MyUIButton
 
                 if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 현재 게임 모드가 튜토리얼일 경우
                 {
-                    switch(_canPlaceType)
+                    switch(TutorialManager.Instance.CurrentTutorialState)
                     {
-                        case ObjectType.Miner:
+                        case TutorialState.Turn1_Player:
                             TutorialManager.Instance.SetTutorialPanel(true, "광부 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
-                            break;
-                        case ObjectType.Soldier:
-                            TutorialManager.Instance.SetTutorialPanel(true, "보병 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
-                            break;
-                        case ObjectType.Tank:
-                            TutorialManager.Instance.SetTutorialPanel(true, "전차 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.526f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                             break;
                     }
                 }

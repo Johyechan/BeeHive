@@ -217,17 +217,11 @@ namespace InGame.MyObject
                                 case ObjectType.Miner: // 광부일 때
                                     if(isMove) // 이동된 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "이번에는 도로를 생성합시다. \n (도로 생성에는 금괴가 소모되지 않습니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                                     }
                                     else // 배치된 경우
                                     {
                                         TutorialManager.Instance.SetTutorialPanel(true, "광부를 클릭해서 이동을 합시다. \n (배치 이후 바로 이동이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
-                                    }
-                                    break;
-                                case ObjectType.Soldier:
-                                    if(!isMove) // 배치된 경우
-                                    {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "보병을 클릭해서 공격을 합시다. \n (배치 이후 바로 공격이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                     }
                                     break;
                             }

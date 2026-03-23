@@ -75,12 +75,12 @@ namespace InGame.MyUI.MyUIButton
                         case TutorialState.Turn1_Player: // 첫 번째 턴(플레이어 턴) 일 경우
                             if(_tutorialCreateCount == 0) // 처음 도로를 생성하는 경우
                             {
-                                TutorialManager.Instance.SetTutorialPanel(true, "도로를 연결해봅시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.465f, 0.547f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                TutorialManager.Instance.SetTutorialPanel(true, "도로를 생성해봅시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.4621f, 0.416f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                                 _tutorialCreateCount++;
                             }
                             else // 두 번째 도로를 생성하는 경우
                             {
-                                TutorialManager.Instance.SetTutorialPanel(true, "한 번 더 도로를 연결해봅시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.466f, 0.605f), new Vector4(0.3f, 0.3f), new Vector2(0, 300f));
+                                TutorialManager.Instance.SetTutorialPanel(true, "한 번 더 도로를 생성해봅시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.426f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                                 _tutorialCreateCount = 0;
                             }
                             break;

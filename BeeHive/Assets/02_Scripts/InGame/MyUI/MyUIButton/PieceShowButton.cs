@@ -41,7 +41,7 @@ namespace InGame.MyUI.MyUIButton
             switch(TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
             {
                 case TutorialState.Turn1_Player:
-                    TutorialManager.Instance.SetTutorialPanel(true, "광부를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.4475f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
+                    TutorialManager.Instance.SetTutorialPanel(true, "도로를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f)); // 가이드 패널 생성
                     break;
                 case TutorialState.Turn2_Player:
                     TutorialManager.Instance.SetTutorialPanel(true, "전차를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성

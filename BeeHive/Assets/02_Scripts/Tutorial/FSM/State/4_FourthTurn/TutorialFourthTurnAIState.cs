@@ -1,0 +1,26 @@
+using MyUtil.Interface;
+using UnityEngine;
+
+namespace Tutorial.FSM.State.Fourth
+{
+    // 작성자: 조혜찬
+    // 네 번째 턴(AI 턴) 상태
+    public class TutorialFourthTurnAIState : IState
+    {
+        public void Enter()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Exit()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}
+// 마지막 작성 일자: 2026.03.23

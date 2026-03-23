@@ -45,7 +45,7 @@ namespace InGame.MySystem
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial())
             {
-                _goldBarCount = 9;
+                _goldBarCount = 2;
             }
 
 
