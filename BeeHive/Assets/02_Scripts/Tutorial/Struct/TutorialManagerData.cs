@@ -1,7 +1,9 @@
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 using InGame.MyUI;
+using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -26,16 +28,24 @@ namespace Tutorial.Struct
         public PieceBase firstTurnAIuseSoldier; // 첫 번째 턴(AI 턴)에 사용할 보병
         public PiecePlacePlaneObject firstTurnAISoldierCreatePlace; // 첫 번째 턴(AI 턴)에 보병을 생성 시킬 위치
         public PiecePlacePlaneObject firstTurnAISoldierMovePlace; // 첫 번째 턴(AI 턴)에 보병을 이동 시킬 위치
+        public RoadPlacePlaneObject firstTurnAIFirstRoadPlacePlane; // 첫 번째 턴(AI 턴)에 첫 번째 도로 배치 칸
+        public RoadPlacePlaneObject firstTurnAISecondRoadPlacePlane; // 첫 번째 턴(AI 턴)에 두 번째 도로 배치 칸
 
-        public PieceBase secondTurnAIuseTank; // 첫 번째 턴(AI 턴)에 사용할 보병
-        public PiecePlacePlaneObject secondTurnAITankCreatePlace; // 첫 번째 턴(AI 턴)에 보병을 생성 시킬 위치
-        public PiecePlacePlaneObject secondTurnAITankMovePlace; // 첫 번째 턴(AI 턴)에 보병을 이동 시킬 위치
+        public PieceBase secondTurnAIuseSoldier; // 두 번째 턴(AI 턴)에 사용할 보병
+        public PiecePlacePlaneObject secondTurnAISoldierMovePlace; // 두 번째 턴(AI 턴)에 보병을 이동 시킬 위치
+        public RoadPlacePlaneObject secondTurnAIFirstRoadPlacePlane; // 두 번째 턴(AI 턴)에 첫 번째 도로 배치 칸
+        public RoadPlacePlaneObject secondTurnAISecondRoadPlacePlane; // 두 번째 턴(AI 턴)에 두 번째 도로 배치 칸
 
-        public PieceBase thirdTurnAIuseSoldier; // 첫 번째 턴(AI 턴)에 사용할 보병
-        public PiecePlacePlaneObject thirdTurnAISoldierCreatePlace; // 첫 번째 턴(AI 턴)에 보병을 생성 시킬 위치
-        public PiecePlacePlaneObject thirdTurnAISoldierMovePlace; // 첫 번째 턴(AI 턴)에 보병을 이동 시킬 위치
+        public PieceBase thirdTurnAIuseSoldier; // 세 번째 턴(AI 턴)에 사용할 보병
+        public PiecePlacePlaneObject thirdTurnAISoldierMovePlace; // 세 번째 턴(AI 턴)에 보병을 이동 시킬 위치
+
+        public Transform roadParent; // ai 도로 부모 객체
 
         public ConfirmUI confirmUI; // 첫 번째 턴(AI 턴)에 보병을 공격 시킬 위치
+
+        public List<PiecePlacePlaneObject> goldCoin1PlacePlanes; // 금화 1개 버는 위치 리스트
+        public List<PiecePlacePlaneObject> goldCoin3PlacePlanes; // 금화 3개 버는 위치 리스트
+        public List<PiecePlacePlaneObject> goldCoin5PlacePlanes; // 금화 5개 버는 위치 리스트
     }
 }
-// 마지막 작성 일자: 2026.03.20
+// 마지막 작성 일자: 2026.03.24

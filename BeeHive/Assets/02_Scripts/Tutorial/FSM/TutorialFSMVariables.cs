@@ -2,9 +2,13 @@ using MyUtil.FSM;
 using MyUtil.Interface;
 using System.Collections.Generic;
 using Tutorial.FSM.State;
+using Tutorial.FSM.State.Eighth;
+using Tutorial.FSM.State.Fifth;
 using Tutorial.FSM.State.First;
 using Tutorial.FSM.State.Fourth;
 using Tutorial.FSM.State.Second;
+using Tutorial.FSM.State.Seventh;
+using Tutorial.FSM.State.Sixth;
 using Tutorial.FSM.State.Third;
 using Tutorial.MyEnum;
 using Tutorial.Struct;
@@ -37,6 +41,22 @@ namespace Tutorial.FSM
 
         public TutorialFourthTurnPlayerState fourthTurnPlayerState; // 튜토리얼 네 번째(플레이어 턴) 상태
 
+        public TutorialFourthTurnAIState fourthTurnAIState; // 튜토리얼 네 번째(AI 턴) 상태
+
+        public TutorialFifthTurnPlayerState fifthTurnPlayerState; // 튜토리얼 다섯 번째(플레이어 턴) 상태
+
+        public TutorialFifthTurnAIState fifthTurnAIState; // 튜토리얼 다섯 번째(AI 턴) 상태
+
+        public TutorialSixthTurnPlayerState sixthTurnPlayerState; // 튜토리얼 여섯 번째(플레이어 턴) 상태
+
+        public TutorialSixthTurnAIState sixthTurnAIState; // 튜토리얼 여섯 번째(AI 턴) 상태
+
+        public TutorialSeventhTurnPlayerState seventhTurnPlayerState; // 튜토리얼 일곱 번째(플레이어 턴) 상태
+
+        public TutorialSeventhTurnAIState seventhTurnAIState; // 튜토리얼 일곱 번째(AI 턴) 상태
+
+        public TutorialEighthTurnPlayerState eighthTurnPlayerState; // 튜토리얼 여덟 번째(플레이어 턴) 상태
+
         public TutorialEndState endState; // 튜토리얼 종료 상태
 
         public TutorialFSMVariables(TutorialManagerData tutorialManagerData)
@@ -44,12 +64,20 @@ namespace Tutorial.FSM
             machine = new StateMachine();
             introState = new TutorialIntroState();
             firstTurnPlayerState = new TutorialFirstTurnPlayerState();
-            firstTurnAIState = new TutorialFirstTurnAIState(tutorialManagerData.firstTurnAIuseSoldier, tutorialManagerData.firstTurnAISoldierCreatePlace, tutorialManagerData.firstTurnAISoldierMovePlace);
-            secondTurnPlayerState = new TutorialSecondTurnPlayerState();
-            secondTurnAIState = new TutorialSecondTurnAIState(tutorialManagerData.secondTurnAIuseTank, tutorialManagerData.secondTurnAITankCreatePlace, tutorialManagerData.secondTurnAITankMovePlace, tutorialManagerData.confirmUI);
-            thirdTurnPlayerState = new TutorialThirdTurnPlayerState(tutorialManagerData.confirmUI);
-            thirdTurnAIState = new TutorialThirdTurnAIState(tutorialManagerData.thirdTurnAIuseSoldier, tutorialManagerData.thirdTurnAISoldierCreatePlace, tutorialManagerData.thirdTurnAISoldierMovePlace);
+            firstTurnAIState = new TutorialFirstTurnAIState(tutorialManagerData.firstTurnAIuseSoldier, tutorialManagerData.firstTurnAISoldierCreatePlace, tutorialManagerData.firstTurnAISoldierMovePlace, tutorialManagerData.roadParent, tutorialManagerData.firstTurnAIFirstRoadPlacePlane, tutorialManagerData.firstTurnAISecondRoadPlacePlane);
+            secondTurnPlayerState = new TutorialSecondTurnPlayerState(tutorialManagerData.goldCoin1PlacePlanes, tutorialManagerData.goldCoin3PlacePlanes, tutorialManagerData.goldCoin5PlacePlanes);
+            secondTurnAIState = new TutorialSecondTurnAIState(tutorialManagerData.secondTurnAIuseSoldier, tutorialManagerData.secondTurnAISoldierMovePlace, tutorialManagerData.roadParent, tutorialManagerData.secondTurnAIFirstRoadPlacePlane, tutorialManagerData.secondTurnAISecondRoadPlacePlane);
+            thirdTurnPlayerState = new TutorialThirdTurnPlayerState();
+            thirdTurnAIState = new TutorialThirdTurnAIState(tutorialManagerData.thirdTurnAIuseSoldier, tutorialManagerData.thirdTurnAISoldierMovePlace);
             fourthTurnPlayerState = new TutorialFourthTurnPlayerState();
+            fourthTurnAIState = new TutorialFourthTurnAIState();
+            fifthTurnPlayerState = new TutorialFifthTurnPlayerState();
+            fifthTurnAIState = new TutorialFifthTurnAIState();
+            sixthTurnPlayerState = new TutorialSixthTurnPlayerState();
+            sixthTurnAIState = new TutorialSixthTurnAIState();
+            seventhTurnPlayerState = new TutorialSeventhTurnPlayerState();
+            seventhTurnAIState = new TutorialSeventhTurnAIState();
+            eighthTurnPlayerState = new TutorialEighthTurnPlayerState();
             endState = new TutorialEndState();
         }
 
@@ -68,4 +96,4 @@ namespace Tutorial.FSM
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.24

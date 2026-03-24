@@ -13,6 +13,7 @@ namespace InGame.MyObject
     public class RoadPlacePlaneObject : PlacePlaneObjectBase
     {
         [SerializeField] private float _roadAngle; // 도로 배치시 도로의 회전 값
+        public float RoadAngle { get => _roadAngle; } // 도로의 회전 값 프로퍼티
 
         public List<PiecePlacePlaneObject> nearPiecePlaceTransformList = new(); // 가깝게 붙어있는 기물 칸을 저장하는 리스트
 
@@ -63,4 +64,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.03.17
+// 마지막 작성 일자: 2026.03.24

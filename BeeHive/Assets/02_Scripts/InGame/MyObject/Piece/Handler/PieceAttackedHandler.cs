@@ -8,6 +8,7 @@ using InGame.MyUI;
 using InGame.MyUI.Card;
 using MyUtil.GameMode;
 using System.Threading.Tasks;
+using Tutorial;
 using UnityEngine;
 
 namespace InGame.MyObject.Piece.Handler
@@ -49,10 +50,18 @@ namespace InGame.MyObject.Piece.Handler
                         HighLightOffFunction(false); // 배치칸 비활성화
                         _pieceData.confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include);
                         _pieceData.confirmUI.gameObject.SetActive(true); // 객체 활성화
+                        if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+                        {
+                            TutorialManager.Instance.SetTutorialPanel(true, "공격을 합시다.", "버튼 클릭", 0.08f, 0.008f, new Vector4(0.422f, 0.224f), new Vector4(1.2f, 0.3f), new Vector2(0, 450f));
+                        }
                         TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
 
                         _pieceData.confirmUI.Confirm(result =>
                         {
+                            if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+                            {
+                                TutorialManager.Instance.SetTutorialPanel(false);
+                            }
                             _pieceData.confirmUI.ConfirmEnd(); // 확인 완료
                             confirmResultTcs.TrySetResult(result); // 확인 결과(result) 할당
                         });
@@ -164,4 +173,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.24

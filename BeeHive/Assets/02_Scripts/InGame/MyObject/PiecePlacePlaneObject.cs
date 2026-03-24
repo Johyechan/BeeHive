@@ -229,25 +229,33 @@ namespace InGame.MyObject
                         case TutorialState.Turn2_Player: // 두 번째 턴(플레이어 턴) 일 경우
                             switch(pieceBase.CurrentObjectType) // 기물이
                             {
-                                case ObjectType.Tank: // 전차일 경우
+                                case ObjectType.Miner: // 전차일 경우
                                     if(isMove) // 이동된 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "전차는 이동 후에도 화력 카드가 있을 경우 \n 원거리 공격이 가능합니다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.524f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 300f));
+                                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                                     }
                                     else // 배치된 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "전차를 클릭해서 이동을 합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.526f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                        TutorialManager.Instance.SetTutorialPanel(true, "광부를 클릭해서 이동을 합시다. \n (배치 이후 바로 이동이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                     }
                                     break;
                             }
                             break;
-                        case TutorialState.Turn3_Player: // 세 번째 턴(플레이어 턴)일 경우
+                        case TutorialState.Turn4_Player: // 네 번째 턴(플레이어 턴)일 경우
                             switch(pieceBase.CurrentObjectType) // 현재 기물이
                             {
-                                case ObjectType.Soldier: // 보병일 경우
-                                    TutorialManager.Instance.SetTutorialPanel(true, "이제 전차를 사용하여 상대 전차를 파괴해봅시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.524f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 400f));
+                                case ObjectType.Miner: // 광부일 경우
+                                    TutorialManager.Instance.SetTutorialPanel(true, "이제 전차를 사용하여 상대 보병을 파괴해봅시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f));
                                     break;
                                 case ObjectType.Tank: // 전차일 경우
+                                    if(isMove) // 이동일 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "전차를 다시 선택하여 원거리 공격을 합시다.\n(전차는 이동 후 원거리 공격이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                    }
+                                    else // 생성일 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "전차를 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                    }
                                     break;
                             }
                             break;
@@ -259,4 +267,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.24

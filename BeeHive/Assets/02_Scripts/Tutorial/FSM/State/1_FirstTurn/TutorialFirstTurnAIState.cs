@@ -5,6 +5,7 @@ using InGame.MyObject;
 using InGame.MyObject.Piece;
 using InGame.MyObject.Piece.ObjectPieces;
 using MyUtil.Interface;
+using System.Threading.Tasks;
 using Tutorial.MyEnum;
 using UnityEngine;
 
@@ -19,11 +20,19 @@ namespace Tutorial.FSM.State.First
         private PiecePlacePlaneObject _createPlacePlane; // 생성 칸 객체
         private PiecePlacePlaneObject _movePlacePlane; // 이동 칸 객체
 
-        public TutorialFirstTurnAIState(PieceBase soldier, PiecePlacePlaneObject createPlacePlane, PiecePlacePlaneObject movePlacePlane)
+        private Transform _roadParent; // 도로 부모 객체
+
+        private RoadPlacePlaneObject _firstRoadPlacePlane; // 첫 번째 도로 배치 칸
+        private RoadPlacePlaneObject _secondRoadPlacePlane; // 두 번째 도로 배치 칸
+
+        public TutorialFirstTurnAIState(PieceBase soldier, PiecePlacePlaneObject createPlacePlane, PiecePlacePlaneObject movePlacePlane, Transform roadParent, RoadPlacePlaneObject firstRoadPlacePlane, RoadPlacePlaneObject secondRoadPlacePlane)
         {
             _soldier = soldier;
             _createPlacePlane = createPlacePlane;
             _movePlacePlane = movePlacePlane;
+            _roadParent = roadParent;
+            _firstRoadPlacePlane = firstRoadPlacePlane;
+            _secondRoadPlacePlane = secondRoadPlacePlane;
         }
 
         public void Enter()
@@ -55,20 +64,21 @@ namespace Tutorial.FSM.State.First
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MainTurn); // 메인 턴으로 턴 변경
                         break;
                     case TurnType.MainTurn: // 메인 턴이라면
-                        // 보병 생성 칸 상태 변경
-                        InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(_createPlacePlane, _soldier, false); 
 
-                        // 보병 생성 위치로 이동
-                        await _soldier.MoveToPlacePlane(_createPlacePlane.transform.parent, _createPlacePlane.transform.localPosition, false);
+                        // 첫 번째 도로 생성
+                        Road road = _roadParent.GetChild(_roadParent.childCount - 1).GetComponent<Road>(); // 도로 부모에서 도로 가져오기
+                        await TutorialManager.Instance.ObjectPlace(_firstRoadPlacePlane, road, false);
 
+                        // 두 번째 도로 생성
+                        road = _roadParent.GetChild(_roadParent.childCount - 1).GetComponent<Road>(); // 도로 부모에서 도로 가져오기
+                        await TutorialManager.Instance.ObjectPlace(_secondRoadPlacePlane, road, false);
+
+                        // 보병 생성
+                        await TutorialManager.Instance.ObjectPlace(_createPlacePlane, _soldier, false);
                         InGameContext.Current.Data.GameManager.CurrentMovePiece = _soldier.gameObject; // 현재 선택된 객체를 할당
 
-                        // 보병 이동 칸 상태 변경
-                        InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(_movePlacePlane, _soldier, true);
-
-                        // 보병 이동 위치로 이동
-                        await _soldier.MoveToPlacePlane(_movePlacePlane.transform.parent, _movePlacePlane.transform.localPosition, true);
-
+                        // 보병 이동
+                        await TutorialManager.Instance.ObjectPlace(_movePlacePlane, _soldier, true);
                         PieceEvents.OnChangeNearRoad?.Invoke(_soldier, _soldier.CurrentTeamType, _soldier.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
 
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.TurnEnd); // 턴 종료 턴으로 턴 변경
@@ -81,4 +91,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.24

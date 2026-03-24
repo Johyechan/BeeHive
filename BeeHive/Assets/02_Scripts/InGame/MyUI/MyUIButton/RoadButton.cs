@@ -84,6 +84,30 @@ namespace InGame.MyUI.MyUIButton
                                 _tutorialCreateCount = 0;
                             }
                             break;
+                        case TutorialState.Turn2_Player:
+                            if (_tutorialCreateCount == 0) // 처음 도로를 생성하는 경우
+                            {
+                                TutorialManager.Instance.SetTutorialPanel(true, "도로를 생성합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.39f, 0.485f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                _tutorialCreateCount++;
+                            }
+                            else // 두 번째 도로를 생성하는 경우
+                            {
+                                TutorialManager.Instance.SetTutorialPanel(true, "한 번 더 도로를 생성합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.356f, 0.516f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                _tutorialCreateCount = 0;
+                            }
+                            break;
+                        case TutorialState.Turn3_Player:
+                            if (_tutorialCreateCount == 0) // 처음 도로를 생성하는 경우
+                            {
+                                TutorialManager.Instance.SetTutorialPanel(true, "도로를 생성합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.394f, 0.546f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                _tutorialCreateCount++;
+                            }
+                            else // 두 번째 도로를 생성하는 경우
+                            {
+                                TutorialManager.Instance.SetTutorialPanel(true, "한 번 더 도로를 생성합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.464f, 0.485f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                _tutorialCreateCount = 0;
+                            }
+                            break;
                     }
                 }
 
@@ -97,4 +121,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.17
+// 마지막 작성 일자: 2026.03.24

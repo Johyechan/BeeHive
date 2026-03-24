@@ -16,21 +16,22 @@ namespace Tutorial.FSM.State.Second
     // 두 번째 턴(AI 턴) 상태 클래스
     public class TutorialSecondTurnAIState : IState
     {
-        private PieceBase _attackTank; // 생성 및 이동할 보병
+        private PieceBase _soldier; // 생성 및 이동할 보병
 
-        private PiecePlacePlaneObject _createPlacePlane; // 생성 칸 객체
         private PiecePlacePlaneObject _movePlacePlane; // 이동 칸 객체
 
-        private ConfirmUI _confirmUI; // 확인 UI
+        private Transform _roadParent; // 도로 부모 객체
 
-        private bool _confirmEnd = false; // 확인 종료
+        private RoadPlacePlaneObject _firstRoadPlacePlane; // 첫 번째 도로 배치 칸
+        private RoadPlacePlaneObject _secondRoadPlacePlane; // 두 번째 도로 배치 칸
 
-        public TutorialSecondTurnAIState(PieceBase tank, PiecePlacePlaneObject createPlacePlane, PiecePlacePlaneObject movePlacePlane, ConfirmUI confirmUI)
+        public TutorialSecondTurnAIState(PieceBase soldier, PiecePlacePlaneObject movePlacePlane, Transform roadParent, RoadPlacePlaneObject firstRoadPlacePlane, RoadPlacePlaneObject secondRoadPlacePlane)
         {
-            _attackTank = tank;
-            _createPlacePlane = createPlacePlane;
+            _soldier = soldier;
             _movePlacePlane = movePlacePlane;
-            _confirmUI = confirmUI;
+            _roadParent = roadParent;
+            _firstRoadPlacePlane = firstRoadPlacePlane;
+            _secondRoadPlacePlane = secondRoadPlacePlane;
         }
 
         public void Enter()
@@ -46,14 +47,7 @@ namespace Tutorial.FSM.State.Second
 
         public async void Update()
         {
-            if(_confirmEnd) // 확인이 끝났을 때
-            {
-                if (TutorialManager.Instance.IsInputDelayOver) // 인풋 딜레이가 지났나서 인풋이 들어왔다면
-                {
-                    _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.TurnEnd); // 턴 종료 턴으로 턴 변경
-                    TutorialManager.Instance.IsInputDelayOver = false;
-                }
-            }
+            
 
             if (TutorialManager.Instance.TurnEnd) // 현재 턴이 끝났을 때
             {
@@ -72,30 +66,22 @@ namespace Tutorial.FSM.State.Second
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MainTurn); // 메인 턴으로 턴 변경
                         break;
                     case TurnType.MainTurn: // 메인 턴이라면
-                        // 전차 생성 칸 상태 변경
-                        InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(_createPlacePlane, _attackTank, false);
 
-                        // 전차 생성 위치로 이동
-                        await _attackTank.MoveToPlacePlane(_createPlacePlane.transform.parent, _createPlacePlane.transform.localPosition, false);
+                        // 첫 번째 도로 생성
+                        Road road = _roadParent.GetChild(_roadParent.childCount - 1).GetComponent<Road>(); // 도로 부모에서 도로 가져오기
+                        await TutorialManager.Instance.ObjectPlace(_firstRoadPlacePlane, road, false);
 
-                        InGameContext.Current.Data.GameManager.CurrentMovePiece = _attackTank.gameObject;
+                        // 두 번째 도로 생성
+                        road = _roadParent.GetChild(_roadParent.childCount - 1).GetComponent<Road>(); // 도로 부모에서 도로 가져오기
+                        await TutorialManager.Instance.ObjectPlace(_secondRoadPlacePlane, road, false);
 
-                        // 전차 이동 칸 상태 변경
-                        InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(_movePlacePlane, _attackTank, true);
+                        InGameContext.Current.Data.GameManager.CurrentMovePiece = _soldier.gameObject; // 현재 선택된 객체를 할당
 
-                        // 전차 이동 위치로 이동
-                        await _attackTank.MoveToPlacePlane(_movePlacePlane.transform.parent, _movePlacePlane.transform.localPosition, true);
+                        // 보병 이동
+                        await TutorialManager.Instance.ObjectPlace(_movePlacePlane, _soldier, true);
+                        PieceEvents.OnChangeNearRoad?.Invoke(_soldier, _soldier.CurrentTeamType, _soldier.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
 
-                        _confirmUI.gameObject.SetActive(true);
-                        _confirmUI.Confirm(result =>
-                        {
-                            TutorialManager.Instance.IsInputDelayOver = false;
-                            TutorialManager.Instance.InputOn = true;
-                            TutorialManager.Instance.SetTutorialPanel(true, "전차간의 싸움에서는 화력을 소모하여 방어할 수 있습니다.", "엔터 클릭");
-                            _confirmEnd = true;
-                        }, "화력을 사용하여 방어하시겠습니까?");
-
-                        TutorialManager.Instance.SetTutorialPanel(true, "상대 전차의 공격을 방어합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.422f, 0.223f), new Vector4(1f, 0.3f), new Vector2(0, 400f));
+                        _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.TurnEnd); // 턴 종료 턴으로 턴 변경
 
                         break;
                     case TurnType.TurnEnd: // 턴 종료 턴이라면
@@ -106,4 +92,4 @@ namespace Tutorial.FSM.State.Second
         }
     }
 }
-// 마지막 작성 일자: 2026.03.20
+// 마지막 작성 일자: 2026.03.24

@@ -1,9 +1,13 @@
 using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
+using InGame.MyObject;
+using InGame.MyObject.Piece;
 using MyUtil.GameMode;
 using MyUtil.Interface;
 using MyUtil.MyObjectPool;
+using System.Threading.Tasks;
 using Tutorial.Event;
 using Tutorial.FSM;
 using Tutorial.MyEnum;
@@ -91,6 +95,23 @@ namespace Tutorial
             return null; // 아예 튜토리얼 상태 맵에 없다면 null 반환
         }
 
+        // AI 턴일 때 기물 배치 함수(배치 칸, 배치 기물, 이동 여부)
+        public Task ObjectPlace(PlacePlaneObjectBase placePlaneObject, PieceBase piece, bool isMove)
+        {
+            float angle = 0; // 각도
+
+            InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(placePlaneObject, piece, isMove);
+
+            RoadPlacePlaneObject roadPlacePlane = placePlaneObject as RoadPlacePlaneObject; // 도로 배치칸으로 형변환 시도
+
+            if (roadPlacePlane) // 도로 배치 칸일 경우 (null이 아닐 경우)
+            {
+                angle = roadPlacePlane.RoadAngle; // 도로 각도 할당
+            }
+
+            return piece.MoveToPlacePlane(placePlaneObject.transform.parent, placePlaneObject.transform.localPosition, isMove, angle);
+        }
+
         // 튜토리얼 UI 패널 세팅 함수
         public void SetTutorialPanel(bool showDimmer, string guideStr = "", string helpStr = "", float holeRadius = 0, float outlineWidth = 0, Vector4 holeCenter = default, Vector4 holeScale = default, Vector2 guideTxtPos = default)
         {
@@ -167,4 +188,4 @@ namespace Tutorial
         }
     }
 }
-// 마지막 작성 일자: 2026.03.23
+// 마지막 작성 일자: 2026.03.24

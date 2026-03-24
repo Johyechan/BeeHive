@@ -56,6 +56,12 @@ namespace InGame.MyUI.MyUIButton
                         case TutorialState.Turn1_Player:
                             TutorialManager.Instance.SetTutorialPanel(true, "광부 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                             break;
+                        case TutorialState.Turn2_Player:
+                            TutorialManager.Instance.SetTutorialPanel(true, "광부 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                            break;
+                        case TutorialState.Turn4_Player:
+                            TutorialManager.Instance.SetTutorialPanel(true, "전차 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                            break;
                     }
                 }
 

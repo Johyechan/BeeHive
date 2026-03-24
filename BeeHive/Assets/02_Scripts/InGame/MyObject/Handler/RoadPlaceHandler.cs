@@ -62,6 +62,30 @@ namespace InGame.MyObject.Handler
                             TutorialManager.Instance.TutorialRoadCreateCount = 0;
                         }
                         break;
+                    case TutorialState.Turn2_Player:
+                        if (TutorialManager.Instance.TutorialRoadCreateCount <= 0) // 처음 도로를 생성하는 경우
+                        {
+                            TutorialManager.Instance.SetTutorialPanel(true, "도로를 한 번 더 생성합시다.\n(도로는 가지고 있는 도로 개수만큼 중복 생성 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                            TutorialManager.Instance.TutorialRoadCreateCount++;
+                        }
+                        else // 두 번째 도로를 생성하는 경우
+                        {
+                            TutorialManager.Instance.SetTutorialPanel(true, "이제 광부를 생성합시다.\n(한 턴에 한 기물만 생성할 수 있습니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.4476f, 0.123f), new Vector4(0.3f, 0.3f));
+                            TutorialManager.Instance.TutorialRoadCreateCount = 0;
+                        }
+                        break;
+                    case TutorialState.Turn3_Player:
+                        if (TutorialManager.Instance.TutorialRoadCreateCount <= 0) // 처음 도로를 생성하는 경우
+                        {
+                            TutorialManager.Instance.SetTutorialPanel(true, "도로를 한 번 더 생성합시다.\n(도로는 가지고 있는 도로 개수만큼 중복 생성 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                            TutorialManager.Instance.TutorialRoadCreateCount++;
+                        }
+                        else // 두 번째 도로를 생성하는 경우
+                        {
+                            TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                            TutorialManager.Instance.TutorialRoadCreateCount = 0;
+                        }
+                        break;
                 }
                 
             }

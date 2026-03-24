@@ -75,28 +75,28 @@ namespace InGame.MyObject.Piece.Handler
                     case TutorialState.Turn2_Player: // 두 번째 턴(플레이어 턴)인 경우
                         switch(_pieceBase.CurrentObjectType) // 기물이
                         {
-                            case ObjectType.Tank: // 전차 일 경우
-                                if(_tutorialSelectedCount == 0) // 처음 선택하는 경우
-                                {
-                                    TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.524f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 300f));
-                                    _tutorialSelectedCount++;
-                                }
-                                else // 중복 선택하는 경우
-                                {
-                                    TutorialManager.Instance.SetTutorialPanel(true, "원거리 공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.545f, 0.576f), new Vector4(0.3f, 0.3f), new Vector2(0, 300f));
-                                    _tutorialSelectedCount = 0;
-                                }
+                            case ObjectType.Miner: // 광부 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.3325f, 0.516f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                 break;
                         }
                         break;
-                    case TutorialState.Turn3_Player: // 세 번째 턴(플레이어 턴) 일 경우
-                        switch(_pieceBase.CurrentObjectType) // 현재 기물이
+                    case TutorialState.Turn4_Player:
+                        switch (_pieceBase.CurrentObjectType) // 기물이
                         {
-                            case ObjectType.Soldier: // 보병일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "이동할 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.457f, 0.685f), new Vector4(0.3f, 0.3f), new Vector2(0, 400f));
+                            case ObjectType.Miner: // 광부 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.372f, 0.384f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                 break;
-                            case ObjectType.Tank: // 전차일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "공격할 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.546f, 0.576f), new Vector4(0.3f, 0.3f), new Vector2(0, 400f));
+                            case ObjectType.Tank: // 전차 일 경우
+                                if(_tutorialSelectedCount <= 0) // 처음 선택했다면
+                                {
+                                    TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                    _tutorialSelectedCount++;
+                                }
+                                else // 중복 선택 했다면
+                                {
+                                    TutorialManager.Instance.SetTutorialPanel(true, "원거리 공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.381f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                    _tutorialSelectedCount = 0;
+                                }
                                 break;
                         }
                         break;

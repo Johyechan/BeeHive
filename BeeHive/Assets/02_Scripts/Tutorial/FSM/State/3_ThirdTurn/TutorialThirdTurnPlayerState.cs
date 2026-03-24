@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyManager.Local;
 using InGame.MyUI;
 using MyUtil.Interface;
+using Tutorial.MyEnum;
 using UnityEngine;
 
 namespace Tutorial.FSM.State.Third
@@ -10,11 +11,9 @@ namespace Tutorial.FSM.State.Third
     // 세 번째 턴(플레이어 턴) 상태 클래스
     public class TutorialThirdTurnPlayerState : IState
     {
-        private ConfirmUI _confirmUI; // 확인 UI
-
-        public TutorialThirdTurnPlayerState(ConfirmUI confirmUI)
+        public TutorialThirdTurnPlayerState()
         {
-            _confirmUI = confirmUI;
+
         }
 
         public void Enter()
@@ -42,17 +41,17 @@ namespace Tutorial.FSM.State.Third
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 변경
                         break;
                     case TurnType.DrawTurn: // 드로우 턴이라면
-                        TutorialManager.Instance.SetTutorialPanel(true, "다시 한 번 더 카드를 뽑아봅시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.055f, 0.094f), new Vector4(0.75f, 0.7f));
+                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 메인 턴을 진행합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                         break;
                     case TurnType.MainTurn: // 메인 턴이라면
-                        TutorialManager.Instance.SetTutorialPanel(true, "보병을 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.479f, 0.635f), new Vector4(0.3f, 0.3f), new Vector2(0, 400f));
+                        TutorialManager.Instance.SetTutorialPanel(true, "도로를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
                         break;
                     case TurnType.TurnEnd: // 턴 종료 턴이라면
-                        TutorialManager.Instance.ChangeTutorialState(MyEnum.TutorialState.Turn3_AI); // 세 번째 턴(AI 턴) 상태로 변경
+                        TutorialManager.Instance.ChangeTutorialState(TutorialState.Turn3_AI); // 세 번째 턴(AI 턴) 상태로 변경
                         break;
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.24
