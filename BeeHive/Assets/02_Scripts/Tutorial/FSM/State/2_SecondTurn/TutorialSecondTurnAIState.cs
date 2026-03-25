@@ -16,7 +16,7 @@ namespace Tutorial.FSM.State.Second
     // 두 번째 턴(AI 턴) 상태 클래스
     public class TutorialSecondTurnAIState : IState
     {
-        private PieceBase _soldier; // 생성 및 이동할 보병
+        private PieceBase _soldier; // 이동할 보병
 
         private PiecePlacePlaneObject _movePlacePlane; // 이동 칸 객체
 
@@ -47,8 +47,6 @@ namespace Tutorial.FSM.State.Second
 
         public async void Update()
         {
-            
-
             if (TutorialManager.Instance.TurnEnd) // 현재 턴이 끝났을 때
             {
                 TutorialManager.Instance.TurnEnd = false; // 초기화

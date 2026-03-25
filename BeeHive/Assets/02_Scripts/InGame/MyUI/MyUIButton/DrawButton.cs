@@ -39,7 +39,7 @@ namespace InGame.MyUI.MyUIButton
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
-                TutorialManager.Instance.SetTutorialPanel(true, "뽑은 카드를 확인 합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.128f, 0.094f), new Vector4(0.65f, 0.65f));
+                TutorialManager.Instance.SetTutorialPanel(true, "뽑은 카드를 확인 합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.128f, 0.094f), new Vector4(0.7f, 0.7f));
             }
         }
     }

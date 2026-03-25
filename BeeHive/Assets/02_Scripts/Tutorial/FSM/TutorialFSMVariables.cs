@@ -70,11 +70,11 @@ namespace Tutorial.FSM
             thirdTurnPlayerState = new TutorialThirdTurnPlayerState();
             thirdTurnAIState = new TutorialThirdTurnAIState(tutorialManagerData.thirdTurnAIuseSoldier, tutorialManagerData.thirdTurnAISoldierMovePlace);
             fourthTurnPlayerState = new TutorialFourthTurnPlayerState();
-            fourthTurnAIState = new TutorialFourthTurnAIState();
+            fourthTurnAIState = new TutorialFourthTurnAIState(tutorialManagerData.fourthTurnAIuseTank, tutorialManagerData.fourthTurnAITankCreatePlace, tutorialManagerData.fourthTurnAITankMovePlace, tutorialManagerData.confirmUI);
             fifthTurnPlayerState = new TutorialFifthTurnPlayerState();
-            fifthTurnAIState = new TutorialFifthTurnAIState();
+            fifthTurnAIState = new TutorialFifthTurnAIState(tutorialManagerData.fifthTurnAIuseMiner, tutorialManagerData.fifthTurnAIMinerCreatePlace, tutorialManagerData.fifthTurnAIMinerMovePlace, tutorialManagerData.roadParent, tutorialManagerData.fifthTurnAIFirstRoadPlacePlane, tutorialManagerData.fifthTurnAISecondRoadPlacePlane);
             sixthTurnPlayerState = new TutorialSixthTurnPlayerState();
-            sixthTurnAIState = new TutorialSixthTurnAIState();
+            sixthTurnAIState = new TutorialSixthTurnAIState(tutorialManagerData.sixthTurnAIuseSoldier, tutorialManagerData.sixthTurnAISoldierCreatePlace, tutorialManagerData.sixthTurnAISoldierMovePlace);
             seventhTurnPlayerState = new TutorialSeventhTurnPlayerState();
             seventhTurnAIState = new TutorialSeventhTurnAIState();
             eighthTurnPlayerState = new TutorialEighthTurnPlayerState();
@@ -96,4 +96,4 @@ namespace Tutorial.FSM
         }
     }
 }
-// 마지막 작성 일자: 2026.03.24
+// 마지막 작성 일자: 2026.03.25

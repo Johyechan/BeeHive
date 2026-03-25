@@ -4,7 +4,10 @@ using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
+using MyUtil.GameMode;
+using System;
 using System.Threading.Tasks;
+using Tutorial.Event;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +15,7 @@ namespace InGame.MyInput
 {
     // 작성자: 조혜찬
     // 드로우 핸들러 클래스
-    public class InputDrawHandler
+    public class InputDrawHandler : IDisposable
     {
         private Deck _deck; // 덱 클래스 - 드로우 할 때 필요한 객체들을 가지는 클래스
 
@@ -28,6 +31,15 @@ namespace InGame.MyInput
             _canDraw = true;
             _delay = delay;
             _handlerData = handlerData;
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼일 때
+            {
+                TutorialEvents.OnTutorialDraw += Draw;
+            }
+        }
+
+        public void Dispose()
+        {
+            TutorialEvents.OnTutorialDraw -= Draw;
         }
 
         // 인풋 액션에 구독할 함수 오버라이드
@@ -78,7 +90,9 @@ namespace InGame.MyInput
             }
 
             _handlerData.socketEventHandler.CallSocketEvent();
+
+            await Task.CompletedTask;
         }
     }
 }
-// 마지막 작성 일자: 2026.02.26
+// 마지막 작성 일자: 2026.03.25

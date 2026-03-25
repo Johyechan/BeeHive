@@ -39,6 +39,20 @@ namespace Tutorial.Struct
         public PieceBase thirdTurnAIuseSoldier; // 세 번째 턴(AI 턴)에 사용할 보병
         public PiecePlacePlaneObject thirdTurnAISoldierMovePlace; // 세 번째 턴(AI 턴)에 보병을 이동 시킬 위치
 
+        public PieceBase fourthTurnAIuseTank; // 네 번째 턴(AI 턴)에 사용할 전차
+        public PiecePlacePlaneObject fourthTurnAITankCreatePlace; // 네 번째 턴(AI 턴)에 전차를 생성 시킬 위치
+        public PiecePlacePlaneObject fourthTurnAITankMovePlace; // 네 번째 턴(AI 턴)에 전차를 이동 시킬 위치
+
+        public PieceBase fifthTurnAIuseMiner; // 다섯 번째 턴(AI 턴)에 사용할 광부
+        public PiecePlacePlaneObject fifthTurnAIMinerCreatePlace; // 다섯 번째 턴(AI 턴)에 광부를 생성 시킬 위치
+        public PiecePlacePlaneObject fifthTurnAIMinerMovePlace; // 다섯 번째 턴(AI 턴)에 광부를 이동 시킬 위치
+        public RoadPlacePlaneObject fifthTurnAIFirstRoadPlacePlane; // 다섯 번째 턴(AI 턴)에 첫 번째 도로 배치 칸
+        public RoadPlacePlaneObject fifthTurnAISecondRoadPlacePlane; // 다섯 번째 턴(AI 턴)에 두 번째 도로 배치 칸
+
+        public PieceBase sixthTurnAIuseSoldier; // 여섯 번째 턴(AI 턴)에 사용할 보병
+        public PiecePlacePlaneObject sixthTurnAISoldierCreatePlace; // 여섯 번째 턴(AI 턴)에 보병을 생성 시킬 위치
+        public PiecePlacePlaneObject sixthTurnAISoldierMovePlace; // 여섯 번째 턴(AI 턴)에 보병을 이동 시킬 위치
+
         public Transform roadParent; // ai 도로 부모 객체
 
         public ConfirmUI confirmUI; // 첫 번째 턴(AI 턴)에 보병을 공격 시킬 위치
@@ -48,4 +62,4 @@ namespace Tutorial.Struct
         public List<PiecePlacePlaneObject> goldCoin5PlacePlanes; // 금화 5개 버는 위치 리스트
     }
 }
-// 마지막 작성 일자: 2026.03.24
+// 마지막 작성 일자: 2026.03.25

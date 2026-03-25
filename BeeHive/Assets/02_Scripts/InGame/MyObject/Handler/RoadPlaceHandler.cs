@@ -86,6 +86,18 @@ namespace InGame.MyObject.Handler
                             TutorialManager.Instance.TutorialRoadCreateCount = 0;
                         }
                         break;
+                    case TutorialState.Turn6_Player:
+                        if (TutorialManager.Instance.TutorialRoadCreateCount <= 0) // 처음 도로를 생성하는 경우
+                        {
+                            TutorialManager.Instance.SetTutorialPanel(true, "도로를 한 번 더 생성합시다.\n(도로는 가지고 있는 도로 개수만큼 중복 생성 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                            TutorialManager.Instance.TutorialRoadCreateCount++;
+                        }
+                        else // 두 번째 도로를 생성하는 경우
+                        {
+                            TutorialManager.Instance.SetTutorialPanel(true, "전차를 이동합시다.", "대상 클릭", 0.18f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                            TutorialManager.Instance.TutorialRoadCreateCount = 0;
+                        }
+                        break;
                 }
                 
             }
@@ -95,4 +107,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.23
+// 마지막 작성 일자: 2026.03.25

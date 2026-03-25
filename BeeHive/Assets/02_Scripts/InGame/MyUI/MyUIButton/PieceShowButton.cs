@@ -46,8 +46,14 @@ namespace InGame.MyUI.MyUIButton
                 case TutorialState.Turn2_Player:
                     TutorialManager.Instance.SetTutorialPanel(true, "전차를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
                     break;
+                case TutorialState.Turn6_Player:
+                    TutorialManager.Instance.SetTutorialPanel(true, "보병을 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.552f, 0.123f), new Vector4(0.3f, 0.3f));
+                    break;
+                case TutorialState.Turn8_Player:
+                    TutorialManager.Instance.SetTutorialPanel(true, "전차를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
+                    break;
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.25

@@ -100,9 +100,60 @@ namespace InGame.MyObject.Piece.Handler
                                 break;
                         }
                         break;
+                    case TutorialState.Turn5_Player:
+                        switch (_pieceBase.CurrentObjectType) // 기물이
+                        {
+                            case ObjectType.Tank: // 전차 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "원거리 공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.381f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                break;
+                        }
+                        break;
+                    case TutorialState.Turn6_Player:
+                        switch (_pieceBase.CurrentObjectType) // 기물이
+                        {
+                            case ObjectType.Miner: // 광부 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.453f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                break;
+                            case ObjectType.Soldier: // 보병 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.454f, 0.576f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                break;
+                            case ObjectType.Tank: // 전차 일 경우
+                                if (_tutorialSelectedCount <= 0) // 처음 선택했다면
+                                {
+                                    TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.543f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                }
+                                else // 중복 선택이라면
+                                {
+                                    TutorialManager.Instance.SetTutorialPanel(true, "공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.586f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                }
+                                break;
+                        }
+                        break;
+                    case TutorialState.Turn7_Player:
+                        switch (_pieceBase.CurrentObjectType) // 기물이
+                        {
+                            case ObjectType.Soldier: // 보병 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.543f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                break;
+                            case ObjectType.Tank: // 전차 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.52f, 0.734f), new Vector4(0.3f, 0.3f));
+                                break;
+                        }
+                        break;
+                    case TutorialState.Turn8_Player:
+                        switch (_pieceBase.CurrentObjectType) // 기물이
+                        {
+                            case ObjectType.Soldier: // 보병 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.52f, 0.734f), new Vector4(0.3f, 0.3f));
+                                break;
+                            case ObjectType.Tank: // 전차 일 경우
+                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.52f, 0.734f), new Vector4(0.3f, 0.3f));
+                                break;
+                        }
+                        break;
                 }
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.25

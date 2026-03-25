@@ -259,6 +259,56 @@ namespace InGame.MyObject
                                     break;
                             }
                             break;
+                        case TutorialState.Turn6_Player:
+                            switch (pieceBase.CurrentObjectType) // 현재 기물이
+                            {
+                                case ObjectType.Miner: // 광부일 경우
+                                    TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                                    break;
+                                case ObjectType.Soldier: // 보병일 경우
+                                    if(isMove) // 보병 이동일 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "도로를 연결합시다.", "대상 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                                    }
+                                    else // 보병 생성일 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "보병을 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                    } 
+                                    break;
+                                case ObjectType.Tank: // 전차일 경우
+                                    if (isMove) // 이동일 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                                    }
+                                    break;
+                            }
+                            break;
+                        case TutorialState.Turn7_Player:
+                            switch (pieceBase.CurrentObjectType) // 현재 기물이
+                            {
+                                case ObjectType.Soldier: // 보병일 경우
+                                    if (isMove) // 보병 이동일 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                                    }
+                                    break;
+                            }
+                            break;
+                        case TutorialState.Turn8_Player:
+                            switch (pieceBase.CurrentObjectType) // 현재 기물이
+                            {
+                                case ObjectType.Tank: // 전차일 경우
+                                    if (isMove) // 전차 이동일 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "보병을 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.543f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                    }
+                                    else // 전차 생성일 경우
+                                    {
+                                        TutorialManager.Instance.SetTutorialPanel(true, "전차를 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                    }
+                                    break;
+                            }
+                            break;
                     }
                 }
 
@@ -267,4 +317,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.03.24
+// 마지막 작성 일자: 2026.03.25

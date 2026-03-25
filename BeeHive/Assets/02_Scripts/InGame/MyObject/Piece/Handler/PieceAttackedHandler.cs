@@ -84,9 +84,11 @@ namespace InGame.MyObject.Piece.Handler
                         if (_pieceBase.CurrentObjectType == ObjectType.Tank) // 만약 공격 받는 기물도 전차라면
                         {
                             if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                            {
                                 NetworkManager.Instance.Socket.Emit("tankAttackedTank", SceneMgr.Instance.CurrentRoomID); // 상대 전차를 공격했다고 서버로 이벤트 호출
+                            }
 
-                            bool opponentChooseDefense = await InGameContext.Current.Data.PieceManager.OpponentChoice() == 1 ? true : false; // 상대가 결정할 때까지 대기
+                            bool opponentChooseDefense = GameModeManager.Instance.CurrentGameMode.UseServer() ? await InGameContext.Current.Data.PieceManager.OpponentChoice() == 1 ? true : false : false; // 상대가 결정할 때까지 대기(서버를 사용하지 않는 경우 바로 false 반환)
 
                             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                                 return; // 반환
@@ -173,4 +175,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.24
+// 마지막 작성 일자: 2026.03.25

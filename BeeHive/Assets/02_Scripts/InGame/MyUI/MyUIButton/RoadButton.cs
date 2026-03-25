@@ -108,6 +108,18 @@ namespace InGame.MyUI.MyUIButton
                                 _tutorialCreateCount = 0;
                             }
                             break;
+                        case TutorialState.Turn6_Player:
+                            if (_tutorialCreateCount == 0) // 처음 도로를 생성하는 경우
+                            {
+                                TutorialManager.Instance.SetTutorialPanel(true, "도로를 생성합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.5f, 0.632f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                _tutorialCreateCount++;
+                            }
+                            else // 두 번째 도로를 생성하는 경우
+                            {
+                                TutorialManager.Instance.SetTutorialPanel(true, "한 번 더 도로를 생성합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.533f, 0.659f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                _tutorialCreateCount = 0;
+                            }
+                            break;
                     }
                 }
 

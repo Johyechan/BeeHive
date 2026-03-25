@@ -18,7 +18,10 @@ namespace InGame.MyManager.MyPlacePlane.Handler
             {
                 // 배치된 기물의 이전 배치 칸 초기화
                 placedPiece.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None;
-                placedPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None;
+                if(!placedPiece.PieceVariable.currentPlacePlane.isNearToCastle) // 성 주위 배치 칸이 아닐 때
+                {
+                    placedPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None; // 배치 칸에서 판단하는 위에 올려진 기물 팀 초기화
+                }
                 placedPiece.PieceVariable.currentPlacePlane.PlacedPiece = null;
             }
 
@@ -45,4 +48,4 @@ namespace InGame.MyManager.MyPlacePlane.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.25

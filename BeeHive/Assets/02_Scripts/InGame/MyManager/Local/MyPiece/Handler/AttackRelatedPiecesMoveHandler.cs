@@ -3,6 +3,7 @@ using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyManager.MyPlacePlane;
+using InGame.MyObject;
 using InGame.MyObject.Piece;
 using MyUtil.GameMode;
 using System.Collections;
@@ -21,6 +22,8 @@ namespace InGame.MyManager.MyPiece.Handler
         public async Task AttackRelatedPiecesMove(PieceBase returnPiece, PieceBase attackPiece, Transform returnParent, Transform attackParent, Vector3 returnPos, Vector3 attackPos)
         {
             int isFirePowerAttack = returnPiece.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
+            bool isNearToCastle = returnPiece.PieceVariable.currentPlacePlane.isNearToCastle; // 공격 당하는 기물이 성 주위에 배치되어있다면
+            TeamType attackedTeam = returnPiece.PieceVariable.currentPlacePlane.TeamType; // 공격 당한 기물의 배치 칸의 팀 타입 저장
 
             InGameContext.Current.Data.GameManager.PieceCanMoveMap[attackPiece.CurrentObjectType] = false; // 공격 시 이동 한 것으로 판정
 
@@ -37,8 +40,11 @@ namespace InGame.MyManager.MyPiece.Handler
             }
             else // 공격 받은 기물이 원거리 공격 대상일 경우
             {
-                returnPiece.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None; 
-                returnPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None;
+                returnPiece.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None;
+                if(!isNearToCastle) // 성 주위 배치칸이 아닐 때
+                {
+                    returnPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None; // 배치 칸에 올라가 있는 팀 상태 변경
+                }
                 returnPiece.PieceVariable.currentPlacePlane.PlacedPiece = null;
             }
 
@@ -76,6 +82,13 @@ namespace InGame.MyManager.MyPiece.Handler
                 }
             }
 
+            if(isNearToCastle) // 성 주위가 공격 당했다면
+            {
+                Castle castle = TeamManager.Instance.GetCastle(attackedTeam); // 공격 당한 팀 성 가져오기
+                castle.CastleHit(attackPiece.Damage); // 성에 피해주기
+                attackPiece.PieceDestroy();
+            }
+
             if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 때
             {
                 switch (TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
@@ -83,11 +96,14 @@ namespace InGame.MyManager.MyPiece.Handler
                     case TutorialState.Turn4_Player:
                         TutorialManager.Instance.SetTutorialPanel(true, "보병과 광부는 원거리 공격을 당하면 즉시 파괴됩니다. \n 다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                         break;
-                    case TutorialState.Turn2_Player:
-                        TutorialManager.Instance.SetTutorialPanel(true, "보병은 이동한 위치 주변의 도로를 자신의 도로로 변경합니다. \n 다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
-                        break;
-                    case TutorialState.Turn3_Player:
+                    case TutorialState.Turn5_Player:
                         TutorialManager.Instance.SetTutorialPanel(true, "상대가 전차간의 싸움에서 화력을 사용하지 않는다면 전차 또한 즉시 파괴됩니다. \n 다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        break;
+                    case TutorialState.Turn6_Player:
+                        TutorialManager.Instance.SetTutorialPanel(true, "보병과 광부는 원거리 공격을 당하면 즉시 파괴됩니다. \n 이제 광부를 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.371f, 0.382f), new Vector4(0.3f, 0.3f));
+                        break;
+                    case TutorialState.Turn7_Player:
+                        TutorialManager.Instance.SetTutorialPanel(true, "상대 팀의 생성 위치에 공격을 가하면 상대 성에 피해를 줄 수 있습니다(상대 기물이 올려져 있다면 상대 기물이 파괴됨과 동시에 상대 성에 데미지도 가합니다.)\n이제 보병을 움직입시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.454f, 0.576f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                         break;
                 }
             }
@@ -96,4 +112,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.25
