@@ -1,6 +1,7 @@
 using InGame.MyUI.MyUIInterface;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI
 {
@@ -13,7 +14,8 @@ namespace InGame.MyUI
         public void OnUIClick()
         {
             GUIUtility.systemCopyBuffer = _roomID.text; // 방 ID 복사
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2025.11.06
+// 마지막 작성 일자: 2026.03.26

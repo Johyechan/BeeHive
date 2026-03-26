@@ -1,6 +1,7 @@
-using InGame.MyUI.MyUIInterface;
 using DG.Tweening;
+using InGame.MyUI.MyUIInterface;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -38,6 +39,7 @@ namespace InGame.MyUI.MyUIButton
             {
                 ClickAnimation(0, 0, false); // 햄버거 메뉴 뷰의 높이는 0, 햄버거 메뉴 아이콘의 z축 회전 값은 0, 햄버거 메뉴가 닫힌 상태로 변경
             }
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
 
         private void ClickAnimation(float height, float rotationValue, bool isOpen)
@@ -48,4 +50,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2025.07.01
+// 마지막 작성 일자: 2026.03.26

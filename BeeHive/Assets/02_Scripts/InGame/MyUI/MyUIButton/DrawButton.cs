@@ -41,7 +41,8 @@ namespace InGame.MyUI.MyUIButton
             {
                 TutorialManager.Instance.SetTutorialPanel(true, "뽑은 카드를 확인 합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.128f, 0.094f), new Vector4(0.7f, 0.7f));
             }
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.26

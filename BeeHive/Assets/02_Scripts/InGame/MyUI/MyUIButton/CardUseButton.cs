@@ -10,6 +10,7 @@ using MyUtil.MyObjectPool;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -39,6 +40,7 @@ namespace InGame.MyUI.MyUIButton
                     {
                         _canvasGroup.gameObject.SetActive(false);
                     }); // 객체 비활성화
+                    EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                     return; // 반환
                 }
 
@@ -53,8 +55,10 @@ namespace InGame.MyUI.MyUIButton
             else // ui 카드가 존재하지 않는다면
             {
                 UIManager.Instance.WarningUIMake("카드가 존재하지 않습니다");
+                EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return;
             }
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
 
         // UI 카드에 맞는 카드 객체를 뒤집는 함수
@@ -86,4 +90,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.26

@@ -14,7 +14,7 @@ namespace Tutorial.FSM.State.Seventh
     {
         public void Enter()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void Exit()

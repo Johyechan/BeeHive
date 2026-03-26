@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
 using System;

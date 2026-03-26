@@ -6,6 +6,7 @@ using MyUtil;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace InGame.MyUI.MyUIButton
@@ -81,7 +82,8 @@ namespace InGame.MyUI.MyUIButton
 
             string json = JsonConvert.SerializeObject(payload);
             NetworkManager.Instance.Socket.Emit("checkIsNickNameDuplicate", json); // 닉네임 중복 확인 이벤트 호출
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.26

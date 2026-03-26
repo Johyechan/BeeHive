@@ -1,5 +1,6 @@
 using InGame.MyUI.MyUIInterface;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace InGame.MyUI.MyUIButton
@@ -11,7 +12,8 @@ namespace InGame.MyUI.MyUIButton
         public void OnUIClick()
         {
             SceneManager.LoadScene(1);
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.01.05
+// 마지막 작성 일자: 2026.03.26

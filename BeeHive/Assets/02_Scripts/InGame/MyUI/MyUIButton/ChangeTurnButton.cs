@@ -7,6 +7,7 @@ using InGame.MyUI.MyUIInterface;
 using MyUtil.GameMode;
 using Tutorial;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace InGame.MyUI.MyUIButton
@@ -48,12 +49,14 @@ namespace InGame.MyUI.MyUIButton
                 {
                     if (GameModeManager.Instance.CurrentGameMode.UseServer())
                         NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 안됨");
+                    EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                     return; // 반환
                 }
                 if (!InGameContext.Current.Data.TurnManager.CanChangeTurn) // 턴 변경 가능 상태가 아닐 경우
                 {
                     if (GameModeManager.Instance.CurrentGameMode.UseServer())
                         NetworkManager.Instance.Socket.Emit("debug", "턴 변경 가능 상태 아님");
+                    EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                     return; // 반환
                 }
 
@@ -80,7 +83,8 @@ namespace InGame.MyUI.MyUIButton
                     }
                 }
             }
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.26

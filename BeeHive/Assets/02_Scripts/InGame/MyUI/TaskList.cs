@@ -1,5 +1,6 @@
 using InGame.MyManager;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

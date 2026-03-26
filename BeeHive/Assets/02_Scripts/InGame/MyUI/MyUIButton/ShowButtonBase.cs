@@ -1,6 +1,8 @@
 using DG.Tweening;
 using InGame.MyManager.Local;
 using InGame.MyUI.MyUIInterface;
+using System.Collections;
+using Tutorial;
 using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
@@ -18,6 +20,8 @@ namespace InGame.MyUI.MyUIButton
         [SerializeField] protected float _showDownYPos; // 안 보여주기 위한 Y축 값
         [SerializeField] protected float _animationDelay; // 애니메이션 실행 시간 변수
 
+        protected bool _animationEnd = false;
+
         private Sequence _seq;
 
         // 클릭 시 실행될 함수
@@ -28,7 +32,8 @@ namespace InGame.MyUI.MyUIButton
         {
             _seq = DOTween.Sequence()
                 .Append(showDownUI.DOAnchorPosY(showDownYPos, _animationDelay)) // 위 아래로만 움직일 것이기 때문에 앵커 포지션 Y축으로만 움직이는 DOTWEEN 함수 사용 - 우선 showDownYPos 위치로 _animationDelay 동안 Y축 이동
-                .Insert(_delayForNext, showUI.DOAnchorPosY(showYPos, _animationDelay)); // 위 아래로만 움직일 것이기 때문에 앵커 포지션 Y축으로만 움직이는 DOTWEEN 함수 사용 - showYPos 위치로 _delayForNext 초 후 _animationDelay 동안 Y축 이동
+                .Insert(_delayForNext, showUI.DOAnchorPosY(showYPos, _animationDelay))
+                .OnComplete(() => _animationEnd = true); // 위 아래로만 움직일 것이기 때문에 앵커 포지션 Y축으로만 움직이는 DOTWEEN 함수 사용 - showYPos 위치로 _delayForNext 초 후 _animationDelay 동안 Y축 이동
 
             InGameContext.Current.Data.ShowButtonManager.PlaySequence(_seq);
         }
@@ -41,6 +46,15 @@ namespace InGame.MyUI.MyUIButton
 
             InGameContext.Current.Data.ShowButtonManager.PlaySequence(_seq);
         }
+
+        // 튜토리얼 코루틴
+        protected virtual IEnumerator TutorialCo()
+        {
+            _animationEnd = false;
+            TutorialManager.Instance.SetTutorialPanel(false); // 투명 벽 생성
+
+            yield return new WaitUntil(() => _animationEnd); // _animationEnd가 true가 될 때까지 대기 후
+        }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.26

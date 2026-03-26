@@ -2,6 +2,7 @@ using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyUI.MyUIInterface;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -33,7 +34,8 @@ namespace InGame.MyUI.MyUIButton
                     socket.Emit("exile", json); // 서버에 leaveRoom 이벤트 전달
                 }
             }
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.03.26

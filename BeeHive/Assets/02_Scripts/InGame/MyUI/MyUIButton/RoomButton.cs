@@ -3,6 +3,7 @@ using InGame.MyManager.Global;
 using InGame.MyUI.MyUIInterface;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace InGame.MyUI.MyUIButton
@@ -45,7 +46,8 @@ namespace InGame.MyUI.MyUIButton
             {
                 NetworkManager.Instance.Socket.Emit("joinRoom", _roomID); // 서버에 방을 찾고 있다고 신호를 보냄
             }
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.02.11
+// 마지막 작성 일자: 2026.03.26

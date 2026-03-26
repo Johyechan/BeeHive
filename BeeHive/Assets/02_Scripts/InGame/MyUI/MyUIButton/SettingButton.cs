@@ -2,6 +2,7 @@ using DG.Tweening;
 using InGame.MyUI.MyUIInterface;
 using MyUtil;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -25,7 +26,9 @@ namespace InGame.MyUI.MyUIButton
             {
                 _canvasGroup.DOFade(1, _animationDuration); // 페이드 인
             });
+
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2025.11.07
+// 마지막 작성 일자: 2026.03.26

@@ -6,6 +6,8 @@ using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
 using MyUtil.GameMode;
 using System.Threading.Tasks;
+using Tutorial;
+using Tutorial.MyEnum;
 using UnityEngine;
 
 namespace InGame.MySystem.Game
@@ -31,51 +33,75 @@ namespace InGame.MySystem.Game
         // 금괴 획득 함수
         private async Task GetGoldBar()
         {
-            if (IsReturn()) return; // 반환해야할 조건을 충족했을 경우 반환
-
-            if(TeamManager.Instance.FirstTurn) // 각 팀마다 첫 번째 턴일 경우
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial())
             {
-                TeamManager.Instance.FirstTurn = false; // 첫 턴 종료
-                switch (TeamManager.Instance.CurrentTeamType)
+                switch (TutorialManager.Instance.CurrentTutorialState)
                 {
-                    case TeamType.Team1:
+                    case TutorialState.Turn1_Player: // 첫 번째 턴(플레이어 턴)
                         WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
                         break;
-                    case TeamType.Team2:
+                    case TutorialState.Turn1_AI: // 첫 번째 턴(AI 턴)
                         WalletEvent.OnGetGoldBar?.Invoke(3); // 금괴 3개 획득
                         break;
-                    default:
+                    default: // 다른 상태에서는
+                        WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
                         break;
                 }
             }
-            else // 각 팀마다 첫 번째 턴이 아닐경우
+            else
             {
-                NetworkManager.Instance.Socket.Emit("debug", "그냥 이제 돈 벌자");
-                WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
+                if (IsReturn()) return; // 반환해야할 조건을 충족했을 경우 반환
+
+                if (TeamManager.Instance.FirstTurn) // 각 팀마다 첫 번째 턴일 경우
+                {
+                    TeamManager.Instance.FirstTurn = false; // 첫 턴 종료
+                    switch (TeamManager.Instance.CurrentTeamType)
+                    {
+                        case TeamType.Team1:
+                            WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
+                            break;
+                        case TeamType.Team2:
+                            WalletEvent.OnGetGoldBar?.Invoke(3); // 금괴 3개 획득
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else // 각 팀마다 첫 번째 턴이 아닐경우
+                {
+                    WalletEvent.OnGetGoldBar?.Invoke(2); // 금괴 2개 획득
+                }
             }
-                
 
             await Task.CompletedTask; // Task 완료 반환
         }
 
         private async Task GetRoad()
         {
-            if (IsReturn()) return; // 반환해야할 조건을 충족했을 경우 반환
-
-            Transform roadParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType);
-            PieceEvents.OnGetRoad?.Invoke(2, TeamManager.Instance.CurrentTeamType, roadParent); // 도로 2개 획득
-
-            AddRoadInfo addRoadInfo = new AddRoadInfo()
+            if(!GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼이 아닐 때
             {
-                roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                roadCount = roadParent.transform.childCount, // 도로의 객체 수
-                teamType = (int)TeamManager.Instance.CurrentTeamType, // 팀 타입을 int형 강제형변환 후 저장
-                roadParentName = roadParent.name, // 현재 팀의 도로 객체 부모 명
-            };
+                if (IsReturn()) return; // 반환해야할 조건을 충족했을 경우 반환
 
-            string json = JsonUtility.ToJson(addRoadInfo); // 구조체를 Json 형태로 변환
-            if (GameModeManager.Instance.CurrentGameMode.UseServer())
-                NetworkManager.Instance.Socket.Emit("addRoad", json); // 서버에 이벤트 전달
+                Transform roadParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType);
+                PieceEvents.OnGetRoad?.Invoke(2, TeamManager.Instance.CurrentTeamType, roadParent); // 도로 2개 획득
+
+                AddRoadInfo addRoadInfo = new AddRoadInfo()
+                {
+                    roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                    roadCount = roadParent.transform.childCount, // 도로의 객체 수
+                    teamType = (int)TeamManager.Instance.CurrentTeamType, // 팀 타입을 int형 강제형변환 후 저장
+                    roadParentName = roadParent.name, // 현재 팀의 도로 객체 부모 명
+                };
+
+                string json = JsonUtility.ToJson(addRoadInfo); // 구조체를 Json 형태로 변환
+                if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                    NetworkManager.Instance.Socket.Emit("addRoad", json); // 서버에 이벤트 전달
+            }
+            else // 튜토리얼 일 때
+            {
+                Transform roadParent = TeamManager.Instance.GetRoadTransform(InGameContext.Current.Data.TurnManager.CurrentTeamType); // 현재 턴 팀의 도로 부모 가져오기
+                PieceEvents.OnGetRoad?.Invoke(2, InGameContext.Current.Data.TurnManager.CurrentTeamType, roadParent); // 도로 2개 획득(현재 턴의 팀)
+            }
 
             await Task.CompletedTask; // Task 완료 반환
         }
@@ -92,4 +118,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.26

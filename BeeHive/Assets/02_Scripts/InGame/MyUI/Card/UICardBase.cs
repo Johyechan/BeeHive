@@ -122,6 +122,7 @@ namespace InGame.MyUI.Card
         {
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
+                EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return; // 반환
             }
 
@@ -133,7 +134,9 @@ namespace InGame.MyUI.Card
             {
                 _uiCardVariable.clickedHandler.ShowAskPanel();
             }
+
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.26

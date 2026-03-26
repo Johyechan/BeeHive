@@ -57,11 +57,13 @@ namespace Tutorial.FSM.State.Sixth
                                 TutorialManager.Instance.SetTutorialPanel(true, "생성 위치 앞 지점에 상대 기물이 올라가 있을 경우 해당 위치의 생성은 막히게 됩니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.53f, 0.71f), new Vector4(1f, 1f));
                                 _currentTurnType = TurnType.TurnEnd;
                                 _guidetutorialEnd.SetResult(true);
+                                TutorialManager.Instance.InputOn = false;
                                 break;
                         }
                         break;
                 }
                 _count++;
+                TutorialManager.Instance.IsInputDelayOver = false;
             }
 
             if (TutorialManager.Instance.TurnEnd) // 현재 턴이 끝났을 때

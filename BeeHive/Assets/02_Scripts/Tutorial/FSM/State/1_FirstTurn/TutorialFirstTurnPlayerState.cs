@@ -40,12 +40,13 @@ namespace Tutorial.FSM.State.First
                     switch (_count) // 카운팅 된 개수가
                     {
                         case 1:
-                            TutorialManager.Instance.SetTutorialPanel(true, "금괴도 2개 생성됩니다.", "엔터 클릭", 0.16f, 0.008f, new Vector4(0.2f, 0.29f), new Vector4(1.5f, 0.6f));
+                            TutorialManager.Instance.SetTutorialPanel(true, "금괴도 2개 생성됩니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.17f, 0.257f), new Vector4(1.5f, 0.6f));
                             break;
                         case 2:
                             TutorialManager.Instance.SetTutorialPanel(false);
                             _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 넘기기
                             _currentTurnType = TurnType.DrawTurn; // 현재 턴 변경(이걸 안하면 계속 생산 턴으로 인식하는 문제 발생)
+                            TutorialManager.Instance.InputOn = false;
                             break;
                     }
                     break;

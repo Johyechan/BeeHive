@@ -3,6 +3,7 @@ using InGame.MyManager.Global;
 using InGame.MyUI.MyUIInterface;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace InGame.MyUI
@@ -31,13 +32,15 @@ namespace InGame.MyUI
             else
             {
                 UIManager.Instance.WarningUIMake("공개 여부를 선택하세요");
+                EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return;
             }
 
             string json = JsonUtility.ToJson(roomValue); // JSON 형태로 감싸기
 
             NetworkManager.Instance.Socket.Emit("createRoom", json); // 방 생성을 서버에 요청
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.02.11
+// 마지막 작성 일자: 2026.03.26

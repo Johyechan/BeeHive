@@ -1,11 +1,12 @@
-using InGame.MyUI.MyUIInterface;
-using UnityEngine;
 using DG.Tweening;
-using MyUtil.MyObjectPool;
+using InGame.MyManager.Global;
+using InGame.MyUI.MyUIInterface;
 using MyUtil.GameMode;
+using MyUtil.MyObjectPool;
 using Tutorial;
 using Tutorial.MyEnum;
-using InGame.MyManager.Global;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI
 {
@@ -39,7 +40,8 @@ namespace InGame.MyUI
                         _targetPanel.gameObject.SetActive(false); // 비활성화
                     }
                 });
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.26

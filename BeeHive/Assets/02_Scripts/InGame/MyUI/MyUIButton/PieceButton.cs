@@ -7,6 +7,7 @@ using System;
 using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -19,15 +20,22 @@ namespace InGame.MyUI.MyUIButton
         {
             // 현재 턴이 메인 턴이 아니라면
             if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 생성할 수 없습니다."))
+            {
+                EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return; // 반환
+            }
 
             if (!WarningEvent.OnCanMakePiece.Invoke()) // 생성이 불가능하다면
             {
+                EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return;
             }
 
             if (!UIManager.Instance.CanInteractionUI) // 만약 UI 상호작용 불가능 상태라면
+            {
+                EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return; // 반환
+            }
 
             if (!_isHighLightOn) // 하이라이트가 꺼져 있을 때
             {
@@ -89,7 +97,9 @@ namespace InGame.MyUI.MyUIButton
                     HighLightEvents.SelectedPlacementType = ObjectType.None; // 아무것도 배치할 수 없는 타입으로 초기화
                 }
             }
+
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.26

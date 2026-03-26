@@ -49,37 +49,37 @@ namespace Tutorial.FSM.State.Second
                         switch (_count)
                         {
                             case 0:
-                                TutorialManager.Instance.SetTutorialPanel(true, "이번 턴에 벌린 금화는 광부가 생산한 것입니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.17f, 0.37f), new Vector4(0.8f, 0.3f));
-                                break;
-                            case 1:
                                 TutorialManager.Instance.SetTutorialPanel(true, "광부는 위치에 따라 금화를 다르게 법니다.", "엔터 클릭");
                                 break;
-                            case 2:
+                            case 1:
                                 HightLightOnOff(_goldCoin1PlacePlanes, true);
-                                TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 1개를 법니다.", "엔터 클릭");
+                                TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 1개를 법니다.", "엔터 클릭", 0, 0, default, default, new Vector2(0, 100f));
                                 break;
-                            case 3:
+                            case 2:
                                 HightLightOnOff(_goldCoin1PlacePlanes, false);
                                 HightLightOnOff(_goldCoin3PlacePlanes, true);
-                                TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 3개를 법니다.", "엔터 클릭");
+                                TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 3개를 법니다.", "엔터 클릭", 0, 0, default, default, new Vector2(0, 450f));
                                 break;
-                            case 4:
+                            case 3:
                                 HightLightOnOff(_goldCoin3PlacePlanes, false);
                                 HightLightOnOff(_goldCoin5PlacePlanes, true);
-                                TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 5개를 법니다.\n(금화 5개가 모이면 금괴 1개로 전환됩니다.)", "엔터 클릭");
+                                TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 5개를 법니다.\n(금화 5개가 모이면 금괴 1개로 전환됩니다.)", "엔터 클릭", 0, 0, default, default, new Vector2(0, 450f));
                                 break;
-                            case 5:
+                            case 4:
                                 HightLightOnOff(_goldCoin5PlacePlanes, false);
                                 TutorialManager.Instance.SetTutorialPanel(true, "이어서 진행하겠습니다.", "엔터 클릭");
                                 break;
-                            case 6:
+                            case 5:
+                                TutorialManager.Instance.SetTutorialPanel(false);
                                 _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn);
                                 _currentTurnType = TurnType.DrawTurn;
+                                TutorialManager.Instance.InputOn = false;
                                 break;
                         }
                         break;
                 }
                 _count++;
+                TutorialManager.Instance.IsInputDelayOver = false;
             }
 
             if(TutorialManager.Instance.TurnEnd) // 현재 턴이 종료 되었을 때
@@ -92,6 +92,7 @@ namespace Tutorial.FSM.State.Second
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MakeTurn); // 생산 턴으로 턴 넘기기
                         break;
                     case TurnType.MakeTurn: // 생산 턴일 때
+                        TutorialManager.Instance.SetTutorialPanel(true, "이번 턴에 벌린 금화는 광부가 생산한 것입니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.17f, 0.37f), new Vector4(0.8f, 0.3f));
                         TutorialManager.Instance.InputOn = true;
                         _count = 0;
                         _currentTurnType = TurnType.MakeTurn;
@@ -125,4 +126,4 @@ namespace Tutorial.FSM.State.Second
         }
     }
 }
-// 마지막 작성 일자: 2026.03.24
+// 마지막 작성 일자: 2026.03.26

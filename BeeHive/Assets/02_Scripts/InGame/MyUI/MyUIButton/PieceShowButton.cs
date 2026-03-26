@@ -5,6 +5,7 @@ using System.Collections;
 using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -29,16 +30,15 @@ namespace InGame.MyUI.MyUIButton
                     StartCoroutine(TutorialCo());
                 }
             }
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
 
         // 튜토리얼 코루틴
-        private IEnumerator TutorialCo()
+        protected override IEnumerator TutorialCo()
         {
-            TutorialManager.Instance.SetTutorialPanel(false); // 투명 벽 생성
+            yield return base.TutorialCo(); // 부모 코루틴 대기
 
-            yield return new WaitForSeconds(_animationDelay); // _animationDelay 만큼 대기 후
-
-            switch(TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
+            switch (TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
             {
                 case TutorialState.Turn1_Player:
                     TutorialManager.Instance.SetTutorialPanel(true, "도로를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f)); // 가이드 패널 생성
@@ -56,4 +56,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.25
+// 마지막 작성 일자: 2026.03.26

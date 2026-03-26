@@ -36,12 +36,11 @@ namespace Tutorial.FSM.State.Second
 
         public void Enter()
         {
-            TutorialManager.Instance.IsInputDelayOver = false;
+
         }
 
         public void Exit()
         {
-            TutorialManager.Instance.InputOn = false;
             _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 두 번째 플레이어 턴)으로 변경
         }
 

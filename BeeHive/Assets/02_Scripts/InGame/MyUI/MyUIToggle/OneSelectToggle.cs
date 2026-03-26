@@ -33,6 +33,7 @@ namespace InGame.MyUI.MyUIToggle
                 _currentToggle.isOn = true; // 현재 토글(내 토글) 키기
                 _otherToggle.isOn = false; // 다른 토글 끄기
             }
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
 
         // 마우스 포인터가 올려져 있을 경우
@@ -48,4 +49,4 @@ namespace InGame.MyUI.MyUIToggle
         }
     }
 }
-// 마지막 작성 일자: 2025.09.29
+// 마지막 작성 일자: 2026.03.26

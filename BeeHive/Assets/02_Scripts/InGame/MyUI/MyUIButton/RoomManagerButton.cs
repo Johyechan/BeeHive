@@ -1,6 +1,7 @@
 using InGame.MyUI.MyUIInterface;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -19,7 +20,8 @@ namespace InGame.MyUI.MyUIButton
         {
             _roomManagerChangeButton.TargetIndex = _targetIndex; // 방장 대상 인덱스를 변경될 방장의 인덱스로 설정
             _askText.text = "방장을 넘기시겠습니까?"; // 텍스트 설정
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2025.08.11
+// 마지막 작성 일자: 2026.03.26

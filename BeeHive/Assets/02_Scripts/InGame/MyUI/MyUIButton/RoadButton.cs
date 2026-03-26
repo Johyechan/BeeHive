@@ -7,6 +7,7 @@ using System;
 using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -34,6 +35,7 @@ namespace InGame.MyUI.MyUIButton
             // 현재 턴이 메인 턴이 아니라면
             if (!isWarning)
             {
+                EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return; // 반환
             }
 
@@ -41,6 +43,7 @@ namespace InGame.MyUI.MyUIButton
             {
                 if (GameModeManager.Instance.CurrentGameMode.UseServer())
                     NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 불가 상태");
+                EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return; // 반환
             }
 
@@ -130,7 +133,9 @@ namespace InGame.MyUI.MyUIButton
                 HighLightEvents.SelectedPlacementType = ObjectType.None; // 아무것도 배치 할 수 없는 타입으로 초기화
                 HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 배치 가능한 도로 칸 하이라이트 끄기
             }
+
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.03.24
+// 마지막 작성 일자: 2026.03.26

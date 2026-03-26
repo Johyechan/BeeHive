@@ -4,6 +4,7 @@ using InGame.MyObject;
 using InGame.MyUI.MyUIInterface;
 using MyUtil.GameMode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -24,7 +25,9 @@ namespace InGame.MyUI.MyUIButton
 
             if (GameModeManager.Instance.CurrentGameMode.UseServer())
                 NetworkManager.Instance.Socket.Emit("gameOver", json);
+
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.26

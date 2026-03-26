@@ -1,8 +1,11 @@
 using InGame.MyEnum;
 using InGame.MyManager.Local;
 using MyUtil.GameMode;
+using System.Collections;
 using Tutorial;
+using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -24,10 +27,19 @@ namespace InGame.MyUI.MyUIButton
 
                 if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
                 {
-                    TutorialManager.Instance.SetTutorialPanel(true, "카드를 확인 해봅시다.", "대상 우클릭", 0.1f, 0.008f, new Vector4(0.5f, 0.15f), new Vector4(1.2f, 1.2f));
+                    StartCoroutine(TutorialCo());
                 }
             }
+
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
+        }
+
+        protected override IEnumerator TutorialCo()
+        {
+            yield return base.TutorialCo(); // 부모 코루틴 대기
+
+            TutorialManager.Instance.SetTutorialPanel(true, "카드를 확인 해봅시다.", "대상 우클릭", 0.1f, 0.008f, new Vector4(0.5f, 0.15f), new Vector4(1.2f, 1.2f));
         }
     }
 }
-// 마지막 작성 일자: 2026.03.18
+// 마지막 작성 일자: 2026.03.26

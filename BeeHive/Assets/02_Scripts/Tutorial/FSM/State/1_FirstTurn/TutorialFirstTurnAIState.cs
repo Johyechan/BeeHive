@@ -1,5 +1,6 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
+using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
@@ -25,6 +26,8 @@ namespace Tutorial.FSM.State.First
         private RoadPlacePlaneObject _firstRoadPlacePlane; // 첫 번째 도로 배치 칸
         private RoadPlacePlaneObject _secondRoadPlacePlane; // 두 번째 도로 배치 칸
 
+        private TurnType _currentTurnType; // 현재 턴
+
         public TutorialFirstTurnAIState(PieceBase soldier, PiecePlacePlaneObject createPlacePlane, PiecePlacePlaneObject movePlacePlane, Transform roadParent, RoadPlacePlaneObject firstRoadPlacePlane, RoadPlacePlaneObject secondRoadPlacePlane)
         {
             _soldier = soldier;
@@ -37,17 +40,33 @@ namespace Tutorial.FSM.State.First
 
         public void Enter()
         {
-
+            TutorialManager.Instance.IsInputDelayOver = false;
         }
 
         public void Exit()
         {
+            TutorialManager.Instance.InputOn = false;
             _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 두 번째 플레이어 턴)으로 변경
         }
 
         public async void Update()
         {
-            if(TutorialManager.Instance.TurnEnd) // 현재 턴이 끝났을 때
+            if (TutorialManager.Instance.IsInputDelayOver) // 인풋이 딜레이 이후 들어오면
+            {
+                switch(_currentTurnType)
+                {
+                    case TurnType.MakeTurn:
+                        NetworkManager.Instance.Socket.Emit("debug", "엔터 입력 받음");
+                        _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 변경
+                        TutorialManager.Instance.SetTutorialPanel(false);
+                        _currentTurnType = TurnType.DrawTurn;
+                        TutorialManager.Instance.InputOn = false;
+                        break;
+                }
+                TutorialManager.Instance.IsInputDelayOver = false;
+            }
+
+            if (TutorialManager.Instance.TurnEnd) // 현재 턴이 끝났을 때
             {
                 TutorialManager.Instance.TurnEnd = false; // 초기화
                 switch(InGameContext.Current.Data.TurnManager.CurrentTurnType) // 현재 턴이
@@ -56,15 +75,17 @@ namespace Tutorial.FSM.State.First
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MakeTurn); // 생성 턴으로 턴 변경
                         break;
                     case TurnType.MakeTurn: // 생성 턴이라면
+                        NetworkManager.Instance.Socket.Emit("debug", "AI 생산 턴");
                         await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
+                        TutorialManager.Instance.InputOn = true;
+                        _currentTurnType = TurnType.MakeTurn;
 
-                        _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 변경
+                        TutorialManager.Instance.SetTutorialPanel(true, "후순위 플레이어는 첫 번째 턴에만 금괴를 2개가 아닌 3개를 획득합니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.27f, 0.79f), new Vector4(1.2f, 0.5f));
                         break;
                     case TurnType.DrawTurn: // 드로우 턴이라면
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MainTurn); // 메인 턴으로 턴 변경
                         break;
                     case TurnType.MainTurn: // 메인 턴이라면
-
                         // 첫 번째 도로 생성
                         Road road = _roadParent.GetChild(_roadParent.childCount - 1).GetComponent<Road>(); // 도로 부모에서 도로 가져오기
                         await TutorialManager.Instance.ObjectPlace(_firstRoadPlacePlane, road, false);
@@ -91,4 +112,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.24
+// 마지막 작성 일자: 2026.03.26

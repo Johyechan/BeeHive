@@ -3,6 +3,7 @@ using InGame.MyManager.Global;
 using InGame.MyUI.MyUIInterface;
 using MyUtil.GameMode;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace InGame.MyUI.MyUIButton
@@ -31,7 +32,8 @@ namespace InGame.MyUI.MyUIButton
             {
                 SceneManager.LoadScene(2); // 방 씬으로 이동
             }
+            EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.26
