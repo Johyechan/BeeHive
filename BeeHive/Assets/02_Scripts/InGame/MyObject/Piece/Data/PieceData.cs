@@ -31,7 +31,7 @@ namespace InGame.MyObject.Piece.Data
         public ObjectType currentObjectType; // 현재 객체의 타입
 
         public float animationDuration; // 애니메이션 지속시간
-        public float xInterval; // 기물 배열의 x축 간격
+        public float zInterval; // 기물 배열의 x축 간격
 
         [HideInInspector] public ConfirmUI confirmUI; // 확인 UI(전차로 원거리 공격 시 화력 카드 사용 여부를 묻기 위한 클래스)
     }

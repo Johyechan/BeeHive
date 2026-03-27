@@ -26,8 +26,6 @@ namespace Tutorial
         // 초기화 함수
         private void Init()
         {
-            NetworkManager.Instance.Socket.Emit("debug", "튜토리얼 초기화 함수 실행");
-
             foreach(var roadPlacePlane in  _roadPlacePlanes)
             {
                 foreach(var road in _roads)
@@ -60,8 +58,6 @@ namespace Tutorial
             }
 
             InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
-
-            NetworkManager.Instance.Socket.Emit("debug", "튜토리얼 초기화 완료");
         }
     }
 }

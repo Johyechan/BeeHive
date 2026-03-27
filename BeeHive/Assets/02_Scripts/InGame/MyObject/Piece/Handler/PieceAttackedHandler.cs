@@ -153,7 +153,7 @@ namespace InGame.MyObject.Piece.Handler
                     break;
             }
 
-            Vector3 returnPos = new Vector3(_pieceData.xInterval * returnParent.childCount, 0, 0); // 공격 당한 기물의 목적지
+            Vector3 returnPos = new Vector3(0, 0, _pieceData.zInterval * returnParent.childCount); // 공격 당한 기물의 목적지
             Vector3 attackPos = returnPieceTrans.localPosition; // 공격한 기물의 목적지
 
             AttackInfo attackInfo = new AttackInfo()
@@ -175,4 +175,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.25
+// 마지막 작성 일자: 2026.03.27

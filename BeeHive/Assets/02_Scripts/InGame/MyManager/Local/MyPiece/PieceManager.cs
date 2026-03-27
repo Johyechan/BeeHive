@@ -98,6 +98,7 @@ namespace InGame.MyManager.Local.MyPiece
             {
                 if(InGameContext.Current.Data.CardManager.HaveFirePowerCard) // 화력 카드를 가지고 있는 경우
                 {
+                    NetworkManager.Instance.Socket.Emit("debug", "그래 그래 현재 기물은 전차이고 화력 카드는 가지고 있단다");
                     _canAttackPieceStateHandler.ShowCanAttackPieces(attackingType, _canFirePowerAttackPieceMap, true); // 원거리 공격 가능 기물 탐색
                 }
             }

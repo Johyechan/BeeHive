@@ -2,6 +2,7 @@ using DG.Tweening;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MySystem;
 using MyUtil.GameMode;
 using System.Threading.Tasks;
@@ -30,8 +31,18 @@ namespace InGame.MyUI.Turn
             await DOTween.Sequence()
                 .AppendCallback(() =>
                 {
-                    Transform parent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType);
-                    PieceEvents.OnDestroyLeftRoad?.Invoke(parent, TeamManager.Instance.CurrentTeamType);
+                    Transform parent = null;
+
+                    if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+                    {
+                        parent = TeamManager.Instance.GetRoadTransform(InGameContext.Current.Data.TurnManager.CurrentTeamType); // 턴 매니저가 현재 팀을 판단
+                        PieceEvents.OnDestroyLeftRoad?.Invoke(parent, InGameContext.Current.Data.TurnManager.CurrentTeamType);
+                    }
+                    else // 튜토리얼이 아닐 경우 
+                    {
+                        parent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType); // 팀 매니저가 현재 팀을 판단(자기 자신만 판단)
+                        PieceEvents.OnDestroyLeftRoad?.Invoke(parent, TeamManager.Instance.CurrentTeamType);
+                    }
 
                     DestroyLeftRoadInfo destroyLeftRoadInfo = new DestroyLeftRoadInfo()
                     {
@@ -49,4 +60,4 @@ namespace InGame.MyUI.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.27

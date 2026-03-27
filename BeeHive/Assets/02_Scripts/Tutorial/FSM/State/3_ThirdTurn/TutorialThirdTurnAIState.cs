@@ -20,6 +20,8 @@ namespace Tutorial.FSM.State.Third
 
         private PiecePlacePlaneObject _movePlacePlane; // 이동 칸 객체
 
+        private TurnType _currentTurnType; // 현재 턴
+
         public TutorialThirdTurnAIState(PieceBase soldier, PiecePlacePlaneObject movePlacePlane)
         {
             _soldier = soldier;
@@ -28,16 +30,31 @@ namespace Tutorial.FSM.State.Third
 
         public void Enter()
         {
-            
+            TutorialManager.Instance.IsInputDelayOver = false;
         }
 
         public void Exit()
         {
+            TutorialManager.Instance.InputOn = false;
             _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 두 번째 플레이어 턴)으로 변경
         }
 
         public async void Update()
         {
+            if (TutorialManager.Instance.IsInputDelayOver) // 인풋이 딜레이 이후 들어오면
+            {
+                switch (_currentTurnType)
+                {
+                    case TurnType.MainTurn:
+                        _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.TurnEnd); // 턴 종료 턴으로 턴 변경
+                        TutorialManager.Instance.SetTutorialPanel(false);
+                        _currentTurnType = TurnType.TurnEnd;
+                        TutorialManager.Instance.InputOn = false;
+                        break;
+                }
+                TutorialManager.Instance.IsInputDelayOver = false;
+            }
+
             if (TutorialManager.Instance.TurnEnd) // 현재 턴이 종료되었다면
             {
                 TutorialManager.Instance.TurnEnd = false; // 초기화
@@ -62,7 +79,9 @@ namespace Tutorial.FSM.State.Third
                         await TutorialManager.Instance.ObjectPlace(_movePlacePlane, _soldier, true);
                         PieceEvents.OnChangeNearRoad?.Invoke(_soldier, _soldier.CurrentTeamType, _soldier.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
 
-                        _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.TurnEnd); // 턴 종료 턴으로 턴 변경
+                        TutorialManager.Instance.SetTutorialPanel(true, "보병은 상대 도로를 한 칸 넘어갈 수 있습니다\n그리고 보병은 이동한 위치의 주위 도로들을 전부 자신 팀의 도로로 변경 시킵니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.381f, 0.517f), new Vector4(1f, 1f), new Vector2(0, 250f));
+                        _currentTurnType = TurnType.MainTurn;
+                        TutorialManager.Instance.InputOn = true;
                         break;
                     case TurnType.TurnEnd:
                         TutorialManager.Instance.ChangeTutorialState(TutorialState.Turn4_Player); // 네 번째 턴(플레이어 턴)으로 튜토리얼 상태 변경
@@ -72,4 +91,4 @@ namespace Tutorial.FSM.State.Third
         }
     }
 }
-// 마지막 작성 일자: 2026.03.24
+// 마지막 작성 일자: 2026.03.27

@@ -1,12 +1,10 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 using InGame.MyObject.Piece.ObjectPieces;
 using MyUtil.Interface;
-using System.Threading.Tasks;
 using Tutorial.MyEnum;
 using UnityEngine;
 
@@ -56,7 +54,6 @@ namespace Tutorial.FSM.State.First
                 switch(_currentTurnType)
                 {
                     case TurnType.MakeTurn:
-                        NetworkManager.Instance.Socket.Emit("debug", "엔터 입력 받음");
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 변경
                         TutorialManager.Instance.SetTutorialPanel(false);
                         _currentTurnType = TurnType.DrawTurn;
@@ -75,7 +72,6 @@ namespace Tutorial.FSM.State.First
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MakeTurn); // 생성 턴으로 턴 변경
                         break;
                     case TurnType.MakeTurn: // 생성 턴이라면
-                        NetworkManager.Instance.Socket.Emit("debug", "AI 생산 턴");
                         await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
                         TutorialManager.Instance.InputOn = true;
                         _currentTurnType = TurnType.MakeTurn;
@@ -94,6 +90,7 @@ namespace Tutorial.FSM.State.First
                         road = _roadParent.GetChild(_roadParent.childCount - 1).GetComponent<Road>(); // 도로 부모에서 도로 가져오기
                         await TutorialManager.Instance.ObjectPlace(_secondRoadPlacePlane, road, false);
 
+                        WalletEvent.OnUseGoldBar(3); // 금괴 사용(보병 비용)
                         // 보병 생성
                         await TutorialManager.Instance.ObjectPlace(_createPlacePlane, _soldier, false);
                         InGameContext.Current.Data.GameManager.CurrentMovePiece = _soldier.gameObject; // 현재 선택된 객체를 할당
@@ -112,4 +109,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.03.27

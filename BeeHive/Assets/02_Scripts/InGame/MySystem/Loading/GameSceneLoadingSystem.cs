@@ -33,10 +33,9 @@ namespace InGame.MySystem.Loading
             UIManager.Instance.CanInteractionUI = true; // UI 상호작용 가능 상태로 초기화
             TeamManager.Instance.FirstTurn = true; // 첫 턴 상태로 할당
 
-            if(GameModeManager.Instance.CurrentGameMode.UseServer())
-                InGameContext.Current.Data.GameMapManager.SetNetworkID(); // 네트워크 ID 할당
-
             await LocalManagerReady.Gate.WaitAsync(); // 씬 내 매니저 세팅 대기
+
+            InGameContext.Current.Data.GameMapManager.SetNetworkID(); // 네트워크 ID 할당
 
             if (!GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 씬이 아닐 때
                 await TeamManager.Instance.TeamSetTcs.Task; // 팀이 정해질 때까지 대기
@@ -69,4 +68,4 @@ namespace InGame.MySystem.Loading
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.03.27

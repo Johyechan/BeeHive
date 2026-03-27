@@ -1,13 +1,9 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPiece;
-using InGame.MyManager.MyPlacePlane;
+using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InGame.MyObject.Piece.ObjectPieces
@@ -91,7 +87,20 @@ namespace InGame.MyObject.Piece.ObjectPieces
                     break;
             }
 
-            ObjectPoolManager.Instance.MakeObject(type, roadPlacePlaneObject.transform.localPosition, roadPlacePlaneObject.transform.parent, true, roadPlacePlaneObject.NetworkId, targetAngle);
+            if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+            {
+                GameObject road = ObjectPoolManager.Instance.GetObject(type, roadPlacePlaneObject.transform.parent);
+                road.transform.localPosition = roadPlacePlaneObject.transform.localPosition;
+                road.transform.Rotate(0, targetAngle, 0);
+                ObjectPoolManager.Instance.Animation(road, true, true);
+                PieceBase pieceBase = road.GetComponent<PieceBase>();
+                InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(roadPlacePlaneObject, pieceBase, false); // 배치칸 상태 변경
+                InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
+            }
+            else // 튜토리얼이 아닐 경우
+            {
+                ObjectPoolManager.Instance.MakeObject(type, roadPlacePlaneObject.transform.localPosition, roadPlacePlaneObject.transform.parent, true, roadPlacePlaneObject.NetworkId, targetAngle);
+            }
         }
 
         public override void ObjectClicked()
@@ -100,4 +109,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.03.03
+// 마지막 작성 일자: 2026.03.27

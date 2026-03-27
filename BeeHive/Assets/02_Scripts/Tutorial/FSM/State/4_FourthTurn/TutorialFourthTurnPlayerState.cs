@@ -10,19 +10,36 @@ namespace Tutorial.FSM.State.Fourth
     // 네 번째 턴(플레이어 턴) 상태 클래스
     public class TutorialFourthTurnPlayerState : IState
     {
+        private TurnType _currentTurnType; // 현재 턴
+
         public void Enter()
         {
-            
+            TutorialManager.Instance.IsInputDelayOver = false;
         }
 
         public void Exit()
         {
+            TutorialManager.Instance.InputOn = false;
             _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 두 번째 플레이어 턴)으로 변경
         }
 
         public void Update()
         {
-            if(TutorialManager.Instance.TurnEnd) // 현재 턴이 종료되었을 때
+            if (TutorialManager.Instance.IsInputDelayOver) // 인풋이 딜레이 이후 들어오면
+            {
+                switch (_currentTurnType)
+                {
+                    case TurnType.MakeTurn:
+                        _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 턴 종료 턴으로 턴 변경
+                        TutorialManager.Instance.SetTutorialPanel(false);
+                        _currentTurnType = TurnType.DrawTurn;
+                        TutorialManager.Instance.InputOn = false;
+                        break;
+                }
+                TutorialManager.Instance.IsInputDelayOver = false;
+            }
+
+            if (TutorialManager.Instance.TurnEnd) // 현재 턴이 종료되었을 때
             {
                 TutorialManager.Instance.TurnEnd = false; // 초기화
 
@@ -32,7 +49,9 @@ namespace Tutorial.FSM.State.Fourth
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MakeTurn);
                         break;
                     case TurnType.MakeTurn:
-                        _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn);
+                        TutorialManager.Instance.SetTutorialPanel(true, "광부와 성이 도로로 연결되어 있지 않다면 광부가 금화를 벌지 못합니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.37f, 0.515f), new Vector4(1.2f, 1.2f), new Vector2(0, 250f));
+                        _currentTurnType = TurnType.MakeTurn;
+                        TutorialManager.Instance.InputOn = true;
                         break;
                     case TurnType.DrawTurn:
                         TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 메인 턴을 진행합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
@@ -48,4 +67,4 @@ namespace Tutorial.FSM.State.Fourth
         }
     }
 }
-// 마지막 작성 일자: 2026.03.24
+// 마지막 작성 일자: 2026.03.27

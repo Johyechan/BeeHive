@@ -196,11 +196,15 @@ namespace InGame.MySystem.Game
                         continue; // 넘기기
 
                     if (nearPiece.TeamType == teamType || nearPiece.TeamType == TeamType.None) // 공격하려는 전차 기물의 팀이거나 빈 칸이라면
+                    {
                         continue; // 넘기기
+                    }
 
                     // 근접 공격으로 공격 가능한 대상이라면
                     if (InGameContext.Current.Data.PieceManager.CanAttackPieceMap[ObjectType.Tank].Contains(nearPiece.PlacedPiece))
+                    {
                         continue; // 넘기기
+                    }
 
                     // 공격 가능한 기물 중에 일치하는 기물이 없을 경우
                     if (!InGameContext.Current.Data.PieceManager.CanFirePowerAttackPieceMap[ObjectType.Tank].Contains(nearPiece.PlacedPiece))

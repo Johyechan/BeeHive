@@ -39,7 +39,7 @@ namespace Tutorial.FSM.State.Seventh
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 변경
                         break;
                     case TurnType.DrawTurn: // 드로우 턴이라면
-
+                        WalletEvent.OnUseGoldBar(2); // 금괴 사용(드로우 비용)
                         await TutorialEvents.OnTutorialDraw?.Invoke(); // 드로우
 
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MainTurn); // 메인 턴으로 턴 변경
@@ -55,6 +55,6 @@ namespace Tutorial.FSM.State.Seventh
         }
     }
 }
-// 마지막 작성 일자: 2026.03.25
+// 마지막 작성 일자: 2026.03.27
 
 

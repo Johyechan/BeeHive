@@ -1,6 +1,7 @@
 using InGame.MyEnum;
 using InGame.MyManager.Global;
 using InGame.MyUI.Card;
+using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,11 @@ namespace InGame.MyManager.Local
             _cardUsedCheckMap.Add(CardType.GoodHarvest, false);
             _cardUsedCheckMap.Add(CardType.FirePower, false);
             _cardUsedCheckMap.Add(CardType.RoadChange, false);
+
+            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 때
+            {
+                _haveFirePowerCard = true; // 화력 카드를 가지고 있는 상태로 초기화
+            }
         }
 
         // 같은 타입의 카드가 사용됐는지 확인 및 처리하는 함수
@@ -92,4 +98,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.03.27

@@ -61,6 +61,7 @@ namespace Tutorial.FSM.State.Fourth
                         break;
                     case TurnType.MainTurn: // 메인 턴이라면
 
+                        WalletEvent.OnUseGoldBar(5); // 금괴 사용(전차 비용)
                         // 전차 생성
                         await TutorialManager.Instance.ObjectPlace(_createPlacePlane, _tank, false);
 
@@ -92,4 +93,4 @@ namespace Tutorial.FSM.State.Fourth
         }
     }
 }
-// 마지막 작성 일자: 2026.03.25
+// 마지막 작성 일자: 2026.03.27
