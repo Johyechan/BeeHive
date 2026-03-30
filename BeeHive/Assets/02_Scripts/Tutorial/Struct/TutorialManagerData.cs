@@ -57,9 +57,13 @@ namespace Tutorial.Struct
 
         public ConfirmUI confirmUI; // 첫 번째 턴(AI 턴)에 보병을 공격 시킬 위치
 
+        public UsedDeck usedDeck; // 사용한 카드들을 모아두는 덱
+
+        public GameObject cardObj; // AI가 튜토리얼에서 기본적으로 가지는 화력 카드
+
         public List<PiecePlacePlaneObject> goldCoin1PlacePlanes; // 금화 1개 버는 위치 리스트
         public List<PiecePlacePlaneObject> goldCoin3PlacePlanes; // 금화 3개 버는 위치 리스트
         public List<PiecePlacePlaneObject> goldCoin5PlacePlanes; // 금화 5개 버는 위치 리스트
     }
 }
-// 마지막 작성 일자: 2026.03.25
+// 마지막 작성 일자: 2026.03.30

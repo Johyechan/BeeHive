@@ -70,7 +70,7 @@ namespace Tutorial.FSM
             thirdTurnPlayerState = new TutorialThirdTurnPlayerState();
             thirdTurnAIState = new TutorialThirdTurnAIState(tutorialManagerData.thirdTurnAIuseSoldier, tutorialManagerData.thirdTurnAISoldierMovePlace);
             fourthTurnPlayerState = new TutorialFourthTurnPlayerState();
-            fourthTurnAIState = new TutorialFourthTurnAIState(tutorialManagerData.fourthTurnAIuseTank, tutorialManagerData.fourthTurnAITankCreatePlace, tutorialManagerData.fourthTurnAITankMovePlace, tutorialManagerData.confirmUI);
+            fourthTurnAIState = new TutorialFourthTurnAIState(tutorialManagerData.fourthTurnAIuseTank, tutorialManagerData.fourthTurnAITankCreatePlace, tutorialManagerData.fourthTurnAITankMovePlace, tutorialManagerData.confirmUI, tutorialManagerData.usedDeck, tutorialManagerData.cardObj, tutorialManagerData.animationDuration);
             fifthTurnPlayerState = new TutorialFifthTurnPlayerState();
             fifthTurnAIState = new TutorialFifthTurnAIState(tutorialManagerData.fifthTurnAIuseMiner, tutorialManagerData.fifthTurnAIMinerCreatePlace, tutorialManagerData.fifthTurnAIMinerMovePlace, tutorialManagerData.roadParent, tutorialManagerData.fifthTurnAIFirstRoadPlacePlane, tutorialManagerData.fifthTurnAISecondRoadPlacePlane);
             sixthTurnPlayerState = new TutorialSixthTurnPlayerState();
@@ -92,8 +92,16 @@ namespace Tutorial.FSM
             tutorialStateMap.Add(TutorialState.Turn3_Player, thirdTurnPlayerState);
             tutorialStateMap.Add(TutorialState.Turn3_AI, thirdTurnAIState);
             tutorialStateMap.Add(TutorialState.Turn4_Player, fourthTurnPlayerState);
+            tutorialStateMap.Add(TutorialState.Turn4_AI, fourthTurnAIState);
+            tutorialStateMap.Add(TutorialState.Turn5_Player, fifthTurnPlayerState);
+            tutorialStateMap.Add(TutorialState.Turn5_AI, fifthTurnAIState);
+            tutorialStateMap.Add(TutorialState.Turn6_Player, sixthTurnPlayerState);
+            tutorialStateMap.Add(TutorialState.Turn6_AI, sixthTurnAIState);
+            tutorialStateMap.Add(TutorialState.Turn7_Player, seventhTurnPlayerState);
+            tutorialStateMap.Add(TutorialState.Turn7_AI, seventhTurnAIState);
+            tutorialStateMap.Add(TutorialState.Turn8_Player, eighthTurnPlayerState);
             tutorialStateMap.Add(TutorialState.End, endState);
         }
     }
 }
-// 마지막 작성 일자: 2026.03.25
+// 마지막 작성 일자: 2026.03.30

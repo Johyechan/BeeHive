@@ -61,6 +61,12 @@ namespace InGame.MyUI.MyUIButton
             EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
 
+        public void TutorialReverseCard(UICardBase uiCard)
+        {
+            _uiCardBase = uiCard;
+            ReverseCardObject();
+        }
+
         // UI 카드에 맞는 카드 객체를 뒤집는 함수
         private void ReverseCardObject()
         {

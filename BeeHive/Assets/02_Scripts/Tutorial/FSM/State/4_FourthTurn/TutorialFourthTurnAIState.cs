@@ -1,10 +1,14 @@
+using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
+using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 using InGame.MyObject.Piece.ObjectPieces;
 using InGame.MyUI;
+using InGame.MyUI.Card;
+using InGame.MyUI.MyUIButton;
 using MyUtil.Interface;
 using System.Threading.Tasks;
 using Tutorial.MyEnum;
@@ -23,12 +27,21 @@ namespace Tutorial.FSM.State.Fourth
 
         private ConfirmUI _confirmUI; // 방어 여부를 물을 UI
 
-        public TutorialFourthTurnAIState(PieceBase tank, PiecePlacePlaneObject createPlacePlane, PiecePlacePlaneObject movePlacePlane, ConfirmUI confirmUI)
+        private UsedDeck _usedDeck; // 사용한 카드들을 모아두는 덱
+
+        private GameObject _cardObj; // 카드 객체
+
+        private float _animationDuration; // 애니메이션 지속 시간
+
+        public TutorialFourthTurnAIState(PieceBase tank, PiecePlacePlaneObject createPlacePlane, PiecePlacePlaneObject movePlacePlane, ConfirmUI confirmUI, UsedDeck usedDeck, GameObject cardObj, float animationDuration)
         {
             _tank = tank;
             _createPlacePlane = createPlacePlane;
             _movePlacePlane = movePlacePlane;
             _confirmUI = confirmUI;
+            _usedDeck = usedDeck;
+            _cardObj = cardObj;
+            _animationDuration = animationDuration;
         }
 
         public void Enter()
@@ -69,6 +82,13 @@ namespace Tutorial.FSM.State.Fourth
                         // 전차 이동   
                         await TutorialManager.Instance.ObjectPlace(_movePlacePlane, _tank, true);
 
+                        _usedDeck.AddCardInToUsedDeck(_cardObj.transform); // 사용한 카드들을 모아두는 덱으로 이동
+
+                        await DOTween.Sequence()
+                            .Append(_cardObj.transform.DORotate(new Vector3(0, _cardObj.transform.eulerAngles.y, 180), _animationDuration)) // y축은 Team1의 경우 플레이어의 시야를 고려하여 180도 돌아가 있기 때문에 카드의 y값으로 그대로 적용, z축으로 180도 회전
+                            .Join(_cardObj.transform.DOMoveY(0.0001f, _animationDuration)) // y축을 조금 올리는 이유는 안 올릴 경우 바닥을 뚫는 문제 발생
+                            .AsyncWaitForCompletion();
+
                         // 방어 여부 묻기
                         _confirmUI.gameObject.SetActive(true);
                         TutorialManager.Instance.SetTutorialPanel(true, "상대 전차의 공격을 방어합시다", "버튼 클릭", 0.08f, 0.008f, new Vector4(0.422f, 0.224f), new Vector4(1.2f, 0.3f), new Vector2(0, 450f));
@@ -93,4 +113,4 @@ namespace Tutorial.FSM.State.Fourth
         }
     }
 }
-// 마지막 작성 일자: 2026.03.27
+// 마지막 작성 일자: 2026.03.30

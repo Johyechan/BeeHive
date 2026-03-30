@@ -16,6 +16,9 @@ namespace InGame.MyUI.Card.Variable
 
         public Image cardInformationImage; // 카드 정보에 필요한 이미지 변수
 
+        public TMP_Text cardTitle; // 카드 이름
+        public TMP_Text cardExplain; // 카드 설명
+
         public CardUseButton cardUseButton; // 카드 사용 버튼 변수
 
         public UICardInitializeHandler initializeHandler; // 초기화 핸들러

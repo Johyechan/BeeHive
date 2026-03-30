@@ -76,7 +76,7 @@ namespace Tutorial.FSM.State.First
                         TutorialManager.Instance.InputOn = true;
                         _currentTurnType = TurnType.MakeTurn;
 
-                        TutorialManager.Instance.SetTutorialPanel(true, "후순위 플레이어는 첫 번째 턴에만 금괴를 2개가 아닌 3개를 획득합니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.27f, 0.79f), new Vector4(1.2f, 0.5f));
+                        TutorialManager.Instance.SetTutorialPanel(true, "후순위 플레이어는 첫 번째 턴에만 금괴를 2개가 아닌 3개를 획득합니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.25f, 0.793f), new Vector4(0.7f, 0.4f));
                         break;
                     case TurnType.DrawTurn: // 드로우 턴이라면
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MainTurn); // 메인 턴으로 턴 변경
@@ -109,4 +109,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.27
+// 마지막 작성 일자: 2026.03.30

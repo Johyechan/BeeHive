@@ -20,6 +20,9 @@ namespace InGame.MyManager.Local
         private bool _cardUsed; // 카드 사용 여부
         public bool CardUsed { get => _cardUsed; set => _cardUsed = value; }
 
+        private UICardBase _currentUICard; // 현재 UI 카드
+        public UICardBase CurrentUICard { get => _currentUICard; set => _currentUICard = value; } // 현재 UI 카드 프로퍼티
+
         private Dictionary<CardType, bool> _cardUsedCheckMap = new Dictionary<CardType, bool>();
 
         private TaskCompletionSource<bool> _cardReverseTask; // 카드 뒤집기 대기 테스크

@@ -4,6 +4,7 @@ using InGame.MyObject;
 using InGame.MyUI.MyUIInterface;
 using MyUtil.GameMode;
 using Tutorial;
+using Tutorial.MyEnum;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -39,10 +40,18 @@ namespace InGame.MyUI.MyUIButton
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
-                TutorialManager.Instance.SetTutorialPanel(true, "뽑은 카드를 확인 합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.128f, 0.094f), new Vector4(0.7f, 0.7f));
+                switch(TutorialManager.Instance.CurrentTutorialState) // 튜토리얼 상태가
+                {
+                    case TutorialState.Turn6_Player: // 여섯 번째 턴(플레이어 턴) 일때
+                        TutorialManager.Instance.SetTutorialPanel(true, "카드를 확인 해봅시다.", "대상 우클릭", 0.1f, 0.008f, new Vector4(0.5f, 0.15f), new Vector4(1.2f, 1.2f));
+                        break;
+                    default:
+                        TutorialManager.Instance.SetTutorialPanel(true, "뽑은 카드를 확인 합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.128f, 0.094f), new Vector4(0.7f, 0.7f));
+                        break;
+                }
             }
             EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.03.30

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyManager.Local;
 using InGame.MyUI.Card.Variable;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,11 +25,13 @@ namespace InGame.MyUI.Card.Handler
 
         public void ShowInfomation()
         {
-            _uiCardVariable.cardInformationImage = _currentCardImage; // 선택한 현재 카드 이미지 할당
+            _uiCardVariable.cardInformationImage = InGameContext.Current.Data.CardManager.CurrentUICard.UICardData.currentCardImage; // 선택한 현재 카드 이미지 할당
+            _uiCardVariable.cardTitle.text = InGameContext.Current.Data.CardManager.CurrentUICard.UICardData.currentCardName; // 선택한 현재 카드 이름
+            _uiCardVariable.cardExplain.text = InGameContext.Current.Data.CardManager.CurrentUICard.UICardData.currentCardExplain; // 선택한 현재 카드 설명
 
             _uiCardVariable.cardInformationCanvasGroup.gameObject.SetActive(true); // 카드 정보 패널 활성화
             _uiCardVariable.cardInformationCanvasGroup.DOFade(1, _animationDuration); // 카드 정보 패널 페이드 인
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.03.30

@@ -40,7 +40,7 @@ namespace Tutorial.FSM.State.First
                     switch (_count) // 카운팅 된 개수가
                     {
                         case 1:
-                            TutorialManager.Instance.SetTutorialPanel(true, "금괴도 2개 생성됩니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.17f, 0.257f), new Vector4(1.5f, 0.6f));
+                            TutorialManager.Instance.SetTutorialPanel(true, "금괴도 2개 생성됩니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.155f, 0.257f), new Vector4(1f, 0.6f));
                             break;
                         case 2:
                             TutorialManager.Instance.SetTutorialPanel(false);
@@ -86,4 +86,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.23
+// 마지막 작성 일자: 2026.03.30

@@ -111,6 +111,9 @@ namespace InGame.MyUI.MyUIButton
                                 _tutorialCreateCount = 0;
                             }
                             break;
+                        case TutorialState.Turn4_Player:
+                            TutorialManager.Instance.SetTutorialPanel(true, "도로를 생성합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.465f, 0.546f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                            break;
                         case TutorialState.Turn6_Player:
                             if (_tutorialCreateCount == 0) // 처음 도로를 생성하는 경우
                             {
@@ -138,4 +141,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.03.30

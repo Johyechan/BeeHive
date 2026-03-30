@@ -278,7 +278,7 @@ namespace InGame.MyObject
                                 case ObjectType.Tank: // 전차일 경우
                                     if (isMove) // 이동일 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                                        TutorialManager.Instance.SetTutorialPanel(true, "이제 상대 보병을 공격합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.542f, 0.684f), new Vector4(0.3f, 0.3f));
                                     }
                                     break;
                             }
@@ -317,4 +317,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.03.25
+// 마지막 작성 일자: 2026.03.30

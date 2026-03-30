@@ -1,6 +1,8 @@
 using InGame;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
+using InGame.MyObject;
+using InGame.MyUI.Card;
 using System.Collections.Generic;
 using Tutorial.Struct;
 using UnityEngine;
@@ -11,10 +13,8 @@ namespace Tutorial
     // 튜토리얼 세팅 클래스
     public class TutorialSetting : MonoBehaviour
     {
-        [SerializeField] private List<TutorialRoadPlacePlaneData> _roadPlacePlanes;
-        [SerializeField] private List<TutorialRoadData> _roads;
-        [SerializeField] private List<TutorialPiecePlacePlaneData> _piecePlacePlanes;
-        [SerializeField] private List<TutorialPieceData> _pieces;
+        [SerializeField] private List<TutorialUICardData> _uiCardList; // 미리 할당된 UI 카드 리스트
+        [SerializeField] private List<TutorialCardObjectData> _cardList; // 미리 할당된 객체 카드 리스트
 
         private async void Awake()
         {
@@ -26,39 +26,18 @@ namespace Tutorial
         // 초기화 함수
         private void Init()
         {
-            foreach(var roadPlacePlane in  _roadPlacePlanes)
+            foreach(var uiCard in _uiCardList) // UI 카드 리스트 순회
             {
-                foreach(var road in _roads)
+                foreach(var card in _cardList) // 카드 객체 리스트 순회
                 {
-                    
-                    if(roadPlacePlane.connectNumber == road.connectNumber) // 연결 번호가 일치한다면
+                    if(uiCard.id == card.id) // UI 카드와 카드 객체의 id가 동일하다면(즉 매칭이 된다면)
                     {
-                        roadPlacePlane.roadPlacePlane.PlacedObjectType = road.road.CurrentObjectType; // 배치된 객체 타입 저장
-                        roadPlacePlane.roadPlacePlane.TeamType = road.road.CurrentTeamType; // 배치된 객체 팀 저장
-                        roadPlacePlane.roadPlacePlane.PlacedPiece = road.road; // 배치된 객체 저장
-
-                        road.road.PieceVariable.currentRoadPlacePlane = roadPlacePlane.roadPlacePlane; // 배치 칸 저장
+                        uiCard.uiCard.UICardVariable.cardObj = card.cardObj.CurrentObject; // UI가 자신의 카드 객체를 id 매칭이 된 카드 객체로 할당
+                        break; // 카드 객체 리스트 순회 반복문 탈출
                     }
                 }
             }
-
-            foreach(var piecePlacePlane in _piecePlacePlanes)
-            {
-                foreach(var piece in _pieces)
-                {
-                    if (piecePlacePlane.connectNumber == piece.connectNumber) // 연결 번호가 일치한다면
-                    {
-                        piecePlacePlane.piecePlacePlane.PlacedObjectType = piece.piece.CurrentObjectType; // 배치된 객체 타입 저장
-                        piecePlacePlane.piecePlacePlane.TeamType = piece.piece.CurrentTeamType; // 배치된 객체 팀 저장
-                        piecePlacePlane.piecePlacePlane.PlacedPiece = piece.piece; // 배치된 객체 저장
-
-                        piece.piece.PieceVariable.currentPlacePlane = piecePlacePlane.piecePlacePlane; // 배치 칸 저장
-                    }
-                }
-            }
-
-            InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
         }
     }
 }
-// 마지막 작성 일자: 2026.03.23
+// 마지막 작성 일자: 2026.03.30

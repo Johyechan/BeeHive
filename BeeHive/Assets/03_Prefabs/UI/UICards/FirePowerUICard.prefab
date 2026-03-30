@@ -150,6 +150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiCardData:
     currentCardName: "\uD654\uB825"
+    currentCardExplain: "\uC804\uCC28\uAC00 \uC6D0\uAC70\uB9AC \uACF5\uACA9\uC744\n\uD558\uAC70\uB098
+      \uC0C1\uB300 \uC804\uCC28\uC758\n\uACF5\uACA9\uC744 \uBC29\uC5B4\uD560 \uC218
+      \uC788\uB2E4."
     currentCardImage: {fileID: 1588352487960299254}
     poolType: 9
     animationDuration: 0.1

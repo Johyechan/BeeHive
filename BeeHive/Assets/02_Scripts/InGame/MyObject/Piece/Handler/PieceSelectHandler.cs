@@ -121,10 +121,12 @@ namespace InGame.MyObject.Piece.Handler
                                 if (_tutorialSelectedCount <= 0) // 처음 선택했다면
                                 {
                                     TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.543f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                    _tutorialSelectedCount++;
                                 }
                                 else // 중복 선택이라면
                                 {
                                     TutorialManager.Instance.SetTutorialPanel(true, "공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.586f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                    _tutorialSelectedCount = 0;
                                 }
                                 break;
                         }
@@ -156,4 +158,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.25
+// 마지막 작성 일자: 2026.03.30

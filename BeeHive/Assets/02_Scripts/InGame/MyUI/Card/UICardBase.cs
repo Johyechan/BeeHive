@@ -2,6 +2,7 @@ using DG.Tweening;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyUI.Card.Handler;
 using InGame.MyUI.Card.Variable;
@@ -111,8 +112,10 @@ namespace InGame.MyUI.Card
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
-                TutorialManager.Instance.SetTutorialPanel(true, "화력 카드 입니다. \n 전차간의 전투 및 원거리 공격에 사용되는 카드 입니다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.5f, 0.237f), new Vector4(0.8f, 0.35f), new Vector2(0, -400f));
+                TutorialManager.Instance.SetTutorialPanel(true, "화력 카드 입니다. \n 전차간의 전투 및 원거리 공격에 사용되는 카드 입니다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.5f, 0.2795f), new Vector4(1.3f, 0.6f), new Vector2(0, -400f));
             }
+
+            InGameContext.Current.Data.CardManager.CurrentUICard = this; // 현재 ui 카드 할당
 
             _uiCardVariable.showInformationHandler.ShowInfomation();
         }
@@ -139,4 +142,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.03.30

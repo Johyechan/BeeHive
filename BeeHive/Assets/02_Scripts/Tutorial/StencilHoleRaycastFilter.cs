@@ -60,6 +60,8 @@ namespace Tutorial
             {
                 switch (TutorialManager.Instance.CurrentTutorialState)
                 {
+                    case TutorialState.Turn3_AI: // 세 번째 턴(AI 턴)일 경우
+                        return true; // true(현재 UI가 레이캐스트를 받도록)반환
                     case TutorialState.Turn4_Player: // 네 번째 턴(플레이어 턴)일 경우
                         switch (InGameContext.Current.Data.TurnManager.CurrentTurnType)
                         {
@@ -72,9 +74,8 @@ namespace Tutorial
                         return true; // true(현재 UI가 레이캐스트를 받도록)반환
                 }
             }
-            NetworkManager.Instance.Socket.Emit("debug", $"원 안이야 {dist >= _holeRadius}");
             return dist >= _holeRadius;
         }
     }
 }
-// 마지막 작성 일자: 2026.03.27
+// 마지막 작성 일자: 2026.03.30
