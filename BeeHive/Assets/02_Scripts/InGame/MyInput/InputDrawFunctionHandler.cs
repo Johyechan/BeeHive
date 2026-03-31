@@ -14,10 +14,6 @@ namespace InGame.MyInput
     {
         public async Task DrawFunction(Transform deckTransform, Transform playerCardsParent, RectTransform playerUICardsParent)
         {
-            if(GameModeManager.Instance.CurrentGameMode.UseServer()) // 서버를 사용하는 경우
-            {
-                NetworkManager.Instance.Socket.Emit("debug", "드로우 함수 들어옴");
-            }
             InGameContext.Current.Data.DrawManager.DrawCard(deckTransform, playerCardsParent, playerUICardsParent); // 카드 드로우 실행
 
             Sequence seq = DOTween.Sequence()

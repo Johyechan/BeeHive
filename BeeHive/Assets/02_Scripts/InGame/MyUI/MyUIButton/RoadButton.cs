@@ -41,8 +41,6 @@ namespace InGame.MyUI.MyUIButton
 
             if (!UIManager.Instance.CanInteractionUI) // 만약 UI 상호작용 불가능 상태라면
             {
-                if (GameModeManager.Instance.CurrentGameMode.UseServer())
-                    NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 불가 상태");
                 EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return; // 반환
             }

@@ -17,17 +17,6 @@ namespace Tutorial.FSM.State.Second
 
         private TurnType _currentTurnType = TurnType.ChangeTeam; // 현재 턴 타입
 
-        private List<PiecePlacePlaneObject> _goldCoin1PlacePlanes; // 금화 1개를 버는 위치 리스트
-        private List<PiecePlacePlaneObject> _goldCoin3PlacePlanes; // 금화 3개를 버는 위치 리스트
-        private List<PiecePlacePlaneObject> _goldCoin5PlacePlanes; // 금화 5개를 버는 위치 리스트
-
-        public TutorialSecondTurnPlayerState(List<PiecePlacePlaneObject> goldCoin1PlacePlanes, List<PiecePlacePlaneObject> goldCoin3PlacePlanes, List<PiecePlacePlaneObject> goldCoin5PlacePlanes)
-        {
-            _goldCoin1PlacePlanes = goldCoin1PlacePlanes;
-            _goldCoin3PlacePlanes = goldCoin3PlacePlanes;
-            _goldCoin5PlacePlanes = goldCoin5PlacePlanes;
-        }
-
         public void Enter()
         {
             TutorialManager.Instance.IsInputDelayOver = false;
@@ -49,27 +38,6 @@ namespace Tutorial.FSM.State.Second
                         switch (_count)
                         {
                             case 0:
-                                TutorialManager.Instance.SetTutorialPanel(true, "광부는 위치에 따라 금화를 다르게 법니다.", "엔터 클릭");
-                                break;
-                            case 1:
-                                HightLightOnOff(_goldCoin1PlacePlanes, true);
-                                TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 1개를 법니다.", "엔터 클릭", 0, 0, default, default, new Vector2(0, 100f));
-                                break;
-                            case 2:
-                                HightLightOnOff(_goldCoin1PlacePlanes, false);
-                                HightLightOnOff(_goldCoin3PlacePlanes, true);
-                                TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 3개를 법니다.", "엔터 클릭", 0, 0, default, default, new Vector2(0, 450f));
-                                break;
-                            case 3:
-                                HightLightOnOff(_goldCoin3PlacePlanes, false);
-                                HightLightOnOff(_goldCoin5PlacePlanes, true);
-                                TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 5개를 법니다.\n(금화 5개가 모이면 금괴 1개로 전환됩니다.)", "엔터 클릭", 0, 0, default, default, new Vector2(0, 450f));
-                                break;
-                            case 4:
-                                HightLightOnOff(_goldCoin5PlacePlanes, false);
-                                TutorialManager.Instance.SetTutorialPanel(true, "이어서 진행하겠습니다.", "엔터 클릭");
-                                break;
-                            case 5:
                                 TutorialManager.Instance.SetTutorialPanel(false);
                                 _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn);
                                 _currentTurnType = TurnType.DrawTurn;
@@ -109,21 +77,6 @@ namespace Tutorial.FSM.State.Second
                 }
             }
         }
-
-        private void HightLightOnOff(List<PiecePlacePlaneObject>goldCoinPlacePlanes, bool on)
-        {
-            foreach(var placePlane in goldCoinPlacePlanes)
-            {
-                if (on)
-                {
-                    placePlane.HighLightOn();
-                }
-                else
-                {
-                    placePlane.HighLightOff();
-                }
-            }
-        }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.03.31

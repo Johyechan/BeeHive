@@ -47,13 +47,11 @@ namespace InGame.MyUI.MyUIButton
             {
                 if(!UIManager.Instance.CanInteractionUI) // UI 상호작용 불가일 때 
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 안됨");
                     EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                     return; // 반환
                 }
                 if (!InGameContext.Current.Data.TurnManager.CanChangeTurn) // 턴 변경 가능 상태가 아닐 경우
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "턴 변경 가능 상태 아님");
                     EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                     return; // 반환
                 }

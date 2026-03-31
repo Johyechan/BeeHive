@@ -1,7 +1,9 @@
 using InGame.MyEnum;
+using InGame.MyManager.Global;
 using InGame.MyObject.Piece;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Tutorial;
 
 namespace InGame.MyManager.MyPiece.Handler
 {

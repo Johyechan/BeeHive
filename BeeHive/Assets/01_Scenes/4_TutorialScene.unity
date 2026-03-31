@@ -510,6 +510,7 @@ MonoBehaviour:
     currentObjectType: 2
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 1
 --- !u!1001 &29988337
@@ -741,6 +742,7 @@ MonoBehaviour:
     currentObjectType: 3
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 2
 --- !u!1 &32244937
@@ -1168,6 +1170,7 @@ MonoBehaviour:
     currentObjectType: 1
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 0
 --- !u!1 &61386055
@@ -5031,6 +5034,7 @@ MonoBehaviour:
     currentObjectType: 1
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 0
 --- !u!1 &297902113
@@ -11049,6 +11053,7 @@ MonoBehaviour:
     currentObjectType: 2
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 1
 --- !u!1 &588290362
@@ -11476,6 +11481,7 @@ MonoBehaviour:
     currentObjectType: 3
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 2
 --- !u!1 &615812863
@@ -16538,6 +16544,7 @@ MonoBehaviour:
     currentObjectType: 3
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 2
 --- !u!1 &825726415
@@ -17905,6 +17912,7 @@ MonoBehaviour:
     currentObjectType: 3
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 2
 --- !u!1001 &864318385
@@ -18014,6 +18022,7 @@ MonoBehaviour:
     currentObjectType: 2
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 1
 --- !u!65 &864318390
@@ -18597,6 +18606,7 @@ MonoBehaviour:
     currentObjectType: 2
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 1
 --- !u!1 &899115819
@@ -23709,6 +23719,7 @@ MonoBehaviour:
     currentObjectType: 2
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 1
 --- !u!65 &1097758553
@@ -37298,6 +37309,7 @@ MonoBehaviour:
     currentObjectType: 2
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 1
 --- !u!1 &1784825265
@@ -38876,6 +38888,7 @@ MonoBehaviour:
     currentObjectType: 1
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 0
 --- !u!1001 &1854841454
@@ -39277,6 +39290,7 @@ MonoBehaviour:
     currentObjectType: 1
     animationDuration: 0.25
     zInterval: -0.006
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 0
 --- !u!1 &1904851470

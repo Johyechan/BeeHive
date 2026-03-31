@@ -61,7 +61,6 @@ namespace Tutorial.FSM.State.Fourth
                         TutorialManager.Instance.SetTutorialPanel(true, "광부는 도로가 연결되어 있지 않아도 한 칸을 뛰어 이동이 가능합니다.\n(상대 도로가 사이에 있다면 넘어갈 수 없습니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                         break;
                     case TurnType.TurnEnd:
-                        NetworkManager.Instance.Socket.Emit("debug", "네 번째 턴(플레이어 턴) 턴 종료 턴");
                         TutorialManager.Instance.ChangeTutorialState(TutorialState.Turn4_AI); // 네 번째 턴(AI 턴) 상태로 변경
                         break;
                 }

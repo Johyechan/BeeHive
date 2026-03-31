@@ -37,14 +37,10 @@ namespace InGame.MySystem.Game
                 {
                     if (on) // 킬 것이라면
                     {
-                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
-                            NetworkManager.Instance.Socket.Emit("debug", $"켜지는 발판: {placePlane}");
                         placePlane.HighLightOn(); // 하이라이트 키기
                     }
                     else // 끌 것이라면
                     {
-                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
-                            NetworkManager.Instance.Socket.Emit("debug", $"꺼지는 발판: {placePlane}");
                         placePlane.HighLightOff(); // 하이라이트 끄기
                     }
                 }

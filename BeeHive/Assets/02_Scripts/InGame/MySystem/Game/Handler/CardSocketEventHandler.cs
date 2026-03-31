@@ -43,8 +43,6 @@ namespace InGame.MySystem.Game.Handler
                     GameObject cardObj = ObjectIdManager.Instance.FindObject(cardReverseInfo.cardID); // 뒤집힐 카드 객체 탐색
                     if (!cardObj) // 카드 객체를 못 찾은 경우
                     {
-                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
-                            NetworkManager.Instance.Socket.Emit("debug", $"카드 객체 못 찾음");
                         return; // 반환
                     }
                     CardObject cardObject = cardObj.GetComponent<CardObject>();

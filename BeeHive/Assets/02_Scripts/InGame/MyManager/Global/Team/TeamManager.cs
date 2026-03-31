@@ -53,9 +53,7 @@ namespace InGame.MyManager.Global
                     if (GameModeManager.Instance.CurrentGameMode.UseServer()) // 게임 서버를 사용하는 경우
                     {
                         int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
-                        NetworkManager.Instance.Socket.Emit("debug", $"받은 팀 타입: {(TeamType)teamType}");
                         _currentTeamType = (TeamType)teamType; // 팀 저장
-                        NetworkManager.Instance.Socket.Emit("debug", $"저장된 팀 타입: {CurrentTeamType}");
                         _teamSetTcs?.TrySetResult(true); // 팀 세팅 완료
                     }
                 });

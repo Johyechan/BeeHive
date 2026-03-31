@@ -6,6 +6,7 @@ using InGame.MyManager.MyPiece;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject;
 using InGame.MyObject.Piece.ObjectPieces;
+using Tutorial;
 
 namespace InGame.MySystem.Game
 {

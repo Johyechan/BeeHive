@@ -38,10 +38,7 @@ namespace InGame.MyObject.Piece.Handler
             _pieceBase.transform.SetParent(parent); // 부모 변경
 
             float yPos = 0;
-            if (targetPos.y > 0)
-                yPos = targetPos.y * 1.5f; // 이후 배치할 때 애니메이션 효과를 위해 1.5배를 하여 조금 더 높이 올려준다
-            else // 0일 경우 곱하는 것이 의미가 없기 때문에
-                yPos = targetPos.y + 0.05f; // 이후 배치할 때 애니메이션 효과를 위해 1.5를 더하여 조금 더 높이 올려준다
+            yPos = targetPos.y + _pieceData.moveAnimationYvalue;
 
             // 높이 먼저 올리기
             await _pieceBase.transform.DOLocalMoveY(yPos, _pieceData.animationDuration).AsyncWaitForCompletion();
@@ -67,4 +64,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.18
+// 마지막 작성 일자: 2026.03.31

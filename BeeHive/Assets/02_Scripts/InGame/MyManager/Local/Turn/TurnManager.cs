@@ -195,8 +195,6 @@ namespace InGame.MyManager.Local.Turn
                 case TurnType.MainTurn:
                     break;
                 default:
-                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
-                        NetworkManager.Instance.Socket.Emit("debug", "이상한 값의 턴이 들어왔다");
                     break;
             }
         }

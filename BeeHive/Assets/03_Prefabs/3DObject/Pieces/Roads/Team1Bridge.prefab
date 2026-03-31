@@ -172,7 +172,8 @@ MonoBehaviour:
     teamType: 1
     currentObjectType: 4
     animationDuration: 0.25
-    xInterval: 0
+    zInterval: 0
+    moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
   _damage: 0
 --- !u!65 &6593378553475760157

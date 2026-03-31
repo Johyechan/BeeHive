@@ -11,7 +11,6 @@ namespace InGame.MyManager.Local
         // 네트워크 ID가 필요한 객체들에게 ID를 할당시켜주는 함수
         public void SetNetworkID()
         {
-            NetworkManager.Instance.Socket.Emit("debug", "네트워크 ID 세팅");
             var allChildren = transform.GetComponentsInChildren<INetworkIdObject>(true); // INetworkIdObject를 상속하는 모든 자식 탐색(비활성화 객체 포함)
 
             for (int i = 0; i < allChildren.Length; i++) // 네트워크 ID가 필요한 자식들 순회
@@ -21,7 +20,6 @@ namespace InGame.MyManager.Local
                 ObjectIdManager.Instance.AddObject(child.NetworkId, child.CurrentObject); // 클라에도 ID 저장
             }
 
-            NetworkManager.Instance.Socket.Emit("debug", "네트워크 ID 세팅 종료");
         }
     }
 }

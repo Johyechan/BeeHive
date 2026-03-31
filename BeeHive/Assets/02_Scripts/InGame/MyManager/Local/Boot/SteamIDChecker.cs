@@ -28,7 +28,6 @@ namespace InGame.MyManager.Local.Boot
         {
             if (_callbackInitialized) // 이미 콜백이 초기화 되어있다면
             {
-                NetworkManager.Instance.Socket.Emit("debug", "이미 콜백이 초기화 되어있음 - SteamIDChecker");
                 return; // 반환
             }
 
@@ -37,7 +36,6 @@ namespace InGame.MyManager.Local.Boot
                 {
                     if (cb.m_eResult != EResult.k_EResultOK) // 이 Steam API 호출의 결과가 정상 성공이 아닐 경우
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", "Steam API 호출 결과가 정상이 아님");
                         _getTicketTcs?.TrySetException(new Exception("Steam auth failed")); // 예외 발생 Steam 검증 실패
                     }
                     else
@@ -62,7 +60,6 @@ namespace InGame.MyManager.Local.Boot
             CallbackInit(); // 콜백 초기화
             if (_getTicketTcs != null) // 이미 tcs가 존재한다면
             {
-                NetworkManager.Instance.Socket.Emit("debug", "이미 tcs가 존재함 - SteamIDChecker");
                 return _getTicketTcs.Task; // 이미 존재하는 tcs 반환
             }
 
@@ -76,8 +73,7 @@ namespace InGame.MyManager.Local.Boot
         protected override async Task<bool> Check()
         {
             _bootingManager.CreateSteamAuthEndTcs(); // 스팀 인증 대기 tcs 생성
-
-            NetworkManager.Instance.Socket.Emit("debug", "스팀 체크");
+            
 
             string authTicketBase64 = "";
             try

@@ -26,7 +26,6 @@ namespace InGame.MyManager.Local.Boot
 
                 if(currentTime > _waitTime) // 대기 시간을 넘어갔다면
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "GPU 할당 안된다");
                     await Task.CompletedTask;
                     return false;
                 }

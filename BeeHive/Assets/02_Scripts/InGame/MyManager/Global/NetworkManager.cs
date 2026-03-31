@@ -103,7 +103,6 @@ namespace InGame.MyManager.Global
             }
             else // 스팀 Init() 실패라면
             {
-                _socket.Emit("debug", "스팀 Init실패");
                 Application.Quit(); // 어플리케이션 즉시 종료
             }
         }

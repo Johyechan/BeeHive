@@ -13,7 +13,6 @@ namespace InGame.MyManager.Local.Boot
         {
             if(!SteamAPI.IsSteamRunning()) // 스팀이 돌아가고 있지 않는다면
             {
-                NetworkManager.Instance.Socket.Emit("debug", "스팀이 안 돌아가고 있음 - SteamChecker");
                 Application.Quit(); // 강제 종료
             }
 

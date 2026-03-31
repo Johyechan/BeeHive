@@ -63,9 +63,9 @@ namespace Tutorial.FSM
         {
             machine = new StateMachine();
             introState = new TutorialIntroState();
-            firstTurnPlayerState = new TutorialFirstTurnPlayerState();
+            firstTurnPlayerState = new TutorialFirstTurnPlayerState(tutorialManagerData.goldCoin1PlacePlanes, tutorialManagerData.goldCoin3PlacePlanes, tutorialManagerData.goldCoin5PlacePlanes);
             firstTurnAIState = new TutorialFirstTurnAIState(tutorialManagerData.firstTurnAIuseSoldier, tutorialManagerData.firstTurnAISoldierCreatePlace, tutorialManagerData.firstTurnAISoldierMovePlace, tutorialManagerData.roadParent, tutorialManagerData.firstTurnAIFirstRoadPlacePlane, tutorialManagerData.firstTurnAISecondRoadPlacePlane);
-            secondTurnPlayerState = new TutorialSecondTurnPlayerState(tutorialManagerData.goldCoin1PlacePlanes, tutorialManagerData.goldCoin3PlacePlanes, tutorialManagerData.goldCoin5PlacePlanes);
+            secondTurnPlayerState = new TutorialSecondTurnPlayerState();
             secondTurnAIState = new TutorialSecondTurnAIState(tutorialManagerData.secondTurnAIuseSoldier, tutorialManagerData.secondTurnAISoldierMovePlace, tutorialManagerData.roadParent, tutorialManagerData.secondTurnAIFirstRoadPlacePlane, tutorialManagerData.secondTurnAISecondRoadPlacePlane);
             thirdTurnPlayerState = new TutorialThirdTurnPlayerState();
             thirdTurnAIState = new TutorialThirdTurnAIState(tutorialManagerData.thirdTurnAIuseSoldier, tutorialManagerData.thirdTurnAISoldierMovePlace);
@@ -104,4 +104,4 @@ namespace Tutorial.FSM
         }
     }
 }
-// 마지막 작성 일자: 2026.03.30
+// 마지막 작성 일자: 2026.03.31

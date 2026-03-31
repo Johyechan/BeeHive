@@ -54,6 +54,7 @@ namespace Tutorial.FSM.State.Sixth
                         switch(_count)
                         {
                             case 0:
+                                TutorialManager.Instance.SetTutorialPanel(false);
                                 _currentTurnType = TurnType.TurnEnd;
                                 _guidetutorialEnd.SetResult(true);
                                 TutorialManager.Instance.InputOn = false;
@@ -109,6 +110,6 @@ namespace Tutorial.FSM.State.Sixth
         }
     }
 }
-// 마지막 작성 일자: 2026.03.30
+// 마지막 작성 일자: 2026.03.31
 
 
