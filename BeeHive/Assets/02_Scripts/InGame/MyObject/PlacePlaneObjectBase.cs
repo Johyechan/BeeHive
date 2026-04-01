@@ -59,9 +59,9 @@ namespace InGame.MyObject
             _collider = GetComponent<Collider>();
 
             _collider.enabled = false; // 콜라이더 비활성화
+            _placedPiece = null; // 아무것도 안 올려져 있는 상태로 초기화
             _placedObjectType = ObjectType.None; // 아무것도 안 올려져 있는 상태로 초기화
             _canPlaceTypePiece = ObjectType.None; // 아무것도 배치 할 수 없는 상태로 초기화
-            _teamType = currentPlayerTeamType; // 팀 초기화
         }
 
         // 하이라이트를 키는 함수
@@ -87,4 +87,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2026.03.31
+// 마지막 작성 일자: 2026.04.01

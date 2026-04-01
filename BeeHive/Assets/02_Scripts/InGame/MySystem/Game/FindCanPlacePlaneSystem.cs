@@ -189,14 +189,22 @@ namespace InGame.MySystem.Game
 
         public void FindCanFirePowerAttackPiece(TeamType teamType, PiecePlacePlaneObject piece)
         {
-            foreach(var nearRoad in piece.nearRoadPlaceTransformList)
+            foreach (var nearRoad in piece.nearRoadPlaceTransformList)
             {
                 foreach(var nearPiece in nearRoad.nearPiecePlaceTransformList)
                 {
                     if (nearPiece == piece) // 자기 자신이라면
                         continue; // 넘기기
 
-                    if (nearPiece.TeamType == teamType || nearPiece.TeamType == TeamType.None) // 공격하려는 전차 기물의 팀이거나 빈 칸이라면
+                    if(!nearPiece.isNearToCastle) // 성 주위 배치칸이 아닐 때만
+                    {
+                        if (nearPiece.TeamType == teamType || nearPiece.TeamType == TeamType.None) // 공격하려는 전차 기물의 팀이거나 빈 칸이라면
+                        {
+                            continue; // 넘기기
+                        }
+                    }
+
+                    if(nearPiece.PlacedObjectType == ObjectType.None) // 배치된 기물이 없다면
                     {
                         continue; // 넘기기
                     }
@@ -258,4 +266,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.01

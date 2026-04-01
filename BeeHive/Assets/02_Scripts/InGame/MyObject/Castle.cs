@@ -68,6 +68,7 @@ namespace InGame.MyObject
                 }
                 else // 자기 성이 아닐 경우
                 {
+                    NetworkManager.Instance.Socket.Emit("debug", "공격 받아서 UI 변경도 들어옴");
                     GetCastleHpTmpTxt(false).text = $"적: {_currentHp}  HP"; // UI 적용
                 }
 
