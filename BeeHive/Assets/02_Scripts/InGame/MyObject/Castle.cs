@@ -5,6 +5,8 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using MyUtil.GameMode;
 using TMPro;
+using Tutorial;
+using Tutorial.MyEnum;
 using UnityEngine;
 
 namespace InGame.MyObject
@@ -68,15 +70,15 @@ namespace InGame.MyObject
                 }
                 else // 자기 성이 아닐 경우
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "공격 받아서 UI 변경도 들어옴");
                     GetCastleHpTmpTxt(false).text = $"적: {_currentHp}  HP"; // UI 적용
                 }
 
-                if(_currentHp < 0) // 체력이 0 이하라면
+                if(_currentHp <= 0) // 체력이 0 이하라면
                 {
                     Time.timeScale = 0; // 시간 멈춤
                     GameOverEvent.OnGameOver?.Invoke();
                     InGameContext.Current.Data.GameManager.GameIsOver(_castleTeamType); // 게임 오버
+                    TutorialManager.Instance.ChangeTutorialState(TutorialState.End); // 튜토리얼 종료 상태로 이동
                 }
             }
             else // 튜토리얼이 아닐 경우
@@ -139,4 +141,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.03.25
+// 마지막 작성 일자: 2026.04.02

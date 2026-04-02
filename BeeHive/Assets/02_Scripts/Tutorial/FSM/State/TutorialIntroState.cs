@@ -31,21 +31,27 @@ namespace Tutorial.FSM.State
             switch(_count) // 카운팅 된 수가
             {
                 case 1:
-                    TutorialManager.Instance.SetTutorialPanel(true, "그리고 이건 당신의 체력입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.448f, 0.958f), new Vector4(1f, 0.3f));
+                    TutorialManager.Instance.SetTutorialPanel(true, "당신의 체력입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.448f, 0.958f), new Vector4(1f, 0.3f));
                     break;
                 case 2:
-                    TutorialManager.Instance.SetTutorialPanel(true, "이건 상대의 성입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.5f, 0.78f), new Vector4(1f, 1f));
+                    TutorialManager.Instance.SetTutorialPanel(true, "상대의 성입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.5f, 0.78f), new Vector4(1f, 1f));
                     break;
                 case 3:
-                    TutorialManager.Instance.SetTutorialPanel(true, "그리고 이건 상대의 체력입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.55f, 0.958f), new Vector4(1f, 0.3f));
+                    TutorialManager.Instance.SetTutorialPanel(true, "상대의 체력입니다.", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.55f, 0.958f), new Vector4(1f, 0.3f));
                     break;
                 case 4:
-                    TutorialManager.Instance.SetTutorialPanel(true, "당신이 바라보는 시점의 성이 당신의 팀이니 유의합시다.", "엔터 클릭");
+                    TutorialManager.Instance.SetTutorialPanel(true, "당신의 금괴 및 금화 개수입니다.", "엔터 클릭", 0.085f, 0.008f, new Vector4(0.815f, 0.094f), new Vector4(1.2f, 0.8f));
                     break;
                 case 5:
-                    TutorialManager.Instance.SetTutorialPanel(true, "상대를 공격하여 승리합시다!", "엔터 클릭");
+                    TutorialManager.Instance.SetTutorialPanel(true, "상대의 금괴 및 금화 개수입니다.", "엔터 클릭", 0.1f, 0.008f, new Vector4(0.14f, 0.96f), new Vector4(1.3f, 0.3f));
                     break;
                 case 6:
+                    TutorialManager.Instance.SetTutorialPanel(true, "당신이 바라보는 시점의 성이 당신의 팀이니 유의합시다.", "엔터 클릭");
+                    break;
+                case 7:
+                    TutorialManager.Instance.SetTutorialPanel(true, "상대를 공격하여 승리합시다!", "엔터 클릭");
+                    break;
+                case 8:
                     TutorialEvents.OnIntroEnd?.Invoke(); // 인트로 종료 이벤트 호출
                     break;
             }
@@ -58,4 +64,4 @@ namespace Tutorial.FSM.State
         }
     }
 }
-// 마지막 작성 일자: 2026.03.20
+// 마지막 작성 일자: 2026.04.02

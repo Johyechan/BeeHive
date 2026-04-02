@@ -189,6 +189,10 @@ namespace InGame.MyObject
                 {
                     if (currentPlayerTeamType != TeamManager.Instance.CurrentTeamType) // 현재 배치칸이 우리팀 배치칸이 아닐 때
                     {
+                        PlacedObjectType = ObjectType.None;
+                        PlacedPiece = null;
+                        TeamType = TeamType.None;
+
                         Castle castle = TeamManager.Instance.GetCastle(currentPlayerTeamType); // 상대 성 가져오기
                         castle.CastleHit(pieceBase.Damage); // 상대 성 공격
 
@@ -317,4 +321,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.03.30
+// 마지막 작성 일자: 2026.04.02

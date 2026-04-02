@@ -22,7 +22,7 @@ namespace InGame.MyManager.MyPiece.Handler
         public async Task AttackRelatedPiecesMove(PieceBase returnPiece, PieceBase attackPiece, Transform returnParent, Transform attackParent, Vector3 returnPos, Vector3 attackPos)
         {
             int isFirePowerAttack = returnPiece.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
-            bool isNearToCastle = returnPiece.PieceVariable.currentPlacePlane.isNearToCastle; // 공격 당하는 기물이 성 주위에 배치되어있다면
+            bool attackedPlaceIsNearToCastle = returnPiece.PieceVariable.currentPlacePlane.isNearToCastle; // 공격 당하는 기물이 성 주위에 배치되어있다면
             TeamType attackedTeam = returnPiece.CurrentTeamType; // 공격 당한 기물의 배치 칸의 팀 타입 저장
 
             InGameContext.Current.Data.GameManager.PieceCanMoveMap[attackPiece.CurrentObjectType] = false; // 공격 시 이동 한 것으로 판정
@@ -41,10 +41,7 @@ namespace InGame.MyManager.MyPiece.Handler
             else // 공격 받은 기물이 원거리 공격 대상일 경우
             {
                 returnPiece.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None;
-                if(!isNearToCastle) // 성 주위 배치칸이 아닐 때
-                {
-                    returnPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None; // 배치 칸에 올라가 있는 팀 상태 변경
-                }
+                returnPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None; // 배치 칸에 올라가 있는 팀 상태 변경
                 returnPiece.PieceVariable.currentPlacePlane.PlacedPiece = null;
             }
 
@@ -82,13 +79,14 @@ namespace InGame.MyManager.MyPiece.Handler
                 }
             }
 
-            if(isNearToCastle) // 성 주위가 공격 당했다면
+            if(attackedPlaceIsNearToCastle) // 성 주위가 공격 당했다면
             {
-                NetworkManager.Instance.Socket.Emit("debug", $"공격 당한 팀: {attackedTeam}");
                 Castle castle = TeamManager.Instance.GetCastle(attackedTeam); // 공격 당한 팀 성 가져오기
-                NetworkManager.Instance.Socket.Emit("debug", $"공격 당한 성: {castle}");
-                NetworkManager.Instance.Socket.Emit("debug", $"공격하는 기물: {attackPiece}");
                 castle.CastleHit(attackPiece.Damage); // 성에 피해주기
+
+                attackPiece.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None;
+                attackPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None; // 배치 칸에 올라가 있는 팀 상태 변경
+                attackPiece.PieceVariable.currentPlacePlane.PlacedPiece = null;
                 attackPiece.PieceDestroy();
             }
 
@@ -115,4 +113,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.30
+// 마지막 작성 일자: 2026.04.02

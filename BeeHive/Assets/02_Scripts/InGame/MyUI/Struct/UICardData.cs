@@ -15,7 +15,7 @@ namespace InGame.MyUI
         [TextArea] // 엔터를 입력하기 위해 추가
         public string currentCardExplain; // 현재 카드 설명
 
-        public Image currentCardImage; // 현재 카드 이미지
+        public Sprite currentCardSprite; // 현재 카드 이미지
 
         public ObjectPoolType poolType; // 카드의 풀 타입
 
@@ -23,4 +23,4 @@ namespace InGame.MyUI
         public float animationYValue; // y축으로 올라가는 값
     }
 }
-// 마지막 작성 일자: 2026.03.30
+// 마지막 작성 일자: 2026.04.02

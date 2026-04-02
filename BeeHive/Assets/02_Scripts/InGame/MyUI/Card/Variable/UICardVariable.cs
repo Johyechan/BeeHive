@@ -18,6 +18,7 @@ namespace InGame.MyUI.Card.Variable
 
         public TMP_Text cardTitle; // 카드 이름
         public TMP_Text cardExplain; // 카드 설명
+        public TMP_Text cardInformation; // 카드 설명(확대 버전)
 
         public CardUseButton cardUseButton; // 카드 사용 버튼 변수
 
@@ -41,4 +42,4 @@ namespace InGame.MyUI.Card.Variable
         public int originIndex; // 자기자신의 기본 인덱스
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.04.02
