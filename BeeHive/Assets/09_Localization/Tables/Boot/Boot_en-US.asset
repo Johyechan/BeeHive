@@ -22,6 +22,28 @@ MonoBehaviour:
     m_Localized: OK
     m_Metadata:
       m_Items: []
+  - m_Id: 27069473619968
+    m_Localized: Steam authentication failed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28397096665088
+    m_Localized: Create
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28678568017920
+    m_Localized: 'Create a nickname
+
+      (Max. 8 characters)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30752269664256
+    m_Localized: The nickname already exists.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31346854199296
+    m_Localized: Nickname is 8 characters or more or is empty.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

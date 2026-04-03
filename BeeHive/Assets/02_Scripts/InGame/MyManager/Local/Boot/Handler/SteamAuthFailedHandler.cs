@@ -2,7 +2,7 @@ using DG.Tweening;
 using InGame.MyManager.Global;
 using MyUtil;
 using SocketIOClient;
-using System.Threading.Tasks;
+using UnityEngine.Localization.Settings;
 using TMPro;
 using UnityEngine;
 
@@ -33,11 +33,16 @@ namespace InGame.MyManager.Boot.Handler
 
             MainThreadDispatcher.Enqueue(() =>
             {
-                _gameQuitTxt.text = response.GetValue<string>(); // 게임 강제 종료 이유 할당
+                string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Boot",
+                    "UI_SteamAuthFailed"
+                ); // Boot 테이블에 있는 UI_SteamAuthFailed 키를 가지는 텍스트 가져오기
+
+                _gameQuitTxt.text = str; // 게임 강제 종료 이유 할당
                 _gameQuitUICanvasGroup.gameObject.SetActive(true); // 게임 강제 종료 UI 활성화
                 _gameQuitUICanvasGroup.DOFade(1, _fadeDuration); // 게임 강제 종료 UI 페이드 인
             });
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.03

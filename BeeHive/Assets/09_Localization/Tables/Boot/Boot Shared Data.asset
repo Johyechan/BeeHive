@@ -19,6 +19,26 @@ MonoBehaviour:
     m_Key: UI_Button_OK
     m_Metadata:
       m_Items: []
+  - m_Id: 27069473619968
+    m_Key: UI_SteamAuthFailed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28397096665088
+    m_Key: UI_Button_Create
+    m_Metadata:
+      m_Items: []
+  - m_Id: 28678568017920
+    m_Key: UI_NickNameGuide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30752269664256
+    m_Key: UI_NickNameDuplicate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 31346854199296
+    m_Key: UI_NickNameOutOfRangeOrEmpty
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
