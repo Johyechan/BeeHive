@@ -7,6 +7,7 @@ using InGame.MyObject.Piece.ObjectPieces;
 using MyUtil.Interface;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Tutorial.FSM.State.First
 {
@@ -75,7 +76,7 @@ namespace Tutorial.FSM.State.First
                         await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
                         TutorialManager.Instance.InputOn = true;
                         _currentTurnType = TurnType.MakeTurn;
-
+                        string str = LocalizationSettings.StringDatabase.GetLocalizedString("ga", "na");
                         TutorialManager.Instance.SetTutorialPanel(true, "후순위 플레이어는 첫 번째 턴에만 금괴를 2개가 아닌 3개를 획득합니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.25f, 0.793f), new Vector4(0.7f, 0.4f));
                         break;
                     case TurnType.DrawTurn: // 드로우 턴이라면

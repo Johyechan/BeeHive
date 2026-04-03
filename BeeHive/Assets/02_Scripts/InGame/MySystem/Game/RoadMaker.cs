@@ -60,9 +60,9 @@ namespace InGame.MySystem
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
                 GameObject road = ObjectPoolManager.Instance.GetObject(objectPoolType, parent);
-                road.transform.localPosition = pos;
+                road.transform.localPosition = new Vector3(pos.x, ObjectPoolManager.Instance.AnimationYPos, pos.z);
                 road.transform.Rotate(0, _angle, 0);
-                ObjectPoolManager.Instance.Animation(road, true, true);
+                ObjectPoolManager.Instance.Animation(road, true, true, pos.y);
             }
             else // 튜토리얼이 아닐 때
             {
@@ -71,4 +71,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.03.20
+// 마지막 작성 일자: 2026.04.03

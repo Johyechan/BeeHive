@@ -19,6 +19,8 @@ namespace MyUtil.MyObjectPool
         [SerializeField] private List<ObjectPoolData> _poolDataList; // 인스펙터에서 풀링할 데이터를 담는 리스트 변수
 
         [SerializeField] private float _animationDuration; // 애니메이션 지속 시간
+        [SerializeField] private float _animationYPos; // 애니메이션에 필요한 y값
+        public float AnimationYPos { get => _animationYPos; } // 애니메이션에 필요한 y값
 
         private Dictionary<ObjectPoolType, ObjectPoolData> _poolDataMap = new(); // 풀링 맵 - 타입에 맞는 풀링 데이트를 할당
         private Dictionary<ObjectPoolType, Queue<GameObject>> _pool = new(); // 실제 풀 - 여기에 풀링 객체를 풀링 타입에 맞게 추가
@@ -62,11 +64,11 @@ namespace MyUtil.MyObjectPool
                         obj.transform.Rotate(0, makeObjectPoolData.angle, 0); // 각도 회전
                     }
 
-                    obj.transform.localPosition = makeObjectPoolData.pos; // 객체 위치 할당
+                    obj.transform.localPosition = new Vector3(makeObjectPoolData.pos.x, _animationYPos, makeObjectPoolData.pos.z); // 객체 위치 할당
 
                     if(makeObjectPoolData.needAnimation) // 애니메이션이 필요하다면
                     {
-                        Animation(obj, true, true);
+                        Animation(obj, true, true, makeObjectPoolData.pos.y);
                     }
 
                     INetworkIdObject networkIdObject = obj.GetComponent<INetworkIdObject>();
@@ -140,14 +142,14 @@ namespace MyUtil.MyObjectPool
             }
         }
 
-        // 외부에서 풀에서 객체를 가져올 때 부르는 함수(매개 변수로 풀링 타입, 부모 = 기본 값 null을 받는다)
-        public GameObject GetObject(ObjectPoolType type, Transform parent = null)
+        // 외부에서 풀에서 객체를 가져올 때 부르는 함수(매개 변수로 풀링 타입, 부모 = 기본 값 null을 받는다, 활성화 여부)
+        public GameObject GetObject(ObjectPoolType type, Transform parent = null, bool isActive = true)
         {
             if (_pool[type].Count > 0) // 풀링 타입의 풀에 객체가 존재한다면
             {
                 GameObject obj = _pool[type].Dequeue(); // 풀링 타입의 풀에 있는 객체를 가져온다.
                 obj.transform.SetParent(parent, false); // 풀에서 꺼낸 객체의 부모를 할당
-                obj.SetActive(true); // 풀에서 꺼낸 객체 활성화
+                obj.SetActive(isActive); // 풀에서 꺼낸 객체 활성화
 
                 return obj; // Task 완료 시 반환되는 GameObject 반환
             }
@@ -156,7 +158,7 @@ namespace MyUtil.MyObjectPool
                 GameObject newObj = null;
                 newObj = CreateObject(type); // 새롭게 풀링 타입에 맞는 객체 생성
                 newObj.transform.SetParent(parent, false); // 새롭게 생성한 객체의 부모를 할당
-                newObj.SetActive(true); // 새롭게 생성한 객체 활성화
+                newObj.SetActive(isActive); // 새롭게 생성한 객체 활성화
 
                 return newObj; // Task 완료 시 반환되는 GameObject 반환
             }
@@ -173,7 +175,7 @@ namespace MyUtil.MyObjectPool
 
             if (needAnimation) // 애니메이션이 필요하다면
             {
-                Animation(returnObj, isObject, false)
+                Animation(returnObj, isObject, false, _animationYPos)
                     .OnComplete(() =>
                     {
                         ResetObject(type, returnObj);
@@ -198,7 +200,7 @@ namespace MyUtil.MyObjectPool
             _pool[type].Enqueue(returnObj); // 풀링 타입의 풀에 객체 추가
         }
 
-        public Tween Animation(GameObject obj, bool isObject, bool isCreate)
+        public Tween Animation(GameObject obj, bool isObject, bool isCreate, float targetYPos = 0)
         {
             float startValue = isCreate ? 1f : 0f; // 생성일 경우 1 할당 아닐 경우 0 할당
             float endValue = isObject ? isCreate ? 0f : 1f : isCreate ? 1f : 0f; // 객체이면서 생성일 경우 0 할당 객체이면서 생성이 아닐 경우 1 할당
@@ -206,18 +208,15 @@ namespace MyUtil.MyObjectPool
 
             if (isObject) // 객체일 때
             {
-                Renderer renderer = obj.GetComponentInChildren<Renderer>(); // 객체 랜더 탐색
-                Material mat = new Material(renderer.sharedMaterial); // 공유 머티리얼로 새 머티리얼 생성
-                renderer.material = mat; // 객체 랜더에 새 머티리얼 할당
-                mat.SetFloat("_Cutoff", startValue); // 객체 보임 상태
-                return mat.DOFloat(endValue, "_Cutoff", _animationDuration); // _animationDuration초 동안 페이드 아웃;
+                return obj.transform.DOLocalMoveY(targetYPos, _animationDuration); // 목표 y값으로 이동
             }
             else // UI 일 때
             {
+                obj.SetActive(true); // 객체 활성화
                 CanvasGroup canvasGroup = obj.GetComponent<CanvasGroup>(); // 캔버스 그룹 가져오기
                 return canvasGroup.DOFade(endValue, _animationDuration); // 이미지 페이드 아웃
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.04.03

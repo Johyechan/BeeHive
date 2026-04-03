@@ -2,10 +2,10 @@ using InGame.MyManager.Boot.Struct;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local.Boot;
 using InGame.MyManager.Local.Boot.Variable;
-using MyUtil;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyManager.Local
 {
@@ -44,6 +44,8 @@ namespace InGame.MyManager.Local
             _variables.checkerQueue.Enqueue(_variables.globalManagersSetChecker); // 1 순위 체크
             _variables.checkerQueue.Enqueue(_variables.steamIDChecker); // 2 순위 체크
             _variables.checkerQueue.Enqueue(_variables.gpuChecker); // 3 순위 체크
+
+            LocalizationSettings.InitializationOperation.WaitForCompletion(); // 번역 테이블 대기
 
             await NetworkManager.Instance.WaitSocketConnected(); // 서버 연결 대기
 

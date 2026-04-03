@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Localization-Assets-Shared
+  m_EditorClassIdentifier: 
+  m_GroupName: Localization-Assets-Shared
+  m_GUID: a57a3c7083b00e548a11b000f8d4ffc7
+  m_SerializeEntries:
+  - m_GUID: 153d8c0ec741d4c47905c2b2b2b0fc46
+    m_Address: Assets/09_Localization/Tables/Tutorial Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 934eda5dc8f70b64f9ba4bb9ebe49771
+    m_Address: Assets/09_Localization/Tables/Game/Game Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dffb9999153867b4996ee147a47ce7c8
+    m_Address: Assets/09_Localization/Tables/Room/Room Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f46a3b27d8376cd4f85bd8c0fe98ec27
+    m_Address: Assets/09_Localization/Tables/Lobby/Lobby Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f79a57504b919d24ca3dab829da26465
+    m_Address: Assets/09_Localization/Tables/Boot Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8ce8538dbe596345945145ec7e17596
+    m_Address: Assets/09_Localization/Tables/Rule/Rule Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 1
+  m_Settings: {fileID: 11400000, guid: 3619e0920ca733e47aaa2a51526717c0, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ea01152af2eedbb438f150b85b747b85, type: 2}
+    - {fileID: 11400000, guid: 9471de8a43b8a264487e69b6e8fa8c52, type: 2}

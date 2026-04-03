@@ -90,9 +90,9 @@ namespace InGame.MyObject.Piece.ObjectPieces
             if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
                 GameObject road = ObjectPoolManager.Instance.GetObject(type, roadPlacePlaneObject.transform.parent);
-                road.transform.localPosition = roadPlacePlaneObject.transform.localPosition;
+                road.transform.localPosition = new Vector3(roadPlacePlaneObject.transform.localPosition.x, ObjectPoolManager.Instance.AnimationYPos, roadPlacePlaneObject.transform.localPosition.z);
                 road.transform.Rotate(0, targetAngle, 0);
-                ObjectPoolManager.Instance.Animation(road, true, true);
+                ObjectPoolManager.Instance.Animation(road, true, true, roadPlacePlaneObject.transform.localPosition.y);
                 PieceBase pieceBase = road.GetComponent<PieceBase>();
                 InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(roadPlacePlaneObject, pieceBase, false); // 배치칸 상태 변경
                 InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
@@ -109,4 +109,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.03.27
+// 마지막 작성 일자: 2026.04.03

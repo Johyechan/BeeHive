@@ -1,3 +1,4 @@
+using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
@@ -7,6 +8,7 @@ using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece.Data;
 using InGame.MyObject.Piece.Handler;
 using InGame.MyObject.Piece.Variable;
+using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -60,7 +62,11 @@ namespace InGame.MyObject.Piece
         // 공격한 기물 처리 함수
         public void PieceDestroy()
         {
-            Destroy(gameObject); // 기물 파괴
+            transform.DOLocalMoveY(ObjectPoolManager.Instance.AnimationYPos, _pieceData.animationDuration)
+                .OnComplete(() =>
+                {
+                    Destroy(gameObject); // 기물 파괴
+                });
         }
 
         // 외부에서 하이라이트를 끌 때 현재 스크립트에서 하이라이트 활성화 여부를 끔 상태로 만들어주는 함수
@@ -108,4 +114,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2026.02.12
+// 마지막 작성 일자: 2026.04.03

@@ -49,7 +49,7 @@ namespace InGame.MyManager.Local.MyCard
 
             if (includeUI) // UI도 생성해야 할 경우
             {
-                GameObject uiCard = ObjectPoolManager.Instance.GetObject(currentDrawCard.CardUIPoolType); // UI 카드를 추가하여 플레이어 UI 카드에 추가
+                GameObject uiCard = ObjectPoolManager.Instance.GetObject(currentDrawCard.CardUIPoolType, null, false); // UI 카드를 추가하여 플레이어 UI 카드에 추가
                 uiCard.GetComponent<RectTransform>().SetParent(playerUICardsParent);
                 UICardBase uiCardBase = uiCard.GetComponent<UICardBase>();
                 uiCardBase.UICardVariable.cardObj = currentDrawCard.gameObject; // UI 카드에 현재 카드 객체 할당
@@ -68,4 +68,4 @@ namespace InGame.MyManager.Local.MyCard
         }
     }
 }
-// 마지막 작성 일자: 2026.03.03
+// 마지막 작성 일자: 2026.04.03

@@ -52,9 +52,12 @@ namespace InGame.MyUI
             {
                 RectTransform uiCardRectTransform = _rectTransform.GetChild(cardCount - 1).GetComponent<RectTransform>(); // 현재 카드의 RectTransform 할당 - 실제 값은 -1을 하지 않아야 하지만 인덱스로 활용할 것이기 때문에 -1을 하여 배열 크기 초과 오류를 방지
                 uiCardRectTransform.DORotate(Vector3.zero, 0.1f); // angle만큼 회전 (-를 한 이유는 반대로 되야 내가 보기 편해서)
-                uiCardRectTransform.DOAnchorPos(new Vector3(0, _cardBaseYPos, 0), 0.1f, true); // 기존 Y축 위치로 이동 + snapping을 활성화하여 정수값으로 떨어지도록 설정
-                UICardInit(uiCardRectTransform, _cardBaseYPos, 0);
-                ObjectPoolManager.Instance.Animation(uiCardRectTransform.gameObject, false, true);
+                uiCardRectTransform.DOAnchorPos(new Vector3(0, _cardBaseYPos, 0), 0.1f, true) // 기존 Y축 위치로 이동 + snapping을 활성화하여 정수값으로 떨어지도록 설정
+                    .OnComplete(() =>
+                    {
+                        UICardInit(uiCardRectTransform, _cardBaseYPos, 0);
+                        ObjectPoolManager.Instance.Animation(uiCardRectTransform.gameObject, false, true);
+                    }); 
                 return;
             }
                 
@@ -76,8 +79,12 @@ namespace InGame.MyUI
                 RectTransform uiCardRectTransform = _rectTransform.GetChild(i).GetComponent<RectTransform>(); // 현재 자식(카드)의 RectTransform을 가져오기
 
                 uiCardRectTransform.DORotate(new Vector3(0, 0, -angle), 0.1f); // angle만큼 회전 (-를 한 이유는 반대로 되야 내가 보기 편해서)
-                uiCardRectTransform.DOAnchorPos(new Vector3(xPos, _cardBaseYPos + yPos, 0), 0.1f, true); // xPos, yPos만큼 이동 + snapping을 활성화하여 정수값으로 떨어지도록 설정
-                UICardInit(uiCardRectTransform, _cardBaseYPos + yPos, i);
+                uiCardRectTransform.DOAnchorPos(new Vector3(xPos, _cardBaseYPos + yPos, 0), 0.1f, true) // xPos, yPos만큼 이동 + snapping을 활성화하여 정수값으로 떨어지도록 설정
+                    .OnComplete(() =>
+                    {
+                        UICardInit(uiCardRectTransform, _cardBaseYPos + yPos, i);
+                        ObjectPoolManager.Instance.Animation(uiCardRectTransform.gameObject, false, true);
+                    });
             }
         }
 
@@ -89,4 +96,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.04.03
