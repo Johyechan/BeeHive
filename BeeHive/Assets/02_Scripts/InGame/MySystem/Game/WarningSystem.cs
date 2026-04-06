@@ -6,6 +6,7 @@ using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MySystem
 {
@@ -43,26 +44,46 @@ namespace InGame.MySystem
             switch (type)
             {
                 case ObjectType.Miner:
-                    UIManager.Instance.WarningUIMake($"더 이상 광부를 이동할 수 없습니다.");
+                    string minerCanNotMove = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_CanNotMoveMiner"
+                    );
+                    UIManager.Instance.WarningUIMake(minerCanNotMove);
                     break;
                 case ObjectType.Soldier:
                     if(isAttack) // 공격 관련이라면
                     {
-                        UIManager.Instance.WarningUIMake($"더 이상 보병으로 공격할 수 없습니다.");
+                        string soldierCanNotAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Game",
+                            "Game_UI_SoldierCanNotAttack"
+                        );
+                        UIManager.Instance.WarningUIMake(soldierCanNotAttack);
                     }
                     else // 이동 관련일 경우
                     {
-                        UIManager.Instance.WarningUIMake($"더 이상 보병을 이동할 수 없습니다.");
+                        string soldierCanNotMove = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Game",
+                            "Game_UI_SoldierCanNotMove"
+                        );
+                        UIManager.Instance.WarningUIMake(soldierCanNotMove);
                     }
                     break;
                 case ObjectType.Tank:
                     if(isAttack) // 공격 관련이라면
                     {
-                        UIManager.Instance.WarningUIMake($"더 이상 전차로 공격할 수 없습니다.");
+                        string tankCanNotAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Game",
+                            "Game_UI_TankCanNotAttack"
+                        );
+                        UIManager.Instance.WarningUIMake(tankCanNotAttack);
                     }
                     else // 이동 관련일 경우
                     {
-                        UIManager.Instance.WarningUIMake($"더 이상 전차를 이동할 수 없습니다.");
+                        string tankCanNotMove = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Game",
+                            "Game_UI_TankCanNotMove"
+                        );
+                        UIManager.Instance.WarningUIMake(tankCanNotMove);
                     }
                     break;
             }
@@ -74,7 +95,11 @@ namespace InGame.MySystem
             if (InGameContext.Current.Data.GameManager.CanMakePiece)
                 return true;
 
-            UIManager.Instance.WarningUIMake("더 이상 기물을 만들 수 없습니다.");
+            string canNotCreatePieces = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_CanNotCreatePieces"
+            );
+            UIManager.Instance.WarningUIMake(canNotCreatePieces);
             return false;
         }
 
@@ -121,7 +146,12 @@ namespace InGame.MySystem
             // 현재 턴의 팀과 내 팀이 다르다면
             if(InGameContext.Current.Data.TurnManager.CurrentTeamType != TeamManager.Instance.CurrentTeamType)
             {
-                UIManager.Instance.WarningUIMake("현재 턴은 당신의 턴이 아닙니다.");
+                string notYourTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_NotYourTurn"
+                );
+
+                UIManager.Instance.WarningUIMake(notYourTurn);
                 return false;
             }
 
@@ -129,4 +159,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.06

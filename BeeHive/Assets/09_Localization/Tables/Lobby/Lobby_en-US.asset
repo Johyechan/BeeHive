@@ -17,7 +17,59 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: f46a3b27d8376cd4f85bd8c0fe98ec27, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 1043122509053952
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1043516886876160
+    m_Localized: Find Room
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044044182192128
+    m_Localized: Room Code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044364291473408
+    m_Localized: Find
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044819214073856
+    m_Localized: Create Room
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045104808427520
+    m_Localized: Enter Room Name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045477489115136
+    m_Localized: Public
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045705298542592
+    m_Localized: Private
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045971188056064
+    m_Localized: Create
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1046627584049152
+    m_Localized: Game Rules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1047007726403584
+    m_Localized: Create Room
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1047166350786560
+    m_Localized: Find Room
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1047630907703296
+    m_Localized: Quit Game
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

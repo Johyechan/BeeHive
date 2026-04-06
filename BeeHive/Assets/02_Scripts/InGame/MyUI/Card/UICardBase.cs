@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Tutorial;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.Card
 {
@@ -131,7 +132,12 @@ namespace InGame.MyUI.Card
 
             if(_uiCardData.poolType == ObjectPoolType.FirePowerUICard) // 화력 카드일 경우
             {
-                UIManager.Instance.WarningUIMake("화력 카드는 직접 사용 하는 카드가 아닙니다 \n 전차가 원거리 공격을 할 때 \n 자동으로 사용 여부를 \n 묻습니다"); // 직접 사용 불가 패널 띄우기
+                string canNotUseFirePowerCard = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_CanNotUseFirePowerCard"
+                );
+
+                UIManager.Instance.WarningUIMake(canNotUseFirePowerCard); // 직접 사용 불가 패널 띄우기
             }
             else // 화력 카드가 아닐 경우
             {
@@ -142,4 +148,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.04.02
+// 마지막 작성 일자: 2026.04.06

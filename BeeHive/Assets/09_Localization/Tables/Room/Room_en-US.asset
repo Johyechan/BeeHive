@@ -17,7 +17,59 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: dffb9999153867b4996ee147a47ce7c8, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 1048191656787968
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1048554581524480
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1048748966543360
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1048982916431872
+    m_Localized: Transfer Host
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049214794334208
+    m_Localized: Kick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049578566320128
+    m_Localized: Leave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1051421342171136
+    m_Localized: 'Room ID: '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1052154540064768
+    m_Localized: 'Room Name: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1053368073846784
+    m_Localized: 'Players: {0} / {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1054503060897792
+    m_Localized: Ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1054838462611456
+    m_Localized: Not Ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1055187554533376
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1055381180383232
+    m_Localized: Ready
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

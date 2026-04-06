@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyManager.Local
 {
@@ -53,7 +54,11 @@ namespace InGame.MyManager.Local
         {
             if (_cardUsedCheckMap[type]) // type 형태의 카드를 이미 사용 했었다면
             {
-                UIManager.Instance.WarningUIMake("같은 카드를 두 번 이상 사용할 수 없습니다"); // 경고창 띄우기
+                string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_CanNotUseSameCard"
+                );
+                UIManager.Instance.WarningUIMake(str); // 경고창 띄우기
                 return true; // 일전에 사용했다고 반환
             }
 

@@ -2,7 +2,7 @@ using DG.Tweening;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using MyUtil;
-using System.Threading.Tasks;
+using UnityEngine.Localization.Settings;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -70,8 +70,26 @@ namespace InGame.MySystem.Room
                     string json = data.GetValue().ToString(); // string 형태로 값 받기
                     _roomInfo = JsonUtility.FromJson<RoomInfo>(json); // RoomInfo 형태로 json 값을 변경
                     MainThreadDispatcher.Enqueue(() => _roomID.text = $"{_roomInfo.ID}"); // 메인 스레드에서 방 ID UI 변경
-                    MainThreadDispatcher.Enqueue(() => _roomName.text = $"방 이름: {_roomInfo.Name}"); // 메인 스레드에서 방 이름 UI 변경
-                    MainThreadDispatcher.Enqueue(() => _maxPlayer.text = $"인원: {_roomInfo.players.Length} / {_roomInfo.maxPlayer}"); // 메인 스레드에서 인원 수 UI 변경
+                    MainThreadDispatcher.Enqueue(() => 
+                    {
+                        string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Room",
+                            "Room_UI_RoomName",
+                            new object[] { _roomInfo.Name }
+                        );
+
+                        _roomName.text = str;
+                    }); // 메인 스레드에서 방 이름 UI 변경
+                    MainThreadDispatcher.Enqueue(() =>
+                    {
+                        string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Room",
+                            "Room_UI_MaxPlayer",
+                            new object[] { _roomInfo.players.Length, _roomInfo.maxPlayer }
+                        );
+
+                        _maxPlayer.text = str;
+                    }); // 메인 스레드에서 인원 수 UI 변경
                     MainThreadDispatcher.Enqueue(() => _playerUISettingHandler.RoomInfo = _roomInfo); // 방 정보 공유
                     MainThreadDispatcher.Enqueue(() => FindCurrentPlayer(_roomInfo)); // 방 정보 공유
                     MainThreadDispatcher.Enqueue(() => _playerUISettingHandler.Init()); // 플레이어 정보 UI에 관련해서 변경을 하는 함수 실행
@@ -177,4 +195,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.02.26
+// 마지막 작성 일자: 2026.04.06

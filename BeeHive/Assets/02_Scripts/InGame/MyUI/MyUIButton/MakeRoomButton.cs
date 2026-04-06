@@ -4,6 +4,7 @@ using InGame.MyUI.MyUIInterface;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace InGame.MyUI
@@ -31,7 +32,12 @@ namespace InGame.MyUI
                 roomValue.isPublic = false;
             else
             {
-                UIManager.Instance.WarningUIMake("공개 여부를 선택하세요");
+                string choosePublicOrPrivate = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_ChoosePublicOrPrivate"
+                );
+
+                UIManager.Instance.WarningUIMake(choosePublicOrPrivate);
                 EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return;
             }
@@ -43,4 +49,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.04.06

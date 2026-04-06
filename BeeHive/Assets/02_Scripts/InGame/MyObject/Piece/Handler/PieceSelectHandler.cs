@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyObject.Piece.Handler
 {
@@ -68,7 +69,11 @@ namespace InGame.MyObject.Piece.Handler
                         switch(_pieceBase.CurrentObjectType) // 기물이
                         {
                             case ObjectType.Miner: // 광부 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                string selectMovePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_SelectMovePlace"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, selectMovePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                 break;
                         }
                         break;
@@ -158,4 +163,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.30
+// 마지막 작성 일자: 2026.04.06

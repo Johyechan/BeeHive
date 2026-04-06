@@ -14,7 +14,131 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: Tutorial
   m_TableCollectionNameGuidString: 153d8c0ec741d4c47905c2b2b2b0fc46
-  m_Entries: []
+  m_Entries:
+  - m_Id: 1083721568223232
+    m_Key: Tutorial_Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1085775795716096
+    m_Key: Tutorial_Click_Enter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1086113462353920
+    m_Key: Tutorial_YourHP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1087966212259840
+    m_Key: Tutorial_OpponentCastle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1088307888652288
+    m_Key: Tutorial_OpponentHP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1088380294922240
+    m_Key: Tutorial_YourGold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1088704275546112
+    m_Key: Tutorial_OpponentGold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1088992512311296
+    m_Key: Tutorial_viewingCastleIsYourTeam
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1089095679606784
+    m_Key: Tutorial_DefeatOpponent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1090931178340352
+    m_Key: Tutorial_Click_Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1091042277064704
+    m_Key: Tutorial_Click_Target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1091434180247552
+    m_Key: Tutorial_RoadCreateTwo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1091955335102464
+    m_Key: Tutorial_GoldBarCreateTwo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1092291927998464
+    m_Key: Tutorial_GoToMainTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1092691267682304
+    m_Key: Tutorial_FirstCreateMiner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1093165073039360
+    m_Key: Tutorial_MinerGuide1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1093656779685888
+    m_Key: Tutorial_MinerGuide2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1093892335992832
+    m_Key: Tutorial_MinerGuide3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094083407511552
+    m_Key: Tutorial_MinerGuide4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094345035612160
+    m_Key: Tutorial_MinerGuide5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094557330309120
+    m_Key: Tutorial_ClickPieceButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1095195627880448
+    m_Key: Tutorial_SelectCreateMinerPlace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1095923570311168
+    m_Key: Tutorial_FirstMoveMiner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1096782429552640
+    m_Key: Tutorial_SelectMovePlace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1098050631892992
+    m_Key: Tutorial_TurnEnd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1098999349903360
+    m_Key: Tutorial_LastPlayerGetThreeGoldFirstTime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1099434097901568
+    m_Key: Tutorial_MinerGetGoldCoin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1099754186211328
+    m_Key: Tutorial_CreateRoad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1104915407306752
+    m_Key: Tutorial_secondCreateRoad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1105872568451072
+    m_Key: Tutorial_CreateRoadAgain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1106270867947520
+    m_Key: Tutorial_FirsCreateMiner
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

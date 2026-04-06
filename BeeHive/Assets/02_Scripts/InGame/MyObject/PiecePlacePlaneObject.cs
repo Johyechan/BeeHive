@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyObject
 {
@@ -81,7 +82,11 @@ namespace InGame.MyObject
                 {
                     if (_frontPiecePlacePlaneObject.TeamType != TeamManager.Instance.CurrentTeamType) // 앞에 있는 기물 배치칸에 배치된 기물이 내 팀이 아닐 경우
                     {
-                        UIManager.Instance.WarningUIMake("상대가 해당 배치 칸의 앞 칸을 점령 했습니다"); // UI 경고문 생성
+                        string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Game",
+                            "Game_UI_OpponentGetFrontPlace"
+                        );
+                        UIManager.Instance.WarningUIMake(str); // UI 경고문 생성
                         HighLightOffEvent(); // 하이라이트 끄기
                         return; // 반환
                     }
@@ -221,11 +226,19 @@ namespace InGame.MyObject
                                 case ObjectType.Miner: // 광부일 때
                                     if(isMove) // 이동된 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                                        string turnEnd = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_TurnEnd"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, turnEnd, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                                     }
                                     else // 배치된 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "광부를 클릭해서 이동을 합시다. \n (배치 이후 바로 이동이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                        string firstMoveMiner = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_FirstMoveMiner"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, firstMoveMiner, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                     }
                                     break;
                             }
@@ -240,7 +253,7 @@ namespace InGame.MyObject
                                     }
                                     else // 배치된 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "광부를 클릭해서 이동을 합시다. \n (배치 이후 바로 이동이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                        TutorialManager.Instance.SetTutorialPanel(true, "생산자를 이동을 합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                     }
                                     break;
                             }
@@ -321,4 +334,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.04.02
+// 마지막 작성 일자: 2026.04.06

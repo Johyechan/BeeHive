@@ -3,7 +3,9 @@ using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
+using InGame.MySystem;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyInput
 {
@@ -20,33 +22,55 @@ namespace InGame.MyInput
 
         public bool IsReturn()
         {
-            if(!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.DrawTurn, "드로우 턴이 아닙니다.")) // 드로우 턴이 아니라면
+            string warningEventStr = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_NotDrawTurn"
+            );
+
+            if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.DrawTurn, warningEventStr)) // 드로우 턴이 아니라면
             {
                 return true; // 반환
             }
 
             if (InGameContext.Current.Data.TurnManager.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 내 팀의 턴이 아니라면
             {
-                UIManager.Instance.WarningUIMake("당신의 턴이 아닙니다.");
+                string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_NotYourTurn"
+                );
+                UIManager.Instance.WarningUIMake(str);
                 return true; // 반환
             }
 
             if(_deck.transform.childCount <= 0) // 덱에 더 이상 카드가 없다면
             {
+                string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_NoMoreCardInDeck"
+                );
                 InGameContext.Current.Data.DeckManager.IsEmpty = true;
-                UIManager.Instance.WarningUIMake("더 이상 드로우를 할 수 없습니다.\n(덱에 더 이상 카드가 없습니다)");
+                UIManager.Instance.WarningUIMake(str);
                 return true; // 반환
             }
 
             if (!InGameContext.Current.Data.DrawManager.CanDraw) // 만약 Draw가 불가능하다면
             {
-                UIManager.Instance.WarningUIMake("더 이상 드로우를 할 수 없습니다.\n(한 턴에 한 장 드로우 가능)");
+                string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_OnlyOneCardPerTurn"
+                );
+                UIManager.Instance.WarningUIMake(str);
                 return true; // 반환
             }
 
             if (!WalletEvent.OnUseGoldBar.Invoke(2)) // 금괴 2개를 사용할 수 없다면
             {
-                UIManager.Instance.WarningUIMake("더 이상 드로우를 할 수 없습니다.\n(금괴가 부족합니다 - 필요 비용: 금괴 2개)");
+                string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_NotEnoughGold",
+                    new object[] { 2 }
+                );
+                UIManager.Instance.WarningUIMake(str);
                 return true; // 반환
             }
 
@@ -54,4 +78,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.02.26
+// 마지막 작성 일자: 2026.04.06

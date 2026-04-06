@@ -11,6 +11,7 @@ using InGame.MyObject.Piece.Variable;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyObject.Piece
 {
@@ -92,8 +93,12 @@ namespace InGame.MyObject.Piece
                 return; // 반환
             }
 
+            string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_NotMainTurnCanNotMove"
+            );
             // 현재 턴이 메인 턴이 아니라면
-            if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 이동할 수 없습니다."))
+            if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, str))
                 return; // 반환
 
             if (_pieceData.teamType != TeamManager.Instance.CurrentTeamType) // 현재 팀과 다른 팀의 기물이라면
@@ -114,4 +119,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2026.04.03
+// 마지막 작성 일자: 2026.04.06

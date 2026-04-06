@@ -2,10 +2,10 @@ using InGame.MyEnum;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using MyUtil.Interface;
-using MyUtil.MyObjectPool;
 using System.Collections.Generic;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Tutorial.FSM.State.First
 {
@@ -53,7 +53,11 @@ namespace Tutorial.FSM.State.First
                     switch (_count) // 카운팅 된 개수가
                     {
                         case 1:
-                            TutorialManager.Instance.SetTutorialPanel(true, "금괴도 2개 생성됩니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.155f, 0.257f), new Vector4(1f, 0.6f));
+                            string goldBarCreateTwo = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_GoldBarCreateTwo"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, goldBarCreateTwo, TutorialManager.Instance.EnterClick, 0.08f, 0.008f, new Vector4(0.155f, 0.257f), new Vector4(1f, 0.6f));
                             break;
                         case 2:
                             TutorialManager.Instance.SetTutorialPanel(false);
@@ -67,28 +71,52 @@ namespace Tutorial.FSM.State.First
                     switch (_count) // 카운팅 된 개수가
                     {
                         case 1:
-                            TutorialManager.Instance.SetTutorialPanel(true, "광부는 위치에 따라 금화를 다르게 법니다.", "엔터 클릭");
+                            string minerGuide1 = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_MinerGuide1"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, minerGuide1, TutorialManager.Instance.EnterClick);
                             break;
                         case 2:
                             HightLightOnOff(_goldCoin1PlacePlanes, true);
-                            TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 1개를 법니다.", "엔터 클릭", 0, 0, default, default, new Vector2(0, 100f));
+                            string minerGuide2 = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_MinerGuide2"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, minerGuide2, TutorialManager.Instance.EnterClick, 0, 0, default, default, new Vector2(0, 100f));
                             break;
                         case 3:
                             HightLightOnOff(_goldCoin1PlacePlanes, false);
                             HightLightOnOff(_goldCoin3PlacePlanes, true);
-                            TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 3개를 법니다.", "엔터 클릭", 0, 0, default, default, new Vector2(0, 350f));
+                            string minerGuide3 = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_MinerGuide3"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, minerGuide3, TutorialManager.Instance.EnterClick, 0, 0, default, default, new Vector2(0, 350f));
                             break;
                         case 4:
                             HightLightOnOff(_goldCoin3PlacePlanes, false);
                             HightLightOnOff(_goldCoin5PlacePlanes, true);
-                            TutorialManager.Instance.SetTutorialPanel(true, "해당 위치에 있으면 금화 5개를 법니다.\n(금화 5개가 모이면 금괴 1개로 전환됩니다.)", "엔터 클릭", 0, 0, default, default, new Vector2(0, 300f));
+                            string minerGuide4 = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_MinerGuide4"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, minerGuide4, TutorialManager.Instance.EnterClick, 0, 0, default, default, new Vector2(0, 300f));
                             break;
                         case 5:
                             HightLightOnOff(_goldCoin5PlacePlanes, false);
-                            TutorialManager.Instance.SetTutorialPanel(true, "이어서 진행하겠습니다.", "엔터 클릭");
+                            string minerGuide5 = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_MinerGuide5"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, minerGuide5, TutorialManager.Instance.EnterClick);
                             break;
                         case 6:
-                            TutorialManager.Instance.SetTutorialPanel(true, "기물 버튼을 눌러 기물을 배치해봅시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.196f, 0.095f), new Vector4(0.7f, 0.7f));
+                            string clickPieceShowButton = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_ClickPieceButton"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, clickPieceShowButton, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.196f, 0.095f), new Vector4(0.7f, 0.7f));
                             _currentTurnType = TurnType.TurnEnd; // 현재 턴 변경(이걸 안하면 계속 생산 턴으로 인식하는 문제 발생)
                             TutorialManager.Instance.InputOn = false;
                             break;
@@ -107,16 +135,28 @@ namespace Tutorial.FSM.State.First
                         break;
                     case TurnType.MakeTurn: // 생성 턴일 경우
                         TutorialManager.Instance.InputOn = true;
-                        TutorialManager.Instance.SetTutorialPanel(true, "매 턴 도로가 2개 생성되고,", "엔터 클릭", 0.07f, 0.008f, new Vector4(0.271f, 0.533f), new Vector4(0.55f, 0.55f));
+                        string roadCreateTwo = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_RoadCreateTwo"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, roadCreateTwo, TutorialManager.Instance.EnterClick, 0.07f, 0.008f, new Vector4(0.271f, 0.533f), new Vector4(0.55f, 0.55f));
                         SetCountAndTurn(TurnType.MakeTurn);
                         break;
                     case TurnType.DrawTurn: // 드로우 턴일 경우
-                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 메인 턴을 진행합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        string goToMainTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_GoToMainTurn"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, goToMainTurn, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                         break;
                     case TurnType.MainTurn: // 메인 턴일 경우 
                         TutorialManager.Instance.IsInputDelayOver = false;
                         SetCountAndTurn(TurnType.MainTurn);
-                        TutorialManager.Instance.SetTutorialPanel(true, "처음에는 광부를 만들어봅시다.", "엔터 클릭");
+                        string firstCreateMiner = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_FirstCreateMiner"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, firstCreateMiner, TutorialManager.Instance.EnterClick);
                         TutorialManager.Instance.InputOn = true;
                         break;
                     case TurnType.TurnEnd: // 턴 종료 턴일 경우
@@ -148,4 +188,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.03.31
+// 마지막 작성 일자: 2026.04.06

@@ -14,7 +14,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: Lobby
   m_TableCollectionNameGuidString: f46a3b27d8376cd4f85bd8c0fe98ec27
-  m_Entries: []
+  m_Entries:
+  - m_Id: 1043122509053952
+    m_Key: Lobby_UI_Button_Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1043516886876160
+    m_Key: Lobby_RoomList_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044044182192128
+    m_Key: Lobby_RoomList_RoomCodeInput
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044364291473408
+    m_Key: Lobby_UI_Button_Find
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1044819214073856
+    m_Key: Lobby_MakeRoom_Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045104808427520
+    m_Key: Lobby_MakeRoom_RoomNameInput
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045477489115136
+    m_Key: Lobby_UI_Toggle_Public
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045705298542592
+    m_Key: Lobby_UI_Toggle_Private
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1045971188056064
+    m_Key: Lobby_UI_Button_Create
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1046627584049152
+    m_Key: Lobby_UI_Button_GameRules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1047007726403584
+    m_Key: Lobby_UI_Button_CreateRoom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1047166350786560
+    m_Key: Lobby_UI_Button_FindRoom
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1047630907703296
+    m_Key: Lobby_UI_Button_QuitGame
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

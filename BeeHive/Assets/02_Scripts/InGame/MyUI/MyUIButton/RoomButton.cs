@@ -4,6 +4,7 @@ using InGame.MyUI.MyUIInterface;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
 namespace InGame.MyUI.MyUIButton
@@ -36,11 +37,19 @@ namespace InGame.MyUI.MyUIButton
         {
             if(_isPlaying) // 플레이 중이라면
             {
-                UIManager.Instance.WarningUIMake("플레이 중이라 참가할 수 없습니다");
+                string isPlay = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_IsPlay"
+                );
+                UIManager.Instance.WarningUIMake(isPlay);
             }
             else if(_isFull) // 참가자가 꽉 차있다면
             {
-                UIManager.Instance.WarningUIMake("참가자가 최대로 참가해 있습니다");
+                string isFull = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_IsFull"
+                );
+                UIManager.Instance.WarningUIMake(isFull);
             }
             else // 괜찮은 상황이라면
             {
@@ -50,4 +59,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.04.06

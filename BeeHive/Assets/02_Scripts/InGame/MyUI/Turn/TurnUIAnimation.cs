@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.Turn
 {
@@ -38,23 +39,43 @@ namespace InGame.MyUI.Turn
             switch(currentTurn)
             {
                 case TurnType.MakeTurn:
-                    _currentTurnTmpText.text = "[생산 턴]";
+                    string makeTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_MakeTurn"
+                    );
+                    _currentTurnTmpText.text = makeTurn;
                     break;
                 case TurnType.DrawTurn:
-                    _currentTurnTmpText.text = "[드로우 턴]";
+                    string drawTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_DrawTurn"
+                    );
+                    _currentTurnTmpText.text = drawTurn;
                     break;
                 case TurnType.MainTurn:
-                    _currentTurnTmpText.text = "[메인 턴]";
+                    string mainTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_MainTurn"
+                    );
+                    _currentTurnTmpText.text = mainTurn;
                     break;
                 case TurnType.TurnEnd:
-                    _currentTurnTmpText.text = "[턴 종료 턴]";
+                    string turnEnd = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_TurnEnd"
+                    );
+                    _currentTurnTmpText.text = turnEnd;
                     break;
                 case TurnType.ChangeTeam:
-                    _currentTurnTmpText.text = "[팀 변경 턴]";
+                    string changeTeam = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_ChangeTeamTurn"
+                    );
+                    _currentTurnTmpText.text = changeTeam;
                     break;
             }
             await _turnAnimations[currentTurn].UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.04.06

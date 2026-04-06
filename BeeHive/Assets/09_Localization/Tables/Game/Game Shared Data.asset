@@ -14,7 +14,203 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: Game
   m_TableCollectionNameGuidString: 934eda5dc8f70b64f9ba4bb9ebe49771
-  m_Entries: []
+  m_Entries:
+  - m_Id: 1057038249230336
+    m_Key: Game_UI_OtherTeamGoldTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058112536313856
+    m_Key: Game_UI_Button_DrawTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058319537799168
+    m_Key: Game_UI_Button_ChangeTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058796509855744
+    m_Key: Game_UI_RoadInfomation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1059071840747520
+    m_Key: Game_UI_RoadTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1059202115829760
+    m_Key: Game_UI_Miner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1059316037320704
+    m_Key: Game_UI_Soldier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1059453270753280
+    m_Key: Game_UI_Tank
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1061172796981248
+    m_Key: Game_UI_Card_CastleUpgradeName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1061381186781184
+    m_Key: Game_UI_Card_CastleUpgradeInformation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1062159314059264
+    m_Key: Game_UI_Card_DroughtName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1062351237021696
+    m_Key: Game_UI_Card_DroughtInformation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1063006626381824
+    m_Key: Game_UI_Card_FirePowerName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1063140424679424
+    m_Key: Game_UI_Card_FirePowerInformation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1063889690951680
+    m_Key: Game_UI_Card_GoodHarvestName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1064754652905472
+    m_Key: Game_UI_Card_GoodHarvestInformation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1065004541149184
+    m_Key: Game_UI_RoadChangeName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1065089542914048
+    m_Key: Game_UI_RoadChangeInformation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1070008303878144
+    m_Key: Game_UI_NotDrawTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1070401440186368
+    m_Key: Game_UI_NotYourTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1070635813699584
+    m_Key: Game_UI_NoMoreCardInDeck
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1070893222330368
+    m_Key: Game_UI_OnlyOneCardPerTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1071488670892032
+    m_Key: Game_UI_NotEnoughGold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1072340370456576
+    m_Key: Game_UI_CanNotUseSameCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1072747226333184
+    m_Key: Game_UI_OpponentGetFrontPlace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1073305911820288
+    m_Key: Game_UI_CanNotMoveMiner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1073669885132800
+    m_Key: Game_UI_SoldierCanNotAttack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074189563592704
+    m_Key: Game_UI_SoldierCanNotMove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074436327079936
+    m_Key: Game_UI_TankCanNotAttack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074815655739392
+    m_Key: Game_UI_TankCanNotMove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1075236172464128
+    m_Key: Game_UI_CanNotCreatePieces
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1076063343738880
+    m_Key: Game_UI_NotMainTurnCanNotMove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1076667000553472
+    m_Key: Game_UI_NotMainTurnCanNotCreatePieces
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1077182220468224
+    m_Key: Game_UI_NotMainTurnCanNotCreateRoad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1077671452475392
+    m_Key: Game_UI_NoLeftPiece
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1078449122574336
+    m_Key: Game_UI_NoGold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1078956717244416
+    m_Key: Game_UI_NoLeftRoad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1079915115708416
+    m_Key: Game_UI_CanNotChangeRoad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1080243018006528
+    m_Key: Game_UI_CanNotUseFirePowerCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1080720749232128
+    m_Key: Game_UI_NoExistCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1081369490620416
+    m_Key: Game_UI_ChoosePublicOrPrivate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1081757946085376
+    m_Key: Game_UI_IsPlay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1082066378424320
+    m_Key: Game_UI_IsFull
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1082532063608832
+    m_Key: Game_UI_Button_Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083336749219840
+    m_Key: Game_UI_MakeTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083440356917248
+    m_Key: Game_UI_DrawTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083755915378688
+    m_Key: Game_UI_MainTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083780330422272
+    m_Key: Game_UI_TurnEnd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083801750732800
+    m_Key: Game_UI_ChangeTeamTurn
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

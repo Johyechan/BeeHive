@@ -6,6 +6,7 @@ using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -41,7 +42,11 @@ namespace InGame.MyUI.MyUIButton
             switch (TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
             {
                 case TutorialState.Turn1_Player:
-                    TutorialManager.Instance.SetTutorialPanel(true, "도로를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f)); // 가이드 패널 생성
+                    string createRoad = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Tutorial",
+                        "Tutorial_CreateRoad"
+                    );
+                    TutorialManager.Instance.SetTutorialPanel(true, createRoad, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f)); // 가이드 패널 생성
                     break;
                 case TutorialState.Turn2_Player:
                     TutorialManager.Instance.SetTutorialPanel(true, "전차를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
@@ -56,4 +61,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.04.06

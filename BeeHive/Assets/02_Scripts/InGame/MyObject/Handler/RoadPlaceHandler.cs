@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyObject.Handler
 {
@@ -53,12 +54,20 @@ namespace InGame.MyObject.Handler
                     case TutorialState.Turn1_Player:
                         if (TutorialManager.Instance.TutorialRoadCreateCount <= 0) // 처음 도로를 생성하는 경우
                         {
-                            TutorialManager.Instance.SetTutorialPanel(true, "도로를 한 번 더 생성합시다. \n (도로는 가지고 있는 도로 개수만큼 중복 생성 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                            string createRoadAgain = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_CreateRoadAgain"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, createRoadAgain, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
                             TutorialManager.Instance.TutorialRoadCreateCount++;
                         }
                         else // 두 번째 도로를 생성하는 경우
                         {
-                            TutorialManager.Instance.SetTutorialPanel(true, "이번에는 광부를 생성합시다. \n (한 턴에 한 기물만 생성할 수 있습니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.4476f, 0.123f), new Vector4(0.3f, 0.3f));
+                            string createMiner = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_FirsCreateMiner"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, createMiner, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.4476f, 0.123f), new Vector4(0.3f, 0.3f));
                             TutorialManager.Instance.TutorialRoadCreateCount = 0;
                         }
                         break;
@@ -110,4 +119,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.30
+// 마지막 작성 일자: 2026.04.06

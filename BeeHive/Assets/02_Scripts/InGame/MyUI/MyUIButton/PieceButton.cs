@@ -8,6 +8,7 @@ using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -18,8 +19,13 @@ namespace InGame.MyUI.MyUIButton
         // 클릭 시 실행될 함수
         public override void OnUIClick()
         {
+            string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_NotMainTurnCanNotCreatePieces"
+            );
+
             // 현재 턴이 메인 턴이 아니라면
-            if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 생성할 수 없습니다."))
+            if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, str))
             {
                 EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return; // 반환
@@ -62,7 +68,11 @@ namespace InGame.MyUI.MyUIButton
                     switch(TutorialManager.Instance.CurrentTutorialState)
                     {
                         case TutorialState.Turn1_Player:
-                            TutorialManager.Instance.SetTutorialPanel(true, "광부 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                            string selectMinerCreatePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_SelectCreateMinerPlace"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, selectMinerCreatePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                             break;
                         case TutorialState.Turn2_Player:
                             TutorialManager.Instance.SetTutorialPanel(true, "광부 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
@@ -102,4 +112,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.04.06

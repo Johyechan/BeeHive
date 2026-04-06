@@ -1,6 +1,7 @@
 using InGame.MyEvent;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyObject.Handler
 {
@@ -23,13 +24,23 @@ namespace InGame.MyObject.Handler
                 return true; // 반환
             }
 
-            if (!WarningEvent.OnCheckLeftPieceCount(leftPieceCount, "남은 기물이 없어 배치할 수 없습니다")) // 남은 도로가 없다면
+            string noLeftPiece = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_NoLeftPiece"
+            );
+
+            if (!WarningEvent.OnCheckLeftPieceCount(leftPieceCount, noLeftPiece)) // 남은 도로가 없다면
             {
                 _piecePlacePlaneObject.HighLightOffEvent(); // 하이라이트 끄기
                 return true; // 반환
             }
 
-            if (!WarningEvent.OnCanPayCost.Invoke(cost, "금괴가 부족하여 기물을 배치할 수 없습니다.")) // 비용을 지불할 수 없다면
+            string noGold = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_NoGold"
+            );
+
+            if (!WarningEvent.OnCanPayCost.Invoke(cost, noGold)) // 비용을 지불할 수 없다면
             {
                 _piecePlacePlaneObject.HighLightOffEvent(); // 하이라이트 끄기
                 return true; // 반환
@@ -39,4 +50,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.04.06

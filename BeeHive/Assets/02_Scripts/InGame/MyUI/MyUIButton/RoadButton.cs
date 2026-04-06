@@ -8,6 +8,7 @@ using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -24,7 +25,11 @@ namespace InGame.MyUI.MyUIButton
 
             try
             {
-                isWarning = WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 도로를 생성할 수 없습니다.");
+                string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_NotMainTurnCanNotCreateRoad"
+                );
+                isWarning = WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, str);
             }
             catch(Exception ex)
             {
@@ -76,12 +81,20 @@ namespace InGame.MyUI.MyUIButton
                         case TutorialState.Turn1_Player: // 첫 번째 턴(플레이어 턴) 일 경우
                             if(_tutorialCreateCount == 0) // 처음 도로를 생성하는 경우
                             {
-                                TutorialManager.Instance.SetTutorialPanel(true, "도로를 생성해봅시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.4621f, 0.416f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                string firstCreateRoad = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_CreateRoad"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, firstCreateRoad, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.4621f, 0.416f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                                 _tutorialCreateCount++;
                             }
                             else // 두 번째 도로를 생성하는 경우
                             {
-                                TutorialManager.Instance.SetTutorialPanel(true, "한 번 더 도로를 생성해봅시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.426f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                string secondCreateRoad = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_secondCreateRoad"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, secondCreateRoad, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.426f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                                 _tutorialCreateCount = 0;
                             }
                             break;
@@ -139,4 +152,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.30
+// 마지막 작성 일자: 2026.04.06

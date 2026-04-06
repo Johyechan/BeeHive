@@ -12,6 +12,7 @@ using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyObject.Piece.ObjectPieces
 {
@@ -23,7 +24,11 @@ namespace InGame.MyObject.Piece.ObjectPieces
         {
             if(!InGameContext.Current.Data.CardManager.CardUsed) // 카드 사용으로 변경하는 것이 아니라면
             {
-                if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, "메인 턴이 아니라서 기물을 이동할 수 없습니다."))
+                string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_NotMainTurnCanNotMove"
+                );
+                if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, str))
                     return; // 반환
             }
             else // 카드 사용으로 변경하는 것이라면
@@ -85,4 +90,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.04.06

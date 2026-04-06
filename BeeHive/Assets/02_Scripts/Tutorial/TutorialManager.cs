@@ -1,12 +1,9 @@
 using DG.Tweening;
-using InGame.MyEnum;
-using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 using MyUtil.GameMode;
 using MyUtil.Interface;
-using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using Tutorial.Event;
 using Tutorial.FSM;
@@ -14,6 +11,7 @@ using Tutorial.MyEnum;
 using Tutorial.Struct;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization.Settings;
 
 namespace Tutorial
 {
@@ -39,6 +37,15 @@ namespace Tutorial
 
         private float _nextInputTime; // 다음 클릭 가능 시간
 
+        private string _enterClick; // 엔터 클릭 문자열
+        public string EnterClick { get => _enterClick; } // 엔터 클릭 문자열 프로퍼티
+
+        private string _buttonClick; // 버튼 클릭 문자열
+        public string ButtonClick { get => _buttonClick; } // 버튼 클릭 문자열 프로퍼티
+
+        private string _targetClick; // 대상 클릭 문자열
+        public string TargetClick { get => _targetClick; } // 대상 클릭 문자열 프로퍼티
+
         private void Awake()
         {
             Instance = this; // 자기 자신 할당
@@ -50,6 +57,21 @@ namespace Tutorial
 
             _fsmVariables = new TutorialFSMVariables(_tutorialManagerData);
             _fsmVariables.Init(); // 튜토리얼 fsm 관련 변수 초기화
+
+            _enterClick = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Tutorial",
+                "Tutorial_Click_Enter"
+            );
+
+            _buttonClick = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Tutorial",
+                "Tutorial_Click_Button"
+            );
+
+            _targetClick = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Tutorial",
+                "Tutorial_Click_Target"
+            );
         }
 
         private void OnEnable()
@@ -192,4 +214,4 @@ namespace Tutorial
         }
     }
 }
-// 마지막 작성 일자: 2026.03.27
+// 마지막 작성 일자: 2026.04.06

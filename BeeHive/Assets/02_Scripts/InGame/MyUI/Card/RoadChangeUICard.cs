@@ -7,6 +7,7 @@ using InGame.MyManager.MyPiece;
 using InGame.MyObject.Piece.ObjectPieces;
 using MyUtil.GameMode;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.Card
 {
@@ -22,9 +23,16 @@ namespace InGame.MyUI.Card
                 return false;
             }
 
+            
+
             if (InGameContext.Current.Data.PieceManager.CanChangeRoadList.Count <= 0) // 도로 변형이 가능한 도로가 없다면
             {
-                UIManager.Instance.WarningUIMake("도로 변형 가능한 도로가 없어서 사용 불가합니다.");
+                string canNotChangeRoad = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_CanNotChangeRoad"
+                );
+
+                UIManager.Instance.WarningUIMake(canNotChangeRoad);
                 return false;
             }
 
@@ -54,4 +62,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.04.06

@@ -17,7 +17,209 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 934eda5dc8f70b64f9ba4bb9ebe49771, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 1057038249230336
+    m_Localized: Opponent Gold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058112536313856
+    m_Localized: Draw
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058319537799168
+    m_Localized: Next Turn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1058796509855744
+    m_Localized: 2 per turn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1059071840747520
+    m_Localized: Road
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1059202115829760
+    m_Localized: Miner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1059316037320704
+    m_Localized: 'Pioneer '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1059453270753280
+    m_Localized: Bombard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1061172796981248
+    m_Localized: Fortify
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1061381186781184
+    m_Localized: "Reinforce your walls \nto increase your \nCastle\u2019s HP by 1.
+      \n(Removed from the \ngame after use)."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1062159314059264
+    m_Localized: Drought
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1062351237021696
+    m_Localized: "Your opponent cannot \ncollect production from \ntheir Miners on
+      their \nnext turn. \n(Does not affect \nCastle production)."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1063006626381824
+    m_Localized: Fire Power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1063140424679424
+    m_Localized: "Allows a Bombard to \nperform a ranged \nattack or defend \nagainst
+      an incoming \nenemy Bombard attack."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1063889690951680
+    m_Localized: Prosperity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1065004541149184
+    m_Localized: Modify Road
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1065089542914048
+    m_Localized: "Select and change \none of your \nopponent's roads \nthat is connected
+      to \nyour own road."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1064754652905472
+    m_Localized: "Immediately gain \n4 Gold Bars. This card \ncan be played even
+      if a\n\"Drought\" card was \nused against you."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1070008303878144
+    m_Localized: Not your draw turn.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1070401440186368
+    m_Localized: Not your turn.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1070635813699584
+    m_Localized: "No more cards to draw. \n(The deck is empty.)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1070893222330368
+    m_Localized: "Cannot draw any more cards. \n(Only one card per turn.)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1071488670892032
+    m_Localized: "Cannot draw cards.\n(Not enough gold \u2014 Cost: {0} gold.)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1072340370456576
+    m_Localized: Cannot use the same card more than once.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1072747226333184
+    m_Localized: Opponent has occupied the tile in front of this slot.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1073305911820288
+    m_Localized: You can no longer move Miners.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1073669885132800
+    m_Localized: You can no longer attack with Pioneers.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074189563592704
+    m_Localized: You can no longer move Pioneers.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074436327079936
+    m_Localized: You can no longer attack with Bombards.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1074815655739392
+    m_Localized: You can no longer move Bombards.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1075236172464128
+    m_Localized: Cannot create any more units.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1076063343738880
+    m_Localized: Cannot move units outside the main turn.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1076667000553472
+    m_Localized: Cannot create units outside the main turn.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1077182220468224
+    m_Localized: Cannot create roads outside the main turn.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1077671452475392
+    m_Localized: No units remaining to place.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1078449122574336
+    m_Localized: Not enough gold to place units.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1078956717244416
+    m_Localized: No roads remaining to place.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1079915115708416
+    m_Localized: No roads available to transform.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1080243018006528
+    m_Localized: Firepower cards cannot be used directly. You will be prompted automatically
+      when a Bombard performs a ranged attack.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1080720749232128
+    m_Localized: Card does not exist.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1081369490620416
+    m_Localized: Select Public or Private.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1081757946085376
+    m_Localized: Cannot join. Game in progress.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1082066378424320
+    m_Localized: Room is full.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1082532063608832
+    m_Localized: Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083336749219840
+    m_Localized: '[Production Phase]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083440356917248
+    m_Localized: '[Draw Phase]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083755915378688
+    m_Localized: '[Main Phase]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083780330422272
+    m_Localized: '[End of Turn]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083801750732800
+    m_Localized: '[Change Team]'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

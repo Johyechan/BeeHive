@@ -14,7 +14,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: Room
   m_TableCollectionNameGuidString: dffb9999153867b4996ee147a47ce7c8
-  m_Entries: []
+  m_Entries:
+  - m_Id: 1048191656787968
+    m_Key: Room_UI_Button_Close
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1048554581524480
+    m_Key: Room_UI_Button_Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1048748966543360
+    m_Key: Room_UI_Button_No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1048982916431872
+    m_Key: Room_UI_Button_RoomManagerChange
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049214794334208
+    m_Key: Room_UI_Button_Exile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1049578566320128
+    m_Key: Room_UI_Button_Leave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1051421342171136
+    m_Key: Room_UI_RoomIDTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1052154540064768
+    m_Key: Room_UI_RoomName
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1053368073846784
+    m_Key: Room_UI_MaxPlayer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1054503060897792
+    m_Key: Room_UI_Ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1054838462611456
+    m_Key: Room_UI_NotReady
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1055187554533376
+    m_Key: Room_UI_Button_Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1055381180383232
+    m_Key: Room_UI_Button_Ready
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

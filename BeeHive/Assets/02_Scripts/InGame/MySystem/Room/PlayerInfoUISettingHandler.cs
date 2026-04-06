@@ -4,6 +4,7 @@ using InGame.MyUI.MyUIButton;
 using MyUtil;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace InGame.MySystem.Room
@@ -69,22 +70,42 @@ namespace InGame.MySystem.Room
 
                     if (_roomInfo.players[i].isReady) // n번째 인덱스 플레이어가 준비 완료 상태라면
                     {
-                        ReadyUI(index, "준비 완료", Color.green);
+                        string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Room",
+                            "Room_UI_Ready"
+                        );
+
+                        ReadyUI(index, str, Color.green);
                     }
                     else
                     {
-                        ReadyUI(index, "준비 중", Color.white);
+                        string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Room",
+                            "Room_UI_NotReady"
+                        );
+
+                        ReadyUI(index, str, Color.white);
                     }
 
                     if (_roomInfo.players[i].id == currentPlayerID)
                     {
                         if (_roomInfo.players[i].isReady) // 준비 상태인 경우
                         {
-                            _players[index].readyButtonText.text = "취소";
+                            string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Room",
+                                "Room_UI_Button_Cancel"
+                            );
+
+                            _players[index].readyButtonText.text = str;
                         }
                         else // 준비 중인 경우
                         {
-                            _players[index].readyButtonText.text = "준비";
+                            string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Room",
+                                "Room_UI_Button_Ready"
+                            );
+
+                            _players[index].readyButtonText.text = str;
                         }
                     }
 
@@ -109,7 +130,11 @@ namespace InGame.MySystem.Room
                         if (!existIndexList.Contains(i)) // 만약 사용하는 인덱스 리스트에 존재하지 않는다면
                         {
                             _players[i].playerNameText.text = "...";
-                            _players[i].readyText.text = "준비 중"; // 준비 중 상태
+                            string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Room",
+                                "Room_UI_NotReady"
+                            );
+                            _players[i].readyText.text = str; // 준비 중 상태
                             _players[i].roomManagerImage.gameObject.SetActive(false); // 방장 여부 방장 아님으로 초기화
                         }
                     }
@@ -127,4 +152,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.02.24
+// 마지막 작성 일자: 2026.04.06

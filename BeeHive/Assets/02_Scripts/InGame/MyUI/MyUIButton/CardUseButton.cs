@@ -11,6 +11,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -54,7 +55,12 @@ namespace InGame.MyUI.MyUIButton
             }
             else // ui 카드가 존재하지 않는다면
             {
-                UIManager.Instance.WarningUIMake("카드가 존재하지 않습니다");
+                string noExistCard = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_NoExistCard"
+                );
+
+                UIManager.Instance.WarningUIMake(noExistCard);
                 EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
                 return;
             }
@@ -96,4 +102,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.04.06

@@ -1,6 +1,7 @@
 using InGame.MyEvent;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyObject.Handler
 {
@@ -17,13 +18,12 @@ namespace InGame.MyObject.Handler
                 return true; // 반환
             }
 
-            if (!WarningEvent.OnCheckLeftPieceCount(leftPieceCount, "남은 도로가 없어 배치할 수 없습니다")) // 남은 도로가 없다면
-            {
-                HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
-                return true; // 반환
-            }
+            string noLeftRoad = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_NoLeftRoad"
+            );
 
-            if (!WarningEvent.OnCanPayCost.Invoke(cost, "금괴가 부족하여 도로를 배치할 수 없습니다.")) // 비용을 지불할 수 없다면
+            if (!WarningEvent.OnCheckLeftPieceCount(leftPieceCount, noLeftRoad)) // 남은 도로가 없다면
             {
                 HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 칸 하이라이트를 끄는 매개변수로 이벤트 콜
                 return true; // 반환
@@ -33,4 +33,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.04.06
