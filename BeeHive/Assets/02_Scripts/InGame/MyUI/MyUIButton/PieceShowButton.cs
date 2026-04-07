@@ -49,16 +49,28 @@ namespace InGame.MyUI.MyUIButton
                     TutorialManager.Instance.SetTutorialPanel(true, createRoad, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f)); // 가이드 패널 생성
                     break;
                 case TutorialState.Turn2_Player:
-                    TutorialManager.Instance.SetTutorialPanel(true, "전차를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
+                    string turn2CreateTank = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Tutorial",
+                        "Tutorial_CreateTank"
+                    );
+                    TutorialManager.Instance.SetTutorialPanel(true, turn2CreateTank, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
                     break;
                 case TutorialState.Turn6_Player:
-                    TutorialManager.Instance.SetTutorialPanel(true, "보병을 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.552f, 0.123f), new Vector4(0.3f, 0.3f));
+                    string turn6CreateSoldier = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Tutorial",
+                        "Tutorial_CreateSoldier"
+                    );
+                    TutorialManager.Instance.SetTutorialPanel(true, turn6CreateSoldier, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.552f, 0.123f), new Vector4(0.3f, 0.3f));
                     break;
                 case TutorialState.Turn8_Player:
-                    TutorialManager.Instance.SetTutorialPanel(true, "전차를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
+                    string turn8CreateTank = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Tutorial",
+                        "Tutorial_CreateTank"
+                    );
+                    TutorialManager.Instance.SetTutorialPanel(true, turn8CreateTank, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f)); // 가이드 패널 생성
                     break;
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.07

@@ -8,6 +8,7 @@ using MyUtil.Interface;
 using System.Threading.Tasks;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Tutorial.FSM.State.Sixth
 {
@@ -92,7 +93,11 @@ namespace Tutorial.FSM.State.Sixth
                         TutorialManager.Instance.InputOn = true;
                         _count = 0;
                         _currentTurnType = TurnType.MainTurn;
-                        TutorialManager.Instance.SetTutorialPanel(true, "생성 위치 앞 지점에 상대 기물이 올라가 있을 경우 해당 위치의 생성은 막히게 됩니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.53f, 0.71f), new Vector4(1f, 1f));
+                        string blockRule = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_BlockRule"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, blockRule, TutorialManager.Instance.EnterClick, 0.08f, 0.008f, new Vector4(0.53f, 0.71f), new Vector4(1f, 1f));
 
                         await _guidetutorialEnd.Task; // 안내 튜토리얼 종료 대기
 
@@ -110,6 +115,6 @@ namespace Tutorial.FSM.State.Sixth
         }
     }
 }
-// 마지막 작성 일자: 2026.03.31
+// 마지막 작성 일자: 2026.04.07
 
 

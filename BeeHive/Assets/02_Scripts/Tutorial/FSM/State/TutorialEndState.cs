@@ -2,6 +2,7 @@ using InGame.MyEvent;
 using InGame.MyManager.Global;
 using MyUtil.Interface;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Tutorial.FSM.State
 {
@@ -11,8 +12,11 @@ namespace Tutorial.FSM.State
     {
         public void Enter()
         {
-            NetworkManager.Instance.Socket.Emit("debug", "튜토리얼 종료 상태");
-            TutorialManager.Instance.SetTutorialPanel(true, "수고하셨습니다.", "버튼 클릭", 0.2f, 0.008f, new Vector4(0.5f, 0.247f), new Vector4(1f, 0.3f), new Vector2(0, 400f));
+            string end = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Tutorial",
+                "Tutorial_End"
+            );
+            TutorialManager.Instance.SetTutorialPanel(true, end, TutorialManager.Instance.ButtonClick, 0.2f, 0.008f, new Vector4(0.5f, 0.247f), new Vector4(1f, 0.3f), new Vector2(0, 400f));
             GameOverEvent.OnGameOver?.Invoke();
         }
 
@@ -27,4 +31,4 @@ namespace Tutorial.FSM.State
         }
     }
 }
-// 마지막 작성 일자: 2026.04.03
+// 마지막 작성 일자: 2026.04.07

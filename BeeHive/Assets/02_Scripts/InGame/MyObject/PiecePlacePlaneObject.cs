@@ -249,11 +249,19 @@ namespace InGame.MyObject
                                 case ObjectType.Miner: // 전차일 경우
                                     if(isMove) // 이동된 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                                        string turnEnd = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_TurnEnd"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, turnEnd, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                                     }
                                     else // 배치된 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "생산자를 이동을 합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                        string moveMiner = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_LetsMoveMiner"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, moveMiner, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                     }
                                     break;
                             }
@@ -262,16 +270,28 @@ namespace InGame.MyObject
                             switch(pieceBase.CurrentObjectType) // 현재 기물이
                             {
                                 case ObjectType.Miner: // 광부일 경우
-                                    TutorialManager.Instance.SetTutorialPanel(true, "이제 전차를 사용하여 상대 보병을 파괴해봅시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f));
+                                    string letsUseTankAndAttackSoldier = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                        "Tutorial",
+                                        "Tutorial_UseTankAndAttackSoldier"
+                                    );
+                                    TutorialManager.Instance.SetTutorialPanel(true, letsUseTankAndAttackSoldier, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.651f, 0.123f), new Vector4(0.3f, 0.3f));
                                     break;
                                 case ObjectType.Tank: // 전차일 경우
                                     if(isMove) // 이동일 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "전차를 다시 선택하여 원거리 공격을 합시다.\n(전차는 이동 후 원거리 공격이 가능합니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                        string selectTankAndRangedAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_SelectTankAndRangedAttack"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, selectTankAndRangedAttack, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                     }
                                     else // 생성일 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "전차를 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                        string moveTank = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_Turn6MoveTank"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, moveTank, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                     }
                                     break;
                             }
@@ -280,22 +300,38 @@ namespace InGame.MyObject
                             switch (pieceBase.CurrentObjectType) // 현재 기물이
                             {
                                 case ObjectType.Miner: // 광부일 경우
-                                    TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                                    string turnEnd = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                        "Tutorial",
+                                        "Tutorial_TurnEnd"
+                                    );
+                                    TutorialManager.Instance.SetTutorialPanel(true, turnEnd, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                                     break;
                                 case ObjectType.Soldier: // 보병일 경우
                                     if(isMove) // 보병 이동일 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "도로를 연결합시다.", "대상 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                                        string connectRoad = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_ConnectRoad"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, connectRoad, TutorialManager.Instance.TargetClick, 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
                                     }
                                     else // 보병 생성일 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "보병을 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                        string moveSoldier = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_MoveSoldier"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, moveSoldier, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                     } 
                                     break;
                                 case ObjectType.Tank: // 전차일 경우
                                     if (isMove) // 이동일 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "이제 상대 광부를 공격합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.542f, 0.684f), new Vector4(0.3f, 0.3f));
+                                        string letsAttackMiner = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_LetsAttackMiner"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, letsAttackMiner, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.542f, 0.684f), new Vector4(0.3f, 0.3f));
                                     }
                                     break;
                             }
@@ -306,7 +342,11 @@ namespace InGame.MyObject
                                 case ObjectType.Soldier: // 보병일 경우
                                     if (isMove) // 보병 이동일 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                                        string turnEnd = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_TurnEnd"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, turnEnd, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                                     }
                                     break;
                             }
@@ -317,11 +357,19 @@ namespace InGame.MyObject
                                 case ObjectType.Tank: // 전차일 경우
                                     if (isMove) // 전차 이동일 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "보병을 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.543f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                        string moveSoldier = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_MoveSoldier"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, moveSoldier, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.543f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
                                     }
                                     else // 전차 생성일 경우
                                     {
-                                        TutorialManager.Instance.SetTutorialPanel(true, "전차를 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                        string moveTank = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                            "Tutorial",
+                                            "Tutorial_Turn6MoveTank"
+                                        );
+                                        TutorialManager.Instance.SetTutorialPanel(true, moveTank, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                     }
                                     break;
                             }
@@ -334,4 +382,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.07

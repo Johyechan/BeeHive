@@ -7,6 +7,7 @@ using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI
 {
@@ -34,7 +35,11 @@ namespace InGame.MyUI
                     {
                         if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
                         {
-                            TutorialManager.Instance.SetTutorialPanel(true, "카드를 확인 했으니, 이제 메인 턴으로 넘어갑시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                            string checkCardGoNextTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_CheckCardGoNextTurn"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, checkCardGoNextTurn, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                         }
 
                         _targetPanel.gameObject.SetActive(false); // 비활성화

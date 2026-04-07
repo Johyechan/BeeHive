@@ -81,7 +81,11 @@ namespace InGame.MyObject.Piece.Handler
                         switch(_pieceBase.CurrentObjectType) // 기물이
                         {
                             case ObjectType.Miner: // 광부 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.3325f, 0.516f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                string selectMovePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_SelectMovePlace"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, selectMovePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.3325f, 0.516f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                 break;
                         }
                         break;
@@ -89,17 +93,29 @@ namespace InGame.MyObject.Piece.Handler
                         switch (_pieceBase.CurrentObjectType) // 기물이
                         {
                             case ObjectType.Miner: // 광부 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.372f, 0.384f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                                string selectMovePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_SelectMovePlace"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, selectMovePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.372f, 0.384f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                                 break;
                             case ObjectType.Tank: // 전차 일 경우
                                 if(_tutorialSelectedCount <= 0) // 처음 선택했다면
                                 {
-                                    TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                    string selectTankMovePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                        "Tutorial",
+                                        "Tutorial_SelectMovePlace"
+                                    );
+                                    TutorialManager.Instance.SetTutorialPanel(true, selectTankMovePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                                     _tutorialSelectedCount++;
                                 }
                                 else // 중복 선택 했다면
                                 {
-                                    TutorialManager.Instance.SetTutorialPanel(true, "원거리 공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.381f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                    string selectRangedAttackTarget = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                        "Tutorial",
+                                        "Tutorial_SelectRangedAttackTarget"
+                                    );
+                                    TutorialManager.Instance.SetTutorialPanel(true, selectRangedAttackTarget, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.381f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                                     _tutorialSelectedCount = 0;
                                 }
                                 break;
@@ -109,7 +125,11 @@ namespace InGame.MyObject.Piece.Handler
                         switch (_pieceBase.CurrentObjectType) // 기물이
                         {
                             case ObjectType.Tank: // 전차 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "원거리 공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.381f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                string selectRangedAttackTarget = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_SelectRangedAttackTarget"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, selectRangedAttackTarget, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.381f, 0.517f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                                 break;
                         }
                         break;
@@ -117,20 +137,36 @@ namespace InGame.MyObject.Piece.Handler
                         switch (_pieceBase.CurrentObjectType) // 기물이
                         {
                             case ObjectType.Miner: // 광부 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.453f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                string selectMinerMovePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_SelectMovePlace"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, selectMinerMovePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.401f, 0.453f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                                 break;
                             case ObjectType.Soldier: // 보병 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.454f, 0.576f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                                string selectSoliderMovePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_SelectMovePlace"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, selectSoliderMovePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.454f, 0.576f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                                 break;
                             case ObjectType.Tank: // 전차 일 경우
                                 if (_tutorialSelectedCount <= 0) // 처음 선택했다면
                                 {
-                                    TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.543f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                    string selectTankMovePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                        "Tutorial",
+                                        "Tutorial_SelectMovePlace"
+                                    );
+                                    TutorialManager.Instance.SetTutorialPanel(true, selectTankMovePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.543f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
                                     _tutorialSelectedCount++;
                                 }
                                 else // 중복 선택이라면
                                 {
-                                    TutorialManager.Instance.SetTutorialPanel(true, "공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.586f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                    string selectAttackTarget = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                        "Tutorial",
+                                        "Tutorial_SelectAttackTarget"
+                                    );
+                                    TutorialManager.Instance.SetTutorialPanel(true, selectAttackTarget, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.586f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
                                     _tutorialSelectedCount = 0;
                                 }
                                 break;
@@ -140,10 +176,18 @@ namespace InGame.MyObject.Piece.Handler
                         switch (_pieceBase.CurrentObjectType) // 기물이
                         {
                             case ObjectType.Soldier: // 보병 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.543f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
+                                string selectMovePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_SelectMovePlace"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, selectMovePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.543f, 0.684f), new Vector4(0.3f, 0.3f), new Vector2(0, 450f));
                                 break;
                             case ObjectType.Tank: // 전차 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "공격 대상을 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.52f, 0.734f), new Vector4(0.3f, 0.3f));
+                                string selectAttackTarget = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_SelectAttackTarget"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, selectAttackTarget, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.52f, 0.734f), new Vector4(0.3f, 0.3f));
                                 break;
                         }
                         break;
@@ -151,10 +195,18 @@ namespace InGame.MyObject.Piece.Handler
                         switch (_pieceBase.CurrentObjectType) // 기물이
                         {
                             case ObjectType.Soldier: // 보병 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.52f, 0.734f), new Vector4(0.3f, 0.3f));
+                                string selectSoldierMovePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_SelectMovePlace"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, selectSoldierMovePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.52f, 0.734f), new Vector4(0.3f, 0.3f));
                                 break;
                             case ObjectType.Tank: // 전차 일 경우
-                                TutorialManager.Instance.SetTutorialPanel(true, "이동 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.52f, 0.734f), new Vector4(0.3f, 0.3f));
+                                string selectTankMovePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Tutorial",
+                                    "Tutorial_SelectMovePlace"
+                                );
+                                TutorialManager.Instance.SetTutorialPanel(true, selectTankMovePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.52f, 0.734f), new Vector4(0.3f, 0.3f));
                                 break;
                         }
                         break;
@@ -163,4 +215,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.07

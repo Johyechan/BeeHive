@@ -3,6 +3,7 @@ using InGame.MyManager.Local;
 using MyUtil.Interface;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Tutorial.FSM.State.Eighth
 {
@@ -35,10 +36,18 @@ namespace Tutorial.FSM.State.Eighth
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 변경
                         break;
                     case TurnType.DrawTurn: // 드로우 턴이라면
-                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 메인 턴을 진행합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        string goToMainTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_GoToMainTurn"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, goToMainTurn, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                         break;
                     case TurnType.MainTurn: // 메인 턴이라면
-                        TutorialManager.Instance.SetTutorialPanel(true, "전차를 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.196f, 0.095f), new Vector4(0.7f, 0.7f));
+                        string createTank = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_CreateTank"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, createTank, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.196f, 0.095f), new Vector4(0.7f, 0.7f));
                         break;
                 }
             }

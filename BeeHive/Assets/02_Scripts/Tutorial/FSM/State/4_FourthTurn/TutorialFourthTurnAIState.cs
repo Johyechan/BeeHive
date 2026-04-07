@@ -13,6 +13,7 @@ using MyUtil.Interface;
 using System.Threading.Tasks;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Tutorial.FSM.State.Fourth
 {
@@ -91,14 +92,22 @@ namespace Tutorial.FSM.State.Fourth
 
                         // 방어 여부 묻기
                         _confirmUI.gameObject.SetActive(true);
-                        TutorialManager.Instance.SetTutorialPanel(true, "상대 전차의 공격을 방어합시다", "버튼 클릭", 0.08f, 0.008f, new Vector4(0.422f, 0.224f), new Vector4(1.2f, 0.3f), new Vector2(0, 450f));
+                        string defenseOpponentAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_DefenseOpponentAttack"
+                        );
+                        string defenseAsk = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_DefenseAsk"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, defenseOpponentAttack, TutorialManager.Instance.ButtonClick, 0.08f, 0.008f, new Vector4(0.422f, 0.224f), new Vector4(1.2f, 0.3f), new Vector2(0, 450f));
                         TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
                         _confirmUI.Confirm(result =>
                         {
                             TutorialManager.Instance.SetTutorialPanel(false);
                             _confirmUI.ConfirmEnd(); // 확인 완료
                             confirmResultTcs.TrySetResult(result); // 확인 결과(result) 할당
-                        }, "화력을 사용하여 방어하시겠습니까?");
+                        }, defenseAsk);
 
                         await confirmResultTcs.Task;
 

@@ -3,6 +3,7 @@ using InGame.MyManager.Local;
 using MyUtil.Interface;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 
 namespace Tutorial.FSM.State.Sixth
@@ -36,10 +37,18 @@ namespace Tutorial.FSM.State.Sixth
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn); // 드로우 턴으로 턴 변경
                         break;
                     case TurnType.DrawTurn: // 드로우 턴이라면
-                        TutorialManager.Instance.SetTutorialPanel(true, "카드를 뽑아봅시다", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.055f, 0.094f), new Vector4(0.7f, 0.7f));
+                        string draw = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_Draw"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, draw, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.055f, 0.094f), new Vector4(0.7f, 0.7f));
                         break;
                     case TurnType.MainTurn: // 메인 턴이라면
-                        TutorialManager.Instance.SetTutorialPanel(true, "보병을 생성합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.196f, 0.095f), new Vector4(0.7f, 0.7f));
+                        string createSoldier = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_CreateSoldier"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, createSoldier, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.196f, 0.095f), new Vector4(0.7f, 0.7f));
                         break;
                     case TurnType.TurnEnd: // 턴 종료 턴이라면
                         TutorialManager.Instance.ChangeTutorialState(TutorialState.Turn6_AI); // 여섯 번째 턴(AI 턴) 상태로 변경
@@ -49,6 +58,6 @@ namespace Tutorial.FSM.State.Sixth
         }
     }
 }
-// 마지막 작성 일자: 2026.03.23
+// 마지막 작성 일자: 2026.04.07
 
 

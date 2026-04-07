@@ -6,6 +6,7 @@ using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.MyUIButton
 {
@@ -38,7 +39,15 @@ namespace InGame.MyUI.MyUIButton
         {
             yield return base.TutorialCo(); // 부모 코루틴 대기
 
-            TutorialManager.Instance.SetTutorialPanel(true, "카드를 확인 해봅시다.", "대상 우클릭", 0.1f, 0.008f, new Vector4(0.5f, 0.15f), new Vector4(1.2f, 1.2f));
+            string checkCard = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Tutorial",
+                "Tutorial_CheckCard"
+            );
+            string rightClick = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Tutorial",
+                "Tutorial_RightClick"
+            );
+            TutorialManager.Instance.SetTutorialPanel(true, checkCard, rightClick, 0.1f, 0.008f, new Vector4(0.5f, 0.15f), new Vector4(1.2f, 1.2f));
         }
     }
 }

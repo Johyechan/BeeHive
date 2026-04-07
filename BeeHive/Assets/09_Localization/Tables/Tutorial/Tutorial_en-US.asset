@@ -148,6 +148,163 @@ MonoBehaviour:
       turn.)"
     m_Metadata:
       m_Items: []
+  - m_Id: 1431090126127104
+    m_Localized: "Pioneers and Miners are destroyed instantly when hit by ranged
+      attacks. \nLet\u2019s place one more road."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1431416673665024
+    m_Localized: "If your opponent does not use firepower in a Bombard battle, their
+      Bombard will also be destroyed instantly. \nPress Next Turn to end your turn."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432376829542400
+    m_Localized: "Pioneers and Miners are destroyed instantly when hit by ranged
+      attacks. \nNow, let\u2019s move a Miner."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1432887121149952
+    m_Localized: "Attacking the opponent\u2019s spawn location deals damage to their
+      castle (If an enemy unit is present, it is destroyed and the castle also takes
+      damage.) \nNow, let\u2019s move a Pioneer."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1435284585316352
+    m_Localized: Now create a Miner.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1435582020190208
+    m_Localized: Move the Bombard.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1436067091447808
+    m_Localized: "Let\u2019s attack."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437645735198720
+    m_Localized: Select a target for the ranged attack.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438042994507776
+    m_Localized: Select an attack target.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438916999380992
+    m_Localized: "Let\u2019s move a Miner."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1439340120768512
+    m_Localized: "Now, let\u2019s use a Bombard to destroy an enemy Pioneer."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1439666307596288
+    m_Localized: 'Select the Bombard again and perform a ranged attack.
+
+      (Bombards
+      can perform ranged attacks after moving.)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1440352126631936
+    m_Localized: "Let\u2019s connect the roads."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1440706465628160
+    m_Localized: "Let\u2019s move a Pioneer."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1440971218485248
+    m_Localized: "Now, let\u2019s attack the enemy Miner."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1441924227268608
+    m_Localized: 'This is a Firepower card.
+
+      It is used in Bombard combat and
+      ranged attacks.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1442332391768064
+    m_Localized: "Let\u2019s check the card."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1442615884775424
+    m_Localized: Right-click the target.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1442963269615616
+    m_Localized: "Now that we\u2019ve checked the card, let\u2019s proceed to the
+      main turn."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1443992375656448
+    m_Localized: "Let\u2019s check the drawn card."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1444594509938688
+    m_Localized: Select a placement location for the Bombard.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1444908990464000
+    m_Localized: Select a placement location for the Pioneer.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445443663560704
+    m_Localized: "Let\u2019s create a Bombard."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445792180862976
+    m_Localized: "Let\u2019s create a Pioneer."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1446972021800960
+    m_Localized: "Pioneers can move one tile beyond enemy roads. \nThey also convert
+      all adjacent roads at their destination to their team\u2019s roads."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1447924011368448
+    m_Localized: "Let\u2019s defend against the enemy Bombard\u2019s attack."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1448179029245952
+    m_Localized: 'You are under attack by an enemy Bombard.
+
+      Use a Firepower
+      card to defend?'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1449335713431552
+    m_Localized: If a Miner is not connected to the castle by roads, it cannot generate
+      gold.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1449634192687104
+    m_Localized: 'Miners can jump one tile even without connected roads.
+
+      (They
+      cannot cross if an enemy road is in between.)'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1450021586993152
+    m_Localized: "Let\u2019s draw a card."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1450271743672320
+    m_Localized: "Let\u2019s destroy the enemy Bombard."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1450634861346816
+    m_Localized: If an enemy unit is on the tile in front of a spawn location, spawning
+      there is blocked.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1451504097296384
+    m_Localized: "Let\u2019s attack the castle with a Bombard."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1452099365502976
+    m_Localized: Well done.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

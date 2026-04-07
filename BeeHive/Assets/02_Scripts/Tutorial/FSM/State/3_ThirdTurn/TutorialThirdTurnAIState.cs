@@ -9,6 +9,7 @@ using InGame.MyUI;
 using MyUtil.Interface;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Tutorial.FSM.State.Third
 {
@@ -78,8 +79,11 @@ namespace Tutorial.FSM.State.Third
                         // 보병 이동
                         await TutorialManager.Instance.ObjectPlace(_movePlacePlane, _soldier, true);
                         PieceEvents.OnChangeNearRoad?.Invoke(_soldier, _soldier.CurrentTeamType, _soldier.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
-
-                        TutorialManager.Instance.SetTutorialPanel(true, "보병은 상대 도로를 한 칸 넘어갈 수 있습니다\n그리고 보병은 이동한 위치의 주위 도로들을 전부 자신 팀의 도로로 변경 시킵니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.381f, 0.517f), new Vector4(1f, 1f), new Vector2(0, 250f));
+                        string soldierSkill = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_soldierSkill"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, soldierSkill, TutorialManager.Instance.EnterClick, 0.08f, 0.008f, new Vector4(0.381f, 0.517f), new Vector4(1f, 1f), new Vector2(0, 250f));
                         _currentTurnType = TurnType.MainTurn;
                         TutorialManager.Instance.InputOn = true;
                         break;
@@ -91,4 +95,4 @@ namespace Tutorial.FSM.State.Third
         }
     }
 }
-// 마지막 작성 일자: 2026.03.27
+// 마지막 작성 일자: 2026.04.07

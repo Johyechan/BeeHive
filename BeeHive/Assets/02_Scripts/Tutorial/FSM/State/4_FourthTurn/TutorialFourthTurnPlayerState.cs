@@ -4,6 +4,7 @@ using InGame.MyManager.Local;
 using MyUtil.Interface;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace Tutorial.FSM.State.Fourth
 {
@@ -50,15 +51,27 @@ namespace Tutorial.FSM.State.Fourth
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MakeTurn);
                         break;
                     case TurnType.MakeTurn:
-                        TutorialManager.Instance.SetTutorialPanel(true, "광부와 성이 도로로 연결되어 있지 않다면 광부가 금화를 벌지 못합니다.", "엔터 클릭", 0.08f, 0.008f, new Vector4(0.37f, 0.515f), new Vector4(1.2f, 1.2f), new Vector2(0, 250f));
+                        string minerSkillProblem = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_MinerSkillProblem"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, minerSkillProblem, TutorialManager.Instance.EnterClick, 0.08f, 0.008f, new Vector4(0.37f, 0.515f), new Vector4(1.2f, 1.2f), new Vector2(0, 250f));
                         _currentTurnType = TurnType.MakeTurn;
                         TutorialManager.Instance.InputOn = true;
                         break;
                     case TurnType.DrawTurn:
-                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 메인 턴을 진행합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        string goToMainTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_GoToMainTurn"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, goToMainTurn, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                         break;
                     case TurnType.MainTurn:
-                        TutorialManager.Instance.SetTutorialPanel(true, "광부는 도로가 연결되어 있지 않아도 한 칸을 뛰어 이동이 가능합니다.\n(상대 도로가 사이에 있다면 넘어갈 수 없습니다.)", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                        string minerMoveInformation = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_MinerMoveInformation"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, minerMoveInformation, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                         break;
                     case TurnType.TurnEnd:
                         TutorialManager.Instance.ChangeTutorialState(TutorialState.Turn4_AI); // 네 번째 턴(AI 턴) 상태로 변경
@@ -68,4 +81,4 @@ namespace Tutorial.FSM.State.Fourth
         }
     }
 }
-// 마지막 작성 일자: 2026.03.27
+// 마지막 작성 일자: 2026.04.07

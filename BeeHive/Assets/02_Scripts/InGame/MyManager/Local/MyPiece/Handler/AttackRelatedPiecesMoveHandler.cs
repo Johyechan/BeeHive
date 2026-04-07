@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyManager.MyPiece.Handler
 {
@@ -95,16 +96,32 @@ namespace InGame.MyManager.MyPiece.Handler
                 switch (TutorialManager.Instance.CurrentTutorialState) // 현재 튜토리얼 상태가
                 {
                     case TutorialState.Turn4_Player:
-                        TutorialManager.Instance.SetTutorialPanel(true, "보병과 광부는 원거리 공격을 당하면 즉시 파괴됩니다. \n 도로를 하나만 더 배치합시다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                        string turn4Attack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_Tutorial4TurnAttack"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, turn4Attack, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
                         break;
                     case TutorialState.Turn5_Player:
-                        TutorialManager.Instance.SetTutorialPanel(true, "상대가 전차간의 싸움에서 화력을 사용하지 않는다면 전차 또한 즉시 파괴됩니다. \n 다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        string turn5Attack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_Tutorial5TurnAttack"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, turn5Attack, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                         break;
                     case TutorialState.Turn6_Player:
-                        TutorialManager.Instance.SetTutorialPanel(true, "보병과 광부는 원거리 공격을 당하면 즉시 파괴됩니다. \n 이제 광부를 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.371f, 0.382f), new Vector4(0.3f, 0.3f));
+                        string turn6Attack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_Tutorial6TurnAttack"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, turn6Attack, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.371f, 0.382f), new Vector4(0.3f, 0.3f));
                         break;
                     case TutorialState.Turn7_Player:
-                        TutorialManager.Instance.SetTutorialPanel(true, "상대 팀의 생성 위치에 공격을 가하면 상대 성에 피해를 줄 수 있습니다(상대 기물이 올려져 있다면 상대 기물이 파괴됨과 동시에 상대 성에 데미지도 가합니다.)\n이제 보병을 움직입시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.454f, 0.576f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                        string turn7Attack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_Tutorial7TurnAttack"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, turn7Attack, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.454f, 0.576f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                         break;
                 }
             }
@@ -113,4 +130,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.04.02
+// 마지막 작성 일자: 2026.04.07

@@ -65,7 +65,7 @@ namespace InGame.MyObject.Handler
                         {
                             string createMiner = LocalizationSettings.StringDatabase.GetLocalizedString(
                                 "Tutorial",
-                                "Tutorial_FirsCreateMiner"
+                                "Tutorial_Turn1CreateMiner"
                             );
                             TutorialManager.Instance.SetTutorialPanel(true, createMiner, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.4476f, 0.123f), new Vector4(0.3f, 0.3f));
                             TutorialManager.Instance.TutorialRoadCreateCount = 0;
@@ -74,39 +74,68 @@ namespace InGame.MyObject.Handler
                     case TutorialState.Turn2_Player:
                         if (TutorialManager.Instance.TutorialRoadCreateCount <= 0) // 처음 도로를 생성하는 경우
                         {
-                            TutorialManager.Instance.SetTutorialPanel(true, "도로를 한 번 더 생성합시다.\n(도로는 가지고 있는 도로 개수만큼 중복 생성 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                            string createRoadAgain = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_CreateRoadAgain"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, createRoadAgain, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
                             TutorialManager.Instance.TutorialRoadCreateCount++;
                         }
                         else // 두 번째 도로를 생성하는 경우
                         {
-                            TutorialManager.Instance.SetTutorialPanel(true, "이제 광부를 생성합시다.\n(한 턴에 한 기물만 생성할 수 있습니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.4476f, 0.123f), new Vector4(0.3f, 0.3f));
+                            string createMiner = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_Turn2CreateMiner"
+                            );
+
+                            TutorialManager.Instance.SetTutorialPanel(true, createMiner, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.4476f, 0.123f), new Vector4(0.3f, 0.3f));
                             TutorialManager.Instance.TutorialRoadCreateCount = 0;
                         }
                         break;
                     case TutorialState.Turn3_Player:
                         if (TutorialManager.Instance.TutorialRoadCreateCount <= 0) // 처음 도로를 생성하는 경우
                         {
-                            TutorialManager.Instance.SetTutorialPanel(true, "도로를 한 번 더 생성합시다.\n(도로는 가지고 있는 도로 개수만큼 중복 생성 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                            string createRoadAgain = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_CreateRoadAgain"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, createRoadAgain, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
                             TutorialManager.Instance.TutorialRoadCreateCount++;
                         }
                         else // 두 번째 도로를 생성하는 경우
                         {
-                            TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                            string turnEndTurn3 = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_TurnEnd"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, turnEndTurn3, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                             TutorialManager.Instance.TutorialRoadCreateCount = 0;
                         }
                         break;
                     case TutorialState.Turn4_Player:
-                        TutorialManager.Instance.SetTutorialPanel(true, "다음 턴을 눌러 턴을 종료합시다.", "버튼 클릭", 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
+                        string turnEndTurn4 = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_TurnEnd"
+                        );
+                        TutorialManager.Instance.SetTutorialPanel(true, turnEndTurn4, TutorialManager.Instance.ButtonClick, 0.18f, 0.008f, new Vector4(0.92f, 0.095f), new Vector4(0.66f, 0.4f));
                         break;
                     case TutorialState.Turn6_Player:
                         if (TutorialManager.Instance.TutorialRoadCreateCount <= 0) // 처음 도로를 생성하는 경우
                         {
-                            TutorialManager.Instance.SetTutorialPanel(true, "도로를 한 번 더 생성합시다.\n(도로는 가지고 있는 도로 개수만큼 중복 생성 가능합니다.)", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
+                            string createRoadAgain = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_CreateRoadAgain"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, createRoadAgain, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.356f, 0.123f), new Vector4(0.5f, 0.3f));
                             TutorialManager.Instance.TutorialRoadCreateCount++;
                         }
                         else // 두 번째 도로를 생성하는 경우
                         {
-                            TutorialManager.Instance.SetTutorialPanel(true, "전차를 이동합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
+                            string moveTank = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_Turn6MoveTank"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, moveTank, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.401f, 0.452f), new Vector4(0.3f, 0.3f), new Vector2(0, 250f));
                             TutorialManager.Instance.TutorialRoadCreateCount = 0;
                         }
                         break;
@@ -119,4 +148,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.07

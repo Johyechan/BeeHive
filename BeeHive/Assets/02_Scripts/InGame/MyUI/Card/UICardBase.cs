@@ -113,7 +113,11 @@ namespace InGame.MyUI.Card
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
-                TutorialManager.Instance.SetTutorialPanel(true, "화력 카드 입니다. \n 전차간의 전투 및 원거리 공격에 사용되는 카드 입니다.", "버튼 클릭", 0.1f, 0.008f, new Vector4(0.5f, 0.2795f), new Vector4(1.3f, 0.6f), new Vector2(0, 350f));
+                string itsFirePowerCard = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Tutorial",
+                    "Tutorial_ItsFirePowerCard"
+                );
+                TutorialManager.Instance.SetTutorialPanel(true, itsFirePowerCard, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.5f, 0.2795f), new Vector4(1.3f, 0.6f), new Vector2(0, 350f));
             }
 
             InGameContext.Current.Data.CardManager.CurrentUICard = this; // 현재 ui 카드 할당

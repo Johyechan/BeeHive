@@ -75,16 +75,32 @@ namespace InGame.MyUI.MyUIButton
                             TutorialManager.Instance.SetTutorialPanel(true, selectMinerCreatePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                             break;
                         case TutorialState.Turn2_Player:
-                            TutorialManager.Instance.SetTutorialPanel(true, "광부 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                            string turn2SelectMinerCreatePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_SelectCreateMinerPlace"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, turn2SelectMinerCreatePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                             break;
                         case TutorialState.Turn4_Player:
-                            TutorialManager.Instance.SetTutorialPanel(true, "전차 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                            string turn4SelectTankCreatePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_SelectCreateTankPlace"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, turn4SelectTankCreatePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                             break;
                         case TutorialState.Turn6_Player:
-                            TutorialManager.Instance.SetTutorialPanel(true, "보병 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                            string turn6SelectSoldierCreatePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_SelectCreateSoldierPlace"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, turn6SelectSoldierCreatePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                             break;
                         case TutorialState.Turn8_Player:
-                            TutorialManager.Instance.SetTutorialPanel(true, "전차 생성 위치를 선택합시다.", "대상 클릭", 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
+                            string turn8SelectTankCreatePlace = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_SelectCreateTankPlace"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, turn8SelectTankCreatePlace, TutorialManager.Instance.TargetClick, 0.08f, 0.008f, new Vector4(0.475f, 0.383f), new Vector4(0.3f, 0.3f), new Vector2(0, 110f));
                             break;
                     }
                 }
@@ -112,4 +128,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.07

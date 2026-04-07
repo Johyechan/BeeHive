@@ -11,6 +11,7 @@ using MyUtil;
 using MyUtil.GameMode;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MySystem.Game.Handler
 {
@@ -95,12 +96,17 @@ namespace InGame.MySystem.Game.Handler
                         ConfirmUI confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 가져오기
 
                         confirmUI.gameObject.SetActive(true); // 확인 UI 활성화
+                        string defenseAsk = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Tutorial_DefenseAsk"
+                        );
+
                         confirmUI.Confirm(result =>
                         {
                             confirmUI.ConfirmEnd();
                             confirmResultTcs.TrySetResult(result);
                         },
-                        "상대 전차에게 공격 당했습니다. \n 화력 카드를 사용하여 방어 하시겠습니까?");
+                        defenseAsk);
                     }
                     else // 화력 카드를 가지고 있지 않을 경우
                     {

@@ -10,6 +10,7 @@ using MyUtil.GameMode;
 using System.Threading.Tasks;
 using Tutorial;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyObject.Piece.Handler
 {
@@ -52,7 +53,11 @@ namespace InGame.MyObject.Piece.Handler
                         _pieceData.confirmUI.gameObject.SetActive(true); // 객체 활성화
                         if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
                         {
-                            TutorialManager.Instance.SetTutorialPanel(true, "공격을 합시다.", "버튼 클릭", 0.08f, 0.008f, new Vector4(0.422f, 0.224f), new Vector4(1.2f, 0.3f), new Vector2(0, 450f));
+                            string letsAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_LetsAttack"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, letsAttack, TutorialManager.Instance.ButtonClick, 0.08f, 0.008f, new Vector4(0.422f, 0.224f), new Vector4(1.2f, 0.3f), new Vector2(0, 450f));
                         }
                         TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
 

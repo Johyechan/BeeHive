@@ -15,128 +15,260 @@ MonoBehaviour:
   m_TableCollectionName: Tutorial
   m_TableCollectionNameGuidString: 153d8c0ec741d4c47905c2b2b2b0fc46
   m_Entries:
-  - m_Id: 1083721568223232
-    m_Key: Tutorial_Start
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1085775795716096
-    m_Key: Tutorial_Click_Enter
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1086113462353920
-    m_Key: Tutorial_YourHP
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1087966212259840
-    m_Key: Tutorial_OpponentCastle
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1088307888652288
-    m_Key: Tutorial_OpponentHP
-    m_Metadata:
-      m_Items: []
   - m_Id: 1088380294922240
     m_Key: Tutorial_YourGold
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1088704275546112
-    m_Key: Tutorial_OpponentGold
     m_Metadata:
       m_Items: []
   - m_Id: 1088992512311296
     m_Key: Tutorial_viewingCastleIsYourTeam
     m_Metadata:
       m_Items: []
-  - m_Id: 1089095679606784
-    m_Key: Tutorial_DefeatOpponent
+  - m_Id: 1439340120768512
+    m_Key: Tutorial_UseTankAndAttackSoldier
     m_Metadata:
       m_Items: []
-  - m_Id: 1090931178340352
-    m_Key: Tutorial_Click_Button
+  - m_Id: 1432887121149952
+    m_Key: Tutorial_Tutorial7TurnAttack
     m_Metadata:
       m_Items: []
-  - m_Id: 1091042277064704
-    m_Key: Tutorial_Click_Target
+  - m_Id: 1432376829542400
+    m_Key: Tutorial_Tutorial6TurnAttack
     m_Metadata:
       m_Items: []
-  - m_Id: 1091434180247552
-    m_Key: Tutorial_RoadCreateTwo
+  - m_Id: 1431416673665024
+    m_Key: Tutorial_Tutorial5TurnAttack
     m_Metadata:
       m_Items: []
-  - m_Id: 1091955335102464
-    m_Key: Tutorial_GoldBarCreateTwo
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1092291927998464
-    m_Key: Tutorial_GoToMainTurn
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1092691267682304
-    m_Key: Tutorial_FirstCreateMiner
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1093165073039360
-    m_Key: Tutorial_MinerGuide1
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1093656779685888
-    m_Key: Tutorial_MinerGuide2
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1093892335992832
-    m_Key: Tutorial_MinerGuide3
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1094083407511552
-    m_Key: Tutorial_MinerGuide4
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1094345035612160
-    m_Key: Tutorial_MinerGuide5
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1094557330309120
-    m_Key: Tutorial_ClickPieceButton
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1095195627880448
-    m_Key: Tutorial_SelectCreateMinerPlace
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1095923570311168
-    m_Key: Tutorial_FirstMoveMiner
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1096782429552640
-    m_Key: Tutorial_SelectMovePlace
+  - m_Id: 1431090126127104
+    m_Key: Tutorial_Tutorial4TurnAttack
     m_Metadata:
       m_Items: []
   - m_Id: 1098050631892992
     m_Key: Tutorial_TurnEnd
     m_Metadata:
       m_Items: []
-  - m_Id: 1098999349903360
-    m_Key: Tutorial_LastPlayerGetThreeGoldFirstTime
+  - m_Id: 1435582020190208
+    m_Key: Tutorial_Turn6MoveTank
     m_Metadata:
       m_Items: []
-  - m_Id: 1099434097901568
-    m_Key: Tutorial_MinerGetGoldCoin
+  - m_Id: 1435284585316352
+    m_Key: Tutorial_Turn2CreateMiner
     m_Metadata:
       m_Items: []
-  - m_Id: 1099754186211328
-    m_Key: Tutorial_CreateRoad
+  - m_Id: 1106270867947520
+    m_Key: Tutorial_Turn1CreateMiner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1451504097296384
+    m_Key: Tutorial_TankAttackCastle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1083721568223232
+    m_Key: Tutorial_Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1446972021800960
+    m_Key: Tutorial_soldierSkill
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1439666307596288
+    m_Key: Tutorial_SelectTankAndRangedAttack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1437645735198720
+    m_Key: Tutorial_SelectRangedAttackTarget
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1096782429552640
+    m_Key: Tutorial_SelectMovePlace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1444594509938688
+    m_Key: Tutorial_SelectCreateTankPlace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1444908990464000
+    m_Key: Tutorial_SelectCreateSoldierPlace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1095195627880448
+    m_Key: Tutorial_SelectCreateMinerPlace
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438042994507776
+    m_Key: Tutorial_SelectAttackTarget
     m_Metadata:
       m_Items: []
   - m_Id: 1104915407306752
     m_Key: Tutorial_secondCreateRoad
     m_Metadata:
       m_Items: []
+  - m_Id: 1091434180247552
+    m_Key: Tutorial_RoadCreateTwo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1442615884775424
+    m_Key: Tutorial_RightClick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1088307888652288
+    m_Key: Tutorial_OpponentHP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1088704275546112
+    m_Key: Tutorial_OpponentGold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1087966212259840
+    m_Key: Tutorial_OpponentCastle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1440706465628160
+    m_Key: Tutorial_MoveSoldier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1449335713431552
+    m_Key: Tutorial_MinerSkillProblem
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1449634192687104
+    m_Key: Tutorial_MinerMoveInformation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094345035612160
+    m_Key: Tutorial_MinerGuide5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094083407511552
+    m_Key: Tutorial_MinerGuide4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1093892335992832
+    m_Key: Tutorial_MinerGuide3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1093656779685888
+    m_Key: Tutorial_MinerGuide2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1093165073039360
+    m_Key: Tutorial_MinerGuide1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1099434097901568
+    m_Key: Tutorial_MinerGetGoldCoin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1438916999380992
+    m_Key: Tutorial_LetsMoveMiner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1440971218485248
+    m_Key: Tutorial_LetsAttackMiner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1436067091447808
+    m_Key: Tutorial_LetsAttack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1098999349903360
+    m_Key: Tutorial_LastPlayerGetThreeGoldFirstTime
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1441924227268608
+    m_Key: Tutorial_ItsFirePowerCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1092291927998464
+    m_Key: Tutorial_GoToMainTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1091955335102464
+    m_Key: Tutorial_GoldBarCreateTwo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1095923570311168
+    m_Key: Tutorial_FirstMoveMiner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1092691267682304
+    m_Key: Tutorial_FirstCreateMiner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1450021586993152
+    m_Key: Tutorial_Draw
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1447924011368448
+    m_Key: Tutorial_DefenseOpponentAttack
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1448179029245952
+    m_Key: Tutorial_DefenseAsk
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1089095679606784
+    m_Key: Tutorial_DefeatOpponent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445443663560704
+    m_Key: Tutorial_CreateTank
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1445792180862976
+    m_Key: Tutorial_CreateSoldier
+    m_Metadata:
+      m_Items: []
   - m_Id: 1105872568451072
     m_Key: Tutorial_CreateRoadAgain
     m_Metadata:
       m_Items: []
-  - m_Id: 1106270867947520
-    m_Key: Tutorial_FirsCreateMiner
+  - m_Id: 1099754186211328
+    m_Key: Tutorial_CreateRoad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1440352126631936
+    m_Key: Tutorial_ConnectRoad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1094557330309120
+    m_Key: Tutorial_ClickPieceButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1091042277064704
+    m_Key: Tutorial_Click_Target
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1085775795716096
+    m_Key: Tutorial_Click_Enter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1090931178340352
+    m_Key: Tutorial_Click_Button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1443992375656448
+    m_Key: Tutorial_CheckDrawCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1442963269615616
+    m_Key: Tutorial_CheckCardGoNextTurn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1442332391768064
+    m_Key: Tutorial_CheckCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1450634861346816
+    m_Key: Tutorial_BlockRule
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1450271743672320
+    m_Key: Tutorial_AttackOpponentTank
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1452099365502976
+    m_Key: Tutorial_End
     m_Metadata:
       m_Items: []
   m_Metadata:
