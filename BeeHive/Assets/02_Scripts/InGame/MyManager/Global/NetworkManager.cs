@@ -11,7 +11,7 @@ namespace InGame.MyManager.Global
 {
     // 작성자: 조혜찬
     // 서버와 연결하는 싱글톤 매니저 클래스
-    public class NetworkManager : MonoSingleton<NetworkManager>, ISingletonManager
+    public class NetworkManager : MonoSingleton<NetworkManager>
     {
         private SocketIOUnity _socket; // 유니티에서 Socket.IO 서버와 통신하기 위한 객체
         public SocketIOUnity Socket { get => _socket; } // 외부에서 _socket에 안전하게 접근 가능한 프로퍼티
@@ -115,4 +115,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.08

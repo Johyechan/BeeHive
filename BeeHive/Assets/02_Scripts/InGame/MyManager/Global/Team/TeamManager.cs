@@ -58,6 +58,8 @@ namespace InGame.MyManager.Global
                     }
                 });
             }
+
+            Ready();
         }
 
         private void OnDisable()
@@ -172,4 +174,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.04.08

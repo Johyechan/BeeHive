@@ -12,6 +12,13 @@ namespace InGame.MyManager.Global
 
         public int Id { get; set; } // 객체 ID
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            Ready();
+        }
+
         // 외부에서 id를 통해 객체를 찾을 때 사용하는 함수
         public GameObject FindObject(int id)
         {
@@ -58,4 +65,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.02.19
+// 마지막 작성 일자: 2026.04.08

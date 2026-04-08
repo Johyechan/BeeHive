@@ -35,7 +35,7 @@ namespace InGame.MyManager.Local
 
         private async void Awake()
         {
-            _variables.Init(this, _data.gameQuitTxt, _data.gameQuitUICanvasGroup, _data.makeNickNameCanvasGroup, _data.fadeDuration); // 변수 초기화 함수
+            _variables.Init(this, _data.gameQuitTxt, _data.gameQuitUICanvasGroup, _data.languageSelectCanvasGroup, _data.fadeDuration); // 변수 초기화 함수
 
             _variables.globalManagersSetChecker = new GlobalManagersSetChecker(_data.managerList, _data.waitTime); // 글로벌 매니저 인스턴스 생성 검증
             _variables.steamIDChecker = new SteamIDChecker(this); // 스팀 ID 검증

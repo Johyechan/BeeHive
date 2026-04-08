@@ -15,14 +15,14 @@ namespace InGame.MyManager.Local.Boot.Handler
     {
         private BootingManager _bootingManager; // 부팅 매니저 클래스
 
-        private CanvasGroup _makeNickNameCanvasGroup; // 닉네임 생성 UI
+        private CanvasGroup _selectLanguageCanvasGroup; // 언어 선택 UI
 
         private float _fadeDuration; // 페이드 인, 아웃에 걸리는 시간
 
-        public SteamAuthSuccessHandler(BootingManager bootingManager, CanvasGroup makeNickNameCanvasGroup, float fadeDuration)
+        public SteamAuthSuccessHandler(BootingManager bootingManager, CanvasGroup selectLanguageCanvasGroup, float fadeDuration)
         {
             _bootingManager = bootingManager;
-            _makeNickNameCanvasGroup = makeNickNameCanvasGroup;
+            _selectLanguageCanvasGroup = selectLanguageCanvasGroup;
             _fadeDuration = fadeDuration;
         }
 
@@ -40,8 +40,8 @@ namespace InGame.MyManager.Local.Boot.Handler
 
                 MainThreadDispatcher.Enqueue(() =>
                 {
-                    _makeNickNameCanvasGroup.gameObject.SetActive(true); // 닉네임 생성 UI 활성화
-                    _makeNickNameCanvasGroup.DOFade(1, _fadeDuration); // 닉네임 생성 UI 페이드 인
+                    _selectLanguageCanvasGroup.gameObject.SetActive(true); // 닉네임 생성 UI 활성화
+                    _selectLanguageCanvasGroup.DOFade(1, _fadeDuration); // 닉네임 생성 UI 페이드 인
                 });
             }
             else // 닉네임이 있을 경우
@@ -52,4 +52,4 @@ namespace InGame.MyManager.Local.Boot.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.08

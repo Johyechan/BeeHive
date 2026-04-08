@@ -17,6 +17,7 @@ namespace InGame.MyManager.Global
         {
             base.Awake();
             _canInteractionUI = true; // 처음에는 UI 상호작용 가능하도록 초기화
+            Ready();
         }
 
         public void WarningUIMake(string text)
@@ -32,4 +33,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.08

@@ -32,11 +32,11 @@ namespace InGame.MyManager.Local.Boot.Variable
         public SteamAuthSuccessHandler steamAuthSuccessHandler; // 스팀 인증 성공 핸들러
 
         // 초기화 함수
-        public void Init(BootingManager bootingManager, TMP_Text gameQuitTxt, CanvasGroup gameQuitUICanvasGroup, CanvasGroup makeNickNameCanvasGroup, float fadeDuration)
+        public void Init(BootingManager bootingManager, TMP_Text gameQuitTxt, CanvasGroup gameQuitUICanvasGroup, CanvasGroup languageSelectCanvasGroup, float fadeDuration)
         {
             steamAuthFailedHandler = new SteamAuthFailedHandler(gameQuitTxt, gameQuitUICanvasGroup, fadeDuration);
-            steamAuthSuccessHandler = new SteamAuthSuccessHandler(bootingManager, makeNickNameCanvasGroup, fadeDuration);
+            steamAuthSuccessHandler = new SteamAuthSuccessHandler(bootingManager, languageSelectCanvasGroup, fadeDuration);
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.08

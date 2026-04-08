@@ -1,3 +1,4 @@
+using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using TMPro;
@@ -21,6 +22,9 @@ namespace InGame.MySystem
         [SerializeField] private TMP_Text _bgmSoundVolumePercentage; // 배경음악 볼륨 퍼센트
         [SerializeField] private TMP_Text _sfxSoundVolumePercentage; // 효과음 볼륨 퍼센트
 
+        [SerializeField] private Toggle _koreaToggle; // 한글 토글
+        [SerializeField] private Toggle _englishToggle; // 영어 토글
+
         private void Awake()
         {
             _masterSoundSlider.onValueChanged.AddListener(SetMasterVolume);
@@ -37,6 +41,21 @@ namespace InGame.MySystem
             SetMasterVolume(SoundManager.Instance.MasterVolume);
             SetBGMVolume(SoundManager.Instance.BgmVolume);
             SetSFXVolume(SoundManager.Instance.SfxVolume);
+
+            SetLanguageToggle();
+        }
+
+        private void SetLanguageToggle()
+        {
+            switch(LanguageManager.Instance.CurrentLanguage)
+            {
+                case LanguageType.Korea:
+                    _koreaToggle.isOn = true;
+                    break;
+                case LanguageType.English:
+                    _englishToggle.isOn = true;
+                    break;
+            }
         }
 
         // dB = 20 X log10(볼륨비) 
@@ -90,4 +109,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.02.06
+// 마지막 작성 일자: 2026.04.08

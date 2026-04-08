@@ -107,6 +107,8 @@ namespace MyUtil.MyObjectPool
                     _pool[poolType].Enqueue(poolObject); // 생성한 풀링 객체를 풀링 타입의 큐에 추가
                 }
             }
+
+            Ready();
         }
 
         // 새로운 풀링 객체 생성 함수(매개변수로 풀링 타입을 받는다)
@@ -219,4 +221,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.04.03
+// 마지막 작성 일자: 2026.04.08

@@ -47,6 +47,8 @@ namespace InGame.MyManager.Global
                     _sfxMap.Add(type, audioSource); // 효과음 맵에 추가
                 }
             }
+
+            Ready();
         }
 
         public void SFXPlay(SFXType type)
@@ -55,4 +57,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.02.06
+// 마지막 작성 일자: 2026.04.08

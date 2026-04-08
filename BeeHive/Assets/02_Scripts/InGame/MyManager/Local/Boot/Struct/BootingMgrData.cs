@@ -12,7 +12,7 @@ namespace InGame.MyManager.Boot.Struct
     public struct BootingMgrData
     {
         public CanvasGroup gameQuitUICanvasGroup; // 게임 강제 종료 UI
-        public CanvasGroup makeNickNameCanvasGroup; // 닉네임 생성 UI
+        public CanvasGroup languageSelectCanvasGroup; // 언어 선택 UI
 
         public TMP_Text gameQuitTxt; // 게임 강제 종료 이유 text
 
@@ -22,4 +22,4 @@ namespace InGame.MyManager.Boot.Struct
         public List<GameObject> managerList; // 글로벌 싱글톤 매니저 객체 리스트
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.08

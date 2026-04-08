@@ -22,6 +22,13 @@ namespace MyUtil.GameMode
             }
         } // 현재 게임 모드 프로퍼티
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            Ready();
+        }
+
         // 게임 모드 할당 함수
         public void SetMode(IGameMode gameMode)
         {
@@ -29,4 +36,4 @@ namespace MyUtil.GameMode
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.04.08
