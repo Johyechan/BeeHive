@@ -77,7 +77,14 @@ namespace InGame.MyManager.Local
 
             if(!_variables.isNewUser && _variables.result) // 신규 유저가 아니면서 검증에 성공했다면
             {
+                if(!_variables.isTutorialOver) // 튜토리얼이 끝나지 않았을 경우
+                {
+                    SceneManager.LoadScene(4); // 튜토리얼 씬으로 이동
+                    return;
+                }
+
                 SceneManager.LoadScene(_variables.sceneNumber); // 로비 씬으로 이동
+                return;
             }
 
             if(!_variables.result)
@@ -93,4 +100,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.09

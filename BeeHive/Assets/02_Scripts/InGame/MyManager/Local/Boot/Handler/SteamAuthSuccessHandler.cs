@@ -6,6 +6,7 @@ using SocketIOClient;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace InGame.MyManager.Local.Boot.Handler
 {
@@ -32,7 +33,11 @@ namespace InGame.MyManager.Local.Boot.Handler
             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                 return; // 반환
 
-            string strNickName = response.GetValue<string>();
+            string json = response.GetValue().ToString();
+
+            SteamAuthSuccessInfo info = JsonUtility.FromJson<SteamAuthSuccessInfo>(json); // 구조체로 변환
+
+            string strNickName = info.nickName;
 
             if (string.IsNullOrEmpty(strNickName)) // 닉네임이 비어있을 경우
             {
@@ -46,10 +51,12 @@ namespace InGame.MyManager.Local.Boot.Handler
             }
             else // 닉네임이 있을 경우
             {
+                _bootingManager.Variables.isTutorialOver = 0 == info.tutorialOver ? false : true; // tutorialOver가 0이면 튜토리얼이 종료 되지 않은 것이고 1이면 튜토리얼이 종료된 것
+
                 NetworkManager.Instance.CurrentClientName = strNickName; // 닉네임 저장
                 _bootingManager.Variables.steamAuthEnd?.TrySetResult(true); // 스팀 인증 성공
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.04.08
+// 마지막 작성 일자: 2026.04.09

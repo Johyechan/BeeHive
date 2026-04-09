@@ -6,6 +6,8 @@ using Steamworks;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Rendering;
 
 namespace InGame.MyManager.Global
 {
@@ -77,7 +79,11 @@ namespace InGame.MyManager.Global
                     string text = response.GetValue<string>();
                     MainThreadDispatcher.Enqueue(() =>
                     {
-                        UIManager.Instance.WarningUIMake(text);
+                        string error = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Error",
+                            text
+                        );
+                        UIManager.Instance.WarningUIMake(error);
                     });
                     return;
                 });
@@ -115,4 +121,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.04.08
+// 마지막 작성 일자: 2026.04.09

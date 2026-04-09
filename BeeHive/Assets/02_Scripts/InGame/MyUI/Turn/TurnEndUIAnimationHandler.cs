@@ -8,6 +8,7 @@ using MyUtil.GameMode;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.Turn
 {
@@ -21,9 +22,13 @@ namespace InGame.MyUI.Turn
 
         public override async Task UIAnimationPlay()
         {
+            string turnEnd = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_TurnEnd"
+            );
             await DOTween.Sequence()
                 .AppendCallback(() => TurnEvents.OnSetInteractable?.Invoke(false)) // 턴 넘기기 버튼 상화작용 비활성화
-                .AppendCallback(() => _tmpText.text = "턴 종료") // 무슨 턴인지 텍스트로 보여주기
+                .AppendCallback(() => _tmpText.text = turnEnd) // 무슨 턴인지 텍스트로 보여주기
                 .AsyncWaitForCompletion(); // 이후 동일하게 실행되어야 할 기능 수행
 
             await base.UIAnimationPlay();
@@ -60,4 +65,4 @@ namespace InGame.MyUI.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.03.27
+// 마지막 작성 일자: 2026.04.09

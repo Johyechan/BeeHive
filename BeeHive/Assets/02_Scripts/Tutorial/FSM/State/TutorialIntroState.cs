@@ -24,7 +24,7 @@ namespace Tutorial.FSM.State
                 "Tutorial_Start"
             );
 
-            TutorialManager.Instance.SetTutorialPanel(true, tutorialStart, TutorialManager.Instance.EnterClick, 0.08f, 0.008f, new Vector4(0.5f, 0.305f), new Vector4(1.2f, 1.2f));
+            TutorialManager.Instance.SetTutorialPanel(true, tutorialStart, TutorialManager.Instance.EnterClick, 0.08f, 0.008f, new Vector4(0.5f, 0.305f), new Vector4(1.2f, 1.2f), new Vector2(0, 110f));
         }
 
         public void Update()
@@ -99,4 +99,4 @@ namespace Tutorial.FSM.State
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.09

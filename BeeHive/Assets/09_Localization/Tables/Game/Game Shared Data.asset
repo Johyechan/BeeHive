@@ -211,6 +211,10 @@ MonoBehaviour:
     m_Key: Game_UI_ChangeTeamTurn
     m_Metadata:
       m_Items: []
+  - m_Id: 2209099670093824
+    m_Key: Game_UI_Turn
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -3,6 +3,7 @@ using InGame.MyManager;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.Turn
 {
@@ -18,12 +19,17 @@ namespace InGame.MyUI.Turn
         // 애니메이션 실행 함수
         public override async Task UIAnimationPlay()
         {
+            string makeTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_MakeTurn"
+            );
+
             await DOTween.Sequence()
-                .AppendCallback(() => _tmpText.text = "생산 턴") // 무슨 턴인지 텍스트로 보여주기
+                .AppendCallback(() => _tmpText.text = makeTurn) // 무슨 턴인지 텍스트로 보여주기
                 .AsyncWaitForCompletion(); // 이후 동일하게 실행되어야 할 기능 수행
 
             await base.UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2026.01.22
+// 마지막 작성 일자: 2026.04.09

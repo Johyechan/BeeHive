@@ -27,6 +27,8 @@ namespace InGame.MyManager.Local.Boot.Variable
 
         public bool result = false; // 검증 실패 여부
 
+        public bool isTutorialOver = false; // 튜토리얼 종료 여부
+
         public SteamAuthFailedHandler steamAuthFailedHandler; // 스팀 인증 실패 핸들러
 
         public SteamAuthSuccessHandler steamAuthSuccessHandler; // 스팀 인증 성공 핸들러
@@ -39,4 +41,4 @@ namespace InGame.MyManager.Local.Boot.Variable
         }
     }
 }
-// 마지막 작성 일자: 2026.04.08
+// 마지막 작성 일자: 2026.04.09

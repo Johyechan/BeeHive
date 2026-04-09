@@ -5,6 +5,7 @@ using InGame.MyManager.Turn;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyUI.Turn
 {
@@ -20,12 +21,16 @@ namespace InGame.MyUI.Turn
         {
             InGameContext.Current.Data.CardManager.ResetCardUse();
 
+            string turn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_Turn"
+            );
             await DOTween.Sequence()
-                .AppendCallback(() => _tmpText.text = InGameContext.Current.Data.TurnManager.CurrentTeamType.ToString() + " 턴") // 무슨 턴인지 텍스트로 보여주기
+                .AppendCallback(() => _tmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType.ToString()} {turn}") // 무슨 턴인지 텍스트로 보여주기
                 .AsyncWaitForCompletion(); // 이후 동일하게 실행되어야 할 기능 수행
 
             await base.UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.09

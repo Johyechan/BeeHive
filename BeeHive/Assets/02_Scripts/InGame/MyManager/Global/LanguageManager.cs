@@ -57,6 +57,8 @@ namespace InGame.MyManager.Global
                 }
             }
 
+            LoadLocal(CurrentLanguage); // 현재 언어 저장
+
             Ready();
         }
 
@@ -79,4 +81,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.04.08
+// 마지막 작성 일자: 2026.04.09
