@@ -1,6 +1,5 @@
 using DG.Tweening;
 using InGame.MyEvent;
-using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
@@ -9,9 +8,7 @@ using InGame.MyUI.Card.Variable;
 using InGame.MyUI.MyUIInterface;
 using MyUtil;
 using MyUtil.GameMode;
-using MyUtil.MyEvent;
 using MyUtil.MyObjectPool;
-using System.Threading.Tasks;
 using Tutorial;
 using UnityEngine;
 using UnityEngine.EventSystems;

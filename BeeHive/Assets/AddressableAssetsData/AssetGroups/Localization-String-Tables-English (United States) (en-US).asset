@@ -20,30 +20,35 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 86e47918bedc7404b94d8d2e03ad5dd1
     m_Address: Tutorial_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 91bd9c0fa508dcb409c19a5aaa2cbc1d
     m_Address: Error_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a787d0608589cf24b9b414c7fa0abd2a
     m_Address: Rule_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ba023688a93623c40b27b33f19fd1d9f
     m_Address: Room_en-US
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cb9ad914a82f3104fa9f0de1e46601f9
     m_Address: Lobby_en-US
@@ -57,6 +62,7 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-US
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3619e0920ca733e47aaa2a51526717c0, type: 2}

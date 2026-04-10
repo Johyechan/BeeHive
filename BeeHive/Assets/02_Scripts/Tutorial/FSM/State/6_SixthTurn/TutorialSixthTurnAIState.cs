@@ -84,7 +84,7 @@ namespace Tutorial.FSM.State.Sixth
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.MainTurn); // 메인 턴으로 턴 변경
                         break;
                     case TurnType.MainTurn: // 메인 턴이라면
-                        WalletEvent.OnUseGoldBar(3); // 금괴 사용(보병 비용)
+                        await WalletEvent.OnUseGoldBar(3); // 금괴 사용(보병 비용)
                         // 보병 생성
                         await TutorialManager.Instance.ObjectPlace(_createPlacePlane, _soldier, false);
                         InGameContext.Current.Data.GameManager.CurrentMovePiece = _soldier.gameObject; // 현재 선택된 객체를 할당
@@ -115,6 +115,6 @@ namespace Tutorial.FSM.State.Sixth
         }
     }
 }
-// 마지막 작성 일자: 2026.04.07
+// 마지막 작성 일자: 2026.04.10
 
 

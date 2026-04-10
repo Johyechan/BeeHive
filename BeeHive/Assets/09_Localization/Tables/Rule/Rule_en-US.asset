@@ -17,7 +17,116 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: f8ce8538dbe596345945145ec7e17596, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 2524761374326784
+    m_Localized: 'Game Components
+
+      Common Components: 1 Game Board, 30 Strategy
+      Cards, Gold Bars, Gold Coins
+
+      Components for each player: 1 Castle,
+      2 Miners, 3 Pioneers, 2 Bombards, 72 Roads'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525352641167360
+    m_Localized: "Basic Setting (2-player strategy game)\r\nGame Overview\r\nThis
+      game is a turn-based 2-player strategy boardgame. In this game, players deploy
+      units to capture the opponent\u2019s castle. Each castle has 5 HP (Hit Points).
+      You win by sending units (such as Pioneers or Bombards) to reduce the enemy
+      castle's HP to 0.\r\n\r\nSetup\r\nCastles: Place each castle on its designated
+      color tile.\r\nStrategy Cards: Shuffle the Strategy Cards face-down and place
+      them in a draw pile.\r\nPlacement Rules: * Roads must always be placed along
+      the edges of the hexagonal tiles. Similarly, Miners, Pioneers, and Bombards
+      must be placed on the vertices (corners) of the hexagonal tiles.\r\n\r\nTurn
+      Structure\r\nEach player follows this specific sequence during their turn:\r\nProduction
+      Phase\r\nDraw Phase\r\nMain Phase\r\nEnd of Turn (Pass to the opponent)\r\nNote:
+      Strategy Cards can be played at any time during your own turn, regardless of
+      the current phase"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525795303817216
+    m_Localized: "Production Turn\n\nDuring the Production Turn, players gain Gold
+      Bars and Gold Coins from their Castles and Producers.\n\nBy default, each Castle
+      provides 2 Gold Bars, while Producers generate Gold Coins depending on the
+      types of tiles they are adjacent to.\nEvery 5 Gold Coins are automatically
+      converted into 1 Gold Bar.\n(5 Gold Coins = 1 Gold Bar)\n\nA Producer earns
+      Gold Coins equal to the production value of the tile type it is most strongly
+      connected to among adjacent tiles.\nEach tile has a different production value:\n\nThe
+      amount of Gold Coins gained depends on the tile color\nDarker tiles yield higher
+      production\n\nHowever, there are cases where a Producer cannot generate Gold
+      Coins:\n\nWhen the opponent has used a \u201CDrought\u201D card\nWhen the Producer
+      is not connected to the Castle via a Sanctuary and Road\n\nIn the Production
+      Turn:\n\nThe 2 Gold Bars from the Castle must always be collected\nCastle production
+      is not affected by \u201CDrought\u201D\n\nHowever:\n\nA player can hold a maximum
+      of 20 Gold Bars\nIf this limit is exceeded, no additional Gold Bars can be
+      gained during the Production Turn\n\nAdditionally, to compensate for the disadvantage
+      of going second:\n\nThe second player gains 3 Gold Bars (instead of 2) from
+      their Castle only during their first Production Turn"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527252967063552
+    m_Localized: "Draw Phase\r\nThe Draw Phase is when players may purchase Strategy
+      Cards to gain tactical advantages.\r\nCost: Each card costs 2 Gold Bars. You
+      can only purchase 1 card per turn.\r\nHand Limit: You may hold a maximum of
+      5 Strategy Cards.\r\nVisibility: Strategy Cards must be kept face-down in a
+      visible area so your opponent can see how many cards you currently hold.\r\nUsage
+      Rules:\r\nYou may only use one card of the same name per turn (with the exception
+      of Firepower).\r\nUsed cards are placed in the face-up discard pile.\r\nSpecial
+      Rule (Fortify): This card is \"one-time use\" only. Once played, it is removed
+      from the game entirely rather than discarded.\r\nReshuffling: If the draw pile
+      is empty, shuffle the face-up discard pile and place it face-down to form a
+      new draw pile.\r\n\nStrategy Cards (Total: 30 Cards)\r\nThere are 5 unique
+      types of cards in the deck:\r\nFortify (Qty: 1)\r\nReinforce your walls to
+      increase your Castle\u2019s HP by 1. (Removed from the game after use).\r\nDrought
+      (Qty: 4)\r\nYour opponent cannot collect production from their Miners on their
+      next turn. (Does not affect Castle production).\r\nProsperity (Qty: 4)\r\nImmediately
+      gain 4 Gold Bars. This card can be played even if a \"Drought\" card was used
+      against you.\r\nModify Road (Qty: 6)\r\nSelect and change one of your opponent's
+      roads that is connected to your own road.\r\nFirepower (Qty: 15)\r\nAllows
+      a Bombard to perform a ranged attack or defend against an incoming enemy Bombard
+      attack."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527682799337472
+    m_Localized: "Main Phase\r\nThe Main Phase is where you build roads, recruit
+      units, move, and attack.\r\n1. Road Construction & Costs\r\nFree Roads: You
+      receive 2 Roads for free at the start of your turn. These must be used in this
+      turn or they will vanish.\r\nRecruitment Costs:\r\nMiner: 1 Gold Bar\r\nPioneer:
+      3 Gold Bars\r\nBombard: 5 Gold Bars\r\nRoad Connectivity: * Roads can only
+      be extended if they are connected to your Castle.\r\nIf a road segment is cut
+      off from the Castle, you can still move across it, but you cannot build new
+      roads from it.\r\nIf there are no valid empty edges left on the board, no more
+      roads can be built.\r\n\r\n\r\n2. Unit Deployment (Spawning)\r\nLocation: Units
+      must be spawned on a vertex (corner) of your Castle's starting tile.\r\nLimit:
+      You may spawn only one unit per turn.\r\nRestrictions: * Only one unit can
+      occupy a single vertex.\r\nAlso you cannot spawn a unit on a vertex that is
+      directly adjacent (one space away) to an enemy unit.\r\n\r\n3. Movement Rules\r\nAfter
+      spawning, you may choose one Miner, one Pioneer, and one Bombard already on
+      the board to move and attack. You must choose one of the two following methods:\r\nMethod
+      A (Off-Road): * Pioneers can always move 1 space.\r\nMiners and Bombards can
+      move 1 space only if there is no enemy road on that path.\r\nMethod B (On-Road):
+      All units can travel any distance in a single move as long as they stay on
+      a continuous line of your own connected roads.\r\nNote: Units cannot move a
+      second time after their initial action. \r\n\r\n4. Unit Abilities & Combat\r\nMiner\r\nSpecialty:
+      Focused on production; cannot attack.\r\nSupply Line: Must be connected to
+      the Castle via a road to generate Gold Coins.\r\nPioneer\r\nMelee Attack: Moves
+      into an enemy's space to destroy their unit.\r\nSpecial Ability (Road Capture):
+      When a Pioneer moves or attacks, all roads touching its new position immediately
+      change to your color.\r\nBombard\r\nMelee Attack: Moves into an enemy's space
+      to destroy them (like a Pioneer).\r\nRanged Attack: Can attack an enemy 1 space
+      away by consuming 1 Firepower Card.\r\nArtillery Duel: Bombards must use Ranged
+      Attacks to fight other Bombards. If the defender also plays a Firepower card,
+      it is a Draw (cards are spent, but both units survive). If the defender has
+      no card, their Bombard is destroyed.\r\nCombo: A Bombard can perform a Melee
+      Attack and then immediately follow up with a Ranged Attack in the same turn.\r\n\r\n\r\n\r\n\r\n5.
+      Attacking the Castle\r\nSuccess in attacking a Castle reduces its HP and requires
+      strategic sacrifice.\r\nPioneer Attack: Reaching a vertex of the enemy Castle
+      tile reduces Castle HP by 1.\r\nBombard Attack: * Melee: Reaching the Castle
+      vertex reduces Castle HP by 2.\r\nRanged: Using 1 Firepower card from 1 space
+      away reduces Castle HP by 2.\r\nThe Sacrifice: Any unit that successfully damages
+      the enemy Castle is permanently removed from the game and cannot be respawned."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

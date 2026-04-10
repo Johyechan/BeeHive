@@ -35,7 +35,7 @@ namespace InGame.MyUI.Card.Handler
             Transform panel = _uiCardVariable.cardUsePanelCanvasGroup.transform.GetChild(1); // 패널 가져오기
             TMP_Text askText = panel.GetChild(0).GetComponent<TMP_Text>(); // 패널의 묻는 텍스트 가져오기
 
-            askText.text = _uiCardBase.UICardData.currentCardName + "카드를 사용하시겠습니까?"; // 텍스트 설정
+            askText.text = _uiCardBase.UICardData.currentCardNameKey + "카드를 사용하시겠습니까?"; // 텍스트 설정
             _uiCardVariable.cardUsePanelCanvasGroup.DOFade(1, _animationDuration); // UI 페이드 인
         }
     }

@@ -2,6 +2,7 @@ using DG.Tweening;
 using InGame.MyManager.Local;
 using InGame.MyUI.Card.Variable;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace InGame.MyUI.Card.Handler
@@ -23,13 +24,24 @@ namespace InGame.MyUI.Card.Handler
         public void ShowInfomation()
         {
             _uiCardVariable.cardInformationImage.sprite = InGameContext.Current.Data.CardManager.CurrentUICard.UICardData.currentCardSprite; // 선택한 현재 카드 이미지 할당
-            _uiCardVariable.cardTitle.text = InGameContext.Current.Data.CardManager.CurrentUICard.UICardData.currentCardName; // 선택한 현재 카드 이름
-            _uiCardVariable.cardExplain.text = InGameContext.Current.Data.CardManager.CurrentUICard.UICardData.currentCardExplain; // 선택한 현재 카드 설명
-            _uiCardVariable.cardInformation.text = InGameContext.Current.Data.CardManager.CurrentUICard.UICardData.currentCardExplain; // 선택한 현재 카드 설명
+
+            string name = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                InGameContext.Current.Data.CardManager.CurrentUICard.UICardData.currentCardNameKey
+            );
+            _uiCardVariable.cardTitle.text = name; // 선택한 현재 카드 이름
+
+            string explain = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                InGameContext.Current.Data.CardManager.CurrentUICard.UICardData.currentCardExplainKey
+            );
+            _uiCardVariable.cardExplain.text = explain; // 선택한 현재 카드 설명
+
+            _uiCardVariable.cardInformation.text = explain; // 선택한 현재 카드 설명
 
             _uiCardVariable.cardInformationCanvasGroup.gameObject.SetActive(true); // 카드 정보 패널 활성화
             _uiCardVariable.cardInformationCanvasGroup.DOFade(1, _animationDuration); // 카드 정보 패널 페이드 인
         }
     }
 }
-// 마지막 작성 일자: 2026.04.02
+// 마지막 작성 일자: 2026.04.10

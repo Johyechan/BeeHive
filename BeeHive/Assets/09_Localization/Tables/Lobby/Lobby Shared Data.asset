@@ -67,6 +67,38 @@ MonoBehaviour:
     m_Key: Lobby_UI_Button_QuitGame
     m_Metadata:
       m_Items: []
+  - m_Id: 2514607933227008
+    m_Key: Lobby_UI_Guide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515193701335040
+    m_Key: Lobby_UI_Button_GameComponents
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515460425515008
+    m_Key: Lobby_UI_Button_GameRulesInList
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515755436081152
+    m_Key: Lobby_UI_Button_BasicSetting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516002543501312
+    m_Key: Lobby_UI_Button_ProductionPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516152234016768
+    m_Key: Lobby_UI_Button_DrawPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516313194627072
+    m_Key: Lobby_UI_Button_MainPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516387068903424
+    m_Key: Lobby_UI_Button_AdditionalRules
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

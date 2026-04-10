@@ -20,6 +20,7 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1b84f204ffbf7bd4bab0ffa2745a4bca
     m_Address: Lobby_ko-KR
@@ -33,30 +34,35 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6e9bb60036992d143a9f003de7be36cc
     m_Address: Tutorial_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 82682d5327267b84086157b220de03b9
     m_Address: Error_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 98be3006f427aa74c8a23323402c600d
     m_Address: Boot_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f81a1cd8fdbb7c24cb666b1be7e06323
     m_Address: Game_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 3619e0920ca733e47aaa2a51526717c0, type: 2}

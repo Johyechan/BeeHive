@@ -94,7 +94,7 @@ namespace Tutorial.FSM.State.First
                         road = _roadParent.GetChild(_roadParent.childCount - 1).GetComponent<Road>(); // 도로 부모에서 도로 가져오기
                         await TutorialManager.Instance.ObjectPlace(_secondRoadPlacePlane, road, false);
 
-                        WalletEvent.OnUseGoldBar(3); // 금괴 사용(보병 비용)
+                        await WalletEvent.OnUseGoldBar(3); // 금괴 사용(보병 비용)
                         // 보병 생성
                         await TutorialManager.Instance.ObjectPlace(_createPlacePlane, _soldier, false);
                         InGameContext.Current.Data.GameManager.CurrentMovePiece = _soldier.gameObject; // 현재 선택된 객체를 할당
@@ -113,4 +113,4 @@ namespace Tutorial.FSM.State.First
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.10

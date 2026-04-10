@@ -21,6 +21,7 @@ namespace InGame.MyManager.Local.Turn
         [SerializeField] private float _teamChangeDelay; // 다른 팀의 턴으로 변경하면서 기다리는 시간 변수
 
         [SerializeField] private int _turnDurationTime; // 턴 지속 시간(초)
+        [SerializeField] private int _makeTurnDelayMillisecond; // 생산 턴 대기 시간
 
         [SerializeField] private Slider _turnTimerSlider; // 턴 타이머 슬라이더
 
@@ -138,6 +139,7 @@ namespace InGame.MyManager.Local.Turn
                 if (_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면
                 {
                     await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
+                    await Task.Delay(_makeTurnDelayMillisecond); // 생산 턴 작업 종료 후 잠시 대기
                     InGameContext.Current.Data.DrawManager.CanDraw = true; // 드로우 가능 상태
                 }
                 else if(_currentTurnType == TurnType.DrawTurn || _currentTurnType == TurnType.MainTurn) // 드로우턴 또는 메인턴일 때
@@ -200,4 +202,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.04.10

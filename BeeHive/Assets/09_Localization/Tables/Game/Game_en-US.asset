@@ -224,6 +224,10 @@ MonoBehaviour:
     m_Localized: Turn
     m_Metadata:
       m_Items: []
+  - m_Id: 2539095152394240
+    m_Localized: Use firepower for this attack?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

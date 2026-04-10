@@ -4342,7 +4342,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 40, y: 20}
+  m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &268253469
 MonoBehaviour:
@@ -8847,7 +8847,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 3333
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a92720e9fa96694892b12bd850fe8f8, type: 2}
   m_sharedMaterial: {fileID: -4710621324376599193, guid: 7a92720e9fa96694892b12bd850fe8f8, type: 2}
@@ -8874,8 +8874,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10991,6 +10991,7 @@ MonoBehaviour:
   _zInterval: 0.012
   _zValueChangeCount: 10
   _goldBarMaxCount: 20
+  _makeDelayMillisecond: 250
   _originColor: {r: 0.2627451, g: 0.21568628, b: 0.16470589, a: 1}
 --- !u!4 &585133075
 Transform:
@@ -14685,6 +14686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _zInterval: -0.006
   _angle: 0
+  _makeDelayMillisecond: 250
 --- !u!114 &727574904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24258,7 +24260,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\u3147\u3147\u3147\u3147\u3147"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a92720e9fa96694892b12bd850fe8f8, type: 2}
   m_sharedMaterial: {fileID: -4710621324376599193, guid: 7a92720e9fa96694892b12bd850fe8f8, type: 2}
@@ -24285,8 +24287,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54
-  m_fontSizeBase: 54
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -28155,6 +28157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamChangeDelay: 1
   _turnDurationTime: 600
+  _makeTurnDelayMillisecond: 750
   _turnTimerSlider: {fileID: 1657432733}
 --- !u!114 &1358037130
 MonoBehaviour:
@@ -30655,6 +30658,8 @@ MonoBehaviour:
   _masterSoundVolumePercentage: {fileID: 1765494177}
   _bgmSoundVolumePercentage: {fileID: 1374937733}
   _sfxSoundVolumePercentage: {fileID: 1293066408}
+  _koreaToggle: {fileID: 0}
+  _englishToggle: {fileID: 0}
 --- !u!1 &1478863575
 GameObject:
   m_ObjectHideFlags: 0
@@ -34995,7 +35000,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 40, y: 20}
+  m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1682791007
 MonoBehaviour:
@@ -35366,7 +35371,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 40, y: 20}
+  m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1684385503
 MonoBehaviour:
@@ -38086,7 +38091,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 40, y: 20}
+  m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1808148254
 MonoBehaviour:

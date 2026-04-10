@@ -42,7 +42,7 @@ namespace InGame.MyUI
             _noButton.onClick.RemoveListener(_noButtonAction); // 아니오 버튼 초기화
         }
 
-        public void Confirm(Action<bool> onResult, string message = "화력을 사용하여 공격하시겠습니까?")
+        public void Confirm(Action<bool> onResult, string message)
         {
             _askText.ForceMeshUpdate(); // TMP를 GPU에 강제로 올리기
 

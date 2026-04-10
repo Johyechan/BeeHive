@@ -61,6 +61,11 @@ namespace InGame.MyObject.Piece.Handler
                         }
                         TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
 
+                        string attack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Tutorial",
+                            "Game_UI_AttackUseFirePower"
+                        );
+
                         _pieceData.confirmUI.Confirm(result =>
                         {
                             if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
@@ -69,7 +74,7 @@ namespace InGame.MyObject.Piece.Handler
                             }
                             _pieceData.confirmUI.ConfirmEnd(); // 확인 완료
                             confirmResultTcs.TrySetResult(result); // 확인 결과(result) 할당
-                        });
+                        }, attack);
 
                         bool result = await confirmResultTcs.Task; // 확인 대기
 
@@ -180,4 +185,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.27
+// 마지막 작성 일자: 2026.04.10

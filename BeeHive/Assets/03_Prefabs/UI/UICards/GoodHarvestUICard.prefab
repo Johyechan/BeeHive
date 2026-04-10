@@ -149,9 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiCardData:
-    currentCardName: "\uD48D\uB144"
-    currentCardExplain: "\uAE08\uAD34 4\uAC1C\uB97C \uD68D\uB4DD\uD55C\uB2E4.\n(\"\uAC00\uBB44\"\uC758
-      \uD6A8\uACFC\uC640\n \uC0C1\uAD00 \uC5C6\uC774 \uD68D\uB4DD)"
+    currentCardNameKey: Game_UI_Card_GoodHarvestName
+    currentCardExplainKey: Game_UI_Card_GoodHarvestInformation
     currentCardSprite: {fileID: 21300000, guid: 99549593060799f409a7927fcd40a520, type: 3}
     poolType: 10
     animationDuration: 0.1

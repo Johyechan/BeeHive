@@ -28,7 +28,7 @@ namespace InGame.MySystem.Game.Handler
                 SetGoldInfo setGoldInfo = JsonUtility.FromJson<SetGoldInfo>(json); // SetGoldInfo 구조체로 값 받기
                 MainThreadDispatcher.Enqueue(() =>
                 {
-                    _goldSetHandle.Setting(setGoldInfo.team, setGoldInfo.goldCoin, setGoldInfo.goldBar); // 금화 및 금괴 객체 세팅(팀, 금화 개수, 금괴 개수)
+                    _ = _goldSetHandle.Setting(setGoldInfo.team, setGoldInfo.goldCoin, setGoldInfo.goldBar); // 금화 및 금괴 객체 세팅(팀, 금화 개수, 금괴 개수)
                 });
             });
         }
@@ -39,4 +39,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.10

@@ -8,6 +8,7 @@ using TMPro;
 using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 namespace InGame.MyObject
 {
@@ -38,11 +39,19 @@ namespace InGame.MyObject
             {
                 if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
                 {
-                    GetCastleHpTmpTxt().text = $"나: {_currentHp} HP"; // UI 적용
+                    string me = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Tutorial",
+                        "Tutorial_UI_MeHPText"
+                    );
+                    GetCastleHpTmpTxt().text = $"{me} {_currentHp} HP"; // UI 적용
                 }
                 else // 자기 성이 아닐 경우
                 {
-                    GetCastleHpTmpTxt(false).text = $"적: {_currentHp} HP"; // UI 적용
+                    string opponent = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Tutorial",
+                        "Tutorial_UI_OpponentHPText"
+                    );
+                    GetCastleHpTmpTxt(false).text = $"{opponent} {_currentHp} HP"; // UI 적용
                 }
             }
             else // 튜토리얼이 아닐 경우
@@ -66,11 +75,21 @@ namespace InGame.MyObject
             {
                 if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
                 {
-                    GetCastleHpTmpTxt().text = $"나: {_currentHp} HP"; // UI 적용
+                    string me = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Tutorial",
+                        "Tutorial_UI_MeHPText"
+                    );
+
+                    GetCastleHpTmpTxt().text = $"{me} {_currentHp} HP"; // UI 적용
                 }
                 else // 자기 성이 아닐 경우
                 {
-                    GetCastleHpTmpTxt(false).text = $"적: {_currentHp}  HP"; // UI 적용
+                    string opponent = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Tutorial",
+                        "Tutorial_UI_OpponentHPText"
+                    );
+
+                    GetCastleHpTmpTxt(false).text = $"{opponent} {_currentHp}  HP"; // UI 적용
                 }
 
                 if(_currentHp <= 0) // 체력이 0 이하라면
@@ -139,4 +158,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.04.03
+// 마지막 작성 일자: 2026.04.10

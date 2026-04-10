@@ -33,16 +33,16 @@ namespace InGame.MySystem.Game
             _team2GoldBarParent = GameObject.Find("Player2GoldBars").transform; // ÆÀ2 ±Ý±« °´Ã¼ ºÎ¸ð ÃÊ±âÈ­
         }
 
-        public void Setting(int team, int goldCoin, int goldBar)
+        public async Task Setting(int team, int goldCoin, int goldBar)
         {
             TeamType type = (TeamType)team; // ÆÀ ±¸ÇÏ±â
             switch (type)
             {
                 case TeamType.Team1:
-                    _wallet.WalletObjectHandle.SetObject(_team1GoldCoinParent, _team1GoldBarParent, goldCoin, goldBar, type); // ±ÝÈ­ ¹× ±Ý±« °´Ã¼ °³¼ö ¼¼ÆÃ
+                    await _wallet.WalletObjectHandle.SetObject(_team1GoldCoinParent, _team1GoldBarParent, goldCoin, goldBar, type); // ±ÝÈ­ ¹× ±Ý±« °´Ã¼ °³¼ö ¼¼ÆÃ
                     break;
                 case TeamType.Team2:
-                    _wallet.WalletObjectHandle.SetObject(_team2GoldCoinParent, _team2GoldBarParent, goldCoin, goldBar, type); // ±ÝÈ­ ¹× ±Ý±« °´Ã¼ °³¼ö ¼¼ÆÃ
+                    await _wallet.WalletObjectHandle.SetObject(_team2GoldCoinParent, _team2GoldBarParent, goldCoin, goldBar, type); // ±ÝÈ­ ¹× ±Ý±« °´Ã¼ °³¼ö ¼¼ÆÃ
                     break;
             }
         }

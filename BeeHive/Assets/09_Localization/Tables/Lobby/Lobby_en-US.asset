@@ -70,6 +70,38 @@ MonoBehaviour:
     m_Localized: Quit Game
     m_Metadata:
       m_Items: []
+  - m_Id: 2514607933227008
+    m_Localized: Game Rules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515193701335040
+    m_Localized: Game Components
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515460425515008
+    m_Localized: Game Rules
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2515755436081152
+    m_Localized: Basic Setting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516002543501312
+    m_Localized: Production Phase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516152234016768
+    m_Localized: Draw Phase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516313194627072
+    m_Localized: Main Phase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2516387068903424
+    m_Localized: Additional Rules
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

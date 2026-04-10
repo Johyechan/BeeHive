@@ -63,7 +63,7 @@ namespace InGame.MyInput
                 return true; // 반환
             }
 
-            if (!WalletEvent.OnUseGoldBar.Invoke(2)) // 금괴 2개를 사용할 수 없다면
+            if (!WalletEvent.OnUseGoldBar.Invoke(2).Result) // 금괴 2개를 사용할 수 없다면
             {
                 string str = LocalizationSettings.StringDatabase.GetLocalizedString(
                     "Game",
@@ -78,4 +78,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.10

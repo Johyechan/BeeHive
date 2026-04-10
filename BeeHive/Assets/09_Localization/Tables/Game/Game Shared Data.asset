@@ -215,6 +215,10 @@ MonoBehaviour:
     m_Key: Game_UI_Turn
     m_Metadata:
       m_Items: []
+  - m_Id: 2539095152394240
+    m_Key: Game_UI_AttackUseFirePower
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

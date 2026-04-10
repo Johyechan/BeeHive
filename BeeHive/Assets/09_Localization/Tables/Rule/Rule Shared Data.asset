@@ -14,7 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TableCollectionName: Rule
   m_TableCollectionNameGuidString: f8ce8538dbe596345945145ec7e17596
-  m_Entries: []
+  m_Entries:
+  - m_Id: 2524761374326784
+    m_Key: Rule_UI_GameComponents
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525352641167360
+    m_Key: Rule_UI_BasicSetting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2525795303817216
+    m_Key: Rule_UI_ProductionPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527252967063552
+    m_Key: Rule_UI_DrawPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2527682799337472
+    m_Key: Rule_UI_MainPhase
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
