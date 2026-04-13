@@ -1,5 +1,7 @@
 using InGame.MyEnum;
+using InGame.MyManager.Global;
 using InGame.MyManager.Local;
+using InGame.MyManager.Local.Turn;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
@@ -36,46 +38,59 @@ namespace InGame.MyUI.Turn
         public async Task UIAnimationPlay(TurnType currentTurn)
         {
             InGameContext.Current.Data.PlacePlaneManager.FindCanPlacePlane();
-            switch(currentTurn)
+
+            switch(InGameContext.Current.Data.TurnManager.CurrentTeamType) // 현재 턴의 팀에 따라
+            {
+                case TeamType.Team1:
+                    _tmpText.color = Color.red; // Team1 색인 빨간색으로 텍스트 색 변경
+                    break;
+                case TeamType.Team2:
+                    _tmpText.color = Color.blue; // Team2 색인 파란색으로 텍스트 색 변경
+                    break;
+            }
+
+            _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} "; // 현재 팀 저장
+
+            switch (currentTurn)
             {
                 case TurnType.MakeTurn:
                     string makeTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Game",
                         "Game_UI_MakeTurn"
                     );
-                    _currentTurnTmpText.text = makeTurn;
+                    _currentTurnTmpText.text += makeTurn;
                     break;
                 case TurnType.DrawTurn:
                     string drawTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Game",
                         "Game_UI_DrawTurn"
                     );
-                    _currentTurnTmpText.text = drawTurn;
+                    _currentTurnTmpText.text += drawTurn;
                     break;
                 case TurnType.MainTurn:
                     string mainTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Game",
                         "Game_UI_MainTurn"
                     );
-                    _currentTurnTmpText.text = mainTurn;
+                    _currentTurnTmpText.text += mainTurn;
                     break;
                 case TurnType.TurnEnd:
                     string turnEnd = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Game",
                         "Game_UI_TurnEnd"
                     );
-                    _currentTurnTmpText.text = turnEnd;
+                    _currentTurnTmpText.text += turnEnd;
                     break;
                 case TurnType.ChangeTeam:
                     string changeTeam = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Game",
                         "Game_UI_ChangeTeamTurn"
                     );
-                    _currentTurnTmpText.text = changeTeam;
+                    _currentTurnTmpText.text += changeTeam;
                     break;
             }
             await _turnAnimations[currentTurn].UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.13

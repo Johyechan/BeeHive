@@ -219,6 +219,22 @@ MonoBehaviour:
     m_Key: Game_UI_AttackUseFirePower
     m_Metadata:
       m_Items: []
+  - m_Id: 3603747319840768
+    m_Key: Game_UI_YesButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3603834053853184
+    m_Key: Game_UI_NoButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3604377291718656
+    m_Key: Game_UI_OkayButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3626696777138176
+    m_Key: Game_UI_OpponentUseCard
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

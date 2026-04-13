@@ -17,6 +17,8 @@ namespace InGame.MyUI
 
         [SerializeField] private RectTransform _ImageParent; // 이미지 부모 객체
 
+        [SerializeField] private TMP_Text _cardInformation; // 카드 설명 텍스트
+
         [SerializeField] private float _animationDuration; // 애니메이션 지속시간
         [SerializeField] private float _usedCardUIShowSecond; // 사용한 카드를 보여주는 시간
 
@@ -41,6 +43,7 @@ namespace InGame.MyUI
                         GameObject uiCard = ObjectPoolManager.Instance.GetObject((ObjectPoolType)usedCardInfo.usedCardType); // 사용된 카드 생성
                         uiCard.GetComponent<RectTransform>().SetParent(_ImageParent); // 부모 할당
                         uiCard.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+                        _cardInformation.text = uiCard.transform.GetChild(1).GetComponent<TMP_Text>().text; // 현재 카드의 설명 가져오기
                         ObjectPoolManager.Instance.Animation(uiCard, false, true);
 
                         _canvasGroup.gameObject.SetActive(true); // 활성화
@@ -66,4 +69,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.04.03
+// 마지막 작성 일자: 2026.04.13

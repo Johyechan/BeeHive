@@ -228,6 +228,22 @@ MonoBehaviour:
     m_Localized: Use firepower for this attack?
     m_Metadata:
       m_Items: []
+  - m_Id: 3603747319840768
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3603834053853184
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3604377291718656
+    m_Localized: OK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3626696777138176
+    m_Localized: Opponent Use Card
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

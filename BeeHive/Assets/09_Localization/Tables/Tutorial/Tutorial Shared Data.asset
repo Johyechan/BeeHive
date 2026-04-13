@@ -279,6 +279,10 @@ MonoBehaviour:
     m_Key: Tutorial_UI_MeHPText
     m_Metadata:
       m_Items: []
+  - m_Id: 3643488308297728
+    m_Key: Tutorial_YourHP
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

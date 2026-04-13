@@ -1,9 +1,13 @@
+using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
+using InGame.MyUI;
 using MyUtil.GameMode;
+using MyUtil.MyObjectPool;
+using System.Collections.Generic;
 using TMPro;
 using Tutorial;
 using Tutorial.MyEnum;
@@ -23,6 +27,10 @@ namespace InGame.MyObject
 
         [SerializeField] private int _hp; // 체력
 
+        [SerializeField] private float _hitAnimationDuration; // 히트 애니메이션 지속 시간
+
+        private List<Material> _castleMaterials = new List<Material>(); // 성 머티리얼 리스트
+
         private int _currentHp; // 현재 체력
         public int CurrentHp { get => _currentHp; } // 위 변수 프로퍼티
 
@@ -35,7 +43,13 @@ namespace InGame.MyObject
             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                 return; // 반환
 
-            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+            var renderers = transform.GetComponentsInChildren<Renderer>(); // 성 머티리얼을 가지는 객체들의 랜더러를 가져오기
+            foreach(var renderer in  renderers)
+            {
+                _castleMaterials.Add(renderer.material); // 객체의 머티리얼(공용 머티리얼을 가져오지 않는다) 추가
+            }
+
+            if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
                 if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
                 {
@@ -70,6 +84,8 @@ namespace InGame.MyObject
         public void CastleHit(int damage)
         {
             _currentHp -= damage;
+
+            HitAnimation(damage); // 히트 애니메이션 실행
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
@@ -123,6 +139,20 @@ namespace InGame.MyObject
             }
         }
 
+        private void HitAnimation(int damage)
+        {
+            foreach (var material in _castleMaterials) // 성을 붉게 만들기
+            {
+                material.DOColor(Color.red, "_BaseColor", _hitAnimationDuration);
+            }
+
+            foreach (var material in _castleMaterials) // 성을 원상태로 돌리기
+            {
+                material.DOColor(Color.white, "_BaseColor", _hitAnimationDuration);
+            }
+        }
+
+
         // 성 강화 함수(최대 체력 1증가)
         public void CastleUpgrade(int currentHp = 0)
         {
@@ -158,4 +188,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.04.10
+// 마지막 작성 일자: 2026.04.13

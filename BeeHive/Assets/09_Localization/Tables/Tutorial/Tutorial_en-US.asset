@@ -313,6 +313,10 @@ MonoBehaviour:
     m_Localized: 'Me:'
     m_Metadata:
       m_Items: []
+  - m_Id: 3643488308297728
+    m_Localized: Your HP
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

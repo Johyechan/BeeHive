@@ -1,5 +1,4 @@
 using InGame.MyEvent;
-using InGame.MyManager.Global;
 using MyUtil.Interface;
 using UnityEngine;
 using UnityEngine.Localization.Settings;

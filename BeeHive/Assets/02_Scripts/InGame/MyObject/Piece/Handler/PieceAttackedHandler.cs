@@ -62,7 +62,7 @@ namespace InGame.MyObject.Piece.Handler
                         TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
 
                         string attack = LocalizationSettings.StringDatabase.GetLocalizedString(
-                            "Tutorial",
+                            "Game",
                             "Game_UI_AttackUseFirePower"
                         );
 
@@ -185,4 +185,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.04.10
+// 마지막 작성 일자: 2026.04.13

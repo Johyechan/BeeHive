@@ -27,6 +27,7 @@ namespace InGame.MyUI.MyUIButton
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
                 NetworkManager.Instance.Socket.Emit("tutorialOver"); // 튜토리얼 종료 이벤트 호출
+                GameModeManager.Instance.SetMode(new MultiplayMode()); // 게임 모드를 멀티 플레이 모드(기본 모드) 초기화
                 SceneManager.LoadScene(1); // 메인 씬으로 이동
             }
             else // 튜토리얼이 아닐 경우
@@ -37,4 +38,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.04.09
+// 마지막 작성 일자: 2026.04.13

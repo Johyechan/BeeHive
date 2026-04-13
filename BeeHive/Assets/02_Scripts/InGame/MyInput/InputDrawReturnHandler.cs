@@ -63,7 +63,7 @@ namespace InGame.MyInput
                 return true; // 반환
             }
 
-            if (!WalletEvent.OnUseGoldBar.Invoke(2).Result) // 금괴 2개를 사용할 수 없다면
+            if (!WalletEvent.OnCanUseGoldBar.Invoke(2)) // 금괴 2개를 사용할 수 없다면
             {
                 string str = LocalizationSettings.StringDatabase.GetLocalizedString(
                     "Game",

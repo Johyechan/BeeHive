@@ -49,8 +49,6 @@ namespace Tutorial
         private void Awake()
         {
             Instance = this; // 자기 자신 할당
-
-            GameModeManager.Instance.SetMode(new TutorialMode()); // 현재 게임 모드를 튜토리얼 모드로 할당
             
             _eventHandlerVariables = new TutorialEventHandlerVariables();
             _eventHandlerVariables.Init();
