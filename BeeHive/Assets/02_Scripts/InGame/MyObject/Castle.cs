@@ -1,12 +1,10 @@
 using DG.Tweening;
 using InGame.MyEnum;
-using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyUI;
 using MyUtil.GameMode;
-using MyUtil.MyObjectPool;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Tutorial;
@@ -141,10 +139,17 @@ namespace InGame.MyObject
 
         private void HitAnimation(int damage)
         {
+            StartCoroutine(HitAnimationCo());
+        }
+
+        private IEnumerator HitAnimationCo()
+        {
             foreach (var material in _castleMaterials) // 성을 붉게 만들기
             {
                 material.DOColor(Color.red, "_BaseColor", _hitAnimationDuration);
             }
+
+            yield return new WaitForSeconds(_hitAnimationDuration);
 
             foreach (var material in _castleMaterials) // 성을 원상태로 돌리기
             {
@@ -188,4 +193,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.04.13
+// 마지막 작성 일자: 2026.04.14

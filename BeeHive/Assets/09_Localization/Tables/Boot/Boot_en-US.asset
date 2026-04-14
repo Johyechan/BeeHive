@@ -44,6 +44,10 @@ MonoBehaviour:
     m_Localized: Nickname is 8 characters or more or is empty.
     m_Metadata:
       m_Items: []
+  - m_Id: 4010195946307584
+    m_Localized: Select a resolution
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

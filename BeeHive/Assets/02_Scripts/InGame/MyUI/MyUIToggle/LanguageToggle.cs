@@ -15,7 +15,7 @@ namespace InGame.MyUI.MyUIToggle
 
         [SerializeField] private List<Toggle> _otherToggleList = new List<Toggle>(); // 현재 토글 이외의 토글 리스트
 
-        public void ToggleChanged(bool isOn)
+        public void OnToggleChanged(bool isOn)
         {
             if(isOn)
             {

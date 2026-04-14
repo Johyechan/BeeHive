@@ -39,6 +39,10 @@ MonoBehaviour:
     m_Key: UI_NickNameOutOfRangeOrEmpty
     m_Metadata:
       m_Items: []
+  - m_Id: 4010195946307584
+    m_Key: UI_ResolutionSelect
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

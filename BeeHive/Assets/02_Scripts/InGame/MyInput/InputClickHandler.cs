@@ -1,3 +1,4 @@
+using InGame.MyManager.Global;
 using InGame.MyObject.MyObjectInterface;
 using MyUtil;
 using UnityEngine;

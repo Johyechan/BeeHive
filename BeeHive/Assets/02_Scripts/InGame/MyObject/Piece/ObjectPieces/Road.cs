@@ -1,18 +1,10 @@
 using InGame.MyEnum;
-using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPiece;
-using InGame.MyManager.MyPlacePlane;
-using InGame.MyManager.Turn;
-using InGame.MyObject.Piece.Data;
 using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 
 namespace InGame.MyObject.Piece.ObjectPieces
 {
@@ -24,12 +16,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
         {
             if(!InGameContext.Current.Data.CardManager.CardUsed) // 카드 사용으로 변경하는 것이 아니라면
             {
-                string str = LocalizationSettings.StringDatabase.GetLocalizedString(
-                    "Game",
-                    "Game_UI_NotMainTurnCanNotMove"
-                );
-                if (!WarningEvent.OnCheckCurrentTurn.Invoke(TurnType.MainTurn, str))
-                    return; // 반환
+                return; // 반환
             }
             else // 카드 사용으로 변경하는 것이라면
             {
@@ -90,4 +77,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.14

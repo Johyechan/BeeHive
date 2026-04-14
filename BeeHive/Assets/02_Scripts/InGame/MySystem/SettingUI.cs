@@ -25,6 +25,8 @@ namespace InGame.MySystem
         [SerializeField] private Toggle _koreaToggle; // 한글 토글
         [SerializeField] private Toggle _englishToggle; // 영어 토글
 
+        [SerializeField] private TMP_Dropdown _resolutionDropdown; // 해상도 드롭다운
+
         private void Awake()
         {
             _masterSoundSlider.onValueChanged.AddListener(SetMasterVolume);
@@ -43,6 +45,14 @@ namespace InGame.MySystem
             SetSFXVolume(SoundManager.Instance.SfxVolume);
 
             SetLanguageToggle();
+
+            SetResolution();
+        }
+
+        private void SetResolution()
+        {
+            _resolutionDropdown.value = UIManager.Instance.CurrentResolutionIndex; // 선택된 인덱스를 현재 선택한 해상도 인덱스로 변경
+            _resolutionDropdown.RefreshShownValue(); // 보이는 UI 변경
         }
 
         private void SetLanguageToggle()
@@ -109,4 +119,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.04.08
+// 마지막 작성 일자: 2026.04.14
