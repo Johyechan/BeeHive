@@ -43,7 +43,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1051421342171136
-    m_Localized: 'Room ID: '
+    m_Localized: 'Room ID: {0}'
     m_Metadata:
       m_Items: []
   - m_Id: 1052154540064768
@@ -68,6 +68,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1055381180383232
     m_Localized: Ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4348688631332864
+    m_Localized: Do you want to transfer host privileges?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4367588303568896
+    m_Localized: Start Game
     m_Metadata:
       m_Items: []
   references:
