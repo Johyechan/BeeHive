@@ -112,6 +112,15 @@ namespace InGame.MyManager.Local.Turn
             await TurnChange(turn); // 턴 변경 및 변경된 턴 기능 실행 함수 호출
         }
 
+        // 언어가 바뀌었을 때 실행될 함수
+        public void OnLanguageChange(bool isOn)
+        {
+            if(isOn) // 언어 토글이 선택이 되었을 때
+            {
+                _turnUIAnimation.SetCurrentTurnUI(_currentTurnType); // 현재 턴을 알려주는 UI 변경
+            }
+        }
+
         // 턴 변경 시 현재 턴을 다음 턴으로 변경 및 다음 턴의 애니메이션까지 실행 시키는 함수(다음 턴)
         public async Task TurnChange(TurnType nextTurn, bool isStart = false)
         {
@@ -202,4 +211,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.04.10
+// 마지막 작성 일자: 2026.04.16

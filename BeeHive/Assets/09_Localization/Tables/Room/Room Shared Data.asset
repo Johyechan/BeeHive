@@ -75,6 +75,10 @@ MonoBehaviour:
     m_Key: Room_UI_Button_GameStart
     m_Metadata:
       m_Items: []
+  - m_Id: 4679109940346880
+    m_Key: Room_UI_Button_CopyRoomID
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

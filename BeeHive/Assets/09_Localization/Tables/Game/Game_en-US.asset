@@ -244,6 +244,10 @@ MonoBehaviour:
     m_Localized: Opponent Use Card
     m_Metadata:
       m_Items: []
+  - m_Id: 4718796008587264
+    m_Localized: Would you like to use the {0} card?
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

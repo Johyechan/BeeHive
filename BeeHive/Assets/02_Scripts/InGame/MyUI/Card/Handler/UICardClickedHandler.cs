@@ -5,6 +5,7 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization.Settings;
 using static UnityEngine.Rendering.DebugUI;
 
 namespace InGame.MyUI.Card.Handler
@@ -35,9 +36,20 @@ namespace InGame.MyUI.Card.Handler
             Transform panel = _uiCardVariable.cardUsePanelCanvasGroup.transform.GetChild(1); // 패널 가져오기
             TMP_Text askText = panel.GetChild(0).GetComponent<TMP_Text>(); // 패널의 묻는 텍스트 가져오기
 
-            askText.text = _uiCardBase.UICardData.currentCardNameKey + "카드를 사용하시겠습니까?"; // 텍스트 설정
+            string useCardName = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                _uiCardBase.UICardData.currentCardNameKey
+            );
+
+            string askUseCard = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_UseCard",
+                new object[] { useCardName }
+            );
+
+            askText.text = askUseCard; // 텍스트 설정
             _uiCardVariable.cardUsePanelCanvasGroup.DOFade(1, _animationDuration); // UI 페이드 인
         }
     }
 }
-// 마지막 작성 일자: 2025.11.14
+// 마지막 작성 일자: 2026.04.16

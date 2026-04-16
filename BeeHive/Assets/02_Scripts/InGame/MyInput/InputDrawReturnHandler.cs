@@ -63,14 +63,14 @@ namespace InGame.MyInput
                 return true; // 반환
             }
 
-            if (!WalletEvent.OnCanUseGoldBar.Invoke(2)) // 금괴 2개를 사용할 수 없다면
+            string noGold = LocalizationSettings.StringDatabase.GetLocalizedString(
+                "Game",
+                "Game_UI_NotEnoughGold",
+                new object[] { 2 }
+            );
+
+            if (!WarningEvent.OnCanPayCost.Invoke(2, noGold)) // 금괴 2개를 사용할 수 없다면
             {
-                string str = LocalizationSettings.StringDatabase.GetLocalizedString(
-                    "Game",
-                    "Game_UI_NotEnoughGold",
-                    new object[] { 2 }
-                );
-                UIManager.Instance.WarningUIMake(str);
                 return true; // 반환
             }
 
@@ -78,4 +78,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.04.10
+// 마지막 작성 일자: 2026.04.16

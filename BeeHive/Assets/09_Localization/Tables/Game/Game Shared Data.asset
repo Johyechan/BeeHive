@@ -235,6 +235,10 @@ MonoBehaviour:
     m_Key: Game_UI_OpponentUseCard
     m_Metadata:
       m_Items: []
+  - m_Id: 4718796008587264
+    m_Key: Game_UI_UseCard
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

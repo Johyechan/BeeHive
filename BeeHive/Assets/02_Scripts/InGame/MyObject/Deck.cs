@@ -90,9 +90,9 @@ namespace InGame.MyObject
             for (int i = 0; i <  _deckList.Count; i++) // 덱 리스트 순회
             {
                 Vector3 pos = new Vector3(0, _yInterval * i, 0); // 카드를 생성할 수 록 y축 간격 만큼 위로 올리기
-                ObjectPoolManager.Instance.MakeObject(_deckList[i], pos, deckTransform);
+                ObjectPoolManager.Instance.MakeObject(_deckList[i], pos, deckTransform, true);
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.02.19
+// 마지막 작성 일자: 2026.04.16

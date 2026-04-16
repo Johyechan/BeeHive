@@ -78,6 +78,10 @@ MonoBehaviour:
     m_Localized: Start Game
     m_Metadata:
       m_Items: []
+  - m_Id: 4679109940346880
+    m_Localized: Copy Room Code
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

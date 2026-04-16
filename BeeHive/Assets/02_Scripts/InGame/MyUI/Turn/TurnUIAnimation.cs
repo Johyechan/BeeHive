@@ -34,6 +34,49 @@ namespace InGame.MyUI.Turn
             _turnAnimations.Add(TurnType.ChangeTeam, new ChangeTeamTurnUIAnimationHandler(_canvasGroup, _tmpText, _animationDuration));
         }
 
+        // 현재 턴을 알려주는 UI 세팅
+        public void SetCurrentTurnUI(TurnType currentTurn)
+        {
+            switch (currentTurn)
+            {
+                case TurnType.MakeTurn:
+                    string makeTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_MakeTurn"
+                    );
+                    _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} {makeTurn}";
+                    break;
+                case TurnType.DrawTurn:
+                    string drawTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_DrawTurn"
+                    );
+                    _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} {drawTurn}";
+                    break;
+                case TurnType.MainTurn:
+                    string mainTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_MainTurn"
+                    );
+                    _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} {mainTurn}";
+                    break;
+                case TurnType.TurnEnd:
+                    string turnEnd = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_TurnEnd"
+                    );
+                    _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} {turnEnd}";
+                    break;
+                case TurnType.ChangeTeam:
+                    string changeTeam = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_ChangeTeamTurn"
+                    );
+                    _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} {changeTeam}";
+                    break;
+            }
+        }
+
         // 매개 변수로 받은 턴의 UI 애니메이션을 실행
         public async Task UIAnimationPlay(TurnType currentTurn)
         {
@@ -49,48 +92,9 @@ namespace InGame.MyUI.Turn
                     break;
             }
 
-            _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} "; // 현재 팀 저장
-
-            switch (currentTurn)
-            {
-                case TurnType.MakeTurn:
-                    string makeTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
-                        "Game",
-                        "Game_UI_MakeTurn"
-                    );
-                    _currentTurnTmpText.text += makeTurn;
-                    break;
-                case TurnType.DrawTurn:
-                    string drawTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
-                        "Game",
-                        "Game_UI_DrawTurn"
-                    );
-                    _currentTurnTmpText.text += drawTurn;
-                    break;
-                case TurnType.MainTurn:
-                    string mainTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
-                        "Game",
-                        "Game_UI_MainTurn"
-                    );
-                    _currentTurnTmpText.text += mainTurn;
-                    break;
-                case TurnType.TurnEnd:
-                    string turnEnd = LocalizationSettings.StringDatabase.GetLocalizedString(
-                        "Game",
-                        "Game_UI_TurnEnd"
-                    );
-                    _currentTurnTmpText.text += turnEnd;
-                    break;
-                case TurnType.ChangeTeam:
-                    string changeTeam = LocalizationSettings.StringDatabase.GetLocalizedString(
-                        "Game",
-                        "Game_UI_ChangeTeamTurn"
-                    );
-                    _currentTurnTmpText.text += changeTeam;
-                    break;
-            }
+            SetCurrentTurnUI(currentTurn);
             await _turnAnimations[currentTurn].UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2026.04.13
+// 마지막 작성 일자: 2026.04.16

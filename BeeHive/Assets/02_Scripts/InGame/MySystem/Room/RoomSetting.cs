@@ -25,10 +25,6 @@ namespace InGame.MySystem.Room
         [SerializeField] private Button _exileButton; // 추방 버튼
         [SerializeField] private Button _roomManagerChangeButton; // 방장 변경 버튼
 
-        [SerializeField] private RectTransform _roomIDCopyButton; // 방 ID 복사 버튼
-
-        [SerializeField] private float _roomIDCopyButtonInterval; // 방 ID 복사 버튼 간격
-
         private PlayerInfoUISettingHandler _playerUISettingHandler; // 플레이어 정보UI를 변경하는 핸들러
 
         private RoomInfo _roomInfo; // 방 정보 변수
@@ -143,8 +139,6 @@ namespace InGame.MySystem.Room
                 );
 
                 _roomID.text = str; // 메인 스레드에서 방 ID UI 변경
-                RectTransform roomIDRectTrans = _roomID.GetComponent<RectTransform>(); // 방 ID UI의 RectTransform 가져오기
-                _roomIDCopyButton.anchoredPosition = new Vector2(roomIDRectTrans.anchoredPosition.x + roomIDRectTrans.rect.width + _roomIDCopyButtonInterval, _roomIDCopyButton.anchoredPosition.y); // 방 ID 복사 버튼 위치 이동
             }); 
             MainThreadDispatcher.Enqueue(() =>
             {
@@ -226,4 +220,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.04.15
+// 마지막 작성 일자: 2026.04.16
