@@ -37,7 +37,8 @@ namespace InGame.MyManager.Local.MyCard
 
         public void DrawCard(Transform deckParent, Transform playerCardsParent, RectTransform playerUICardsParent, bool includeUI = true)
         {
-            Transform currentDrawCardTrans = deckParent.GetChild(0); // 맨 위에 있는 카드 할당
+            int topCardIndex = deckParent.childCount - 1; // 맨 위에 있는 카드 인덱스
+            Transform currentDrawCardTrans = deckParent.GetChild(topCardIndex); // 맨 위에 있는 카드 할당
             CardObject currentDrawCard = currentDrawCardTrans.GetComponent<CardObject>();
 
             if (currentDrawCard.CardUIPoolType == ObjectPoolType.FirePowerUICard) // 드로우한 카드가 화력 카드일 경우
@@ -68,4 +69,4 @@ namespace InGame.MyManager.Local.MyCard
         }
     }
 }
-// 마지막 작성 일자: 2026.04.03
+// 마지막 작성 일자: 2026.04.17
