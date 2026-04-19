@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Localization.Settings;
+using InGame.MyManager.Enum;
 
 namespace InGame.MyManager.Local
 {
@@ -79,11 +80,13 @@ namespace InGame.MyManager.Local
             {
                 if(!_variables.isTutorialOver) // 튜토리얼이 끝나지 않았을 경우
                 {
-                    SceneManager.LoadScene(4); // 튜토리얼 씬으로 이동
+                    SceneMgr.Instance.ChangeCurrentSceneFlow(SceneFlowType.GoTutorial); // 튜토리얼 씬으로 이동하는 흐름으로 변경
+                    SceneMgr.Instance.LoadScene(); // 씬 전환
                     return;
                 }
 
-                SceneManager.LoadScene(_variables.sceneNumber); // 로비 씬으로 이동
+                SceneMgr.Instance.ChangeCurrentSceneFlow(SceneFlowType.GoLobby); // 로비 씬으로 이동하는 흐름으로 변경
+                SceneMgr.Instance.LoadScene(); // 씬 전환
                 return;
             }
 
@@ -100,4 +103,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.04.09
+// 마지막 작성 일자: 2026.04.19

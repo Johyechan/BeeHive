@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using InGame.MyManager.Enum;
 
 namespace InGame.MySystem.Room
 {
@@ -72,14 +73,6 @@ namespace InGame.MySystem.Room
                     RoomUISet(); // 방 UI 세팅
                 });
 
-                socket.On("goLobby", _ =>
-                {
-                    if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
-                        return; // 반환
-
-                    MainThreadDispatcher.Enqueue(() => SceneManager.LoadScene(1));
-                });// 로비 씬으로 이동
-
                 socket.On("goGame", _ =>
                 {
                     if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
@@ -88,7 +81,11 @@ namespace InGame.MySystem.Room
                     MainThreadDispatcher.Enqueue(() =>
                     {
                         Sequence sequence = DOTween.Sequence()
-                            .AppendCallback(() => SceneManager.LoadScene(3)) // 게임 씬으로 이동
+                            .AppendCallback(() =>
+                            {
+                                SceneMgr.Instance.ChangeCurrentSceneFlow(SceneFlowType.GoGame);// 게임 씬으로 이동하는 흐름으로 변경
+                                SceneMgr.Instance.LoadScene(); // 씬 전환
+                            })
                             .AppendCallback(() =>
                             {
                                 for(int i = 0; i < _roomInfo.players.Length; i++)
@@ -220,4 +217,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.04.16
+// 마지막 작성 일자: 2026.04.19

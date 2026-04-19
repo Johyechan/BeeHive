@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using InGame.MyManager.Enum;
 using InGame.MyManager.Global;
 using MyUtil;
 using UnityEngine;
@@ -45,9 +46,10 @@ namespace InGame.MyNetwork
             MainThreadDispatcher.Enqueue(() =>
             {
                 SceneMgr.Instance.CurrentRoomID = id; // 현재 참가한 방의 ID 저장
-                SceneManager.LoadScene(2); // 방 씬으로 변경 추가
+                SceneMgr.Instance.ChangeCurrentSceneFlow(SceneFlowType.GoRoom);// 방 씬으로 이동하는 흐름으로 변경
+                SceneMgr.Instance.LoadScene(); // 씬 전환
             });
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.19

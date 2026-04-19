@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyManager;
+using InGame.MyManager.Enum;
 using InGame.MyManager.Global;
 using InGame.MyUI.MyUIInterface;
 using MyUtil;
@@ -23,8 +24,6 @@ namespace InGame.MyUI.MyUIButton
 
         [SerializeField] private float _fadeDuration; // 페이드 인 지속 시간
 
-        [SerializeField] private int _tutorialSceneNumber; // 튜토리얼 씬 번호
-
         private string _currentNickName; // 현재 닉네임
 
         private void Awake()
@@ -46,7 +45,8 @@ namespace InGame.MyUI.MyUIButton
                     else // 중복이 아닐경우
                     {
                         NetworkManager.Instance.CurrentClientName = _currentNickName; // 현재 닉네임 할당
-                        SceneManager.LoadScene(_tutorialSceneNumber); // 튜토리얼 씬으로 이동
+                        SceneMgr.Instance.ChangeCurrentSceneFlow(SceneFlowType.GoTutorial);// 튜토리얼 씬으로 이동하는 흐름으로 변경
+                        SceneMgr.Instance.LoadScene(); // 씬 전환
                     }
                 });
             });
@@ -86,4 +86,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.04.19

@@ -1,4 +1,5 @@
 using InGame.MyManager;
+using InGame.MyManager.Enum;
 using InGame.MyManager.Global;
 using InGame.MyUI.MyUIInterface;
 using MyUtil.GameMode;
@@ -28,14 +29,15 @@ namespace InGame.MyUI.MyUIButton
             {
                 NetworkManager.Instance.Socket.Emit("tutorialOver"); // 튜토리얼 종료 이벤트 호출
                 GameModeManager.Instance.SetMode(new MultiplayMode()); // 게임 모드를 멀티 플레이 모드(기본 모드) 초기화
-                SceneManager.LoadScene(1); // 메인 씬으로 이동
+                SceneMgr.Instance.ChangeCurrentSceneFlow(SceneFlowType.GoLobby);// 로비 씬으로 이동하는 흐름으로 변경
             }
             else // 튜토리얼이 아닐 경우
             {
-                SceneManager.LoadScene(2); // 방 씬으로 이동
+                SceneMgr.Instance.ChangeCurrentSceneFlow(SceneFlowType.GoRoom);// 방 씬으로 이동하는 흐름으로 변경
             }
+            SceneMgr.Instance.LoadScene(); // 씬 전환
             EventSystem.current.SetSelectedGameObject(null); // 선택한 객체 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.04.13
+// 마지막 작성 일자: 2026.04.19

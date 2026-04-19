@@ -21,8 +21,6 @@ namespace InGame.MyManager.Local.Boot.Variable
          
         public TaskCompletionSource<bool> steamAuthEnd;
          
-        public int sceneNumber = 1; // 넘어갈 씬 번호 - 로비 씬(1)으로 이동
-         
         public bool isNewUser = false; // 신규 유저 여부
 
         public bool result = false; // 검증 실패 여부
@@ -41,4 +39,4 @@ namespace InGame.MyManager.Local.Boot.Variable
         }
     }
 }
-// 마지막 작성 일자: 2026.04.09
+// 마지막 작성 일자: 2026.04.19
