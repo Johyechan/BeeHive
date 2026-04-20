@@ -21,16 +21,13 @@ namespace InGame.MySystem
 
         private int _zValueChangeCount; // z축 값이 변경되는 개수 
         private int _goldBarMaxCount; // 금괴 최대 개수
-        private int _makeDelayMillisecond; // 생성 대기 시간
 
         private Color _originColor; // 기본 색
 
         private TMP_Text _otherTeamGoldCoin; // 상대 팀 골드 코인 개수 UI
         private TMP_Text _otherTeamGoldBar; // 상대 팀 골드 바 개수 UI
 
-        private CancellationTokenSource _cts; // 작업 중지 토근
-
-        public WalletObjectHandle(float team1GoldCoinInterval, float team1GoldBarInterval, float team2GoldCoinInterval, float team2GoldBarInterval, float zInterval, int zValueChangeCount, int goldBarMaxCount, int makeDelayMillisecond, Color originColor, TMP_Text otherTeamGoldCoin, TMP_Text otherTeamGoldBar)
+        public WalletObjectHandle(float team1GoldCoinInterval, float team1GoldBarInterval, float team2GoldCoinInterval, float team2GoldBarInterval, float zInterval, int zValueChangeCount, int goldBarMaxCount, Color originColor, TMP_Text otherTeamGoldCoin, TMP_Text otherTeamGoldBar)
         {
             _team1GoldCoinInterval = team1GoldCoinInterval;
             _team1GoldBarInterval = team1GoldBarInterval;
@@ -40,7 +37,6 @@ namespace InGame.MySystem
 
             _zValueChangeCount = zValueChangeCount;
             _goldBarMaxCount = goldBarMaxCount;
-            _makeDelayMillisecond = makeDelayMillisecond;
 
             _originColor = originColor;
 
@@ -48,13 +44,9 @@ namespace InGame.MySystem
             _otherTeamGoldBar = otherTeamGoldBar;
         }
 
-        public async Task SetObject(Transform goldCoinParent, Transform goldBarParent, int goldCoinCount, int goldBarCount, TeamType type)
+        public void SetObject(Transform goldCoinParent, Transform goldBarParent, int goldCoinCount, int goldBarCount, TeamType type)
         {
-            _cts?.Cancel(); // 토큰이 존재한다면 정지
-            _cts = new CancellationTokenSource(); // 새로운 토큰 할당
-            var token = _cts.Token; // cts 토큰
-
-            if(TeamManager.Instance.CurrentTeamType != type) // 내 팀의 금화 금괴 변경 사항이 아니라면
+            if (TeamManager.Instance.CurrentTeamType != type) // 내 팀의 금화 금괴 변경 사항이 아니라면
             {
                 _otherTeamGoldCoin.text = $"x {goldCoinCount}"; // 상대 팀 금화 개수 UI 변경
                 _otherTeamGoldBar.text = $"x {goldBarCount}"; // 상대 팀 금괴 개수 UI 변경
@@ -68,79 +60,31 @@ namespace InGame.MySystem
                 }
             }
 
-            int currentGoldCount = goldCoinParent.childCount; // 현재 금화 개수
-            if (currentGoldCount < goldCoinCount) // 금화 객체가 실제 금화보다 적을 경우
-            {
-                float interval = 0;
-                switch(type)
-                {
-                    case TeamType.Team1:
-                        interval = _team1GoldCoinInterval;
-                        break;
-                    case TeamType.Team2:
-                        interval = _team2GoldCoinInterval;
-                        break;
-                }
-                await MakeObject(currentGoldCount, goldCoinCount, ObjectPoolType.GoldCoin, goldCoinParent, interval, token);
-            }
-            else if (currentGoldCount > goldCoinCount) // 금화 객체가 실제 금화보다 많을 경우
-            {
-                await DestroyObject(currentGoldCount, goldCoinCount, ObjectPoolType.GoldCoin, goldCoinParent, token);
-            }
+            float coinInterval = (type == TeamType.Team1) ? _team1GoldCoinInterval : _team2GoldCoinInterval;
+            SyncObject(goldCoinCount, ObjectPoolType.GoldCoin, goldCoinParent, coinInterval);
 
-            int currentGoldBarCount = goldBarParent.childCount;
-            if (currentGoldBarCount < goldBarCount) // 금괴 객체가 실제 금괴보다 적을 경우
-            {
-                float interval = 0;
-                switch (type)
-                {
-                    case TeamType.Team1:
-                        interval = _team1GoldBarInterval;
-                        break;
-                    case TeamType.Team2:
-                        interval = _team2GoldBarInterval;
-                        break;
-                }
-                await MakeObject(currentGoldBarCount, goldBarCount, ObjectPoolType.GoldBar, goldBarParent, interval, token);
-            }
-            else if (currentGoldBarCount > goldBarCount) // 금괴 객체 실제 금괴보다 많을 경우
-            {
-                await DestroyObject(currentGoldBarCount, goldBarCount, ObjectPoolType.GoldBar, goldBarParent, token);
-            }
+            float barInterval = (type == TeamType.Team1) ? _team1GoldBarInterval : _team2GoldBarInterval;
+            SyncObject(goldBarCount, ObjectPoolType.GoldBar, goldBarParent, barInterval);
         }
 
-        private async Task MakeObject(int childCount, int realCount, ObjectPoolType type, Transform parent, float interval, CancellationToken cts)
+        private void SyncObject(int targetCount, ObjectPoolType type, Transform parent, float interval)
         {
-            int count = realCount - childCount;
-            if(type == ObjectPoolType.GoldCoin)
-            {
-                NetworkManager.Instance.Socket.Emit("debug", $"실제 개수: {realCount}, 자식 수: {childCount}, 더 생성해야 하는 개수: {count}");
-            }
-            for (int i = 0; i < count; i++) // 격차만큼 반복
-            {
-                if (cts.IsCancellationRequested) // 토큰에 취소 요청이 들어왔다면
-                    return; // 반환
+            int currentCount = parent.childCount; // 현재 자식 수
 
-                int index = childCount + i;
+            for(int i = currentCount; i < targetCount; i++)
+            {
                 GameObject obj = ObjectPoolManager.Instance.GetObject(type, parent); // 금화 또는 금괴 가져오기
-                obj.transform.localPosition = new Vector3(index % _zValueChangeCount * interval, ObjectPoolManager.Instance.AnimationYPos, index / _zValueChangeCount * _zInterval); // 금 개수가 z축 값이 변경되는 개수 초과이면 z축으로 _zInterval만큼 올라가고 x축은 초기화 돼서 0부터 다시 interval 간격으로 배치
-                await ObjectPoolManager.Instance.Animation(obj, true, true, 0).AsyncWaitForCompletion(); // 애니메이션 실행 후 끝날 때까지 대기
-                await Task.Delay(_makeDelayMillisecond);
+                obj.transform.localPosition = new Vector3(i % _zValueChangeCount * interval, ObjectPoolManager.Instance.AnimationYPos, i / _zValueChangeCount * _zInterval); // 금 개수가 z축 값이 변경되는 개수 초과이면 z축으로 _zInterval만큼 올라가고 x축은 초기화 돼서 0부터 다시 interval 간격으로 배치
+                obj.transform.DOKill(true);
+                ObjectPoolManager.Instance.Animation(obj, true, true, 0); // 애니메이션 실행 후 끝날 때까지 대기
             }
-        }
 
-        private async Task DestroyObject(int childCount, int realCount, ObjectPoolType type, Transform parent, CancellationToken cts)
-        {
-            for (int i = childCount - 1; i >= realCount; i--) // 끝부터 실제 개수까지 반복
+            for(int i = currentCount - 1; i >= targetCount; i--)
             {
-                if (cts.IsCancellationRequested) // 토큰에 취소 요청이 들어왔다면
-                    return; // 반환
-
-                GameObject obj = parent.GetChild(i).gameObject; // 금화 객체 저장
-                ObjectPoolManager.Instance.ReturnObject(type, obj, true); // 금화 객체 오브젝트 풀에 다시 반환
-                await Task.Delay(_makeDelayMillisecond);
+                GameObject obj = parent.GetChild(i).gameObject;
+                ObjectPoolManager.Instance.ReturnObject(type, obj, true);
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.04.17
+// 마지막 작성 일자: 2026.04.20

@@ -33,19 +33,19 @@ namespace InGame.MySystem.Game
             _team2GoldBarParent = GameObject.Find("Player2GoldBars").transform; // 팀2 금괴 객체 부모 초기화
         }
 
-        public async Task Setting(int team, int goldCoin, int goldBar)
+        public void Setting(int team, int goldCoin, int goldBar)
         {
             TeamType type = (TeamType)team; // 팀 구하기
             switch (type)
             {
                 case TeamType.Team1:
-                    await _wallet.WalletObjectHandle.SetObject(_team1GoldCoinParent, _team1GoldBarParent, goldCoin, goldBar, type); // 금화 및 금괴 객체 개수 세팅
+                    _wallet.WalletObjectHandle.SetObject(_team1GoldCoinParent, _team1GoldBarParent, goldCoin, goldBar, type); // 금화 및 금괴 객체 개수 세팅
                     break;
                 case TeamType.Team2:
-                    await _wallet.WalletObjectHandle.SetObject(_team2GoldCoinParent, _team2GoldBarParent, goldCoin, goldBar, type); // 금화 및 금괴 객체 개수 세팅
+                    _wallet.WalletObjectHandle.SetObject(_team2GoldCoinParent, _team2GoldBarParent, goldCoin, goldBar, type); // 금화 및 금괴 객체 개수 세팅
                     break;
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.20
+// 마지막 작성 일자: 2026.04.20

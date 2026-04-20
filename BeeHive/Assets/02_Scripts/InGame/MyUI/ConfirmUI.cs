@@ -1,10 +1,7 @@
 using DG.Tweening;
-using InGame.MyManager;
 using InGame.MyManager.Local;
 using InGame.MyUI.MyUIButton;
-using MyUtil;
 using System;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;

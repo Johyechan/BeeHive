@@ -110,7 +110,6 @@ namespace InGame.MySystem.Room
             NetworkManager.Instance.Socket.Off("canStartGame");
             NetworkManager.Instance.Socket.Off("cantStartGame");
             NetworkManager.Instance.Socket.Off("roomInfo");
-            NetworkManager.Instance.Socket.Off("goLobby");
             NetworkManager.Instance.Socket.Off("goGame");
         }
 

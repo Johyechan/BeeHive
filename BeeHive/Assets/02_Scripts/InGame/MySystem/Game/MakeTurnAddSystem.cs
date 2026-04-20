@@ -38,13 +38,13 @@ namespace InGame.MySystem.Game
                 switch (TutorialManager.Instance.CurrentTutorialState)
                 {
                     case TutorialState.Turn1_Player: // Ã¹ ¹øÂ° ÅÏ(ÇÃ·¹ÀÌ¾î ÅÏ)
-                        await WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
+                        WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
                         break;
                     case TutorialState.Turn1_AI: // Ã¹ ¹øÂ° ÅÏ(AI ÅÏ)
-                        await WalletEvent.OnGetGoldBar?.Invoke(3); // ±Ý±« 3°³ È¹µæ
+                        WalletEvent.OnGetGoldBar?.Invoke(3); // ±Ý±« 3°³ È¹µæ
                         break;
                     default: // ´Ù¸¥ »óÅÂ¿¡¼­´Â
-                        await WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
+                        WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
                         break;
                 }
             }
@@ -58,10 +58,10 @@ namespace InGame.MySystem.Game
                     switch (TeamManager.Instance.CurrentTeamType)
                     {
                         case TeamType.Team1:
-                            await WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
+                            WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
                             break;
                         case TeamType.Team2:
-                            await WalletEvent.OnGetGoldBar?.Invoke(3); // ±Ý±« 3°³ È¹µæ
+                            WalletEvent.OnGetGoldBar?.Invoke(3); // ±Ý±« 3°³ È¹µæ
                             break;
                         default:
                             break;
@@ -69,7 +69,7 @@ namespace InGame.MySystem.Game
                 }
                 else // °¢ ÆÀ¸¶´Ù Ã¹ ¹øÂ° ÅÏÀÌ ¾Æ´Ò°æ¿ì
                 {
-                    await WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
+                    WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
                 }
             }
 
@@ -118,4 +118,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// ¸¶Áö¸· ÀÛ¼º ÀÏÀÚ: 2026.04.10
+// ¸¶Áö¸· ÀÛ¼º ÀÏÀÚ: 2026.04.20

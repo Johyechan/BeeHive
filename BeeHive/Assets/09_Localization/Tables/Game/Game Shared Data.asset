@@ -239,6 +239,10 @@ MonoBehaviour:
     m_Key: Game_UI_UseCard
     m_Metadata:
       m_Items: []
+  - m_Id: 6130045271408640
+    m_Key: Game_UI_WaitConfirm
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

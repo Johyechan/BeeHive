@@ -63,6 +63,8 @@ namespace InGame.MyUI.Card
             if (!_uiCardVariable.isAnimationEnd) // 애니메이션이 종료 되지 않았다면
                 return; // 반환
 
+            _uiCardVariable.originIndex = _uiCardVariable.rect.GetSiblingIndex(); // 현재 순서 저장
+
             _uiCardVariable.isMouseCursorOn = true;
             _upDownAnimationTween?.Kill(); // 이전 트윈이 돌고 있다면 삭제
 

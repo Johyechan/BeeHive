@@ -7,7 +7,6 @@ using InGame.MyUI.Card;
 using InGame.MyUI.MyUIInterface;
 using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
-using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -95,7 +94,7 @@ namespace InGame.MyUI.MyUIButton
                     CardObject cardObject = _uiCardBase.UICardVariable.cardObj.GetComponent<CardObject>();
                     if(cardObject.CardPoolType == ObjectPoolType.CastleUpgradeCard) // 현재 카드가 성벽 강화 카드라면
                     {
-                        ObjectPoolManager.Instance.ReturnObject(cardObject.CardPoolType, _uiCardBase.UICardVariable.cardObj); // 성벽 강화 카드를 풀에 반환 - 성벽 강화 카드는 재사용 불가 카드이기 때문
+                        ObjectPoolManager.Instance.ReturnObject(cardObject.CardPoolType, _uiCardBase.UICardVariable.cardObj, true); // 성벽 강화 카드를 풀에 반환 - 성벽 강화 카드는 재사용 불가 카드이기 때문
                     }
                     InGameContext.Current.Data.CardManager.CardReverseTask.SetResult(true); // 카드 뒤집기 완료
                 });

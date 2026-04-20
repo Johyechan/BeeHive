@@ -2,6 +2,7 @@ using InGame.MyManager.Enum;
 using InGame.MyManager.Global;
 using MyUtil;
 using System.Net.Sockets;
+using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
 namespace InGame.MyManager
@@ -22,9 +23,23 @@ namespace InGame.MyManager
 
         private SceneFlowType _currentSceneFlow; // 현재 씬 흐름 변수
 
+        private SceneType _currentSceneType = SceneType.Boot; // 현재 씬 타입 - 처음 씬 타입을 부팅 씬으로 저장
+
         protected override void Awake()
         {
             base.Awake();
+
+            _ = Init();
+        }
+
+        private void OnDisable()
+        {
+            NetworkManager.Instance.Socket.Off("goLobby");
+        }
+
+        private async Task Init()
+        {
+            await NetworkManager.Instance.WaitSocketConnected();
 
             NetworkManager.Instance.Socket.On("goLobby", _ =>
             {
@@ -32,6 +47,11 @@ namespace InGame.MyManager
                     return; // 반환
 
                 _currentSceneFlow = SceneFlowType.GoLobby; // 로비로 이동하는 흐름으로 변경
+
+                if (_currentSceneType == SceneType.Room) // 현재 씬이 방 씬이라면
+                {
+                    LoadScene(); // 씬 전환
+                }
             });
 
             Ready();
@@ -41,7 +61,9 @@ namespace InGame.MyManager
         public void ChangeCurrentSceneFlow(SceneFlowType flowType)
         {
             if (_currentSceneFlow != SceneFlowType.None) // 씬 흐름이 존재한다면
+            {
                 return; // 반환
+            }
 
             _currentSceneFlow = flowType; // 씬 흐름 변경
         }
@@ -52,20 +74,24 @@ namespace InGame.MyManager
             switch(_currentSceneFlow)
             {
                 case SceneFlowType.GoLobby: // 로비로 가는 흐름
-                    SceneManager.LoadScene(1); // 로비 씬으로 이동
+                    _currentSceneType = SceneType.Lobby;
+                    SceneManager.LoadScene((int)_currentSceneType); // 로비 씬으로 이동
                     break;
                 case SceneFlowType.GoRoom: // 방으로 가는 흐름
-                    SceneManager.LoadScene(2); // 방 씬으로 이동
+                    _currentSceneType = SceneType.Room;
+                    SceneManager.LoadScene((int)_currentSceneType); // 방 씬으로 이동
                     break;
                 case SceneFlowType.GoGame: // 게임으로 가는 흐름
-                    SceneManager.LoadScene(3); // 게임 씬으로 이동
+                    _currentSceneType = SceneType.Game;
+                    SceneManager.LoadScene((int)_currentSceneType); // 게임 씬으로 이동
                     break;
                 case SceneFlowType.GoTutorial: // 튜토리얼로 가는 흐름
-                    SceneManager.LoadScene(4); // 튜토리얼 씬으로 이동
+                    _currentSceneType = SceneType.Tutorial;
+                    SceneManager.LoadScene((int)_currentSceneType); // 튜토리얼 씬으로 이동
                     break;
             }
             _currentSceneFlow = SceneFlowType.None; // 흐름 초기화
         }
     }
 }
-// 마지막 작성 일자: 2026.04.19
+// 마지막 작성 일자: 2026.04.20

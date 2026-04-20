@@ -17,6 +17,10 @@ namespace InGame.MyManager.Local.MyPiece
 
     public class PieceManager : MonoBehaviour
     {
+        [SerializeField] private CanvasGroup _waitConfirmUI; // 확인 대기 UI
+
+        [SerializeField] private float _animationDuration; // 애니메이션 지속 시간
+
         private Dictionary<ObjectType, List<PieceBase>> _canAttackPieceMap = new Dictionary<ObjectType, List<PieceBase>>(); // 공격 가능한 기물들을 저장하는 맵
         public Dictionary<ObjectType, List<PieceBase>> CanAttackPieceMap { get =>  _canAttackPieceMap; } // 위 변수 프로퍼티
 
@@ -69,7 +73,25 @@ namespace InGame.MyManager.Local.MyPiece
             PieceEvents.OnHideCanAttackPieces -= HideCanAttackPieces;
         }
 
-        public async Task<int> OpponentChoice(int delay = 100) // 기본적으로 5초 대기
+        // 확인 대기 UI 페이드 인아웃 함수
+        public void FadeInOutWaitConfirmUI(float endValue)
+        {
+            if(endValue > 0)
+            {
+                _waitConfirmUI.gameObject.SetActive(true); // 활성화
+            }
+
+            _waitConfirmUI.DOFade(endValue, _animationDuration)
+                .OnComplete(() =>
+                {
+                    if (endValue <= 0)
+                    {
+                        _waitConfirmUI.gameObject.SetActive(false); // 비활성화
+                    }
+                });
+        }
+
+        public async Task<int> OpponentChoice(int delay = 5) // 기본적으로 5초 대기
         {
             _tcs = new TaskCompletionSource<int>();
 
@@ -115,4 +137,4 @@ namespace InGame.MyManager.Local.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.04.20

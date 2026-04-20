@@ -248,6 +248,10 @@ MonoBehaviour:
     m_Localized: Would you like to use the {0} card?
     m_Metadata:
       m_Items: []
+  - m_Id: 6130045271408640
+    m_Localized: Waiting for opponent's decision
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -20,6 +20,11 @@ namespace InGame.MyObject.Piece.ObjectPieces
             }
             else // 카드 사용으로 변경하는 것이라면
             {
+                if(!InGameContext.Current.Data.PieceManager.CanChangeRoadList.Contains(this)) // 변형 가능한 도로가 아닐 경우
+                {
+                    return; // 반환
+                }
+
                 InGameContext.Current.Data.CardManager.CardUsed = false; // 카드 사용 끝내기
             }
 
@@ -77,4 +82,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.04.14
+// 마지막 작성 일자: 2026.04.20

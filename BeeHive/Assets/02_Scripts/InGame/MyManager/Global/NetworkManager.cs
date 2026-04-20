@@ -59,38 +59,9 @@ namespace InGame.MyManager.Global
             _socket.OnConnected += (sender, e) =>
             {
                 _socketConnectedTcs?.TrySetResult(true);
-                // 현재 클라이언트 ID를 서버에서 받아온다
-                _socket.On("myID", data =>
-                {
-                    if (_isClientOver) // 클라이언트가 종료 되었다면
-                        return; // 반환
-
-                    string id = data.GetValue<string>();
-                    MainThreadDispatcher.Enqueue(() => _currentPlayerID = id); // 현재 클라이언트 ID 할당
-                });
-
-                // 오류 발생 시 오류 표기
-                _socket.On("error", response =>
-                {
-                    if (_isClientOver) // 클라이언트가 종료 되었다면
-                        return; // 반환
-
-                    string text = response.GetValue<string>();
-                    MainThreadDispatcher.Enqueue(() =>
-                    {
-                        string error = LocalizationSettings.StringDatabase.GetLocalizedString(
-                            "Error",
-                            text
-                        );
-                        UIManager.Instance.WarningUIMake(error);
-                    });
-                    return;
-                });
-
-                _roomNetworkHandler.Init(); // 방과 관련된 서버 신호를 받는 핸들러 초기화
             };
 
-            Ready();
+            _ = Init();
         }
 
         private void OnDisable()
@@ -118,6 +89,43 @@ namespace InGame.MyManager.Global
             _socket.Dispose(); // 소켓 정리
             SteamAPI.Shutdown(); // 스팀과의 연결 정리
         }
+
+        private async Task Init()
+        {
+            await WaitSocketConnected();
+
+            // 현재 클라이언트 ID를 서버에서 받아온다
+            _socket.On("myID", data =>
+            {
+                if (_isClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
+                string id = data.GetValue<string>();
+                MainThreadDispatcher.Enqueue(() => _currentPlayerID = id); // 현재 클라이언트 ID 할당
+            });
+
+            // 오류 발생 시 오류 표기
+            _socket.On("error", response =>
+            {
+                if (_isClientOver) // 클라이언트가 종료 되었다면
+                    return; // 반환
+
+                string text = response.GetValue<string>();
+                MainThreadDispatcher.Enqueue(() =>
+                {
+                    string error = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Error",
+                        text
+                    );
+                    UIManager.Instance.WarningUIMake(error);
+                });
+                return;
+            });
+
+            _roomNetworkHandler.Init(); // 방과 관련된 서버 신호를 받는 핸들러 초기화
+
+            Ready();
+        }
     }
 }
-// 마지막 작성 일자: 2026.04.09
+// 마지막 작성 일자: 2026.04.20
