@@ -108,6 +108,8 @@ namespace InGame.MySystem
 
                 ChangeGoldCoinToGoldBar(); // 함수를 통해 금화를 금괴로 치환
 
+                BlockGoldBarMaxOver(); // 금괴가 최대 금괴 수 초과로 벌리는 것을 막는 함수
+
                 GoldSetEventEmit();
                 _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
             }
@@ -168,6 +170,8 @@ namespace InGame.MySystem
 
                 _goldBarCount += value; // 금괴 증가
 
+                BlockGoldBarMaxOver(); // 금괴가 최대 금괴 수 초과로 벌리는 것을 막는 함수
+
                 GoldSetEventEmit();
                 _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
             }
@@ -187,6 +191,15 @@ namespace InGame.MySystem
             else
             {
                 _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
+            }
+        }
+
+        // 금괴가 최대 금괴 수를 넘어가는 것을 방지하는 함수
+        private void BlockGoldBarMaxOver()
+        {
+            if (_goldBarCount >= _goldBarMaxCount) // 금괴 개수가 최대라면
+            {
+                _goldBarCount = _goldBarMaxCount; // 금괴 개수를 최대로 고정
             }
         }
 
@@ -287,4 +300,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.04.10
+// 마지막 작성 일자: 2026.04.20

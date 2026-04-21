@@ -177,6 +177,7 @@ namespace MyUtil.MyObjectPool
 
             if (needAnimation) // 애니메이션이 필요하다면
             {
+                returnObj.transform.DOKill();
                 Animation(returnObj, isObject, false, _animationYPos)
                     .OnComplete(() =>
                     {
@@ -221,4 +222,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.04.08
+// 마지막 작성 일자: 2026.04.21

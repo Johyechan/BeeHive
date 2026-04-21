@@ -117,8 +117,7 @@ namespace InGame.MyObject
         {
             if (!WarningEvent.OnCanMovePiece.Invoke(CanPlacePieceType, false)) // 같은 타입의 기물이 이동 했었다면
             {
-                HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 이동 가능한 판 하이라이트 끄기
-                PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
+                HighLightOffEvent(); // 하이라이트 끄기
                 return;
             }
 
@@ -139,6 +138,7 @@ namespace InGame.MyObject
         private async Task PlacePiece(GameObject pieceObj, bool isMove)
         {
             PieceBase pieceBase = pieceObj.GetComponent<PieceBase>(); // 객체의 PieceBase를 가져오기
+            pieceBase.PieceVariable.moveEnd = isMove ? false : true; // 이동이라면 이동 종료 여부를 false로 할당
 
             if (pieceBase != null) // null 체크
             {
@@ -378,8 +378,9 @@ namespace InGame.MyObject
                 }
 
                 InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
+                pieceBase.PieceVariable.moveEnd = true; // 이동 종료
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.04.07
+// 마지막 작성 일자: 2026.04.21

@@ -1,7 +1,6 @@
 using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyObject.Interface;
 using InGame.MyObject.MyObjectInterface;
@@ -85,6 +84,11 @@ namespace InGame.MyObject.Piece
         // 오브젝트가 마우스로 클릭되었을 때 실행될 함수
         public virtual async void ObjectClicked()
         {
+            if(!_pieceVariable.moveEnd) // 기물 이동 중이라면 
+            {
+                return; // 반환
+            }
+
             if (!WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
             {
                 HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
@@ -119,4 +123,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.21

@@ -29,7 +29,7 @@ namespace InGame.MyObject.Handler
                 "Game_UI_NoLeftPiece"
             );
 
-            if (!WarningEvent.OnCheckLeftPieceCount(leftPieceCount, noLeftPiece)) // 남은 도로가 없다면
+            if (!WarningEvent.OnCheckLeftPieceCount(leftPieceCount, noLeftPiece)) // 남은 기물이 없다면
             {
                 _piecePlacePlaneObject.HighLightOffEvent(); // 하이라이트 끄기
                 return true; // 반환

@@ -14,6 +14,8 @@ namespace InGame.MyObject.Piece.Variable
 
         public bool isSelected = false; // 선택 여부를 확인하는 변수
 
+        public bool moveEnd = true; // 이동 종료 여부
+
         public bool isFirePowerAttackTarget = false; // 원거리 공격 대상인지 확인하는 변수
     }
 }

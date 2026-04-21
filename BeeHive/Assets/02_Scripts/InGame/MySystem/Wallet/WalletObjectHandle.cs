@@ -74,8 +74,8 @@ namespace InGame.MySystem
             for(int i = currentCount; i < targetCount; i++)
             {
                 GameObject obj = ObjectPoolManager.Instance.GetObject(type, parent); // 금화 또는 금괴 가져오기
+                obj.transform.DOKill();
                 obj.transform.localPosition = new Vector3(i % _zValueChangeCount * interval, ObjectPoolManager.Instance.AnimationYPos, i / _zValueChangeCount * _zInterval); // 금 개수가 z축 값이 변경되는 개수 초과이면 z축으로 _zInterval만큼 올라가고 x축은 초기화 돼서 0부터 다시 interval 간격으로 배치
-                obj.transform.DOKill(true);
                 ObjectPoolManager.Instance.Animation(obj, true, true, 0); // 애니메이션 실행 후 끝날 때까지 대기
             }
 
@@ -87,4 +87,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.04.20
+// 마지막 작성 일자: 2026.04.21

@@ -104,7 +104,7 @@ namespace InGame.MyObject.Piece.Handler
 
                             if (GameModeManager.Instance.CurrentGameMode.UseServer()) // 서버를 사용하는 경우
                             {
-                                InGameContext.Current.Data.PieceManager.FadeInOutWaitConfirmUI(1); // 대기 UI 비활성화
+                                InGameContext.Current.Data.PieceManager.FadeInOutWaitConfirmUI(0); // 대기 UI 비활성화
                             }
 
                             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
@@ -192,4 +192,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.04.20
+// 마지막 작성 일자: 2026.04.21
