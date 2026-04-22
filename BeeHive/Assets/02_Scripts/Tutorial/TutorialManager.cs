@@ -2,7 +2,6 @@ using DG.Tweening;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
-using MyUtil.GameMode;
 using MyUtil.Interface;
 using System.Threading.Tasks;
 using Tutorial.Event;
@@ -198,6 +197,7 @@ namespace Tutorial
                 case TutorialState.Turn2_Player:
                 case TutorialState.Turn3_AI:
                 case TutorialState.Turn4_Player:
+                case TutorialState.Turn5_Player:
                 case TutorialState.Turn6_AI:
                     if(InputOn) // 인풋이 허용 됐을 때
                     {
@@ -212,4 +212,4 @@ namespace Tutorial
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.04.22

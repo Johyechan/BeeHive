@@ -1,9 +1,6 @@
 using InGame.MyEnum;
-using InGame.MyManager.Global;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
-using MyUtil.GameMode;
-using System.Threading.Tasks;
 
 namespace InGame.MyManager.MyPlacePlane.Handler
 {
@@ -30,13 +27,15 @@ namespace InGame.MyManager.MyPlacePlane.Handler
 
             if (!isRoad) // 도로 배치칸을 변경하는 것이 아닌 기물 배치칸을 변경하는 것이라면
             {
-                placedPiece.PieceVariable.currentPlacePlane = (PiecePlacePlaneObject)currentPlacePlane; // 기물 전용 배치칸 할당
+                PiecePlacePlaneObject piecePlacePlane = (PiecePlacePlaneObject)currentPlacePlane;
+                placedPiece.PieceVariable.currentPlacePlane = piecePlacePlane; // 기물 전용 배치칸 할당
             }
             else // 도로 배치칸을 변경하는 것이라면
             {
-                placedPiece.PieceVariable.currentRoadPlacePlane = (RoadPlacePlaneObject)currentPlacePlane; // 도로 전용 배치칸 할당
+                RoadPlacePlaneObject roadPlacePlane = (RoadPlacePlaneObject)currentPlacePlane;
+                placedPiece.PieceVariable.currentRoadPlacePlane = roadPlacePlane; // 도로 전용 배치칸 할당
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.04.02
+// 마지막 작성 일자: 2026.04.22

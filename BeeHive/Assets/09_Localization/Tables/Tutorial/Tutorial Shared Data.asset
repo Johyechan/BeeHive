@@ -283,6 +283,10 @@ MonoBehaviour:
     m_Key: Tutorial_YourHP
     m_Metadata:
       m_Items: []
+  - m_Id: 6893716612317184
+    m_Key: Tutorial_CanCheckUsedCard
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

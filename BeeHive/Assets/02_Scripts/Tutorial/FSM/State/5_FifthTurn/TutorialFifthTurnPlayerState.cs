@@ -11,19 +11,48 @@ namespace Tutorial.FSM.State.Fifth
     // 다섯 번째 턴(플레이어 턴) 상태
     public class TutorialFifthTurnPlayerState : IState
     {
+        private int _count; // 카운팅 변수
+
+        private TurnType _currentTurnType; // 현재 턴
+
         public void Enter()
         {
-            
+            TutorialManager.Instance.IsInputDelayOver = false;
         }
 
         public void Exit()
         {
+            TutorialManager.Instance.InputOn = false;
             _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.ChangeTeam); // 팀 변경 턴(다음 팀 턴 - 튜토리얼에선 두 번째 플레이어 턴)으로 변경
         }
 
         public void Update()
         {
-            if(TutorialManager.Instance.TurnEnd) // 턴이 종료 되었을 때
+            if (TutorialManager.Instance.IsInputDelayOver) // 인풋이 딜레이 이후 들어오면
+            {
+                _count++; // 카운팅
+                TutorialManager.Instance.IsInputDelayOver = false;
+            }
+
+            switch (_currentTurnType) // 현재 턴이
+            {
+                case TurnType.DrawTurn: // 드로우 턴일 때
+                    switch (_count) // 카운팅 된 개수가
+                    {
+                        case 1:
+                            string draw = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Tutorial",
+                                "Tutorial_Draw"
+                            );
+                            TutorialManager.Instance.SetTutorialPanel(true, draw, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.055f, 0.094f), new Vector4(0.7f, 0.7f));
+                            _currentTurnType = TurnType.MainTurn; // 현재 턴 변경(이걸 안하면 계속 드로우 턴으로 인식하는 문제 발생)
+                            TutorialManager.Instance.InputOn = false;
+                            break;
+                    }
+                    break;
+            }
+
+            if (TutorialManager.Instance.TurnEnd) // 턴이 종료 되었을 때
             {
                 TutorialManager.Instance.TurnEnd = false; // 초기화
                 switch(InGameContext.Current.Data.TurnManager.CurrentTurnType)
@@ -35,11 +64,17 @@ namespace Tutorial.FSM.State.Fifth
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.DrawTurn);
                         break;
                     case TurnType.DrawTurn: // 드로우 턴일 경우
-                        string draw = LocalizationSettings.StringDatabase.GetLocalizedString(
+
+                        // 사용된 카드 보여주기
+                        string canCheckUsedCard = LocalizationSettings.StringDatabase.GetLocalizedString(
                             "Tutorial",
-                            "Tutorial_Draw"
+                            "Tutorial_CanCheckUsedCard"
                         );
-                        TutorialManager.Instance.SetTutorialPanel(true, draw, TutorialManager.Instance.ButtonClick, 0.1f, 0.008f, new Vector4(0.055f, 0.094f), new Vector4(0.7f, 0.7f));
+                        TutorialManager.Instance.SetTutorialPanel(true, canCheckUsedCard, TutorialManager.Instance.EnterClick, 0.1f, 0.008f, new Vector4(0.78f, 0.58f), new Vector4(0.7f, 0.7f));
+                        TutorialManager.Instance.InputOn = true;
+                        _currentTurnType = TurnType.DrawTurn;
+                        _count = 0;
+
                         break;
                     case TurnType.MainTurn: // 메인 턴일 경우
                         string attackOpponentTank = LocalizationSettings.StringDatabase.GetLocalizedString(
@@ -56,5 +91,5 @@ namespace Tutorial.FSM.State.Fifth
         }
     }
 }
-// 마지막 작성 일자: 2026.04.07
+// 마지막 작성 일자: 2026.04.22
 

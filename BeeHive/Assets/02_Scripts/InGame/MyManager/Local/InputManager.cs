@@ -1,9 +1,5 @@
 using InGame.MyEvent;
 using InGame.MyInput;
-using InGame.MyInput.Struct;
-using InGame.MyManager.Global;
-using InGame.MyObject;
-using MyUtil;
 using MyUtil.GameMode;
 using Tutorial;
 using UnityEngine;

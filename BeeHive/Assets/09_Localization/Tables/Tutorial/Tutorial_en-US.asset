@@ -317,6 +317,10 @@ MonoBehaviour:
     m_Localized: Your HP
     m_Metadata:
       m_Items: []
+  - m_Id: 6893716612317184
+    m_Localized: Click this area to view all cards used so far.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

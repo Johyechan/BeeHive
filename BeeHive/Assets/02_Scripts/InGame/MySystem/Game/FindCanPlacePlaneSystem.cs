@@ -1,12 +1,8 @@
 using InGame.MyEnum;
-using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPiece;
-using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject;
-using InGame.MyObject.Piece.ObjectPieces;
-using Tutorial;
+using System.Collections.Generic;
 
 namespace InGame.MySystem.Game
 {
@@ -14,6 +10,8 @@ namespace InGame.MySystem.Game
     // 배치 가능한 판들을 찾는 시스템 클래스
     public class FindCanPlacePlaneSystem
     {
+        private List<RoadPlacePlaneObject> _nearToCastleRoadPlacePlanes = new List<RoadPlacePlaneObject>();
+
         // 배치 가능한 기물 칸들을 찾는 함수
         public void FindCanPlacePiecePlane(TeamType type)
         {
@@ -24,7 +22,8 @@ namespace InGame.MySystem.Game
                     piece.IsChecked = true; // 체크 한 것으로 취급
                     if(piece.PlacedObjectType == ObjectType.None) // 해당 위치에 아무것도 올라와 있지 않을 때
                     {
-                        InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPiecePlacePlanes.Add(piece); // 배치가 가능한 기물 배치 칸 저장
+                        if(!InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPiecePlacePlanes.Contains(piece))
+                            InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPiecePlacePlanes.Add(piece); // 배치가 가능한 기물 배치 칸 저장
                     }
                 }
             }
@@ -65,16 +64,22 @@ namespace InGame.MySystem.Game
                 }
                 else if (road.isNearToCastle) // 성과 인접한 배치 판이라면
                 {
+                    if(!_nearToCastleRoadPlacePlanes.Contains(road))
+                        _nearToCastleRoadPlacePlanes.Add(road);
+
                     road.IsChecked = true; // 체크 한 것으로 취급
                     if(road.PlacedObjectType == ObjectType.None) // 아무것도 올라와 있지 않은 상태 일때
                     {
                         if(road.currentPlayerTeamType == type) // 팀 타입이 도로 탐색을 하는 팀과 같을 경우
                         {
-                            InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanRoadPlacePlanes.Add(road); // 배치가 가능한 도로 배치 칸 저장
+                            if (!InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanRoadPlacePlanes.Contains(road))
+                                InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanRoadPlacePlanes.Add(road); // 배치가 가능한 도로 배치 칸 저장
                         }
                     }
                 }
             }
+
+            FindCanPlaceRoadPlane(); // 배치 가능한 도로칸 탐색 
         }
 
         // 배치 판 확인 여부 초기화 함수(완전 초기화 할지 여부)
@@ -83,11 +88,13 @@ namespace InGame.MySystem.Game
             foreach (var piece in InGameContext.Current.Data.PlacePlaneManager.Variable.placePlaneMap.PiecePlacePlanes) // 전체 기물 판 순회
             {
                 piece.IsChecked = false; // 확인하지 않은 상태로 초기화
+                piece.IsConnectionChecked = false; // 연결을 확인하지 않은 상태로 초기화
             }
 
             foreach (var road in InGameContext.Current.Data.PlacePlaneManager.Variable.placePlaneMap.RoadPlacePlanes) // 전체 도로 판 순회
             {
                 road.IsChecked = false; // 확인하지 않은 상태로 초기화
+                road.IsConnectionChecked = false; // 연결을 확인하지 않은 상태로 초기화
             }
 
             if(isClear)
@@ -117,7 +124,7 @@ namespace InGame.MySystem.Game
                     continue; // 넘기기
                 else if (nearPiece.TeamType != teamType && nearPiece.TeamType != TeamType.None) // 현재 팀이 아니고 다른 팀에 속한 상태라면
                 {
-                    if(road.TeamType == TeamManager.Instance.CurrentTeamType) // 도로가 우리 팀 도로라면
+                    if (road.TeamType == TeamManager.Instance.CurrentTeamType) // 도로가 우리 팀 도로라면
                     {
                         if (!InGameContext.Current.Data.PieceManager.CanAttackPieceMap[ObjectType.Tank].Contains(nearPiece.PlacedPiece)) // 중복 확인
                         {
@@ -149,7 +156,7 @@ namespace InGame.MySystem.Game
 
                 if (nearPiece.PlacedObjectType == ObjectType.None) // 빈 칸이라면
                 {
-                    if(currentObjType == ObjectType.Miner) // 현재 기물이 광부 객체일 때
+                    if (currentObjType == ObjectType.Miner) // 현재 기물이 광부 객체일 때
                     {
                         if(road.TeamType == TeamManager.Instance.CurrentTeamType) // 도로가 내 팀 도로라면
                         {
@@ -173,18 +180,15 @@ namespace InGame.MySystem.Game
                             InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanDigCheckPlacePlanes.Add(nearPiece); // 생산 가능 여부 확인 배치칸으로 추가
                         }
                     }
-
-                    if (!once) // 한 번만 확인하는 게 아닐 경우
-                        FindNearRoads(teamType, nearPiece); // 해당 기물 칸의 인접한 도로 탐색
                 }
                 else // 빈 칸이 아니라면 - 즉 내 팀에 속한 기물이 올려져 있다면
                 {
                     if(road.TeamType == TeamManager.Instance.CurrentTeamType) // 도로의 팀 타입이 내 팀이라면
                         InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanDigCheckPlacePlanes.Add(nearPiece); // 생산 가능 여부 확인 배치칸으로 추가
-
-                    if(!once) // 한 번만 확인하는 게 아닐 경우
-                        FindNearRoads(teamType, nearPiece); // 해당 기물 칸의 인접한 도로만 탐색
                 }
+
+                if (!once) // 한 번만 확인하는 게 아닐 경우
+                    FindNearRoads(teamType, nearPiece); // 해당 기물 칸의 인접한 도로만 탐색
             }
         }
 
@@ -247,24 +251,64 @@ namespace InGame.MySystem.Game
                      continue; // 넘기기
                 else if((nearRoad.TeamType != teamType && nearRoad.TeamType != TeamType.None)) // (현재 팀이 아니면서 다른 팀이라면)
                 {
-                    if(!InGameContext.Current.Data.PieceManager.CanChangeRoadList.Contains(nearRoad.PlacedPiece)) // 이전에 저장했던 도로가 아닐 경우
+                    if (!InGameContext.Current.Data.PieceManager.CanChangeRoadList.Contains(nearRoad.PlacedPiece)) // 이전에 저장했던 도로가 아닐 경우
                     {
                         InGameContext.Current.Data.PieceManager.CanChangeRoadList.Add(nearRoad.PlacedPiece); // 도로 추가
                     }
                     continue;
                 }
 
-                if (nearRoad.PlacedObjectType == ObjectType.None) // 빈 칸이라면
+                if (nearRoad.PlacedObjectType != ObjectType.None) // 빈 칸이 아니라면 - 즉 내 도로 기물이 올라가 있다면
                 {
-                    InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanRoadPlacePlanes.Add(nearRoad); // 배치 가능한 도로 칸에 추가
-                }
-                else // 빈 칸이 아니라면 - 즉 내 도로 기물이 올라가 있다면
-                {
-                    if(!once) // 한 번만 확인하는 게 아닐 경우
+                    if (!once) // 한 번만 확인하는 게 아닐 경우
                         FindNearPieces(teamType, nearRoad); // 해당 도로 칸의 인접한 기물만 탐색
                 }
             }
         }
+
+        // 배치 가능한 도로 칸 탐색 함수
+        private void FindCanPlaceRoadPlane()
+        {
+            foreach(var nearRoad in _nearToCastleRoadPlacePlanes) // 성에 근접한 도로 배치칸 탐색
+            {
+                ChangeRoadPlacePlaneConnection(nearRoad);
+            }
+        }
+
+        private void ChangeRoadPlacePlaneConnection(RoadPlacePlaneObject roadPlacePlane)
+        {
+            if (roadPlacePlane.IsConnectionChecked)
+                return;
+
+            roadPlacePlane.IsConnectionChecked = true;
+            if (roadPlacePlane.PlacedObjectType != ObjectType.None) // 배치된 도로가 있을 때
+            {
+                if (TeamManager.Instance.CurrentTeamType == roadPlacePlane.TeamType) // 플레이어의 도로일 때
+                {
+                    foreach (var nearPiece in roadPlacePlane.nearPiecePlaceTransformList)
+                    {
+                        ChangePiecePlacePlaneConnection(nearPiece);
+                    }
+                }
+            }
+            else // 배치된 도로가 없을 때
+            {
+                if (!InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanRoadPlacePlanes.Contains(roadPlacePlane))
+                    InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanRoadPlacePlanes.Add(roadPlacePlane); // 배치가 가능한 도로 배치 칸 저장
+            }
+        }
+
+        private void ChangePiecePlacePlaneConnection(PiecePlacePlaneObject piecePlacePlane)
+        {
+            if (piecePlacePlane.IsConnectionChecked)
+                return;
+
+            piecePlacePlane.IsConnectionChecked = true;
+            foreach(var nearRoad in piecePlacePlane.nearRoadPlaceTransformList)
+            {
+                ChangeRoadPlacePlaneConnection(nearRoad);
+            }
+        }
     }
 }
-// 마지막 작성 일자: 2026.04.20
+// 마지막 작성 일자: 2026.04.22

@@ -1,7 +1,7 @@
 using DG.Tweening;
-using InGame.MyManager.Global;
 using InGame.MyObject.Handler;
 using InGame.MyObject.MyObjectInterface;
+using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -77,9 +77,12 @@ namespace InGame.MyObject
 
         public void ObjectClicked()
         {
+            if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우 반환
+                return;
+
             _usedDeckUIData.usedDeckCanvasGroup.gameObject.SetActive(true); // ui 활성화
             _usedDeckUIData.usedDeckCanvasGroup.DOFade(1, _usedDeckData.uiFadeDuration); // 페이드 인
         }
     }
 }
-// 마지막 작성 일자: 2025.12.04
+// 마지막 작성 일자: 2026.04.22
