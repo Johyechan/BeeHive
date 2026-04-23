@@ -33,9 +33,13 @@ namespace InGame.MyManager.MyPlacePlane.Handler
             else // 도로 배치칸을 변경하는 것이라면
             {
                 RoadPlacePlaneObject roadPlacePlane = (RoadPlacePlaneObject)currentPlacePlane;
+                if(roadPlacePlane.IsUpdating) // 업데이트 중이라면
+                {
+                    roadPlacePlane.IsUpdating = false; // 업데이트 종료
+                }
                 placedPiece.PieceVariable.currentRoadPlacePlane = roadPlacePlane; // 도로 전용 배치칸 할당
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.04.22
+// 마지막 작성 일자: 2026.04.23

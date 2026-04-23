@@ -64,8 +64,13 @@ namespace InGame.MySystem.Game
                 }
                 else if (road.isNearToCastle) // 성과 인접한 배치 판이라면
                 {
-                    if(!_nearToCastleRoadPlacePlanes.Contains(road))
-                        _nearToCastleRoadPlacePlanes.Add(road);
+                    if (road.currentPlayerTeamType == type) // 도로 배치 칸이 내 팀 주위 배치 칸일 때
+                    {
+                        if (!_nearToCastleRoadPlacePlanes.Contains(road))
+                        {
+                            _nearToCastleRoadPlacePlanes.Add(road);
+                        }
+                    }
 
                     road.IsChecked = true; // 체크 한 것으로 취급
                     if(road.PlacedObjectType == ObjectType.None) // 아무것도 올라와 있지 않은 상태 일때
@@ -311,4 +316,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.04.22
+// 마지막 작성 일자: 2026.04.23

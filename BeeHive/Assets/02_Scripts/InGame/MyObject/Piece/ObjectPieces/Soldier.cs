@@ -60,9 +60,6 @@ namespace InGame.MyObject.Piece.ObjectPieces
                         case TeamType.Team2:
                             ChangeRoad(ObjectPoolType.Team2Road, nearRoad); // 도로 변경
                             break;
-                        case TeamType.Team3:
-                            ChangeRoad(ObjectPoolType.Team3Road, nearRoad); // 도로 변경
-                            break;
                     }
                 }
             }
@@ -71,25 +68,24 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
 
         // 도로 변경 함수
-        private void ChangeRoad(ObjectPoolType type, RoadPlacePlaneObject roadPlacePlaneObject)
+        private void ChangeRoad(ObjectPoolType roadType, RoadPlacePlaneObject roadPlacePlaneObject)
         {
-            float targetAngle = roadPlacePlaneObject.PlacedPiece.gameObject.transform.rotation.eulerAngles.y;
-            switch(roadPlacePlaneObject.PlacedPiece.CurrentTeamType) // 기존 도로의 팀 타입
+            if(roadPlacePlaneObject.IsUpdating) // 업데이트 중이라면
             {
-                case TeamType.Team1:
-                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team1Road, roadPlacePlaneObject.PlacedPiece.gameObject, true); // 기존 도로 객체 반환
-                    break;
-                case TeamType.Team2:
-                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, roadPlacePlaneObject.PlacedPiece.gameObject, true); // 기존 도로 객체 반환
-                    break;
-                case TeamType.Team3:
-                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, roadPlacePlaneObject.PlacedPiece.gameObject, true); // 기존 도로 객체 반환
-                    break;
+                return; // 반환
             }
+
+            roadPlacePlaneObject.IsUpdating = true; // 업데이트 시작
+            float targetAngle = roadPlacePlaneObject.PlacedPiece.gameObject.transform.rotation.eulerAngles.y;
+            ObjectPoolManager.Instance.ReturnObject(roadType, roadPlacePlaneObject.PlacedPiece.gameObject, true); // 기존 도로 객체 반환
+
+            roadPlacePlaneObject.PlacedObjectType = ObjectType.None;
+            roadPlacePlaneObject.TeamType = TeamType.None;
+            roadPlacePlaneObject.PlacedPiece = null;
 
             if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
-                GameObject road = ObjectPoolManager.Instance.GetObject(type, roadPlacePlaneObject.transform.parent);
+                GameObject road = ObjectPoolManager.Instance.GetObject(roadType, roadPlacePlaneObject.transform.parent);
                 road.transform.localPosition = new Vector3(roadPlacePlaneObject.transform.localPosition.x, ObjectPoolManager.Instance.AnimationYPos, roadPlacePlaneObject.transform.localPosition.z);
                 road.transform.Rotate(0, targetAngle, 0);
                 ObjectPoolManager.Instance.Animation(road, true, true, roadPlacePlaneObject.transform.localPosition.y);
@@ -99,7 +95,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
             }
             else // 튜토리얼이 아닐 경우
             {
-                ObjectPoolManager.Instance.MakeObject(type, roadPlacePlaneObject.transform.localPosition, roadPlacePlaneObject.transform.parent, true, roadPlacePlaneObject.NetworkId, targetAngle);
+                ObjectPoolManager.Instance.MakeObject(roadType, roadPlacePlaneObject.transform.localPosition, roadPlacePlaneObject.transform.parent, true, roadPlacePlaneObject.NetworkId, targetAngle);
             }
         }
 
@@ -109,4 +105,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.04.03
+// 마지막 작성 일자: 2026.04.23

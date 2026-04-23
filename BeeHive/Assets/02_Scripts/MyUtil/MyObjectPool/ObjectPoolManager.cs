@@ -6,6 +6,7 @@ using InGame.MyObject;
 using InGame.MyObject.Interface;
 using InGame.MyObject.Piece;
 using MyUtil.GameMode;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -183,8 +184,21 @@ namespace MyUtil.MyObjectPool
                     {
                         ResetObject(type, returnObj);
                     });
+
+                StartCoroutine(ActiveCheckAndReturnCo(type, returnObj)); // 만약 반환 되지 않은 경우 반환
             }
             else // 애니메이션이 필요 없다면
+            {
+                ResetObject(type, returnObj);
+            }
+        }
+
+        // 활성화 여부를 확인하고 반환하는 코루틴
+        private IEnumerator ActiveCheckAndReturnCo(ObjectPoolType type, GameObject returnObj)
+        {
+            yield return new WaitForSeconds(_animationDuration);
+
+            if(returnObj.activeSelf) // 활성화 되어 있다면
             {
                 ResetObject(type, returnObj);
             }
@@ -199,7 +213,6 @@ namespace MyUtil.MyObjectPool
             returnObj.transform.localScale = Vector3.one; // 크기 초기화
 
             returnObj.SetActive(false); // 반환하는 객체 비활성화
-
             _pool[type].Enqueue(returnObj); // 풀링 타입의 풀에 객체 추가
         }
 
@@ -222,4 +235,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.04.21
+// 마지막 작성 일자: 2026.04.23

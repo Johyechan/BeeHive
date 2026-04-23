@@ -23,6 +23,9 @@ namespace InGame.MyObject
 
         private RoadPlaceHandler _roadPlaceHandler; // 도로 배치 기능 핸들러
 
+        private bool _isUpdating = false; // 상태 업데이트 중인 여부
+        public bool IsUpdating { get => _isUpdating; set => _isUpdating = value; } // 상태 업데이트 중인 여부 프로퍼티
+
         protected override void Awake()
         {
             base.Awake();
@@ -64,4 +67,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.04.22
+// 마지막 작성 일자: 2026.04.23
