@@ -71,7 +71,9 @@ namespace InGame.MyObject
         // 마우스로 클릭 시 실행될 함수
         public override void ObjectClicked()
         {
-            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 현재 게임 모드가 튜토리얼 일때
+            NetworkManager.Instance.Socket.Emit("debug", "배치칸 클릭 함수");
+
+            if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 현재 게임 모드가 튜토리얼 일때
             {
                 TutorialManager.Instance.SetTutorialPanel(false);
             }
@@ -115,6 +117,7 @@ namespace InGame.MyObject
         // 객체를 이동하는 기능 함수
         private async void ObjectMove()
         {
+            NetworkManager.Instance.Socket.Emit("debug", "객체 이동 함수");
             if (!WarningEvent.OnCanMovePiece.Invoke(CanPlacePieceType, false)) // 같은 타입의 기물이 이동 했었다면
             {
                 HighLightOffEvent(); // 하이라이트 끄기
@@ -128,6 +131,7 @@ namespace InGame.MyObject
         // 객체를 배치하는 기능 함수
         private async void ObjectPlace()
         {
+            NetworkManager.Instance.Socket.Emit("debug", "객체 배치 함수");
             InGameContext.Current.Data.GameManager.CanMakePiece = false;
             Transform pieceParent = _pieceMap[CanPlacePieceType]; // 현재 배치 가능한 타입의 객체 부모
             int pieceCount = pieceParent.childCount; // 현재 보유 중인 배치 가능한 타입의 기물 수
@@ -162,7 +166,7 @@ namespace InGame.MyObject
                     if (GameModeManager.Instance.CurrentGameMode.UseServer())
                         NetworkManager.Instance.Socket.Emit("movePiece", json); // 서버에 movePiece 이벤트 전달
                 }
-
+                
                 HighLightOffEvent(); // 하이라이트 끄기
 
                 await pieceBase.MoveToPlacePlane(transform.parent, transform.localPosition, isMove); // 기물을 현재 배치판의 부모 자식으로 변경, 기물을 현재 배치할 배치 판의 위치로 이동, 이동인지 생산인지 여부
@@ -186,6 +190,7 @@ namespace InGame.MyObject
                         if (GameModeManager.Instance.CurrentGameMode.UseServer())
                             NetworkManager.Instance.Socket.Emit("pieceChangeRoad", pieceChangeRoadJson);
 
+                        NetworkManager.Instance.Socket.Emit("debug", "이동 시 도로 변경 이벤트 호출");
                         PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, pieceBase.CurrentTeamType, pieceBase.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                     }
                 }

@@ -1,10 +1,12 @@
 using DG.Tweening;
+using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyObject.Interface;
 using InGame.MyObject.Piece;
+using InGame.MyObject.Piece.ObjectPieces;
 using MyUtil.GameMode;
 using System.Collections;
 using System.Collections.Generic;
@@ -213,7 +215,23 @@ namespace MyUtil.MyObjectPool
             returnObj.transform.localScale = Vector3.one; // 크기 초기화
 
             returnObj.SetActive(false); // 반환하는 객체 비활성화
-            _pool[type].Enqueue(returnObj); // 풀링 타입의 풀에 객체 추가
+
+            bool isMatch = true; // 맞는지 확인 하는 변수
+            if(returnObj.TryGetComponent<Road>(out var road))
+            {
+                switch(road.CurrentTeamType)
+                {
+                    case TeamType.Team1:
+                        isMatch = type == ObjectPoolType.Team1Road; // 객체 타입이 팀 1 도로 인지 여부를 맞는 확인하는 변수에 할당
+                        break;
+                    case TeamType.Team2:
+                        isMatch = type == ObjectPoolType.Team2Road; // 객체 타입이 팀 2 도로 인지 여부를 맞는 확인하는 변수에 할당
+                        break;
+                }
+            }
+            
+            if(isMatch)
+                _pool[type].Enqueue(returnObj); // 풀링 타입의 풀에 객체 추가
         }
 
         public Tween Animation(GameObject obj, bool isObject, bool isCreate, float targetYPos = 0)
@@ -235,4 +253,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.04.23
+// 마지막 작성 일자: 2026.04.24

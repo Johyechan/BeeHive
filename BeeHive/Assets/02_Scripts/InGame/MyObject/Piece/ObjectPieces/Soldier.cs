@@ -41,10 +41,12 @@ namespace InGame.MyObject.Piece.ObjectPieces
 
         private void NearRoadChange(PieceBase pieceBase, TeamType type, PiecePlacePlaneObject piecePlacePlaneObject)
         {
-            if (pieceBase.NetworkId != NetworkId) // 자기자신이 부른 게 아닐경우 - 왜?
+            if (pieceBase.NetworkId != NetworkId) // 자기자신이 부른 게 아닐경우 - 다른 보병이 부른 경우 실행되면 안되기 때문에
             {
                 return; // 반환
             }
+
+            NetworkManager.Instance.Socket.Emit("debug", "도로 변경 함수 들어옴");
 
             UIManager.Instance.CanInteractionUI = false;
 
@@ -95,7 +97,10 @@ namespace InGame.MyObject.Piece.ObjectPieces
             }
             else // 튜토리얼이 아닐 경우
             {
-                ObjectPoolManager.Instance.MakeObject(roadType, roadPlacePlaneObject.transform.localPosition, roadPlacePlaneObject.transform.parent, true, roadPlacePlaneObject.NetworkId, targetAngle);
+                if(TeamManager.Instance.CurrentTeamType == InGameContext.Current.Data.TurnManager.CurrentTeamType) // 현재 자신의 차례일 경우
+                {
+                    ObjectPoolManager.Instance.MakeObject(roadType, roadPlacePlaneObject.transform.localPosition, roadPlacePlaneObject.transform.parent, true, roadPlacePlaneObject.NetworkId, targetAngle);
+                }
             }
         }
 
@@ -105,4 +110,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.04.23
+// 마지막 작성 일자: 2026.04.24
