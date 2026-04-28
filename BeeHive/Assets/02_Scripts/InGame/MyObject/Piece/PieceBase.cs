@@ -2,6 +2,7 @@ using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyObject.Interface;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece.Data;
@@ -84,7 +85,7 @@ namespace InGame.MyObject.Piece
         // 오브젝트가 마우스로 클릭되었을 때 실행될 함수
         public virtual async void ObjectClicked()
         {
-            if(!_pieceVariable.moveEnd) // 기물 이동 중이라면 
+            if(InGameContext.Current.Data.PieceManager.IsPlayAnimation) // 기물 애니메이션 실행 중이라면
             {
                 return; // 반환
             }
@@ -123,4 +124,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2026.04.21
+// 마지막 작성 일자: 2026.04.28

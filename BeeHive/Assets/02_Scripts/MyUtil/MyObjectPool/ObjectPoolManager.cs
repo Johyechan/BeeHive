@@ -172,6 +172,8 @@ namespace MyUtil.MyObjectPool
         // 외부에서 사용했던 객체를 다시 풀에 넣을 때 부르는 함수(매개 변수로 풀링 타입, 반환할 객체를 받는다, 객체인지 UI인지 여부, 애니메이션 필요 여부)
         public void ReturnObject(ObjectPoolType type, GameObject returnObj, bool needAnimation = false, bool isObject = true)
         {
+            returnObj.transform.SetParent(transform, true); // 부모에서 제외 + 현재 위치를 부모가 바뀌어도 유지되도록 설정
+
             if (_poolDataMap[type].needNetworkID) // 네트워크 ID가 필요한 객체라면
             {
                 INetworkIdObject networkIdObject = returnObj.GetComponent<INetworkIdObject>();
@@ -242,15 +244,17 @@ namespace MyUtil.MyObjectPool
 
             if (isObject) // 객체일 때
             {
+                obj.transform.DOKill();
                 return obj.transform.DOLocalMoveY(targetYPos, _animationDuration); // 목표 y값으로 이동
             }
             else // UI 일 때
             {
                 obj.SetActive(true); // 객체 활성화
                 CanvasGroup canvasGroup = obj.GetComponent<CanvasGroup>(); // 캔버스 그룹 가져오기
+                canvasGroup.DOKill();
                 return canvasGroup.DOFade(endValue, _animationDuration); // 이미지 페이드 아웃
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.04.24
+// 마지막 작성 일자: 2026.04.28

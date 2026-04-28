@@ -142,7 +142,7 @@ namespace InGame.MyObject
         private async Task PlacePiece(GameObject pieceObj, bool isMove)
         {
             PieceBase pieceBase = pieceObj.GetComponent<PieceBase>(); // 객체의 PieceBase를 가져오기
-            pieceBase.PieceVariable.moveEnd = isMove ? false : true; // 이동이라면 이동 종료 여부를 false로 할당
+            InGameContext.Current.Data.PieceManager.IsPlayAnimation = true; // 기물 애니메이션 실행
 
             if (pieceBase != null) // null 체크
             {
@@ -383,9 +383,9 @@ namespace InGame.MyObject
                 }
 
                 InGameContext.Current.Data.PieceManager.FindCanPlacePlane();
-                pieceBase.PieceVariable.moveEnd = true; // 이동 종료
+                InGameContext.Current.Data.PieceManager.IsPlayAnimation = false; // 애니메이션 종료
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.04.21
+// 마지막 작성 일자: 2026.04.28

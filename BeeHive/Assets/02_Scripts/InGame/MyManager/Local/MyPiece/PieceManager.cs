@@ -37,6 +37,9 @@ namespace InGame.MyManager.Local.MyPiece
         private bool _isDrought; // 가뭄인지 여부를 확인하는 변수
         public bool IsDrought { get => _isDrought; set => _isDrought = value; } // 위 변수 프로퍼티
 
+        private bool _isPlayAnimation = false; // 기물이 특정 위치로 가기 위해 애니메이션이 실행중이라면
+        public bool IsPlayAnimation { get => _isPlayAnimation; set => _isPlayAnimation = value; } // 위 변수 프로퍼티
+
         private TaskCompletionSource<int> _tcs; // 1이 참, 0이 거짓
 
         private void Awake()
@@ -137,4 +140,4 @@ namespace InGame.MyManager.Local.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2026.04.20
+// 마지막 작성 일자: 2026.04.28
