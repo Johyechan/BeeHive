@@ -12,6 +12,7 @@ namespace InGame.MyObject.Piece.Data
 
         public Material originMaterial; // 기본 머티리얼
         public Material emissionMaterial; // 발광 머티리얼
+        public Material canAttackEmissionMaterial; // 공격 가능 발광 머티리얼
     }
 }
-// 마지막 작성 일자: 2025.09.15
+// 마지막 작성 일자: 2026.04.30

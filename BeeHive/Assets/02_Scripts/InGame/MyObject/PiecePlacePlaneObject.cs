@@ -5,7 +5,9 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject.Handler;
 using InGame.MyObject.Piece;
+using InGame.MyObject.Piece.Data;
 using MyUtil.GameMode;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tutorial;
@@ -30,6 +32,9 @@ namespace InGame.MyObject
         private Dictionary<ObjectType, Transform> _pieceMap = new(); // 타입에 따라 필요한 객체를 가지는 부모를 찾기 위한 맵
 
         private PiecePlaceReturnCheckHandler _pieceReturnCheckHandler; // 기물 배치 가능 여부 체크 핸들러
+
+        private bool _isRangeAttackTarget = false; // 원거리 공격 대상 여부
+        public bool IsRangeAttackTarget { get => _isRangeAttackTarget; set => _isRangeAttackTarget = value; } // 원거리 공격 대상 여부 프로퍼티
 
         protected override void Awake()
         {
@@ -61,6 +66,12 @@ namespace InGame.MyObject
             _pieceMap.Add(ObjectType.Tank, _tankParent); // 전차 추가
         }
 
+        // 공격 가능하다고 알려주는 하이라이트 온오프
+        public void CanAttackHighLightOnOff(bool isOn)
+        {
+            CanAttackHighLight(isOn);
+        }
+
         public void HighLightOffEvent()
         {
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
@@ -69,10 +80,8 @@ namespace InGame.MyObject
         }
 
         // 마우스로 클릭 시 실행될 함수
-        public override void ObjectClicked()
+        public override async void ObjectClicked()
         {
-            NetworkManager.Instance.Socket.Emit("debug", "배치칸 클릭 함수");
-
             if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 현재 게임 모드가 튜토리얼 일때
             {
                 TutorialManager.Instance.SetTutorialPanel(false);
@@ -92,6 +101,38 @@ namespace InGame.MyObject
                         HighLightOffEvent(); // 하이라이트 끄기
                         return; // 반환
                     }
+                }
+
+                if (_isRangeAttackTarget)
+                {
+                    PieceBase pieceBase = InGameContext.Current.Data.GameManager.CurrentMovePiece.GetComponent<PieceBase>();
+                    TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
+
+                    string attack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_AttackUseFirePower"
+                    );
+
+                    pieceBase.PieceData.confirmUI.Confirm(result =>
+                    {
+                        if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+                        {
+                            TutorialManager.Instance.SetTutorialPanel(false);
+                        }
+                        pieceBase.PieceData.confirmUI.ConfirmEnd(); // 확인 완료
+                        confirmResultTcs.TrySetResult(result); // 확인 결과(result) 할당
+                    }, attack);
+
+                    bool result = await confirmResultTcs.Task; // 확인 대기
+
+                    if (!result)
+                    {
+                        return;
+                    }
+
+                    CastleAttack(pieceBase); // 성 공격
+                    _isRangeAttackTarget = false; // 원거리 공격 대상 초기화
+                    return;
                 }
             }
 
@@ -117,7 +158,6 @@ namespace InGame.MyObject
         // 객체를 이동하는 기능 함수
         private async void ObjectMove()
         {
-            NetworkManager.Instance.Socket.Emit("debug", "객체 이동 함수");
             if (!WarningEvent.OnCanMovePiece.Invoke(CanPlacePieceType, false)) // 같은 타입의 기물이 이동 했었다면
             {
                 HighLightOffEvent(); // 하이라이트 끄기
@@ -131,7 +171,6 @@ namespace InGame.MyObject
         // 객체를 배치하는 기능 함수
         private async void ObjectPlace()
         {
-            NetworkManager.Instance.Socket.Emit("debug", "객체 배치 함수");
             InGameContext.Current.Data.GameManager.CanMakePiece = false;
             Transform pieceParent = _pieceMap[CanPlacePieceType]; // 현재 배치 가능한 타입의 객체 부모
             int pieceCount = pieceParent.childCount; // 현재 보유 중인 배치 가능한 타입의 기물 수
@@ -190,7 +229,6 @@ namespace InGame.MyObject
                         if (GameModeManager.Instance.CurrentGameMode.UseServer())
                             NetworkManager.Instance.Socket.Emit("pieceChangeRoad", pieceChangeRoadJson);
 
-                        NetworkManager.Instance.Socket.Emit("debug", "이동 시 도로 변경 이벤트 호출");
                         PieceEvents.OnChangeNearRoad?.Invoke(pieceBase, pieceBase.CurrentTeamType, pieceBase.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                     }
                 }
@@ -199,25 +237,7 @@ namespace InGame.MyObject
                 {
                     if (currentPlayerTeamType != TeamManager.Instance.CurrentTeamType) // 현재 배치칸이 우리팀 배치칸이 아닐 때
                     {
-                        PlacedObjectType = ObjectType.None;
-                        PlacedPiece = null;
-                        TeamType = TeamType.None;
-
-                        Castle castle = TeamManager.Instance.GetCastle(currentPlayerTeamType); // 상대 성 가져오기
-                        castle.CastleHit(pieceBase.Damage); // 상대 성 공격
-
-                        CastleAttackInfo castleAttackInfo = new CastleAttackInfo()
-                        {
-                            roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                            attackedCaslteType = (int)currentPlayerTeamType, // 공격 받은 성의 타입
-                            damage = pieceBase.Damage, // 데미지
-                            objectID = pieceBase.NetworkId // 공격한 기물 객체 ID
-                        };
-
-                        string castleAttackJson = JsonUtility.ToJson(castleAttackInfo); // Json 형태로 변환
-                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
-                            NetworkManager.Instance.Socket.Emit("castleAttack", castleAttackJson); // 서버로 성 공격 신호 보내기
-                        pieceBase.PieceDestroy(); // 공격한 기물 파괴
+                        CastleAttack(pieceBase); // 성 공격
                     }
                 }
                 
@@ -386,6 +406,30 @@ namespace InGame.MyObject
                 InGameContext.Current.Data.PieceManager.IsPlayAnimation = false; // 애니메이션 종료
             }
         }
+
+        // 성 공격 함수
+        private void CastleAttack(PieceBase pieceBase)
+        {
+            PlacedObjectType = ObjectType.None;
+            PlacedPiece = null;
+            TeamType = TeamType.None;
+
+            Castle castle = TeamManager.Instance.GetCastle(currentPlayerTeamType); // 상대 성 가져오기
+            castle.CastleHit(pieceBase.Damage); // 상대 성 공격
+
+            CastleAttackInfo castleAttackInfo = new CastleAttackInfo()
+            {
+                roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                attackedCaslteType = (int)currentPlayerTeamType, // 공격 받은 성의 타입
+                damage = pieceBase.Damage, // 데미지
+                objectID = pieceBase.NetworkId // 공격한 기물 객체 ID
+            };
+
+            string castleAttackJson = JsonUtility.ToJson(castleAttackInfo); // Json 형태로 변환
+            if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                NetworkManager.Instance.Socket.Emit("castleAttack", castleAttackJson); // 서버로 성 공격 신호 보내기
+            pieceBase.PieceDestroy(); // 공격한 기물 파괴
+        }
     }
 }
-// 마지막 작성 일자: 2026.04.28
+// 마지막 작성 일자: 2026.04.30

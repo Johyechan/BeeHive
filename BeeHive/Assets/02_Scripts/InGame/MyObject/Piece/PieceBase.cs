@@ -24,6 +24,8 @@ namespace InGame.MyObject.Piece
         [SerializeField] private int _damage; // 기물 피해량
         public int Damage { get => _damage; } // 외부에서 접근 가능한 기물 피해량 프로퍼티
 
+        public PieceData PieceData { get => _pieceData; } // _pieceData 프로퍼티
+
         public ObjectType CurrentObjectType { get => _pieceData.currentObjectType; } // 현재 객체의 타입
 
         public TeamType CurrentTeamType { get => _pieceData.teamType; } // 현재 팀 타입 프로퍼티

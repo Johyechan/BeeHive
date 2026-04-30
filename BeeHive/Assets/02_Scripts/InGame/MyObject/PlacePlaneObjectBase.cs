@@ -46,6 +46,9 @@ namespace InGame.MyObject
         private bool _isConnectionChecked = false; // 이전에 성과 연결 여부를 체크했는지 확인하는 변수
         public bool IsConnectionChecked { get => _isConnectionChecked; set => _isConnectionChecked = value; } // 이전에 성과 연결 여부를 체크했는지 확인하는 변수 프로퍼티
 
+        private bool _findAttackChecked = false; // 공격 가능 여부를 위해 탐색했는지 확인하는 변수
+        public bool FindAttackCheck { get => _findAttackChecked; set => _findAttackChecked = value; } // 위 변수 프로퍼티
+
         protected int _cost; // 비용
         public int Cost { get => _cost; set => _cost = value; } // 위 변수 프로퍼티
 
@@ -65,6 +68,12 @@ namespace InGame.MyObject
             _placedPiece = null; // 아무것도 안 올려져 있는 상태로 초기화
             _placedObjectType = ObjectType.None; // 아무것도 안 올려져 있는 상태로 초기화
             _canPlaceTypePiece = ObjectType.None; // 아무것도 배치 할 수 없는 상태로 초기화
+        }
+
+        // 공격 가능하다고 알려주는 하이라이트 온오프
+        protected void CanAttackHighLight(bool isOn)
+        {
+            _changeMaterialHandler.ChangeCanAttackMaterial(isOn);
         }
 
         // 하이라이트를 키는 함수
@@ -90,4 +99,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2026.04.22
+// 마지막 작성 일자: 2026.04.30

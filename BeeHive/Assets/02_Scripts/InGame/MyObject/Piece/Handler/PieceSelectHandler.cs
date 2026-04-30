@@ -39,6 +39,11 @@ namespace InGame.MyObject.Piece.Handler
 
             InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, _pieceData.currentObjectType); // 한 칸 이동 가능한 칸 찾기
 
+            if(_pieceBase.CurrentObjectType != ObjectType.Miner) // 광부가 아닐 경우
+            {
+                InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanAttackPieces(_pieceBase);
+            }
+
             if(_pieceBase.CurrentObjectType == ObjectType.Tank) // 전차일 경우
             {
                 if(InGameContext.Current.Data.CardManager.HaveFirePowerCard) // 화력 카드를 가지고 있을 때
@@ -57,7 +62,7 @@ namespace InGame.MyObject.Piece.Handler
 
             HighLightEvents.OnPieceMovementHighLight?.Invoke(true, false); // 기물 이동 칸 하이라이트 키기, 이동 가능 배치 판 대상
 
-            PieceEvents.OnShowCanAttackPieces?.Invoke(_pieceData.currentObjectType); // 보병이 공격 가능한 기물들 하이라이트 키기 (공격하는 기물)
+            PieceEvents.OnShowCanAttackPieces?.Invoke(_pieceBase); // 보병이 공격 가능한 기물들 하이라이트 키기 (공격하는 기물)
 
             _pieceBase.PieceVariable.isSelected = true; // 선택 되었다고 할당
 
@@ -215,4 +220,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.04.07
+// 마지막 작성 일자: 2026.04.30

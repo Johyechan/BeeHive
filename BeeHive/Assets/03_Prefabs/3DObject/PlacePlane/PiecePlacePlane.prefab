@@ -130,4 +130,6 @@ MonoBehaviour:
     renderer: {fileID: 2539139066115289158}
     originMaterial: {fileID: 2100000, guid: 0a1f67c7870dede41839fe7d3b99849a, type: 2}
     emissionMaterial: {fileID: 2100000, guid: 935f4887cf0ff754e8b824b7f7a94355, type: 2}
+    canAttackEmissionMaterial: {fileID: 2100000, guid: 56a9869ef9ced154da172dca33b843b9, type: 2}
+  _frontPiecePlacePlaneObject: {fileID: 0}
   nearRoadPlaceTransformList: []

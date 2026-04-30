@@ -3,9 +3,8 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyManager.MyPiece.Handler;
-using InGame.MyManager.MyPlacePlane;
+using InGame.MyObject;
 using InGame.MyObject.Piece;
-using MyUtil;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -21,11 +20,14 @@ namespace InGame.MyManager.Local.MyPiece
 
         [SerializeField] private float _animationDuration; // 애니메이션 지속 시간
 
-        private Dictionary<ObjectType, List<PieceBase>> _canAttackPieceMap = new Dictionary<ObjectType, List<PieceBase>>(); // 공격 가능한 기물들을 저장하는 맵
-        public Dictionary<ObjectType, List<PieceBase>> CanAttackPieceMap { get =>  _canAttackPieceMap; } // 위 변수 프로퍼티
+        private Dictionary<PieceBase, List<PieceBase>> _canAttackPieceMap = new Dictionary<PieceBase, List<PieceBase>>(); // 공격 가능한 기물들을 저장하는 맵
+        public Dictionary<PieceBase, List<PieceBase>> CanAttackPieceMap { get =>  _canAttackPieceMap; } // 위 변수 프로퍼티
 
-        private Dictionary<ObjectType, List<PieceBase>> _canFirePowerAttackPieceMap = new Dictionary<ObjectType, List<PieceBase>>(); // 화력으로 공격 가능한 기물들을 저장하는 맵
-        public Dictionary<ObjectType, List<PieceBase>> CanFirePowerAttackPieceMap { get => _canFirePowerAttackPieceMap; } // 위 변수 프로퍼티
+        private Dictionary<PieceBase, List<PieceBase>> _canFirePowerAttackPieceMap = new Dictionary<PieceBase, List<PieceBase>>(); // 화력으로 공격 가능한 기물들을 저장하는 맵
+        public Dictionary<PieceBase, List<PieceBase>> CanFirePowerAttackPieceMap { get => _canFirePowerAttackPieceMap; } // 위 변수 프로퍼티
+
+        private Dictionary<PieceBase, List<PiecePlacePlaneObject>> _canFirePowerAttackPiecePlaceMap = new Dictionary<PieceBase, List<PiecePlacePlaneObject>>(); // 화력으로 공격 가능한 기물 배치칸
+        public Dictionary<PieceBase, List<PiecePlacePlaneObject>> CanFirePowerAttackPiecePlaceMap { get => _canFirePowerAttackPiecePlaceMap; } // 위 변수 프로퍼티
 
         private List<PieceBase> _canChangeRoadList = new List<PieceBase>(); // 변경 가능한 도로를 저장하는 리스트
         public List<PieceBase> CanChangeRoadList { get =>  _canChangeRoadList; } // 위 변수 프로퍼티
@@ -46,11 +48,6 @@ namespace InGame.MyManager.Local.MyPiece
         {
             _attackRelatedPiecesMoveHandler = new AttackRelatedPiecesMoveHandler();
             _canAttackPieceStateHandler = new CanAttackPieceStateHandler();
-            
-            _canAttackPieceMap.Add(ObjectType.Soldier, new List<PieceBase>());
-            _canAttackPieceMap.Add(ObjectType.Tank, new List<PieceBase>());
-
-            _canFirePowerAttackPieceMap.Add(ObjectType.Tank, new List<PieceBase>());
 
             NetworkManager.Instance.Socket.On("opponentChooseOne", value =>
             {
@@ -115,23 +112,23 @@ namespace InGame.MyManager.Local.MyPiece
             await _attackRelatedPiecesMoveHandler.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, returnPos, attackPos);
         }
 
-        private void ShowCanAttackPieces(ObjectType attackingType)
+        private void ShowCanAttackPieces(PieceBase attackingPiece)
         {
-            _canAttackPieceStateHandler.ShowCanAttackPieces(attackingType, _canAttackPieceMap); // 근거리 공격 가능 기물 탐색
+            _canAttackPieceStateHandler.ShowCanAttackPieces(attackingPiece, _canAttackPieceMap, _canFirePowerAttackPiecePlaceMap); // 근거리 공격 가능 기물 탐색
 
-            if (attackingType == ObjectType.Tank) // 현재 기물이 전차일 경우
+            if (attackingPiece.CurrentObjectType == ObjectType.Tank) // 현재 기물이 전차일 경우
             {
                 if(InGameContext.Current.Data.CardManager.HaveFirePowerCard) // 화력 카드를 가지고 있는 경우
                 {
-                    _canAttackPieceStateHandler.ShowCanAttackPieces(attackingType, _canFirePowerAttackPieceMap, true); // 원거리 공격 가능 기물 탐색
+                    _canAttackPieceStateHandler.ShowCanAttackPieces(attackingPiece, _canFirePowerAttackPieceMap, _canFirePowerAttackPiecePlaceMap, true); // 원거리 공격 가능 기물 탐색
                 }
             }
         }
 
         private void HideCanAttackPieces(bool changeFirePowerAttack)
         {
-            _canAttackPieceStateHandler.HideCanAttackPieces(_canAttackPieceMap); // 근거리 공격 대상 숨기기
-            _canAttackPieceStateHandler.HideCanAttackPieces(_canFirePowerAttackPieceMap, true, changeFirePowerAttack); // 원거리 공격 대상 숨기기
+            _canAttackPieceStateHandler.HideCanAttackPieces(_canAttackPieceMap, _canFirePowerAttackPiecePlaceMap); // 근거리 공격 대상 숨기기
+            _canAttackPieceStateHandler.HideCanAttackPieces(_canFirePowerAttackPieceMap, _canFirePowerAttackPiecePlaceMap, true, changeFirePowerAttack); // 원거리 공격 대상 숨기기
         }
 
         public void FindCanPlacePlane()
@@ -140,4 +137,4 @@ namespace InGame.MyManager.Local.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2026.04.28
+// 마지막 작성 일자: 2026.04.30

@@ -1,16 +1,11 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPiece;
-using InGame.MyManager.MyPlacePlane;
-using InGame.MyManager.Turn;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 using MyUtil;
 using MyUtil.MyObjectPool;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MySystem.Game.Handler
