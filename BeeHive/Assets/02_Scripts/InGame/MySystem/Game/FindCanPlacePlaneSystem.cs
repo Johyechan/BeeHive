@@ -96,6 +96,7 @@ namespace InGame.MySystem.Game
                 piece.IsChecked = false; // 확인하지 않은 상태로 초기화
                 piece.IsConnectionChecked = false; // 연결을 확인하지 않은 상태로 초기화
                 piece.FindAttackCheck = false; // 공격 여부 확인 초기화
+                piece.IsRangeAttackTarget = false;
             }
 
             foreach (var road in InGameContext.Current.Data.PlacePlaneManager.Variable.placePlaneMap.RoadPlacePlanes) // 전체 도로 판 순회
@@ -116,14 +117,6 @@ namespace InGame.MySystem.Game
                 InGameContext.Current.Data.PieceManager.CanAttackPieceMap.Clear(); // 공격 가능 기물 저장 컨테이너 비우기
 
                 InGameContext.Current.Data.PieceManager.CanFirePowerAttackPieceMap.Clear(); // 화력 공격 가능 기물 저장 컨테이너 비우기
-
-                foreach(var piecePlace in InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap)
-                {
-                    foreach(var place in piecePlace.Value)
-                    {
-                        place.IsRangeAttackTarget = false;
-                    }
-                }
 
                 InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap.Clear(); // 화력 공격 가능 기물 배치 칸 저장 컨테이너 비우기
             }
@@ -306,13 +299,16 @@ namespace InGame.MySystem.Game
                         {
                             if(nearPiece.PlacedPiece == null) // 성 주위 배치칸이 비어있다면
                             {
-                                if (!InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap.ContainsKey(pieceBase)) // 현재 기물의 원거리 공격 대상을 저장하지 않았다면
+                                if(!InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPieceMovePlanes.Contains(nearPiece)) // 이동 가능한 위치가 아닐 때
                                 {
-                                    InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap.Add(pieceBase, new List<PiecePlacePlaneObject>()); // 새 맵 추가
-                                }
+                                    if (!InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap.ContainsKey(pieceBase)) // 현재 기물의 원거리 공격 대상을 저장하지 않았다면
+                                    {
+                                        InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap.Add(pieceBase, new List<PiecePlacePlaneObject>()); // 새 맵 추가
+                                    }
 
-                                nearPiece.IsRangeAttackTarget = true;
-                                InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap[pieceBase].Add(nearPiece); // 화력 공격 가능한 기물 배치칸으로 저장
+                                    nearPiece.IsRangeAttackTarget = true;
+                                    InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap[pieceBase].Add(nearPiece); // 화력 공격 가능한 기물 배치칸으로 저장
+                                }
                             }
                         }
                     }
@@ -425,4 +421,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.04.30
+// 마지막 작성 일자: 2026.05.01

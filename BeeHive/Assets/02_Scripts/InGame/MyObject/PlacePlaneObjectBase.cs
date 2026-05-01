@@ -73,6 +73,7 @@ namespace InGame.MyObject
         // 공격 가능하다고 알려주는 하이라이트 온오프
         protected void CanAttackHighLight(bool isOn)
         {
+            _collider.enabled = isOn;
             _changeMaterialHandler.ChangeCanAttackMaterial(isOn);
         }
 
@@ -99,4 +100,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2026.04.30
+// 마지막 작성 일자: 2026.05.01

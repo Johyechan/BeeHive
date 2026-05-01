@@ -5,9 +5,7 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject.Handler;
 using InGame.MyObject.Piece;
-using InGame.MyObject.Piece.Data;
 using MyUtil.GameMode;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tutorial;
@@ -82,6 +80,7 @@ namespace InGame.MyObject
         // 마우스로 클릭 시 실행될 함수
         public override async void ObjectClicked()
         {
+            NetworkManager.Instance.Socket.Emit("debug", "기물 배치칸 눌림");
             if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 현재 게임 모드가 튜토리얼 일때
             {
                 TutorialManager.Instance.SetTutorialPanel(false);
@@ -89,50 +88,59 @@ namespace InGame.MyObject
 
             if (isNearToCastle) // 성과 근접한 배치칸이면서
             {
-                if(_frontPiecePlacePlaneObject.PlacedObjectType != ObjectType.None)// 앞에 있는 기물 배치칸에 배치된 기물이 있다면 
+                NetworkManager.Instance.Socket.Emit("debug", "성과 근접한 기물 배치칸");
+                if (InGameContext.Current.Data.TurnManager.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 자신의 차례가 아니고
                 {
-                    if (_frontPiecePlacePlaneObject.TeamType != TeamManager.Instance.CurrentTeamType) // 앞에 있는 기물 배치칸에 배치된 기물이 내 팀이 아닐 경우
+                    NetworkManager.Instance.Socket.Emit("debug", "내 차례가 아님");
+                    if (_isRangeAttackTarget) // 원거리 공격 가능 대상일 때
                     {
-                        string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        NetworkManager.Instance.Socket.Emit("debug", "원거리 공격 가능 대상");
+                        PieceBase pieceBase = InGameContext.Current.Data.GameManager.CurrentMovePiece.GetComponent<PieceBase>();
+                        TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
+
+                        string attack = LocalizationSettings.StringDatabase.GetLocalizedString(
                             "Game",
-                            "Game_UI_OpponentGetFrontPlace"
+                            "Game_UI_AttackUseFirePower"
                         );
-                        UIManager.Instance.WarningUIMake(str); // UI 경고문 생성
-                        HighLightOffEvent(); // 하이라이트 끄기
-                        return; // 반환
-                    }
-                }
 
-                if (_isRangeAttackTarget)
-                {
-                    PieceBase pieceBase = InGameContext.Current.Data.GameManager.CurrentMovePiece.GetComponent<PieceBase>();
-                    TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
-
-                    string attack = LocalizationSettings.StringDatabase.GetLocalizedString(
-                        "Game",
-                        "Game_UI_AttackUseFirePower"
-                    );
-
-                    pieceBase.PieceData.confirmUI.Confirm(result =>
-                    {
-                        if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+                        pieceBase.PieceData.confirmUI.Confirm(result =>
                         {
-                            TutorialManager.Instance.SetTutorialPanel(false);
+                            if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
+                            {
+                                TutorialManager.Instance.SetTutorialPanel(false);
+                            }
+                            pieceBase.PieceData.confirmUI.ConfirmEnd(); // 확인 완료
+                            confirmResultTcs.TrySetResult(result); // 확인 결과(result) 할당
+                        }, attack);
+
+                        bool result = await confirmResultTcs.Task; // 확인 대기
+
+                        if (!result)
+                        {
+                            return;
                         }
-                        pieceBase.PieceData.confirmUI.ConfirmEnd(); // 확인 완료
-                        confirmResultTcs.TrySetResult(result); // 확인 결과(result) 할당
-                    }, attack);
 
-                    bool result = await confirmResultTcs.Task; // 확인 대기
-
-                    if (!result)
-                    {
+                        CastleAttack(pieceBase); // 성 공격
+                        _isRangeAttackTarget = false; // 원거리 공격 대상 초기화
                         return;
                     }
-
-                    CastleAttack(pieceBase); // 성 공격
-                    _isRangeAttackTarget = false; // 원거리 공격 대상 초기화
-                    return;
+                }
+                else // 자신의 차례일 때
+                {
+                    NetworkManager.Instance.Socket.Emit("debug", "내 차례");
+                    if (_frontPiecePlacePlaneObject.PlacedObjectType != ObjectType.None)// 앞에 있는 기물 배치칸에 배치된 기물이 있다면 
+                    {
+                        if (_frontPiecePlacePlaneObject.TeamType != TeamManager.Instance.CurrentTeamType) // 앞에 있는 기물 배치칸에 배치된 기물이 내 팀이 아닐 경우
+                        {
+                            string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Game",
+                                "Game_UI_OpponentGetFrontPlace"
+                            );
+                            UIManager.Instance.WarningUIMake(str); // UI 경고문 생성
+                            HighLightOffEvent(); // 하이라이트 끄기
+                            return; // 반환
+                        }
+                    }
                 }
             }
 
@@ -432,4 +440,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.04.30
+// 마지막 작성 일자: 2026.05.01
