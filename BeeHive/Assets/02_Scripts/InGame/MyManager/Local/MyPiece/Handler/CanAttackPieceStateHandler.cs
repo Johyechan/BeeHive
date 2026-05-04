@@ -32,6 +32,7 @@ namespace InGame.MyManager.MyPiece.Handler
                                 {
                                     foreach(var place in piecePlace.Value)
                                     {
+                                        place.IsRangeAttackTarget = true;
                                         place.CanAttackHighLightOnOff(true);
                                     }
                                 }
@@ -63,6 +64,7 @@ namespace InGame.MyManager.MyPiece.Handler
                         {
                             foreach (var place in piecePlace.Value)
                             {
+                                place.IsRangeAttackTarget = false;
                                 place.CanAttackHighLightOnOff(false);
                             }
                         }
@@ -74,4 +76,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.04.30
+// 마지막 작성 일자: 2026.05.04

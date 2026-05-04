@@ -75,9 +75,6 @@ namespace InGame.MyObject.Piece.ObjectPieces
                 case TeamType.Team2:
                     ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, gameObject, true);
                     break;
-                case TeamType.Team3:
-                    ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, gameObject, true);
-                    break;
             }
         }
     }

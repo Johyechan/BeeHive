@@ -321,6 +321,7 @@ MonoBehaviour:
       renderer: {fileID: 15338550}
       originMaterial: {fileID: 2100000, guid: ccb64ab5655b09f46a9f13f15ddf715d, type: 2}
       emissionMaterial: {fileID: 2100000, guid: eb91b779ad3adeb48bf45feeb12f8077, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 1
     currentObjectType: 1
     animationDuration: 0.25
@@ -3158,6 +3159,7 @@ MonoBehaviour:
       renderer: {fileID: 185339220}
       originMaterial: {fileID: 2100000, guid: 07efe3611ebec7749ab389aff7681fc0, type: 2}
       emissionMaterial: {fileID: 2100000, guid: dfd93ea454e703244a5f435a1eabba1f, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 2
     currentObjectType: 2
     animationDuration: 0.25
@@ -3730,6 +3732,7 @@ MonoBehaviour:
       renderer: {fileID: 208751126}
       originMaterial: {fileID: 2100000, guid: 07efe3611ebec7749ab389aff7681fc0, type: 2}
       emissionMaterial: {fileID: 2100000, guid: dfd93ea454e703244a5f435a1eabba1f, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 2
     currentObjectType: 2
     animationDuration: 0.25
@@ -9994,6 +9997,7 @@ MonoBehaviour:
       renderer: {fileID: 556639831}
       originMaterial: {fileID: 2100000, guid: 07efe3611ebec7749ab389aff7681fc0, type: 2}
       emissionMaterial: {fileID: 2100000, guid: dfd93ea454e703244a5f435a1eabba1f, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 2
     currentObjectType: 1
     animationDuration: 0.25
@@ -12678,6 +12682,7 @@ MonoBehaviour:
       renderer: {fileID: 730321411}
       originMaterial: {fileID: 2100000, guid: ccb64ab5655b09f46a9f13f15ddf715d, type: 2}
       emissionMaterial: {fileID: 2100000, guid: eb91b779ad3adeb48bf45feeb12f8077, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 1
     currentObjectType: 3
     animationDuration: 0.25
@@ -14887,6 +14892,7 @@ MonoBehaviour:
       renderer: {fileID: 835949637}
       originMaterial: {fileID: 2100000, guid: 07efe3611ebec7749ab389aff7681fc0, type: 2}
       emissionMaterial: {fileID: 2100000, guid: dfd93ea454e703244a5f435a1eabba1f, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 2
     currentObjectType: 3
     animationDuration: 0.25
@@ -15022,6 +15028,7 @@ MonoBehaviour:
       renderer: {fileID: 837825870}
       originMaterial: {fileID: 2100000, guid: ccb64ab5655b09f46a9f13f15ddf715d, type: 2}
       emissionMaterial: {fileID: 2100000, guid: eb91b779ad3adeb48bf45feeb12f8077, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 1
     currentObjectType: 3
     animationDuration: 0.25
@@ -22037,6 +22044,7 @@ MonoBehaviour:
       renderer: {fileID: 1219557339}
       originMaterial: {fileID: 2100000, guid: ccb64ab5655b09f46a9f13f15ddf715d, type: 2}
       emissionMaterial: {fileID: 2100000, guid: eb91b779ad3adeb48bf45feeb12f8077, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 1
     currentObjectType: 2
     animationDuration: 0.25
@@ -23470,6 +23478,7 @@ MonoBehaviour:
       renderer: {fileID: 1270140262}
       originMaterial: {fileID: 2100000, guid: ccb64ab5655b09f46a9f13f15ddf715d, type: 2}
       emissionMaterial: {fileID: 2100000, guid: eb91b779ad3adeb48bf45feeb12f8077, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 1
     currentObjectType: 2
     animationDuration: 0.25
@@ -26963,6 +26972,7 @@ MonoBehaviour:
       renderer: {fileID: 1418791791}
       originMaterial: {fileID: 2100000, guid: 07efe3611ebec7749ab389aff7681fc0, type: 2}
       emissionMaterial: {fileID: 2100000, guid: dfd93ea454e703244a5f435a1eabba1f, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 2
     currentObjectType: 2
     animationDuration: 0.25
@@ -27178,6 +27188,7 @@ MonoBehaviour:
       renderer: {fileID: 1423602701}
       originMaterial: {fileID: 2100000, guid: 07efe3611ebec7749ab389aff7681fc0, type: 2}
       emissionMaterial: {fileID: 2100000, guid: dfd93ea454e703244a5f435a1eabba1f, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 2
     currentObjectType: 3
     animationDuration: 0.25
@@ -33736,6 +33747,7 @@ MonoBehaviour:
       renderer: {fileID: 1834496792}
       originMaterial: {fileID: 2100000, guid: ccb64ab5655b09f46a9f13f15ddf715d, type: 2}
       emissionMaterial: {fileID: 2100000, guid: eb91b779ad3adeb48bf45feeb12f8077, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 1
     currentObjectType: 1
     animationDuration: 0.25
@@ -37281,6 +37293,7 @@ MonoBehaviour:
       renderer: {fileID: 2027610584}
       originMaterial: {fileID: 2100000, guid: ccb64ab5655b09f46a9f13f15ddf715d, type: 2}
       emissionMaterial: {fileID: 2100000, guid: eb91b779ad3adeb48bf45feeb12f8077, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 1
     currentObjectType: 2
     animationDuration: 0.25
@@ -38798,6 +38811,7 @@ MonoBehaviour:
       renderer: {fileID: 2101025664}
       originMaterial: {fileID: 2100000, guid: 07efe3611ebec7749ab389aff7681fc0, type: 2}
       emissionMaterial: {fileID: 2100000, guid: dfd93ea454e703244a5f435a1eabba1f, type: 2}
+      canAttackEmissionMaterial: {fileID: 0}
     teamType: 2
     currentObjectType: 1
     animationDuration: 0.25

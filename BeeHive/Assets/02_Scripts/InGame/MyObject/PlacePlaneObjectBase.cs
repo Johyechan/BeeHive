@@ -1,7 +1,5 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager;
-using InGame.MyManager.Global;
 using InGame.MyObject.Interface;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece;
@@ -39,15 +37,6 @@ namespace InGame.MyObject
 
         private PieceBase _placedPiece; // 올려져 있는 기물
         public PieceBase PlacedPiece { get => _placedPiece; set => _placedPiece = value; } // 위 변수 프로퍼티
-
-        private bool _isChecked = false; // 이전에 확인이 되었는지 확인하는 변수
-        public bool IsChecked { get { return _isChecked; } set { _isChecked = value; } } // 이전에 확인이 되었는지 확인하는 변수 프로퍼티
-
-        private bool _isConnectionChecked = false; // 이전에 성과 연결 여부를 체크했는지 확인하는 변수
-        public bool IsConnectionChecked { get => _isConnectionChecked; set => _isConnectionChecked = value; } // 이전에 성과 연결 여부를 체크했는지 확인하는 변수 프로퍼티
-
-        private bool _findAttackChecked = false; // 공격 가능 여부를 위해 탐색했는지 확인하는 변수
-        public bool FindAttackCheck { get => _findAttackChecked; set => _findAttackChecked = value; } // 위 변수 프로퍼티
 
         protected int _cost; // 비용
         public int Cost { get => _cost; set => _cost = value; } // 위 변수 프로퍼티
@@ -100,4 +89,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2026.05.01
+// 마지막 작성 일자: 2026.05.04

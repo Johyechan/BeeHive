@@ -138,6 +138,19 @@ namespace InGame.MyManager.Local.Turn
                 }
             }
 
+            if(nextTurn == TurnType.TurnEnd) // 다음 턴이 턴 종료 턴이라면
+            {
+                foreach (var piece in InGameContext.Current.Data.PlacePlaneManager.Variable.placePlaneMap.PiecePlacePlanes) // 전체 기물 판 순회
+                {
+                    piece.HighLightOff(); // 하이라이트 끄기
+                }
+
+                foreach (var road in InGameContext.Current.Data.PlacePlaneManager.Variable.placePlaneMap.RoadPlacePlanes) // 전체 도로 판 순회
+                {
+                    road.HighLightOff(); // 하이라이트 끄기
+                }
+            }
+
             await _turnUIAnimation.UIAnimationPlay(nextTurn); // 배치 관련 배열 초기화 및 현재 턴을 알려주는 애니메이션
 
             _currentTurnType = nextTurn; // 현재 턴을 다음 턴으로 변경
@@ -188,7 +201,7 @@ namespace InGame.MyManager.Local.Turn
         // 서버에 턴 완료 신호를 보내는 함수
         private void AutoTurnCompleted()
         {
-            switch(_currentTurnType)
+            switch (_currentTurnType)
             {
                 case TurnType.ChangeTeam:
                 case TurnType.MakeTurn:
@@ -211,4 +224,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.04.16
+// 마지막 작성 일자: 2026.05.04
