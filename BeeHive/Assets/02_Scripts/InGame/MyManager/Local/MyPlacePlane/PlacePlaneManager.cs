@@ -1,17 +1,18 @@
-using MyUtil;
 using DG.Tweening;
-using UnityEngine;
-using InGame.MyEvent;
 using InGame.MyEnum;
-using InGame.MyObject;
-using System.Collections.Generic;
-using InGame.MySystem.Game;
-using InGame.MyObject.Piece;
-using InGame.MyObject.Piece.ObjectPieces;
+using InGame.MyEvent;
+using InGame.MyManager.Global;
 using InGame.MyManager.MyPlacePlane.Handler;
 using InGame.MyManager.MyPlacePlane.Variable;
+using InGame.MyObject;
+using InGame.MyObject.Piece;
+using InGame.MyObject.Piece.ObjectPieces;
+using InGame.MySystem.Game;
+using InGame.MySystem.Game.FindSystem;
+using MyUtil;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using InGame.MyManager.Global;
+using UnityEngine;
 
 namespace InGame.MyManager.Local.MyPlacePlane
 {
@@ -33,11 +34,7 @@ namespace InGame.MyManager.Local.MyPlacePlane
         {
             _variable = new PlacePlaneManagerVariable();
 
-            _variable.placePlaneMap = new PlacePlaneMap();
-            _variable.highLightHandler = new HighLightHandler();
-            _variable.findCanPlacePlaneSystem = new FindCanPlacePlaneSystem();
-            _variable.placePlaneStateHandler = new PlacePlaneStateHandler();
-            _variable.setNearRoadHandler = new SetNearRoadHandler();
+            _variable.Init();
 
             _variable.placePlaneMap.PlacePlaneSet(_placePlaneParent); // 전체 배치 판 저장
 
@@ -64,11 +61,11 @@ namespace InGame.MyManager.Local.MyPlacePlane
 
         public void FindCanPlacePlane()
         {
-            _variable.findCanPlacePlaneSystem.ResetPlacePlanes();
+            _variable.findCanPlacePlaneSystem.ResetFindPlanes();
 
-            _variable.findCanPlacePlaneSystem.FindCanPlacePiecePlane(TeamManager.Instance.CurrentTeamType);
+            _variable.findCanPlacePlaneSystem.FindCanPieceCreatePlane(TeamManager.Instance.CurrentTeamType);
 
-            _variable.findCanPlacePlaneSystem.FindCanPlaceRoadPlane(TeamManager.Instance.CurrentTeamType);
+            _variable.findCanPlacePlaneSystem.FindCanRoadCreatePlane(TeamManager.Instance.CurrentTeamType);
         }
 
         // 배치 칸 상태 변경 함수(상태 변경될 배치칸, 배치할 기물, 이동 여부)

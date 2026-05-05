@@ -6,7 +6,6 @@ using InGame.MyObject;
 using MyUtil.GameMode;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;

@@ -44,19 +44,19 @@ namespace InGame.MyObject.Piece
         {
             _pieceData.changeMaterialHandler = new ChangeMaterialHandler(_pieceData.materialData, gameObject); // 머티리얼 변경 핸들러 생성
             _pieceData.pieceMoveHandler = new PieceMoveHandler(this, _pieceData); // 기물 이동 핸들러 생성
-            _pieceData.pieceDeselectHandler = new PieceDeselectHandler(this); // 기물 선택 해제 핸들러 생성
+            _pieceData.pieceDeselectHandler = new PieceDeselectHandler(); // 기물 선택 해제 핸들러 생성
             _pieceData.pieceSelectHandler = new PieceSelectHandler(this, _pieceData); // 기물 선택 핸들러 생성
             _pieceData.pieceAttackedHandler = new PieceAttackedHandler(this, _pieceData); // 기물 공격 받는 기능 핸들러 생성
         }
 
         protected virtual void OnEnable()
         {
-            HighLightEvents.OnPieceMovementHighLight += HighLightOff;
+
         }
 
         protected virtual void OnDisable()
         {
-            HighLightEvents.OnPieceMovementHighLight -= HighLightOff;
+
         }
 
         // 외부에서 머티리얼을 변경할 때 사용하는 함수(기본 머티리얼로 변경할지 여부)
@@ -73,12 +73,6 @@ namespace InGame.MyObject.Piece
                 {
                     Destroy(gameObject); // 기물 파괴
                 });
-        }
-
-        // 외부에서 하이라이트를 끌 때 현재 스크립트에서 하이라이트 활성화 여부를 끔 상태로 만들어주는 함수
-        private void HighLightOff(bool isOn, bool isMove = true) // 켜졌는지 여부, 이동 상태를 위해 켜졌는지 여부 = 어떤 값이 와도 상관 없음
-        {
-            _pieceData.pieceDeselectHandler.HighLightOff(isOn, isMove); // 하이라이트 해제 함수
         }
 
         // 기물들을 지정 위치로 이동 시키는 함수(부모, 이동 위치, 기물 이동인지(첫 배치가 아닌 배치되어있는 상태에서 다른 칸으로 이동), 각도)
@@ -129,4 +123,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2026.05.04
+// 마지막 작성 일자: 2026.05.05

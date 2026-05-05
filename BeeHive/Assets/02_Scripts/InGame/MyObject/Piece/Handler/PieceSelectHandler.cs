@@ -1,12 +1,9 @@
 using InGame.MyEnum;
 using InGame.MyEvent;
-using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject.Piece.Data;
 using MyUtil.GameMode;
-using System.Threading.Tasks;
 using Tutorial;
 using Tutorial.MyEnum;
 using UnityEngine;
@@ -37,7 +34,7 @@ namespace InGame.MyObject.Piece.Handler
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
             PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
 
-            InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanMovePlacePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, _pieceData.currentObjectType); // 한 칸 이동 가능한 칸 찾기
+            InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanPieceMovePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, _pieceData.currentObjectType); // 한 칸 이동 가능한 칸 찾기
 
             if(_pieceBase.CurrentObjectType != ObjectType.Miner) // 광부가 아닐 경우
             {
@@ -55,9 +52,15 @@ namespace InGame.MyObject.Piece.Handler
             InGameContext.Current.Data.GameManager.CurrentMovePiece = _pieceBase.gameObject; // 현재 객체를 현재 이동하려는 기물로 할당
             HighLightEvents.SelectedPlacementType = ObjectType.None; // 배치 하는 것이 아닌 이동의 여부이기에 None으로 설정
 
-            foreach (var piece in InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPieceMovePlanes) // 배치 가능한 도로 칸들 순회
+            foreach (var map in InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPieceMovePlanes) // 배치 가능한 도로 칸들 순회
             {
-                piece.CanPlacePieceType = _pieceData.currentObjectType; // 배치 가능한 타입을 할당
+                if(map.Key == _pieceBase) // 자기 자신을 확인 할 때
+                {
+                    foreach(var piece in map.Value)
+                    {
+                        piece.CanPlacePieceType = _pieceData.currentObjectType; // 배치 가능한 타입을 할당
+                    }
+                }
             }
 
             HighLightEvents.OnPieceMovementHighLight?.Invoke(true, false); // 기물 이동 칸 하이라이트 키기, 이동 가능 배치 판 대상
@@ -220,4 +223,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.04.30
+// 마지막 작성 일자: 2026.05.05

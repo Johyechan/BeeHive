@@ -1,4 +1,5 @@
 using InGame.MyEnum;
+using InGame.MyObject.Piece;
 using System;
 
 namespace InGame.MyEvent
