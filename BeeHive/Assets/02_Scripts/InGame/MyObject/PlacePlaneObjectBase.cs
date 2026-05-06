@@ -17,7 +17,6 @@ namespace InGame.MyObject
 
         public int team1GoldCoin; // 이 칸에서 Team1 광부가 획득할 수 있는 금화 수
         public int team2GoldCoin; // 이 칸에서 Team2 광부가 획득할 수 있는 금화 수
-        public int team3GoldCoin; // 이 칸에서 Team3 광부가 획득할 수 있는 금화 수
 
         public TeamType currentPlayerTeamType; // 현재 플레이어의 팀 타입
 
@@ -89,4 +88,4 @@ namespace InGame.MyObject
         public abstract void ObjectClicked();
     }
 }
-// 마지막 작성 일자: 2026.05.04
+// 마지막 작성 일자: 2026.05.06

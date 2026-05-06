@@ -1,17 +1,9 @@
-using DG.Tweening;
-using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
-using InGame.MyManager.MyPlacePlane.Handler;
 using InGame.MyManager.MyPlacePlane.Variable;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
-using InGame.MyObject.Piece.ObjectPieces;
-using InGame.MySystem.Game;
-using InGame.MySystem.Game.FindSystem;
-using MyUtil;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyManager.Local.MyPlacePlane

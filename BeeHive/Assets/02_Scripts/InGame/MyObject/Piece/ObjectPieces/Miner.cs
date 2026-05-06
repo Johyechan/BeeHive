@@ -55,9 +55,6 @@ namespace InGame.MyObject.Piece.ObjectPieces
                 case TeamType.Team2: // 플레이어의 팀이 Team2일 경우
                     WalletEvent.OnGetGoldCoin?.Invoke(PieceVariable.currentPlacePlane.team2GoldCoin); // 현재 칸에서 team2가 얻는 금화만큼 얻기
                     break;
-                case TeamType.Team3: // 플레이어의 팀이 Team3일 경우
-                    WalletEvent.OnGetGoldCoin?.Invoke(PieceVariable.currentPlacePlane.team3GoldCoin); // 현재 칸에서 team3이 얻는 금화만큼 얻기
-                    break;
             }
 
             await Task.CompletedTask; // Taks 완료 반환
@@ -90,4 +87,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.05.05
+// 마지막 작성 일자: 2026.05.06

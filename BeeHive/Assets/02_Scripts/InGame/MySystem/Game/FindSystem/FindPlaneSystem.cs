@@ -1,4 +1,5 @@
 using InGame.MyEnum;
+using InGame.MyManager.Global;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 using InGame.MySystem.Game.FindSystem.Handler;
@@ -35,39 +36,45 @@ namespace InGame.MySystem.Game.FindSystem
             _resetPlanesHandler = resetPlanesHandler;
         }
 
-        // 기물 생성 가능한 기물 칸을 찾는 함수
+        // 기물 생성 가능한 기물 칸을 찾는 함수 - 기물 생성 버튼을 누르면 실행
         public void FindCanPieceCreatePlane(TeamType type)
         {
+            NetworkManager.Instance.Socket.Emit("debug", "기물 배치 가능한 곳 탐색 시작");
             _findCanPieceCreatePlaneHandler.FindCanPieceCreatePlane(type);
         }
 
-        // 움직일 수 있는 칸을 찾는 함수
+        // 움직일 수 있는 칸을 찾는 함수 - 기물을 누르면 실행
         public void FindCanPieceMovePlane(PiecePlacePlaneObject piece, TeamType teamType, ObjectType currentPieceType)
         {
+            NetworkManager.Instance.Socket.Emit("debug", "이동 가능한 곳 탐색 시작");
             _findCanPieceMovePlaneHandler.FindCanPieceMovePlane(piece, teamType, currentPieceType);
         }
 
-        // 도로 생성 가능한 칸들을 찾는 함수
+        // 도로 생성 가능한 칸들을 찾는 함수 - 도로 생성 버튼을 누르면 실행
         public void FindCanRoadCreatePlane(TeamType type)
         {
+            NetworkManager.Instance.Socket.Emit("debug", "도로 배치 가능한 곳 탐색 시작");
             _findCanRoadCreatePlaneHandler.FindCanRoadCreatePlane(type);
         }
 
         // 찾은 값들을 초기화하는 함수
         public void ResetFindPlanes()
         {
+            NetworkManager.Instance.Socket.Emit("debug", "전부 초기화");
             _resetPlanesHandler.ResetFindPlanes();
         }
 
-        // 공격 가능한 기물들을 탐색하는 함수
+        // 공격 가능한 기물들을 탐색하는 함수 - 기물을 눌렀을 때 실행
         public void FindCanAttackPieces(PieceBase pieceBase)
         {
+            NetworkManager.Instance.Socket.Emit("debug", "공격 가능한 곳 탐색 시작");
             _findCanAttackPiecesHandler.FindCanAttackPieces(pieceBase);
         }
 
-        // 화력을 사용해 원거리 공격 가능한 기물 탐색 함수
+        // 화력을 사용해 원거리 공격 가능한 기물 탐색 함수 - 전차를 눌렀을 때 실행
         public void FindCanFirePowerAttackPiece(TeamType teamType, PiecePlacePlaneObject piece)
         {
+            NetworkManager.Instance.Socket.Emit("debug", "원거리 공격 가능한 곳 탐색 시작");
             _findCanRangedAttackPiecesHandler.FindCanRangedAttackPieces(teamType, piece);
         }
     }

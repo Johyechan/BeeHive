@@ -45,9 +45,6 @@ namespace InGame.MySystem.Game
                 case TeamType.Team2: // 팀2 일 때
                     await GetCards(cardCount, _player2CardsParent); // 해당 플레이어가 카드 드로우
                     break;
-                case TeamType.Team3: // 팀3 일 때
-                    await GetCards(cardCount, _player3CardsParent); // 해당 플레이어가 카드 드로우
-                    break;
             }
 
             await Task.CompletedTask; // Task 완료
@@ -69,4 +66,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.05.06

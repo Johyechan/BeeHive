@@ -38,9 +38,6 @@ namespace InGame.MyObject.Piece.ObjectPieces
                 case TeamType.Team2:
                     poolType = ObjectPoolType.Team2Road;
                     break;
-                case TeamType.Team3:
-                    poolType = ObjectPoolType.Team3Road;
-                    break;
             }
 
             float angle = transform.rotation.eulerAngles.y;
@@ -79,4 +76,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.04.20
+// 마지막 작성 일자: 2026.05.06

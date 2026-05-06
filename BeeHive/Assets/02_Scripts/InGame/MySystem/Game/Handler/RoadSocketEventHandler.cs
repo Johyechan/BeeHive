@@ -116,9 +116,6 @@ namespace InGame.MySystem.Game.Handler
                         case TeamType.Team2:
                             ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team2Road, targetRoadObj, true);
                             break;
-                        case TeamType.Team3:
-                            ObjectPoolManager.Instance.ReturnObject(ObjectPoolType.Team3Road, targetRoadObj, true);
-                            break;
                     }
                 });
             });
@@ -134,4 +131,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.03
+// 마지막 작성 일자: 2026.05.06

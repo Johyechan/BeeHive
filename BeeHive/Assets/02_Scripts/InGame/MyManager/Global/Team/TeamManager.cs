@@ -76,8 +76,6 @@ namespace InGame.MyManager.Global
                     return InGameContext.Current.Data.GameManager.MyCastle = GameObject.Find("Team1Castle").GetComponent<Castle>();
                 case TeamType.Team2: // 팀2 일 때 팀2 성 반환
                     return InGameContext.Current.Data.GameManager.MyCastle = GameObject.Find("Team2Castle").GetComponent<Castle>();
-                case TeamType.Team3: // 팀3 일 때 팀3 성 반환
-                    return InGameContext.Current.Data.GameManager.MyCastle = GameObject.Find("Team3Castle").GetComponent<Castle>();
                 default:
                     return null;
             }
@@ -91,8 +89,6 @@ namespace InGame.MyManager.Global
                     return GameObject.Find("Player1Miners").transform;
                 case TeamType.Team2:
                     return GameObject.Find("Player2Miners").transform;
-                case TeamType.Team3:
-                    return GameObject.Find("Player3Miners").transform;
                 default:
                     return null;
             }
@@ -106,8 +102,6 @@ namespace InGame.MyManager.Global
                     return GameObject.Find("Player1Soldiers").transform;
                 case TeamType.Team2:
                     return GameObject.Find("Player2Soldiers").transform;
-                case TeamType.Team3:
-                    return GameObject.Find("Player3Soldiers").transform;
                 default:
                     return null;
             }
@@ -121,8 +115,6 @@ namespace InGame.MyManager.Global
                     return GameObject.Find("Player1Tanks").transform;
                 case TeamType.Team2:
                     return GameObject.Find("Player2Tanks").transform;
-                case TeamType.Team3:
-                    return GameObject.Find("Player3Tanks").transform;
                 default:
                     return null;
             }
@@ -136,8 +128,6 @@ namespace InGame.MyManager.Global
                     return GameObject.Find("Player1Road").transform;
                 case TeamType.Team2:
                     return GameObject.Find("Player2Road").transform;
-                case TeamType.Team3:
-                    return GameObject.Find("Player3Road").transform;
                 default:
                     return null;
             }
@@ -151,8 +141,6 @@ namespace InGame.MyManager.Global
                     return GameObject.Find("Player1GoldCoins").transform;
                 case TeamType.Team2:
                     return GameObject.Find("Player2GoldCoins").transform;
-                case TeamType.Team3:
-                    return GameObject.Find("Player3GoldCoins").transform;
                 default:
                     return null;
             }
@@ -166,12 +154,10 @@ namespace InGame.MyManager.Global
                     return GameObject.Find("Player1GoldBars").transform;
                 case TeamType.Team2:
                     return GameObject.Find("Player2GoldBars").transform;
-                case TeamType.Team3:
-                    return GameObject.Find("Player3GoldBars").transform;
                 default:
                     return null;
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.04.08
+// 마지막 작성 일자: 2026.05.06

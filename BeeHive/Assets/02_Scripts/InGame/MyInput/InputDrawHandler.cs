@@ -78,10 +78,6 @@ namespace InGame.MyInput
                 case TeamType.Team2: // 현재 팀이 Team2일 때
                     await _handlerData.functionHandler.DrawFunction(_deck.deckTransform, _deck.player2CardsParent, _deck._playerUICardsParent);
                     break;
-
-                case TeamType.Team3: // 현재 팀이 Team3일 때
-                    await _handlerData.functionHandler.DrawFunction(_deck.deckTransform, _deck.player3CardsParent, _deck._playerUICardsParent);
-                    break;
             }
 
             if (_deck.deckTransform.childCount <= 0) // 덱이 비어있다면
@@ -95,4 +91,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2026.03.25
+// 마지막 작성 일자: 2026.05.06

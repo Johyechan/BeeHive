@@ -98,12 +98,10 @@ namespace InGame.MyManager.Local
                     return _team1CardParent.childCount > 0 ? true : false;
                 case TeamType.Team2:
                     return _team2CardParent.childCount > 0 ? true : false;
-                case TeamType.Team3:
-                    return _team3CardParent.childCount > 0 ? true : false;
                 default:
                     return false;
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.03.27
+// 마지막 작성 일자: 2026.05.06

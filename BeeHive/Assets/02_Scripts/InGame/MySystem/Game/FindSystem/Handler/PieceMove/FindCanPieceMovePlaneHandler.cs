@@ -88,7 +88,7 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceMove
             if(pieceBase.CurrentObjectType == ObjectType.Miner) // 이동 가능한 위치를 찾는 기물이 광부일 때
             {
                 // 만약 현재 기물의 생산 가능 여부를 확인 한 적이 없다면
-                if(InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanDigCheckPlacePlanes.ContainsKey(pieceBase))
+                if(!InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanDigCheckPlacePlanes.ContainsKey(pieceBase))
                 {
                     InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanDigCheckPlacePlanes.Add(pieceBase, new HashSet<PlacePlaneObjectBase>()); // 맵에 새로 추가
                 }
@@ -105,4 +105,4 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceMove
         }
     }
 }
-// 마지막 작성 일자: 2026.05.05
+// 마지막 작성 일자: 2026.05.06

@@ -33,7 +33,6 @@ namespace InGame.MySystem
             {
                 TeamType.Team1 => ObjectPoolType.Team1Road, // 팀1은 팀1 도로 타입 반환
                 TeamType.Team2 => ObjectPoolType.Team2Road, // 팀2은 팀2 도로 타입 반환
-                TeamType.Team3 => ObjectPoolType.Team3Road, // 팀3은 팀3 도로 타입 반환
                 _ => throw new ArgumentOutOfRangeException() // type이 허용 범위를 벗어남
             };
 
@@ -55,8 +54,6 @@ namespace InGame.MySystem
                 case TeamType.Team2:
                     pos = new Vector3(0, 0, count * _zInterval); // 위치
                     break;
-                case TeamType.Team3:
-                    break;
             }
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
@@ -75,4 +72,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.04.10
+// 마지막 작성 일자: 2026.05.06

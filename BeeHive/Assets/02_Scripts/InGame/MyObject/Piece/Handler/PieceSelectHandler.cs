@@ -34,7 +34,7 @@ namespace InGame.MyObject.Piece.Handler
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
             PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
 
-            InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanPieceMovePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, _pieceData.currentObjectType); // 한 칸 이동 가능한 칸 찾기
+            InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanPieceMovePlane(_pieceBase.PieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, _pieceData.currentObjectType); // 이동 가능한 칸 찾기
 
             if(_pieceBase.CurrentObjectType != ObjectType.Miner) // 광부가 아닐 경우
             {

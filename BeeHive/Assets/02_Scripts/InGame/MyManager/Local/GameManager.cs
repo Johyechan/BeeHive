@@ -79,9 +79,6 @@ namespace InGame.MyManager.Local
                 case TeamType.Team2: // 팀2 일 때 팀2 성 반환
                     _myCastle = GameObject.Find("Team2Castle").GetComponent<Castle>();
                     break;
-                case TeamType.Team3: // 팀3 일 때 팀3 성 반환
-                    _myCastle = GameObject.Find("Team3Castle").GetComponent<Castle>();
-                    break;
             }
         }
 
@@ -140,7 +137,6 @@ namespace InGame.MyManager.Local
             {
                 _teamOrder.Add(TeamType.Team1); // 팀1 추가
                 _teamOrder.Add(TeamType.Team2); // 팀2 추가
-                _teamOrder.Add(TeamType.Team3); // 팀3 추가
             }
             else
             {
@@ -174,4 +170,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.05.06

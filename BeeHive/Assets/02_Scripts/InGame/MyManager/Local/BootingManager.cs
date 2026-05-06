@@ -4,7 +4,6 @@ using InGame.MyManager.Local.Boot;
 using InGame.MyManager.Local.Boot.Variable;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Localization.Settings;
 using InGame.MyManager.Enum;
 

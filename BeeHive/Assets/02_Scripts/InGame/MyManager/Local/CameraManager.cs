@@ -22,13 +22,10 @@ namespace InGame.MyManager.Local
                 case TeamType.Team2:
                     _cameraBrain.ChannelMask = OutputChannels.Channel02;
                     break;
-                case TeamType.Team3:
-                    _cameraBrain.ChannelMask = OutputChannels.Channel03;
-                    break;
             }
 
             await Task.CompletedTask;
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.05.06

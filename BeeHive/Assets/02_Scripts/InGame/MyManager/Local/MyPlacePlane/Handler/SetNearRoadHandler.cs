@@ -20,9 +20,6 @@ namespace InGame.MyManager.MyPlacePlane.Handler
                 case TeamType.Team2:
                     SetNearRoad(team2NearRoads);
                     break;
-                case TeamType.Team3:
-                    SetNearRoad(team3NearRoads);
-                    break;
             }
         }
 
@@ -36,4 +33,4 @@ namespace InGame.MyManager.MyPlacePlane.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.05.06
