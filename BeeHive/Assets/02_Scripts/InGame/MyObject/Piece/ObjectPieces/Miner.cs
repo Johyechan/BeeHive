@@ -2,7 +2,6 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using MyUtil.GameMode;
 using System.Threading.Tasks;
 
 namespace InGame.MyObject.Piece.ObjectPieces
@@ -63,6 +62,8 @@ namespace InGame.MyObject.Piece.ObjectPieces
         // 생산 가능 여부 확인 함수
         private bool CanDig()
         {
+            InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanPieceMovePlane(_pieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, PieceData.currentObjectType); // 이동 가능한 칸 찾기
+
             foreach (var map in InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanDigCheckPlacePlanes) // 생산 가능 여부 확인 배치칸 순회
             {
                 if(map.Key == this) // 나 자신의 생산 가능 여부를 확인할 때
@@ -87,4 +88,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.05.06
+// 마지막 작성 일자: 2026.05.07

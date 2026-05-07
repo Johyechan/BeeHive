@@ -46,7 +46,6 @@ namespace InGame.MyObject.Piece.ObjectPieces
                 return; // 반환
             }
 
-            NetworkManager.Instance.Socket.Emit("debug", "도로 변경 함수 들어옴");
 
             UIManager.Instance.CanInteractionUI = false;
 

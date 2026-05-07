@@ -54,13 +54,17 @@ namespace InGame.MySystem.Game
                     return; // 그냥 반환
                 }
 
-                PieceBase piece = InGameContext.Current.Data.GameManager.CurrentMovePiece.GetComponent<PieceBase>(); // 현재 선택된 기물 가져오기
+                PieceBase piece = InGameContext.Current.Data.GameManager.CurrentMovePiece?.GetComponent<PieceBase>(); // 현재 선택된 기물 가져오기
+
+                if (piece == null)
+                    return;
 
                 if (on == false) // 끄는 상태일 때
                 {
                     InGameContext.Current.Data.GameManager.CurrentMovePiece = null; // 현재 이동하려는 기물을 null로 할당
                     piece.PieceVariable.isSelected = false; // 선택 해제 된 상태로 할당
                 }
+
 
                 foreach (var placePlane in _canPieceMovePlanes[piece]) // 이동 가능한 기물 판 객체들 순회
                 {
@@ -78,10 +82,12 @@ namespace InGame.MySystem.Game
 
         public void RoadHighLight(bool on)
         {
+
             if (_canRoadPlacePlanes.Count <= 0) // 배치 가능한 도로 판 객체 존재하지 않다면
             {
                 return; // 그냥 반환
             }
+
 
             foreach (var placePlane in _canRoadPlacePlanes) // 배치 가능한 도로 판 객체들 순회
             {
@@ -97,4 +103,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.05.05
+// 마지막 작성 일자: 2026.05.07

@@ -68,10 +68,7 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceMove
 
             foreach(var nearPiece in road.nearPiecePlaceTransformList) // 도로의 주위 기물 탐색
             {
-                if(nearPiece.PlacedObjectType == ObjectType.None) // 기물 위가 비어 있다면
-                {
-                    CheckPiece(pieceBase, nearPiece, teamType, roadVisited, pieceVisited);
-                }
+                CheckPiece(pieceBase, nearPiece, teamType, roadVisited, pieceVisited);
             }
         }
 
@@ -83,7 +80,8 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceMove
 
             pieceVisited.Add(piece);
 
-            InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPieceMovePlanes[pieceBase].Add(piece); // 이동 가능한 기물 배치 칸 추가
+            if(piece.PlacedObjectType == ObjectType.None) // 기물 칸이 비어있다면
+                InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPieceMovePlanes[pieceBase].Add(piece); // 이동 가능한 기물 배치 칸 추가
 
             if(pieceBase.CurrentObjectType == ObjectType.Miner) // 이동 가능한 위치를 찾는 기물이 광부일 때
             {
@@ -95,7 +93,7 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceMove
                 InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanDigCheckPlacePlanes[pieceBase].Add(piece); // 생산 가능 여부 확인 배치칸으로 추가
             }
 
-            foreach (var nearRoad in piece.nearRoadPlaceTransformList)
+            foreach (var nearRoad in piece.nearRoadPlaceTransformList) 
             {
                 if(nearRoad.TeamType == teamType) // 도로가 같은 팀 도로일 때
                 {
@@ -105,4 +103,4 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceMove
         }
     }
 }
-// 마지막 작성 일자: 2026.05.06
+// 마지막 작성 일자: 2026.05.07

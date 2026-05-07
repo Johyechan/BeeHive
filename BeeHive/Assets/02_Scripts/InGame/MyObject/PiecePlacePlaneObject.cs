@@ -91,12 +91,9 @@ namespace InGame.MyObject
             {
                 if (currentPlayerTeamType != TeamManager.Instance.CurrentTeamType) // 상대방이 성 주위 배치칸을 클릭했을 경우
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "상대방이 성 주위 배치칸을 클릭함");
                     if (_isRangeAttackTarget) // 원거리 공격 가능 대상일 때
                     {
-                        NetworkManager.Instance.Socket.Emit("debug", "원거리 공격 가능 대상");
                         PieceBase pieceBase = InGameContext.Current.Data.GameManager.CurrentMovePiece.GetComponent<PieceBase>();
-                        NetworkManager.Instance.Socket.Emit("debug", $"그래서 선택된 기물이: {pieceBase}");
 
                         TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
 
@@ -107,8 +104,6 @@ namespace InGame.MyObject
 
                         pieceBase.CurrentConfirmUI = FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 탐색
                         pieceBase.PieceData.confirmUI.gameObject.SetActive(true); // 객체 활성화
-
-                        NetworkManager.Instance.Socket.Emit("debug", $"확인 UI: {pieceBase.PieceData.confirmUI}");
 
                         pieceBase.PieceData.confirmUI.Confirm(result =>
                         {
@@ -135,7 +130,6 @@ namespace InGame.MyObject
                 }
                 else // 자신이 성 주위 배치칸을 눌렀을 경우
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", "내가 성 주위 배치칸을 클릭함");
                     if (_frontPiecePlacePlaneObject.PlacedObjectType != ObjectType.None)// 앞에 있는 기물 배치칸에 배치된 기물이 있다면 
                     {
                         if (_frontPiecePlacePlaneObject.TeamType != TeamManager.Instance.CurrentTeamType) // 앞에 있는 기물 배치칸에 배치된 기물이 내 팀이 아닐 경우

@@ -1,7 +1,5 @@
 using InGame.MyEnum;
-using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.Local.Turn;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;

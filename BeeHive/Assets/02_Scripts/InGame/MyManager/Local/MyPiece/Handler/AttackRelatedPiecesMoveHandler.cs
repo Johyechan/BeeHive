@@ -76,7 +76,6 @@ namespace InGame.MyManager.MyPiece.Handler
                     if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                         return; // 반환
 
-                    NetworkManager.Instance.Socket.Emit("debug", "공격 시 도로 변경 이벤트 호출");
                     PieceEvents.OnChangeNearRoad?.Invoke(attackPiece, attackPiece.CurrentTeamType, attackPiece.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                 }
             }
