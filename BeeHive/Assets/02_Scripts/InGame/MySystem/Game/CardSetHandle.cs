@@ -1,8 +1,5 @@
-using DG.Tweening;
 using InGame.MyEnum;
-using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using MyUtil.MyEvent;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -12,7 +9,6 @@ namespace InGame.MySystem.Game
     {
         public Transform player1Parent;
         public Transform player2Parent;
-        public Transform player3Parent;
     }
     // 작성자: 조혜찬
     // 카드 인게임 세팅 핸들 클래스
@@ -22,7 +18,6 @@ namespace InGame.MySystem.Game
 
         private Transform _player1CardsParent; // 플레이어1 객체 부모
         private Transform _player2CardsParent; // 플레이어2 객체 부모
-        private Transform _player3CardsParent; // 플레이어3 객체 부모
 
         public CardSetHandle(Transform deckParent, CardParents cardParents)
         {
@@ -30,7 +25,6 @@ namespace InGame.MySystem.Game
 
             _player1CardsParent = cardParents.player1Parent;
             _player2CardsParent = cardParents.player2Parent;
-            _player3CardsParent = cardParents.player3Parent;
         }
 
         public async Task Setting(int targetTeam, int cardCount)
@@ -56,14 +50,10 @@ namespace InGame.MySystem.Game
 
             for(int i = 0; i < count; i++) // 카드 수 차이만큼 반복
             {
-                InGameContext.Current.Data.DrawManager.DrawCard(_deckParent, playerCardsParent, null, false); // ui는 제외, 객체만 드로우
-                Sequence seq = DOTween.Sequence()
-                    .AppendCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(playerCardsParent)); // 카드 객체 정렬
-
-                await seq.AsyncWaitForCompletion(); // Task 완료 대기
+                await InGameContext.Current.Data.DrawManager.DrawCard(_deckParent, playerCardsParent, null, false); // ui는 제외, 객체만 드로우
             }
             await Task.CompletedTask; // Task 완료
         }
     }
 }
-// 마지막 작성 일자: 2026.05.06
+// 마지막 작성 일자: 2026.05.08

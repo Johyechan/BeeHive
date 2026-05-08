@@ -152,7 +152,7 @@ MonoBehaviour:
     currentCardNameKey: Game_UI_Card_FirePowerName
     currentCardExplainKey: Game_UI_Card_FirePowerInformation
     currentCardSprite: {fileID: 21300000, guid: f56983519c9e1a442a90bfd54a6ff5c4, type: 3}
-    poolType: 9
+    poolType: 8
     animationDuration: 0.1
     animationYValue: 0.05
 --- !u!225 &-1320419940044538253

@@ -16,7 +16,6 @@ namespace InGame.MyObject
     {
         public Transform player1CardsParent; // 플레이어1 카드들의 부모 Transform 변수
         public Transform player2CardsParent; // 플레이어2 카드들의 부모 Transform 변수
-        public Transform player3CardsParent; // 플레이어3 카드들의 부모 Transform 변수
 
         public RectTransform _playerUICardsParent; // 플레이어 UI 카드들의 부모 RectTransform 변수
 
@@ -95,4 +94,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.04.16
+// 마지막 작성 일자: 2026.05.08

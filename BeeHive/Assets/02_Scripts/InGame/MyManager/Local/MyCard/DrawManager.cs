@@ -1,9 +1,12 @@
+using DG.Tweening;
 using InGame.MyManager.Global;
 using InGame.MyObject;
 using InGame.MySystem.Game;
 using InGame.MyUI.Card;
+using MyUtil.MyEvent;
 using MyUtil.MyObjectPool;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyManager.Local.MyCard
@@ -30,12 +33,11 @@ namespace InGame.MyManager.Local.MyCard
             {
                 player1Parent = _deck.player1CardsParent, // 플레이어1 카드 객체 부모
                 player2Parent = _deck.player2CardsParent, // 플레이어2 카드 객체 부모
-                player3Parent = _deck.player3CardsParent, // 플레이어3 카드 객체 부모
             };
             _cardSetHandle = new CardSetHandle(_deck.deckTransform, cardParents); // 카드 세팅 클래스 생성
         }
 
-        public void DrawCard(Transform deckParent, Transform playerCardsParent, RectTransform playerUICardsParent, bool includeUI = true)
+        public async Task DrawCard(Transform deckParent, Transform playerCardsParent, RectTransform playerUICardsParent, bool includeUI = true)
         {
             int topCardIndex = deckParent.childCount - 1; // 맨 위에 있는 카드 인덱스
             Transform currentDrawCardTrans = deckParent.GetChild(topCardIndex); // 맨 위에 있는 카드 할당
@@ -66,7 +68,19 @@ namespace InGame.MyManager.Local.MyCard
                     InGameContext.Current.Data.DeckManager.ReMakeDeck();
                 }
             }
+
+            Sequence seq = DOTween.Sequence()
+                  .AppendCallback(() =>
+                  {
+                      if(includeUI)
+                      {
+                          DrawEventSystem.OnCardUISet?.Invoke();
+                      }
+                  })
+                  .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(playerCardsParent));// 드로우 이벤트 인보크 후 시퀀스 완료
+
+            await seq.AsyncWaitForCompletion(); // Task 완료 반환 대기
         }
     }
 }
-// 마지막 작성 일자: 2026.04.17
+// 마지막 작성 일자: 2026.05.08

@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4d3d7a1f99a57641a5b53f058f96df6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardUIPoolType: 10
-  _cardPoolType: 15
+  _cardUIPoolType: 9
+  _cardPoolType: 14
 --- !u!210 &4885919658576878335
 SortingGroup:
   m_ObjectHideFlags: 0

@@ -507,7 +507,7 @@ MonoBehaviour:
     currentCardNameKey: Game_UI_Card_DroughtName
     currentCardExplainKey: Game_UI_Card_DroughtInformation
     currentCardSprite: {fileID: 21300000, guid: 84f8abeae50e4f24ab63b4f1f2a661e7, type: 3}
-    poolType: 8
+    poolType: 7
     animationDuration: 0.1
     animationYValue: 0.05
 --- !u!225 &1005268961364620859
