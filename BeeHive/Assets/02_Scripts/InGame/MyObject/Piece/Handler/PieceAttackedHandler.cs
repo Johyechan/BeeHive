@@ -100,7 +100,7 @@ namespace InGame.MyObject.Piece.Handler
                                 InGameContext.Current.Data.PieceManager.FadeInOutWaitConfirmUI(1); // 대기 UI 활성화
                             }
 
-                            bool opponentChooseDefense = GameModeManager.Instance.CurrentGameMode.UseServer() ? await InGameContext.Current.Data.PieceManager.OpponentChoice() == 1 ? true : false : false; // 상대가 결정할 때까지 대기(서버를 사용하지 않는 경우 바로 false 반환)
+                            bool opponentChooseDefense = GameModeManager.Instance.CurrentGameMode.UseServer() ? await InGameContext.Current.Data.PieceManager.OpponentChoice(InGameContext.Current.Data.PieceManager.WaitTime) == 1 ? true : false : false; // 상대가 결정할 때까지 대기(서버를 사용하지 않는 경우 바로 false 반환)
 
                             if (GameModeManager.Instance.CurrentGameMode.UseServer()) // 서버를 사용하는 경우
                             {
@@ -192,4 +192,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.04.21
+// 마지막 작성 일자: 2026.05.11

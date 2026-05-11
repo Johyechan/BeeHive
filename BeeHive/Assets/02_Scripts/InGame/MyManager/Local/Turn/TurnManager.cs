@@ -161,7 +161,7 @@ namespace InGame.MyManager.Local.Turn
                 if (_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면
                 {
                     await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
-                    await Task.Delay(_makeTurnDelayMillisecond); // 생산 턴 작업 종료 후 잠시 대기
+                    WalletEvent.OnSetGold?.Invoke(); // 금화 및 금괴의 객체와 UI 세팅
                     InGameContext.Current.Data.DrawManager.CanDraw = true; // 드로우 가능 상태
                 }
                 else if(_currentTurnType == TurnType.DrawTurn || _currentTurnType == TurnType.MainTurn) // 드로우턴 또는 메인턴일 때
@@ -224,4 +224,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.05.04
+// 마지막 작성 일자: 2026.05.11

@@ -1,4 +1,3 @@
-using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyManager.Global;
 using MyUtil.MyObjectPool;
@@ -42,11 +41,23 @@ namespace InGame.MySystem
             _otherTeamGoldBar = otherTeamGoldBar;
         }
 
-        public void SetObject(Transform goldCoinParent, Transform goldBarParent, int goldCoinCount, int goldBarCount, TeamType type)
+        // 금화 세팅 함수
+        public void SetGoldCoin(Transform goldCoinParent, int goldCoinCount, TeamType type)
         {
             if (TeamManager.Instance.CurrentTeamType != type) // 내 팀의 금화 금괴 변경 사항이 아니라면
             {
                 _otherTeamGoldCoin.text = $"x {goldCoinCount}"; // 상대 팀 금화 개수 UI 변경
+            }
+
+            float coinInterval = (type == TeamType.Team1) ? _team1GoldCoinInterval : _team2GoldCoinInterval;
+            SyncObject(goldCoinCount, ObjectPoolType.GoldCoin, goldCoinParent, coinInterval);
+        }
+
+        // 금괴 세팅 함수
+        public void SetGoldBar(Transform goldBarParent, int goldBarCount, TeamType type)
+        {
+            if (TeamManager.Instance.CurrentTeamType != type) // 내 팀의 금화 금괴 변경 사항이 아니라면
+            {
                 _otherTeamGoldBar.text = $"x {goldBarCount}"; // 상대 팀 금괴 개수 UI 변경
                 if (goldBarCount >= _goldBarMaxCount) // 금괴 수가 최대 개수 이상이라면
                 {
@@ -58,43 +69,39 @@ namespace InGame.MySystem
                 }
             }
 
-            float coinInterval = (type == TeamType.Team1) ? _team1GoldCoinInterval : _team2GoldCoinInterval;
-            SyncObject(goldCoinCount, ObjectPoolType.GoldCoin, goldCoinParent, coinInterval);
-
             float barInterval = (type == TeamType.Team1) ? _team1GoldBarInterval : _team2GoldBarInterval;
             SyncObject(goldBarCount, ObjectPoolType.GoldBar, goldBarParent, barInterval);
         }
 
         private void SyncObject(int targetCount, ObjectPoolType type, Transform parent, float interval)
         {
-            int currentCount = parent.childCount;
+            int diff = targetCount - parent.childCount; // 목표 수와 현재 자식 수의 개수 차이
 
-            for(int i = currentCount; i < targetCount; i++)
+            if (diff > 0) // 현재 자식 수보다 목표 수가 더 많을 경우
             {
-                if(type == ObjectPoolType.GoldCoin)
-                    NetworkManager.Instance.Socket.Emit("debug", $"{type} 생성");
-                GameObject obj = ObjectPoolManager.Instance.GetObject(type, parent); // 금화 또는 금괴 가져오기
-                obj.transform.localPosition = new Vector3(i % _zValueChangeCount * interval, ObjectPoolManager.Instance.AnimationYPos, i / _zValueChangeCount * _zInterval); // 금 개수가 z축 값이 변경되는 개수 초과이면 z축으로 _zInterval만큼 올라가고 x축은 초기화 돼서 0부터 다시 interval 간격으로 배치
+                for(int i = 0; i < diff; i++)
+                {
+                    GameObject obj = ObjectPoolManager.Instance.GetObject(type, parent); // 금화 또는 금괴 가져오기
+                    int currentIndex = parent.childCount - 1;
+                    obj.transform.localPosition = new Vector3(currentIndex % _zValueChangeCount * interval, ObjectPoolManager.Instance.AnimationYPos, currentIndex / _zValueChangeCount * _zInterval); // 금 개수가 z축 값이 변경되는 개수 초과이면 z축으로 _zInterval만큼 올라가고 x축은 초기화 돼서 0부터 다시 interval 간격으로 배치
+                }
+
+                for (int i = 0; i < targetCount; i++)
+                {
+                    GameObject obj = parent.GetChild(i).gameObject;
+                    ObjectPoolManager.Instance.Animation(obj, true, true); // 애니메이션 실행
+                }
             }
-
-            for(int i = currentCount - 1; i >= targetCount; i--)
+            else if(diff < 0) // 현재 자식 수가 목표 수 보다 더 많을 경우
             {
-                if (type == ObjectPoolType.GoldCoin)
-                    NetworkManager.Instance.Socket.Emit("debug", $"{type} 파괴");
-
-                GameObject obj = parent.GetChild(i).gameObject;
-                ObjectPoolManager.Instance.ReturnObject(type, obj, true);
-            }
-
-            for (int i = 0; i < targetCount; i++)
-            {
-                if (type == ObjectPoolType.GoldCoin)
-                    NetworkManager.Instance.Socket.Emit("debug", $"{type} 애니메이션");
-
-                GameObject obj = parent.GetChild(i).gameObject;
-                ObjectPoolManager.Instance.Animation(obj, true, true); // 애니메이션 실행
+                for(int i = 0; i < -diff; i++)
+                {
+                    int lastIndex = parent.childCount - 1; // 맨 끝 자식 인덱스 가져오기
+                    GameObject obj = parent.GetChild(lastIndex).gameObject; // 맨 끝 자식 가져오기
+                    ObjectPoolManager.Instance.ReturnObject(type, obj, true); // 맨 끝 자식 반환
+                }
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.04.28
+// 마지막 작성 일자: 2026.05.11

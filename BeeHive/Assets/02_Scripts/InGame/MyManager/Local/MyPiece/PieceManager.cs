@@ -20,6 +20,9 @@ namespace InGame.MyManager.Local.MyPiece
 
         [SerializeField] private float _animationDuration; // 애니메이션 지속 시간
 
+        [SerializeField] private int _waitTime; // 공격 대응 대기 시간
+        public int WaitTime { get => _waitTime; } // 공격 대응 대기 시간 프로퍼티
+
         private Dictionary<PieceBase, List<PieceBase>> _canAttackPieceMap = new Dictionary<PieceBase, List<PieceBase>>(); // 공격 가능한 기물들을 저장하는 맵
         public Dictionary<PieceBase, List<PieceBase>> CanAttackPieceMap { get =>  _canAttackPieceMap; } // 위 변수 프로퍼티
 
@@ -137,4 +140,4 @@ namespace InGame.MyManager.Local.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2026.04.30
+// 마지막 작성 일자: 2026.05.11

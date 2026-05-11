@@ -11,7 +11,7 @@ namespace InGame.MyEvent
     // 기물 관련 이벤트를 가지는 정적 클래스
     public static class PieceEvents
     {
-        public static Func<int, TeamType, Transform, Task> OnGetRoad; // 도로를 가져오는 이벤트
+        public static Action<int, TeamType, Transform> OnGetRoad; // 도로를 가져오는 이벤트
         public static Action<Transform, TeamType> OnDestroyLeftRoad; // 사용하지 않은 도로를 삭제하는 이벤트
         public static Action<PieceBase> OnShowCanAttackPieces; // 공격 가능한 기물들을 보여주는 이벤트
         public static Action<bool> OnHideCanAttackPieces; // 공격 가능한 기물들을 숨겨주는 이벤트

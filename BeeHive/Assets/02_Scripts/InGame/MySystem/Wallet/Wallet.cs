@@ -68,6 +68,7 @@ namespace InGame.MySystem
             WalletEvent.OnGetGoldBar += GetGoldBar; // 금괴 획득 이벤트에 금괴 획득 함수 구독
             WalletEvent.OnUseGoldBar += UseGoldBar; // 금괴 사용 이벤트에 금괴 사용 함수 구독
             WalletEvent.OnCanUseGoldBar += CanUseGoldBar; // 금괴 사용 여부 확인 이벤트에 금괴 사용 여부 확인 함수 구독
+            WalletEvent.OnSetGold += SetGold; // 금괴 및 금화 세팅 이벤트에 함수 구독
         }
 
         private void OnDisable()
@@ -75,7 +76,18 @@ namespace InGame.MySystem
             WalletEvent.OnGetGoldCoin -= GetGoldCoin; // 금화 획득 이벤트에 금화 획득 함수 구독 해제
             WalletEvent.OnGetGoldBar -= GetGoldBar; // 금괴 획득 이벤트에 금괴 획득 함수 구독 해제
             WalletEvent.OnUseGoldBar -= UseGoldBar; // 금괴 사용 이벤트에 금괴 사용 함수 구독 해제
-            WalletEvent.OnCanUseGoldBar -= CanUseGoldBar; // 금괴 사용 여부 확인 이벤트에 금괴 사용 여부 확인 함수 구독
+            WalletEvent.OnCanUseGoldBar -= CanUseGoldBar; // 금괴 사용 여부 확인 이벤트에 금괴 사용 여부 확인 함수 구독 해제
+            WalletEvent.OnSetGold -= SetGold; // 금괴 및 금화 세팅 이벤트에 함수 구독 해제
+        }
+
+        private void SetGold()
+        {
+            GoldSetEventEmit();
+
+            _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
+
+            _goldSetHandle.GoldCoinSetting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount); // 객체 변경
+            _goldSetHandle.GoldBarSetting((int)TeamManager.Instance.CurrentTeamType, _goldBarCount); // 객체 변경
         }
 
         // 금화를 얻는 함수(얻는 값)
@@ -90,7 +102,6 @@ namespace InGame.MySystem
 
                         ChangeGoldCoinToGoldBar(); // 함수를 통해 금화를 금괴로 치환
 
-                        GoldSetEventEmit();
                         _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
                         break;
                     case TeamType.Team2:
@@ -103,10 +114,10 @@ namespace InGame.MySystem
                 switch (InGameContext.Current.Data.TurnManager.CurrentTeamType)
                 {
                     case TeamType.Team1:
-                        _goldSetHandle.Setting((int)TeamType.Team1, _goldCoinCount, _goldBarCount); // 객체 변경
+                        _goldSetHandle.GoldCoinSetting((int)TeamType.Team1, _goldCoinCount); // 객체 변경
                         break;
                     case TeamType.Team2:
-                        _goldSetHandle.Setting((int)TeamType.Team2, _tutorialGoldCoinCount, _tutorialGoldBarCount); // 객체 변경
+                        _goldSetHandle.GoldCoinSetting((int)TeamType.Team2, _tutorialGoldCoinCount); // 객체 변경
                         break;
                 }
             }
@@ -119,7 +130,7 @@ namespace InGame.MySystem
         }
 
         // 금괴를 얻는 함수(얻는 값)
-        private void GetGoldBar(int value)
+        private void GetGoldBar(int value, bool directChange)
         {
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼일 경우
             {
@@ -133,7 +144,6 @@ namespace InGame.MySystem
 
                         _goldBarCount += value; // 금괴 증가
 
-                        GoldSetEventEmit();
                         _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
                         break;
                     case TeamType.Team2:
@@ -150,10 +160,10 @@ namespace InGame.MySystem
                 switch (InGameContext.Current.Data.TurnManager.CurrentTeamType)
                 {
                     case TeamType.Team1:
-                        _goldSetHandle.Setting((int)TeamType.Team1, _goldCoinCount, _goldBarCount); // 객체 변경
+                        _goldSetHandle.GoldBarSetting((int)TeamType.Team1, _goldBarCount); // 객체 변경
                         break;
                     case TeamType.Team2:
-                        _goldSetHandle.Setting((int)TeamType.Team2, _tutorialGoldCoinCount, _tutorialGoldBarCount); // 객체 변경
+                        _goldSetHandle.GoldBarSetting((int)TeamType.Team2, _tutorialGoldBarCount); // 객체 변경
                         break;
                 }
             }
@@ -168,10 +178,10 @@ namespace InGame.MySystem
 
                 BlockGoldBarMaxOver(); // 금괴가 최대 금괴 수 초과로 벌리는 것을 막는 함수
 
-                GoldSetEventEmit();
-                _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-
-                _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
+                if(directChange) // 즉시 변경일 경우
+                {
+                    SetGold(); // 골드 세팅
+                }
             }
         }
 
@@ -196,13 +206,12 @@ namespace InGame.MySystem
                 {
                     case TeamType.Team1:
                         _goldBarCount -= value; // 금괴 감소
-                        GoldSetEventEmit();
                         _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-                        _goldSetHandle.Setting((int)TeamType.Team1, _goldCoinCount, _goldBarCount); // 객체 변경
+                        _goldSetHandle.GoldBarSetting((int)TeamType.Team1, _goldBarCount); // 객체 변경
                         return true;
                     case TeamType.Team2:
                         _tutorialGoldBarCount -= value; // 금괴 감소
-                        _goldSetHandle.Setting((int)TeamType.Team2, _tutorialGoldCoinCount, _tutorialGoldBarCount); // 객체 변경
+                        _goldSetHandle.GoldBarSetting((int)TeamType.Team2, _tutorialGoldBarCount); // 객체 변경
                         return true;
                     default: // 예외 발생 시
                         return false;
@@ -211,9 +220,12 @@ namespace InGame.MySystem
             else
             {
                 _goldBarCount -= value; // 금괴 감소
+
                 GoldSetEventEmit();
+
                 _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-                _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
+
+                _goldSetHandle.GoldBarSetting((int)TeamManager.Instance.CurrentTeamType, _goldBarCount); // 객체 변경
                 return true;
             }
         }
@@ -234,14 +246,12 @@ namespace InGame.MySystem
                             return false; // false 반환
                         break;
                 }
-                
             }
             else
             {
                 if (_goldBarCount < value) // 사용하려는 값보다 금괴 수가 적다면
                     return false; // false 반환
             }
-
 
             return true; // true 반환
         }
@@ -264,15 +274,6 @@ namespace InGame.MySystem
             }
 
             BlockGoldBarMaxOver(); // 금괴가 최대 금괴 수 초과로 벌리는 것을 막는 함수
-
-            if (GameModeManager.Instance.CurrentGameMode.IsTutorial())
-                return;
-
-            GoldSetEventEmit();
-
-            _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // UI 변경
-
-            _goldSetHandle.Setting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount, _goldBarCount); // 객체 변경
         }
 
         private void GoldSetEventEmit()
@@ -290,4 +291,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.04.28
+// 마지막 작성 일자: 2026.05.11

@@ -8,9 +8,10 @@ namespace InGame.MyEvent
     public static class WalletEvent
     {
         public static Action<int> OnGetGoldCoin; // 금화 획득 이벤트
-        public static Action<int> OnGetGoldBar; // 금괴 획득 이벤트
+        public static Action<int, bool> OnGetGoldBar; // 금괴 획득 이벤트
+        public static Action OnSetGold; // 금화 및 금괴의 객체와 UI 세팅 이벤트
         public static Func<int, bool> OnUseGoldBar; // 금괴 사용 이벤트
         public static Func<int, bool> OnCanUseGoldBar; // 금괴 사용 가능 여부 확인 이벤트
     }
 }
-// 마지막 작성 일자: 2026.04.10
+// 마지막 작성 일자: 2026.05.11

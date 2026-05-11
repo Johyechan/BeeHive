@@ -3,7 +3,6 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.Turn;
 using MyUtil.GameMode;
 using UnityEngine;
 
@@ -35,8 +34,8 @@ namespace InGame.MyUI.Card
                 return false; // ¹ÝÈ¯
 
             // ±Ý±« 4°³ È¹µæ(°¡¹³ Ä«µåÀÇ È¿°ú¸¦ ¹ÞÁö ¾ÊÀ½)
-            WalletEvent.OnGetGoldBar?.Invoke(4);
-
+            WalletEvent.OnGetGoldBar?.Invoke(4, true);
+            WalletEvent.OnSetGold?.Invoke();
             return base.UseCard();
         }
     }

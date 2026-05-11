@@ -27,7 +27,7 @@ namespace InGame.MySystem
         }
 
         // 도로 생성 함수(생성 개수, 어떤 팀의 도로인지)
-        private async Task MakeRoad(int count, TeamType type, Transform parent)
+        private void MakeRoad(int count, TeamType type, Transform parent)
         {
             ObjectPoolType objectPoolType = type switch
             {
@@ -38,11 +38,11 @@ namespace InGame.MySystem
 
             for (int i = 0; i < count; i++)
             {
-                await MakeRoad(type, objectPoolType, parent, i);
+                MakeRoad(type, objectPoolType, parent, i);
             }
         }
 
-        private async Task MakeRoad(TeamType type, ObjectPoolType objectPoolType, Transform parent, int count)
+        private void MakeRoad(TeamType type, ObjectPoolType objectPoolType, Transform parent, int count)
         {
             Vector3 pos = Vector3.zero;
 
@@ -62,12 +62,10 @@ namespace InGame.MySystem
                 road.transform.localPosition = new Vector3(pos.x, ObjectPoolManager.Instance.AnimationYPos, pos.z);
                 road.transform.Rotate(0, _angle, 0);
                 ObjectPoolManager.Instance.Animation(road, true, true, pos.y);
-                await Task.Delay(_makeDelayMillisecond);
             }
             else // 튜토리얼이 아닐 때
             {
                 ObjectPoolManager.Instance.MakeObject(objectPoolType, pos, parent, true, -1, _angle); // 도로 생성
-                await Task.Delay(_makeDelayMillisecond);
             }
         }
     }

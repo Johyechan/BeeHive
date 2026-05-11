@@ -1,9 +1,7 @@
 using InGame.MyEnum;
-using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPiece;
 using InGame.MyObject.Piece.ObjectPieces;
 using MyUtil.GameMode;
 using UnityEngine;

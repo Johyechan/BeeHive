@@ -3,7 +3,6 @@ using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.Turn;
 using MyUtil.GameMode;
 using System.Threading.Tasks;
 using Tutorial;
@@ -38,13 +37,13 @@ namespace InGame.MySystem.Game
                 switch (TutorialManager.Instance.CurrentTutorialState)
                 {
                     case TutorialState.Turn1_Player: // Ã¹ ¹øÂ° ÅÏ(ÇÃ·¹ÀÌ¾î ÅÏ)
-                        WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
+                        WalletEvent.OnGetGoldBar?.Invoke(2, false); // ±Ý±« 2°³ È¹µæ
                         break;
                     case TutorialState.Turn1_AI: // Ã¹ ¹øÂ° ÅÏ(AI ÅÏ)
-                        WalletEvent.OnGetGoldBar?.Invoke(3); // ±Ý±« 3°³ È¹µæ
+                        WalletEvent.OnGetGoldBar?.Invoke(3, false); // ±Ý±« 3°³ È¹µæ
                         break;
                     default: // ´Ù¸¥ »óÅÂ¿¡¼­´Â
-                        WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
+                        WalletEvent.OnGetGoldBar?.Invoke(2, false); // ±Ý±« 2°³ È¹µæ
                         break;
                 }
             }
@@ -58,10 +57,10 @@ namespace InGame.MySystem.Game
                     switch (TeamManager.Instance.CurrentTeamType)
                     {
                         case TeamType.Team1:
-                            WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
+                            WalletEvent.OnGetGoldBar?.Invoke(2, false); // ±Ý±« 2°³ È¹µæ
                             break;
                         case TeamType.Team2:
-                            WalletEvent.OnGetGoldBar?.Invoke(3); // ±Ý±« 3°³ È¹µæ
+                            WalletEvent.OnGetGoldBar?.Invoke(3, false); // ±Ý±« 3°³ È¹µæ
                             break;
                         default:
                             break;
@@ -69,7 +68,7 @@ namespace InGame.MySystem.Game
                 }
                 else // °¢ ÆÀ¸¶´Ù Ã¹ ¹øÂ° ÅÏÀÌ ¾Æ´Ò°æ¿ì
                 {
-                    WalletEvent.OnGetGoldBar?.Invoke(2); // ±Ý±« 2°³ È¹µæ
+                    WalletEvent.OnGetGoldBar?.Invoke(2, false); // ±Ý±« 2°³ È¹µæ
                 }
             }
 
@@ -100,7 +99,7 @@ namespace InGame.MySystem.Game
             else // Æ©Åä¸®¾ó ÀÏ ¶§
             {
                 Transform roadParent = TeamManager.Instance.GetRoadTransform(InGameContext.Current.Data.TurnManager.CurrentTeamType); // ÇöÀç ÅÏ ÆÀÀÇ µµ·Î ºÎ¸ð °¡Á®¿À±â
-                await PieceEvents.OnGetRoad?.Invoke(2, InGameContext.Current.Data.TurnManager.CurrentTeamType, roadParent); // µµ·Î 2°³ È¹µæ(ÇöÀç ÅÏÀÇ ÆÀ)
+                PieceEvents.OnGetRoad?.Invoke(2, InGameContext.Current.Data.TurnManager.CurrentTeamType, roadParent); // µµ·Î 2°³ È¹µæ(ÇöÀç ÅÏÀÇ ÆÀ)
             }
 
             await Task.CompletedTask; // Task ¿Ï·á ¹ÝÈ¯
@@ -118,4 +117,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// ¸¶Áö¸· ÀÛ¼º ÀÏÀÚ: 2026.04.20
+// ¸¶Áö¸· ÀÛ¼º ÀÏÀÚ: 2026.05.11
