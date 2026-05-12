@@ -9,6 +9,7 @@ using InGame.MyUI.MyUIInterface;
 using MyUtil;
 using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
+using System.Threading.Tasks;
 using Tutorial;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -87,7 +88,7 @@ namespace InGame.MyUI.Card
         }
 
         // 카드 사용 함수
-        public virtual bool UseCard()
+        public virtual Task<bool> UseCard()
         {
             // 카드 사용 후 사용된 카드들을 모아두는 덱으로 이동
             if(_uiCardVariable.usedCardDeck != null) // 사용한 카드들을 모아두는 덱을 찾았을 경우
@@ -98,10 +99,10 @@ namespace InGame.MyUI.Card
                     ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject, true, false);
                 });
 
-                return true;
+                return Task.FromResult(true);
             }
 
-            return false;
+            return Task.FromResult(false);
         }
 
         // 카드 정보를 보여주는 함수
@@ -151,4 +152,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.05.12

@@ -1,6 +1,8 @@
 using DG.Tweening;
+using InGame.MyManager.Local;
 using InGame.MyObject.Handler;
 using InGame.MyObject.MyObjectInterface;
+using InGame.MyUI.Card;
 using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
@@ -58,6 +60,13 @@ namespace InGame.MyObject
                 case ObjectPoolType.FirePowerUICard:
                     ++_usedCardInfo.firePowerCardCount;
                     _usedDeckUIData.firePowerCardCount.text = $"x {_usedCardInfo.firePowerCardCount}";
+
+                    UICardBase uiCardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard(); // 자신의 패에서 화력 카드 탐색
+
+                    if (uiCardBase == null) // 자신의 패에 화력 카드가 없다면
+                    {
+                        InGameContext.Current.Data.CardManager.HaveFirePowerCard = false; // 화력 카드가 없는 상태로 전환
+                    }
                     break;
             }
 
@@ -85,4 +94,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.04.22
+// 마지막 작성 일자: 2026.05.12

@@ -26,13 +26,14 @@ namespace InGame.MyUI.MyUIButton
         public UICardBase UICardBase { get => _uiCardBase; set => _uiCardBase = value; } // 외부에서 할당하기 위한 프로퍼티
 
         // 클릭 시 실행될 함수
-        public void OnUIClick()
+        public async void OnUIClick()
         {
             InGameContext.Current.Data.CardManager.CardReverseTask = new TaskCompletionSource<bool>(); // 카드 뒤집기 대기 테스크 할당
 
             if(_uiCardBase != null) // ui 카드가 존재할 때
             {
-                if (_uiCardBase.UseCard() == false) // 카드 사용에 예외가 발생했다면
+                bool useCardResult = await _uiCardBase.UseCard(); // 카드 사용 대기
+                if (useCardResult == false) // 카드 사용에 예외가 발생했다면
                 {
                     DOTween.Sequence()
                     .Append(_canvasGroup.DOFade(0, _animationDuration)) // 페이드 아웃
@@ -101,4 +102,4 @@ namespace InGame.MyUI.MyUIButton
         }
     }
 }
-// 마지막 작성 일자: 2026.04.06
+// 마지막 작성 일자: 2026.05.12

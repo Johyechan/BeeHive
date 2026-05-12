@@ -1,5 +1,4 @@
 using InGame.MyEnum;
-using InGame.MyManager.Global;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 using InGame.MySystem.Game.FindSystem.Handler;

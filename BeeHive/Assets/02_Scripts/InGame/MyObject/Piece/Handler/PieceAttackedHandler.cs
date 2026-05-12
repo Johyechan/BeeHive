@@ -91,6 +91,8 @@ namespace InGame.MyObject.Piece.Handler
                         isRangedAttack = true; // 전차 원거리 공격으로 판정
                         InGameContext.Current.Data.GameManager.TankRangedAttacked = true; // 원거리 공격한 것으로 판정
 
+                        await InGameContext.Current.Data.CardManager.UsedCardShowOver?.Task; // 사용한 카드 보여주기가 끝날 때까지 대기
+
                         if (_pieceBase.CurrentObjectType == ObjectType.Tank) // 만약 공격 받는 기물도 전차라면
                         {
                             if (GameModeManager.Instance.CurrentGameMode.UseServer())
@@ -115,13 +117,6 @@ namespace InGame.MyObject.Piece.Handler
                                 InGameContext.Current.Data.GameManager.PieceCanMoveMap[attackPieceBase.CurrentObjectType] = false; // 공격한 기물이 이동 한 것으로 판정
 
                                 HighLightOffFunction(true);
-
-                                UICardBase uiCardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard(); // 자신의 패에서 화력 카드 탐색
-
-                                if (uiCardBase == null) // 자신의 패에 화력 카드가 없다면
-                                {
-                                    InGameContext.Current.Data.CardManager.HaveFirePowerCard = false; // 화력 카드가 없는 상태로 전환
-                                }
 
                                 InGameContext.Current.Data.PieceManager.FindCanPlacePlane(); // 재탐색
                                 await Task.CompletedTask; // 테스크 종료
@@ -192,4 +187,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.05.11
+// 마지막 작성 일자: 2026.05.12

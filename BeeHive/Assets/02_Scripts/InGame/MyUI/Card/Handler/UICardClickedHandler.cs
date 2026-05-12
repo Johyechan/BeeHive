@@ -1,12 +1,8 @@
 using DG.Tweening;
-using InGame.MyManager;
 using InGame.MyUI.Card.Variable;
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.Localization.Settings;
-using static UnityEngine.Rendering.DebugUI;
 
 namespace InGame.MyUI.Card.Handler
 {

@@ -1,6 +1,6 @@
 using DG.Tweening;
-using InGame.MyManager;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using MyUtil;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
@@ -58,6 +58,7 @@ namespace InGame.MyUI
                         _ = _canvasGroup.DOFade(0, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 아웃
 
                         _canvasGroup.gameObject.SetActive(true); // 비활성화
+                        InGameContext.Current.Data.CardManager.UsedCardShowOver?.SetResult(true); // 사용한 카드 보여주기 종료
                     });
                 });
             }
@@ -69,4 +70,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.04.13
+// 마지막 작성 일자: 2026.05.12

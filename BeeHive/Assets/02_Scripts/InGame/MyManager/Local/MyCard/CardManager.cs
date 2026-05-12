@@ -29,6 +29,9 @@ namespace InGame.MyManager.Local
         private TaskCompletionSource<bool> _cardReverseTask; // 카드 뒤집기 대기 테스크
         public TaskCompletionSource<bool> CardReverseTask { get => _cardReverseTask; set => _cardReverseTask = value; } // 카드 뒤집기 대기 테스크 프로퍼티
 
+        private TaskCompletionSource<bool> _usedCardShowOver; // 사용한 카드를 보여주는 것이 종료 되었는지 확인하는 변수
+        public TaskCompletionSource<bool> UsedCardShowOver { get => _usedCardShowOver; set => _usedCardShowOver = value; } // 사용한 카드를 보여주는 것이 종료 되었는지 확인하는 변수 프로퍼티
+
         [SerializeField] private Transform _uiCardsParent; // ui 카드 부모
 
         [SerializeField] private Transform _team1CardParent; // 팀1카드 부모
@@ -104,4 +107,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.05.06
+// 마지막 작성 일자: 2026.05.12

@@ -232,7 +232,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3626696777138176
-    m_Key: Game_UI_OpponentUseCard
+    m_Key: Game_UI_UseCardInformation
     m_Metadata:
       m_Items: []
   - m_Id: 4718796008587264

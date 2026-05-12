@@ -4,6 +4,7 @@ using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using MyUtil.GameMode;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyUI.Card
@@ -13,7 +14,7 @@ namespace InGame.MyUI.Card
     public class GoodHarvestUICard : UICardBase
     {
         // 카드 기능을 실제로 수행하는 함수
-        public override bool UseCard()
+        public override async Task<bool> UseCard()
         {
             if (InGameContext.Current.Data.CardManager.CheckSameTypeCardWasUsed(CardType.GoodHarvest)) // 풍년 카드 일전에 사용 했었는지 확인
             {
@@ -26,9 +27,13 @@ namespace InGame.MyUI.Card
                 usedCardType = (int)_uiCardData.poolType, // 사용한 카드의 이름
             };
 
+            InGameContext.Current.Data.CardManager.UsedCardShowOver = new TaskCompletionSource<bool>(); // 사용한 카드 보여주기 끝날 때까지 대기할 tcs 발급
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
             if (GameModeManager.Instance.CurrentGameMode.UseServer())
                 NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
+
+
+            await InGameContext.Current.Data.CardManager.UsedCardShowOver?.Task; // tcs 대기
 
             if (InGameContext.Current.Data.TurnManager.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 자신의 턴이 아닐 경우
                 return false; // 반환
@@ -36,8 +41,8 @@ namespace InGame.MyUI.Card
             // 금괴 4개 획득(가뭄 카드의 효과를 받지 않음)
             WalletEvent.OnGetGoldBar?.Invoke(4, true);
             WalletEvent.OnSetGold?.Invoke();
-            return base.UseCard();
+            return await base.UseCard();
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.05.12
