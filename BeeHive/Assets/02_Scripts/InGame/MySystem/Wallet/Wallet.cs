@@ -14,10 +14,10 @@ namespace InGame.MySystem
     // 지갑 클래스
     public class Wallet : MonoBehaviour
     {
-        [SerializeField] private TMP_Text _goldCoinTmpText; // 금화 개수 UI
-        [SerializeField] private TMP_Text _goldBarTmpText; // 금괴 개수 UI
-        [SerializeField] private TMP_Text _otherGoldCoinTmpText; // 상대 금화 개수 UI
-        [SerializeField] private TMP_Text _otherGoldBarTmpText; // 상대 금괴 개수 UI
+        [SerializeField] private TMP_Text _team1GoldCoinText; // 팀 1 금화 개수 텍스트
+        [SerializeField] private TMP_Text _team1GoldBarText; // 팀 1 금괴 개수 텍스트
+        [SerializeField] private TMP_Text _team2GoldCoinText; // 팀 2 금화 개수 텍스트
+        [SerializeField] private TMP_Text _team2GoldBarText; // 팀 2 금괴 개수 텍스트
 
         [SerializeField] private float _team1GoldCoinInterval; // 팀 1 금화 간격
         [SerializeField] private float _team1GoldBarInterval; // 팀 1 금괴 간격
@@ -29,7 +29,8 @@ namespace InGame.MySystem
         [SerializeField] private int _goldBarMaxCount; // 금괴 최대 개수
         [SerializeField] private int _makeDelayMillisecond; // 생성 대기 시간
 
-        [SerializeField] private Color _originColor; // 텍스트 기본 색상
+        [SerializeField] private Color _team1OriginalColor; // 팀 1 텍스트 기본 색상
+        [SerializeField] private Color _team2OriginalColor; // 팀 2 텍스트 기본 색상
 
         private int _goldCoinCount = 0; // 금화 개수
         private int _goldBarCount = 0; // 금괴 개수
@@ -55,9 +56,9 @@ namespace InGame.MySystem
 
             _goldSetHandle = new GoldSetHandle(this);
 
-            _walletUIHandle = new WalletUIHandle(_goldCoinTmpText, _goldBarTmpText, _goldBarMaxCount, _originColor);
+            _walletUIHandle = new WalletUIHandle(_team1GoldCoinText, _team1GoldBarText, _team2GoldCoinText, _team2GoldBarText, _goldBarMaxCount, _team1OriginalColor, _team2OriginalColor);
 
-            _walletObjectHandle = new WalletObjectHandle(_team1GoldCoinInterval, _team1GoldBarInterval, _team2GoldCoinInterval, _team2GoldBarInterval, _zInterval, _zValueChangeCount, _goldBarMaxCount, _originColor, _otherGoldCoinTmpText, _otherGoldBarTmpText);
+            _walletObjectHandle = new WalletObjectHandle(_team1GoldCoinInterval, _team1GoldBarInterval, _team2GoldCoinInterval, _team2GoldBarInterval, _zInterval, _zValueChangeCount, _goldBarMaxCount, _team1OriginalColor, _team2OriginalColor, _team1GoldCoinText, _team1GoldBarText, _team2GoldCoinText, _team2GoldBarText);
 
             _walletUIHandle.SetUI(_goldCoinCount, _goldBarCount); // 금화, 금괴 UI 초기화
         }
@@ -291,4 +292,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.05.11
+// 마지막 작성 일자: 2026.05.14

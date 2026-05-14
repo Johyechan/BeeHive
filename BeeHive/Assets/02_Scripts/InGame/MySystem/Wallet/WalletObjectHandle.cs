@@ -19,12 +19,15 @@ namespace InGame.MySystem
         private int _zValueChangeCount; // z축 값이 변경되는 개수 
         private int _goldBarMaxCount; // 금괴 최대 개수
 
-        private Color _originColor; // 기본 색
+        private Color _team1OriginalColor; // 팀 1기본 색
+        private Color _team2OriginalColor; // 팀 2기본 색
 
-        private TMP_Text _otherTeamGoldCoin; // 상대 팀 골드 코인 개수 UI
-        private TMP_Text _otherTeamGoldBar; // 상대 팀 골드 바 개수 UI
+        private TMP_Text _team1GoldCoinText; // 팀 1 골드 코인 개수 UI
+        private TMP_Text _team1GoldBarText; // 팀 1 골드 바 개수 UI
+        private TMP_Text _team2GoldCoinText; // 팀 2 골드 코인 개수 UI
+        private TMP_Text _team2GoldBarText; // 팀 2 골드 바 개수 UI
 
-        public WalletObjectHandle(float team1GoldCoinInterval, float team1GoldBarInterval, float team2GoldCoinInterval, float team2GoldBarInterval, float zInterval, int zValueChangeCount, int goldBarMaxCount, Color originColor, TMP_Text otherTeamGoldCoin, TMP_Text otherTeamGoldBar)
+        public WalletObjectHandle(float team1GoldCoinInterval, float team1GoldBarInterval, float team2GoldCoinInterval, float team2GoldBarInterval, float zInterval, int zValueChangeCount, int goldBarMaxCount, Color team1OriginalColor, Color team2OriginalColor, TMP_Text team1GoldCoinText, TMP_Text team1GoldBarText, TMP_Text team2GoldCoinText, TMP_Text team2GoldBarText)
         {
             _team1GoldCoinInterval = team1GoldCoinInterval;
             _team1GoldBarInterval = team1GoldBarInterval;
@@ -35,10 +38,13 @@ namespace InGame.MySystem
             _zValueChangeCount = zValueChangeCount;
             _goldBarMaxCount = goldBarMaxCount;
 
-            _originColor = originColor;
+            _team1OriginalColor = team1OriginalColor;
+            _team2OriginalColor = team2OriginalColor;
 
-            _otherTeamGoldCoin = otherTeamGoldCoin;
-            _otherTeamGoldBar = otherTeamGoldBar;
+            _team1GoldCoinText = team1GoldCoinText;
+            _team1GoldBarText = team1GoldBarText;
+            _team2GoldCoinText = team2GoldCoinText;
+            _team2GoldBarText = team2GoldBarText;
         }
 
         // 금화 세팅 함수
@@ -46,7 +52,15 @@ namespace InGame.MySystem
         {
             if (TeamManager.Instance.CurrentTeamType != type) // 내 팀의 금화 금괴 변경 사항이 아니라면
             {
-                _otherTeamGoldCoin.text = $"x {goldCoinCount}"; // 상대 팀 금화 개수 UI 변경
+                switch (TeamManager.Instance.CurrentTeamType)
+                {
+                    case TeamType.Team1: // 자신의 팀이 팀 1 일 경우
+                        _team2GoldCoinText.text = $"x {goldCoinCount}"; // 팀 2 금화 UI 변경
+                        break;
+                    case TeamType.Team2: // 자신의 팀이 팀 2 일 경우
+                        _team1GoldCoinText.text = $"x {goldCoinCount}"; // 팀 1 금화 UI 변경
+                        break;
+                }
             }
 
             float coinInterval = (type == TeamType.Team1) ? _team1GoldCoinInterval : _team2GoldCoinInterval;
@@ -58,19 +72,32 @@ namespace InGame.MySystem
         {
             if (TeamManager.Instance.CurrentTeamType != type) // 내 팀의 금화 금괴 변경 사항이 아니라면
             {
-                _otherTeamGoldBar.text = $"x {goldBarCount}"; // 상대 팀 금괴 개수 UI 변경
-                if (goldBarCount >= _goldBarMaxCount) // 금괴 수가 최대 개수 이상이라면
+                switch (TeamManager.Instance.CurrentTeamType)
                 {
-                    _otherTeamGoldBar.color = Color.red; // 빨간색으로 변경
-                }
-                else // 금괴 수가 최대 개수 미만이라면
-                {
-                    _otherTeamGoldBar.color = _originColor; // 기본 색상으로 변경
+                    case TeamType.Team1: // 자신의 팀이 팀 1 일 경우
+                        SetGoldBarUI(_team2GoldBarText, goldBarCount, _team2OriginalColor); // 팀 2 UI 변경
+                        break;
+                    case TeamType.Team2: // 자신의 팀이 팀 2 일 경우
+                        SetGoldBarUI(_team1GoldBarText, goldBarCount, _team1OriginalColor); // 팀 1 UI 변경
+                        break;
                 }
             }
 
             float barInterval = (type == TeamType.Team1) ? _team1GoldBarInterval : _team2GoldBarInterval;
             SyncObject(goldBarCount, ObjectPoolType.GoldBar, goldBarParent, barInterval);
+        }
+
+        private void SetGoldBarUI(TMP_Text otherTeamGoldBarText, int goldBarCount, Color otherTeamOriginalColor)
+        {
+            otherTeamGoldBarText.text = $"x {goldBarCount}"; // 상대 팀 금괴 개수 UI 변경
+            if (goldBarCount >= _goldBarMaxCount) // 금괴 수가 최대 개수 이상이라면
+            {
+                otherTeamGoldBarText.color = Color.red; // 빨간색으로 변경
+            }
+            else // 금괴 수가 최대 개수 미만이라면
+            {
+                otherTeamGoldBarText.color = otherTeamOriginalColor; // 기본 색상으로 변경
+            }
         }
 
         private void SyncObject(int targetCount, ObjectPoolType type, Transform parent, float interval)
@@ -104,4 +131,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.05.11
+// 마지막 작성 일자: 2026.05.14

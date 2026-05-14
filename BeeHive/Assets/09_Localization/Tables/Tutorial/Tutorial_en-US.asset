@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1088307888652288
-    m_Localized: Opponent HP
+    m_Localized: Opponent HP And Gold Coin, Gold Bar
     m_Metadata:
       m_Items: []
   - m_Id: 1088380294922240
@@ -306,15 +306,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2540124577202176
-    m_Localized: 'Opponent:'
+    m_Localized: Opponent - 5HP
     m_Metadata:
       m_Items: []
   - m_Id: 2540223034294272
-    m_Localized: 'Me:'
+    m_Localized: Me - 5HP
     m_Metadata:
       m_Items: []
   - m_Id: 3643488308297728
-    m_Localized: Your HP
+    m_Localized: Your HP And Gold Coin, Gold Bar
     m_Metadata:
       m_Items: []
   - m_Id: 6893716612317184

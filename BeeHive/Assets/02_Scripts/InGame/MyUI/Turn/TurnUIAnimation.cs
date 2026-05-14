@@ -20,6 +20,9 @@ namespace InGame.MyUI.Turn
 
         [SerializeField] private float _animationDuration; // 애니메이션 시간
 
+        [SerializeField] private Color _team1Color; // 팀 1 색
+        [SerializeField] private Color _team2Color; // 팀 2 색
+
         private Dictionary<TurnType, TurnUIAnimationHandlerBase> _turnAnimations = new Dictionary<TurnType, TurnUIAnimationHandlerBase>();
 
         // 변수 초기화
@@ -35,6 +38,17 @@ namespace InGame.MyUI.Turn
         // 현재 턴을 알려주는 UI 세팅
         public void SetCurrentTurnUI(TurnType currentTurn)
         {
+            // 현재 팀 차례에 맞춰 텍스트 색 변경
+            switch (InGameContext.Current.Data.TurnManager.CurrentTeamType)
+            {
+                case TeamType.Team1:
+                    _currentTurnTmpText.color = _team1Color;
+                    break;
+                case TeamType.Team2:
+                    _currentTurnTmpText.color = _team2Color;
+                    break;
+            }
+
             switch (currentTurn)
             {
                 case TurnType.MakeTurn:
@@ -42,35 +56,35 @@ namespace InGame.MyUI.Turn
                         "Game",
                         "Game_UI_MakeTurn"
                     );
-                    _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} {makeTurn}";
+                    _currentTurnTmpText.text = $"{makeTurn}";
                     break;
                 case TurnType.DrawTurn:
                     string drawTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Game",
                         "Game_UI_DrawTurn"
                     );
-                    _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} {drawTurn}";
+                    _currentTurnTmpText.text = $"{drawTurn}";
                     break;
                 case TurnType.MainTurn:
                     string mainTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Game",
                         "Game_UI_MainTurn"
                     );
-                    _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} {mainTurn}";
+                    _currentTurnTmpText.text = $"{mainTurn}";
                     break;
                 case TurnType.TurnEnd:
                     string turnEnd = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Game",
                         "Game_UI_TurnEnd"
                     );
-                    _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} {turnEnd}";
+                    _currentTurnTmpText.text = $"{turnEnd}";
                     break;
                 case TurnType.ChangeTeam:
                     string changeTeam = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Game",
                         "Game_UI_ChangeTeamTurn"
                     );
-                    _currentTurnTmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType} {changeTeam}";
+                    _currentTurnTmpText.text = $"{changeTeam}";
                     break;
             }
         }
@@ -95,4 +109,4 @@ namespace InGame.MyUI.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.04.16
+// 마지막 작성 일자: 2026.05.14

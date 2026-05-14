@@ -55,7 +55,7 @@ namespace InGame.MyObject
                         "Tutorial",
                         "Tutorial_UI_MeHPText"
                     );
-                    GetCastleHpTmpTxt().text = $"{me} {_currentHp} HP"; // UI 적용
+                    GetCastleHpTmpTxt().text = $"{me} - {_currentHp} HP"; // UI 적용
                 }
                 else // 자기 성이 아닐 경우
                 {
@@ -63,18 +63,18 @@ namespace InGame.MyObject
                         "Tutorial",
                         "Tutorial_UI_OpponentHPText"
                     );
-                    GetCastleHpTmpTxt(false).text = $"{opponent} {_currentHp} HP"; // UI 적용
+                    GetCastleHpTmpTxt(false).text = $"{opponent} - {_currentHp} HP"; // UI 적용
                 }
             }
             else // 튜토리얼이 아닐 경우
             {
                 if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
                 {
-                    GetCastleHpTmpTxt().text = $"{NetworkManager.Instance.CurrentClientName}: {_currentHp} HP"; // UI 적용
+                    GetCastleHpTmpTxt().text = $"{NetworkManager.Instance.CurrentClientName} - {_currentHp} HP"; // UI 적용
                 }
                 else // 자기 성이 아닐 경우
                 {
-                    GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName}: {_currentHp} HP"; // UI 적용
+                    GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName} - {_currentHp} HP"; // UI 적용
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace InGame.MyObject
                         "Tutorial_UI_MeHPText"
                     );
 
-                    GetCastleHpTmpTxt().text = $"{me} {_currentHp} HP"; // UI 적용
+                    GetCastleHpTmpTxt().text = $"{me} - {_currentHp} HP"; // UI 적용
                 }
                 else // 자기 성이 아닐 경우
                 {
@@ -103,7 +103,7 @@ namespace InGame.MyObject
                         "Tutorial_UI_OpponentHPText"
                     );
 
-                    GetCastleHpTmpTxt(false).text = $"{opponent} {_currentHp}  HP"; // UI 적용
+                    GetCastleHpTmpTxt(false).text = $"{opponent} - {_currentHp}  HP"; // UI 적용
                 }
 
                 if(_currentHp <= 0) // 체력이 0 이하라면
@@ -116,11 +116,11 @@ namespace InGame.MyObject
             {
                 if (_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자기 성일 경우
                 {
-                    GetCastleHpTmpTxt().text = $"{NetworkManager.Instance.CurrentClientName} : {_currentHp} HP"; // UI 적용
+                    GetCastleHpTmpTxt().text = $"{NetworkManager.Instance.CurrentClientName} - {_currentHp} HP"; // UI 적용
                 }
                 else // 자기 성이 아닐 경우
                 {
-                    GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName}: {_currentHp}  HP"; // UI 적용
+                    GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName} - {_currentHp}  HP"; // UI 적용
                 }
             }
 
@@ -164,11 +164,11 @@ namespace InGame.MyObject
             if(_castleTeamType == TeamManager.Instance.CurrentTeamType) // 자신의 성이라면
             {
                 _currentHp++; // 현재 체력 증가
-                GetCastleHpTmpTxt().text = $"{NetworkManager.Instance.CurrentClientName} : {_currentHp}  HP"; // UI 적용
+                GetCastleHpTmpTxt().text = $"{NetworkManager.Instance.CurrentClientName} - {_currentHp}  HP"; // UI 적용
             }
             else // 상대의 성이라면
             {
-                GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName}: {currentHp} HP"; // UI 적용
+                GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName} - {currentHp} HP"; // UI 적용
             }
         }
 
@@ -193,4 +193,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.04.14
+// 마지막 작성 일자: 2026.05.14

@@ -122,6 +122,8 @@ namespace InGame.MyObject
                             return;
                         }
 
+                        await InGameContext.Current.Data.CardManager.UsedCardShowOver?.Task; // 사용한 카드 보여주기가 끝날 때까지 대기
+
                         HighLightOffEvent(); // 하이라이트 끄기
                         CastleAttack(pieceBase); // 성 공격
                         _isRangeAttackTarget = false; // 원거리 공격 대상 초기화
@@ -442,4 +444,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.05.04
+// 마지막 작성 일자: 2026.05.14

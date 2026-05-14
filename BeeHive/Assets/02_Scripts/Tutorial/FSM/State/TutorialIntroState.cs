@@ -40,9 +40,9 @@ namespace Tutorial.FSM.State
                 case 1:
                     string yourHP = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Tutorial",
-                        "Tutorial_YourHP"
+                        "Tutorial_YourHPAndGold"
                     );
-                    TutorialManager.Instance.SetTutorialPanel(true, yourHP, TutorialManager.Instance.EnterClick, 0.07f, 0.008f, new Vector4(0.448f, 0.958f), new Vector4(1f, 0.3f));
+                    TutorialManager.Instance.SetTutorialPanel(true, yourHP, TutorialManager.Instance.EnterClick, 0.07f, 0.008f, new Vector4(0.42f, 0.958f), new Vector4(2f, 0.6f));
                     break;
                 case 2:
                     string opponentCastle = LocalizationSettings.StringDatabase.GetLocalizedString(
@@ -54,47 +54,25 @@ namespace Tutorial.FSM.State
                 case 3:
                     string opponentHP = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Tutorial",
-                        "Tutorial_OpponentHP"
+                        "Tutorial_OpponentHPAndGold"
                     );
-                    string currentID = LocalizationSettings.SelectedLocale.Identifier.Code; // 현재 선택된 장소의 코드
-                    if(currentID == "en-US") // 영어라면
-                    {
-                        TutorialManager.Instance.SetTutorialPanel(true, opponentHP, TutorialManager.Instance.EnterClick, 0.07f, 0.008f, new Vector4(0.58f, 0.958f), new Vector4(1.5f, 0.3f));
-                    }
-                    else // 한글이라면
-                    {
-                        TutorialManager.Instance.SetTutorialPanel(true, opponentHP, TutorialManager.Instance.EnterClick, 0.07f, 0.008f, new Vector4(0.55f, 0.958f), new Vector4(1f, 0.3f));
-                    }
+                    TutorialManager.Instance.SetTutorialPanel(true, opponentHP, TutorialManager.Instance.EnterClick, 0.07f, 0.008f, new Vector4(0.58f, 0.958f), new Vector4(2f, 0.6f));
                     break;
                 case 4:
-                    string yourGold = LocalizationSettings.StringDatabase.GetLocalizedString(
-                        "Tutorial",
-                        "Tutorial_YourGold"
-                    );
-                    TutorialManager.Instance.SetTutorialPanel(true, yourGold, TutorialManager.Instance.EnterClick, 0.085f, 0.008f, new Vector4(0.815f, 0.094f), new Vector4(1.2f, 0.8f));
-                    break;
-                case 5:
-                    string opponentGold = LocalizationSettings.StringDatabase.GetLocalizedString(
-                        "Tutorial",
-                        "Tutorial_OpponentGold"
-                    );
-                    TutorialManager.Instance.SetTutorialPanel(true, opponentGold, TutorialManager.Instance.EnterClick, 0.1f, 0.008f, new Vector4(0.15f, 0.96f), new Vector4(1.3f, 0.3f));
-                    break;
-                case 6:
                     string viewingCastleIsYourTeam = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Tutorial",
                         "Tutorial_viewingCastleIsYourTeam"
                     );
                     TutorialManager.Instance.SetTutorialPanel(true, viewingCastleIsYourTeam, TutorialManager.Instance.EnterClick);
                     break;
-                case 7:
+                case 5:
                     string defeatOpponet = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Tutorial",
                         "Tutorial_DefeatOpponent"
                     );
                     TutorialManager.Instance.SetTutorialPanel(true, defeatOpponet, TutorialManager.Instance.EnterClick);
                     break;
-                case 8:
+                case 6:
                     TutorialEvents.OnIntroEnd?.Invoke(); // 인트로 종료 이벤트 호출
                     break;
             }
@@ -107,4 +85,4 @@ namespace Tutorial.FSM.State
         }
     }
 }
-// 마지막 작성 일자: 2026.04.13
+// 마지막 작성 일자: 2026.05.14

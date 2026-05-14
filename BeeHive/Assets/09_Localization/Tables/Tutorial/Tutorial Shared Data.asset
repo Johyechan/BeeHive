@@ -112,7 +112,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1088307888652288
-    m_Key: Tutorial_OpponentHP
+    m_Key: Tutorial_OpponentHPAndGold
     m_Metadata:
       m_Items: []
   - m_Id: 1088704275546112
@@ -280,7 +280,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3643488308297728
-    m_Key: Tutorial_YourHP
+    m_Key: Tutorial_YourHPAndGold
     m_Metadata:
       m_Items: []
   - m_Id: 6893716612317184

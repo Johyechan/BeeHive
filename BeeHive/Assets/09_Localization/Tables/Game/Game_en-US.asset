@@ -201,23 +201,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1083336749219840
-    m_Localized: '[Production Phase]'
+    m_Localized: Production Phase
     m_Metadata:
       m_Items: []
   - m_Id: 1083440356917248
-    m_Localized: '[Draw Phase]'
+    m_Localized: Draw Phase
     m_Metadata:
       m_Items: []
   - m_Id: 1083755915378688
-    m_Localized: '[Main Phase]'
+    m_Localized: Main Phase
     m_Metadata:
       m_Items: []
   - m_Id: 1083780330422272
-    m_Localized: '[End of Turn]'
+    m_Localized: End of Turn
     m_Metadata:
       m_Items: []
   - m_Id: 1083801750732800
-    m_Localized: '[Change Team]'
+    m_Localized: Change Team
     m_Metadata:
       m_Items: []
   - m_Id: 2209099670093824
