@@ -54,7 +54,7 @@ namespace InGame.MySystem
             goldBarText.text = $"x {goldBarCount}"; // 금괴 개수를 UI로 표기
             if (goldBarCount >= _goldBarMaxCount) // 금괴 수가 최대 개수 이상이라면
             {
-                goldBarText.color = Color.red; // 빨간색으로 변경
+                goldBarText.color = Color.yellow; // 노란색으로 변경
             }
             else // 금괴 수가 최대 개수 미만이라면
             {
@@ -63,4 +63,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.05.14
+// 마지막 작성 일자: 2026.05.15

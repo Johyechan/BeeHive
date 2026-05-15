@@ -1,10 +1,11 @@
-using System.Collections.Generic;
-using UnityEngine;
-using InGame.MyObject.Piece;
-using InGame.MyObject.Handler;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
+using InGame.MyObject.Handler;
+using InGame.MyObject.Piece;
 using MyUtil.GameMode;
+using System.Collections.Generic;
 using Tutorial;
+using UnityEngine;
 
 namespace InGame.MyObject
 {
@@ -49,7 +50,9 @@ namespace InGame.MyObject
         {
             if (_roadPlaceReturnCheckHandler.IsReturn(_leftPieceCount, _cost))
                 return;
-            
+
+            InGameContext.Current.Data.PieceManager.IsPlayAnimation = true; // 기물 애니메이션 실행
+
             GameObject newRoad = _roadParent.GetChild(_roadParent.childCount - 1).gameObject; // 도로 객체들의 부모 객체에서 도로 객체 가져오기
             PieceBase roadPiece = newRoad.GetComponent<PieceBase>();
 
@@ -64,7 +67,9 @@ namespace InGame.MyObject
                 PlacedPiece.PieceVariable.currentRoadPlacePlane = this; // 배치된 도로의 배치칸을 할당
                 await _roadPlaceHandler.Place(this, roadPiece, _roadParent, _roadAngle); // 도로 배치 기능
             }
+
+            InGameContext.Current.Data.PieceManager.IsPlayAnimation = false; // 애니메이션 종료
         }
     }
 }
-// 마지막 작성 일자: 2026.04.23
+// 마지막 작성 일자: 2026.05.15
