@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.Local;
 using InGame.MyManager.Turn;
@@ -25,12 +26,31 @@ namespace InGame.MyUI.Turn
                 "Game",
                 "Game_UI_Turn"
             );
+
+            string team = "";
+
+            switch(InGameContext.Current.Data.TurnManager.CurrentTeamType)
+            {
+                case TeamType.Team1:
+                    team = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_Red"
+                    );
+                    break;
+                case TeamType.Team2:
+                    team = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_Blue"
+                    );
+                    break;
+            }
+
             await DOTween.Sequence()
-                .AppendCallback(() => _tmpText.text = $"{InGameContext.Current.Data.TurnManager.CurrentTeamType.ToString()} {turn}") // 무슨 턴인지 텍스트로 보여주기
+                .AppendCallback(() => _tmpText.text = $"{team} {turn}") // 무슨 턴인지 텍스트로 보여주기
                 .AsyncWaitForCompletion(); // 이후 동일하게 실행되어야 할 기능 수행
 
             await base.UIAnimationPlay();
         }
     }
 }
-// 마지막 작성 일자: 2026.04.09
+// 마지막 작성 일자: 2026.05.16

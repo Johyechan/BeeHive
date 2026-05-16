@@ -31,10 +31,14 @@ namespace InGame.MyManager.MyPiece.Handler
                 }
             }
 
+            NetworkManager.Instance.Socket.Emit("debug", $"공격하는 기물: {attackingPiece}");
+            NetworkManager.Instance.Socket.Emit("debug", $"공격 가능 기물들 저장 맵: {canAttackPieceMap.Count}");
             foreach (var piece in canAttackPieceMap) // 공격 가능 기물들 저장 맵 순회
             {
                 if (piece.Key == attackingPiece) // 매개 변수로 받은 공격 하는 기물의 타입과 현재 순서의 타입이 같다면
                 {
+                    NetworkManager.Instance.Socket.Emit("debug", $"공격하는 기물 공격할 수 있는 기물이 존재함");
+                    NetworkManager.Instance.Socket.Emit("debug", $"공격 가능한 기물 리스트: {piece.Value.Count}");
                     foreach (var pieceBase in piece.Value) // 해당 타입에 맞는 기물들을 저장한 리스트 순회
                     {
                         if(isFirePowerAttack) // 원거리 공격이라면

@@ -249,7 +249,10 @@ namespace InGame.MyObject
                 {
                     if (currentPlayerTeamType != TeamManager.Instance.CurrentTeamType) // 현재 배치칸이 우리팀 배치칸이 아닐 때
                     {
-                        CastleAttack(pieceBase); // 성 공격
+                        if (pieceBase.CurrentObjectType != ObjectType.Miner) // 현재 기물이 광부가 아닐 때
+                        {
+                            CastleAttack(pieceBase); // 성 공격
+                        }
                     }
                 }
                 
@@ -444,4 +447,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.05.14
+// 마지막 작성 일자: 2026.05.16

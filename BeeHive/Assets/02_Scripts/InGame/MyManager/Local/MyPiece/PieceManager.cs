@@ -123,7 +123,6 @@ namespace InGame.MyManager.Local.MyPiece
             {
                 if(InGameContext.Current.Data.CardManager.HaveFirePowerCard) // 화력 카드를 가지고 있는 경우
                 {
-                    NetworkManager.Instance.Socket.Emit("debug", $"화력 카드를 가지고 있어서 원거리 공격 가능한 칸을 활성화 시키려고 함 공격하려는 놈:{attackingPiece}, 원거리 공격 가능한 대상 수: {_canFirePowerAttackPieceMap.Count}, 원거리 공격 가능한 기물 칸 수: {_canFirePowerAttackPiecePlaceMap.Count}");
                     _canAttackPieceStateHandler.ShowCanAttackPieces(attackingPiece, _canFirePowerAttackPieceMap, _canFirePowerAttackPiecePlaceMap, true); // 원거리 공격 가능 기물 탐색
                 }
             }

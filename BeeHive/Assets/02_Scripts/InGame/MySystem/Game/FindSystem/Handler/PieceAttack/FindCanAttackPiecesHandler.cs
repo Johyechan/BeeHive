@@ -1,4 +1,5 @@
 using InGame.MyEnum;
+using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
@@ -37,6 +38,7 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceAttack
 
             foreach (var nearPiece in road.nearPiecePlaceTransformList)
             {
+                NetworkManager.Instance.Socket.Emit("debug", $"현재 기물: {nearPiece}, 현재 기물 팀: {nearPiece.TeamType}");
                 if (road.TeamType == selectPiece.CurrentTeamType) // 도로가 내 팀일 때
                 {
                     CheckCanAttackPiece(selectPiece, nearPiece, roadVisited, pieceVisited);
@@ -61,7 +63,7 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceAttack
 
             if (piece.PlacedPiece != null)
             {
-                if (piece.TeamType != selectPiece.CurrentTeamType) // 기물 배치 칸이 다른 팀이 점령 중이라면
+                if (piece.PlacedPiece.CurrentTeamType != selectPiece.CurrentTeamType) // 현재 확인하는 기물과 현재 선택된 기물의 팀이 다르다면
                 {
                     if (!InGameContext.Current.Data.PieceManager.CanAttackPieceMap[selectPiece].Contains(piece.PlacedPiece)) // 중복 확인
                     {

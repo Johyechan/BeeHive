@@ -243,6 +243,14 @@ MonoBehaviour:
     m_Key: Game_UI_WaitConfirm
     m_Metadata:
       m_Items: []
+  - m_Id: 15527429315231744
+    m_Key: Game_Red
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15527792109944832
+    m_Key: Game_Blue
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
