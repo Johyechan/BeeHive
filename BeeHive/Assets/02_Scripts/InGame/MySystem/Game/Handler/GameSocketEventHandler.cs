@@ -1,9 +1,9 @@
+using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
-using InGame.MyManager.MyPiece;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 using InGame.MyUI;
@@ -20,6 +20,18 @@ namespace InGame.MySystem.Game.Handler
     // 게임 관련 소켓 이벤트 연결 핸들러 클래스
     public class GameSocketEventHandler : BaseSocketEventHandler
     {
+        private CanvasGroup _showIsTeam1DroughtUI; // 팀 1 가뭄 상태를 보여주는 UI
+        private CanvasGroup _showIsTeam2DroughtUI; // 팀 2 가뭄 상태를 보여주는 UI
+
+        private float _animationDuration; // 애니메이션 지속 시간
+
+        public GameSocketEventHandler(CanvasGroup showIsTeam1DroughtUI, CanvasGroup showIsTeam2DroughtUI, float animationDuration)
+        {
+            _showIsTeam1DroughtUI = showIsTeam1DroughtUI;
+            _showIsTeam2DroughtUI = showIsTeam2DroughtUI;
+            _animationDuration = animationDuration;
+        }
+
         public override void OnConnect()
         {
             NetworkManager.Instance.Socket.On("drought", (value) =>
@@ -31,6 +43,15 @@ namespace InGame.MySystem.Game.Handler
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     InGameContext.Current.Data.PieceManager.IsDrought = isDrought == 1; // 가뭄 여부 변경 - isDrought가 1일 경우 참, 1이 아닐 경우 거짓 할당
+                    switch(TeamManager.Instance.CurrentTeamType)
+                    {
+                        case TeamType.Team1:
+                            _showIsTeam1DroughtUI.DOFade(1, _animationDuration);
+                            break;
+                        case TeamType.Team2:
+                            _showIsTeam2DroughtUI.DOFade(1, _animationDuration);
+                            break;
+                    }
                 });
             });
 
@@ -147,4 +168,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.05.18

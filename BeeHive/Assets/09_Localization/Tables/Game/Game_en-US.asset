@@ -260,6 +260,10 @@ MonoBehaviour:
     m_Localized: Blue team
     m_Metadata:
       m_Items: []
+  - m_Id: 16299850523738112
+    m_Localized: (Drought state)
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

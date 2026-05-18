@@ -1,4 +1,5 @@
 using InGame.MyEnum;
+using InGame.MyManager.Global;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
 
@@ -23,7 +24,7 @@ namespace InGame.MyManager.MyPlacePlane.Handler
 
             currentPlacePlane.PlacedObjectType = placedPiece.CurrentObjectType; // 배치된 기물의 객체 타입 할당
             currentPlacePlane.PlacedPiece = placedPiece;
-            currentPlacePlane.TeamType = placedPiece.CurrentTeamType; // 배치된 기물의 팀 타입 할당
+            currentPlacePlane.TeamType = placedPiece.CurrentTeamType; // 배치된 기물의 팀 타입 할당rk 
 
             if (!isRoad) // 도로 배치칸을 변경하는 것이 아닌 기물 배치칸을 변경하는 것이라면
             {

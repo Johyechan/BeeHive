@@ -29,12 +29,15 @@ namespace InGame.MyObject
 
         private List<Material> _castleMaterials = new List<Material>(); // 성 머티리얼 리스트
 
+        private int _opponentHp; // 상대 체력
         private int _currentHp; // 현재 체력
         public int CurrentHp { get => _currentHp; } // 위 변수 프로퍼티
 
         private async void Awake()
         {
-            _currentHp = _hp; // 현재 체력을 최대 체력으로 할당
+            // 현재 체력을 최대 체력으로 할당
+            _currentHp = _hp;
+            _opponentHp = _hp;
 
             await TeamReady.Gate.WaitAsync(); // 팀 할당 대기
 
@@ -63,7 +66,7 @@ namespace InGame.MyObject
                         "Tutorial",
                         "Tutorial_UI_OpponentHPText"
                     );
-                    GetCastleHpTmpTxt(false).text = $"{opponent} - {_currentHp} HP"; // UI 적용
+                    GetCastleHpTmpTxt(false).text = $"{opponent} - {_opponentHp} HP"; // UI 적용
                 }
             }
             else // 튜토리얼이 아닐 경우
@@ -74,14 +77,21 @@ namespace InGame.MyObject
                 }
                 else // 자기 성이 아닐 경우
                 {
-                    GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName} - {_currentHp} HP"; // UI 적용
+                    GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName} - {_opponentHp} HP"; // UI 적용
                 }
             }
         }
 
         public void CastleHit(int damage)
         {
-            _currentHp -= damage;
+            if(_castleTeamType == TeamManager.Instance.CurrentTeamType) // 내 팀일 경우
+            {
+                _currentHp -= damage;
+            }
+            else // 상대 팀일 경우
+            {
+                _opponentHp -= damage;
+            }
 
             HitAnimation(damage); // 히트 애니메이션 실행
 
@@ -103,7 +113,7 @@ namespace InGame.MyObject
                         "Tutorial_UI_OpponentHPText"
                     );
 
-                    GetCastleHpTmpTxt(false).text = $"{opponent} - {_currentHp}  HP"; // UI 적용
+                    GetCastleHpTmpTxt(false).text = $"{opponent} - {_opponentHp}  HP"; // UI 적용
                 }
 
                 if(_currentHp <= 0) // 체력이 0 이하라면
@@ -120,7 +130,7 @@ namespace InGame.MyObject
                 }
                 else // 자기 성이 아닐 경우
                 {
-                    GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName} - {_currentHp}  HP"; // UI 적용
+                    GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName} - {_opponentHp}  HP"; // UI 적용
                 }
             }
 
@@ -168,7 +178,8 @@ namespace InGame.MyObject
             }
             else // 상대의 성이라면
             {
-                GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName} - {currentHp} HP"; // UI 적용
+                _opponentHp = currentHp; // 상대 체력을 변경
+                GetCastleHpTmpTxt(false).text = $"{SceneMgr.Instance.OtherNickName} - {_opponentHp} HP"; // UI 적용
             }
         }
 
@@ -193,4 +204,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.05.14
+// 마지막 작성 일자: 2026.05.18

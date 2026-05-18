@@ -251,6 +251,10 @@ MonoBehaviour:
     m_Key: Game_Blue
     m_Metadata:
       m_Items: []
+  - m_Id: 16299850523738112
+    m_Key: Game_UI_IsDrought
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

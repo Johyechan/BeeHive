@@ -38,7 +38,6 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceAttack
 
             foreach (var nearPiece in road.nearPiecePlaceTransformList)
             {
-                NetworkManager.Instance.Socket.Emit("debug", $"현재 기물: {nearPiece}, 현재 기물 팀: {nearPiece.TeamType}");
                 if (road.TeamType == selectPiece.CurrentTeamType) // 도로가 내 팀일 때
                 {
                     CheckCanAttackPiece(selectPiece, nearPiece, roadVisited, pieceVisited);

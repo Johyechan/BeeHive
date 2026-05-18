@@ -268,7 +268,8 @@ namespace InGame.MySystem
                     _tutorialGoldBarCount++; // 튜토리얼 금괴 1 증가
                 }
             }
-            if (_goldCoinCount >= 5) // 금화가 5개 이상이라면
+
+            while(_goldCoinCount >= 5) // 금화가 5개 이상일 동안
             {
                 _goldCoinCount -= 5; // 금화 5개 감소
                 _goldBarCount++; // 금괴 1 증가
@@ -292,4 +293,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.05.14
+// 마지막 작성 일자: 2026.05.18
