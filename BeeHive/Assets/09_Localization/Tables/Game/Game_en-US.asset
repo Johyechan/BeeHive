@@ -264,6 +264,10 @@ MonoBehaviour:
     m_Localized: (Drought state)
     m_Metadata:
       m_Items: []
+  - m_Id: 16687921777868800
+    m_Localized: Next turn gold
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

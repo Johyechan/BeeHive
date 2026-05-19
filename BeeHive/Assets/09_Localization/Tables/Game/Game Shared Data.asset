@@ -255,6 +255,10 @@ MonoBehaviour:
     m_Key: Game_UI_IsDrought
     m_Metadata:
       m_Items: []
+  - m_Id: 16687921777868800
+    m_Key: Game_UI_NextTurnGoldTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

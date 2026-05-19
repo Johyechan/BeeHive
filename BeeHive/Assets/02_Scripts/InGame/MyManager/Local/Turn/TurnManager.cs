@@ -20,15 +20,11 @@ namespace InGame.MyManager.Local.Turn
     public class TurnManager : MonoBehaviour
     {
         [SerializeField] private float _teamChangeDelay; // 다른 팀의 턴으로 변경하면서 기다리는 시간 변수
-        [SerializeField] private float _droughtUIfadeOutAnimationDuration; // 가뭄 여부를 보여주는 UI 페이드 아웃에 걸리는 시간 변수
 
         [SerializeField] private int _turnDurationTime; // 턴 지속 시간(초)
         [SerializeField] private int _makeTurnDelayMillisecond; // 생산 턴 대기 시간
 
         [SerializeField] private Slider _turnTimerSlider; // 턴 타이머 슬라이더
-
-        [SerializeField] private CanvasGroup _showIsTeam1DroughtUI; // 팀 1 가뭄 여부를 보여주는 UI
-        [SerializeField] private CanvasGroup _showIsTeam2DroughtUI; // 팀 2 가뭄 여부를 보여주는 UI
 
         private TeamType _currentTeamType; // 현재 턴의 팀
         // 위 변수 프로퍼티
@@ -182,16 +178,7 @@ namespace InGame.MyManager.Local.Turn
                     {
                         InGameContext.Current.Data.PieceManager.IsDrought = false; // 가뭄 종료
 
-                        // 가뭄 여부 UI 페이드 아웃
-                        switch(_currentTeamType)
-                        {
-                            case TeamType.Team1:
-                                _showIsTeam1DroughtUI.DOFade(0, _droughtUIfadeOutAnimationDuration);
-                                break;
-                            case TeamType.Team2:
-                                _showIsTeam2DroughtUI.DOFade(0, _droughtUIfadeOutAnimationDuration);
-                                break;
-                        }
+                        InGameContext.Current.Data.CardManager.DroughtState(false, _currentTeamType); // 가뭄 종료
                     }
                 }
 
@@ -203,8 +190,15 @@ namespace InGame.MyManager.Local.Turn
                 HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
                 PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
             }
+            else // 상대 팀 턴일 때
+            {
+                if(_currentTurnType == TurnType.TurnEnd)
+                {
+                    InGameContext.Current.Data.CardManager.DroughtState(false, _currentTeamType); // 가뭄 종료
+                }
+            }
 
-            if(GameModeManager.Instance.CurrentGameMode.UseServer()) // 현재 게임 모드가 서버를 사용하는 멀티 플레이라면
+            if (GameModeManager.Instance.CurrentGameMode.UseServer()) // 현재 게임 모드가 서버를 사용하는 멀티 플레이라면
             {
                 AutoTurnCompleted(); // 턴 완료
             }
@@ -240,4 +234,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.05.18
+// 마지막 작성 일자: 2026.05.19

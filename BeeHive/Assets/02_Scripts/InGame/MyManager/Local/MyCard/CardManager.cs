@@ -1,3 +1,4 @@
+using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyManager.Global;
 using InGame.MyUI.Card;
@@ -31,6 +32,11 @@ namespace InGame.MyManager.Local
 
         private TaskCompletionSource<bool> _usedCardShowOver; // 사용한 카드를 보여주는 것이 종료 되었는지 확인하는 변수
         public TaskCompletionSource<bool> UsedCardShowOver { get => _usedCardShowOver; set => _usedCardShowOver = value; } // 사용한 카드를 보여주는 것이 종료 되었는지 확인하는 변수 프로퍼티
+
+        [SerializeField] private CanvasGroup _showIsTeam1DroughtUI; // 팀 1 가뭄 여부를 보여주는 UI
+        [SerializeField] private CanvasGroup _showIsTeam2DroughtUI; // 팀 2 가뭄 여부를 보여주는 UI
+
+        [SerializeField] private float _droughtUIfadeOutAnimationDuration; // 가뭄 여부를 보여주는 UI 페이드 아웃에 걸리는 시간 변수
 
         [SerializeField] private Transform _uiCardsParent; // ui 카드 부모
 
@@ -93,6 +99,34 @@ namespace InGame.MyManager.Local
             return null;
         }
 
+        public void DroughtState(bool state, TeamType targetTeam)
+        {
+            if(state)
+            {
+                switch (targetTeam)
+                {
+                    case TeamType.Team1:
+                        _showIsTeam1DroughtUI.DOFade(1, _droughtUIfadeOutAnimationDuration);
+                        break;
+                    case TeamType.Team2:
+                        _showIsTeam2DroughtUI.DOFade(1, _droughtUIfadeOutAnimationDuration);
+                        break;
+                }
+            }
+            else
+            {
+                switch (targetTeam)
+                {
+                    case TeamType.Team1:
+                        _showIsTeam1DroughtUI.DOFade(0, _droughtUIfadeOutAnimationDuration);
+                        break;
+                    case TeamType.Team2:
+                        _showIsTeam2DroughtUI.DOFade(0, _droughtUIfadeOutAnimationDuration);
+                        break;
+                }
+            }
+        }
+
         public bool IsHaveCard(TeamType teamType)
         {
             switch(teamType)
@@ -107,4 +141,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.05.12
+// 마지막 작성 일자: 2026.05.19

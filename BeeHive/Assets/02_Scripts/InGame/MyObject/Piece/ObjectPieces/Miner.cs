@@ -1,4 +1,5 @@
 using InGame.MyEnum;
+using UnityEngine;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
@@ -10,6 +11,8 @@ namespace InGame.MyObject.Piece.ObjectPieces
     // 광부 기물 클래스
     public class Miner : PieceBase
     {
+        [SerializeField] private Transform _canDigParent; // 생산 가능한 부모
+
         protected override void Awake()
         {
             base.Awake();
@@ -20,15 +23,54 @@ namespace InGame.MyObject.Piece.ObjectPieces
         protected override void OnEnable()
         {
             base.OnEnable();
-
+            switch (CurrentTeamType)
+            {
+                case TeamType.Team1:
+                    WalletEvent.OnTeam1MinerDigValue += GetGoldCoin;
+                    break;
+                case TeamType.Team2:
+                    WalletEvent.OnTeam2MinerDigValue += GetGoldCoin;
+                    break;
+            }
             TurnEvents.OnMakeTurn.Add(Dig); // 생산 턴에 광부가 금화를 얻는 기능 큐에 추가
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-
+            switch (CurrentTeamType)
+            {
+                case TeamType.Team1:
+                    WalletEvent.OnTeam1MinerDigValue -= GetGoldCoin;
+                    break;
+                case TeamType.Team2:
+                    WalletEvent.OnTeam2MinerDigValue -= GetGoldCoin;
+                    break;
+            }
             TurnEvents.OnMakeTurn.Remove(Dig); // 생산 턴에 광부가 금화를 얻는 기능 큐에서 삭제
+        }
+
+        private int GetGoldCoin()
+        {
+            if(transform.parent != _canDigParent) // 생산 가능한 부모 밑에 있지 않다면
+            {
+                return 0;
+            }
+
+            if(!CanDig())
+            {
+                return 0;
+            }
+
+            switch (CurrentTeamType)
+            {
+                case TeamType.Team1: // 플레이어의 팀이 Team1일 경우
+                    return PieceVariable.currentPlacePlane.team1GoldCoin;
+                case TeamType.Team2: // 플레이어의 팀이 Team2일 경우
+                    return PieceVariable.currentPlacePlane.team2GoldCoin;
+            }
+
+            return 0;
         }
 
         // 금화를 얻는 함수
@@ -88,4 +130,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.05.07
+// 마지막 작성 일자: 2026.05.19

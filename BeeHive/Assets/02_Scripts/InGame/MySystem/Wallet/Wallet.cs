@@ -5,6 +5,7 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MySystem.Game;
 using MyUtil.GameMode;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -36,6 +37,10 @@ namespace InGame.MySystem
         private int _goldBarCount = 0; // 금괴 개수
         private int _tutorialGoldCoinCount = 0; // 튜토리얼 금화 개수
         private int _tutorialGoldBarCount = 0; // 튜토리얼 금괴 개수
+        private int _nextTurnGoldCoin = 0; // 다음 턴 금화 수
+        public int NextTurnGoldCoin { get => _nextTurnGoldCoin; }
+        private int _nextTurnGoldBar = 0; // 다음 턴 금괴 수
+        public int NextTurnGoldBar { get => _nextTurnGoldBar; }
 
         private GoldSetHandle _goldSetHandle;
 
@@ -70,6 +75,7 @@ namespace InGame.MySystem
             WalletEvent.OnUseGoldBar += UseGoldBar; // 금괴 사용 이벤트에 금괴 사용 함수 구독
             WalletEvent.OnCanUseGoldBar += CanUseGoldBar; // 금괴 사용 여부 확인 이벤트에 금괴 사용 여부 확인 함수 구독
             WalletEvent.OnSetGold += SetGold; // 금괴 및 금화 세팅 이벤트에 함수 구독
+            
         }
 
         private void OnDisable()
@@ -291,6 +297,63 @@ namespace InGame.MySystem
             if (GameModeManager.Instance.CurrentGameMode.UseServer())
                 NetworkManager.Instance.Socket.Emit("changeGold", json);
         }
+
+        public void CheckNextTurnGoldCoinAndGoldBar(TeamType team)
+        {
+            if(team == TeamManager.Instance.CurrentTeamType) // 내 팀일 때
+            {
+                _nextTurnGoldCoin = _goldCoinCount;
+                _nextTurnGoldBar = _goldBarCount + 2; // 매턴 2 벌기 때문에 + 2
+            }
+            else // 상대 팀일 때
+            {
+                Transform GoldCoinParent = null;
+                Transform GoldBarParent = null;
+
+                switch (team)
+                {
+                    case TeamType.Team1:
+                        GoldCoinParent = GameObject.Find("Player1GoldCoins").transform;
+                        GoldCoinParent = GameObject.Find("Player1GoldBars").transform;
+                        break;
+                    case TeamType.Team2:
+                        GoldCoinParent = GameObject.Find("Player2GoldCoins").transform;
+                        GoldCoinParent = GameObject.Find("Player2GoldBars").transform;
+                        break;
+                }
+                
+
+                _nextTurnGoldCoin = GoldCoinParent.childCount;
+                _nextTurnGoldBar = GoldBarParent.childCount + 2;
+            }
+
+            CheckMinerDigValue(team);
+
+            while (_nextTurnGoldCoin >= 5)
+            {
+                _nextTurnGoldCoin -= 5;
+                _nextTurnGoldBar++;
+            }
+        }
+
+        private void CheckMinerDigValue(TeamType team)
+        {
+            switch (team)
+            {
+                case TeamType.Team1:
+                    foreach (Func<int> func in WalletEvent.OnTeam1MinerDigValue.GetInvocationList())
+                    {
+                        _nextTurnGoldCoin += func.Invoke();
+                    }
+                    break;
+                case TeamType.Team2:
+                    foreach (Func<int> func in WalletEvent.OnTeam2MinerDigValue.GetInvocationList())
+                    {
+                        _nextTurnGoldCoin += func.Invoke();
+                    }
+                    break;
+            }
+        }
     }
 }
-// 마지막 작성 일자: 2026.05.18
+// 마지막 작성 일자: 2026.05.19

@@ -39,6 +39,8 @@ namespace InGame.MyUI.Card
             {
                 int target = TeamManager.Instance.CurrentTeamType == TeamType.Team1 ? 2 : 1; // ÆÀ 1ÀÏ °æ¿ì ÆÀ 2¸¦ ÇÒ´ç, ÆÀ 2ÀÏ °æ¿ì ÆÀ 1À» ÇÒ´ç
 
+                InGameContext.Current.Data.CardManager.DroughtState(true, (TeamType)target);
+
                 DroughtInfo droughtInfo = new DroughtInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID,

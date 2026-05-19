@@ -10,11 +10,6 @@ namespace InGame.MySystem.Game
     {
         [SerializeField] private Wallet _wallet;
 
-        [SerializeField] private CanvasGroup _showIsTeam1DroughtUI; // 가뭄 여부를 보여주는 UI
-        [SerializeField] private CanvasGroup _showIsTeam2DroughtUI; // 가뭄 여부를 보여주는 UI
-
-        [SerializeField] private float _animationDuration; // 애니메이션 지속 시간
-
         private GoldSetHandle _goldSetEventHandle; // 금화 및 금괴 객체 세팅 핸들러
 
         private SetPieceHandle _setPieceHandle; // 기물 이동, 생성 핸들러
@@ -33,7 +28,7 @@ namespace InGame.MySystem.Game
 
             if(socket != null) // 서버와 통신하기 위한 객체가 존재할 경우
             {
-                _socketEventHandlerListMachine = new SocketEventHandlerListMachine(_goldSetEventHandle, _setPieceHandle, _setRoadHandle, _showIsTeam1DroughtUI, _showIsTeam2DroughtUI, _animationDuration);
+                _socketEventHandlerListMachine = new SocketEventHandlerListMachine(_goldSetEventHandle, _setPieceHandle, _setRoadHandle);
                 _socketEventHandlerListMachine.OnConnected(); // 소켓 이벤트 연결
             }
         }
@@ -44,4 +39,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.05.18
+// 마지막 작성 일자: 2026.05.19
