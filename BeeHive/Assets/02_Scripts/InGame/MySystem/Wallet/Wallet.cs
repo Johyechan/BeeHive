@@ -314,14 +314,13 @@ namespace InGame.MySystem
                 {
                     case TeamType.Team1:
                         GoldCoinParent = GameObject.Find("Player1GoldCoins").transform;
-                        GoldCoinParent = GameObject.Find("Player1GoldBars").transform;
+                        GoldBarParent = GameObject.Find("Player1GoldBars").transform;
                         break;
                     case TeamType.Team2:
                         GoldCoinParent = GameObject.Find("Player2GoldCoins").transform;
-                        GoldCoinParent = GameObject.Find("Player2GoldBars").transform;
+                        GoldBarParent = GameObject.Find("Player2GoldBars").transform;
                         break;
                 }
-                
 
                 _nextTurnGoldCoin = GoldCoinParent.childCount;
                 _nextTurnGoldBar = GoldBarParent.childCount + 2;
@@ -356,4 +355,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.05.19
+// 마지막 작성 일자: 2026.05.20

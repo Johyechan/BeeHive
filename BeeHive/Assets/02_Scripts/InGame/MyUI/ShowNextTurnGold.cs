@@ -29,6 +29,9 @@ namespace InGame.MyUI
         // 이 스크립트를 가지는 객체 위에 마우스가 올라갔을 경우
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (_showNextTurnGoldPanel.gameObject.activeSelf) // 이미 패널이 활성화 되어있다면
+                return; // 반환
+
             RectTransform canvasRect = _canvas.GetComponent<RectTransform>(); // UI 캔버스의 RectTransform 가져오기
 
             // 스크린 좌표(마우스) → 특정 RectTransform 기준 Local 좌표
@@ -53,6 +56,9 @@ namespace InGame.MyUI
         // 이 스크립트를 가지는 객체 위에 마우스가 빠졌을 경우
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (!_showNextTurnGoldPanel.gameObject.activeSelf) // 이미 패널이 비활성화 상태라면
+                return; // 반환
+
             _showNextTurnGoldPanel.DOFade(0, _fadeDuration) // 패널 페이드 아웃
                 .OnComplete(() => // 패널 페이드 아웃 완료 후
                 {
@@ -61,4 +67,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.05.19
+// 마지막 작성 일자: 2026.05.20

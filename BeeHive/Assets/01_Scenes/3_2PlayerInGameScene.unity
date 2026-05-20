@@ -35885,7 +35885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadingCanvasGroup: {fileID: 2012494541}
-  _animationDuration: 0.1
+  _animationDuration: 0.25
   _isTutorial: 0
 --- !u!4 &1842043254
 Transform:

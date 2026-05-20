@@ -1,5 +1,6 @@
 using InGame.MyEnum;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using MyUtil.MyObjectPool;
 using TMPro;
 using UnityEngine;
@@ -128,7 +129,9 @@ namespace InGame.MySystem
                     ObjectPoolManager.Instance.ReturnObject(type, obj, true); // 맨 끝 자식 반환
                 }
             }
+
+            InGameContext.Current.Data.TurnManager.GoldMakeTcs?.SetResult(true); // 금 생성 tcs가 null이 아닐 경우 true 할당
         }
     }
 }
-// 마지막 작성 일자: 2026.05.15
+// 마지막 작성 일자: 2026.05.20

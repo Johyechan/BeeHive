@@ -52,11 +52,12 @@ namespace InGame.MyUI.Card
                 if (GameModeManager.Instance.CurrentGameMode.UseServer())
                     NetworkManager.Instance.Socket.Emit("makeDrought", droughtJson); // 서버에게 1을 보냄으로써 가뭄이 활성화 되었다고 전송
 
-                return await base.UseCard();
+                bool result = await base.UseCard();
+                return result;
             }
 
             return true;
         }
     }
 }
-// 마지막 작성 일자: 2026.05.12
+// 마지막 작성 일자: 2026.05.20

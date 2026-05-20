@@ -34,8 +34,9 @@ namespace InGame.MyUI.Card
 
             await InGameContext.Current.Data.CardManager.UsedCardShowOver?.Task; // tcs 대기
 
-            return await base.UseCard();
+            bool result = await base.UseCard();
+            return result;
         }
     }
 }
-// 마지막 작성 일자: 2026.05.12
+// 마지막 작성 일자: 2026.05.20

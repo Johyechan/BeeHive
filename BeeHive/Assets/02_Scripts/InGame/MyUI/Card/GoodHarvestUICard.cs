@@ -41,8 +41,9 @@ namespace InGame.MyUI.Card
             // 금괴 4개 획득(가뭄 카드의 효과를 받지 않음)
             WalletEvent.OnGetGoldBar?.Invoke(4, true);
             WalletEvent.OnSetGold?.Invoke();
-            return await base.UseCard();
+            bool result = await base.UseCard();
+            return result;
         }
     }
 }
-// 마지막 작성 일자: 2026.05.12
+// 마지막 작성 일자: 2026.05.20

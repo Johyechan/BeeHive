@@ -47,8 +47,10 @@ namespace InGame.MyUI.Card
             if (GameModeManager.Instance.CurrentGameMode.UseServer())
                 NetworkManager.Instance.Socket.Emit("castleHpUp", castleJson); // 서버에 최대 체력이 올라간 팀 타입 알려주기
 
-            return await base.UseCard();
+            bool result = await base.UseCard();
+
+            return result;
         }
     }
 }
-// 마지막 작성 일자: 2026.05.12
+// 마지막 작성 일자: 2026.05.20

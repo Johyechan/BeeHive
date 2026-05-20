@@ -59,8 +59,9 @@ namespace InGame.MyUI.Card
                 }
             }
 
-            return await base.UseCard();
+            bool result = await base.UseCard();
+            return result;
         }
     }
 }
-// 마지막 작성 일자: 2026.05.12
+// 마지막 작성 일자: 2026.05.20

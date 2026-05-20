@@ -7,6 +7,7 @@ using MyUtil.GameMode;
 using System.Threading.Tasks;
 using Tutorial;
 using Tutorial.MyEnum;
+using UnityEditor;
 using UnityEngine;
 
 namespace InGame.MySystem.Game
@@ -72,7 +73,7 @@ namespace InGame.MySystem.Game
                 }
             }
 
-            await Task.CompletedTask; // Task 완료 반환
+            await Task.CompletedTask;
         }
 
         private async Task GetRoad()
@@ -102,7 +103,7 @@ namespace InGame.MySystem.Game
                 PieceEvents.OnGetRoad?.Invoke(2, InGameContext.Current.Data.TurnManager.CurrentTeamType, roadParent); // 도로 2개 획득(현재 턴의 팀)
             }
 
-            await Task.CompletedTask; // Task 완료 반환
+            await Task.CompletedTask;
         }
 
         // 반환 여부 확인 함수
@@ -117,4 +118,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.05.11
+// 마지막 작성 일자: 2026.05.20
