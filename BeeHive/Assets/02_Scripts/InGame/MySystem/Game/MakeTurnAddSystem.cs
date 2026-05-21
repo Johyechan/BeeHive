@@ -103,7 +103,14 @@ namespace InGame.MySystem.Game
                 PieceEvents.OnGetRoad?.Invoke(2, InGameContext.Current.Data.TurnManager.CurrentTeamType, roadParent); // 도로 2개 획득(현재 턴의 팀)
             }
 
-            await Task.CompletedTask;
+            if(InGameContext.Current.Data.TurnManager.RoadCreateCompletionTcs != null) // 도로 생성 완료 tcs가 null 아닐 때
+            {
+                await InGameContext.Current.Data.TurnManager.RoadCreateCompletionTcs.Task; // 도로 생성 완료 대기
+            }
+            else // null일 경우
+            {
+                await Task.CompletedTask; // 바로 넘기기
+            }
         }
 
         // 반환 여부 확인 함수
@@ -118,4 +125,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.05.20
+// 마지막 작성 일자: 2026.05.21

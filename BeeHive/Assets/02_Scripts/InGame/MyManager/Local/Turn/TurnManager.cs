@@ -1,4 +1,3 @@
-using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
@@ -42,10 +41,8 @@ namespace InGame.MyManager.Local.Turn
         private TurnTimerHandler _turnTimerHandler; // 턴 타이머 핸들러 클래스
         private TurnTimerUIHandler _turnTimerUIHandler; // 턴 타이머 UI 핸들러 클래스
 
-        private TaskCompletionSource<bool> _goldMakeTcs; // 금 생성 tcs
-        public TaskCompletionSource<bool> GoldMakeTcs { get => _goldMakeTcs; set => _goldMakeTcs = value; } // 금 생성 tcs 프로퍼티
-        private TaskCompletionSource<bool> _roadMakeTcs; // 도로 생성 tcs
-        public TaskCompletionSource<bool> RoadMakeTcs { get => _roadMakeTcs; set => _roadMakeTcs = value; } // 도로 생성 tcs 프로퍼티
+        private TaskCompletionSource<bool> _roadCreateCompletionTcs; // 도로 생성 완료 tcs
+        public TaskCompletionSource<bool> RoadCreateCompletionTcs { get => _roadCreateCompletionTcs; } // 도로 생성 완료 tcs 프로퍼티
 
         private bool _canChangeTurn; // 턴 변경 가능 여부
         public bool CanChangeTurn { get => _canChangeTurn; set => _canChangeTurn = value; } // 위 변수 프로퍼티
@@ -166,13 +163,12 @@ namespace InGame.MyManager.Local.Turn
             {
                 if (_currentTurnType == TurnType.MakeTurn) // 현재 턴이 생산 턴이라면
                 {
-                    _goldMakeTcs = new TaskCompletionSource<bool>();
-                    _roadMakeTcs = new TaskCompletionSource<bool>();
+                    TaskCompletionSource<bool> completionTcs = new TaskCompletionSource<bool>();
+                    _roadCreateCompletionTcs = new TaskCompletionSource<bool>();
                     await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
-                    WalletEvent.OnSetGold?.Invoke(); // 금화 및 금괴의 객체와 UI 세팅
-                    NetworkManager.Instance.Socket.Emit("debug", $"생성 턴 생성 대기 전");
-                    await _goldMakeTcs?.Task; // 금 생성 대기
-                    NetworkManager.Instance.Socket.Emit("debug", $"생성 턴 생성 대기 끝");
+                    WalletEvent.OnSetGold?.Invoke(completionTcs); // 금화 및 금괴의 객체와 UI 세팅
+                    await completionTcs.Task;
+                    await Task.Delay(_makeTurnDelayMillisecond); // 생산 턴 대기 시간 만큼 대기
                     InGameContext.Current.Data.DrawManager.CanDraw = true; // 드로우 가능 상태
                 }
                 else if(_currentTurnType == TurnType.DrawTurn || _currentTurnType == TurnType.MainTurn) // 드로우턴 또는 메인턴일 때
@@ -244,4 +240,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.05.20
+// 마지막 작성 일자: 2026.05.21

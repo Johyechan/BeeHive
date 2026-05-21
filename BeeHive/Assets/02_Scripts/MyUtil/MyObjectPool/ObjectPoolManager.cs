@@ -11,7 +11,6 @@ using MyUtil.GameMode;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace MyUtil.MyObjectPool
 {
@@ -245,7 +244,18 @@ namespace MyUtil.MyObjectPool
             if (isObject) // 객체일 때
             {
                 obj.transform.DOKill();
-                return obj.transform.DOLocalMoveY(targetYPos, _animationDuration); // 목표 y값으로 이동
+                return obj.transform.DOLocalMoveY(targetYPos, _animationDuration) // 목표 y값으로 이동
+                    .OnComplete(() =>
+                    {
+                        // obj 객체의 부모가 현재 차례인 팀의 도로 부모일 때
+                        if(obj.transform.parent == TeamManager.Instance.GetRoadTransform(InGameContext.Current.Data.TurnManager.CurrentTeamType))
+                        {
+                            if(obj.transform.parent.childCount >= 2) // 도로의 개수가 2개 이상일 경우
+                            {
+                                InGameContext.Current.Data.TurnManager.RoadCreateCompletionTcs?.SetResult(true);
+                            }
+                        }
+                    }); 
             }
             else // UI 일 때
             {
@@ -257,4 +267,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.04.28
+// 마지막 작성 일자: 2026.05.21

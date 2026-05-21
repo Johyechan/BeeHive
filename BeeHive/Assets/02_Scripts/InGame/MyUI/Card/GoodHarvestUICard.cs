@@ -40,7 +40,7 @@ namespace InGame.MyUI.Card
 
             // ±Ý±« 4°³ È¹µæ(°¡¹³ Ä«µåÀÇ È¿°ú¸¦ ¹ÞÁö ¾ÊÀ½)
             WalletEvent.OnGetGoldBar?.Invoke(4, true);
-            WalletEvent.OnSetGold?.Invoke();
+            WalletEvent.OnSetGold?.Invoke(null);
             bool result = await base.UseCard();
             return result;
         }

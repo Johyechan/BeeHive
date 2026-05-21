@@ -25600,7 +25600,7 @@ MonoBehaviour:
   _usedDeckData:
     animationDuration: 0.25
     cardShuffleDuration: 0.1
-    uiFadeDuration: 0.1
+    uiFadeDuration: 0.25
     yInterval: 0.0005
     shuffleMinYPos: -30
     shuffleCount: 5
@@ -28495,7 +28495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 1667095411}
-  _animationDuration: 0.1
+  _animationDuration: 0.25
 --- !u!1001 &1407919145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33338,7 +33338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamChangeDelay: 1
   _turnDurationTime: 600
-  _makeTurnDelayMillisecond: 750
+  _makeTurnDelayMillisecond: 500
   _turnTimerSlider: {fileID: 279555795}
 --- !u!4 &1713890272
 Transform:
@@ -39247,7 +39247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waitConfirmUI: {fileID: 1472582254}
   _animationDuration: 0.1
-  _waitTime: 10
+  _waitTime: 30
 --- !u!4 &2024793782
 Transform:
   m_ObjectHideFlags: 0

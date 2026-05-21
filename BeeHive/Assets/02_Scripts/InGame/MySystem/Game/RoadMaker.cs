@@ -5,6 +5,7 @@ using InGame.MyManager.Local;
 using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MySystem
@@ -39,8 +40,6 @@ namespace InGame.MySystem
             {
                 MakeRoad(type, objectPoolType, parent, i);
             }
-
-            InGameContext.Current.Data.TurnManager.RoadMakeTcs?.SetResult(true); // 도로 생성 tcs에 true 할당
         }
 
         private void MakeRoad(TeamType type, ObjectPoolType objectPoolType, Transform parent, int count)
@@ -71,4 +70,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.05.20
+// 마지막 작성 일자: 2026.05.21

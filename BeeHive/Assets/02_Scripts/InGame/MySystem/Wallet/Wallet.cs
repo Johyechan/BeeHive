@@ -6,6 +6,7 @@ using InGame.MyManager.Local;
 using InGame.MySystem.Game;
 using MyUtil.GameMode;
 using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -87,7 +88,7 @@ namespace InGame.MySystem
             WalletEvent.OnSetGold -= SetGold; // 금괴 및 금화 세팅 이벤트에 함수 구독 해제
         }
 
-        private void SetGold()
+        private void SetGold(TaskCompletionSource<bool> completionTcs)
         {
             GoldSetEventEmit();
 
@@ -95,6 +96,8 @@ namespace InGame.MySystem
 
             _goldSetHandle.GoldCoinSetting((int)TeamManager.Instance.CurrentTeamType, _goldCoinCount); // 객체 변경
             _goldSetHandle.GoldBarSetting((int)TeamManager.Instance.CurrentTeamType, _goldBarCount); // 객체 변경
+
+            completionTcs?.SetResult(true);
         }
 
         // 금화를 얻는 함수(얻는 값)
@@ -187,7 +190,7 @@ namespace InGame.MySystem
 
                 if(directChange) // 즉시 변경일 경우
                 {
-                    SetGold(); // 골드 세팅
+                    SetGold(null); // 골드 세팅
                 }
             }
         }
@@ -355,4 +358,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.05.20
+// 마지막 작성 일자: 2026.05.21

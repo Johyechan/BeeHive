@@ -129,8 +129,6 @@ namespace InGame.MySystem
                     ObjectPoolManager.Instance.ReturnObject(type, obj, true); // 맨 끝 자식 반환
                 }
             }
-
-            InGameContext.Current.Data.TurnManager.GoldMakeTcs?.SetResult(true); // 금 생성 tcs가 null이 아닐 경우 true 할당
         }
     }
 }

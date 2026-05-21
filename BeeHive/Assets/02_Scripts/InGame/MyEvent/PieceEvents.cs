@@ -18,4 +18,4 @@ namespace InGame.MyEvent
         public static Action<PieceBase, TeamType, PiecePlacePlaneObject> OnChangeNearRoad; // 가까운 도로를 변경하는 이벤트
     }
 }
-// 마지막 작성 일자: 2026.01.16
+// 마지막 작성 일자: 2026.05.21
