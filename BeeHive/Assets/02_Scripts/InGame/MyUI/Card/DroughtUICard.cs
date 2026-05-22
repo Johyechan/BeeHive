@@ -40,6 +40,7 @@ namespace InGame.MyUI.Card
                 int target = TeamManager.Instance.CurrentTeamType == TeamType.Team1 ? 2 : 1; // 팀 1일 경우 팀 2를 할당, 팀 2일 경우 팀 1을 할당
 
                 InGameContext.Current.Data.CardManager.DroughtState(true, (TeamType)target);
+                InGameContext.Current.Data.PieceManager.OpponentDrought = true; // 상대 가뭄 상태
 
                 DroughtInfo droughtInfo = new DroughtInfo()
                 {
@@ -60,4 +61,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.05.20
+// 마지막 작성 일자: 2026.05.22

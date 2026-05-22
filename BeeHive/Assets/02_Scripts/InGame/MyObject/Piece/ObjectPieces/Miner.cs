@@ -57,7 +57,22 @@ namespace InGame.MyObject.Piece.ObjectPieces
                 return 0;
             }
 
-            if(!CanDig())
+            if(CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 내 팀의 광부일 경우
+            {
+                if (InGameContext.Current.Data.PieceManager.IsDrought) // 가뭄 상태라면
+                {
+                    return 0;
+                }
+            }
+            else // 상대 팀 광부일 경우
+            {
+                if (InGameContext.Current.Data.PieceManager.OpponentDrought) // 가뭄 상태라면
+                {
+                    return 0;
+                }
+            }
+
+            if (!CanDig())
             {
                 return 0;
             }
@@ -104,7 +119,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
         // 생산 가능 여부 확인 함수
         private bool CanDig()
         {
-            InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanPieceMovePlane(_pieceVariable.currentPlacePlane, TeamManager.Instance.CurrentTeamType, PieceData.currentObjectType); // 이동 가능한 칸 찾기
+            InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanPieceMovePlane(_pieceVariable.currentPlacePlane, CurrentTeamType, PieceData.currentObjectType); // 이동 가능한 칸 찾기
 
             foreach (var map in InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanDigCheckPlacePlanes) // 생산 가능 여부 확인 배치칸 순회
             {
@@ -130,4 +145,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.05.19
+// 마지막 작성 일자: 2026.05.22

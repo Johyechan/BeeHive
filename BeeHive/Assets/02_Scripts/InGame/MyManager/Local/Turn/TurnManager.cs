@@ -165,10 +165,12 @@ namespace InGame.MyManager.Local.Turn
                 {
                     TaskCompletionSource<bool> completionTcs = new TaskCompletionSource<bool>();
                     _roadCreateCompletionTcs = new TaskCompletionSource<bool>();
+
                     await TurnEvents.OnMakeTurn.ActionlistPlay(); // 생산 턴의 작업 실행
                     WalletEvent.OnSetGold?.Invoke(completionTcs); // 금화 및 금괴의 객체와 UI 세팅
                     await completionTcs.Task;
                     await Task.Delay(_makeTurnDelayMillisecond); // 생산 턴 대기 시간 만큼 대기
+
                     InGameContext.Current.Data.DrawManager.CanDraw = true; // 드로우 가능 상태
                 }
                 else if(_currentTurnType == TurnType.DrawTurn || _currentTurnType == TurnType.MainTurn) // 드로우턴 또는 메인턴일 때
@@ -200,7 +202,12 @@ namespace InGame.MyManager.Local.Turn
             {
                 if(_currentTurnType == TurnType.TurnEnd)
                 {
-                    InGameContext.Current.Data.CardManager.DroughtState(false, _currentTeamType); // 가뭄 종료
+                    if(InGameContext.Current.Data.PieceManager.OpponentDrought) // 상대가 가뭄 상태라면
+                    {
+                        InGameContext.Current.Data.PieceManager.OpponentDrought = false; // 가뭄 종료
+
+                        InGameContext.Current.Data.CardManager.DroughtState(false, _currentTeamType); // 가뭄 종료
+                    }
                 }
             }
 
@@ -240,4 +247,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.05.21
+// 마지막 작성 일자: 2026.05.22

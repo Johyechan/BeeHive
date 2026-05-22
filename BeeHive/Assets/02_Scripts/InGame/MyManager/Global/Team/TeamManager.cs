@@ -34,8 +34,8 @@ namespace InGame.MyManager.Global
             }
         }
 
-        private bool _firstTurn = true; // 팀의 첫 번째 턴 여부
-        public bool FirstTurn { get => _firstTurn; set => _firstTurn = value; } // 팀의 첫 번째 턴 여부 프로퍼티
+        private bool _team2FirstTurn = true; // 블루팀(팀2)의 첫 번째 턴 여부
+        public bool Team2FirstTurn { get => _team2FirstTurn; set => _team2FirstTurn = value; } // 블루팀(팀2)의 첫 번째 턴 여부 프로퍼티
 
         protected override void Awake()
         {
@@ -160,4 +160,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.05.06
+// 마지막 작성 일자: 2026.05.22

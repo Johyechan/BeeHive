@@ -28,13 +28,17 @@ namespace InGame.MyObject.Handler
         // 카드 세팅 코루틴
         public IEnumerator CardSettingCo(Transform addCardTrans, ObjectPoolType cardPoolType, int usedCardCount)
         {
+            yield return new WaitUntil(() => InGameContext.Current.Data.CardManager.CardReverseTask.Task.IsCompleted);
+
             if (cardPoolType != ObjectPoolType.CastleUpgradeCard) // 카드가 성벽 강화 카드가 아닐 경우에만
             {
                 bool tweenEnd = false; // 트윈 종료 여부를 판단하는 변수
                 DOTween.Sequence()
-                    .AppendInterval(_animationDuration) // 대기
                     .Append(addCardTrans.DOLocalMove(new Vector3(0, _yInterval * usedCardCount, 0), _animationDuration))
-                    .OnComplete(() => tweenEnd = true); // 사용한 카드 위치 이동
+                    .OnComplete(() =>
+                    {
+                        tweenEnd = true; // 사용한 카드 위치 이동
+                    });
 
                 yield return new WaitUntil(() => tweenEnd); // 트윈이 종료될 때까지 대기
             }
@@ -42,8 +46,6 @@ namespace InGame.MyObject.Handler
             {
                 ObjectPoolManager.Instance.ReturnObject(cardPoolType, addCardTrans.gameObject); // 성벽 강화 카드를 풀에 반환 - 성벽 강화 카드는 재사용 불가 카드이기 때문
             }
-
-            yield return new WaitUntil(() => InGameContext.Current.Data.CardManager.CardReverseTask.Task.IsCompleted);
 
             bool end = false;
             switch (InGameContext.Current.Data.TurnManager.CurrentTeamType) // 현재 팀에 따라 카드 재세팅
@@ -71,4 +73,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.19
+// 마지막 작성 일자: 2026.05.22

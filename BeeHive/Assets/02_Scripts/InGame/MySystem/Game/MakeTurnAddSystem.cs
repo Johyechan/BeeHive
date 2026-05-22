@@ -52,25 +52,23 @@ namespace InGame.MySystem.Game
             {
                 if (IsReturn()) return; // 반환해야할 조건을 충족했을 경우 반환
 
-                if (TeamManager.Instance.FirstTurn) // 각 팀마다 첫 번째 턴일 경우
+                if (InGameContext.Current.Data.TurnManager.CurrentTeamType == TeamType.Team2) // 현재 차례인 팀이 블루팀(팀2)이라면
                 {
-                    TeamManager.Instance.FirstTurn = false; // 첫 턴 종료
-                    switch (TeamManager.Instance.CurrentTeamType)
+                    if (TeamManager.Instance.Team2FirstTurn) // 블루팀(팀2)의 첫 번째 턴이라면
                     {
-                        case TeamType.Team1:
-                            WalletEvent.OnGetGoldBar?.Invoke(2, false); // 금괴 2개 획득
-                            break;
-                        case TeamType.Team2:
-                            WalletEvent.OnGetGoldBar?.Invoke(3, false); // 금괴 3개 획득
-                            break;
-                        default:
-                            break;
+                        WalletEvent.OnGetGoldBar?.Invoke(3, false); // 금괴 3개 획득
+                        TeamManager.Instance.Team2FirstTurn = false; // 블루팀(팀2)의 첫 번째 턴 상태 종료
+                    }
+                    else // 첫 번째 턴이 아니라면
+                    {
+                        WalletEvent.OnGetGoldBar?.Invoke(2, false); // 금괴 2개 획득
                     }
                 }
-                else // 각 팀마다 첫 번째 턴이 아닐경우
+                else // 레드팀(팀1)이라면
                 {
                     WalletEvent.OnGetGoldBar?.Invoke(2, false); // 금괴 2개 획득
                 }
+                
             }
 
             await Task.CompletedTask;
@@ -125,4 +123,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.05.21
+// 마지막 작성 일자: 2026.05.22

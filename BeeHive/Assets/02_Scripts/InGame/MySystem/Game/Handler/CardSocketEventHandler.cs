@@ -3,7 +3,6 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using MyUtil;
-using MyUtil.GameMode;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -47,10 +46,14 @@ namespace InGame.MySystem.Game.Handler
                     }
                     CardObject cardObject = cardObj.GetComponent<CardObject>();
 
-                    _ = cardObj.transform.DORotate(new Vector3(0, cardObj.transform.eulerAngles.y, 90), cardReverseInfo.animationDuration / 2).AsyncWaitForCompletion(); // 카드 뒤집기
-                    _ = cardObj.transform.DORotate(new Vector3(0, cardObj.transform.eulerAngles.y, 180), cardReverseInfo.animationDuration / 2).AsyncWaitForCompletion(); // 카드 뒤집기
-                    _ = cardObj.transform.DOMoveY(0.0001f, cardReverseInfo.animationDuration).AsyncWaitForCompletion(); // 뒤집힌 카드가 땅을 뚫지 않게 조금 위로 이동
-                    InGameContext.Current.Data.CardManager.CardReverseTask.SetResult(true);
+                    DOTween.Sequence()
+                        .Append(cardObj.transform.DORotate(new Vector3(0, cardObj.transform.eulerAngles.y, 90), cardReverseInfo.animationDuration / 2))
+                        .Append(cardObj.transform.DORotate(new Vector3(0, cardObj.transform.eulerAngles.y, 180), cardReverseInfo.animationDuration / 2))
+                        .Join(cardObj.transform.DOMoveY(0.0005f, cardReverseInfo.animationDuration))
+                        .OnComplete(() =>
+                        {
+                            InGameContext.Current.Data.CardManager.CardReverseTask.SetResult(true);
+                        });
 
                     UsedDeck usedDeck = GameObject.Find("UsedDeck").GetComponent<UsedDeck>();
                     usedDeck.AddCardInToUsedDeck(cardObj.transform);
@@ -65,4 +68,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.05.22
