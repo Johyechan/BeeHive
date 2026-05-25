@@ -1,12 +1,13 @@
-using InGame.MyManager;
 using InGame.MyManager.Enum;
 using InGame.MyManager.Global;
 using InGame.MyUI;
 using InGame.MyUI.MyUIButton;
 using MyUtil;
+using MyUtil.GameMode;
 using MyUtil.MyObjectPool;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace InGame.MySystem.Lobby
 {
@@ -19,10 +20,15 @@ namespace InGame.MySystem.Lobby
         [SerializeField] private GameObject _roomListContent; // 방 리스트에 버튼이 자식으로 추가될 부모 객체
         [SerializeField] private GameObject _roomListBlockPanel; // 방 리스트에 버튼이 자식으로 추가될 부모 객체
 
+        [SerializeField] private Button _makeRoomButton; // 방 생성 버튼
+
         private async void Awake()
         {
             NetworkManager.Instance.Socket.On("roomListSet", (value) => // 방 목록 세팅 이벤트
             {
+                if (GameModeManager.Instance.CurrentLicenseType == LicenseType.FriendPass) // 프랜즈 패스일 경우
+                    return; // 반환
+
                 MainThreadDispatcher.Enqueue(() =>
                 {
                     _roomListBlockPanel.SetActive(true); // UI 클릭 방지 시작
@@ -70,10 +76,23 @@ namespace InGame.MySystem.Lobby
             }
         }
 
+        // 앱 권한 확인 함수
+        public void CheckAppLicense()
+        {
+            if(GameModeManager.Instance.CurrentLicenseType == LicenseType.FriendPass) // 현재 앱의 권한이 프랜즈 패스일 경우
+            {
+                _makeRoomButton.interactable = false; // 방 생성 버튼 상호 작용 불가
+            }
+            else // 현재 앱의 권한이 프랜즈 패스가 아닐 경우
+            {
+                _makeRoomButton.interactable = true; // 방 생성 버튼 상호 작용 가능
+            }
+        }
+
         private void OnDisable()
         {
             NetworkManager.Instance.Socket.Off("roomListSet"); // 소켓 이벤트 연결 해제
         }
     }
 }
-// 마지막 작성 일자: 2026.02.18
+// 마지막 작성 일자: 2026.05.25

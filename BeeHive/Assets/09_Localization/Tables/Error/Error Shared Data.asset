@@ -35,6 +35,14 @@ MonoBehaviour:
     m_Key: Error_UI_AlreadyFullPlayer
     m_Metadata:
       m_Items: []
+  - m_Id: 16651131360641024
+    m_Key: Error_UI_IsFriendPass
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16654687996215296
+    m_Key: Error_UI_IsFriendPassExist
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

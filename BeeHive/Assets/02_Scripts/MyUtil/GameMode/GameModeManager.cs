@@ -1,4 +1,5 @@
 using MyUtil.Interface;
+using Steamworks;
 using UnityEngine;
 
 namespace MyUtil.GameMode
@@ -7,6 +8,9 @@ namespace MyUtil.GameMode
     // 게임 모드 매니저
     public class GameModeManager : MonoSingleton<GameModeManager>
     {
+        private const uint MAIN_APP_ID = 1;
+        private const uint FRIENDPASS_APP_ID = 2;
+
         private IGameMode _currentGameMode;
 
         public IGameMode CurrentGameMode 
@@ -22,9 +26,22 @@ namespace MyUtil.GameMode
             }
         } // 현재 게임 모드 프로퍼티
 
+        private LicenseType _currentLicenseType = LicenseType.None; // 현재 권한 타입
+        public LicenseType CurrentLicenseType { get => _currentLicenseType; } // 현재 권한 타입 프로퍼티
+
         protected override void Awake()
         {
             base.Awake();
+
+            switch(SteamUtils.GetAppID().m_AppId)
+            {
+                case MAIN_APP_ID:
+                    _currentLicenseType = LicenseType.Main;
+                    break;
+                case FRIENDPASS_APP_ID:
+                    _currentLicenseType = LicenseType.FriendPass;
+                    break;
+            }
 
             Ready();
         }
@@ -36,4 +53,4 @@ namespace MyUtil.GameMode
         }
     }
 }
-// 마지막 작성 일자: 2026.04.08
+// 마지막 작성 일자: 2026.05.25

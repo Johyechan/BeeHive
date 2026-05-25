@@ -38,6 +38,14 @@ MonoBehaviour:
     m_Localized: Room is already at maximum capacity.
     m_Metadata:
       m_Items: []
+  - m_Id: 16651131360641024
+    m_Localized: This feature is unavailable for Friend Pass users.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16654687996215296
+    m_Localized: Cannot transfer host to a Friend Pass user.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

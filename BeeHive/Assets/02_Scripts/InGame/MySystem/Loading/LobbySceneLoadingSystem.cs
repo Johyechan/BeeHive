@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyManager.Global;
+using InGame.MySystem.Lobby;
 using UnityEngine;
 
 namespace InGame.MySystem.Loading
@@ -13,9 +14,13 @@ namespace InGame.MySystem.Loading
 
         [SerializeField] private float _animationDuration; // 애니메이션 지속 시간
 
+        [SerializeField] private LobbySetting _lobbySetting; // 로비 세팅
+
         private async void Awake()
         {
             await LobbyReady.Gate.WaitAsync(); // 로비 준비 대기
+
+            _lobbySetting.CheckAppLicense();
 
             await _loadingUICanvasGroup.DOFade(0, _animationDuration).AsyncWaitForCompletion(); // 로딩 창 닫기
 
@@ -26,4 +31,4 @@ namespace InGame.MySystem.Loading
         }
     }
 }
-// 마지막 작성 일자: 2026.02.10
+// 마지막 작성 일자: 2026.05.25

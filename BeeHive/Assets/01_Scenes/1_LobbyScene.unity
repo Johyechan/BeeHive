@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 6853516}
   - component: {fileID: 6853518}
   - component: {fileID: 6853517}
+  - component: {fileID: 6853519}
   m_Layer: 5
   m_Name: RoomListPanel
   m_TagString: Untagged
@@ -178,6 +179,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6853515}
   m_CullTransparentMesh: 1
+--- !u!114 &6853519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6853515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc2fb7e37ff5d64cbec03f1c5c4a5bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _roomList: {fileID: 1731460179}
 --- !u!1 &11355322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,7 +1879,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &228647684
@@ -3164,6 +3178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _loadingUICanvasGroup: {fileID: 1785251737}
   _animationDuration: 0.1
+  _lobbySetting: {fileID: 2114266552}
 --- !u!4 &334315689
 Transform:
   m_ObjectHideFlags: 0
@@ -7656,7 +7671,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &916085133
@@ -15195,7 +15210,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1909723734
@@ -16889,6 +16904,7 @@ MonoBehaviour:
   _nickNameText: {fileID: 463120351}
   _roomListContent: {fileID: 396590938}
   _roomListBlockPanel: {fileID: 1643980228}
+  _makeRoomButton: {fileID: 492607638}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
