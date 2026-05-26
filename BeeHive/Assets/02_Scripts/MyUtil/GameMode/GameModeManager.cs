@@ -9,6 +9,7 @@ namespace MyUtil.GameMode
     public class GameModeManager : MonoSingleton<GameModeManager>
     {
         private const uint MAIN_APP_ID = 4317470;
+        private const uint TEST_APP_ID = 480;
         private const uint FRIENDPASS_APP_ID = 4778260;
 
         private IGameMode _currentGameMode;
@@ -41,6 +42,9 @@ namespace MyUtil.GameMode
                 case FRIENDPASS_APP_ID:
                     _currentLicenseType = LicenseType.FriendPass;
                     break;
+                case TEST_APP_ID:
+                    _currentLicenseType = LicenseType.Main;
+                    break;
             }
 
             Ready();
@@ -53,4 +57,4 @@ namespace MyUtil.GameMode
         }
     }
 }
-// 마지막 작성 일자: 2026.05.25
+// 마지막 작성 일자: 2026.05.26

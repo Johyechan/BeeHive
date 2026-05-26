@@ -175,18 +175,16 @@ namespace InGame.MyManager.Local.Turn
                 }
                 else if(_currentTurnType == TurnType.DrawTurn || _currentTurnType == TurnType.MainTurn) // 드로우턴 또는 메인턴일 때
                 {
-                    if(!GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼이 아닐 때
-                    {
-                        _turnTimerHandler.TurnTimerStart(_turnTimerSlider, _turnDurationTime); // 턴 타이머 시작
-                    }
-                }
-                else if (_currentTurnType == TurnType.TurnEnd) // 현재 턴이면서 턴 종료일 때
-                {
-                    if(InGameContext.Current.Data.PieceManager.IsDrought) // 가뭄 상태라면
+                    if (InGameContext.Current.Data.PieceManager.IsDrought) // 가뭄 상태라면
                     {
                         InGameContext.Current.Data.PieceManager.IsDrought = false; // 가뭄 종료
 
                         InGameContext.Current.Data.CardManager.DroughtState(false, _currentTeamType); // 가뭄 종료
+                    }
+
+                    if (!GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼이 아닐 때
+                    {
+                        _turnTimerHandler.TurnTimerStart(_turnTimerSlider, _turnDurationTime); // 턴 타이머 시작
                     }
                 }
 
@@ -200,8 +198,16 @@ namespace InGame.MyManager.Local.Turn
             }
             else // 상대 팀 턴일 때
             {
-                if(_currentTurnType == TurnType.TurnEnd)
+                if(_currentTurnType == TurnType.DrawTurn) // 드로우 턴일 때 (생산 이후 턴)
                 {
+                    if(_currentTeamType == TeamType.Team2)
+                    {
+                        if(TeamManager.Instance.Team2FirstTurn) // 팀2의 첫 번째 턴이라면
+                        {
+                            TeamManager.Instance.Team2FirstTurn = false; // 첫 번째 턴 종료
+                        }
+                    }
+
                     if(InGameContext.Current.Data.PieceManager.OpponentDrought) // 상대가 가뭄 상태라면
                     {
                         InGameContext.Current.Data.PieceManager.OpponentDrought = false; // 가뭄 종료
@@ -247,4 +253,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.05.22
+// 마지막 작성 일자: 2026.05.26

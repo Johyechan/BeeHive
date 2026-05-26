@@ -1,5 +1,7 @@
+using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using MyUtil;
 using UnityEngine;
 
@@ -30,6 +32,14 @@ namespace InGame.MySystem.Game.Handler
                 {
                     _goldSetHandle.GoldCoinSetting(setGoldInfo.team, setGoldInfo.goldCoin); // 금화 객체 세팅(팀, 금화 개수)
                     _goldSetHandle.GoldBarSetting(setGoldInfo.team,  setGoldInfo.goldBar); // 금괴 객체 세팅(팀, 금괴 개수)
+
+                    if (InGameContext.Current.Data.TurnManager.CurrentTeamType == TeamType.Team2) // 팀 2 차례일 때
+                    {
+                        if (TeamManager.Instance.Team2FirstTurn) // 팀 2 첫 번째 차례라면
+                        {
+                            TeamManager.Instance.Team2FirstTurn = false; // 첫 번째 차례 해제
+                        }
+                    }
                 });
             });
         }
@@ -40,4 +50,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.05.11
+// 마지막 작성 일자: 2026.05.26
