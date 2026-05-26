@@ -8,8 +8,8 @@ namespace MyUtil.GameMode
     // 게임 모드 매니저
     public class GameModeManager : MonoSingleton<GameModeManager>
     {
-        private const uint MAIN_APP_ID = 1;
-        private const uint FRIENDPASS_APP_ID = 2;
+        private const uint MAIN_APP_ID = 4317470;
+        private const uint FRIENDPASS_APP_ID = 4778260;
 
         private IGameMode _currentGameMode;
 

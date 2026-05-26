@@ -6,7 +6,7 @@ namespace InGame.MyManager.Boot.Struct
     public struct SteamAuthInfo
     {
         public string ticket; // 스팀에게서 받은 인증 티켓
-        public int appID; // 앱 ID
+        public uint appID; // 앱 ID
     }
 }
-// 마지막 작성 일자: 2025.12.31
+// 마지막 작성 일자: 2026.05.26

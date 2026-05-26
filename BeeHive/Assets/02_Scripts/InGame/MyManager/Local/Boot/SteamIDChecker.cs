@@ -89,7 +89,7 @@ namespace InGame.MyManager.Local.Boot
             SteamAuthInfo authInfo = new SteamAuthInfo()
             {
                 ticket = authTicketBase64,
-                appID = 480//4317470 <- 이게 실제 appID
+                appID = SteamUtils.GetAppID().m_AppId
             };
 
             string json = JsonUtility.ToJson(authInfo);
@@ -101,4 +101,4 @@ namespace InGame.MyManager.Local.Boot
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.05.26

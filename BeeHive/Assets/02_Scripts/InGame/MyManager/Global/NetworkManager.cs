@@ -117,7 +117,7 @@ namespace InGame.MyManager.Global
                         "Error",
                         text
                     );
-                    UIManager.Instance.WarningUIMake(error);¤Ä
+                    UIManager.Instance.WarningUIMake(error);
                 });
                 return;
             });
