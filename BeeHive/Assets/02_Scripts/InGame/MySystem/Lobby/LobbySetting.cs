@@ -27,7 +27,10 @@ namespace InGame.MySystem.Lobby
             NetworkManager.Instance.Socket.On("roomListSet", (value) => // 방 목록 세팅 이벤트
             {
                 if (GameModeManager.Instance.CurrentLicenseType == LicenseType.FriendPass) // 프랜즈 패스일 경우
+                {
+                    LobbyReady.Gate.Completed(); // 로비 준비 완료
                     return; // 반환
+                }
 
                 MainThreadDispatcher.Enqueue(() =>
                 {
@@ -95,4 +98,4 @@ namespace InGame.MySystem.Lobby
         }
     }
 }
-// 마지막 작성 일자: 2026.05.25
+// 마지막 작성 일자: 2026.05.26
