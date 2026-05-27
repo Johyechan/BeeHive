@@ -46,6 +46,15 @@ MonoBehaviour:
     m_Localized: Cannot transfer host to a Friend Pass user.
     m_Metadata:
       m_Items: []
+  - m_Id: 17374612767375360
+    m_Localized: Host has left the room. (Friend Pass users cannot remain in the
+      room if there is no host.)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17389331439943680
+    m_Localized: You were kicked by the host.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

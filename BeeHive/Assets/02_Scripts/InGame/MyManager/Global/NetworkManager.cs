@@ -3,10 +3,10 @@ using MyUtil;
 using SocketIOClient;
 using Steamworks;
 using System;
-using System.Net.Sockets;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
+using UnityEngine.SceneManagement;
 
 namespace InGame.MyManager.Global
 {
@@ -24,8 +24,10 @@ namespace InGame.MyManager.Global
         private string _currentPlayerID; // 현재 클라이언트 ID
         // 현재 클라이언트 ID 프로퍼티
         public string CurrentPlayerID { get => _currentPlayerID; }
+        private string _saveError = ""; // 경고문을 저장해두는 변수
 
         private bool _isSteamAPIInitSuccess = false; // 스팀 api Init 성공 여부
+        private bool _isNeedShowInLobbyScene = false; // 로비 씬에서 보여줘야할 경고문이 있는지 여부
 
         private bool _isClientOver = false; // 클라이언트 종료 여부
         public bool IsClientOver { get => _isClientOver; } // 클라이언트 종료 여부 프로퍼티
@@ -71,7 +73,7 @@ namespace InGame.MyManager.Global
             _socket.Off("error");
         }
 
-        private void Update()
+        private async void Update()
         {
             if (_isSteamAPIInitSuccess) // 스팀이 돌아가고 있으며, Init()이 성공 했을 때
             {
@@ -80,6 +82,25 @@ namespace InGame.MyManager.Global
             else // 스팀 Init() 실패라면
             {
                 Application.Quit(); // 어플리케이션 즉시 종료
+            }
+
+            if(_isNeedShowInLobbyScene) // 로비 씬에 보여줘야할 경고문이 있고
+            {
+                if(SceneManager.GetActiveScene().buildIndex == 1) // 현재 씬이 로비 씬일 때
+                {
+                    await LobbyReady.Gate.WaitAsync();
+
+                    if(_saveError != "") // 저장한 경고문이 있을 때
+                    {
+                        string error = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Error",
+                            _saveError
+                        );
+                        UIManager.Instance.WarningUIMake(error); // 경고문 띄우기
+                        _saveError = ""; // 저장한 경고문 초기화
+                        _isNeedShowInLobbyScene = false; // 로비씬에 보여줘야할 경고문이 없는 상태로 초기화
+                    }
+                }
             }
         }
         
@@ -117,7 +138,18 @@ namespace InGame.MyManager.Global
                         "Error",
                         text
                     );
-                    UIManager.Instance.WarningUIMake(error);
+
+                    switch(text)
+                    {
+                        case "Error_UI_ToFriendsPass_HostLeave":
+                        case "Show_UI_YouKicked":
+                            _isNeedShowInLobbyScene = true;
+                            _saveError = text;
+                            break;
+                        default:
+                            UIManager.Instance.WarningUIMake(error);
+                            break;
+                    }
                 });
                 return;
             });
@@ -128,4 +160,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.04.20
+// 마지막 작성 일자: 2026.05.27

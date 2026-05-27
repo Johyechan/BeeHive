@@ -46,13 +46,6 @@ namespace InGame.MySystem.Room
                     socket.Emit("getRoomInfo", SceneMgr.Instance.CurrentRoomID); // 서버에 방 정보를 가져오는 이벤트 호출, 현재 방 ID를 매개 변수로 보내기
                 }
 
-                socket.On("kicked", _ => // 추방 당했다면
-                {
-                    // 로비 화면으로 이동
-                    SceneMgr.Instance.ChangeCurrentSceneFlow(SceneFlowType.GoLobby);
-                    SceneMgr.Instance.LoadScene();
-                });
-
                 socket.On("canStartGame", _ =>
                 {
                     if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
@@ -222,4 +215,4 @@ namespace InGame.MySystem.Room
         }
     }
 }
-// 마지막 작성 일자: 2026.05.25
+// 마지막 작성 일자: 2026.05.27

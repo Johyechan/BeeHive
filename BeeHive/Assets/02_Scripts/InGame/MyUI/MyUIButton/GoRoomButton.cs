@@ -5,7 +5,6 @@ using InGame.MyUI.MyUIInterface;
 using MyUtil.GameMode;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 namespace InGame.MyUI.MyUIButton
 {
