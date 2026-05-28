@@ -40,11 +40,11 @@ namespace InGame.MyUI.Card
         private void OnEnable()
         {
             UIEvents.OnShowUICardInformation += ShowInfomation;
-        }
 
-        private void Start()
-        {
-            _uiCardVariable.usedCardDeck = GameObject.Find("UsedDeck").GetComponent<UsedDeck>();
+            if(InGameContext.Current != null)
+            {
+                _uiCardVariable.usedCardDeck = InGameContext.Current.Data.DeckManager.UsedDeckProp;
+            }
         }
 
         private void OnDisable()
@@ -152,4 +152,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.05.12
+// 마지막 작성 일자: 2026.05.28

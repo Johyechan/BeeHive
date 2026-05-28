@@ -93,6 +93,16 @@ namespace InGame.MyObject
                 _opponentHp -= damage;
             }
 
+            if(_currentHp <= 0)
+            {
+                _currentHp = 0;
+            }
+
+            if(_opponentHp <= 0)
+            {
+                _opponentHp = 0;
+            }
+
             HitAnimation(damage); // 히트 애니메이션 실행
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
@@ -204,4 +214,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.05.18
+// 마지막 작성 일자: 2026.05.28

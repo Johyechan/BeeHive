@@ -411,7 +411,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\uC790\uC2E0\uC758 \uC131\uBCBD\uC744 \uAC15\uD654\uD574\n\uC131\uC758
-    \uCCB4\uB825\uC774\n1\uB9CC\uD07C \uC62C\uB77C\uAC04\uB2E4."
+    \uCCB4\uB825\uC774\n1\uB9CC\uD07C \uC62C\uB77C\uAC04\uB2E4.\n(\uC0AC\uC6A9 \uC2DC
+    \uC601\uAD6C \uC0AD\uC81C)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02e53f01f85dfd849806b464452927f3, type: 2}
   m_sharedMaterial: {fileID: 5453975834086442537, guid: 02e53f01f85dfd849806b464452927f3, type: 2}
