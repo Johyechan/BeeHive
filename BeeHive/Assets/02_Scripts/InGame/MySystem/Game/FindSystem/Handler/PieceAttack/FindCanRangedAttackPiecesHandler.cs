@@ -48,7 +48,19 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceAttack
                         {
                             if (nearPiece.PlacedPiece == null) // 성 주위 배치칸이 비어있다면
                             {
-                                if (!InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPieceMovePlanes[pieceBase].Contains(nearPiece)) // 이동 가능한 위치가 아닐 때
+                                if(InGameContext.Current.Data.GameManager.PieceCanMoveMap[pieceBase.CurrentObjectType]) // 현재 기물이 이동 가능할 때
+                                {
+                                    if (!InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPieceMovePlanes[pieceBase].Contains(nearPiece)) // 이동 가능한 위치가 아닐 때
+                                    {
+                                        if (!InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap.ContainsKey(pieceBase)) // 현재 기물의 원거리 공격 대상을 저장하지 않았다면
+                                        {
+                                            InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap.Add(pieceBase, new List<PiecePlacePlaneObject>()); // 새 맵 추가
+                                        }
+
+                                        InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap[pieceBase].Add(nearPiece); // 화력 공격 가능한 기물 배치칸으로 저장
+                                    }
+                                }
+                                else // 현재 기물이 이동 불가 할 때
                                 {
                                     if (!InGameContext.Current.Data.PieceManager.CanFirePowerAttackPiecePlaceMap.ContainsKey(pieceBase)) // 현재 기물의 원거리 공격 대상을 저장하지 않았다면
                                     {
@@ -66,11 +78,15 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceAttack
                         continue; // 넘기기
                     }
 
-                    // 근접 공격으로 공격 가능한 대상이라면
-                    if (InGameContext.Current.Data.PieceManager.CanAttackPieceMap[pieceBase].Contains(nearPiece.PlacedPiece))
+                    
+                    if (InGameContext.Current.Data.GameManager.PieceCanMoveMap[pieceBase.CurrentObjectType]) // 현재 기물이 이동 가능할 때
                     {
-                        continue; // 넘기기
-                    }
+                        // 근접 공격으로 공격 가능한 대상이라면
+                        if (InGameContext.Current.Data.PieceManager.CanAttackPieceMap[pieceBase].Contains(nearPiece.PlacedPiece))
+                        {
+                            continue; // 넘기기
+                        }
+                    }                                                                                 
 
                     if (nearPiece.TeamType != pieceBase.CurrentTeamType) // 상대 팀이라면
                     {
@@ -88,4 +104,4 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceAttack
         }
     }
 }
-// 마지막 작성 일자: 2026.05.05
+// 마지막 작성 일자: 2026.05.29

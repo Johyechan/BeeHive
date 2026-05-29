@@ -191,6 +191,7 @@ namespace InGame.MyManager.Local.Turn
                 if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                     return; // 반환
 
+                NetworkManager.Instance.Socket.Emit("debug", "이벤트 부르기 바로 전"); 
                 HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
                 HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
                 HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
@@ -219,6 +220,7 @@ namespace InGame.MyManager.Local.Turn
 
             if (GameModeManager.Instance.CurrentGameMode.UseServer()) // 현재 게임 모드가 서버를 사용하는 멀티 플레이라면
             {
+                NetworkManager.Instance.Socket.Emit("debug", "이벤트 종료");
                 AutoTurnCompleted(); // 턴 완료
             }
             else // 현제 게임 모드가 서버를 사용하지 않는다면

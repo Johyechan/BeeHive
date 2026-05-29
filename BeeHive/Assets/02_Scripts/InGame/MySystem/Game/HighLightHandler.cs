@@ -46,6 +46,8 @@ namespace InGame.MySystem.Game
                         placePlane.HighLightOff(); // 하이라이트 끄기
                     }
                 }
+
+                NetworkManager.Instance.Socket.Emit("debug", "PieceHighLight 생성 칸 초기화");
             }
             else
             {
@@ -77,6 +79,8 @@ namespace InGame.MySystem.Game
                         placePlane.HighLightOff(); // 하이라이트 끄기
                     }
                 }
+
+                NetworkManager.Instance.Socket.Emit("debug", "PieceHighLight 이동 칸 초기화");
             }
         }
 
@@ -100,6 +104,8 @@ namespace InGame.MySystem.Game
                     placePlane.HighLightOff(); // 하이라이트 끄기
                 }
             }
+
+            NetworkManager.Instance.Socket.Emit("debug", "RoadHighLight 생성 칸 초기화");
         }
     }
 }
