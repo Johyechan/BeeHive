@@ -14151,6 +14151,7 @@ MonoBehaviour:
   _gameOverUICanvasGroup: {fileID: 1194231715}
   _victoryImage: {fileID: 313513374}
   _defeatImage: {fileID: 228357370}
+  _usedCardInformationUI: {fileID: 1505893310}
   _animationDuration: 0.5
   PlayerCount: 2
 --- !u!4 &733623769
@@ -19689,7 +19690,7 @@ MonoBehaviour:
   m_text: "\uB2EB\uAE30"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7a92720e9fa96694892b12bd850fe8f8, type: 2}
-  m_sharedMaterial: {fileID: 5453975834086442537, guid: 02e53f01f85dfd849806b464452927f3, type: 2}
+  m_sharedMaterial: {fileID: -4710621324376599193, guid: 7a92720e9fa96694892b12bd850fe8f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

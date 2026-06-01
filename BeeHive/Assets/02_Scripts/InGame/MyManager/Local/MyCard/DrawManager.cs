@@ -56,7 +56,6 @@ namespace InGame.MyManager.Local.MyCard
                 uiCard.GetComponent<RectTransform>().SetParent(playerUICardsParent);
                 UICardBase uiCardBase = uiCard.GetComponent<UICardBase>();
                 uiCardBase.UICardVariable.cardObj = currentDrawCard.gameObject; // UI 카드에 현재 카드 객체 할당
-
                 uiCardBase.Init(_cardUsePanelCanvasGroup, _cardInformationPanelCanvasGroup);
             }
 
@@ -83,4 +82,4 @@ namespace InGame.MyManager.Local.MyCard
         }
     }
 }
-// 마지막 작성 일자: 2026.05.08
+// 마지막 작성 일자: 2026.06.01

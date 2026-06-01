@@ -21,7 +21,7 @@ namespace InGame.MyUI.Card
     // UI 카드 부모 클래스
     public class UICardBase : MonoBehaviour, IUIClick, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] protected UICardData _uiCardData;
+        [SerializeField] protected UICardData _uiCardData = new UICardData();
         public UICardData UICardData { get => _uiCardData; } // 외부에서 접근하기 위한 인스펙터 할당 변수들을 가지는 구조체 프로퍼티
 
         protected UICardVariable _uiCardVariable = new UICardVariable(); // 필요한 변수들을 가지는 클래스
@@ -152,4 +152,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.05.28
+// 마지막 작성 일자: 2026.06.01

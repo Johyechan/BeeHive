@@ -1,6 +1,7 @@
 using DG.Tweening;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
+using InGame.MyObject;
 using MyUtil;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
@@ -40,25 +41,14 @@ namespace InGame.MyUI
 
                     MainThreadDispatcher.Enqueue(() =>
                     {
-                        GameObject uiCard = ObjectPoolManager.Instance.GetObject((ObjectPoolType)usedCardInfo.usedCardType); // 사용된 카드 생성
-                        uiCard.GetComponent<RectTransform>().SetParent(_ImageParent); // 부모 할당
-                        uiCard.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-                        _cardInformation.text = uiCard.transform.GetChild(1).GetComponent<TMP_Text>().text; // 현재 카드의 설명 가져오기
-                        ObjectPoolManager.Instance.Animation(uiCard, false, true);
-
-                        _canvasGroup.gameObject.SetActive(true); // 활성화
-
-                        _ = _canvasGroup.DOFade(1, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 인
+                        ShowUsedCardInformation(usedCardInfo.usedCardType);
                     });
 
-                    await Task.Delay((int)(_usedCardUIShowSecond * _makeMillisecondValue)); // 사용된 카드를 보여주는 시간만큼 대기
+                    await Delay();
 
                     MainThreadDispatcher.Enqueue(() =>
                     {
-                        _ = _canvasGroup.DOFade(0, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 아웃
-
-                        _canvasGroup.gameObject.SetActive(true); // 비활성화
-                        InGameContext.Current.Data.CardManager.UsedCardShowOver?.SetResult(true); // 사용한 카드 보여주기 종료
+                        HideUsedCardInformation();
                     });
                 });
             }
@@ -68,6 +58,35 @@ namespace InGame.MyUI
         {
             NetworkManager.Instance.Socket.Off("usedCardInformation");
         }
+
+        // 대기 함수
+        public async Task Delay()
+        {
+            await Task.Delay((int)(_usedCardUIShowSecond * _makeMillisecondValue)); // 사용된 카드를 보여주는 시간만큼 대기
+        }
+
+        // 카드를 보여주는 함수
+        public void ShowUsedCardInformation(int usedCardType)
+        {
+            GameObject uiCard = ObjectPoolManager.Instance.GetObject((ObjectPoolType)usedCardType); // 사용된 카드 생성
+            uiCard.GetComponent<RectTransform>().SetParent(_ImageParent); // 부모 할당
+            uiCard.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            _cardInformation.text = uiCard.transform.GetChild(1).GetComponent<TMP_Text>().text; // 현재 카드의 설명 가져오기
+            ObjectPoolManager.Instance.Animation(uiCard, false, true);
+
+            _canvasGroup.gameObject.SetActive(true); // 활성화
+
+            _ = _canvasGroup.DOFade(1, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 인
+        }
+
+        // 카드를 숨기는 함수
+        public void HideUsedCardInformation()
+        {
+            _ = _canvasGroup.DOFade(0, _animationDuration).AsyncWaitForCompletion(); // 애니메이션 지속시간 동안 페이드 아웃
+
+            _canvasGroup.gameObject.SetActive(true); // 비활성화
+            InGameContext.Current.Data.CardManager.UsedCardShowOver?.SetResult(true); // 사용한 카드 보여주기 종료
+        }
     }
 }
-// 마지막 작성 일자: 2026.05.12
+// 마지막 작성 일자: 2026.06.01

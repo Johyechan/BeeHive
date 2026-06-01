@@ -126,7 +126,7 @@ namespace InGame.MyObject
                     GetCastleHpTmpTxt(false).text = $"{opponent} - {_opponentHp}  HP"; // UI 적용
                 }
 
-                if(_currentHp <= 0) // 체력이 0 이하라면
+                if(_opponentHp <= 0) // 체력이 0 이하라면
                 {
                     TutorialManager.Instance.ChangeTutorialState(TutorialState.End); // 튜토리얼 종료 상태로 이동
                     InGameContext.Current.Data.GameManager.GameIsOver(_castleTeamType); // 게임 오버
@@ -214,4 +214,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.05.28
+// 마지막 작성 일자: 2026.06.01

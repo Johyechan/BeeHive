@@ -28,6 +28,7 @@ namespace InGame.MySystem.Game
 
         public void PieceHighLight(bool on, bool isPlace)
         {
+
             if (isPlace)
             {
                 if (_canPiecePlacePlanes.Count <= 0) // 배치 가능한 기물 판 객체 존재하지 않다면
@@ -46,8 +47,6 @@ namespace InGame.MySystem.Game
                         placePlane.HighLightOff(); // 하이라이트 끄기
                     }
                 }
-
-                NetworkManager.Instance.Socket.Emit("debug", "PieceHighLight 생성 칸 초기화");
             }
             else
             {
@@ -59,7 +58,9 @@ namespace InGame.MySystem.Game
                 PieceBase piece = InGameContext.Current.Data.GameManager.CurrentMovePiece?.GetComponent<PieceBase>(); // 현재 선택된 기물 가져오기
 
                 if (piece == null)
+                {
                     return;
+                }
 
                 if (on == false) // 끄는 상태일 때
                 {
@@ -67,6 +68,10 @@ namespace InGame.MySystem.Game
                     piece.PieceVariable.isSelected = false; // 선택 해제 된 상태로 할당
                 }
 
+                if (!_canPieceMovePlanes.ContainsKey(piece)) // 이동 가능한 기물 칸 객체들을 저장하는 맵에 키 중 piece가 없다면
+                {
+                    return; // 반환
+                }
 
                 foreach (var placePlane in _canPieceMovePlanes[piece]) // 이동 가능한 기물 판 객체들 순회
                 {
@@ -79,8 +84,6 @@ namespace InGame.MySystem.Game
                         placePlane.HighLightOff(); // 하이라이트 끄기
                     }
                 }
-
-                NetworkManager.Instance.Socket.Emit("debug", "PieceHighLight 이동 칸 초기화");
             }
         }
 
@@ -104,9 +107,7 @@ namespace InGame.MySystem.Game
                     placePlane.HighLightOff(); // 하이라이트 끄기
                 }
             }
-
-            NetworkManager.Instance.Socket.Emit("debug", "RoadHighLight 생성 칸 초기화");
         }
     }
 }
-// 마지막 작성 일자: 2026.05.07
+// 마지막 작성 일자: 2026.06.01

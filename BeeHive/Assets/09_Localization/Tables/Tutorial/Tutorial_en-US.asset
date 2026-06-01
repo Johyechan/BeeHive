@@ -35,7 +35,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1088307888652288
-    m_Localized: Opponent HP And Gold Coin, Gold Bar
+    m_Localized: "Opponent HP And Gold Coin, Gold Bar\n(Mouse over to view next turn\u2019s
+      expected Gold/Gold Bars.)"
     m_Metadata:
       m_Items: []
   - m_Id: 1088380294922240
@@ -92,7 +93,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1094083407511552
-    m_Localized: "Earn 5 gold when placed in this location. \n(5 gold is converted
+    m_Localized: "Earn 6 gold when placed in this location. \n(5 gold is converted
       into a gold bar.)"
     m_Metadata:
       m_Items: []
@@ -314,7 +315,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3643488308297728
-    m_Localized: Your HP And Gold Coin, Gold Bar
+    m_Localized: "Your HP And Gold Coin, Gold Bar\n(Mouse over to view next turn\u2019s
+      expected Gold/Gold Bars.)"
     m_Metadata:
       m_Items: []
   - m_Id: 6893716612317184

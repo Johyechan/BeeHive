@@ -3,6 +3,7 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyObject;
+using InGame.MyUI;
 using MyUtil.GameMode;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,12 @@ namespace InGame.MyManager.Local
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _gameOverUICanvasGroup;
+
         [SerializeField] private Image _victoryImage; 
         [SerializeField] private Image _defeatImage;
+
+        [SerializeField] private UsedCardInformationUI _usedCardInformationUI;
+        public UsedCardInformationUI UsedCardInformationUI { get => _usedCardInformationUI; }
 
         [SerializeField] private float _animationDuration;
 

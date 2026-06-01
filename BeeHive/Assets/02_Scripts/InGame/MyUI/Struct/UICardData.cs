@@ -22,4 +22,4 @@ namespace InGame.MyUI
         public float animationYValue; // y축으로 올라가는 값
     }
 }
-// 마지막 작성 일자: 2026.04.10
+// 마지막 작성 일자: 2026.06.01

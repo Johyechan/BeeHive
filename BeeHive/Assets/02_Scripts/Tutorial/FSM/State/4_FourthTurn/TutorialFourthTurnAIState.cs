@@ -111,6 +111,10 @@ namespace Tutorial.FSM.State.Fourth
 
                         await confirmResultTcs.Task;
 
+                        await InGameContext.Current.Data.CardManager.UsedCardShowOver?.Task; // 카드 효과 보여주는 애니메이션 종료 대기
+
+                        await InGameContext.Current.Data.CardManager.CardReverseTask.Task; // 카드 뒤집히기 대기
+
                         _ = InGameContext.Current.Data.TurnManager.NextTurn(TurnType.TurnEnd); // 턴 종료 턴으로 턴 변경
 
                         break;
@@ -122,4 +126,4 @@ namespace Tutorial.FSM.State.Fourth
         }
     }
 }
-// 마지막 작성 일자: 2026.04.20
+// 마지막 작성 일자: 2026.06.01

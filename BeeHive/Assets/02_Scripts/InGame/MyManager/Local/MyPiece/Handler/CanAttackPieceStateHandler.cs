@@ -61,8 +61,6 @@ namespace InGame.MyManager.MyPiece.Handler
                         place.CanAttackHighLightOnOff(false);
                     }
                 }
-
-                NetworkManager.Instance.Socket.Emit("debug", "원거리 공격 대상 초기화");
             }
 
             foreach (var piece in canAttackPieceMap) // 공격 가능 기물들 저장 맵 순회
@@ -79,8 +77,6 @@ namespace InGame.MyManager.MyPiece.Handler
                     pieceBase.ChangeMaterial(true);
                 }
             }
-
-            NetworkManager.Instance.Socket.Emit("debug", "근거리 공격 대상 초기화");
         }
     }
 }
