@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyManager.Local;
 using MyUtil.Interface;
 using Tutorial.Event;
+using Tutorial.MyEnum;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
@@ -19,12 +20,11 @@ namespace Tutorial.FSM.State
             TutorialManager.Instance.IsInputDelayOver = false;
             _count = 0;
 
-            string tutorialStart = LocalizationSettings.StringDatabase.GetLocalizedString(
-                "Tutorial",
-                "Tutorial_Start"
-            );
-
-            TutorialManager.Instance.SetTutorialPanel(true, tutorialStart, TutorialManager.Instance.EnterClick, 0.08f, 0.008f, new Vector4(0.5f, 0.305f), new Vector4(1.2f, 1.2f), new Vector2(0, 110f));
+            string howToQuit = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Tutorial",
+                        "Tutorial_HowToQuit"
+                    );
+            TutorialManager.Instance.SetTutorialPanel(true, howToQuit, TutorialManager.Instance.EnterClick);
         }
 
         public void Update()
@@ -38,41 +38,49 @@ namespace Tutorial.FSM.State
             switch(_count) // 카운팅 된 수가
             {
                 case 1:
+                    string tutorialStart = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Tutorial",
+                        "Tutorial_Start"
+                    );
+
+                    TutorialManager.Instance.SetTutorialPanel(true, tutorialStart, TutorialManager.Instance.EnterClick, 0.08f, 0.008f, new Vector4(0.5f, 0.305f), new Vector4(1.2f, 1.2f), new Vector2(0, 110f));
+                    break;
+                case 2:
                     string yourHP = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Tutorial",
                         "Tutorial_YourHPAndGold"
                     );
                     TutorialManager.Instance.SetTutorialPanel(true, yourHP, TutorialManager.Instance.EnterClick, 0.07f, 0.008f, new Vector4(0.42f, 0.958f), new Vector4(2f, 0.6f));
                     break;
-                case 2:
+                case 3:
                     string opponentCastle = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Tutorial",
                         "Tutorial_OpponentCastle"
                     );
                     TutorialManager.Instance.SetTutorialPanel(true, opponentCastle, TutorialManager.Instance.EnterClick, 0.07f, 0.008f, new Vector4(0.5f, 0.78f), new Vector4(1f, 1f));
                     break;
-                case 3:
+                case 4:
                     string opponentHP = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Tutorial",
                         "Tutorial_OpponentHPAndGold"
                     );
                     TutorialManager.Instance.SetTutorialPanel(true, opponentHP, TutorialManager.Instance.EnterClick, 0.07f, 0.008f, new Vector4(0.58f, 0.958f), new Vector4(2f, 0.6f));
                     break;
-                case 4:
+                case 5:
                     string viewingCastleIsYourTeam = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Tutorial",
                         "Tutorial_viewingCastleIsYourTeam"
                     );
                     TutorialManager.Instance.SetTutorialPanel(true, viewingCastleIsYourTeam, TutorialManager.Instance.EnterClick);
                     break;
-                case 5:
+                case 6:
                     string defeatOpponet = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Tutorial",
                         "Tutorial_DefeatOpponent"
                     );
                     TutorialManager.Instance.SetTutorialPanel(true, defeatOpponet, TutorialManager.Instance.EnterClick);
                     break;
-                case 6:
+                case 7:
                     TutorialEvents.OnIntroEnd?.Invoke(); // 인트로 종료 이벤트 호출
                     break;
             }
@@ -85,4 +93,4 @@ namespace Tutorial.FSM.State
         }
     }
 }
-// 마지막 작성 일자: 2026.05.14
+// 마지막 작성 일자: 2026.06.02

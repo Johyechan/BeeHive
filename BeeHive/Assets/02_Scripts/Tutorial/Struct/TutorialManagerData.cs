@@ -16,6 +16,7 @@ namespace Tutorial.Struct
     {
         public CanvasGroup tutorialDimmer; // 튜토리얼 UI (클릭 가능한 대상을 알려주는 UI)
         public CanvasGroup tutorialBlockPanel; // 튜토리얼 UI (클릭을 완전히 방지하는 UI)
+        public CanvasGroup tutorialEscapePanel; // 튜토리얼 종료 패널
 
         public TMP_Text guideTxt; // 안내문
         public TMP_Text helpTxt; // 도움말
@@ -66,4 +67,4 @@ namespace Tutorial.Struct
         public List<PiecePlacePlaneObject> goldCoin5PlacePlanes; // 금화 5개 버는 위치 리스트
     }
 }
-// 마지막 작성 일자: 2026.03.30
+// 마지막 작성 일자: 2026.06.02

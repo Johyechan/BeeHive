@@ -166,8 +166,8 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 1432887121149952
     m_Localized: "Attacking the opponent\u2019s spawn location deals damage to their
-      castle (If an enemy unit is present, it is destroyed and the castle also takes
-      damage.) \nNow, let\u2019s move a Pioneer."
+      castle \n(If an enemy unit is present, it is destroyed and the castle also
+      takes damage.) \nNow, let\u2019s move a Pioneer."
     m_Metadata:
       m_Items: []
   - m_Id: 1435284585316352
@@ -307,11 +307,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2540124577202176
-    m_Localized: Opponent - 5HP
+    m_Localized: Opponent
     m_Metadata:
       m_Items: []
   - m_Id: 2540223034294272
-    m_Localized: Me - 5HP
+    m_Localized: Me
     m_Metadata:
       m_Items: []
   - m_Id: 3643488308297728
@@ -321,6 +321,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 6893716612317184
     m_Localized: Click this area to view all cards used so far.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21757389205929984
+    m_Localized: Press ESC to skip the tutorial.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21759844765401088
+    m_Localized: Skip the tutorial?
     m_Metadata:
       m_Items: []
   references:

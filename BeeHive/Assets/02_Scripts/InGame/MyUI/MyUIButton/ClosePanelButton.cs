@@ -25,6 +25,7 @@ namespace InGame.MyUI
         public void OnUIClick()
         {
             _targetPanel.DOFade(0, _animationDuration) // _targetPanel을 _animationDuration 동안 페이드 아웃
+                .SetUpdate(true)
                 .OnComplete(() =>
                 {
                     if (_panelType != ObjectPoolType.None) // 오브젝트 풀링에 돌려놓을 객체라면
@@ -49,4 +50,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.03.26
+// 마지막 작성 일자: 2026.06.02

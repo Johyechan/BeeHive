@@ -102,6 +102,10 @@ MonoBehaviour:
     m_Localized: Additional Rules
     m_Metadata:
       m_Items: []
+  - m_Id: 21754938893533184
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -186,6 +186,13 @@ namespace Tutorial
             _fsmVariables.machine.ChangeState(GetState(changeState)); // 상태 변경
         }
 
+        public void OnEscape(InputAction.CallbackContext ctx)
+        {
+            Time.timeScale = 0; // 시간 멈추기
+            _tutorialManagerData.tutorialEscapePanel.DOFade(1, _tutorialManagerData.animationDuration).SetUpdate(true); // 튜토리얼 종료 패널 페이드 인
+            _tutorialManagerData.tutorialEscapePanel.gameObject.SetActive(true); // 활성화
+        }
+
         // 인풋 딜레이 함수
         public void OnConfirm(InputAction.CallbackContext ctx)
         {
@@ -212,4 +219,4 @@ namespace Tutorial
         }
     }
 }
-// 마지막 작성 일자: 2026.04.22
+// 마지막 작성 일자: 2026.06.02

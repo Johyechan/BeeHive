@@ -17,6 +17,7 @@ namespace InGame.MyManager.Local
         private InputAction _lClickAction; // 액션 맵에 있는 액션 - 좌클릭 액션
         private InputAction _rClickAction; // 액션 맵에 있는 액션 - 우클릭 액션
         private InputAction _enterClickAction; // 액션 맵에 있는 액션 - 엔터 클릭 액션
+        private InputAction _escapeClickAction; // 액션 맵에 있는 액션 - esc 클릭 액션
 
         private InputClickHandler _clickHandler; // 객체 클릭을 인식하기 위한 핸들러
         
@@ -33,6 +34,7 @@ namespace InGame.MyManager.Local
             _playerActionAsset.Enable(); // 인풋 에셋 활성화
             _lClickAction.Enable();
             _rClickAction.Enable();
+
             _lClickAction.performed += _clickHandler.MouseClick; // 클릭 액션에 클릭 시 실행될 함수 구독
             _rClickAction.performed += ctx => UIEvents.OnShowUICardInformation?.Invoke();
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
@@ -40,6 +42,10 @@ namespace InGame.MyManager.Local
                 _enterClickAction = _playActionMap.FindAction("EnterClick"); // 액션 맵에서 EnterClick 이름을 가진 액션 탐색
                 _enterClickAction.Enable();
                 _enterClickAction.performed += TutorialManager.Instance.OnConfirm;
+
+                _escapeClickAction = _playActionMap.FindAction("EscapeClick"); // 액션 맵에서 EscapeClick 이름을 가진 액션 탐색
+                _escapeClickAction.Enable();
+                _escapeClickAction.performed += TutorialManager.Instance.OnEscape;
             }
         }
 
@@ -65,9 +71,10 @@ namespace InGame.MyManager.Local
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial())
             {
                 _enterClickAction.performed -= TutorialManager.Instance.OnConfirm;
+                _escapeClickAction.performed -= TutorialManager.Instance.OnEscape;
             }
             _playerActionAsset.Disable(); // 인풋 에셋 비활성화
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.06.02

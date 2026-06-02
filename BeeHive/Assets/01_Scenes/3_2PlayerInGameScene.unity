@@ -2754,10 +2754,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deckCardInfo:
-    castleUpgradeCardCount: 0
-    droughtCardCount: 0
-    goodHarvestCardCount: 0
-    roadChangeCardCount: 0
+    castleUpgradeCardCount: 2
+    droughtCardCount: 5
+    goodHarvestCardCount: 5
+    roadChangeCardCount: 3
     firePowerCardCount: 15
   _deck: {fileID: 588781781}
   _usedDeck: {fileID: 1279848487}

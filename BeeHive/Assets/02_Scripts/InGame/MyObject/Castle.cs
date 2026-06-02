@@ -128,6 +128,7 @@ namespace InGame.MyObject
 
                 if(_opponentHp <= 0) // 체력이 0 이하라면
                 {
+                    DOTween.CompleteAll(); // 실행 중인 모든 닷트윈 완료
                     TutorialManager.Instance.ChangeTutorialState(TutorialState.End); // 튜토리얼 종료 상태로 이동
                     InGameContext.Current.Data.GameManager.GameIsOver(_castleTeamType); // 게임 오버
                 }
@@ -146,6 +147,8 @@ namespace InGame.MyObject
 
             if(_currentHp <= 0 && TeamManager.Instance.CurrentTeamType == _castleTeamType) // 현재 체력이 0 이하라면 그리고 같은 팀의 성일 경우
             {
+                DOTween.CompleteAll(); // 실행 중인 모든 닷트윈 완료
+
                 GameOverInfo gameOverInfo = new GameOverInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
@@ -214,4 +217,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.01
+// 마지막 작성 일자: 2026.06.02
