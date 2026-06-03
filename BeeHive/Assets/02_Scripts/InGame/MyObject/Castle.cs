@@ -6,6 +6,7 @@ using InGame.MyManager.Local;
 using MyUtil.GameMode;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Tutorial;
 using Tutorial.MyEnum;
@@ -82,7 +83,7 @@ namespace InGame.MyObject
             }
         }
 
-        public void CastleHit(int damage)
+        public async void CastleHit(int damage)
         {
             if(_castleTeamType == TeamManager.Instance.CurrentTeamType) // 내 팀일 경우
             {
@@ -103,7 +104,7 @@ namespace InGame.MyObject
                 _opponentHp = 0;
             }
 
-            HitAnimation(damage); // 히트 애니메이션 실행
+            await HitAnimation(damage); // 히트 애니메이션 실행
 
             if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 경우
             {
@@ -128,7 +129,7 @@ namespace InGame.MyObject
 
                 if(_opponentHp <= 0) // 체력이 0 이하라면
                 {
-                    DOTween.CompleteAll(); // 실행 중인 모든 닷트윈 완료
+                    await InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.Task; // 사용한 카드가 사용한 카드들을 모아두는 덱으로 갈 때까지 대기
                     TutorialManager.Instance.ChangeTutorialState(TutorialState.End); // 튜토리얼 종료 상태로 이동
                     InGameContext.Current.Data.GameManager.GameIsOver(_castleTeamType); // 게임 오버
                 }
@@ -147,7 +148,7 @@ namespace InGame.MyObject
 
             if(_currentHp <= 0 && TeamManager.Instance.CurrentTeamType == _castleTeamType) // 현재 체력이 0 이하라면 그리고 같은 팀의 성일 경우
             {
-                DOTween.CompleteAll(); // 실행 중인 모든 닷트윈 완료
+                await InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.Task; // 사용한 카드가 사용한 카드들을 모아두는 덱으로 갈 때까지 대기
 
                 GameOverInfo gameOverInfo = new GameOverInfo()
                 {
@@ -160,12 +161,14 @@ namespace InGame.MyObject
             }
         }
 
-        private void HitAnimation(int damage)
+        private async Task HitAnimation(int damage)
         {
-            StartCoroutine(HitAnimationCo());
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>(); // 코루틴 완료 대기 tcs
+            StartCoroutine(HitAnimationCo(tcs));
+            await tcs.Task; // 코루틴 종료 대기
         }
 
-        private IEnumerator HitAnimationCo()
+        private IEnumerator HitAnimationCo(TaskCompletionSource<bool> tcs)
         {
             foreach (var material in _castleMaterials) // 성을 붉게 만들기
             {
@@ -178,6 +181,8 @@ namespace InGame.MyObject
             {
                 material.DOColor(Color.white, "_BaseColor", _hitAnimationDuration);
             }
+
+            tcs.SetResult(true); // 코루틴 완료 tcs에 종료 할당
         }
 
 
@@ -217,4 +222,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.02
+// 마지막 작성 일자: 2026.06.03

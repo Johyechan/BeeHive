@@ -34,6 +34,7 @@ namespace InGame.MySystem.Loading
             TeamManager.Instance.Team2FirstTurn = true; // 팀2 첫 턴 상태로 할당
 
             await LocalManagerReady.Gate.WaitAsync(); // 씬 내 매니저 세팅 대기
+            NetworkManager.Instance.Socket.Emit("debug", "씬 내 매니저 세팅 대기 완료");
 
             InGameContext.Current.Data.GameMapManager.SetNetworkID(); // 네트워크 ID 할당
 
@@ -42,9 +43,12 @@ namespace InGame.MySystem.Loading
             else // 튜토리얼인 경우
                 TeamManager.Instance.CurrentTeamType = TeamType.Team1; // 현재 팀을 팀 1로 할당
 
+            NetworkManager.Instance.Socket.Emit("debug", "팀 대기 완료");
+
             TeamReady.Gate.Completed(); // 팀 할당 완료
 
             await EventReady.WaitAsync(); // 이벤트 준비 완료까지 대기
+            NetworkManager.Instance.Socket.Emit("debug", "이벤트 준비 대기 완료");
 
             if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                 return; // 반환

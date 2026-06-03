@@ -61,6 +61,7 @@ namespace InGame.MyObject.Handler
             }
 
             DrawEventSystem.OnCardUISet?.Invoke();// 카드 UI 재세팅
+            InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.SetResult(true); // 사용한 카드가 사용된 카드들을 모으는 덱으로 이동될 때까지 대기 하는 tcs가 존재한다면 true 할당
 
             if (InGameContext.Current.Data.DeckManager.IsEmpty && cardPoolType != ObjectPoolType.CastleUpgradeCard) // 덱이 비어 있으며 현재 사용한 카드가 성벽 강화 카드가 아닐 경우
             {
@@ -73,4 +74,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.05.22
+// 마지막 작성 일자: 2026.06.03

@@ -33,6 +33,9 @@ namespace InGame.MyManager.Local
         private TaskCompletionSource<bool> _usedCardShowOver; // 사용한 카드를 보여주는 것이 종료 되었는지 확인하는 변수
         public TaskCompletionSource<bool> UsedCardShowOver { get => _usedCardShowOver; set => _usedCardShowOver = value; } // 사용한 카드를 보여주는 것이 종료 되었는지 확인하는 변수 프로퍼티
 
+        private TaskCompletionSource<bool> _usedCardMoveToUsedCardDeck; // 사용한 카드가 사용한 카드들을 모아두는 덱으로 이동했는지 확인하는 tcs
+        public TaskCompletionSource<bool> UsedCardMoveToUsedCardDeck { get => _usedCardMoveToUsedCardDeck; set => _usedCardMoveToUsedCardDeck = value; } // 사용한 카드가 사용한 카드들을 모아두는 덱으로 이동했는지 확인하는 tcs 프로퍼티
+
         [SerializeField] private CanvasGroup _showIsTeam1DroughtUI; // 팀 1 가뭄 여부를 보여주는 UI
         [SerializeField] private CanvasGroup _showIsTeam2DroughtUI; // 팀 2 가뭄 여부를 보여주는 UI
 
@@ -141,4 +144,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.05.19
+// 마지막 작성 일자: 2026.06.03

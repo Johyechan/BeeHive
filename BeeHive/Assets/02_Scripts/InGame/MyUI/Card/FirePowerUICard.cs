@@ -29,6 +29,8 @@ namespace InGame.MyUI.Card
             };
 
             InGameContext.Current.Data.CardManager.UsedCardShowOver = new TaskCompletionSource<bool>(); // 사용한 카드 보여주기 끝날 때까지 대기할 tcs 발급
+            InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck = new TaskCompletionSource<bool>(); // 사용한 카드가 사용된 카드들을 모으는 덱에 갈 때까지 대기하는 tcs 생성
+
             string json = JsonUtility.ToJson(usedCardData); // Json 형태로 변환
             if (GameModeManager.Instance.CurrentGameMode.UseServer())
                 NetworkManager.Instance.Socket.Emit("usedCard", json); // 서버로 카드를 사용했다고 전송
@@ -48,4 +50,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.06.01
+// 마지막 작성 일자: 2026.06.03
