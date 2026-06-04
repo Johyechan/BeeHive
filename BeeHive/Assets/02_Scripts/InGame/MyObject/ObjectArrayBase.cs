@@ -22,7 +22,7 @@ namespace InGame.MyObject
 
             if (objectCount <= 0 || objectCount > _maxChild) // 보유 중인 객체 수가 0이하라면 또는 최대 보유 개수 초과라면
             {
-                return false; // 반환
+                return true; // 반환
             }
 
             for(int i = 0; i < objectCount; i++)
@@ -50,4 +50,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.06.04

@@ -85,23 +85,28 @@ namespace InGame.MyObject
 
         public async void CastleHit(int damage)
         {
+            bool isGameOver = false; // 게임 종료 여부
+
             if(_castleTeamType == TeamManager.Instance.CurrentTeamType) // 내 팀일 경우
             {
                 _currentHp -= damage;
+                if (_currentHp <= 0)
+                {
+                    _currentHp = 0;
+                    isGameOver = true; // 게임 오버
+                    NetworkManager.Instance.Socket.Emit("debug", $"게임 오버 상태 만들기");
+                }
             }
             else // 상대 팀일 경우
             {
                 _opponentHp -= damage;
-            }
+                if (_opponentHp <= 0)
+                {
+                    _opponentHp = 0;
 
-            if(_currentHp <= 0)
-            {
-                _currentHp = 0;
-            }
-
-            if(_opponentHp <= 0)
-            {
-                _opponentHp = 0;
+                    if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼일 경우
+                        isGameOver = true; // 게임 오버
+                }
             }
 
             await HitAnimation(damage); // 히트 애니메이션 실행
@@ -127,7 +132,7 @@ namespace InGame.MyObject
                     GetCastleHpTmpTxt(false).text = $"{opponent} - {_opponentHp}  HP"; // UI 적용
                 }
 
-                if(_opponentHp <= 0) // 체력이 0 이하라면
+                if(isGameOver) // 체력이 0 이하라면
                 {
                     await InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.Task; // 사용한 카드가 사용한 카드들을 모아두는 덱으로 갈 때까지 대기
                     TutorialManager.Instance.ChangeTutorialState(TutorialState.End); // 튜토리얼 종료 상태로 이동
@@ -146,9 +151,13 @@ namespace InGame.MyObject
                 }
             }
 
-            if(_currentHp <= 0 && TeamManager.Instance.CurrentTeamType == _castleTeamType) // 현재 체력이 0 이하라면 그리고 같은 팀의 성일 경우
+            NetworkManager.Instance.Socket.Emit("debug", $"게임 오버: {isGameOver}");
+            if (isGameOver) // 현재 체력이 0 이하라면 그리고 같은 팀의 성일 경우
             {
+                NetworkManager.Instance.Socket.Emit("debug", $"현재 체력이 0 이하로 내려옴, 사용한 카드 이동 대기 tcs null?: {InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck == null}, tcs는? : {InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck.Task}, ?로 tcs 확인: {InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.Task}");
+
                 await InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.Task; // 사용한 카드가 사용한 카드들을 모아두는 덱으로 갈 때까지 대기
+                NetworkManager.Instance.Socket.Emit("debug", "사용한 카드가 사용한 카드들을 모아두는 덱으로 이동 완료");
 
                 GameOverInfo gameOverInfo = new GameOverInfo()
                 {
@@ -222,4 +231,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.03
+// 마지막 작성 일자: 2026.06.04
