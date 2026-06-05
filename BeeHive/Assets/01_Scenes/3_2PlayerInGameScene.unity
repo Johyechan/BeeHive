@@ -2754,10 +2754,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _deckCardInfo:
-    castleUpgradeCardCount: 0
-    droughtCardCount: 0
-    goodHarvestCardCount: 0
-    roadChangeCardCount: 0
+    castleUpgradeCardCount: 2
+    droughtCardCount: 5
+    goodHarvestCardCount: 5
+    roadChangeCardCount: 3
     firePowerCardCount: 15
   _deck: {fileID: 588781781}
   _usedDeck: {fileID: 1279848487}
@@ -13617,7 +13617,7 @@ MonoBehaviour:
     zInterval: -0.006
     moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
-  _damage: 5
+  _damage: 2
 --- !u!1 &730789672
 GameObject:
   m_ObjectHideFlags: 0
@@ -16665,7 +16665,7 @@ MonoBehaviour:
     zInterval: -0.006
     moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
-  _damage: 5
+  _damage: 2
 --- !u!1 &838911373
 GameObject:
   m_ObjectHideFlags: 0
@@ -40107,7 +40107,7 @@ MonoBehaviour:
     zInterval: -0.006
     moveAnimationYvalue: 0.005
     confirmUI: {fileID: 0}
-  _damage: 5
+  _damage: 2
 --- !u!1 &2051955900
 GameObject:
   m_ObjectHideFlags: 0

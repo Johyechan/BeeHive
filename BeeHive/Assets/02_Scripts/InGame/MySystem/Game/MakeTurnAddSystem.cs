@@ -66,7 +66,7 @@ namespace InGame.MySystem.Game
                 }
                 else // ·¹µåÆÀ(ÆÀ1)ÀÌ¶ó¸é
                 {
-                    WalletEvent.OnGetGoldBar?.Invoke(7, false); // ±Ý±« 2°³ È¹µæ
+                    WalletEvent.OnGetGoldBar?.Invoke(2, false); // ±Ý±« 2°³ È¹µæ
                 }
                 
             }
@@ -81,7 +81,7 @@ namespace InGame.MySystem.Game
                 if (IsReturn()) return; // ¹ÝÈ¯ÇØ¾ßÇÒ Á¶°ÇÀ» ÃæÁ·ÇßÀ» °æ¿ì ¹ÝÈ¯
 
                 Transform roadParent = TeamManager.Instance.GetRoadTransform(TeamManager.Instance.CurrentTeamType);
-                PieceEvents.OnGetRoad?.Invoke(6, TeamManager.Instance.CurrentTeamType, roadParent); // µµ·Î 2°³ È¹µæ
+                PieceEvents.OnGetRoad?.Invoke(2, TeamManager.Instance.CurrentTeamType, roadParent); // µµ·Î 2°³ È¹µæ
 
                 AddRoadInfo addRoadInfo = new AddRoadInfo()
                 {

@@ -61,9 +61,7 @@ namespace InGame.MyObject.Handler
             }
 
             DrawEventSystem.OnCardUISet?.Invoke();// 카드 UI 재세팅
-            NetworkManager.Instance.Socket.Emit("debug", $"대기 시작, UsedCardMoveToUsedCardDeck null?: {InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck == null}, tcs: {InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck.Task}, ?로 tcs 확인: {InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.Task}");
             InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.SetResult(true); // 사용한 카드가 사용된 카드들을 모으는 덱으로 이동될 때까지 대기 하는 tcs가 존재한다면 true 할당
-            NetworkManager.Instance.Socket.Emit("debug", $"사용한 카드 이동 완료 대기 tcs 완료");
 
             if (InGameContext.Current.Data.DeckManager.IsEmpty && cardPoolType != ObjectPoolType.CastleUpgradeCard) // 덱이 비어 있으며 현재 사용한 카드가 성벽 강화 카드가 아닐 경우
             {

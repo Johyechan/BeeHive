@@ -94,7 +94,6 @@ namespace InGame.MyObject
                 {
                     _currentHp = 0;
                     isGameOver = true; // 게임 오버
-                    NetworkManager.Instance.Socket.Emit("debug", $"게임 오버 상태 만들기");
                 }
             }
             else // 상대 팀일 경우
@@ -134,7 +133,17 @@ namespace InGame.MyObject
 
                 if(isGameOver) // 체력이 0 이하라면
                 {
-                    await InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.Task; // 사용한 카드가 사용한 카드들을 모아두는 덱으로 갈 때까지 대기
+                    var tcs = InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck;
+
+                    if(tcs != null)
+                    {
+                        await tcs.Task; // 사용한 카드가 사용한 카드들을 모아두는 덱으로 갈 때까지 대기
+                    }
+                    else
+                    {
+                        NetworkManager.Instance.Socket.Emit("debug", "사용한 카드 이동 대기 tcs가 존재하지 않습니다.");
+                    }
+
                     TutorialManager.Instance.ChangeTutorialState(TutorialState.End); // 튜토리얼 종료 상태로 이동
                     InGameContext.Current.Data.GameManager.GameIsOver(_castleTeamType); // 게임 오버
                 }
@@ -151,13 +160,18 @@ namespace InGame.MyObject
                 }
             }
 
-            NetworkManager.Instance.Socket.Emit("debug", $"게임 오버: {isGameOver}");
             if (isGameOver) // 현재 체력이 0 이하라면 그리고 같은 팀의 성일 경우
             {
-                NetworkManager.Instance.Socket.Emit("debug", $"현재 체력이 0 이하로 내려옴, 사용한 카드 이동 대기 tcs null?: {InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck == null}, tcs는? : {InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck.Task}, ?로 tcs 확인: {InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.Task}");
+                var tcs = InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck;
 
-                await InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck?.Task; // 사용한 카드가 사용한 카드들을 모아두는 덱으로 갈 때까지 대기
-                NetworkManager.Instance.Socket.Emit("debug", "사용한 카드가 사용한 카드들을 모아두는 덱으로 이동 완료");
+                if(tcs != null)
+                {
+                    await tcs.Task; // 사용한 카드가 사용한 카드들을 모아두는 덱으로 갈 때까지 대기
+                }
+                else
+                {
+                    NetworkManager.Instance.Socket.Emit("debug", "사용한 카드 이동 대기 tcs가 존재하지 않습니다.");
+                }
 
                 GameOverInfo gameOverInfo = new GameOverInfo()
                 {
@@ -231,4 +245,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.04
+// 마지막 작성 일자: 2026.06.05
