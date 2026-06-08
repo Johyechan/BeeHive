@@ -15,24 +15,108 @@ MonoBehaviour:
   m_TableCollectionName: Rule
   m_TableCollectionNameGuidString: f8ce8538dbe596345945145ec7e17596
   m_Entries:
-  - m_Id: 2524761374326784
-    m_Key: Rule_UI_GameComponents
+  - m_Id: 23901465837568000
+    m_Key: Rule_UI_Button_HowToWin
     m_Metadata:
       m_Items: []
-  - m_Id: 2525352641167360
-    m_Key: Rule_UI_BasicSetting
+  - m_Id: 23901985910292480
+    m_Key: Rule_Text_HowToWin
     m_Metadata:
       m_Items: []
-  - m_Id: 2525795303817216
-    m_Key: Rule_UI_ProductionPhase
+  - m_Id: 23902546864898048
+    m_Key: Rule_UI_Button_Phase
     m_Metadata:
       m_Items: []
-  - m_Id: 2527252967063552
-    m_Key: Rule_UI_DrawPhase
+  - m_Id: 23903102853447680
+    m_Key: Rule_UI_Button_TeamChange
     m_Metadata:
       m_Items: []
-  - m_Id: 2527682799337472
-    m_Key: Rule_UI_MainPhase
+  - m_Id: 23903297582399488
+    m_Key: Rule_Text_TeamChange
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23904639164088320
+    m_Key: Rule_UI_Button_TurnEnd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23908419586752512
+    m_Key: Rule_Text_ProductionPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23909811244236800
+    m_Key: Rule_Text_DrawPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23910492587950080
+    m_Key: Rule_Text_MainPhase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23910913914175488
+    m_Key: Rule_Text_TurnEnd
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23918661267619840
+    m_Key: Rule_UI_Button_Card
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23924688109174784
+    m_Key: Rule_UI_Button_CastleUpgradeCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23924748133859328
+    m_Key: Rule_UI_Button_ProsperityCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23924910520532992
+    m_Key: Rule_UI_Button_DroughtCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23925103685009408
+    m_Key: Rule_UI_Button_FirePowerCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23925236568948736
+    m_Key: Rule_UI_Button_ModifyRoadCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23926802965331968
+    m_Key: Rule_Text_FirePowerCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23929431380459520
+    m_Key: Rule_Text_ProsperityCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23929881576079360
+    m_Key: Rule_Text_DroughCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23930527863799808
+    m_Key: Rule_Text_ModifyRoadCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23930835000098816
+    m_Key: Rule_Text_CastleUpgradeCard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23934289735057408
+    m_Key: Rule_UI_Button_PieceButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23935375761997824
+    m_Key: Rule_Text_Miner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23935994723827712
+    m_Key: Rule_Text_Pioneer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23936568668192768
+    m_Key: Rule_Text_Bombard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 23938738515869696
+    m_Key: Rule_Text_Road
     m_Metadata:
       m_Items: []
   m_Metadata:

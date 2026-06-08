@@ -74,18 +74,6 @@ MonoBehaviour:
     m_Localized: Game Rules
     m_Metadata:
       m_Items: []
-  - m_Id: 2515193701335040
-    m_Localized: Game Components
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2515460425515008
-    m_Localized: Game Rules
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2515755436081152
-    m_Localized: Basic Setting
-    m_Metadata:
-      m_Items: []
   - m_Id: 2516002543501312
     m_Localized: Production Phase
     m_Metadata:

@@ -71,18 +71,6 @@ MonoBehaviour:
     m_Key: Lobby_UI_Guide
     m_Metadata:
       m_Items: []
-  - m_Id: 2515193701335040
-    m_Key: Lobby_UI_Button_GameComponents
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2515460425515008
-    m_Key: Lobby_UI_Button_GameRulesInList
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2515755436081152
-    m_Key: Lobby_UI_Button_BasicSetting
-    m_Metadata:
-      m_Items: []
   - m_Id: 2516002543501312
     m_Key: Lobby_UI_Button_ProductionPhase
     m_Metadata:
