@@ -18,11 +18,11 @@ namespace InGame.MyUI
             // 처음 규칙으로 보여주기
             string rule = LocalizationSettings.StringDatabase.GetLocalizedString(
                 "Rule",
-                "Rule_UI_GameComponents"
+                "Rule_Text_HowToWin"
             );
 
             _ruleTmp.text = rule;
         }
     }
 }
-// 마지막 작성 일자: 2026.04.13
+// 마지막 작성 일자: 2026.06.09

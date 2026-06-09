@@ -156,8 +156,8 @@ MonoBehaviour:
     m_Localized: '- Can perform ranged attacks using Firepower cards.
 
 
-      -
-      Can attack Miner and Pioneer units.
+      - Can
+      attack Miner and Pioneer units.
 
 
       - Bombard units can only be destroyed
@@ -177,6 +177,97 @@ MonoBehaviour:
 
       - Can only
       be used when it is connected to a Castle.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24245917152182272
+    m_Localized: View Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24246338725871616
+    m_Localized: UI Card Info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24246526727159808
+    m_Localized: Gold Count
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24246824468217856
+    m_Localized: Used Card Count
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24247219953336320
+    m_Localized: '- The effect panel appears when you right-click a UI card.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24247523352510464
+    m_Localized: "- Hover over the Gold and Gold Bar UI to view next turn\u2019s
+      Gold and Gold Bars."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24247865226035200
+    m_Localized: '- Click the area next to the deck to view used cards.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24248429020184576
+    m_Localized: Combat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24249749756182528
+    m_Localized: How To Combat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24250086655262720
+    m_Localized: Combat Result
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24250377446359040
+    m_Localized: Attack Castle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24250748692594688
+    m_Localized: Capture Point
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24250867668221952
+    m_Localized: "- When you select one of your units, \n  any enemy unit within
+      a valid movement range \n  can be attacked."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24251459706814464
+    m_Localized: "- On attack, the enemy unit is destroyed \n  and your unit moves
+      into its position."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24251770307608576
+    m_Localized: "- If a unit moves onto a Castle attack tile, \n  it deals damage
+      to the Castle and is permanently removed."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24252080006627328
+    m_Localized: "- If you place one of your units on the tile in front of a Castle
+      attack tile, \n  the opponent cannot deploy units to that Castle attack tile."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24252608442793984
+    m_Localized: Word
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24252811526799360
+    m_Localized: Castle Attack Tile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24253201655791616
+    m_Localized: Connected To ~
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24253865362456576
+    m_Localized: '- A tile where units are created.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 24254412517801984
+    m_Localized: "- Only roads continuously connected to the Castle are considered
+      connected.\n  Unit deployment tiles adjacent to such roads are also considered
+      connected."
     m_Metadata:
       m_Items: []
   references:

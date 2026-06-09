@@ -1,5 +1,8 @@
 using DG.Tweening;
 using InGame.MyUI.MyUIInterface;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
@@ -14,26 +17,83 @@ namespace InGame.MyUI.MyUIButton
         [SerializeField] private float _hideHeight; // 숨길 때 Height 값
         [SerializeField] private float _animationDuration; // 애니메이션 지속시간
 
+        [SerializeField] private List<RectTransform> _underButtons = new List<RectTransform>(); // 밑에 있는 버튼 리스트
+
+        [SerializeField] private GuideButtonPanelAutoSize panelAutoSize; // 스크롤 뷰의 크기를 자동으로 변경하는 클래스
+        
         private Tweener _tweener; // 닷트윈 실행 기능 저장 변수
 
         private bool _isShow = false; // 보여주는 상태 여부
 
-        public void OnUIClick()
+        private List<TaskCompletionSource<bool>> _animationWaitTcs = new List<TaskCompletionSource<bool>>();
+
+        public async void OnUIClick()
         {
-            Vector2 currrentSize = _listRect.sizeDelta; // 현재 크기
+            foreach(var tcs in  _animationWaitTcs) // 애니메이션 완료 대기
+            {
+                await tcs.Task;
+            }
+
+            _animationWaitTcs.Clear(); // 애니메이션 대기 리스트 비우기
+
+            Vector2 currentSize = _listRect.sizeDelta; // 현재 크기
             _tweener?.Kill(); // 실행되던 기능 종료
+
+            foreach(var button in _underButtons)
+            {
+                button.DOKill();
+            }
 
             if (_isShow) // 보여진 상태일 경우
             {
-                _tweener = _listRect.DOSizeDelta(new Vector2(currrentSize.x, _hideHeight), _animationDuration);
-                _isShow = false;
+                ClickAnimation(currentSize, false);
             }
             else // 숨겨진 상태일 경우
             {
-                _tweener = _listRect.DOSizeDelta(new Vector2(currrentSize.x, _showHeight), _animationDuration);
-                _isShow = true;
+                ClickAnimation(currentSize, true);
             }
+        }
+
+        // 클릭 되었을 때 실행될 애니메이션
+        private void ClickAnimation(Vector2 currentSize, bool isShow)
+        {
+            float changeValue = isShow == true ? -_showHeight : _showHeight; // 보여주는 애니메이션이 필요하다면 버튼을 밑으로 내리고 숨길 경우 버튼을 위로 올린다
+            float height = isShow == true ? _showHeight : _hideHeight; // 보여주는 경우 _showHeight, 숨기는 경우 _hideHeight
+
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>(); // 새로운 애니메이션 대기 tcs 생성
+            _animationWaitTcs.Add(tcs); // 애니메이션 대기 리스트에 새로 생성한 tcs 추가
+
+            _tweener = _listRect.DOSizeDelta(new Vector2(currentSize.x, height), _animationDuration) // 버튼을 숨기고 있는 패널 사이즈 변경
+                .OnComplete(() =>
+                {
+                    tcs.SetResult(true);
+                });
+
+            float lastButtonTargetYPos = 0; // 맨 밑 버튼의 목표 위치
+            if(_underButtons.Count <= 0)// 자신이 이미 맨 밑 버튼이라면
+            {
+                lastButtonTargetYPos = gameObject.GetComponent<RectTransform>().anchoredPosition.y; // 자기 자신의 위치를 맨 밑 버튼의 목표 위치로 저장
+            }
+            foreach (var button in _underButtons) // 밑에 있는 버튼 순회
+            {
+                TaskCompletionSource<bool> buttonTcs = new TaskCompletionSource<bool>(); // 새로운 애니메이션 대기 tcs 생성
+                _animationWaitTcs.Add(buttonTcs); // 애니메이션 대기 리스트에 새로 생성한 tcs 추가
+                float targetYPos = button.anchoredPosition.y + changeValue; // 버튼의 목표 위치 저장
+                if(button == _underButtons[_underButtons.Count - 1]) // 현재 버튼이 마지막 버튼과 같다면
+                {
+                    lastButtonTargetYPos = Mathf.Abs(targetYPos); // 맨 밑 버튼의 위치를 현재 버튼의 목표 위치로 할당(스크롤 뷰의 크기를 변경할 때는 무조건 양수의 값이어야 하기 때문에 절댓값으로 변경
+                }
+                button.DOAnchorPosY(targetYPos, _animationDuration) // 버튼 이동
+                    .OnComplete(() =>
+                    {
+                        buttonTcs.SetResult(true); // 애니메이션 완료
+                    });
+            }
+
+            panelAutoSize.ChangeScrollViewHeight(lastButtonTargetYPos, isShow); // 스크롤 뷰 크기 변경
+
+            _isShow = isShow;
         }
     }
 }
-// 마지막 작성 일자: 2026.04.10
+// 마지막 작성 일자: 2026.06.09
