@@ -93,7 +93,7 @@ namespace InGame.MyManager.Local
 
             _gameOver = true;
 
-            TeamManager.Instance.TeamSetTcs = null; // 팀 세팅 대기 초기화
+            TeamManager.Instance.ResetTeamSetTcs(); // 팀 세팅 대기 tcs 초기화
 
             _gameOverUICanvasGroup.gameObject.SetActive(true); // 게임 오버 UI 캔버스 그룹 활성화
 
@@ -175,4 +175,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.05.06
+// 마지막 작성 일자: 2026.06.10

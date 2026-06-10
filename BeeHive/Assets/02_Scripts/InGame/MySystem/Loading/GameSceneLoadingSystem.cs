@@ -5,6 +5,7 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyManager.Team;
 using MyUtil.GameMode;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace InGame.MySystem.Loading
@@ -39,7 +40,13 @@ namespace InGame.MySystem.Loading
             InGameContext.Current.Data.GameMapManager.SetNetworkID(); // 네트워크 ID 할당
 
             if (!GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 씬이 아닐 때
-                await TeamManager.Instance.TeamSetTcs.Task; // 팀이 정해질 때까지 대기
+            {
+                if(TeamManager.Instance == null)
+                {
+                    NetworkManager.Instance.Socket.Emit("debug", "팀 매니저의 인스턴스가 null");
+                }
+                await TeamManager.Instance.WaitTeamSetTcsAsync(); // 팀 세팅 대기 tcs 확인 대기
+            }
             else // 튜토리얼인 경우
                 TeamManager.Instance.CurrentTeamType = TeamType.Team1; // 현재 팀을 팀 1로 할당
 
@@ -72,4 +79,4 @@ namespace InGame.MySystem.Loading
         }
     }
 }
-// 마지막 작성 일자: 2026.05.22
+// 마지막 작성 일자: 2026.06.10

@@ -4,6 +4,7 @@ using InGame.MyObject;
 using MyUtil;
 using MyUtil.GameMode;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InGame.MyManager.Global
@@ -12,27 +13,13 @@ namespace InGame.MyManager.Global
     // 서버에서 팀을 배정 받기 위한 싱글톤 클래스
     public class TeamManager : MonoSingleton<TeamManager>
     {
+        private readonly object _teamSettingLock = new(); // 팀 세팅에 사용할 락 키
+
         private TeamType _currentTeamType; // 현재 팀 타입
         // 위에 변수 프로퍼티
         public TeamType CurrentTeamType { get => _currentTeamType; set => _currentTeamType = value; }
 
         private TaskCompletionSource<bool> _teamSetTcs; // 팀 세팅 대기 Task
-        public TaskCompletionSource<bool> TeamSetTcs // 팀 세팅 대기 Task 프로퍼티
-        {
-            get
-            {
-                if(_teamSetTcs == null) // 팀 세팅 대기 task가 비어 있다면
-                {
-                    _teamSetTcs = new TaskCompletionSource<bool>(); // 새로 생성
-                }
-                return _teamSetTcs;
-            }
-
-            set
-            {
-                _teamSetTcs = value;
-            }
-        }
 
         private bool _team2FirstTurn = true; // 블루팀(팀2)의 첫 번째 턴 여부
         public bool Team2FirstTurn { get => _team2FirstTurn; set => _team2FirstTurn = value; } // 블루팀(팀2)의 첫 번째 턴 여부 프로퍼티
@@ -54,7 +41,7 @@ namespace InGame.MyManager.Global
                     {
                         int teamType = value.GetValue<int>(); // int 형으로 전달 받은 값 저장
                         _currentTeamType = (TeamType)teamType; // 팀 저장
-                        _teamSetTcs?.TrySetResult(true); // 팀 세팅 완료
+                        TeamSetComplete(); // 팀 세팅 완료
                     }
                 });
             }
@@ -65,6 +52,36 @@ namespace InGame.MyManager.Global
         private void OnDisable()
         {
             NetworkManager.Instance.Socket.Off("teamType");
+        }
+
+        // 팀 세팅 대기 tcs null 체크 후 생성 반환 또는 그냥 반환하는 함수
+        public Task WaitTeamSetTcsAsync()
+        {
+            lock(_teamSettingLock)
+            {
+                _teamSetTcs ??= new TaskCompletionSource<bool>(); // 만약 팀 세팅 대기 tcs가 null이라면 새로 할당
+                return _teamSetTcs.Task; // 반환
+            }
+        }
+
+        // 팀 세팅 완료 함수
+        private void TeamSetComplete()
+        {
+            TaskCompletionSource<bool> tcs;
+
+            lock(_teamSettingLock)
+            {
+                _teamSetTcs ??= new TaskCompletionSource<bool>(); // 팀 대기 tcs가 null이라면 새로 할당
+                tcs = _teamSetTcs; // 지역 변수에 팀 대기 tcs 할당
+            }
+
+            tcs.SetResult(true); // 팀 세팅 대기 완료
+        }
+
+        // 팀 세팅 대기 tcs 초기화 함수
+        public void ResetTeamSetTcs()
+        {
+            _teamSetTcs = null;
         }
 
         // 팀에 맞는 성을 반환하는 함수
@@ -160,4 +177,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.05.22
+// 마지막 작성 일자: 2026.06.10

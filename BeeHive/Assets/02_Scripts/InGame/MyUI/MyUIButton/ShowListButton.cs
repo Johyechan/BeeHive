@@ -69,20 +69,11 @@ namespace InGame.MyUI.MyUIButton
                     tcs.SetResult(true);
                 });
 
-            float lastButtonTargetYPos = 0; // 맨 밑 버튼의 목표 위치
-            if(_underButtons.Count <= 0)// 자신이 이미 맨 밑 버튼이라면
-            {
-                lastButtonTargetYPos = gameObject.GetComponent<RectTransform>().anchoredPosition.y; // 자기 자신의 위치를 맨 밑 버튼의 목표 위치로 저장
-            }
             foreach (var button in _underButtons) // 밑에 있는 버튼 순회
             {
                 TaskCompletionSource<bool> buttonTcs = new TaskCompletionSource<bool>(); // 새로운 애니메이션 대기 tcs 생성
                 _animationWaitTcs.Add(buttonTcs); // 애니메이션 대기 리스트에 새로 생성한 tcs 추가
                 float targetYPos = button.anchoredPosition.y + changeValue; // 버튼의 목표 위치 저장
-                if(button == _underButtons[_underButtons.Count - 1]) // 현재 버튼이 마지막 버튼과 같다면
-                {
-                    lastButtonTargetYPos = Mathf.Abs(targetYPos); // 맨 밑 버튼의 위치를 현재 버튼의 목표 위치로 할당(스크롤 뷰의 크기를 변경할 때는 무조건 양수의 값이어야 하기 때문에 절댓값으로 변경
-                }
                 button.DOAnchorPosY(targetYPos, _animationDuration) // 버튼 이동
                     .OnComplete(() =>
                     {
@@ -90,10 +81,10 @@ namespace InGame.MyUI.MyUIButton
                     });
             }
 
-            panelAutoSize.ChangeScrollViewHeight(lastButtonTargetYPos, isShow); // 스크롤 뷰 크기 변경
+            panelAutoSize.ChangeScrollViewHeight(-changeValue); // 스크롤 뷰 크기 변경(스크롤 크기는 버튼이 내려갈 수 록 높이가 커져야하기 때문에 앞에 -를 붙여 부호를 반전시킨다)
 
             _isShow = isShow;
         }
     }
 }
-// 마지막 작성 일자: 2026.06.09
+// 마지막 작성 일자: 2026.06.10

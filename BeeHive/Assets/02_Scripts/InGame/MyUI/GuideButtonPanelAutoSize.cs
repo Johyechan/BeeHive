@@ -1,3 +1,4 @@
+using InGame.MyManager.Global;
 using UnityEngine;
 
 namespace InGame.MyUI
@@ -6,9 +7,6 @@ namespace InGame.MyUI
     // 버튼들의 스크롤 뷰 크기를 자동으로 맞춰주는 기능을 가지는 클래스
     public class GuideButtonPanelAutoSize : MonoBehaviour
     {
-        [SerializeField] private int _showLastButtonScrollViewHeight; // 제일 밑에 있는 버튼을 눌렀을 때 버튼들을 숨기고 있던 스크롤 뷰
-        [SerializeField] private int _hideLastButtonScrollViewHeight; // 제일 밑에 있는 버튼을 눌렀을 때 버튼들을 숨기고 있던 스크롤 뷰
-
         private RectTransform _scrollViewRectTransform; // 스크롤 뷰의 RectTransform
 
         private void Awake()
@@ -16,14 +14,12 @@ namespace InGame.MyUI
             _scrollViewRectTransform = GetComponent<RectTransform>();
         }
 
-        public void ChangeScrollViewHeight(float lastButtonYPos, bool isShow)
+        public void ChangeScrollViewHeight(float buttonPosChangeValue)
         {
-            float _lastButtonScrollViewHeight = isShow == true ? _showLastButtonScrollViewHeight : _hideLastButtonScrollViewHeight;
-            Vector2 currentSize = _scrollViewRectTransform.sizeDelta; // 현재 크기 버튼들의 스크롤 뷰 크기
-            float targetHeight = lastButtonYPos + 600 + _lastButtonScrollViewHeight; // 맨 밑 버튼 위치 + 600 + 맨 밑 버튼을 눌렀을 때 보여지는 스크롤 뷰 높이 = 목표 높이
-            Vector2 newSize = new Vector2(currentSize.x, targetHeight); // 새 크기
-            _scrollViewRectTransform.sizeDelta = newSize; // 버튼들의 스크롤 뷰 크기에 새 크기를 할당
+            Vector2 currentSize = _scrollViewRectTransform.sizeDelta; // 현재 크기 저장
+            float finalHeight = currentSize.y + buttonPosChangeValue; // 최종 높이를 현재 높이 + 버튼들의 이동 값으로 결정
+            _scrollViewRectTransform.sizeDelta = new Vector2(currentSize.x, finalHeight); // 크기 변경(x축은 그대로 y축은 버튼들의 이동 값 만큼 변경)
         }
     }
 }
-// 마지막 작성 일자: 2026.06.09
+// 마지막 작성 일자: 2026.06.10
