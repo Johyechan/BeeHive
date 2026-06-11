@@ -33,15 +33,18 @@ namespace InGame.MySystem.Game
                 }
             }
 
-            pieceBase.PieceVariable.currentPlacePlane = (PiecePlacePlaneObject)placePlane; // 기물에게 PiecePlacePlaneObject 형식으로 현재 배치된 칸 할당
+            if(!placePlane.isNearToCastle) // 기물이 이동하는 목표 칸이 성 주위 칸이 아닐 경우
+            {
+                pieceBase.PieceVariable.currentPlacePlane = (PiecePlacePlaneObject)placePlane; // 기물에게 PiecePlacePlaneObject 형식으로 현재 배치된 칸 할당
 
-            pieceBase.PieceVariable.currentPlacePlane.PlacedObjectType = (ObjectType)placedObjectType; // 현재 기물
-            placePlane.TeamType = pieceBase.CurrentTeamType; // 배치 칸의 팀을 기물의 팀으로 할당
-            placePlane.PlacedPiece = pieceBase; // 배치 칸에 배치된 기물 객체 할당
+                pieceBase.PieceVariable.currentPlacePlane.PlacedObjectType = (ObjectType)placedObjectType; // 현재 기물
+                placePlane.TeamType = pieceBase.CurrentTeamType; // 배치 칸의 팀을 기물의 팀으로 할당
+                placePlane.PlacedPiece = pieceBase; // 배치 칸에 배치된 기물 객체 할당
+            }
 
             GameObject parent = GameObject.Find(parentName); // 부모 객체 찾기
             await pieceBase.MoveToPlacePlane(parent.transform, targetPos, isMove, angle); // 기물 또는 도로 이동
         }
     }
 }
-// 마지막 작성 일자: 2026.05.18
+// 마지막 작성 일자: 2026.06.11

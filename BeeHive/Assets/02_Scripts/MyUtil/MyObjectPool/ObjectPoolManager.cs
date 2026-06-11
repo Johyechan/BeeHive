@@ -255,6 +255,21 @@ namespace MyUtil.MyObjectPool
                                 InGameContext.Current.Data.TurnManager.RoadCreateCompletionTcs?.SetResult(true);
                             }
                         }
+
+                        NetworkManager.Instance.Socket.Emit("debug", "");
+                        if(!UIManager.Instance.CanInteractionUI) // UI 상호작용이 불가능 하다면
+                        {
+                            UIManager.Instance.CanInteractionUI = true; // UI 상호작용이 가능하도록 변경
+                        }
+
+                        if(InGameContext.Current != null) // 인게임에서만 존재하는 시스템들의 실행 컨테이너가 존재할 때
+                        {
+                            if (InGameContext.Current.Data.PieceManager.IsRoadChanging) // 도로가 변경 중이라면
+                            {
+                                InGameContext.Current.Data.PieceManager.IsRoadChanging = false; // 도로 변경 종료
+                            }
+                        }
+                        
                     }); 
             }
             else // UI 일 때
@@ -267,4 +282,4 @@ namespace MyUtil.MyObjectPool
         }
     }
 }
-// 마지막 작성 일자: 2026.05.21
+// 마지막 작성 일자: 2026.06.11

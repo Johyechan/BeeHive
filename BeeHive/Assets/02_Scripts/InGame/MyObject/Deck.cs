@@ -35,6 +35,8 @@ namespace InGame.MyObject
                 if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
                     return; // 반환
 
+                InGameContext.Current.Data.DeckManager.IsEmpty = false;
+
                 string json = data.GetValue().ToString(); // 서버가 전송한 값 받기
 
                 MainThreadDispatcher.Enqueue(() =>

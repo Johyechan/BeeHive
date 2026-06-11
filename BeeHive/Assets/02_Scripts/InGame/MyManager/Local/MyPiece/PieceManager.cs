@@ -47,6 +47,9 @@ namespace InGame.MyManager.Local.MyPiece
         private bool _isPlayAnimation = false; // 기물이 특정 위치로 가기 위해 애니메이션이 실행중이라면
         public bool IsPlayAnimation { get => _isPlayAnimation; set => _isPlayAnimation = value; } // 위 변수 프로퍼티
 
+        private bool _isRoadChanging = false; // 도로 변경 중인지 여부를 판단하는 변수
+        public bool IsRoadChanging { get => _isRoadChanging; set => _isRoadChanging = value; } // 위 변수 프로퍼티
+
         private TaskCompletionSource<int> _tcs; // 1이 참, 0이 거짓
 
         private void Awake()
@@ -142,4 +145,4 @@ namespace InGame.MyManager.Local.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2026.05.22
+// 마지막 작성 일자: 2026.06.11

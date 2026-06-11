@@ -41,6 +41,7 @@ namespace InGame.MyObject.Piece.ObjectPieces
             }
 
             float angle = transform.rotation.eulerAngles.y;
+            InGameContext.Current.Data.PieceManager.IsRoadChanging = true; // 도로 변경 중
             ObjectPoolManager.Instance.MakeObject(poolType, transform.localPosition, transform.parent, true, PieceVariable.currentRoadPlacePlane.NetworkId, angle);
 
             ChangeRoadInfo changeRoadInfo = new ChangeRoadInfo()

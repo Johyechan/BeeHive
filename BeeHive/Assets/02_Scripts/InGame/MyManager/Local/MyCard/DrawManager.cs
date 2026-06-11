@@ -63,7 +63,6 @@ namespace InGame.MyManager.Local.MyCard
             {
                 if(InGameContext.Current.Data.TurnManager.CurrentTeamType == TeamManager.Instance.CurrentTeamType) // 현재 턴의 팀과 클라이언트 팀이 같을 경우
                 {
-                    InGameContext.Current.Data.DeckManager.IsEmpty = false;
                     InGameContext.Current.Data.DeckManager.ReMakeDeck();
                 }
             }

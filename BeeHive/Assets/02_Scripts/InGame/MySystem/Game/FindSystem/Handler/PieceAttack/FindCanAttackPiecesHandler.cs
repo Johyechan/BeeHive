@@ -38,11 +38,11 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceAttack
 
             foreach (var nearPiece in road.nearPiecePlaceTransformList)
             {
-                if (road.TeamType == selectPiece.CurrentTeamType) // 도로가 내 팀일 때
+                if (road.TeamType == selectPiece.CurrentTeamType || road.PlacedObjectType == ObjectType.None) // 도로가 내 팀이거나 비어있을 때
                 {
                     CheckCanAttackPiece(selectPiece, nearPiece, roadVisited, pieceVisited);
                 }
-                else // 도로가 내 팀이 아니거나 비어있을 때
+                else // 도로가 내 팀이 아닐 때
                 {
                     if (selectPiece.CurrentObjectType == ObjectType.Soldier) // 선택된 기물이 보병일 경우
                     {
@@ -90,4 +90,4 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceAttack
         }
     }
 }
-// 마지막 작성 일자: 2026.05.05
+// 마지막 작성 일자: 2026.06.11

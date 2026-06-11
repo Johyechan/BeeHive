@@ -46,13 +46,13 @@ namespace InGame.MyObject.Piece.ObjectPieces
                 return; // 반환
             }
 
-
-            UIManager.Instance.CanInteractionUI = false;
-
             foreach (var nearRoad in piecePlacePlaneObject.nearRoadPlaceTransformList)
             {
-                if(nearRoad.TeamType != type && nearRoad.TeamType != TeamType.None)
+                if(nearRoad.TeamType != type && nearRoad.TeamType != TeamType.None) // 변경 가능한 도로를 찾았을 때
                 {
+                    UIManager.Instance.CanInteractionUI = false; // UI 상호작용 금지
+                    InGameContext.Current.Data.PieceManager.IsRoadChanging = true; // 도로 변경 중
+
                     switch (type)
                     {
                         case TeamType.Team1:
@@ -64,8 +64,6 @@ namespace InGame.MyObject.Piece.ObjectPieces
                     }
                 }
             }
-
-            UIManager.Instance.CanInteractionUI = true;
         }
 
         // 도로 변경 함수
@@ -109,4 +107,4 @@ namespace InGame.MyObject.Piece.ObjectPieces
         }
     }
 }
-// 마지막 작성 일자: 2026.04.24
+// 마지막 작성 일자: 2026.06.11

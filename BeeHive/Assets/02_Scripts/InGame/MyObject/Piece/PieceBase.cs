@@ -89,6 +89,11 @@ namespace InGame.MyObject.Piece
                 return; // 반환
             }
 
+            if(InGameContext.Current.Data.PieceManager.IsRoadChanging) // 도로가 변경 중이라면
+            {
+                return; // 반환
+            }
+
             if (!WarningEvent.OnCheckCurrentTurnTeam()) // 현재 턴이 자신의 턴이 아닐 경우
             {
                 HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 칸 하이라이트를 끄는 매개변수로 이벤트 콜(하이라이트 키기 여부, 배치 칸 이동 칸 여부 - true는 배치칸, false는 이동칸)
@@ -123,4 +128,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2026.05.05
+// 마지막 작성 일자: 2026.06.11
