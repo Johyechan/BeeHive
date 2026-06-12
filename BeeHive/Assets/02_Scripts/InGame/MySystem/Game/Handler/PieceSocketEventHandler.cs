@@ -59,6 +59,7 @@ namespace InGame.MySystem.Game.Handler
                     Transform returnParent = GameObject.Find(setInfo.returnParentName).transform; // 공격 받은 기물의 부모 객체
                     Transform attackParent = attackPieceObj.transform.parent; // 공격한 기물의 부모 객체
 
+                    NetworkManager.Instance.Socket.Emit("debug", $"공격 당한 기물: {returnPiece}, 공격한 기물: {attackPiece}, 반환 부모: {returnParent}, 공격의 부모: {attackParent}, 반환 목표 위치: {setInfo.returnPos}, 공격 목표 위치: {setInfo.attackPos}");
                     _ = InGameContext.Current.Data.PieceManager.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, setInfo.returnPos, setInfo.attackPos); // 공격 받은 기물 및 공격한 기물 이동 함수
                 });
             });

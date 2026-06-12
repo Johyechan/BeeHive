@@ -26,10 +26,13 @@ namespace InGame.MyUI
 
         [SerializeField] private TeamType _teamType;
 
+        private Tween _fadeTween; // 페이드 인 아웃 트윈 저장 변수
+
         // 이 스크립트를 가지는 객체 위에 마우스가 올라갔을 경우
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if (_showNextTurnGoldPanel.gameObject.activeSelf) // 이미 패널이 활성화 되어있다면
+            // 이미 패널이 활성화 상태면
+            if (_showNextTurnGoldPanel.gameObject.activeSelf)
                 return; // 반환
 
             RectTransform canvasRect = _canvas.GetComponent<RectTransform>(); // UI 캔버스의 RectTransform 가져오기
@@ -48,18 +51,21 @@ namespace InGame.MyUI
             _goldCoinCountTxt.text = $"x {_wallet.NextTurnGoldCoin}";
             _goldBarCountTxt.text = $"x {_wallet.NextTurnGoldBar}";
 
-            _showNextTurnGoldPanel.gameObject.SetActive(true); // 패널 활성화
+            _fadeTween?.Kill(true); // 트윈이 있다면 즉시 완료 후 제거
 
-            _showNextTurnGoldPanel.DOFade(1, _fadeDuration); // 패널 페이드 인
+            _showNextTurnGoldPanel.gameObject.SetActive(true); // 패널 활성화
+            _fadeTween = _showNextTurnGoldPanel.DOFade(1, _fadeDuration); // 패널 페이드 인
         }
 
         // 이 스크립트를 가지는 객체 위에 마우스가 빠졌을 경우
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (!_showNextTurnGoldPanel.gameObject.activeSelf) // 이미 패널이 비활성화 상태라면
+            // 이미 패널이 비활성화 상태면
+            if (!_showNextTurnGoldPanel.gameObject.activeSelf) 
                 return; // 반환
 
-            _showNextTurnGoldPanel.DOFade(0, _fadeDuration) // 패널 페이드 아웃
+            _fadeTween?.Kill(true); // 트윈이 있다면 즉시 완료 후 제거
+            _fadeTween = _showNextTurnGoldPanel.DOFade(0, _fadeDuration) // 패널 페이드 아웃
                 .OnComplete(() => // 패널 페이드 아웃 완료 후
                 {
                     _showNextTurnGoldPanel.gameObject.SetActive(false); // 패널 비활성화
@@ -67,4 +73,4 @@ namespace InGame.MyUI
         }
     }
 }
-// 마지막 작성 일자: 2026.05.20
+// 마지막 작성 일자: 2026.06.12
