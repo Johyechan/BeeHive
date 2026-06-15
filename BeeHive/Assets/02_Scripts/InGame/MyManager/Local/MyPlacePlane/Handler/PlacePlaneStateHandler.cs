@@ -14,7 +14,6 @@ namespace InGame.MyManager.MyPlacePlane.Handler
         {
             if (isMove) // 이동일 경우
             {
-                NetworkManager.Instance.Socket.Emit("debug", $"placedPiece.PieceVariable.currentPlacePlane is null?: {placedPiece.PieceVariable.currentPlacePlane == null}");
                 // 배치된 기물의 이전 배치 칸 초기화
                 placedPiece.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None;
                 placedPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None; // 배치 칸에서 판단하는 위에 올려진 기물 팀 초기화

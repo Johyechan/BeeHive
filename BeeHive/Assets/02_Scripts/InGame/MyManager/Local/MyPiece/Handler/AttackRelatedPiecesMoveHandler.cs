@@ -22,14 +22,9 @@ namespace InGame.MyManager.MyPiece.Handler
         // 공격 당한 기물과 공격한 기물이 이동하는 함수(공격 당한 기물, 공격한 기물, 공격 당한 기물의 부모, 공격한 기물의 부모, 공격 당한 기물의 목적지, 공격한 기물의 목적지)
         public async Task AttackRelatedPiecesMove(PieceBase returnPiece, PieceBase attackPiece, Transform returnParent, Transform attackParent, Vector3 returnPos, Vector3 attackPos)
         {
-            NetworkManager.Instance.Socket.Emit("debug", "공격 이동 함수 들어옴");
-
             int isFirePowerAttack = returnPiece.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
-            NetworkManager.Instance.Socket.Emit("debug", $"원거리 공격 여부 판단 완료 isFirePowerAttack: {isFirePowerAttack}");
             bool attackedPlaceIsNearToCastle = returnPiece.PieceVariable.currentPlacePlane.isNearToCastle; // 공격 당하는 기물이 성 주위에 배치되어있다면
-            NetworkManager.Instance.Socket.Emit("debug", $"성 주위 칸 공격 여부 판단 완료 attackedPlaceIsNearToCastle: {attackedPlaceIsNearToCastle}");
             TeamType attackedTeam = returnPiece.CurrentTeamType; // 공격 당한 기물의 배치 칸의 팀 타입 저장
-            NetworkManager.Instance.Socket.Emit("debug", $"공격 당한 팀 저장 완료 attackedTeam: {attackedTeam}");
 
             InGameContext.Current.Data.GameManager.PieceCanMoveMap[attackPiece.CurrentObjectType] = false; // 공격 시 이동 한 것으로 판정
 
@@ -39,17 +34,13 @@ namespace InGame.MyManager.MyPiece.Handler
             PieceEvents.OnHideCanAttackPieces?.Invoke(true); // 공격 가능한 기물들 하이라이트 끄기
 
             UIManager.Instance.CanInteractionUI = false; // UI 상호작용 불가능 상태로 할당
-            NetworkManager.Instance.Socket.Emit("debug", "UI 상호 작용 불가 상태 완료");
 
             if(isFirePowerAttack == 0) // 공격 받은 기물이 원거리 공격 대상이 아닐 경우
             {
-                NetworkManager.Instance.Socket.Emit("debug", $"공격 받은 기물이 원거리 공격 대상이 아닐 경우 배치칸 상태 바꾸기 시작 returnPiece.PieceVariable.currentPlacePlane: {returnPiece.PieceVariable.currentPlacePlane}, attackPiece: {attackPiece}");
                 InGameContext.Current.Data.PlacePlaneManager.ChangePlacePlaneState(returnPiece.PieceVariable.currentPlacePlane, attackPiece, true); // 현재 배치칸 상태 변경
-                NetworkManager.Instance.Socket.Emit("debug", "공격 받은 기물이 원거리 공격 대상이 아닐 경우 배치칸 상태 바꾸기 완료");
             }
             else // 공격 받은 기물이 원거리 공격 대상일 경우
             {
-                NetworkManager.Instance.Socket.Emit("debug", "공격 받은 기물이 원거리 공격 대상임");
                 returnPiece.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None;
                 returnPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None; // 배치 칸에 올라가 있는 팀 상태 변경
                 returnPiece.PieceVariable.currentPlacePlane.PlacedPiece = null;
@@ -57,14 +48,11 @@ namespace InGame.MyManager.MyPiece.Handler
 
             returnPiece.PieceVariable.currentPlacePlane = null; // 공격 받은 기물의 배치된 칸을 null로 초기화
 
-            NetworkManager.Instance.Socket.Emit("debug", $"{returnPiece}가 {returnParent}의 자식으로 {returnPos}로 이동");
             await returnPiece.MoveToPlacePlane(returnParent, returnPos); // 공격 받은 기물 이동
-            NetworkManager.Instance.Socket.Emit("debug", $"{returnPiece}가 {returnParent}의 자식으로 {returnPos}로 이동 완료");
+
             if(isFirePowerAttack == 0) // 공격 받은 기물이 원거리 공격 대상이 아닐 경우
             {
-            NetworkManager.Instance.Socket.Emit("debug", $"{attackPiece}가 {attackParent}의 자식으로 {attackPos}로 이동");
                 await attackPiece.MoveToPlacePlane(attackParent, attackPos); // 공격한 기물 이동
-            NetworkManager.Instance.Socket.Emit("debug", $"{attackPiece}가 {attackParent}의 자식으로 {attackPos}로 이동 완료");
             }
 
             if (attackPiece.CurrentObjectType == ObjectType.Soldier)
