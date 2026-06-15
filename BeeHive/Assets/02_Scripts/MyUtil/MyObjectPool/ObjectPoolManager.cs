@@ -256,7 +256,6 @@ namespace MyUtil.MyObjectPool
                             }
                         }
 
-                        NetworkManager.Instance.Socket.Emit("debug", "");
                         if(!UIManager.Instance.CanInteractionUI) // UI 상호작용이 불가능 하다면
                         {
                             UIManager.Instance.CanInteractionUI = true; // UI 상호작용이 가능하도록 변경

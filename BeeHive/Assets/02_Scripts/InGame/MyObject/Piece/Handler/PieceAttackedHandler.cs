@@ -172,10 +172,10 @@ namespace InGame.MyObject.Piece.Handler
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                 returnPieceID = returnObjID, // 공격 당한 기물 ID
-                returnPos = returnPos, // 공격 당한 기물의 목적지
+                returnPos = returnPos,
                 returnParentName = returnParent.name, // 공격 당한 기물의 부모 객체 명
                 attackPieceID = attackObjID, // 공격한 기물 ID
-                attackPos = attackPos, // 공격한 기물의 목적지
+                attackPos = attackPos,
                 isFirePowerAttack = isFirePowerAttack, // 원거리 공격 여부 할당(1: 참, 0: 거짓)
             };
 
@@ -187,4 +187,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.05.12
+// 마지막 작성 일자: 2026.06.15

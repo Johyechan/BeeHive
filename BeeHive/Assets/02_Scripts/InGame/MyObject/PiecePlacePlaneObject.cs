@@ -251,11 +251,6 @@ namespace InGame.MyObject
                     {
                         if (pieceBase.CurrentObjectType != ObjectType.Miner) // 현재 기물이 광부가 아닐 때
                         {
-                            // 현재 칸 초기화
-                            PlacedObjectType = ObjectType.None; // 올려진 기물 타입 초기화
-                            TeamType = TeamType.None; // 배치 칸에서 판단하는 위에 올려진 기물 팀 초기화
-                            PlacedPiece = null; // 올려진 기물 초기화
-
                             CastleAttack(pieceBase); // 성 공격
                         }
                     }
@@ -452,4 +447,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.05.19
+// 마지막 작성 일자: 2026.06.15

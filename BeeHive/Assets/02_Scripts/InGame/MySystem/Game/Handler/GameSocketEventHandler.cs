@@ -78,8 +78,13 @@ namespace InGame.MySystem.Game.Handler
                 {
                     Castle castle = TeamManager.Instance.GetCastle((TeamType)castleHitInfo.attackedCaslteType); // 공격 받은 성 받아오기
                     castle.CastleHit(castleHitInfo.damage); // 성 공격
+
                     GameObject attackObj = ObjectIdManager.Instance.FindObject(castleHitInfo.objectID); // 공격한 기물 탐색
                     PieceBase pieceBase = attackObj.GetComponent<PieceBase>(); // 공격한 기물에게서 pieceBase 가져오기
+
+                    pieceBase.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None;
+                    pieceBase.PieceVariable.currentPlacePlane.PlacedPiece = null;
+                    pieceBase.PieceVariable.currentPlacePlane.TeamType = TeamType.None;
                     pieceBase.PieceDestroy(); // 공격한 기물 파괴
                 });
             });
@@ -148,4 +153,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.05.19
+// 마지막 작성 일자: 2026.06.15

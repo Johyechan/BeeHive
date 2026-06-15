@@ -48,6 +48,7 @@ namespace InGame.MySystem.Game.Handler
                 {
                     GameObject returnPieceObj = ObjectIdManager.Instance.FindObject(setInfo.returnPieceID); // 공격 받은 기물 탐색
                     PieceBase returnPiece = returnPieceObj.GetComponent<PieceBase>(); // 공격 받은 기물의 PieceBase 가져오기
+                    
                     if (setInfo.isFirePowerAttack == 1) // 원거리 공격이라면(1: 참, 0: 거짓)
                     {
                         returnPiece.PieceVariable.isFirePowerAttackTarget = true; // 공격 대상 기물을 원거리 공격 대상으로 할당
@@ -59,7 +60,6 @@ namespace InGame.MySystem.Game.Handler
                     Transform returnParent = GameObject.Find(setInfo.returnParentName).transform; // 공격 받은 기물의 부모 객체
                     Transform attackParent = attackPieceObj.transform.parent; // 공격한 기물의 부모 객체
 
-                    NetworkManager.Instance.Socket.Emit("debug", $"공격 당한 기물: {returnPiece}, 공격한 기물: {attackPiece}, 반환 부모: {returnParent}, 공격의 부모: {attackParent}, 반환 목표 위치: {setInfo.returnPos}, 공격 목표 위치: {setInfo.attackPos}");
                     _ = InGameContext.Current.Data.PieceManager.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, setInfo.returnPos, setInfo.attackPos); // 공격 받은 기물 및 공격한 기물 이동 함수
                 });
             });
@@ -72,4 +72,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.06.15
