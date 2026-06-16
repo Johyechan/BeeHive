@@ -22,6 +22,8 @@ namespace InGame.MyObject
         [SerializeField] private TMP_Text _team1HpText; // Team1 성의 체력을 알려주는 UI
         [SerializeField] private TMP_Text _team2HpText; // Team2 성의 체력을 알려주는 UI
 
+        [SerializeField] private GameObject _blockImage; // 클릭 방지 이미지
+
         [SerializeField] private TeamType _castleTeamType; // 성의 팀 타입
 
         [SerializeField] private int _hp; // 체력
@@ -102,9 +104,7 @@ namespace InGame.MyObject
                 if (_opponentHp <= 0)
                 {
                     _opponentHp = 0;
-
-                    if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼일 경우
-                        isGameOver = true; // 게임 오버
+                    isGameOver = true; // 게임 오버
                 }
             }
 
@@ -173,10 +173,30 @@ namespace InGame.MyObject
                     NetworkManager.Instance.Socket.Emit("debug", "사용한 카드 이동 대기 tcs가 존재하지 않습니다.");
                 }
 
+                _blockImage.SetActive(true); // 클릭 방지 이미지 활성화
+
+                int loseTeamType = 0;
+                if (_opponentHp <= 0)
+                {
+                    switch(_castleTeamType)
+                    {
+                        case TeamType.Team1:
+                            loseTeamType = (int)TeamType.Team2;
+                            break;
+                        case TeamType.Team2:
+                            loseTeamType = (int)TeamType.Team1;
+                            break;
+                    }
+                }
+                else if(_currentHp <= 0) // 내 체력이 0 이하라면
+                {
+                    loseTeamType = (int)_castleTeamType; // 현재 성 팀타입이 패배
+                }
+
                 GameOverInfo gameOverInfo = new GameOverInfo()
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                    loseTeamType = (int)_castleTeamType, // 패배 팀 타입
+                    loseTeamType = loseTeamType, // 패배 팀 타입
                 };
                 string json = JsonUtility.ToJson(gameOverInfo); // Json으로 변환
                 if (GameModeManager.Instance.CurrentGameMode.UseServer())
@@ -245,4 +265,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.05
+// 마지막 작성 일자: 2026.06.16

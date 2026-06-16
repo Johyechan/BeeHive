@@ -181,7 +181,7 @@ namespace MyUtil.MyObjectPool
 
             if (needAnimation) // 애니메이션이 필요하다면
             {
-                returnObj.transform.DOKill();
+                returnObj.transform.DOKill(true);
                 Animation(returnObj, isObject, false, _animationYPos)
                     .OnComplete(() =>
                     {
@@ -243,7 +243,7 @@ namespace MyUtil.MyObjectPool
 
             if (isObject) // 객체일 때
             {
-                obj.transform.DOKill();
+                obj.transform.DOKill(true);
                 return obj.transform.DOLocalMoveY(targetYPos, _animationDuration) // 목표 y값으로 이동
                     .OnComplete(() =>
                     {
@@ -275,10 +275,10 @@ namespace MyUtil.MyObjectPool
             {
                 obj.SetActive(true); // 객체 활성화
                 CanvasGroup canvasGroup = obj.GetComponent<CanvasGroup>(); // 캔버스 그룹 가져오기
-                canvasGroup.DOKill();
+                canvasGroup.DOKill(true);
                 return canvasGroup.DOFade(endValue, _animationDuration); // 이미지 페이드 아웃
             }
         }
     }
 }
-// 마지막 작성 일자: 2026.06.11
+// 마지막 작성 일자: 2026.06.16

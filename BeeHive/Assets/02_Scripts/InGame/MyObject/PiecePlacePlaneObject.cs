@@ -134,15 +134,20 @@ namespace InGame.MyObject
                 {
                     if (_frontPiecePlacePlaneObject.PlacedObjectType != ObjectType.None)// 앞에 있는 기물 배치칸에 배치된 기물이 있다면 
                     {
-                        if (_frontPiecePlacePlaneObject.TeamType != TeamManager.Instance.CurrentTeamType) // 앞에 있는 기물 배치칸에 배치된 기물이 내 팀이 아닐 경우
+                        // 앞에 있는 기물 배치칸에 배치된 기물이 내 팀이 아닐 경우
+                        if (_frontPiecePlacePlaneObject.TeamType != TeamManager.Instance.CurrentTeamType) 
                         {
-                            string str = LocalizationSettings.StringDatabase.GetLocalizedString(
-                                "Game",
-                                "Game_UI_OpponentGetFrontPlace"
-                            );
-                            UIManager.Instance.WarningUIMake(str); // UI 경고문 생성
-                            HighLightOffEvent(); // 하이라이트 끄기
-                            return; // 반환
+                            // 이동 또는 공격하는 객체를 선택하지 않은 경우 즉 기물을 생성하는 경우
+                            if (InGameContext.Current.Data.GameManager.CurrentMovePiece == null) 
+                            {
+                                    string str = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                    "Game",
+                                    "Game_UI_OpponentGetFrontPlace"
+                                );
+                                UIManager.Instance.WarningUIMake(str); // UI 경고문 생성
+                                HighLightOffEvent(); // 하이라이트 끄기
+                                return; // 반환
+                            }
                         }
                     }
                 }
@@ -429,6 +434,15 @@ namespace InGame.MyObject
             PlacedPiece = null;
             TeamType = TeamType.None;
 
+            if(pieceBase.PieceVariable.currentPlacePlane != null) // 자신이 배치 되어있는 배치 칸을 알고 있을 때
+            {
+                // 자신이 배치되어 있는 칸 초기화
+                pieceBase.PieceVariable.currentPlacePlane.PlacedObjectType = ObjectType.None;
+                pieceBase.PieceVariable.currentPlacePlane.PlacedPiece = null;
+                pieceBase.PieceVariable.currentPlacePlane.TeamType = TeamType.None;
+            }
+            
+
             Castle castle = TeamManager.Instance.GetCastle(currentPlayerTeamType); // 상대 성 가져오기
             castle.CastleHit(pieceBase.Damage); // 상대 성 공격
 
@@ -447,4 +461,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.15
+// 마지막 작성 일자: 2026.06.16

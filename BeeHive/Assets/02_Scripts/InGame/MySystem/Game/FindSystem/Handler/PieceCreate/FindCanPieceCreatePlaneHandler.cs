@@ -14,7 +14,8 @@ namespace InGame.MySystem.Game.FindSystem.Handler.PieceCreate
             {
                 if (piece.isNearToCastle && piece.currentPlayerTeamType == type) // 성과 인접한 배치 판이면서 같은 팀일 경우
                 {
-                    if (piece.PlacedObjectType == ObjectType.None) // 해당 위치에 아무것도 올라와 있지 않을 때
+                    // 해당 위치에 아무것도 올라와 있지 않을 때
+                    if (piece.PlacedObjectType == ObjectType.None) 
                     {
                         if (!InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPiecePlacePlanes.Contains(piece))
                             InGameContext.Current.Data.PlacePlaneManager.Variable.highLightHandler.CanPiecePlacePlanes.Add(piece); // 배치가 가능한 기물 배치 칸 저장
