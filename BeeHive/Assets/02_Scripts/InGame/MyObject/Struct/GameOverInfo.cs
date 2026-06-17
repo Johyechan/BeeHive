@@ -10,6 +10,7 @@ namespace InGame.MyObject
     {
         public string roomID; // 현재 방 ID
         public int loseTeamType; // 패배한 팀 타입
+        public int isSurrender; // 항복 여부
     }
 }
-// 마지막 작성 일자: 2025.10.28
+// 마지막 작성 일자: 2026.06.17

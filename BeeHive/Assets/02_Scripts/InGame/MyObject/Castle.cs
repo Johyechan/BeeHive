@@ -197,6 +197,7 @@ namespace InGame.MyObject
                 {
                     roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                     loseTeamType = loseTeamType, // 패배 팀 타입
+                    isSurrender = 0 // 항복 여부 (0 = false)
                 };
                 string json = JsonUtility.ToJson(gameOverInfo); // Json으로 변환
                 if (GameModeManager.Instance.CurrentGameMode.UseServer())
@@ -265,4 +266,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.16
+// 마지막 작성 일자: 2026.06.17

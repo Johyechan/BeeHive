@@ -19,6 +19,7 @@ namespace InGame.MyUI.MyUIButton
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                 loseTeamType = (int)TeamManager.Instance.CurrentTeamType, // 자신의 팀 타입
+                isSurrender = 1 // 항복 여부(1 = true)
             };
 
             string json = JsonUtility.ToJson(gameOverInfo);
