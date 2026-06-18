@@ -3,6 +3,7 @@ using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject.Piece.Data;
+using InGame.MyUI.Card;
 using MyUtil.GameMode;
 using Tutorial;
 using Tutorial.MyEnum;
@@ -43,7 +44,9 @@ namespace InGame.MyObject.Piece.Handler
 
             if(_pieceBase.CurrentObjectType == ObjectType.Tank) // 전차일 경우
             {
-                if(InGameContext.Current.Data.CardManager.HaveFirePowerCard) // 화력 카드를 가지고 있을 때
+                UICardBase uiCardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard();
+
+                if(uiCardBase != null) // 화력 카드를 가지고 있을 때
                 {
                     InGameContext.Current.Data.PlacePlaneManager.Variable.findCanPlacePlaneSystem.FindCanFirePowerAttackPiece(_pieceBase.CurrentTeamType, _pieceBase.PieceVariable.currentPlacePlane); // 한 칸 떨어진 기물들을 공격 가능 대상으로 지정
                 }
@@ -223,4 +226,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.05.05
+// 마지막 작성 일자: 2026.06.18

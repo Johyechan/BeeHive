@@ -43,11 +43,6 @@ namespace InGame.MyManager.Local.MyCard
             Transform currentDrawCardTrans = deckParent.GetChild(topCardIndex); // 맨 위에 있는 카드 할당
             CardObject currentDrawCard = currentDrawCardTrans.GetComponent<CardObject>();
 
-            if (currentDrawCard.CardUIPoolType == ObjectPoolType.FirePowerUICard) // 드로우한 카드가 화력 카드일 경우
-            {
-                InGameContext.Current.Data.CardManager.HaveFirePowerCard = true; // 화력 카드를 가지고 있다고 할당
-            }
-
             currentDrawCardTrans.SetParent(playerCardsParent);// 덱에 있는 카드를 플레이어의 카드로 변경
 
             if (includeUI) // UI도 생성해야 할 경우
@@ -81,4 +76,4 @@ namespace InGame.MyManager.Local.MyCard
         }
     }
 }
-// 마지막 작성 일자: 2026.06.01
+// 마지막 작성 일자: 2026.06.18

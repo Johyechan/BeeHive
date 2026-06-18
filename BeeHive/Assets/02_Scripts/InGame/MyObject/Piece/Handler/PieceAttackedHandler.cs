@@ -46,7 +46,10 @@ namespace InGame.MyObject.Piece.Handler
             {
                 if (_pieceBase.PieceVariable.isFirePowerAttackTarget) // 공격 받은 기물이 원거리 공격 대상이라면
                 {
-                    if (InGameContext.Current.Data.CardManager.HaveFirePowerCard && !InGameContext.Current.Data.GameManager.TankRangedAttacked) // 공격한 기물의 팀이 화력 카드를 가지고 있으며 원거리 공격을 한 번도 안한 상태라면
+                    UICardBase uiCardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard();
+
+                    // 공격한 기물의 팀이 화력 카드를 가지고 있으며 원거리 공격을 한 번도 안한 상태라면
+                    if (uiCardBase != null && !InGameContext.Current.Data.GameManager.TankRangedAttacked) 
                     {
                         HighLightOffFunction(false); // 배치칸 비활성화
                         _pieceData.confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include);
@@ -187,4 +190,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.15
+// 마지막 작성 일자: 2026.06.18

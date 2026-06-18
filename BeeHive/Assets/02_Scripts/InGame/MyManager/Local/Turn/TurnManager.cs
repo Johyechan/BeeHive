@@ -144,13 +144,6 @@ namespace InGame.MyManager.Local.Turn
 
             if(nextTurn == TurnType.TurnEnd) // 다음 턴이 턴 종료 턴이라면
             {
-                UICardBase uiCardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard(); // 자신의 패에서 화력 카드 탐색
-
-                if (uiCardBase == null) // 자신의 패에 화력 카드가 없다면
-                {
-                    InGameContext.Current.Data.CardManager.HaveFirePowerCard = false; // 화력 카드가 없는 상태로 전환
-                }
-
                 foreach (var piece in InGameContext.Current.Data.PlacePlaneManager.Variable.placePlaneMap.PiecePlacePlanes) // 전체 기물 판 순회
                 {
                     piece.HighLightOff(); // 하이라이트 끄기
@@ -258,4 +251,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.06.17
+// 마지막 작성 일자: 2026.06.18

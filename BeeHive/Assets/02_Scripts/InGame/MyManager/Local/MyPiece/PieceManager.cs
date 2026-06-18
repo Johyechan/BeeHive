@@ -5,6 +5,7 @@ using InGame.MyManager.Global;
 using InGame.MyManager.MyPiece.Handler;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
+using InGame.MyUI.Card;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -126,7 +127,9 @@ namespace InGame.MyManager.Local.MyPiece
 
             if (attackingPiece.CurrentObjectType == ObjectType.Tank) // 현재 기물이 전차일 경우
             {
-                if(InGameContext.Current.Data.CardManager.HaveFirePowerCard) // 화력 카드를 가지고 있는 경우
+                UICardBase uiCardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard();
+
+                if(uiCardBase != null) // 화력 카드를 가지고 있는 경우
                 {
                     _canAttackPieceStateHandler.ShowCanAttackPieces(attackingPiece, _canFirePowerAttackPieceMap, _canFirePowerAttackPiecePlaceMap, true); // 원거리 공격 가능 기물 탐색
                 }
@@ -145,4 +148,4 @@ namespace InGame.MyManager.Local.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2026.06.11
+// 마지막 작성 일자: 2026.06.18

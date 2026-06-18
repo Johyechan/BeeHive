@@ -16,9 +16,6 @@ namespace InGame.MyManager.Local
     // 가지고 있는 카드들을 관리하는 클래스
     public class CardManager : MonoBehaviour
     {
-        private bool _haveFirePowerCard; // 화력 카드가 패에 있는지 여부
-        public bool HaveFirePowerCard { get => _haveFirePowerCard; set => _haveFirePowerCard = value; } // 위 변수 프로퍼티
-
         private bool _cardUsed; // 카드 사용 여부
         public bool CardUsed { get => _cardUsed; set => _cardUsed = value; }
 
@@ -54,11 +51,6 @@ namespace InGame.MyManager.Local
             _cardUsedCheckMap.Add(CardType.GoodHarvest, false);
             _cardUsedCheckMap.Add(CardType.FirePower, false);
             _cardUsedCheckMap.Add(CardType.RoadChange, false);
-
-            if(GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 때
-            {
-                _haveFirePowerCard = true; // 화력 카드를 가지고 있는 상태로 초기화
-            }
         }
 
         // 같은 타입의 카드가 사용됐는지 확인 및 처리하는 함수
@@ -144,4 +136,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.06.03
+// 마지막 작성 일자: 2026.06.18

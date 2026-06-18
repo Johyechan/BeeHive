@@ -100,7 +100,7 @@ namespace InGame.MySystem.Game.Handler
                 {
                     UICardBase uiCardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard(); // 자신의 패에서 화력 카드 탐색
 
-                    if (InGameContext.Current.Data.CardManager.HaveFirePowerCard) // 화력 카드를 가지고 있다면
+                    if (uiCardBase != null) // 화력 카드를 가지고 있다면
                     {
                         ConfirmUI confirmUI = Object.FindAnyObjectByType<ConfirmUI>(FindObjectsInactive.Include); // 확인 UI 가져오기
 
@@ -148,4 +148,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.15
+// 마지막 작성 일자: 2026.06.18
