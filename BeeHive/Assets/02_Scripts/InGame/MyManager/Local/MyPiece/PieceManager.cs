@@ -5,6 +5,7 @@ using InGame.MyManager.Global;
 using InGame.MyManager.MyPiece.Handler;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
+using InGame.MyUI;
 using InGame.MyUI.Card;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -83,8 +84,10 @@ namespace InGame.MyManager.Local.MyPiece
         }
 
         // 확인 대기 UI 페이드 인아웃 함수
-        public void FadeInOutWaitConfirmUI(float endValue)
+        public void FadeInOutWaitConfirmUI(float endValue, float waitTime = 0)
         {
+            TimerUIParent timerUIParent = _waitConfirmUI.GetComponent<TimerUIParent>();
+
             if(endValue > 0)
             {
                 _waitConfirmUI.gameObject.SetActive(true); // 활성화
@@ -93,7 +96,14 @@ namespace InGame.MyManager.Local.MyPiece
             _waitConfirmUI.DOFade(endValue, _animationDuration)
                 .OnComplete(() =>
                 {
-                    if (endValue <= 0)
+                    if(endValue > 0) // UI를 보이게 하는 경우
+                    {
+                        if(timerUIParent != null) // 타이머 UI 사용 객체가 null이 아닐 때
+                        {
+                            timerUIParent.UseTimerUI(waitTime); // 타이머 UI 사용(타이머 시간)
+                        }
+                    }
+                    if (endValue <= 0) // UI를 숨기는 경우
                     {
                         _waitConfirmUI.gameObject.SetActive(false); // 비활성화
                     }
@@ -148,4 +158,4 @@ namespace InGame.MyManager.Local.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2026.06.18
+// 마지막 작성 일자: 2026.06.19

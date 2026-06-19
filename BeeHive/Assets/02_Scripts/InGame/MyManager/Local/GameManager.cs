@@ -56,9 +56,6 @@ namespace InGame.MyManager.Local
         private Dictionary<ObjectType, bool> _pieceCanMoveMap = new Dictionary<ObjectType, bool>(); // 각 기물마다 이동 가능 여부를 가지는 맵
         public Dictionary<ObjectType, bool> PieceCanMoveMap { get => _pieceCanMoveMap; }
 
-        private Castle _myCastle; // 플레이어 성
-        public Castle MyCastle { get => _myCastle; set => _myCastle = value; }
-
         private async void Awake()
         {
             // 변수 초기화
@@ -72,19 +69,6 @@ namespace InGame.MyManager.Local
             _pieceCanMoveMap.Add(ObjectType.Tank, true); // 전차 기물 이동 가능 여부
 
             await TeamReady.Gate.WaitAsync(); // 게임 준비 완료 대기
-
-            if (NetworkManager.Instance.IsClientOver) // 클라이언트가 종료 되었다면
-                return; // 반환
-
-            switch (TeamManager.Instance.CurrentTeamType)
-            {
-                case TeamType.Team1: // 팀1 일 때 팀1 성 반환
-                    _myCastle = GameObject.Find("Team1Castle").GetComponent<Castle>();
-                    break;
-                case TeamType.Team2: // 팀2 일 때 팀2 성 반환
-                    _myCastle = GameObject.Find("Team2Castle").GetComponent<Castle>();
-                    break;
-            }
         }
 
         public void GameIsOver(TeamType loseTeamType)
@@ -175,4 +159,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.06.10
+// 마지막 작성 일자: 2026.06.19

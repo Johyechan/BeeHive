@@ -2,6 +2,7 @@ using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
+using InGame.MyObject;
 using MyUtil.GameMode;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -34,14 +35,14 @@ namespace InGame.MyUI.Card
 
             await InGameContext.Current.Data.CardManager.UsedCardShowOver?.Task; // tcs 대기
 
-            // 성 체력 1증가
-            InGameContext.Current.Data.GameManager.MyCastle.CastleUpgrade(); // 자기 자신 최대 체력 1 증가
+            Castle currentCastle = TeamManager.Instance.GetCastle(TeamManager.Instance.CurrentTeamType); // 현재 팀의 성 가져오기
+            currentCastle.CastleUpgrade(); // 성 체력 1증가
 
             CastleHpUpInfo castleHpUpInfo = new CastleHpUpInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                 changeTeamType = (int)TeamManager.Instance.CurrentTeamType, // 체력이 바뀔 성의 팀 타입
-                changedHp = InGameContext.Current.Data.GameManager.MyCastle.CurrentHp, // 바뀐 체력
+                changedHp = currentCastle.CurrentHp, // 바뀐 체력
             };
             string castleJson = JsonUtility.ToJson(castleHpUpInfo); // Json화
             if (GameModeManager.Instance.CurrentGameMode.UseServer())
@@ -53,4 +54,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.05.20
+// 마지막 작성 일자: 2026.06.19

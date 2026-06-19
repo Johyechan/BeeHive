@@ -25,12 +25,16 @@ namespace InGame.MyUI
 
         private CanvasGroup _canvasGroup; // UI 애니메이션을 위한 canvasGroup 변수
 
+        private TimerUIParent _timerUIParent; // 타이머 UI를 사용할 자기 자신
+
         private UnityAction _yesButtonAction; // 예 버튼 델리게이트 (여기에 함수를 저장하여 구독 및 해제)
         private UnityAction _noButtonAction; // 아니오 버튼 델리게이트 (여기에 함수를 저장하여 구독 및 해제)
+        private UnityAction _timerUIHideAction; // 타이머 UI 숨기기 함수
 
         private void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
+            _timerUIParent = GetComponent<TimerUIParent>();
         }
 
         // 확인 종료 후 초기화 함수
@@ -40,7 +44,7 @@ namespace InGame.MyUI
             _noButton.onClick.RemoveListener(_noButtonAction); // 아니오 버튼 초기화
         }
 
-        public void Confirm(Action<bool> onResult, string message)
+        public void Confirm(Action<bool> onResult, string message, bool useTimer = false, float waitTime = 0)
         {
             _askText.ForceMeshUpdate(); // TMP를 GPU에 강제로 올리기
 
@@ -53,8 +57,23 @@ namespace InGame.MyUI
 
             _yesButton.onClick.AddListener(_yesButtonAction); // 예 버튼에 true를 반환하는 기능 구독
             _noButton.onClick.AddListener(_noButtonAction); // 아니오 버튼에 false 반환하는 기능 구독
-            _canvasGroup.DOFade(1, _animationDuration); // 페이드 인
+
+            if(useTimer) // 타이머 UI를 사용할 경우
+            {
+                _timerUIHideAction = () => _timerUIParent.TimerUIHide(); // 타이머 UI 숨기기 이벤트
+                _yesButton.onClick.AddListener(_timerUIHideAction); // 예 버튼에 타이머 UI 숨기기 기능 구독
+                _noButton.onClick.AddListener(_timerUIHideAction); // 아니오 버튼에 타이머 UI 숨기기 기능 구독
+            }
+            
+            _canvasGroup.DOFade(1, _animationDuration)
+                .OnComplete(() =>
+                {
+                    if(useTimer)
+                    {
+                        _timerUIParent.UseTimerUI(waitTime);
+                    }
+                }); // 페이드 인
         }
     }
 }
-// 마지막 작성 일자: 2026.06.01
+// 마지막 작성 일자: 2026.06.19

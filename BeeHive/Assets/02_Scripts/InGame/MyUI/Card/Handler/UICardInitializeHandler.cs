@@ -36,11 +36,11 @@ namespace InGame.MyUI.Card.Handler
             _uiCardVariable.cardInformation = informationTransform.GetComponent<TMP_Text>(); // 설명 할당
 
             Transform cardUsePanelTransform = _uiCardVariable.cardUsePanelCanvasGroup.transform.GetChild(1); // 카드 사용 패널의 두 번째 자식 - 패널
-            Transform buttonsTransform = cardUsePanelTransform.GetChild(1); // 패널의 첫 번째 자식 - 버튼을 모아둔 빈 객체
+            Transform buttonsTransform = cardUsePanelTransform.GetChild(2); // 패널의 첫 번째 자식 - 버튼을 모아둔 빈 객체
             Transform cardUseButtonTransform = buttonsTransform.GetChild(0); // 버튼을 모아둔 빈 객체의 첫 번째 자식 - 카드 사용 버튼
 
             _uiCardVariable.cardUseButton = cardUseButtonTransform.GetComponent<CardUseButton>(); // 버튼 할당
         }
     }
 }
-// 마지막 작성 일자: 2026.04.02
+// 마지막 작성 일자: 2026.06.19

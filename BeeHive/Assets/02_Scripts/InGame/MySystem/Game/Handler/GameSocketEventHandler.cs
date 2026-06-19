@@ -115,7 +115,7 @@ namespace InGame.MySystem.Game.Handler
                             confirmUI.ConfirmEnd();
                             confirmResultTcs.TrySetResult(result);
                         },
-                        defenseAsk);
+                        defenseAsk, true, InGameContext.Current.Data.PieceManager.WaitTime);
                     }
                     else // 화력 카드를 가지고 있지 않을 경우
                     {
@@ -148,4 +148,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.18
+// 마지막 작성 일자: 2026.06.19

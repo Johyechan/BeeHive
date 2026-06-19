@@ -90,9 +90,9 @@ namespace InGame.MyManager.Global
             switch(teamType)
             {
                 case TeamType.Team1: // 팀1 일 때 팀1 성 반환
-                    return InGameContext.Current.Data.GameManager.MyCastle = GameObject.Find("Team1Castle").GetComponent<Castle>();
+                    return GameObject.Find("Team1Castle").GetComponent<Castle>();
                 case TeamType.Team2: // 팀2 일 때 팀2 성 반환
-                    return InGameContext.Current.Data.GameManager.MyCastle = GameObject.Find("Team2Castle").GetComponent<Castle>();
+                    return GameObject.Find("Team2Castle").GetComponent<Castle>();
                 default:
                     return null;
             }
@@ -177,4 +177,4 @@ namespace InGame.MyManager.Global
         }
     }
 }
-// 마지막 작성 일자: 2026.06.10
+// 마지막 작성 일자: 2026.06.19

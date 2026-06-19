@@ -102,7 +102,7 @@ namespace InGame.MyObject.Piece.Handler
                             {
                                 NetworkManager.Instance.Socket.Emit("tankAttackedTank", SceneMgr.Instance.CurrentRoomID); // 상대 전차를 공격했다고 서버로 이벤트 호출
 
-                                InGameContext.Current.Data.PieceManager.FadeInOutWaitConfirmUI(1); // 대기 UI 활성화
+                                InGameContext.Current.Data.PieceManager.FadeInOutWaitConfirmUI(1, InGameContext.Current.Data.PieceManager.WaitTime); // 대기 UI 활성화
                             }
 
                             bool opponentChooseDefense = GameModeManager.Instance.CurrentGameMode.UseServer() ? await InGameContext.Current.Data.PieceManager.OpponentChoice(InGameContext.Current.Data.PieceManager.WaitTime) == 1 ? true : false : false; // 상대가 결정할 때까지 대기(서버를 사용하지 않는 경우 바로 false 반환)
@@ -190,4 +190,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.18
+// 마지막 작성 일자: 2026.06.19
