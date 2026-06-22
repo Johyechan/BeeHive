@@ -83,7 +83,7 @@ namespace Tutorial.FSM.State.Fourth
                         // 전차 이동   
                         await TutorialManager.Instance.ObjectPlace(_movePlacePlane, _tank, true);
 
-                        _usedDeck.AddCardInToUsedDeck(_cardObj.transform); // 사용한 카드들을 모아두는 덱으로 이동
+                        _usedDeck.AddCardInToUsedDeck(_cardObj.transform, TeamType.Team2); // 사용한 카드들을 모아두는 덱으로 이동
 
                         await DOTween.Sequence()
                             .Append(_cardObj.transform.DORotate(new Vector3(0, _cardObj.transform.eulerAngles.y, 180), _animationDuration)) // y축은 Team1의 경우 플레이어의 시야를 고려하여 180도 돌아가 있기 때문에 카드의 y값으로 그대로 적용, z축으로 180도 회전
@@ -126,4 +126,4 @@ namespace Tutorial.FSM.State.Fourth
         }
     }
 }
-// 마지막 작성 일자: 2026.06.01
+// 마지막 작성 일자: 2026.06.22

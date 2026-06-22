@@ -10,6 +10,7 @@ namespace InGame.MySystem
     {
         public int cardID; // 뒤집힐 카드의 ID
         public float animationDuration; // 애니메이션 지속 시간
+        public int cardUseTeam; // 카드를 사용한 팀
     }
 }
-
+// 마지막 작성 일자: 2026.06.22

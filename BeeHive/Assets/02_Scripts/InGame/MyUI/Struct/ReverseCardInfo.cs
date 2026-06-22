@@ -9,6 +9,7 @@ namespace InGame.MyUI
         public string roomID; // 현재 방 ID
         public int cardID; // 뒤집히는 카드의 ID
         public float animationDuration; // 애니메이션 지속 시간
+        public int cardUseTeam; // 카드를 사용한 팀
     }
 }
-// 마지막 작성 일자: 2025.10.15
+// 마지막 작성 일자: 2026.06.22

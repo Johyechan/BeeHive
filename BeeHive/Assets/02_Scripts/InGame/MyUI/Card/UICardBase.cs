@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
@@ -95,7 +96,10 @@ namespace InGame.MyUI.Card
             {
                 MainThreadDispatcher.Enqueue(() =>
                 {
-                    _uiCardVariable.usedCardDeck.AddCardInToUsedDeck(_uiCardVariable.cardObj.transform); // 사용한 카드를 추가
+                    // 카드를 사용한 팀을 현재 게임 모드가 튜토리얼 일 경우 팀 1을 할당하고 튜토리얼이 아닐 경우 현재 팀을 할당
+                    TeamType cardUseTeam = GameModeManager.Instance.CurrentGameMode.IsTutorial() == true ? TeamType.Team1 : TeamManager.Instance.CurrentTeamType;
+                    // 사용한 카드를 추가
+                    _uiCardVariable.usedCardDeck.AddCardInToUsedDeck(_uiCardVariable.cardObj.transform, cardUseTeam); 
                     ObjectPoolManager.Instance.ReturnObject(_uiCardData.poolType, gameObject, true, false);
                 });
 
@@ -152,4 +156,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.06.01
+// 마지막 작성 일자: 2026.06.22

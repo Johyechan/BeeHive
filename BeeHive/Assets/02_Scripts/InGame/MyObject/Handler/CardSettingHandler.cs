@@ -26,7 +26,7 @@ namespace InGame.MyObject.Handler
         }
 
         // 카드 세팅 코루틴
-        public IEnumerator CardSettingCo(Transform addCardTrans, ObjectPoolType cardPoolType, int usedCardCount)
+        public IEnumerator CardSettingCo(Transform addCardTrans, ObjectPoolType cardPoolType, int usedCardCount, TeamType cardUseTeam)
         {
             yield return new WaitUntil(() => InGameContext.Current.Data.CardManager.CardReverseTask.Task.IsCompleted);
 
@@ -48,7 +48,7 @@ namespace InGame.MyObject.Handler
             }
 
             bool end = false;
-            switch (TeamManager.Instance.CurrentTeamType) // 카드를 사용한 팀에 따라 카드 재세팅
+            switch (cardUseTeam) // 카드를 사용한 팀에 따라 카드 재세팅
             {
                 case TeamType.Team1:
                     end = DrawEventSystem.OnCardObjectSet.Invoke(InGameContext.Current.Data.DeckManager.DeckProp.player1CardsParent);
@@ -73,4 +73,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.19
+// 마지막 작성 일자: 2026.06.22

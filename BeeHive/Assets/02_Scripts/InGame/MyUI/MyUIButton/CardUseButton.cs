@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyEnum;
 using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
@@ -76,11 +77,14 @@ namespace InGame.MyUI.MyUIButton
         // UI 카드에 맞는 카드 객체를 뒤집는 함수
         private void ReverseCardObject()
         {
+            // 카드를 사용한 팀을 튜토리얼일 경우 팀 1 튜토리얼이 아닐 경우 현재 팀을 할당
+            TeamType cardUseTeam = GameModeManager.Instance.CurrentGameMode.IsTutorial() == true ? TeamType.Team1 : TeamManager.Instance.CurrentTeamType;
             ReverseCardInfo reverseCardInfo = new ReverseCardInfo()
             {
                 roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                 cardID = _uiCardBase.UICardVariable.cardObj.GetComponent<CardObject>().NetworkId, // 뒤집히는 카드의 ID
                 animationDuration = _animationDuration, // 애니메이션 지속 시간
+                cardUseTeam = (int)cardUseTeam // 카드를 사용한 팀
             };
             string json = JsonUtility.ToJson(reverseCardInfo); // Json 형태로 변환
             if (GameModeManager.Instance.CurrentGameMode.UseServer())

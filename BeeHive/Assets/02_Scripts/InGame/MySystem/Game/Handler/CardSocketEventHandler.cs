@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyEnum;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
@@ -56,7 +57,7 @@ namespace InGame.MySystem.Game.Handler
                         });
 
                     UsedDeck usedDeck = GameObject.Find("UsedDeck").GetComponent<UsedDeck>();
-                    usedDeck.AddCardInToUsedDeck(cardObj.transform);
+                    usedDeck.AddCardInToUsedDeck(cardObj.transform, (TeamType)cardReverseInfo.cardUseTeam);
                 });
             });
         }
@@ -68,4 +69,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.05.22
+// 마지막 작성 일자: 2026.06.22

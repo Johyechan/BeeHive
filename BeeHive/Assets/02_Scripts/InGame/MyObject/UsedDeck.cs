@@ -1,4 +1,5 @@
 using DG.Tweening;
+using InGame.MyEnum;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject.Handler;
@@ -34,7 +35,7 @@ namespace InGame.MyObject
         }
 
         // 사용한 카드들을 덱에 추가하는 함수
-        public void AddCardInToUsedDeck(Transform addCardTrans)
+        public void AddCardInToUsedDeck(Transform addCardTrans, TeamType cardUsedTeam)
         {
             addCardTrans.SetParent(transform); // 추가한 카드의 부모를 자기 자신으로 할당
             int usedCardCount = transform.childCount; // 사용한 카드들을 모아두는 덱에 있는 카드 수
@@ -64,7 +65,7 @@ namespace InGame.MyObject
                     break;
             }
 
-            StartCoroutine(_usedDeckHandlers.cardSettingHandler.CardSettingCo(addCardTrans, cardObject.CardPoolType, usedCardCount));
+            StartCoroutine(_usedDeckHandlers.cardSettingHandler.CardSettingCo(addCardTrans, cardObject.CardPoolType, usedCardCount, cardUsedTeam));
         }
 
         public async Task DeckShuffleAnimationFadeIn()
@@ -88,4 +89,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.05.12
+// 마지막 작성 일자: 2026.06.22
