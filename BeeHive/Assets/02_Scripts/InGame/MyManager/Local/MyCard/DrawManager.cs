@@ -70,10 +70,10 @@ namespace InGame.MyManager.Local.MyCard
                           DrawEventSystem.OnCardUISet?.Invoke();
                       }
                   })
-                  .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(playerCardsParent));// 드로우 이벤트 인보크 후 시퀀스 완료
+                  .JoinCallback(() => DrawEventSystem.OnCardObjectSet?.Invoke(playerCardsParent, InGameContext.Current.Data.TurnManager.CurrentTeamType));// 드로우 이벤트 인보크 후 시퀀스 완료
 
             await seq.AsyncWaitForCompletion(); // Task 완료 반환 대기
         }
     }
 }
-// 마지막 작성 일자: 2026.06.18
+// 마지막 작성 일자: 2026.06.23

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using InGame.MyEnum;
+using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace InGame.MyObject
         [SerializeField] private float _angle; // 회전 각도
 
         // 자식 객체들 재배치 함수
-        protected bool ObjectRePlace(Transform parent)
+        protected bool ObjectRePlace(Transform parent, TeamType team)
         {
             int objectCount = parent.childCount; // 현재 자식 수 - 즉 보유하고 있는 객체 수
 
@@ -32,11 +33,11 @@ namespace InGame.MyObject
 
                 Transform trans = parent.GetChild(i); // 자식 객체의 Transform을 저장
 
-                if(InGameContext.Current.Data.TurnManager.CurrentTeamType == TeamType.Team1) // 현재 턴이 Team1의 팀일 경우
+                if(team == TeamType.Team1) // 카드를 재배열 해야하는 팀이 Team1의 팀일 경우
                 {
                     trans.transform.localRotation = Quaternion.Euler(0, 180, 0); // 카드를 180도 회전(회전을 안할 시 거꾸로 보임)
                 }
-                else // 현재 턴이 Team2의 팀일 경우
+                else // 카드를 재배열 해야하는 팀 턴이 Team2의 팀일 경우
                 {
                     trans.transform.localRotation = Quaternion.Euler(0, 0, 0); // 카드를 0도 회전(회전을 안할 시 거꾸로 보임)
                     dir = -1;
@@ -50,4 +51,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.04
+// 마지막 작성 일자: 2026.06.23

@@ -51,11 +51,11 @@ namespace InGame.MyObject.Handler
             switch (cardUseTeam) // 카드를 사용한 팀에 따라 카드 재세팅
             {
                 case TeamType.Team1:
-                    end = DrawEventSystem.OnCardObjectSet.Invoke(InGameContext.Current.Data.DeckManager.DeckProp.player1CardsParent);
+                    end = DrawEventSystem.OnCardObjectSet.Invoke(InGameContext.Current.Data.DeckManager.DeckProp.player1CardsParent, cardUseTeam);
                     yield return new WaitUntil(() => end);
                     break;
                 case TeamType.Team2:
-                    end = DrawEventSystem.OnCardObjectSet.Invoke(InGameContext.Current.Data.DeckManager.DeckProp.player2CardsParent);
+                    end = DrawEventSystem.OnCardObjectSet.Invoke(InGameContext.Current.Data.DeckManager.DeckProp.player2CardsParent, cardUseTeam);
                     yield return new WaitUntil(() => end);
                     break;
             }
@@ -73,4 +73,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.22
+// 마지막 작성 일자: 2026.06.23

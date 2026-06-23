@@ -25,6 +25,8 @@ namespace InGame.MyManager.MyPiece.Handler
             int isFirePowerAttack = returnPiece.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
             bool attackedPlaceIsNearToCastle = returnPiece.PieceVariable.currentPlacePlane.isNearToCastle; // 공격 당하는 기물이 성 주위에 배치되어있다면
             TeamType attackedTeam = returnPiece.CurrentTeamType; // 공격 당한 기물의 배치 칸의 팀 타입 저장
+            NetworkManager.Instance.Socket.Emit("debug", $"" +
+                $"공격 당한 기물과 공격한 기물 이동 함수 들어옴, \n isFirePowerAttack: {isFirePowerAttack}, \n attackedPlaceIsNearToCastle: {attackedPlaceIsNearToCastle}, \n attackedTeam: {attackedTeam}, \n returnPiece: {returnPiece}, \n returnPiece.PieceVariable: {returnPiece.PieceVariable}, \n returnPiece.PieceVariable.currentPlacePlane: {returnPiece.PieceVariable.currentPlacePlane}, \n attackPiece: {attackPiece}, \n returnParent: {returnParent}, \n returnPos: {returnPos}, \n attackParent: {attackParent}, \n attackPos: {attackPos}");
 
             InGameContext.Current.Data.GameManager.PieceCanMoveMap[attackPiece.CurrentObjectType] = false; // 공격 시 이동 한 것으로 판정
 

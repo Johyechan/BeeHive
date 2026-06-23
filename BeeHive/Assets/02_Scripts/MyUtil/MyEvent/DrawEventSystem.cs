@@ -1,5 +1,5 @@
+using InGame.MyEnum;
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace MyUtil.MyEvent
@@ -9,7 +9,7 @@ namespace MyUtil.MyEvent
     public static class DrawEventSystem
     {
         public static Action OnCardUISet; // 드로우 액션 - 드로우 했을 때 실행되야 할 함수들이 구독하는 이벤트
-        public static Func<Transform, bool> OnCardObjectSet; // 카드 세팅 액션 - 여러 플레이어의 카드들을 세팅할 함수들이 구독하는 이벤트
+        public static Func<Transform, TeamType, bool> OnCardObjectSet; // 카드 세팅 액션 - 여러 플레이어의 카드들을 세팅할 함수들이 구독하는 이벤트
     }
 }
-// 마지막 작성 일자: 2025.08.28
+// 마지막 작성 일자: 2026.06.23
