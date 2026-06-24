@@ -50,13 +50,18 @@ namespace InGame.MyManager.Local
         }
 
         // 덱 제작 함수(현재 방 ID)
-        public void MakeDeck(string currentRoomID, int castleUpdradeCardCount = 0, int droughtCardCount = 0, int goodHarvestCardCount = 0, int roadChangeCardCount = 0, int firePowerCardCount = 0)
+        public void MakeDeck(string currentRoomID, bool isRemake, int castleUpdradeCardCount = 0, int droughtCardCount = 0, int goodHarvestCardCount = 0, int roadChangeCardCount = 0, int firePowerCardCount = 0)
         {
             if (GameModeManager.Instance.CurrentGameMode.UseServer()) // 게임 서버를 사용하는 경우
             {
                 _deckMakeCheckTcs = new TaskCompletionSource<bool>(); // 새로운 tcs 할당
 
-                int castleCard = castleUpdradeCardCount == 0 ? _deckCardInfo.castleUpgradeCardCount : castleUpdradeCardCount; // 성벽 카드 수
+                int castleCard = 0;
+                if (!isRemake) // 덱을 처음 만드는 경우에만 성벽 강화 카드 생성
+                {
+                    castleCard = castleUpdradeCardCount == 0 ? _deckCardInfo.castleUpgradeCardCount : castleUpdradeCardCount; // 성벽 카드 수
+                }
+
                 int droughtCard = droughtCardCount == 0 ? _deckCardInfo.droughtCardCount : droughtCardCount; // 가뭄 카드 수
                 int goodHarvestCard = goodHarvestCardCount == 0 ? _deckCardInfo.goodHarvestCardCount : goodHarvestCardCount; // 풍년 카드 수
                 int roadChangeCard = roadChangeCardCount == 0 ? _deckCardInfo.roadChangeCardCount : roadChangeCardCount; // 도로 변형 카드 수
@@ -84,8 +89,8 @@ namespace InGame.MyManager.Local
 
         public void ReMakeDeck()
         {
-            MakeDeck(SceneMgr.Instance.CurrentRoomID, _usedDeck.UsedCardInfo.castleCardCount, _usedDeck.UsedCardInfo.droughtCardCount, _usedDeck.UsedCardInfo.goodHarvestCardCount, _usedDeck.UsedCardInfo.roadChangeCardCount, _usedDeck.UsedCardInfo.firePowerCardCount);
+            MakeDeck(SceneMgr.Instance.CurrentRoomID, true, _usedDeck.UsedCardInfo.castleCardCount, _usedDeck.UsedCardInfo.droughtCardCount, _usedDeck.UsedCardInfo.goodHarvestCardCount, _usedDeck.UsedCardInfo.roadChangeCardCount, _usedDeck.UsedCardInfo.firePowerCardCount);
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.06.24

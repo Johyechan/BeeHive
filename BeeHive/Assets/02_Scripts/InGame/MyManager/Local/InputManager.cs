@@ -1,8 +1,11 @@
 using InGame.MyEvent;
 using InGame.MyInput;
 using MyUtil.GameMode;
+using System.Collections;
 using Tutorial;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace InGame.MyManager.Local
@@ -20,12 +23,15 @@ namespace InGame.MyManager.Local
         private InputAction _escapeClickAction; // 액션 맵에 있는 액션 - esc 클릭 액션
 
         private InputClickHandler _clickHandler; // 객체 클릭을 인식하기 위한 핸들러
+
+        private bool _isIgnoreInput = false; // 인풋 무시 변수
+        public bool IsIgnoreInput { get => _isIgnoreInput; } // 인풋 무시 변수 프로퍼티
         
         private async void Awake()
         {
             await GameReady.Gate.WaitAsync();
 
-            _clickHandler = new InputClickHandler();
+            _clickHandler = new InputClickHandler(this);
             
             _playActionMap = _playerActionAsset.FindActionMap("Play"); // 인풋 에셋에서 Play 이름을 가진 액션 맵 탐색
             _lClickAction = _playActionMap.FindAction("LClick"); // 액션 맵에서 LClick 이름을 가진 액션 탐색
@@ -60,6 +66,16 @@ namespace InGame.MyManager.Local
             DisableInputSystem();
         }
 
+        private void OnApplicationFocus(bool focus)
+        {
+            if(focus) // 게임 화면으로 돌아왔을 때
+            {
+                StartCoroutine(OneframeInputIgnoreCo());
+                EventSystem.current?.SetSelectedGameObject(null); // 현재 선택 상태 초기화
+                Canvas.ForceUpdateCanvases(); // UI 재계산 - 레이아웃 동기화로 UI위치와 Raycast 위치가 어긋나는 문제 대비
+            }
+        }
+
         void Update()
         {
             _clickHandler.CheckIsMouseOverUI(); // 마우스 커서가 UI 위에 있는지 확인하는 함수
@@ -75,6 +91,14 @@ namespace InGame.MyManager.Local
             }
             _playerActionAsset.Disable(); // 인풋 에셋 비활성화
         }
+
+        // 1 프레임 인풋 무시 코루틴
+        private IEnumerator OneframeInputIgnoreCo()
+        {
+            _isIgnoreInput = true;
+            yield return null;
+            _isIgnoreInput = false;
+        }
     }
 }
-// 마지막 작성 일자: 2026.06.02
+// 마지막 작성 일자: 2026.06.24

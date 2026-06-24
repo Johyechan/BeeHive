@@ -31,7 +31,6 @@ namespace InGame.MyObject.Handler
         public async Task UsedDeckShuffle()
         {
             _usedDeckUIHandler.Init(); // 사용한 카드 UI 초기화
-            _usedCardInfo.castleCardCount = 0;
             _usedCardInfo.droughtCardCount = 0;
             _usedCardInfo.goodHarvestCardCount = 0;
             _usedCardInfo.roadChangeCardCount = 0;
@@ -74,4 +73,4 @@ namespace InGame.MyObject.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.02.03
+// 마지막 작성 일자: 2026.06.24

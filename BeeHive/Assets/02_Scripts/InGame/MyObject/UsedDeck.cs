@@ -45,7 +45,8 @@ namespace InGame.MyObject
             switch(cardObject.CardUIPoolType)
             {
                 case ObjectPoolType.CastleUpgradeUICard:
-                    _usedDeckUIData.castleUpgradeCardCount.text = "x 1";
+                    ++_usedCardInfo.castleCardCount;
+                    _usedDeckUIData.castleUpgradeCardCount.text = $"x {_usedCardInfo.castleCardCount}";
                     break;
                 case ObjectPoolType.DroughtUICard:
                     ++_usedCardInfo.droughtCardCount;
@@ -89,4 +90,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.22
+// 마지막 작성 일자: 2026.06.24

@@ -1,4 +1,5 @@
 using InGame.MyManager.Global;
+using InGame.MyManager.Local;
 using InGame.MyObject.MyObjectInterface;
 using MyUtil;
 using UnityEngine;
@@ -11,9 +12,16 @@ namespace InGame.MyInput
     // 클릭 기능을 제공하는 핸들러 클래스
     public class InputClickHandler
     {
+        private InputManager _inputManager; // 인풋 매니저
+
         private RaycastHit _mouseRaycastHit; // 마우스 레이를 쏴서 닿았을 때 정보를 저장할 변수
 
         private bool _isOverUI; // UI위에 마우스 커서가 있는지 확인할 변수
+
+        public InputClickHandler(InputManager inputManager)
+        {
+            _inputManager = inputManager;
+        }
 
         // 마우스 클릭 시 호출되는 함수
         private GameObject OnMouseClick()
@@ -33,6 +41,11 @@ namespace InGame.MyInput
 
         public void MouseClick(InputAction.CallbackContext context)
         {
+            if(_inputManager.IsIgnoreInput) // 인풋 무시 상태라면
+            {
+                return; // 반환
+            }
+
             GameObject hitObj = OnMouseClick(); // 마우스 클릭 시 레이 캐스트를 쏘아 닿은 객체를 반환
             if (hitObj != null) // 레이캐스트에 닿은 객체가 있을 경우
             {
@@ -47,4 +60,4 @@ namespace InGame.MyInput
         }
     }
 }
-// 마지막 작성 일자: 2025.09.01
+// 마지막 작성 일자: 2026.06.24

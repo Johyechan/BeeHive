@@ -126,9 +126,9 @@ namespace InGame.MyManager.Local.MyPiece
         }
 
         // 공격 당한 기물과 공격한 기물이 이동하는 함수(공격 당한 기물, 공격한 기물공격 당한 기물의 부모, 공격한 기물의 부모, 공격 당한 기물의 목적지, 공격한 기물의 목적지)
-        public async Task AttackRelatedPiecesMove(PieceBase returnPiece, PieceBase attackPiece, Transform returnParent, Transform attackParent, Vector3 returnPos, Vector3 attackPos)
+        public async Task AttackRelatedPiecesMove(PieceBase returnPiece, PieceBase attackPiece, Transform returnParent, Transform attackParent, Vector3 returnPos, Vector3 attackPos, int isFirePowerAttack)
         {
-            await _attackRelatedPiecesMoveHandler.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, returnPos, attackPos);
+            await _attackRelatedPiecesMoveHandler.AttackRelatedPiecesMove(returnPiece, attackPiece, returnParent, attackParent, returnPos, attackPos, isFirePowerAttack);
         }
 
         private void ShowCanAttackPieces(PieceBase attackingPiece)
@@ -158,4 +158,4 @@ namespace InGame.MyManager.Local.MyPiece
         }
     }
 }
-// 마지막 작성 일자: 2026.06.19
+// 마지막 작성 일자: 2026.06.24

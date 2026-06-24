@@ -19,10 +19,9 @@ namespace InGame.MyManager.MyPiece.Handler
     // 공격 관련 기물들을 이동하는 기능을 처리하는 핸들러
     public class AttackRelatedPiecesMoveHandler
     {
-        // 공격 당한 기물과 공격한 기물이 이동하는 함수(공격 당한 기물, 공격한 기물, 공격 당한 기물의 부모, 공격한 기물의 부모, 공격 당한 기물의 목적지, 공격한 기물의 목적지)
-        public async Task AttackRelatedPiecesMove(PieceBase returnPiece, PieceBase attackPiece, Transform returnParent, Transform attackParent, Vector3 returnPos, Vector3 attackPos)
+        // 공격 당한 기물과 공격한 기물이 이동하는 함수(공격 당한 기물, 공격한 기물, 공격 당한 기물의 부모, 공격한 기물의 부모, 공격 당한 기물의 목적지, 공격한 기물의 목적지, 원거리 공격 여부 할당(1: 참, 0: 거짓))
+        public async Task AttackRelatedPiecesMove(PieceBase returnPiece, PieceBase attackPiece, Transform returnParent, Transform attackParent, Vector3 returnPos, Vector3 attackPos, int isFirePowerAttack)
         {
-            int isFirePowerAttack = returnPiece.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
             bool attackedPlaceIsNearToCastle = returnPiece.PieceVariable.currentPlacePlane.isNearToCastle; // 공격 당하는 기물이 성 주위에 배치되어있다면
             TeamType attackedTeam = returnPiece.CurrentTeamType; // 공격 당한 기물의 배치 칸의 팀 타입 저장
             NetworkManager.Instance.Socket.Emit("debug", $"" +
@@ -133,4 +132,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.15
+// 마지막 작성 일자: 2026.06.24

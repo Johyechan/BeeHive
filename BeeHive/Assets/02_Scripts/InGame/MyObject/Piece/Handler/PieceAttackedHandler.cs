@@ -144,7 +144,8 @@ namespace InGame.MyObject.Piece.Handler
                 }
             }
 
-            int isFirePowerAttack = _pieceBase.PieceVariable.isFirePowerAttackTarget ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
+            int isFirePowerAttack = isRangedAttack == true ? 1 : 0; // 원거리 공격 여부 할당(1: 참, 0: 거짓)
+            NetworkManager.Instance.Socket.Emit("debug", $"처음 판단 할 때 원거리 공격 여부 isFirePowerAttack: {isFirePowerAttack}, 그리고 전차가 원거리 공격 했는가?: isRangedAttack: {isRangedAttack}");
 
             int attackObjID = attackPieceBase.NetworkId; // 공격한 객체의 ID
             int returnObjID = _pieceBase.NetworkId; // 공격 받은 객체의 ID
@@ -182,12 +183,13 @@ namespace InGame.MyObject.Piece.Handler
                 isFirePowerAttack = isFirePowerAttack, // 원거리 공격 여부 할당(1: 참, 0: 거짓)
             };
 
+            NetworkManager.Instance.Socket.Emit("debug", $"서버에 보내기 직전 attackInfo.isFirePowerAttack: {attackInfo.isFirePowerAttack}");
             string json = JsonUtility.ToJson(attackInfo);
             if (GameModeManager.Instance.CurrentGameMode.UseServer())
                 NetworkManager.Instance.Socket.Emit("attackPiece", json);
 
-            await InGameContext.Current.Data.PieceManager.AttackRelatedPiecesMove(_pieceBase, attackPieceBase, returnParent, returnPieceTrans.parent, returnPos, attackPos); // 공격 당한 기물과 공격한 기물이 이동하는 함수
+            await InGameContext.Current.Data.PieceManager.AttackRelatedPiecesMove(_pieceBase, attackPieceBase, returnParent, returnPieceTrans.parent, returnPos, attackPos, isFirePowerAttack); // 공격 당한 기물과 공격한 기물이 이동하는 함수
         }
     }
 }
-// 마지막 작성 일자: 2026.06.19
+// 마지막 작성 일자: 2026.06.24

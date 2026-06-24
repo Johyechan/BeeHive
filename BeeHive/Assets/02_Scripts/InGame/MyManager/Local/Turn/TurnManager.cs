@@ -132,7 +132,7 @@ namespace InGame.MyManager.Local.Turn
             {
                 if(TeamManager.Instance.CurrentTeamType == TeamType.Team1) // 시작 시 제작하는 덱은 팀 1이 전담해서 제작
                 {
-                    InGameContext.Current.Data.DeckManager.MakeDeck(SceneMgr.Instance.CurrentRoomID);
+                    InGameContext.Current.Data.DeckManager.MakeDeck(SceneMgr.Instance.CurrentRoomID, false);
                     await InGameContext.Current.Data.DeckManager.DeckMakeEnd();
                 }
                 else // 팀 1이 아닐 경우
@@ -251,4 +251,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.06.18
+// 마지막 작성 일자: 2026.06.24
