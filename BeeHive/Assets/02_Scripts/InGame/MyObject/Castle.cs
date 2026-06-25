@@ -104,7 +104,7 @@ namespace InGame.MyObject
                 if (_opponentHp <= 0)
                 {
                     _opponentHp = 0;
-                    isGameOver = true; // 게임 오버
+                    isGameOver = true;
                 }
             }
 
@@ -160,7 +160,7 @@ namespace InGame.MyObject
                 }
             }
 
-            if (isGameOver) // 현재 체력이 0 이하라면 그리고 같은 팀의 성일 경우
+            if (isGameOver) // 현재 체력이 0 이하라면
             {
                 var tcs = InGameContext.Current.Data.CardManager.UsedCardMoveToUsedCardDeck;
 
@@ -176,21 +176,22 @@ namespace InGame.MyObject
                 _blockImage.SetActive(true); // 클릭 방지 이미지 활성화
 
                 int loseTeamType = 0;
-                if (_opponentHp <= 0)
+                
+                if(_currentHp <= 0) // 내 체력이 0 이하라면
                 {
-                    switch(_castleTeamType)
+                    loseTeamType = (int)TeamManager.Instance.CurrentTeamType; // 현재 클라이언트의 팀이 패배
+                }
+                else if(_opponentHp <= 0) // 상대 체력이 0 이하라면
+                {
+                    switch(TeamManager.Instance.CurrentTeamType) // 내 팀이
                     {
-                        case TeamType.Team1:
-                            loseTeamType = (int)TeamType.Team2;
+                        case TeamType.Team1: // 팀 1일 때
+                            loseTeamType = (int)TeamType.Team2; // 진 팀은 팀 2
                             break;
-                        case TeamType.Team2:
-                            loseTeamType = (int)TeamType.Team1;
+                        case TeamType.Team2: // 팀 2일 때
+                            loseTeamType = (int)TeamType.Team1; // 진 팀은 팀 1
                             break;
                     }
-                }
-                else if(_currentHp <= 0) // 내 체력이 0 이하라면
-                {
-                    loseTeamType = (int)_castleTeamType; // 현재 성 팀타입이 패배
                 }
 
                 GameOverInfo gameOverInfo = new GameOverInfo()
@@ -266,4 +267,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.17
+// 마지막 작성 일자: 2026.06.25
