@@ -44,10 +44,8 @@ namespace InGame.MyManager.Turn.Handler
                     NetworkManager.Instance.Socket.Emit("turnTimerStart", SceneMgr.Instance.CurrentRoomID);
 
                 await Task.Delay(time * 1000, token); // time초 만큼 대기 또는 token 취소 발생 시 대기 종료
-
-                TurnTimerEnd(timerSlider); // 턴 종료
             }
-            catch(OperationCanceledException) // 취소 발생 시
+            finally
             {
                 TurnTimerEnd(timerSlider); // 턴 종료
             }
@@ -73,4 +71,4 @@ namespace InGame.MyManager.Turn.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.03.19
+// 마지막 작성 일자: 2026.06.26

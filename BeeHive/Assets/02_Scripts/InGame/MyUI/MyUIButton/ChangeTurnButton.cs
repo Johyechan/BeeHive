@@ -60,6 +60,7 @@ namespace InGame.MyUI.MyUIButton
                 {
                     if(GameModeManager.Instance.CurrentGameMode.UseServer()) // 서버를 사용하는 게임 모드라면
                     {
+                        NetworkManager.Instance.Socket.Emit("debug", "턴 넘기기 버튼 클릭됨 그리고 현재 차례인 놈이 누름 그리고 서버 사용 중임");
                         if (GameModeManager.Instance.CurrentGameMode.UseServer())
                             NetworkManager.Instance.Socket.Emit("turnTimerStop", SceneMgr.Instance.CurrentRoomID); // 턴 타이머 종료
                     }

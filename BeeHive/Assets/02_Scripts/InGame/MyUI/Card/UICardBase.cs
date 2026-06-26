@@ -149,6 +149,16 @@ namespace InGame.MyUI.Card
             }
             else // 화력 카드가 아닐 경우
             {
+                if(InGameContext.Current.Data.TurnManager.CurrentTeamType != TeamManager.Instance.CurrentTeamType) // 자신의 턴이 아닐 경우
+                {
+                    string notYourTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_NotYourTurn"
+                    );
+
+                    UIManager.Instance.WarningUIMake(notYourTurn); // 직접 사용 불가 패널 띄우기
+                    return; // 반환
+                }
                 _uiCardVariable.clickedHandler.ShowAskPanel();
             }
 
@@ -156,4 +166,4 @@ namespace InGame.MyUI.Card
         }
     }
 }
-// 마지막 작성 일자: 2026.06.22
+// 마지막 작성 일자: 2026.06.26
