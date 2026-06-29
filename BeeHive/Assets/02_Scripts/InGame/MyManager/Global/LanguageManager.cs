@@ -18,7 +18,7 @@ namespace InGame.MyManager.Global
         private Dictionary<string, LanguageType> _findLanguageTypeMap = new Dictionary<string, LanguageType>(); // 언어 타입 탐색용 맵
 
         private const string CURRENT_LANGUAGE = "CurrentLanguage";
-        
+
         // 현재 언어 프로퍼티
         public LanguageType CurrentLanguage 
         {

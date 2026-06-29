@@ -91,6 +91,10 @@ MonoBehaviour:
     m_Key: Lobby_UI_Button_Tutorial
     m_Metadata:
       m_Items: []
+  - m_Id: 31514501096144896
+    m_Key: Lobby_UI_Button_ViewDetailRules
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

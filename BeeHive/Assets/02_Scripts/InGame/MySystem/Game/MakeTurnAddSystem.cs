@@ -41,7 +41,7 @@ namespace InGame.MySystem.Game
                         WalletEvent.OnGetGoldBar?.Invoke(2, false); // 금괴 2개 획득
                         break;
                     case TutorialState.Turn1_AI: // 첫 번째 턴(AI 턴)
-                        WalletEvent.OnGetGoldBar?.Invoke(3, false); // 금괴 3개 획득
+                        WalletEvent.OnGetGoldBar?.Invoke(4, false); // 금괴 4개 획득
                         break;
                     default: // 다른 상태에서는
                         WalletEvent.OnGetGoldBar?.Invoke(2, false); // 금괴 2개 획득
@@ -56,7 +56,7 @@ namespace InGame.MySystem.Game
                 {
                     if (TeamManager.Instance.Team2FirstTurn) // 블루팀(팀2)의 첫 번째 턴이라면
                     {
-                        WalletEvent.OnGetGoldBar?.Invoke(3, false); // 금괴 3개 획득
+                        WalletEvent.OnGetGoldBar?.Invoke(4, false); // 금괴 4개 획득
                         TeamManager.Instance.Team2FirstTurn = false; // 블루팀(팀2)의 첫 번째 턴 상태 종료
                     }
                     else // 첫 번째 턴이 아니라면
@@ -123,4 +123,4 @@ namespace InGame.MySystem.Game
         }
     }
 }
-// 마지막 작성 일자: 2026.05.22
+// 마지막 작성 일자: 2026.06.29

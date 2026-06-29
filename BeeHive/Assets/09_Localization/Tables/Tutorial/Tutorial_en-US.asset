@@ -123,7 +123,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1098999349903360
-    m_Localized: The second player gains 3 gold bars instead of 2 on their first
+    m_Localized: The second player gains 4 gold bars instead of 2 on their first
       turn only.
     m_Metadata:
       m_Items: []

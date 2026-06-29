@@ -41198,7 +41198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _teamChangeDelay: 1
-  _turnDurationTime: 600
+  _turnDurationTime: 300
   _makeTurnDelayMillisecond: 500
   _turnTimerSlider: {fileID: 279555795}
 --- !u!4 &1713890272

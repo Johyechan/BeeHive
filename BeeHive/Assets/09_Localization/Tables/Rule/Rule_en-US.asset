@@ -47,7 +47,7 @@ MonoBehaviour:
 
 
       - Exception: The Blue Team
-      gains 3 Gold Bars on its first phase.
+      gains 4 Gold Bars on its first phase.
 
 
       - Producers generate Gold.'
@@ -168,7 +168,16 @@ MonoBehaviour:
 
 
       -
-      You can use Firepower cards to defend against enemy Bombard ranged attacks.'
+      You can use Firepower cards to defend against enemy Bombard ranged attacks.
+
+
+      -
+      Can move or perform a attack before making a ranged attack.
+
+      
+
+      -
+      Cannot move or perform a attack after making a ranged attack.'
     m_Metadata:
       m_Items: []
   - m_Id: 23938738515869696
