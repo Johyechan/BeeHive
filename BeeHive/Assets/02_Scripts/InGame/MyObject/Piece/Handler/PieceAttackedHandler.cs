@@ -4,6 +4,7 @@ using InGame.MyManager;
 using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject.Piece.Data;
+using InGame.MyObject.Piece.ObjectPieces;
 using InGame.MyUI;
 using InGame.MyUI.Card;
 using MyUtil.GameMode;
@@ -40,6 +41,7 @@ namespace InGame.MyObject.Piece.Handler
         public async Task PieceAttacked()
         {
             PieceBase attackPieceBase = InGameContext.Current.Data.GameManager.CurrentMovePiece.GetComponent<PieceBase>(); // 공격한 객체의 PieceBase 가져오기
+            Tank tank = attackPieceBase as Tank;
             bool isRangedAttack = false; // 전차 원거리 공격 여부
 
             if (attackPieceBase.CurrentObjectType == ObjectType.Tank) // 공격한 기물이 전차일 경우
@@ -47,6 +49,22 @@ namespace InGame.MyObject.Piece.Handler
                 if (_pieceBase.PieceVariable.isFirePowerAttackTarget) // 공격 받은 기물이 원거리 공격 대상이라면
                 {
                     UICardBase uiCardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard();
+
+                    // 뭔가 전에 행동을 한 전차가 현재 공격을 행한 전차가 아닌 동시에 null이 아닌 즉 이미 다른 전차가 행동을 한 상태라면
+                    if (InGameContext.Current.Data.GameManager.DoSomethingTank != tank && InGameContext.Current.Data.GameManager.DoSomethingTank != null)
+                    {
+                        // 공격 불가하다는 경고문 띄우기
+                        string tankCanNotAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Game",
+                            "Game_UI_TankCanNotAttack"
+                        );
+                        UIManager.Instance.WarningUIMake(tankCanNotAttack);
+
+                        HighLightOffFunction(true);
+
+                        await Task.CompletedTask; // 테스크 종료
+                        return; // 함수 종료
+                    }
 
                     // 공격한 기물의 팀이 화력 카드를 가지고 있으며 원거리 공격을 한 번도 안한 상태라면
                     if (uiCardBase != null && !InGameContext.Current.Data.GameManager.TankRangedAttacked) 
@@ -93,6 +111,7 @@ namespace InGame.MyObject.Piece.Handler
 
                         isRangedAttack = true; // 전차 원거리 공격으로 판정
                         InGameContext.Current.Data.GameManager.TankRangedAttacked = true; // 원거리 공격한 것으로 판정
+                        InGameContext.Current.Data.GameManager.DoSomethingTank = tank; // 전차로 변환 후 할당
 
                         await InGameContext.Current.Data.CardManager.UsedCardShowOver?.Task; // 사용한 카드 보여주기가 끝날 때까지 대기
 
@@ -141,6 +160,24 @@ namespace InGame.MyObject.Piece.Handler
 
                     await Task.CompletedTask; // 테스크 종료
                     return; // 함수 종료
+                }
+
+                if (tank != null)
+                {
+                    if (InGameContext.Current.Data.GameManager.DoSomethingTank != tank && InGameContext.Current.Data.GameManager.DoSomethingTank != null)
+                    {
+                        // 공격 불가하다는 경고문 띄우기
+                        string tankCanNotAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                            "Game",
+                            "Game_UI_TankCanNotAttack"
+                        );
+                        UIManager.Instance.WarningUIMake(tankCanNotAttack);
+
+                        HighLightOffFunction(true);
+
+                        await Task.CompletedTask; // 테스크 종료
+                        return; // 함수 종료
+                    }
                 }
             }
 
@@ -192,4 +229,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.24
+// 마지막 작성 일자: 2026.06.30

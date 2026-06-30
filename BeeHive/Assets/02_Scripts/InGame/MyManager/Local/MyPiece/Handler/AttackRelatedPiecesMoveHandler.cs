@@ -27,8 +27,12 @@ namespace InGame.MyManager.MyPiece.Handler
             NetworkManager.Instance.Socket.Emit("debug", $"" +
                 $"공격 당한 기물과 공격한 기물 이동 함수 들어옴, \n isFirePowerAttack: {isFirePowerAttack}, \n attackedPlaceIsNearToCastle: {attackedPlaceIsNearToCastle}, \n attackedTeam: {attackedTeam}, \n returnPiece: {returnPiece}, \n returnPiece.PieceVariable: {returnPiece.PieceVariable}, \n returnPiece.PieceVariable.currentPlacePlane: {returnPiece.PieceVariable.currentPlacePlane}, \n attackPiece: {attackPiece}, \n returnParent: {returnParent}, \n returnPos: {returnPos}, \n attackParent: {attackParent}, \n attackPos: {attackPos}");
 
-            InGameContext.Current.Data.GameManager.PieceCanMoveMap[attackPiece.CurrentObjectType] = false; // 공격 시 이동 한 것으로 판정
-
+            // 원거리 공격이 아닐 때만
+            if(isFirePowerAttack == 0)
+            {
+                InGameContext.Current.Data.GameManager.PieceCanMoveMap[attackPiece.CurrentObjectType] = false; // 공격 시 이동 한 것으로 판정
+            }
+            
             HighLightEvents.OnPieceMovementHighLight?.Invoke(false, false); // 하이라이트 끄기, 이동 가능 배치 칸 대상
             HighLightEvents.OnRoadPlacementHighLight?.Invoke(false); // 도로 배치 칸 하이라이트 끄기
             HighLightEvents.OnPiecePlacementHighLight?.Invoke(false, true); // 기물 배치 칸 하이라이트 끄기, 배치 가능 배치 판 대상
@@ -132,4 +136,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.24
+// 마지막 작성 일자: 2026.06.30

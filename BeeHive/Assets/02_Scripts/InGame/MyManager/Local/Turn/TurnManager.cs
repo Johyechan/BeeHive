@@ -2,6 +2,8 @@ using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
 using InGame.MyManager.Turn.Handler;
+using InGame.MyObject;
+using InGame.MySystem;
 using InGame.MySystem.Game;
 using InGame.MyUI.Card;
 using InGame.MyUI.Turn;
@@ -9,8 +11,10 @@ using MyUtil;
 using MyUtil.GameMode;
 using System;
 using System.Threading.Tasks;
+using TMPro;
 using Tutorial.Event;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 namespace InGame.MyManager.Local.Turn
@@ -23,8 +27,11 @@ namespace InGame.MyManager.Local.Turn
 
         [SerializeField] private int _turnDurationTime; // 턴 지속 시간(초)
         [SerializeField] private int _makeTurnDelayMillisecond; // 생산 턴 대기 시간
+        [SerializeField] private int _maxTurn; // 최대 턴
 
         [SerializeField] private Slider _turnTimerSlider; // 턴 타이머 슬라이더
+
+        [SerializeField] private TMP_Text _turnCountTxt; // 현재 턴 카운팅을 보여주는 텍스트
 
         private TeamType _currentTeamType; // 현재 턴의 팀
         // 위 변수 프로퍼티
@@ -49,6 +56,8 @@ namespace InGame.MyManager.Local.Turn
         public bool CanChangeTurn { get => _canChangeTurn; set => _canChangeTurn = value; } // 위 변수 프로퍼티
 
         public Action OnTurnTimerStop; // 턴 타이머 종료 이벤트
+
+        private int _turnCount; // 턴 카운팅 변수
 
         // 변수 초기화
         private void Awake()
@@ -78,6 +87,9 @@ namespace InGame.MyManager.Local.Turn
                     });
                 });
             }
+
+            _turnCount = 1; // 턴 카운트 초기화
+            TurnCountTextSetting();
 
             _turnUIAnimation = GetComponent<TurnUIAnimation>();
             _makeTurnAddSystem = new MakeTurnAddSystem();
@@ -110,7 +122,52 @@ namespace InGame.MyManager.Local.Turn
         {
             if (turn == TurnType.ChangeTeam) // 팀을 변경하는 턴 일경우
             {
+                InGameContext.Current.Data.GameManager.DoSomethingTank = null;
+
+                if(_turnCount > _maxTurn)
+                {
+                    TeamType currentTeam = TeamManager.Instance.CurrentTeamType; // 내 팀
+                    TeamType opponentTeam = TeamType.None; // 적 팀
+                    switch(currentTeam)
+                    {
+                        case TeamType.Team1:
+                            opponentTeam = TeamType.Team2;
+                            break;
+                        case TeamType.Team2:
+                            opponentTeam = TeamType.Team1;
+                            break;
+                    }
+                    Castle currentCastle = TeamManager.Instance.GetCastle(currentTeam); // 내 성
+                    Castle opponentCastle = TeamManager.Instance.GetCastle(opponentTeam); // 적 성
+
+                    TeamType loseTeamType = TeamType.None; // 패배 팀
+
+                    if (currentCastle.CurrentHp > opponentCastle.CurrentHp) // 내 성이 체력이 더 높다면
+                    {
+                        loseTeamType = opponentTeam; // 상대 팀을 패배 팀으로 할당
+                    }
+                    else if(currentCastle.CurrentHp < opponentCastle.CurrentHp) // 상대 성이 체력이 더 높다면
+                    {
+                        loseTeamType = currentTeam; // 내 팀을 패배 팀으로 할당
+                    }
+
+                    GameOverInfo gameOverInfo = new GameOverInfo()
+                    {
+                        roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                        loseTeamType = (int)loseTeamType, // 패배 팀 타입
+                        isSurrender = 0 // 항복 여부 (0 = false)
+                    };
+
+                    string json = JsonUtility.ToJson(gameOverInfo); // Json으로 변환
+
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                        NetworkManager.Instance.Socket.Emit("gameOver", json);
+
+                    return;
+                }
                 _currentTeamType = InGameContext.Current.Data.GameManager.NextTeam(_currentTeamType); // 현재 팀을 다음 팀으로 지정
+                _turnCount++;
+                TurnCountTextSetting();
             }
 
             await TurnChange(turn); // 턴 변경 및 변경된 턴 기능 실행 함수 호출
@@ -225,6 +282,18 @@ namespace InGame.MyManager.Local.Turn
             }
         }
 
+        // 현재 턴 UI 세팅
+        private void TurnCountTextSetting()
+        {
+            string currentTurn = LocalizationSettings.StringDatabase.GetLocalizedString(
+                    "Game",
+                    "Game_UI_TurnCount",
+                    new object[] { _turnCount }
+                );
+
+            _turnCountTxt.text = currentTurn;
+        }
+
         // 서버에 턴 완료 신호를 보내는 함수
         private void AutoTurnCompleted()
         {
@@ -251,4 +320,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.06.24
+// 마지막 작성 일자: 2026.06.30

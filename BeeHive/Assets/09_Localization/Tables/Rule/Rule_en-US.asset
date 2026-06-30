@@ -23,7 +23,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 23901985910292480
-    m_Localized: Defeat your opponent by reducing their HP to 0.
+    m_Localized: '- Defeat your opponent by reducing their HP to 0.
+
+
+      - After
+      Turn 60, the player with more remaining HP wins.
+
+
+      - If both players
+      have the same remaining HP, the game ends in a draw.'
     m_Metadata:
       m_Items: []
   - m_Id: 23902546864898048
@@ -172,12 +180,7 @@ MonoBehaviour:
 
 
       -
-      Can move or perform a attack before making a ranged attack.
-
-      
-
-      -
-      Cannot move or perform a attack after making a ranged attack.'
+      can move once and perform one ranged attack per turn.'
     m_Metadata:
       m_Items: []
   - m_Id: 23938738515869696

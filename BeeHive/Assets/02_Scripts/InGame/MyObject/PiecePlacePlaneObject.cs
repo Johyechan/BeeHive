@@ -6,6 +6,7 @@ using InGame.MyManager.Local;
 using InGame.MyObject.Handler;
 using InGame.MyObject.Piece;
 using InGame.MyObject.Piece.Data;
+using InGame.MyObject.Piece.ObjectPieces;
 using InGame.MyUI;
 using MyUtil.GameMode;
 using System.Collections.Generic;
@@ -95,6 +96,27 @@ namespace InGame.MyObject
                     {
                         PieceBase pieceBase = InGameContext.Current.Data.GameManager.CurrentMovePiece.GetComponent<PieceBase>();
 
+                        Tank tank = pieceBase as Tank;
+
+                        // 전차가 아니라면 반환
+                        if (tank == null)
+                            return;
+
+                        // 이전에 뭔가 행한 전차가 현재 공격하는 전차가 아닌 동시에 null이 아닌 즉 이미 다른 전차가 행동을 한 상태라면
+                        if (InGameContext.Current.Data.GameManager.DoSomethingTank != tank && InGameContext.Current.Data.GameManager.DoSomethingTank != null)
+                        {
+                            // 공격 불가하다는 경고문 띄우기
+                            string tankCanNotAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                                "Game",
+                                "Game_UI_TankCanNotAttack"
+                            );
+                            UIManager.Instance.WarningUIMake(tankCanNotAttack);
+
+                            HighLightOffEvent(); // 하이라이트 끄기
+
+                            return;
+                        }
+
                         TaskCompletionSource<bool> confirmResultTcs = new TaskCompletionSource<bool>(); // 확인 결과를 가지는 tcs
 
                         string attack = LocalizationSettings.StringDatabase.GetLocalizedString(
@@ -182,6 +204,28 @@ namespace InGame.MyObject
             }
 
             InGameContext.Current.Data.GameManager.PieceCanMoveMap[CanPlacePieceType] = false; // 현재 이동하는 타입의 기물을 이후로는 같은 타입의 기물 이동이 불가한 상태로 할당
+
+            
+            // 현재 선택된 기물에서 Tank 클래스 가져오기 시도 후 성공했다면
+            if (InGameContext.Current.Data.GameManager.CurrentMovePiece.TryGetComponent(out Tank tank))
+            {
+                if (InGameContext.Current.Data.GameManager.DoSomethingTank != tank && InGameContext.Current.Data.GameManager.DoSomethingTank != null)
+                {
+                    // 공격 불가하다는 경고문 띄우기
+                    string tankCanNotAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
+                        "Game",
+                        "Game_UI_TankCanNotAttack"
+                    );
+                    UIManager.Instance.WarningUIMake(tankCanNotAttack);
+
+                    HighLightOffEvent(); // 하이라이트 끄기
+
+                    await Task.CompletedTask; // 테스크 종료
+                    return; // 함수 종료
+                }
+                InGameContext.Current.Data.GameManager.DoSomethingTank = tank; // 뭔가 행동한 기물을 Tank로 지정
+            }
+
             await PlacePiece(InGameContext.Current.Data.GameManager.CurrentMovePiece, true); // 기물 이동
         }
 
@@ -461,4 +505,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.16
+// 마지막 작성 일자: 2026.06.30

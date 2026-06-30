@@ -2,7 +2,7 @@ using DG.Tweening;
 using InGame.MyEnum;
 using InGame.MyEvent;
 using InGame.MyManager.Global;
-using InGame.MyObject;
+using InGame.MyObject.Piece.ObjectPieces;
 using InGame.MyUI;
 using MyUtil.GameMode;
 using System.Collections.Generic;
@@ -22,6 +22,7 @@ namespace InGame.MyManager.Local
 
         [SerializeField] private Image _victoryImage; 
         [SerializeField] private Image _defeatImage;
+        [SerializeField] private Image _drawImage;
 
         [SerializeField] private UsedCardInformationUI _usedCardInformationUI;
         public UsedCardInformationUI UsedCardInformationUI { get => _usedCardInformationUI; }
@@ -39,6 +40,9 @@ namespace InGame.MyManager.Local
             get => _currentMovePiece;
             set => _currentMovePiece = value;
         }
+
+        private Tank _doSomethingTank = null; // 뭔가 행동을 한 탱크
+        public Tank DoSomethingTank { get => _doSomethingTank; set => _doSomethingTank = value; } // 뭔가 행동을 한 탱크 프로퍼티
 
         private bool _canMakePiece; // 기물 생성 가능 여부
         public bool CanMakePiece // 위 변수 프로퍼티
@@ -84,12 +88,20 @@ namespace InGame.MyManager.Local
             if(TeamManager.Instance.CurrentTeamType == loseTeamType) // 패배 팀이라면
             {
                 _victoryImage.gameObject.SetActive(false); // 승리 이미지 비활성화
+                _drawImage.gameObject.SetActive(false); // 무승부 이미지 비활성화
                 _defeatImage.gameObject.SetActive(true); // 패배 이미지 활성화
+            }
+            else if(loseTeamType == TeamType.None)
+            {
+                _victoryImage.gameObject.SetActive(false); // 승리 이미지 비활성화
+                _defeatImage.gameObject.SetActive(false); // 패배 이미지 비활성화
+                _drawImage.gameObject.SetActive(true); // 무승부 이미지 활성화
             }
             else // 승리 팀이라면
             {
-                _victoryImage.gameObject.SetActive(true); // 승리 이미지 활성화
+                _drawImage.gameObject.SetActive(false); // 무승부 이미지 비활성화
                 _defeatImage.gameObject.SetActive(false); // 패배 이미지 비활성화
+                _victoryImage.gameObject.SetActive(true); // 승리 이미지 활성화
             }
 
             _gameOverUICanvasGroup.DOFade(1, _animationDuration).SetUpdate(true)
@@ -159,4 +171,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.06.19
+// 마지막 작성 일자: 2026.06.30

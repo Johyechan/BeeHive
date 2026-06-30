@@ -9,7 +9,6 @@ using InGame.MyObject.Piece.Data;
 using InGame.MyObject.Piece.Handler;
 using InGame.MyObject.Piece.Variable;
 using InGame.MyUI;
-using InGame.MyUI.Card;
 using MyUtil.MyObjectPool;
 using System.Threading.Tasks;
 using UnityEngine;

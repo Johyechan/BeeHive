@@ -259,6 +259,10 @@ MonoBehaviour:
     m_Key: Game_UI_NextTurnGoldTitle
     m_Metadata:
       m_Items: []
+  - m_Id: 31861593551405056
+    m_Key: Game_UI_TurnCount
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
