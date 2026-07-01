@@ -93,4 +93,4 @@ namespace InGame.MyManager.Local
         }
     }
 }
-// 마지막 작성 일자: 2026.06.24
+// 마지막 작성 일자: 2026.07.01

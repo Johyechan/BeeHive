@@ -30,7 +30,8 @@ namespace InGame.MyObject.Handler
 
         public async Task UsedDeckShuffle()
         {
-            _usedDeckUIHandler.Init(); // 사용한 카드 UI 초기화
+            // 사용한 카드 UI 초기화(성 강화 카드를 하나도 사용하지 않았다면 성 강화 카드 개수 초기화가 필요한 상황으로 인식)
+            _usedDeckUIHandler.Init(_usedCardInfo.castleCardCount == 0);
             _usedCardInfo.droughtCardCount = 0;
             _usedCardInfo.goodHarvestCardCount = 0;
             _usedCardInfo.roadChangeCardCount = 0;

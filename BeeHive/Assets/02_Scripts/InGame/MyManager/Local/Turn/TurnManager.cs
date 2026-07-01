@@ -122,49 +122,6 @@ namespace InGame.MyManager.Local.Turn
         {
             if (turn == TurnType.ChangeTeam) // 팀을 변경하는 턴 일경우
             {
-                InGameContext.Current.Data.GameManager.DoSomethingTank = null;
-
-                if(_turnCount > _maxTurn)
-                {
-                    TeamType currentTeam = TeamManager.Instance.CurrentTeamType; // 내 팀
-                    TeamType opponentTeam = TeamType.None; // 적 팀
-                    switch(currentTeam)
-                    {
-                        case TeamType.Team1:
-                            opponentTeam = TeamType.Team2;
-                            break;
-                        case TeamType.Team2:
-                            opponentTeam = TeamType.Team1;
-                            break;
-                    }
-                    Castle currentCastle = TeamManager.Instance.GetCastle(currentTeam); // 내 성
-                    Castle opponentCastle = TeamManager.Instance.GetCastle(opponentTeam); // 적 성
-
-                    TeamType loseTeamType = TeamType.None; // 패배 팀
-
-                    if (currentCastle.CurrentHp > opponentCastle.CurrentHp) // 내 성이 체력이 더 높다면
-                    {
-                        loseTeamType = opponentTeam; // 상대 팀을 패배 팀으로 할당
-                    }
-                    else if(currentCastle.CurrentHp < opponentCastle.CurrentHp) // 상대 성이 체력이 더 높다면
-                    {
-                        loseTeamType = currentTeam; // 내 팀을 패배 팀으로 할당
-                    }
-
-                    GameOverInfo gameOverInfo = new GameOverInfo()
-                    {
-                        roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
-                        loseTeamType = (int)loseTeamType, // 패배 팀 타입
-                        isSurrender = 0 // 항복 여부 (0 = false)
-                    };
-
-                    string json = JsonUtility.ToJson(gameOverInfo); // Json으로 변환
-
-                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
-                        NetworkManager.Instance.Socket.Emit("gameOver", json);
-
-                    return;
-                }
                 _currentTeamType = InGameContext.Current.Data.GameManager.NextTeam(_currentTeamType); // 현재 팀을 다음 팀으로 지정
                 _turnCount++;
                 TurnCountTextSetting();
@@ -301,15 +258,68 @@ namespace InGame.MyManager.Local.Turn
             {
                 case TurnType.ChangeTeam:
                 case TurnType.MakeTurn:
-                case TurnType.TurnEnd:
                     TurnCompletedInfo turnCompletedInfo = new TurnCompletedInfo()
                     {
                         roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
                         completedTurn = (int)_currentTurnType // 현재 완료한 턴
                     };
                     string json = JsonUtility.ToJson(turnCompletedInfo); // Json으로 변환
-                    if(GameModeManager.Instance.CurrentGameMode.UseServer())
+                    if (GameModeManager.Instance.CurrentGameMode.UseServer())
                         NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
+                    break;
+                case TurnType.TurnEnd:
+                    InGameContext.Current.Data.GameManager.DoSomethingTank = null;
+
+                    if (_turnCount >= _maxTurn)
+                    {
+                        TeamType currentTeam = TeamManager.Instance.CurrentTeamType; // 내 팀
+                        TeamType opponentTeam = TeamType.None; // 적 팀
+                        switch (currentTeam)
+                        {
+                            case TeamType.Team1:
+                                opponentTeam = TeamType.Team2;
+                                break;
+                            case TeamType.Team2:
+                                opponentTeam = TeamType.Team1;
+                                break;
+                        }
+
+                        Castle currentCastle = TeamManager.Instance.GetCastle(currentTeam); // 내 성
+
+                        TeamType loseTeamType = TeamType.None; // 패배 팀
+
+                        if (currentCastle.CurrentHp > currentCastle.OpponentHp) // 내 성이 체력이 더 높다면
+                        {
+                            loseTeamType = opponentTeam; // 상대 팀을 패배 팀으로 할당
+                        }
+                        else if (currentCastle.CurrentHp < currentCastle.OpponentHp) // 상대 성이 체력이 더 높다면
+                        {
+                            loseTeamType = currentTeam; // 내 팀을 패배 팀으로 할당
+                        }
+
+                        GameOverInfo gameOverInfo = new GameOverInfo()
+                        {
+                            roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                            loseTeamType = (int)loseTeamType, // 패배 팀 타입
+                            isSurrender = 0 // 항복 여부 (0 = false)
+                        };
+
+                        string gameOverjson = JsonUtility.ToJson(gameOverInfo); // Json으로 변환
+
+                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                            NetworkManager.Instance.Socket.Emit("gameOver", gameOverjson);
+                    }
+                    else
+                    {
+                        TurnCompletedInfo turnEndCompletedInfo = new TurnCompletedInfo()
+                        {
+                            roomID = SceneMgr.Instance.CurrentRoomID, // 현재 방 ID
+                            completedTurn = (int)_currentTurnType // 현재 완료한 턴
+                        };
+                        string turnEndCompletedJson = JsonUtility.ToJson(turnEndCompletedInfo); // Json으로 변환
+                        if (GameModeManager.Instance.CurrentGameMode.UseServer())
+                            NetworkManager.Instance.Socket.Emit("turnCompleted", turnEndCompletedJson); // 서버에 턴 변경 신호를 보냄
+                    }
                     break;
                 case TurnType.DrawTurn:
                 case TurnType.MainTurn:
@@ -320,4 +330,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.06.30
+// 마지막 작성 일자: 2026.07.01

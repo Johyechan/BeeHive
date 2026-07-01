@@ -33,8 +33,9 @@ namespace InGame.MyObject
         private List<Material> _castleMaterials = new List<Material>(); // 성 머티리얼 리스트
 
         private int _opponentHp; // 상대 체력
+        public int OpponentHp { get => _opponentHp; } // 상대 체력 프로퍼티
         private int _currentHp; // 현재 체력
-        public int CurrentHp { get => _currentHp; } // 위 변수 프로퍼티
+        public int CurrentHp { get => _currentHp; } // 현재 체력 프로퍼티
 
         private async void Awake()
         {
@@ -267,4 +268,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.25
+// 마지막 작성 일자: 2026.07.01
