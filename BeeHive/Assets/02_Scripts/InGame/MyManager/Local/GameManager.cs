@@ -41,8 +41,8 @@ namespace InGame.MyManager.Local
             set => _currentMovePiece = value;
         }
 
-        private Tank _doSomethingTank = null; // 뭔가 행동을 한 탱크
-        public Tank DoSomethingTank { get => _doSomethingTank; set => _doSomethingTank = value; } // 뭔가 행동을 한 탱크 프로퍼티
+        private int _doSomethingTankID = -1; // 뭔가 행동을 한 탱크 ID
+        public int DoSomethingTankID { get => _doSomethingTankID; set => _doSomethingTankID = value; } // 뭔가 행동을 한 탱크 프로퍼티
 
         private bool _canMakePiece; // 기물 생성 가능 여부
         public bool CanMakePiece // 위 변수 프로퍼티

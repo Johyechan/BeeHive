@@ -5,6 +5,7 @@ using InGame.MyManager.Local;
 using InGame.MyManager.MyPlacePlane;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
+using InGame.MyObject.Piece.ObjectPieces;
 using MyUtil.GameMode;
 using System.Collections;
 using System.Threading.Tasks;
@@ -85,8 +86,14 @@ namespace InGame.MyManager.MyPiece.Handler
                     PieceEvents.OnChangeNearRoad?.Invoke(attackPiece, attackPiece.CurrentTeamType, attackPiece.PieceVariable.currentPlacePlane); // 도로 변경 이벤트 호출
                 }
             }
+            else if(attackPiece.CurrentObjectType == ObjectType.Tank) // 공격한 기물이 전차일 경우
+            {
+                Tank tank = attackPiece as Tank;
+                InGameContext.Current.Data.GameManager.DoSomethingTankID = tank.NetworkId; // 행동을 취한 전차로 할당
+                NetworkManager.Instance.Socket.Emit("debug", $"InGameContext.Current.Data.GameManager.DoSomethingTank: {InGameContext.Current.Data.GameManager.DoSomethingTankID}");
+            }
 
-            if(attackedPlaceIsNearToCastle) // 성 주위가 공격 당했다면
+            if (attackedPlaceIsNearToCastle) // 성 주위가 공격 당했다면
             {
                 Castle castle = TeamManager.Instance.GetCastle(attackedTeam); // 공격 당한 팀 성 가져오기
                 castle.CastleHit(attackPiece.Damage); // 성에 피해주기
@@ -95,6 +102,7 @@ namespace InGame.MyManager.MyPiece.Handler
                 attackPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None; // 배치 칸에 올라가 있는 팀 상태 변경
                 attackPiece.PieceVariable.currentPlacePlane.PlacedPiece = null;
                 attackPiece.PieceDestroy();
+                NetworkManager.Instance.Socket.Emit("debug", $"성 공격 이후 InGameContext.Current.Data.GameManager.DoSomethingTank: {InGameContext.Current.Data.GameManager.DoSomethingTankID}");
             }
 
             if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 때
@@ -136,4 +144,4 @@ namespace InGame.MyManager.MyPiece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.30
+// 마지막 작성 일자: 2026.07.02

@@ -268,7 +268,7 @@ namespace InGame.MyManager.Local.Turn
                         NetworkManager.Instance.Socket.Emit("turnCompleted", json); // 서버에 턴 변경 신호를 보냄
                     break;
                 case TurnType.TurnEnd:
-                    InGameContext.Current.Data.GameManager.DoSomethingTank = null;
+                    InGameContext.Current.Data.GameManager.DoSomethingTankID = -1;
 
                     if (_turnCount >= _maxTurn)
                     {

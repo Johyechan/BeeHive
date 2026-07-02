@@ -272,6 +272,11 @@ MonoBehaviour:
     m_Localized: Turn {0}
     m_Metadata:
       m_Items: []
+  - m_Id: 32602805627518976
+    m_Localized: "This Bombard cannot act \nbecause another Bombard has \nalready
+      acted."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

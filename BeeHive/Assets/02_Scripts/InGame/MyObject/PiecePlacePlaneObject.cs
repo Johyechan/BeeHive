@@ -103,12 +103,12 @@ namespace InGame.MyObject
                             return;
 
                         // 이전에 뭔가 행한 전차가 현재 공격하는 전차가 아닌 동시에 null이 아닌 즉 이미 다른 전차가 행동을 한 상태라면
-                        if (InGameContext.Current.Data.GameManager.DoSomethingTank != tank && InGameContext.Current.Data.GameManager.DoSomethingTank != null)
+                        if (InGameContext.Current.Data.GameManager.DoSomethingTankID != tank.NetworkId && InGameContext.Current.Data.GameManager.DoSomethingTankID != -1)
                         {
                             // 공격 불가하다는 경고문 띄우기
                             string tankCanNotAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
                                 "Game",
-                                "Game_UI_TankCanNotAttack"
+                                "Game_UI_ThisTankCanNotDoSometing"
                             );
                             UIManager.Instance.WarningUIMake(tankCanNotAttack);
 
@@ -209,12 +209,13 @@ namespace InGame.MyObject
             // 현재 선택된 기물에서 Tank 클래스 가져오기 시도 후 성공했다면
             if (InGameContext.Current.Data.GameManager.CurrentMovePiece.TryGetComponent(out Tank tank))
             {
-                if (InGameContext.Current.Data.GameManager.DoSomethingTank != tank && InGameContext.Current.Data.GameManager.DoSomethingTank != null)
+                NetworkManager.Instance.Socket.Emit("debug", $"이동하려고요 InGameContext.Current.Data.GameManager.DoSomethingTank: {InGameContext.Current.Data.GameManager.DoSomethingTankID}");
+                if (InGameContext.Current.Data.GameManager.DoSomethingTankID != tank.NetworkId && InGameContext.Current.Data.GameManager.DoSomethingTankID != -1)
                 {
                     // 공격 불가하다는 경고문 띄우기
                     string tankCanNotAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
                         "Game",
-                        "Game_UI_TankCanNotAttack"
+                        "Game_UI_ThisTankCanNotDoSometing"
                     );
                     UIManager.Instance.WarningUIMake(tankCanNotAttack);
 
@@ -223,7 +224,8 @@ namespace InGame.MyObject
                     await Task.CompletedTask; // 테스크 종료
                     return; // 함수 종료
                 }
-                InGameContext.Current.Data.GameManager.DoSomethingTank = tank; // 뭔가 행동한 기물을 Tank로 지정
+
+                InGameContext.Current.Data.GameManager.DoSomethingTankID = tank.NetworkId; // 뭔가 행동한 기물을 Tank로 지정
             }
 
             await PlacePiece(InGameContext.Current.Data.GameManager.CurrentMovePiece, true); // 기물 이동
@@ -505,4 +507,4 @@ namespace InGame.MyObject
         }
     }
 }
-// 마지막 작성 일자: 2026.06.30
+// 마지막 작성 일자: 2026.07.02

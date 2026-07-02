@@ -263,6 +263,10 @@ MonoBehaviour:
     m_Key: Game_UI_TurnCount
     m_Metadata:
       m_Items: []
+  - m_Id: 32602805627518976
+    m_Key: Game_UI_ThisTankCanNotDoSometing
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

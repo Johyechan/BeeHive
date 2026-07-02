@@ -7,6 +7,7 @@ using InGame.MyObject.Interface;
 using InGame.MyObject.MyObjectInterface;
 using InGame.MyObject.Piece.Data;
 using InGame.MyObject.Piece.Handler;
+using InGame.MyObject.Piece.ObjectPieces;
 using InGame.MyObject.Piece.Variable;
 using InGame.MyUI;
 using MyUtil.MyObjectPool;
@@ -128,4 +129,4 @@ namespace InGame.MyObject.Piece
         }
     }
 }
-// 마지막 작성 일자: 2026.06.18
+// 마지막 작성 일자: 2026.07.02

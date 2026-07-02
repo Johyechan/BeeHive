@@ -51,12 +51,12 @@ namespace InGame.MyObject.Piece.Handler
                     UICardBase uiCardBase = InGameContext.Current.Data.CardManager.FindFirePowerCard();
 
                     // 뭔가 전에 행동을 한 전차가 현재 공격을 행한 전차가 아닌 동시에 null이 아닌 즉 이미 다른 전차가 행동을 한 상태라면
-                    if (InGameContext.Current.Data.GameManager.DoSomethingTank != tank && InGameContext.Current.Data.GameManager.DoSomethingTank != null)
+                    if (InGameContext.Current.Data.GameManager.DoSomethingTankID != tank.NetworkId && InGameContext.Current.Data.GameManager.DoSomethingTankID != -1)
                     {
                         // 공격 불가하다는 경고문 띄우기
                         string tankCanNotAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
                             "Game",
-                            "Game_UI_TankCanNotAttack"
+                            "Game_UI_ThisTankCanNotDoSometing"
                         );
                         UIManager.Instance.WarningUIMake(tankCanNotAttack);
 
@@ -111,7 +111,7 @@ namespace InGame.MyObject.Piece.Handler
 
                         isRangedAttack = true; // 전차 원거리 공격으로 판정
                         InGameContext.Current.Data.GameManager.TankRangedAttacked = true; // 원거리 공격한 것으로 판정
-                        InGameContext.Current.Data.GameManager.DoSomethingTank = tank; // 전차로 변환 후 할당
+                        InGameContext.Current.Data.GameManager.DoSomethingTankID = tank.NetworkId; // 전차로 변환 후 할당
 
                         await InGameContext.Current.Data.CardManager.UsedCardShowOver?.Task; // 사용한 카드 보여주기가 끝날 때까지 대기
 
@@ -164,12 +164,12 @@ namespace InGame.MyObject.Piece.Handler
 
                 if (tank != null)
                 {
-                    if (InGameContext.Current.Data.GameManager.DoSomethingTank != tank && InGameContext.Current.Data.GameManager.DoSomethingTank != null)
+                    if (InGameContext.Current.Data.GameManager.DoSomethingTankID != tank.NetworkId && InGameContext.Current.Data.GameManager.DoSomethingTankID != -1)
                     {
                         // 공격 불가하다는 경고문 띄우기
                         string tankCanNotAttack = LocalizationSettings.StringDatabase.GetLocalizedString(
                             "Game",
-                            "Game_UI_TankCanNotAttack"
+                            "Game_UI_ThisTankCanNotDoSometing"
                         );
                         UIManager.Instance.WarningUIMake(tankCanNotAttack);
 
@@ -229,4 +229,4 @@ namespace InGame.MyObject.Piece.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.30
+// 마지막 작성 일자: 2026.07.02

@@ -6,6 +6,7 @@ using InGame.MyManager.Global;
 using InGame.MyManager.Local;
 using InGame.MyObject;
 using InGame.MyObject.Piece;
+using InGame.MyObject.Piece.ObjectPieces;
 using InGame.MyUI;
 using InGame.MyUI.Card;
 using MyUtil;
@@ -148,4 +149,4 @@ namespace InGame.MySystem.Game.Handler
         }
     }
 }
-// 마지막 작성 일자: 2026.06.19
+// 마지막 작성 일자: 2026.07.02
