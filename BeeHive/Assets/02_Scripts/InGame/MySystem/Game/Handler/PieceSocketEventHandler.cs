@@ -49,7 +49,6 @@ namespace InGame.MySystem.Game.Handler
                     GameObject returnPieceObj = ObjectIdManager.Instance.FindObject(setInfo.returnPieceID); // 공격 받은 기물 탐색
                     PieceBase returnPiece = returnPieceObj.GetComponent<PieceBase>(); // 공격 받은 기물의 PieceBase 가져오기
 
-                    NetworkManager.Instance.Socket.Emit("debug", $"서버에서 즉시 받았을 때 setInfo.isFirePowerAttack: {setInfo.isFirePowerAttack}");
                     if (setInfo.isFirePowerAttack == 1) // 원거리 공격이라면(1: 참, 0: 거짓)
                     {
                         returnPiece.PieceVariable.isFirePowerAttackTarget = true; // 공격 대상 기물을 원거리 공격 대상으로 할당

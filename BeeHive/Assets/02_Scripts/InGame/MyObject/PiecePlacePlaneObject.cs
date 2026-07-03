@@ -209,7 +209,6 @@ namespace InGame.MyObject
             // 현재 선택된 기물에서 Tank 클래스 가져오기 시도 후 성공했다면
             if (InGameContext.Current.Data.GameManager.CurrentMovePiece.TryGetComponent(out Tank tank))
             {
-                NetworkManager.Instance.Socket.Emit("debug", $"이동하려고요 InGameContext.Current.Data.GameManager.DoSomethingTank: {InGameContext.Current.Data.GameManager.DoSomethingTankID}");
                 if (InGameContext.Current.Data.GameManager.DoSomethingTankID != tank.NetworkId && InGameContext.Current.Data.GameManager.DoSomethingTankID != -1)
                 {
                     // 공격 불가하다는 경고문 띄우기

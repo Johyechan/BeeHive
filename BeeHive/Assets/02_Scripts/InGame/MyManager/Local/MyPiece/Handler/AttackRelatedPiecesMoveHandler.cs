@@ -25,8 +25,6 @@ namespace InGame.MyManager.MyPiece.Handler
         {
             bool attackedPlaceIsNearToCastle = returnPiece.PieceVariable.currentPlacePlane.isNearToCastle; // 공격 당하는 기물이 성 주위에 배치되어있다면
             TeamType attackedTeam = returnPiece.CurrentTeamType; // 공격 당한 기물의 배치 칸의 팀 타입 저장
-            NetworkManager.Instance.Socket.Emit("debug", $"" +
-                $"공격 당한 기물과 공격한 기물 이동 함수 들어옴, \n isFirePowerAttack: {isFirePowerAttack}, \n attackedPlaceIsNearToCastle: {attackedPlaceIsNearToCastle}, \n attackedTeam: {attackedTeam}, \n returnPiece: {returnPiece}, \n returnPiece.PieceVariable: {returnPiece.PieceVariable}, \n returnPiece.PieceVariable.currentPlacePlane: {returnPiece.PieceVariable.currentPlacePlane}, \n attackPiece: {attackPiece}, \n returnParent: {returnParent}, \n returnPos: {returnPos}, \n attackParent: {attackParent}, \n attackPos: {attackPos}");
 
             // 원거리 공격이 아닐 때만
             if(isFirePowerAttack == 0)
@@ -90,7 +88,6 @@ namespace InGame.MyManager.MyPiece.Handler
             {
                 Tank tank = attackPiece as Tank;
                 InGameContext.Current.Data.GameManager.DoSomethingTankID = tank.NetworkId; // 행동을 취한 전차로 할당
-                NetworkManager.Instance.Socket.Emit("debug", $"InGameContext.Current.Data.GameManager.DoSomethingTank: {InGameContext.Current.Data.GameManager.DoSomethingTankID}");
             }
 
             if (attackedPlaceIsNearToCastle) // 성 주위가 공격 당했다면
@@ -102,7 +99,6 @@ namespace InGame.MyManager.MyPiece.Handler
                 attackPiece.PieceVariable.currentPlacePlane.TeamType = TeamType.None; // 배치 칸에 올라가 있는 팀 상태 변경
                 attackPiece.PieceVariable.currentPlacePlane.PlacedPiece = null;
                 attackPiece.PieceDestroy();
-                NetworkManager.Instance.Socket.Emit("debug", $"성 공격 이후 InGameContext.Current.Data.GameManager.DoSomethingTank: {InGameContext.Current.Data.GameManager.DoSomethingTankID}");
             }
 
             if (GameModeManager.Instance.CurrentGameMode.IsTutorial()) // 튜토리얼 일 때
