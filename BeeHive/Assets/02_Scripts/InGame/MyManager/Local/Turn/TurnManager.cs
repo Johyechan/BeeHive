@@ -235,6 +235,7 @@ namespace InGame.MyManager.Local.Turn
             }
             else // 현제 게임 모드가 서버를 사용하지 않는다면
             {
+                InGameContext.Current.Data.GameManager.DoSomethingTankID = -1;
                 TutorialEvents.OnTurnEnd?.Invoke(); // 튜토리얼 턴 종료 이벤트 호출
             }
         }
@@ -330,4 +331,4 @@ namespace InGame.MyManager.Local.Turn
         }
     }
 }
-// 마지막 작성 일자: 2026.07.01
+// 마지막 작성 일자: 2026.07.03

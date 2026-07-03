@@ -148,6 +148,7 @@ namespace InGame.MyObject
 
                         HighLightOffEvent(); // 하이라이트 끄기
                         CastleAttack(pieceBase); // 성 공격
+                        InGameContext.Current.Data.GameManager.DoSomethingTankID = tank.NetworkId;
                         _isRangeAttackTarget = false; // 원거리 공격 대상 초기화
                         return;
                     }
