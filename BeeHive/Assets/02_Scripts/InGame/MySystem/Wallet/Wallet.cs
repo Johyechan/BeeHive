@@ -309,7 +309,7 @@ namespace InGame.MySystem
             {
                 if (TeamManager.Instance.Team2FirstTurn) // 블루팀(팀2)이 첫 번째 턴 일 때
                 {
-                    basicGoldBarCount = 3; // 기본 금괴 수를 3으로 설정
+                    basicGoldBarCount = 4; // 기본 금괴 수를 4으로 설정
                 }
             }
             
@@ -317,7 +317,7 @@ namespace InGame.MySystem
             if(team == TeamManager.Instance.CurrentTeamType) // 내 팀일 때
             {
                 _nextTurnGoldCoin = _goldCoinCount;
-                _nextTurnGoldBar = _goldBarCount + basicGoldBarCount; 
+                _nextTurnGoldBar = _goldBarCount + basicGoldBarCount;
             }
             else // 상대 팀일 때
             {
@@ -347,6 +347,11 @@ namespace InGame.MySystem
                 _nextTurnGoldCoin -= 5;
                 _nextTurnGoldBar++;
             }
+
+            if (_nextTurnGoldBar >= _goldBarMaxCount) // 최대 금괴 수 이상이라면
+            {
+                _nextTurnGoldBar = _goldBarMaxCount; // 최대 금괴 수로 제한
+            }
         }
 
         private void CheckMinerDigValue(TeamType team)
@@ -369,4 +374,4 @@ namespace InGame.MySystem
         }
     }
 }
-// 마지막 작성 일자: 2026.05.22
+// 마지막 작성 일자: 2026.07.07
