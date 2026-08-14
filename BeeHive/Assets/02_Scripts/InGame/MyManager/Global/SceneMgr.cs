@@ -1,6 +1,7 @@
 using InGame.MyManager.Enum;
 using InGame.MyManager.Global;
 using MyUtil;
+using MyUtil.GameMode;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
@@ -75,10 +76,12 @@ namespace InGame.MyManager
             {
                 case SceneFlowType.GoLobby: // 로비로 가는 흐름
                     _currentSceneType = SceneType.Lobby;
+                    GameModeManager.Instance.SetMode(new MultiplayMode()); // 게임 모드를 멀티 플레이 모드(기본 모드) 초기화
                     SceneManager.LoadScene((int)_currentSceneType); // 로비 씬으로 이동
                     break;
                 case SceneFlowType.GoRoom: // 방으로 가는 흐름
                     _currentSceneType = SceneType.Room;
+                    GameModeManager.Instance.SetMode(new MultiplayMode()); // 게임 모드를 멀티 플레이 모드(기본 모드) 초기화
                     SceneManager.LoadScene((int)_currentSceneType); // 방 씬으로 이동
                     break;
                 case SceneFlowType.GoGame: // 게임으로 가는 흐름

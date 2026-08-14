@@ -1,6 +1,7 @@
 using InGame.MyManager;
 using InGame.MyManager.Enum;
 using InGame.MyUI.MyUIInterface;
+using MyUtil.GameMode;
 using UnityEngine;
 
 namespace InGame.MyUI.MyUIButton
